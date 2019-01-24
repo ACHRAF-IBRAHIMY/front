@@ -11,4 +11,12 @@ Job1:
     paths:
       - target/
   only:
-    - test
+    - master
+Job2:
+  stage: deploy_dev
+  script:
+    - scp -o stricthostkeychecking=no target/*.jar karaz@91.121.60.221:/home/karaz
+    - ssh -o stricthostkeychecking=no karaz@91.121.60.221 "unzip -o karaz-ux-hub-1.0.jar -d karaz-ux-hub-1.0/ && rm -rf /home/karaz/payara5/glassfish/domains/domainPublic/autodeploy/karazApp/karaz-ux-hub-1.0 && mv karaz-ux-hub-1.0 /home/karaz/payara5/glassfish/domains/domainPublic/autodeploy/karazApp/ "
+    - ssh -o stricthostkeychecking=no karaz@91.121.60.221 "./restart_payara.sh"
+  only:
+    - master
