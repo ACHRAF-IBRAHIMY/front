@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dashboard label="Exemple" backgroundColor="white" columnsWidth="55/45">
+  <dashlet label="Demandes de légalisation par Mois et par Objets" type="LineChart" dataType="BI" dataSourceQN="karazapps.cug.legalisation.model.Legalisation" barAxis="vertical" verticalAxis="verticalAxis" numLabel="Nombre de demandes" catLabel="Période" timeUnit="DayMounth" timeDeep="6" timeIndex="d1" dataLimit="1000" dataMagnifier="0.05" stateIndex="s5" height="300">
+    <bar step="état civil" label="état civil" color="green" data="9" />
+    <bar step="actes judiciaire" label="actes judiciaire" color="red" data="1" />
+    <bar step="actes notarié" label="actes notarié" color="blue" data="2" />
+    <bar step="administratif" label="administratif" color="brown" data="3" />
+    <bar step="attestations sur l'honneur" label="attestations sur l'honneur" color="orange" data="4" />
+    <bar step="reconnaissance de dettes" label="reconnaissance de dettes" color="yellow" data="5" />
+    <bar step="contrat" label="contrat" color="violet" data="6" />
+    <bar step="factures" label="factures" color="gray" data="7" />
+    <bar step="autre" label="autre" color="gold" data="8" />
+  </dashlet>
+  <dashlet label="Copie Conforme" type="GroupBars" processQN="cug/copieconforme/process/AuthentifierCopie" barAxis="vertical" numLabel="Nombre de demandes" catLabel="Période" timeUnit="DayUnit" timeDeep="6" dataType="BAM">
+    <bar step="StartEvent" color="blue" label="Ouvert" data="1" />
+    <bar step="InitierLegalisation" color="red" label="Authetifié" data="2" />
+    <bar step="RemettreDocument" color="green" label="Remise de Document" data="3" />
+  </dashlet>
+  <dashlet label="Demandes de légalisation par Nature" type="PieChart" dataType="BI" dataSourceQN="karazapps.cug.legalisation.model.Legalisation" stateIndex="s6">
+    <slice state="Public" color="blue" label="Public" legend="Public" data="1" />
+    <slice state="Sous seing privé" color="green" label="Privé" legend="Sous seing privé" data="2" />
+  </dashlet>
+</dashboard>
+

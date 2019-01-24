@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:Parametrages xmlns:tns="http://www.example.org/Parametrages-model">
+  <description />
+  <reference />
+  <modelName >karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch</modelName>
+  <modelLabel>DashboardSearch</modelLabel>
+  <statut >enabled</statut>
+   <dateCreation />
+    <dateChange />
+  <entity>
+    <dataObjectId />
+    <description >/</description>
+    <modelQN />
+  </entity>
+  <process>
+      <processus>
+      <activities>
+      </activities>
+      <stateBar>
+   
+      </stateBar>
+	<observers>
+		<observer>
+			<role >Observateur</role>
+			<type >owner</type>
+			<email ></email>
+			<enabled >false</enabled>
+			<destinataire>
+				<dataObjectId />
+				<description />
+				<modelQN />
+			</destinataire>
+		</observer>
+	</observers>
+      <notification>
+        <email>
+                  <subject>[KARAZ Notification] ${message.momentLabel} de $message.activityLabel for [$message.sequence]</subject>
+          <body ><![CDATA[ 
+       
+<body>
+	<div style="background-color:#ececec; width:100%; height:100%">
+		<div style="background-color:#710038; height:40px;width:100%; ">&nbsp;
+		</div>
+		<div style="background-color:#6EBE39; height:5px; width:100%;   ">&nbsp;
+		</div>
+		<div
+			style="background-color:#ececec; margin-top:0px; margin:0px;padding:5px">
+
+			<font color="#484848" face="Verdana, sans-serif">
+				<span style="font-size: 9.5pt;">
+					La tâche&nbsp;
+				</span>
+			</font>
+			<font color="#484848" face="Verdana, sans-serif" size="2">$message.activityLabel
+				[$message.sequence]</font>
+			<span
+				style="font-size: 9.5pt; color: rgb(72, 72, 72); font-family: Verdana, sans-serif;">&nbsp;
+								a été créée le $message.dateCreation.
+							</span>
+			<ul type="disc">
+				<li style="color:#484848; ">
+					<span style="font-size:9.5pt; font-family:Verdana,sans-serif; ">
+						<b>Objet&nbsp;
+						</b>
+						$message.modelName
+						<o:p></o:p>
+					</span>
+				</li>
+				<li style="color:#484848; ">
+					<strong>
+						<span
+							style="font-size:9.5pt;font-family:Verdana,sans-serif;mso-fareast-font-family:
+     Times New Roman">Processus</span>
+					</strong>
+					<span style="font-size:9.5pt;
+     font-family:Verdana,sans-serif; ">&nbsp;$message.processName
+						<o:p></o:p>
+					</span>
+				</li>
+				<li style="color:#484848;  ">
+					<font face="Verdana, sans-serif" size="2">
+						<b>Activité</b>
+					</font>
+					<span>&nbsp;
+					</span>
+					<span style="font-family: Verdana, sans-serif; font-size: 9.5pt;">$message.activityLabel</span>
+				</li>
+				<li style="color:#484848;  ">
+					<span style="font-family: Verdana, sans-serif;">
+						<font size="2">
+							<b>Moment</b>
+						</font>
+					</span>
+					<span style="font-family: Verdana, sans-serif; font-size: 13px;"> $message.momentLabel</span>
+				</li>
+			</ul>
+			<div style="text-align:center">
+				<hr width="100%" />
+			</div>
+			<p>
+				<span style="font-size:9.5pt;font-family:Verdana,sans-serif;color:#484848">Cette
+					notification vous a été envoyée en tant que "$role".
+					Pour consulter l'objet en question&nbsp;
+					<a
+						href="http://${frontEndLink}?displayObject=true&amp;dataObjectId=${message.dataObjectId}">
+						<i>
+							<b>clicuer ici</b>
+						</i>
+					</a>
+					.
+				</span>
+			</p>
+			<p>
+								&nbsp;
+			</p>
+			<div align="center" style="text-align:center">
+				<hr align="center" size="1" width="100%" />
+			</div>
+			<p style="text-align: right;">
+				<i>
+					<span
+						style="font-size:7.5pt;font-family:Verdana,sans-serif;
+color:#484848">Ce
+						mail &nbsp;a
+						été envoyé automatiquement par KaRaZ. Veuillez ne pas répondre.
+						<o:p></o:p>
+					</span>
+				</i>
+			</p>
+
+		</div>
+	</div>
+</body>
+          ]]></body>
+          <priority >low</priority>
+          <sendType >Individuel</sendType>
+          <templateName>default</templateName>
+          <fcmEnable>true</fcmEnable>
+          <fcmTitle>KARAZ Notification </fcmTitle>
+          <fcmMessage>[$message.sequence]  ${message.momentLabel} de l'activité $message.activityLabel  </fcmMessage>
+          <fcmIcon></fcmIcon> 
+          <fcmMobile>true</fcmMobile>
+          <fcmWeb>true</fcmWeb>
+        </email>
+      </notification>
+      <processName >karaz/ux/hub/dashboardsearch/process/GestionDashboardSearchProcess</processName>
+      <processLabel >GestionDashboardSearch</processLabel>
+      <journalizable >true</journalizable>
+      <autostart >true</autostart>
+      <horizontalProcessing >true</horizontalProcessing>
+      <exlusive >true</exlusive>
+       <timeout>
+        <deadline />
+        <timeUnite >60</timeUnite>
+        <alert />
+        <disable />
+        <ceilHour/>
+            <skipHolidays >false</skipHolidays>
+            <onlyBusinessDays >false</onlyBusinessDays>
+            <onlyBusinessHours >false</onlyBusinessHours>
+        <warnings>
+          <warning>
+            <state >orange</state>
+            <marge >0</marge>
+            <alertoOwner />
+            <alertAffected />
+            <observers />
+            <interval >1</interval>
+            <template >default</template>
+            <disable >false</disable>
+          </warning>
+		   <warning>
+            <state >yellow</state>
+             <marge >4H</marge>
+            <alertoOwner />
+            <alertAffected />
+            <observers />
+            <interval >1</interval>
+            <template >default</template>
+            <disable >false</disable>
+          </warning>
+		   <warning>
+            <state >red</state>
+             <marge >8H</marge>
+            <alertoOwner />
+            <alertAffected />
+            <observers />
+            <interval >1</interval>
+            <template >default</template>
+            <disable >false</disable>
+          </warning>
+        </warnings>
+      </timeout>
+    	<configParams>
+  <!--   params number  =  $pv.cps.getConfigparam().size(); -->  
+    		    	</configParams>
+    </processus>
+  </process>
+  
+   <sequence>
+  	<currentBI></currentBI>
+  	<ownBI>false</ownBI>
+  	<currentFormula></currentFormula>
+  	<defaultFormula></defaultFormula>
+  	<expressionsPlanning>
+  		
+  	</expressionsPlanning>
+  </sequence> 
+   <translations>
+   
+  </translations>
+</tns:Parametrages>
+

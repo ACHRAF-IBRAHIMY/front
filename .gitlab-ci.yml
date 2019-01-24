@@ -1,0 +1,14 @@
+stages :
+   - maven_build
+   - deploy_dev
+
+Job1:
+  stage: maven_build
+  script: 
+     - mvn kbuilder:all
+     - mvn clean install
+  artifacts:
+    paths:
+      - target/
+  only:
+    - test

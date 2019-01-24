@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskLoader name="TLDashboardSearch Loader" >
+ 
+	<query>
+		<clause>
+			<clause type="OR">
+					
+			</clause>
+					</clause>
+	  
+	</query>
+	<data>
+		<query> 
+				 
+			
+		</query>
+		<mode>collapse</mode>
+	</data>
+	<mappings>
+			
+	</mappings>
+	<view>
+	<screen labelWidth="200">
+		<framedpanel  label="Filtre des tâches"  collapsible="true"    usage="${usage}">
+		<hx>
+					<field label="Mots Clés" widget="text" xpath="query.orFilter"
+						labelAlign="left" labelWidth="200" />
+					<button postProcessing="mode=expand" label="Avancé" ratio="0"
+						width="60">
+						<dependency attribute="visible" expression="{mode},=,collapse" />
+					</button>
+					<button postProcessing="mode=collapse" label="Réduit" ratio="0"
+						width="60">
+						<dependency attribute="visible" expression="{mode},=,expand" />
+					</button>
+				</hx>
+         
+			<vbox > 
+					<dependency attribute="visible" expression="{mode},=,expand" />
+			  
+						 
+		</vbox>
+		  
+	</framedpanel>
+	</screen>
+	<buttonBar> 
+	</buttonBar>
+<taskList name="TLDashboardSearch" />
+	</view>
+	
+
+</taskLoader>

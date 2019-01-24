@@ -1,0 +1,12 @@
+<menus> 
+ <menu relId="Importation_karaz_ux_hub" label="karaz_ux_hub" icone="process"   ignoreIfExist="true"   parent_id="backend/admin/importation/process" />
+      <menu relId="Importation_DashboardSearch" label="DashboardSearch " icone="process" 
+      parent_id="backend/admin/importation/process/Importation_karaz_ux_hub">
+        <resource type="launchProcess">backend/admin/importation/process/GestionImportProcess?modelQN=karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch</resource>
+      </menu> 
+   <menu relId="AllImportation_karaz_ux_hub" label="karaz_ux_hub" icone="search"    ignoreIfExist="true"     parent_id="backend/admin/importation/search" />     
+         <menu relId="AllImportation_DashboardSearch" label="DashboardSearch" icone="search" 
+       parent_id="backend/admin/importation/search/AllImportation_karaz_ux_hub" >
+        <resource type="search">backend/admin/importation/search/AllImportation?query.modelQN=karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch&amp;targetScreen=karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch:view-importation&amp;use=modelQN</resource>
+      </menu> 
+</menus>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<indexation model="DashboardSearch">
+  <mapping table="string" column="1" field="status" name="status" generated="true" />
+  <mapping table="string" column="2" field="reference" name="reference" generated="true" />
+</indexation>
+
+

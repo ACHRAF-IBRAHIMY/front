@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:configs xmlns:tns="http://www.example.org/kconfig-struct">
+  <config name="DashboardSearch" version="1" sequence="DashboardSearch-{BI}/{Year}" dependsOn="">
+    <menus>
+      <menu resourceName="DashboardSearch-menu.xml" webContext="FrontEnd" />
+    </menus>
+    <translations>
+      <translation resourceName="translation/DashboardSearch-i18n-fr.properties" />
+    </translations>
+    <actions />
+    <dashboards xcstt="x">
+      <dashboard resourceName="mypage-dashboard.xml" dashboardName="karaz/ux/hub/dashboardSearch/mypage-dashboard" />
+    </dashboards>
+  </config>
+</tns:configs>
+

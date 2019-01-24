@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="PublicCentralSearch" label="PublicCentralSearch">
+<query> 
+</query> 
+<data>
+		<query> 
+			<keys></keys>
+			<model></model>
+			<from />
+			<to />  
+			<task>true</task>  
+			<object>true</object>  
+			<document>true</document>  
+			<annotation>true</annotation>  
+			<others>true</others>
+            
+            <userLogin></userLogin>
+            <userPassword></userPassword>            
+		</query>
+	</data>
+    
+    
+  <view>
+        
+    /********************************************************/
+    /*      START :: #MFB :: grid Rokhas 3.0 Home page      */
+    /********************************************************/
+      
+      
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true"  >      
+        
+		
+        <vbox columns=" 25% 75% " columns-small="auto" contentAlign="center" contentJustify="enter">
+            <vbox>
+
+            </vbox>
+            <html>
+                <div class="hp-logo">
+                    <img src="./img/rokhasRectBlueArFr.svg" alt="Rokhas logo"/>
+                </div>
+                <div style="height: 30px;" > </div>
+            </html>
+            <html id="blank-vseparator" />
+        </vbox>>
+           
+
+        <vbox columns="30% 70%">
+            <vbox className="hp-box">
+                <vbox columns="20% 80%">
+                    <html>
+                        <div class="hp-box-icon fas fa-user-lock"></div>
+                    </html>
+                    <html>
+                        <div class="hp-box-small-title"> Accédez à votre espace privé</div>       
+                    </html>    
+                </vbox>
+                <html>
+                    <div style="height: 50px;" > </div>
+                </html>                
+                <vbox>
+                    <field widget="text" className="hp-text-input" xpath="userLogin" emptyText="Nom utilisateur" noLabel="true"  width="80%">
+                        <bag position="leading" className="hp-bag-input fas fa-user"/>
+                        <validation type="required"  errorMessage="Veuillez saisir votre nom d'utilisateur !"/>
+                    </field>
+                    <field widget="password" className="hp-text-input" xpath="userPassword" postEnter="x=$('.HomePageLoginButton').click()!!expr!!string" separator="!!" emptyText="Mot de passe"  noLabel="true" height="100" >
+                        <bag position="leading" className="hp-bag-input fas fa-lock"/>
+                        <validation type="required"  errorMessage="Veuillez saisir votre mot de passe !"/>
+                    </field>
+
+                    <button className="hp-box-btn HomePageLoginButton" label="Se connecter">
+                        <postChange>
+                            <!--  Routing credentials check depending to authentication domain (@rokhas / @casaurba)-->
+                            let myUrl='kas/signin';
+                            //let uri='http://37.59.82.23:8080/karazal';
+                            let uri='http://preprodrokhas.karaz.org:8080/karazal';                            
+                            let myDomain = 'karaz';
+                            let myLogin = root.userLogin;
+                            let myPassword = root.userPassword;             
+                            
+                            myDomain = myLogin.split('@')[1];
+                                        
+                            switch(myDomain) {                           
+                              case 'casaurba' :
+                                uri='https://www.casaurba.ma/karazortal';
+                                myUrl = uri+'/kas/signin';
+                                Toaster.push({title: "Authentification", position: "top_center", message: "Authentification reussie. Vous allez être connecté au service Casaurba.", type:"success", duration:-1});
+                                window.location.replace(uri+"/index.jsp");
+                                break;
+                              case 'casaurba.ma':
+                                uri='https://www.casaurba.ma/karazortal';
+                                myUrl = uri+'/kas/signin';
+                                Toaster.push({title: "Authentification", position: "top_center", message: "Authentification reussie. Vous allez être connecté au service Casaurba.", type:"success", duration:-1});   
+                                break;
+                              case 'rokhas.ma':
+                                uri='https://www.rokhas.ma/karazortal';
+                                myUrl = uri+'/kas/signin';
+                                Toaster.push({title: "Authentification", position: "top_center", message: "Authentification reussie. Vous allez être connecté au service Rokhas.", type:"success", duration:-1});    break;                                
+                              default:
+                                myUrl = 'kas/signin';
+                            }
+                            
+                        
+                            // Ajax's call to user authentication service
+                            
+                            $.ajax({
+                            
+                               type: "POST",
+                            
+                               url: myUrl,
+
+                               data: {
+                                   "j_username" : myLogin,
+                                   "j_password": myPassword,
+                               },
+                            
+                               success: function (result) {
+                                    Toaster.push({title: "Routage", position: "top_center", message: "Votre authentification s'est bien déroulée !", type:"success", duration:-1});                            
+                                    window.location.replace(uri+"/index.jsp");
+                               },
+                            
+                               error: function (err) { 
+                                    Toaster.push({title: "Erreur d'athentification", position: "top_center", message: "Nom d'utilisateur ou mot de passe incorrects. Veuillez réessayer ...", type:"error", duration:-1});
+                                    console.log("error on isOn" + err, err); 
+                                
+                                }
+                            });   
+                            
+                        </postChange>                                  
+                    
+                    </button>
+                </vbox>
+                <vbox>
+                    <html>
+                        <div style="height: 70px;" />
+                        <div class="hp-sbox-text">
+                            <a><i class="fab fa-ello"></i> Pas encore de compte Rokhas ?</a>
+                        </div>                             
+                        <div class="hp-sbox-text">
+                            <a><i class="fas fa-user-slash"></i> Mot de passe oublié ?</a>
+                        </div>
+                        <div style="height: 10px;" > </div>                                                                  
+                    </html>
+                </vbox>
+                
+            </vbox>
+            
+            <vbox className="hp-box">
+                <html>
+                    <div class="hp-sbox-big-title">
+                        Bienvenue au guichet digital national des autorisations communales
+                    </div>
+                    <div class="hp-sbox-text">
+                        Soumettez votre demande d'autoriation, suivez son traitement en ligne et recevez par e-mail votre document signé éléctroniquement
+                    </div>
+                    <div style="height: 50px;" />
+                </html>    
+                <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
+                    <field className="hp-search_field" label="" xpath ="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
+                    </field>
+                    <button className="hp-search_field_icon fas fa-search" label=""  
+                    postProcessing="search()" separator="!!" > </button>
+                </vbox>
+                    
+
+                <html>
+                    <div style="height: 70px;" > </div>
+                </html>        
+                
+                <vbox columns="50% 50%">
+                    <vbox>
+                        <vbox columns="20% 80%">
+                            <html>
+                                <div class="hp-sbox-icon fas fa-building"></div>
+                            </html>
+                            <html>
+                                <div class="hp-sbox-small-title">Autorisations urbanistiques</div>
+                                <div style="height: 10px;" > </div>
+                                <div class="hp-sbox-text">
+                                    Permis de construction, modification, élevation, lotissement, permis d'habiter, copie-conforme au plan autorisé, réceptions, ...
+                                </div>
+                                <div style="height: 15px;" > </div>                                
+                                <div class="hp-sbox-btn">Accéder</div>
+                            </html>
+                        </vbox>
+                    </vbox>
+                    
+                    <vbox>
+                        <vbox columns="20% 80%">
+                            <html>
+                                <div class="hp-sbox-icon fas fa-cogs"></div>
+                            </html>
+                            <html>
+                                <div class="hp-sbox-small-title">Autorisations économiques</div>
+                                <div style="height: 10px;" > </div>
+                                <div class="hp-sbox-text">
+                                    Déclaration des activités non classées et autorisations des établissements classés en 2ème et 3ème catégorie.
+                                </div>
+                                <div style="height: 15px;" > </div>                                
+                                <div class="hp-sbox-btn">Accéder</div>
+                            </html>
+                        </vbox>
+                    </vbox>                                    
+                    
+                </vbox>
+                
+        </vbox>
+        </vbox>    
+            
+		<html> <div style="height: 30px;" > </div> </html>                
+        
+        <html>
+            <cms-topicTitle>Chiffres clés</cms-topicTitle>
+            <cms-topicSeparator></cms-topicSeparator>
+        </html>
+        
+
+        <vbox columns="25% 25% 25% 25%">
+             <html>                
+                <box-card>
+                    <box-icon class="fas fa-university"> </box-icon>
+                    <box-big-title>121</box-big-title>
+                    <box-small-title>Commune</box-small-title>
+                    <box-h-sep> </box-h-sep>
+                    <box-text><a>Liste des communes couvertes</a></box-text>                    
+                </box-card>
+             </html>                
+
+             <html>                
+                <box-card>
+                    <box-icon class="fas fa-folder"> </box-icon>  
+                    <box-big-title>+300</box-big-title>
+                    <box-small-title>Dossier traité / jour</box-small-title>
+                    <box-h-sep> </box-h-sep>
+                    <box-text><a>Indicateurs de performance</a></box-text>                      
+                </box-card>
+             </html>
+            
+             <html>                
+                <box-card>
+                    <box-icon class="fas fa-user-tie"> </box-icon>  
+                    <box-big-title>+900</box-big-title>
+                    <box-small-title>Fonctionnaire</box-small-title>
+                    <box-h-sep> </box-h-sep>
+                    <box-text><a>Statistiques d'utilisation</a></box-text>                      
+                </box-card>
+             </html>
+            
+             <html>                
+                <box-card>
+                    <box-icon class="fas fa-users"> </box-icon>  
+                    <box-big-title>+5000</box-big-title>
+                    <box-small-title>Utilisateur</box-small-title>
+                    <box-h-sep> </box-h-sep>
+                    <box-text><a>Répartition des usagers</a></box-text>                       
+                </box-card>
+             </html>            
+            
+          </vbox>
+        
+		  <html> <div style="height: 30px;" > </div> </html>            
+        
+    </screen>
+        
+    /********************************************************/
+    /*      END :: #MFB :: grid Rokhas 3.0 Home page        */
+    /********************************************************/ 
+      
+    <html>
+        <cms-topicTitle>Liste de tâches</cms-topicTitle>
+        <cms-topicSeparator></cms-topicSeparator>
+    </html>      
+	
+	
+	<tasklist name="TLZonebundle" label="My Tasks" displayMode="thumbnail"  searchQN="globalTasks"   style="width:1200px; max-width: 95%; margin:auto"  >
+    <field label="Réf." index="stringIndex1" widget="text" name="reference" />
+    <field label="Statut" index="stringIndex2" widget="text" name="statut" />
+    <field label="Description" index="stringIndex3" widget="text" name="description" />
+    <field label="d4" index="stringIndex4" widget="text" name="detail4" /> 
+    <field label="d5" index="stringIndex5" widget="text" name="detail5" /> 
+    <field label="d6" index="stringIndex6" widget="text" name="detail6" /> 
+    <field label="d7" index="stringIndex7" widget="text" name="detail7" /> 
+    <field label="d8" index="stringIndex8" widget="text" name="detail8" /> 
+    <field label="d9" index="stringIndex9" widget="text" name="detail9" /> 
+    <field label="d10" index="stringIndex10" widget="text" name="detail10" /> 
+    <field label="d11" index="stringIndex11" widget="text" name="detail11" /> 
+    <field label="d12" index="stringIndex12" widget="text" name="detail12" /> 
+    <field label="manualTaskId" index="manualTaskId" widget="text" name="manualTaskId" />
+    <field label="creationTime" index="creationTime" widget="text" name="creationTime" />
+    <field label="affected" index="affected" widget="text" name="affected" />
+    <field label="activityName" index="activityName" widget="text" name="activityName" />
+	<field  label="Processus" index="processName" name="processName" /> 
+	<field  label="ProcessusQN" index="processQN" name="processQN" /> 
+	<field  label="modelQN" index="modelQN" name="modelQN" /> 
+	<field  label="aiId" index="id" name="aiId" /> 
+	<field  label="objectId" index="objectId" name="objectId" /> 
+	
+	<template>
+       <div class="ow-thumbnail ow-thumbnail-${owt_state}"> 
+	    <div class="ow-thumbnail-actions">
+			<div class="ow-thumbnail-action  fa fa-edit" onclick="ApplicationManager.loadTask(${aiId}, '${processQN}', '${activityName}')"  > </div>
+			<div class="ow-thumbnail-action  fa fa-eye"  onclick="ApplicationManager.displayObject(${objectId}, '${modelQN}', '${activityName}')"  > </div>
+			<div class="ow-thumbnail-action  ${whoIsForMe_css}" onclick="ApplicationManager.delegateTask(${aiId}, ${objectId},  '${processQN}', '${whoIsForMe}', '${affected}', '${manualTaskId}' )"> </div>
+		</div>
+          <div class="ow-thumbnail-inner"  >
+			<div class="ow-thumbnail-title-line">
+				<div class="ow-thumbnail-bag"  >${activityName}</div> 
+				<div > 
+					<span class='ow-thumbnail-value'  >${processName}</span>
+				</div> 
+				<div> 
+					<span class='ow-thumbnail-value'  >${reference}</span>
+				</div> 
+			</div>
+			<div class="ow-thumbnail-details-line">  
+				<div class="ow-t1">${description}</div>
+				<div class="ow-t1">${detail5}</div> 
+				<div class="ow-t1">${statut}</div> 
+			</div>
+			<div class="ow-thumbnail-details-line"> 
+				<div class="ow-t1">${detail4}</div>  
+				<div class="ow-t1">${detail6}</div> 
+				<div class="ow-t1">${detail7}</div>
+				<div class="ow-t1">${detail8}</div>  
+			</div>
+			<div class="ow-thumbnail-details-line"> 
+				<div class="ow-t1">${detail9}</div>  
+				<div class="ow-t1">${detail10}</div> 
+				<div class="ow-t1">${detail11}</div>
+				<div class="ow-t1">${detail12}</div>  
+			</div>
+			
+			
+			<div class="ow-thumbnail-foot-line" >
+			
+				<div>${processName}</div>
+				<div>${activityName}</div>
+				<div>${creationTime}</div> 
+				<div class="affectation ${owt_state} ">${owt_state_message}</div>
+			</div>
+          </div> 
+		</div> 
+      </template>
+	 
+	 
+	 
+  </tasklist>
+   
+  </view>
+</search>
+
+	

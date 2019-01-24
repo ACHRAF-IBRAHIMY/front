@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<views>
+  <view name="dashboardsearch" default="true">
+    <screen label="DashboardSearch" labelWidth="140" usage="cr:R,val:R" labelAlign="left" xcstt="x" />
+    <buttonBar />
+    <statusBar indicator="Demande.state.indicator" type="historique" />
+  </view>
+  <taskList name="TLDashboardSearch" />
+</views>
+

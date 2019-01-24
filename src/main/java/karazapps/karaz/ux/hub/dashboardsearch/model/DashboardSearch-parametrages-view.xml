@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="parametrages" default="true">
+	<Screen label="Parametrages" labelWidth="100" usage="cr:R,val:V"
+		labelAlign="left">
+		<vbox xpath="" label="Paramétrages">
+			<hbox labelWidth="80">
+				<Vbox width="300">
+					<field xpath="reference" label="Référence" widget="text" />
+					<field xpath="modelLabel" label="Modèle" widget="text" />
+				</Vbox>
+				<Vbox>
+					<field xpath="entity" label="Entity" editable="true" widget="reference" />
+					<field xpath="modelName" label="Modèle QN" widget="text" />
+				</Vbox>
+				<Vbox width="200">
+				  <field xpath="dateChange" label="Date Traitement" widget="date" />
+            <field xpath="statut" label="Statut" widget="select" >
+            	<option label="Actif" value="enabled"  /> 
+            	<option label="Inactif" value="desabled"  /> 
+            </field>
+				</Vbox>
+			</hbox>
+			<tabpanel>
+								
+								<tabpanel xpath="process.processus[0]" label="GestionDashboardSearch">
+				 <hbox label="configuration" height="60"  >
+              <vbox labelWidth="100"    width="500"  height="60" ratio="0"  >
+                <field xpath="process.processus[0].processName" label="Nom Complet" widget="text" readOnly="true" />
+                <field xpath="process.processus[0].processLabel" label="Libellé" widget="text" readOnly="true" />
+              </vbox>
+              <vbox labelWidth="80"  width="120"   ratio="0" >
+                <field xpath="process.processus[0].autostart" label="Autostart" widget="boolean" />
+                <field xpath="process.processus[0].horizontalProcessing" label="Horizontal" widget="boolean" />
+              </vbox>
+              <vbox   labelWidth="80"  width="120"   ratio="0" >
+                <field xpath="process.processus[0].journalizable" label="Journalizable" widget="boolean" />
+                <field xpath="process.processus[0].exlusive" label="Exlusive" widget="boolean" />
+              </vbox>
+            </hbox> 
+					<vbox xpath="process.processus[0].activities" label="Activités">
+						<table xpath="process.processus[0].activities.activity"
+							label="Activity" usage="cr:E,val:V">
+							 
+
+							<field xpath="activityLabel" label="Activité" widget="text" />
+							<field xpath="enabled" label="Activation" widget="boolean"
+								usage="" trueLabel="Activée" falseLabel="Désactivée" />
+							<field xpath="notifyAllocation" label="Notifier Allocation" widget="boolean" />
+							<field xpath="notifyClose" label="Notifier Cloture" widget="boolean" />
+							<field xpath="timeout.deadline" label="Délai"  width="80" widget="integer" />
+							<field xpath="timeout.timeUnite" label="Unité" widget="select" width="80">
+								 <option value="" label="" />
+								<option value="1" label="m" /> 
+								<option value="60" label="H" /> 
+								<option value="1440" label="J" /> 
+								<option value="10080" label="S" />
+								<option value="43200" label="M(30J)" /> 
+							</field>
+							<field xpath="timeout.alert" label="Skip Out State" editable="true" widget="select" 
+							optionsXpath="process.processus[0].timeout.warnings"  mappedOptionKey="warning"  mappedValueKey="state"   > 
+								 
+							</field>
+							<field xpath="notifyBI" label="Notifier BI" widget="boolean"
+								usage="" />
+						</table>
+					</vbox>
+					<hbox xpath="process.processus[0].stateBar" 
+						label="Barre d'état">
+						<table xpath="process.processus[0].stateBar.state" width="500"
+							label="State"  supportClone="true"
+							supportResorting="true">
+							<xmlTemplate>
+								<state>
+									<label />
+									<durationEstimation />
+									<durationUnite />
+									<displayPreview>true</displayPreview>
+									<activities />
+								</state>
+							</xmlTemplate>
+							<field xpath="label" label="Label" widget="text" width="200"  />
+							<field xpath="durationEstimation"  label="Durée estimé"  width="100"  />
+							<field xpath="durationUnite"  label="Unité"  widget="select" width="100"   > 
+								 <option value="Heure" label="Heure" />
+								 <option value="Jour" label="Jour" />
+								 <option value="Semaine" label="Semaine" />
+							</field>
+							<field xpath="displayPreview"  label="Prévision"  widget="boolean" />
+						</table>
+						<fieldset master="process.processus[0].stateBar.state" label="Etat" >
+							<field xpath="label" label="Label" widget="text" />
+							<table xpath="activities.activity" label="Activities"
+								supportClone="true" supportResorting="true" >
+
+								<field xpath="activityName" label="Activité" widget="select">
+									 </field>
+								
+							</table>
+						</fieldset>
+
+					</hbox>
+				<vbox xpath="notification" label="Notifications">
+                  <table xpath="process.processus[0].notification.email" label="Email">
+                     <field xpath="templateName" label="Template Name" widget="text" />
+                    <field xpath="priority" label="Priorité" width="200"  widget="select">
+                      <option value="realTime" label="Temps Réel" />
+                      <option value="hight" label="Haute" />
+                      <option value="normal" label="Normale" />
+                      <option value="low" label="Basse" />
+                    </field>
+                    <field xpath="sendType" label="Type d'envoi" width="200" widget="select">
+                      <option label="Individuel" value="Individuel" />
+                      <option label="Collectif" value="Collectif" />
+                    </field> 
+                  </table>
+                  <fieldset label="Email/FCM"  master="process.processus[0].notification.email">
+                    <field xpath="subject" label="Subject" widget="text" />
+                   <tabpanel >
+						<vbox label="Email Display">
+							<html><div style="border:2px black solid; height:350px;overflow:auto; width:100%"> ${body} </div></html>
+						</vbox>
+						<vbox label="Email HTML" >
+							<field xpath="body" label="Body" widget="textArea" height="350" labelAlign="top" />
+						</vbox>
+						<vbox label="FCM" >
+						<hbox>
+						
+							<field xpath="fcmEnable" label="Enable" widget="boolean" />
+							<field xpath="fcmMobile" label="Mobile Notification" widget="boolean" />
+							<field xpath="fcmWeb" label="Web Notification" widget="boolean" />
+						</hbox>
+							<field xpath="fcmTitle" label="Title" widget="text" />
+							<field xpath="fcmMessage" label="Message" widget="textArea" height="200" /> 
+						</vbox>
+					 
+					</tabpanel>
+                  </fieldset>
+                </vbox>
+					 
+					<vbox xpath="process.processus[0].observers" label="Observations" width="370" ratio="0" >
+					<hbox>
+					<field xpath="process.processus[0].notification.email.priority"
+							label="Priority" widget="select" >
+								<option value="realTime"  label="Temps Réel" />
+								<option value="hight"  label="Haute" />
+								<option value="normal"  label="Normale" />
+								<option value="low"  label="Basse" />
+							</field>
+					<field xpath="process.processus[0].notification.email.sendType"
+							label="Type d'envoi" widget="select" >
+								<option label="Individuel"  value="Individuel" />
+								<option label="Collectif"  value="Collectif" /> 
+							</field>
+							</hbox>
+						<table xpath="process.processus[0].observers.observer"
+							label="Observateurs">
+							<xmlTemplate>
+								<observer>
+									<role />
+									<type />
+									<email />
+									<enabled />
+									<destinataire>
+										<dataObjectId />
+										<description />
+										<modelQN />
+									</destinataire>
+								</observer>
+							</xmlTemplate>
+						<field xpath="role" label="Rôle" widget="text"   />
+							<field xpath="type" label="Type" widget="select" width="150">
+								<option label="Email" value="Email" />
+								<option label="Propriétaire" value="Owner" />
+								<option label="Expression" value="Expression" />
+								<option label="Utilisateur" value="User" />
+								<option label="Groupe" value="Group" />
+								<option label="Collaborateur" value="Collaborateur" /> 
+								<option label="Employée" value="Epmloyee" />
+								<option label="Affectation" value="Affectation" />
+							</field>
+						<!--<field xpath="destinataire" label="..." widget="reference"
+								width="25" searchQN="admin/report/search/AllObject?query.modeleName={type}" />
+						  -->		
+						  <field xpath="email" label="Email" widget="text" width="200" >
+								<dependency attribute="value" expression="{destinataire.description}" evalMoment="whenEmpty"  /> 
+							</field>
+							<field xpath="enabled" label="Activation" widget="boolean" width="100"
+								trueLabel="Activé" falseLabel="Désactivé" />
+						</table>
+					</vbox>
+					
+
+  <vbox xpath="process.processus[0].timeout" label="Time Out" labelWidth="70">
+                  <vbox>
+                    <hbox>
+                      <field xpath="process.processus[0].timeout.deadline" label="Delay" widget="integer"  labelWidth="50"  /> 
+                      <field xpath="process.processus[0].timeout.timeUnite" label="Time Unite" widget="select" editable="true" >
+                      <option value="" label="" />
+								<option value="1" label="m" /> 
+								<option value="60" label="H" /> 
+								<option value="1440" label="J" /> 
+								<option value="10080" label="S" />
+								<option value="43200" label="M(30J)" />
+								
+								</field> 
+                <field xpath="process.processus[0].timeout.onlyBusinessHours" label="Business Hours" widget="boolean" labelWidth="120" width="35" />
+                <field xpath="process.processus[0].timeout.onlyBusinessDays" label="Business Days" widget="boolean" labelWidth="120" width="35" />
+                <field xpath="process.processus[0].timeout.skipHolidays" label="Skip Holdays" widget="boolean" labelWidth="70" width="35" />
+                      <field xpath="process.processus[0].timeout.disable" label="Disable" widget="boolean" labelWidth="50" width="35" />
+                   </hbox>
+                    <fieldset  label="Warnings">
+                      <table xpath="process.processus[0].timeout.warnings.warning" label="Warning">
+                          <field xpath="state" label="State"   widget="select" searchQN="resources/core/timeOut/warningsState" >
+								<option value="orange" label="orange" /> 
+								<option value="yellow" label="yellow" /> 
+								<option value="red" label="red" /> 
+								<option value="black" label="black" /> 	
+						</field>
+                        <field xpath="marge" label="Marge" widget="text" />
+                        <field xpath="template" label="Notification" widget="select"   
+						optionsXpath="process.processus[0].notification" mappedOptionKey="email"   mappedLabelKey="templateName" 
+						mappedValueKey="templateName" />
+                        <field xpath="alertoOwner" label="Alert Owner" widget="boolean" />
+                        <field xpath="alertAffected" label="Alert Affected" widget="boolean" />
+                        <field xpath="observers" label="Observers" widget="select" autoExpand="true"  
+						optionsXpath="process.processus[0].observers" mappedOptionKey="observer"   mappedLabelKey="role"  mappedValueKey="role"  />
+                        <field xpath="interval" label="Interval" widget="integer" />
+                        <field xpath="disable" label="Disable" widget="boolean" />
+                        <xmlTemplate>
+                          <warning>
+                            <state />
+                            <marge />
+                            <alertoOwner />
+                            <alertAffected />
+                            <observers />
+                            <interval>1</interval>
+							<template >default</template>
+                            <disable>false</disable>
+                          </warning>
+                        </xmlTemplate>
+                      </table>
+                    </fieldset>
+                  </vbox>
+                </vbox>
+                <vbox label="Parameters">
+               
+                 <hbox>
+                
+                	<vbox  width="500" ratio="0" margin="10 4 0 4" >
+                	<table xpath="process.processus[0].configParams.configParam" label="Parameters" usage="cr:A,val:V">
+                		<field xpath="name" label="Param" width="120" />
+                		<field xpath="type" label="Type" width="60"    ></field>
+                		<field xpath="value" label="Value" width="100" ></field>
+                		<field xpath="defaultValue" label="Default" width="100" readOnly="true" ></field>
+                		<field xpath="enabled" label="Enabled" width="50"  widget="boolean"  ></field>
+                		<field xpath="multiple" label="Multiple" width="50"  widget="boolean"  ></field>
+                	</table>
+                	</vbox>
+                	
+                	<fieldset label="Details" master="process.processus[0].configParams.configParam">
+					
+                		<html><div style="font-style:italic;font-family:Candara"> ${description} </div></html>
+                	<field xpath="name" label="Param" labelAlign="top"   />
+                		<field xpath="type" label="Type"  labelAlign="top"   widget="select" editable="true" >
+                			<option label="String" value="String" />
+                			<option label="int" value="int" />
+                			<option label="Double" value="double" />
+                			<option label="Date" value="Date" />
+                			<option label="Boolean" value="Boolean" />
+                			<option label="Reference" value="Reference" />
+                		
+                		</field>
+                		<field xpath="value" label="Value" widget="textArea" height="48"  labelAlign="top"  ></field>
+                		<field xpath="defaultValue" label="Default" widget="textArea" height="48"  labelAlign="top"  readOnly="true"></field>
+                		<field xpath="note" label="Note" widget="textArea" height="48"  labelAlign="top"  ></field>
+                		
+                		<hbox  labelWidth="50" > 
+                		<field xpath="enabled" label="Enabled"   widget="boolean" ></field>
+                		<field xpath="multiple" label="Multiple"   widget="boolean"  ></field>
+                		</hbox>
+                		
+                	</fieldset>
+                </hbox>
+                </vbox>
+				</tabpanel>
+												
+				
+				   <vbox xpath="sequence" label="Sequence">
+            <hbox height="40">
+              <field xpath="sequence.currentFormula" label="Current Formula" widget="text" />
+              <field xpath="sequence.defaultFormula" label="Default Formula" widget="text" />
+              <field xpath="sequence.currentBI" label="Current BI" widget="text" labelWidth="80" />
+              <field xpath="sequence.ownBI" label="Own BI" widget="boolean" labelWidth="60" />
+            </hbox>
+            <fieldset xpath="sequence.expressionsPlanning" label="Formula Planning">
+              <table xpath="sequence.expressionsPlanning.expression" label="Expression">
+                <field xpath="formula" label="Formula" widget="text" />
+                <field xpath="start" label="Start" widget="time" />
+                <field xpath="finish" label="Finish" widget="time" />
+                <field xpath="enable" label="Enable" widget="boolean" />
+                <xmlTemplate>
+                  <expression>
+                    <formula />
+                    <start />
+                    <finish />
+                    <enable>true</enable>
+                  </expression>
+                </xmlTemplate>
+              </table>
+            </fieldset>
+          </vbox>
+          <fieldset xpath="translations" label="Translations">
+            <table xpath="translations.translation" label="Translation" supportClone="false" supportResorting="true">
+              <field xpath="language" label="Language" widget="select" editable="true">
+                <option value="fr" label="Français" />
+                <option value="en" label="English" />
+                <option value="ar" label="العربية" />
+                <option />
+              </field>
+              <field widget="fileUpload" label="Joindre" xpath="attachment" />
+              <field xpath="attachment.fileId" label="Voir" widget="fileDownload" />
+              <field xpath="attachment.fileName" label="File Name" widget="text" readOnly="true" required="false" autoExpand="true" />
+              <field xpath="attachment.fileSize" label="File Size" widget="text" readOnly="true" />
+              <field xpath="enabled" label="Enabled" widget="boolean" />
+              <xmlTemplate>
+                <translation>
+                  <language />
+                  <attachment>
+                    <fileId />
+                    <fileName />
+                    <fileSize />
+                    <fileSignature />
+                    <fileTime />
+                  </attachment>
+                  <enabled>true</enabled>
+                </translation>
+              </xmlTemplate>
+            </table>
+          </fieldset>
+       
+			</tabpanel>
+
+		</vbox>
+	</Screen>
+	<buttonBar>
+		<button label="Valider" type="submit" xpath="toPrevious" value="false" />
+		<button label="Retourner" type="submit" xpath="toPrevious"
+			value="true" warning="Attention... vous allez Retourner à l'etape précédente" />
+	</buttonBar>
+	<statusBar indicator="Demande.state.indicator" type="historique">
+		<status label="Creer Parametrages" state="CreerParametrages" />
+		<status label="Valider Parametrages" state="ValiderParametrages" />
+		<status label="Rejet" state="Rejet" />
+	</statusBar>
+</view>

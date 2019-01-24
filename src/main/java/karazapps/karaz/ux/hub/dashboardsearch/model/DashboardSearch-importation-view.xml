@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="importation" default="true">
+
+	<Screen label="gestion de importation" labelWidth="150"
+		labelAlign="left" usage="import:R">
+
+		<FieldSet label="Données" collapsible="2">
+			<HBox>
+				<VBox>
+					<field xpath="sequence" label="N° Dossier" readOnly="true" />
+					<field xpath="name" label="Nom d'importation" />
+				</VBox>
+
+				<VBox labelWidth="80" ratio="0">
+
+					<field xpath="modelQN" label="Modèle"   width="450" />
+					<field xpath="processQN" label="Processus" widget="select" searchQN="{modelQN}#resourceType=launchProcess"   />
+
+				</VBox>
+			</HBox>
+		</FieldSet>
+		<tabPanel>
+			<hbox label="Collection d'Importation">
+				 
+				<FieldSet label="Liste des Objets" width="180" ratio="0" >
+					<table xpath="data.instance"   skipMaster='true'  	supportClone="true"  supportResorting="true"
+						    >
+						<xmlTemplate>
+							<instance>
+								<importationId></importationId>
+								<dataObjectId></dataObjectId>
+								<description></description>
+								<sequence></sequence>
+								<comment></comment>
+								<step>1</step>
+								<xmlData><to /><status /><reference /></xmlData>
+								</instance>
+						</xmlTemplate>
+						<field xpath="importationId" label="ID Import" width="60" />
+						<field xpath="step" label="Etape" widget="integer" width="50" autoExpand="true"  /> 		</table>
+					</FieldSet >
+					<vbox label="data"   master="data.instance"> 
+						<hbox labelWidth="60"  >
+							<field xpath="dataObjectId" label="ID Karaz" width="100" readOnly="true" />
+							<field xpath="sequence" label="Sequence" width="140"  readOnly="true"/>
+							<field xpath="description" label="Description" autoExpand="true"  readOnly="true" />
+						</hbox>
+						<html><div ><div style='font-family: candara;font-size: 12px;font-weight: bold; margin-bottom:1px'>Data:</div><hr style='border:1px #333 solid; margin-top: 0px; margin-bottom: 0px;'/></div></html>
+
+								<screen label="DashboardSearch" labelWidth="140" usage="import:R" labelAlign="left" xcstt="x" master="xmlData" masterRelId="xData" />
+					</vbox> 
+			</hbox>
+			<HBox label="Opérations" labelWidth="110" >
+				<FieldSet label="traitement"  ratio="5" >
+					<field xpath="dateCreation" label="Date de création"   widget="text" 
+						readOnly="true" />
+					<field xpath="dateValidation" label="Date de Traitement "
+						  readOnly="true" />
+
+					<field xpath="lastImportationTime" label="Dernier Import "
+						  readOnly="true" />
+					<field xpath="entity" label="Entité" widget="reference"
+						  editable="true"
+						searchQN="backend/admin/domain/entity/search/AllEntity?statut=active&amp;use=active" />
+
+					<field xpath="statut" label="Statut" widget="select"  >
+						<option value="Collection Créée (0)" label="Collection Créée " />
+						<option value="Collection Importée (1)" label="Collection Importée" />
+						<option value="Collection Supprimée (2)" label="Collection Supprimée" />
+					</field>
+
+				</FieldSet>
+				<FieldSet label="Importation" ratio="5">
+					<hbox>
+					<button actionName="backend/admin/importation/ImportDataObject"
+						label="Créer les Objets" />
+					<button actionName="backend/admin/importation/ImportDataObject?update=true"
+						label="MAJ Références" />
+						</hbox>
+							<field xpath="responseAddObject" label="Réponse " widget="textArea"
+						readOnly="true" labelAlign="topleft" height="150" />
+
+				</FieldSet>
+				<FieldSet label="Suppression" ratio="5">
+					<button actionName="backend/admin/importation/RemoveDataObject"
+						label="Supprimer les Objets" />
+					<field xpath="responseRemoveObject" label="Réponse " widget="textArea"
+						readOnly="true" labelAlign="topleft" height="150" />
+
+				</FieldSet>
+
+			</HBox>
+			<HBox label="Importer/Exporter">
+				<FieldSet label="Chargement" ratio="5">
+					<field xpath="importFile" label="Fichier d'import" widget="fileCombo"  downloadTarget="download" />
+					<button actionName="backend/admin/importation/LoadCollection"
+						label="Charger la collection" />
+					<field xpath="responseLoad" label="Réponse " widget="textArea"
+						readOnly="true" labelAlign="top" height="150" />
+				</FieldSet>
+				<FieldSet label="Export" ratio="5">
+					<field xpath="exportFile" label="Fichier d'import" widget="fileCombo"   downloadTarget="download"  />
+					<button actionName="backend/admin/importation/ExportCollection"
+						label="Exporter la collection" />
+					<field xpath="responseExport" label="Réponse " widget="textArea"
+						readOnly="true" labelAlign="top" height="150" />
+				</FieldSet>
+			</HBox>
+
+
+			<HBox label="Déscription">
+				<VBox>
+					<field xpath="description" label="Déscription" widget="textArea"
+						height="100" labelAlign="top" />
+				</VBox>
+			</HBox>
+		</tabPanel>
+	</Screen>
+
+	<buttonBar>
+		<button label="Terminer" type="submit" />
+	</buttonBar>
+
+</view>
