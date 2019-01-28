@@ -4,8 +4,8 @@
 </query> 
 <data>
 		<query> 
-			<keys></keys>
-			<model></model>
+			<keys />
+			<model />
 			<from />
 			<to />  
 			<task>true</task>  
@@ -14,8 +14,8 @@
 			<annotation>true</annotation>  
 			<others>true</others>
             
-            <userLogin></userLogin>
-            <userPassword></userPassword>            
+            <userLogin />
+            <userPassword />            
 		</query>
 	</data>
     
@@ -27,44 +27,53 @@
     /********************************************************/
       
       
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true"  >      
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         
-		
-        <vbox columns=" 25% 75% " columns-small="auto" contentAlign="center" contentJustify="enter">
-            <vbox>
-
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox columns="100%"  contentJustify="center">
+                <html>
+                    <div>
+                        <img src="./img/rokhasRectBlueArFr.svg" alt="Rokhas logo" />
+                    </div>
+                </html>
             </vbox>
-            <html>
-                <div class="hp-logo">
-                    <img src="./img/rokhasRectBlueArFr.svg" alt="Rokhas logo"/>
-                </div>
-                <div style="height: 30px;" > </div>
-            </html>
-            <html id="blank-vseparator" />
-        </vbox>>
-           
+            <vbox columns="100%" contentJustify="end">
+                <html>
+                    <div class="form-text-medium">
+                        <span style="margin:0px 20px;"> <a>Accueil</a> </span>
+                        <span style="margin:0px 20px;"> <a>Questions fréquentes</a> </span>
+                        <span style="margin:0px 20px;"> <a>Nous contacter</a> </span>
+                        <span style="margin:0px 20px;"> <a>Termes d'utilisation</a> </span>
+                    </div>
+                </html>
+            </vbox>
+        </vbox>
 
+        <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+        </html>        
+           
         <vbox columns="30% 70%">
             <vbox className="hp-box">
                 <vbox columns="20% 80%">
                     <html>
-                        <div class="hp-box-icon fas fa-user-lock"></div>
+                        <div class="hp-box-icon fas fa-user-lock" />
                     </html>
                     <html>
                         <div class="hp-box-small-title"> Accédez à votre espace privé</div>       
                     </html>    
                 </vbox>
                 <html>
-                    <div style="height: 50px;" > </div>
+                    <div style="height: 50px;"> </div>
                 </html>                
                 <vbox>
-                    <field widget="text" className="hp-text-input" xpath="userLogin" emptyText="Nom utilisateur" noLabel="true"  width="80%">
-                        <bag position="leading" className="hp-bag-input fas fa-user"/>
-                        <validation type="required"  errorMessage="Veuillez saisir votre nom d'utilisateur !"/>
+                    <field widget="text" className="hp-text-input" xpath="userLogin" emptyText="Nom utilisateur" noLabel="true" width="80%">
+                        <bag position="leading" className="hp-bag-input fas fa-user" />
+                        <validation type="required" errorMessage="Veuillez saisir votre nom d'utilisateur !" />
                     </field>
-                    <field widget="password" className="hp-text-input" xpath="userPassword" postEnter="x=$('.HomePageLoginButton').click()!!expr!!string" separator="!!" emptyText="Mot de passe"  noLabel="true" height="100" >
-                        <bag position="leading" className="hp-bag-input fas fa-lock"/>
-                        <validation type="required"  errorMessage="Veuillez saisir votre mot de passe !"/>
+                    <field widget="password" className="hp-text-input" xpath="userPassword" postEnter="x=$('.HomePageLoginButton').click()!!expr!!string" separator="!!" emptyText="Mot de passe" noLabel="true" height="100">
+                        <bag position="leading" className="hp-bag-input fas fa-lock" />
+                        <validation type="required" errorMessage="Veuillez saisir votre mot de passe !" />
                     </field>
 
                     <button className="hp-box-btn HomePageLoginButton" label="Se connecter">
@@ -133,12 +142,12 @@
                     <html>
                         <div style="height: 70px;" />
                         <div class="hp-sbox-text">
-                            <a><i class="fab fa-ello"></i> Pas encore de compte Rokhas ?</a>
+                            <a><i class="fab fa-ello" /> Pas encore de compte Rokhas ?</a>
                         </div>                             
                         <div class="hp-sbox-text">
-                            <a><i class="fas fa-user-slash"></i> Mot de passe oublié ?</a>
+                            <a><i class="fas fa-user-slash" /> Mot de passe oublié ?</a>
                         </div>
-                        <div style="height: 10px;" > </div>                                                                  
+                        <div style="height: 10px;"> </div>                                                                  
                     </html>
                 </vbox>
                 
@@ -155,30 +164,29 @@
                     <div style="height: 50px;" />
                 </html>    
                 <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath ="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
+                    <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
                     </field>
-                    <button className="hp-search_field_icon fas fa-search" label=""  
-                    postProcessing="search()" separator="!!" > </button>
+                    <button className="hp-search_field_icon fas fa-search" label="" postProcessing="search()" separator="!!"> </button>
                 </vbox>
                     
 
                 <html>
-                    <div style="height: 70px;" > </div>
+                    <div style="height: 70px;"> </div>
                 </html>        
                 
                 <vbox columns="50% 50%">
                     <vbox>
                         <vbox columns="20% 80%">
                             <html>
-                                <div class="hp-sbox-icon fas fa-building"></div>
+                                <div class="hp-sbox-icon fas fa-building" />
                             </html>
                             <html>
                                 <div class="hp-sbox-small-title">Autorisations urbanistiques</div>
-                                <div style="height: 10px;" > </div>
+                                <div style="height: 10px;"> </div>
                                 <div class="hp-sbox-text">
                                     Permis de construction, modification, élevation, lotissement, permis d'habiter, copie-conforme au plan autorisé, réceptions, ...
                                 </div>
-                                <div style="height: 15px;" > </div>                                
+                                <div style="height: 15px;"> </div>                                
                                 <div class="hp-sbox-btn">Accéder</div>
                             </html>
                         </vbox>
@@ -187,15 +195,15 @@
                     <vbox>
                         <vbox columns="20% 80%">
                             <html>
-                                <div class="hp-sbox-icon fas fa-cogs"></div>
+                                <div class="hp-sbox-icon fas fa-cogs" />
                             </html>
                             <html>
                                 <div class="hp-sbox-small-title">Autorisations économiques</div>
-                                <div style="height: 10px;" > </div>
+                                <div style="height: 10px;"> </div>
                                 <div class="hp-sbox-text">
                                     Déclaration des activités non classées et autorisations des établissements classés en 2ème et 3ème catégorie.
                                 </div>
-                                <div style="height: 15px;" > </div>                                
+                                <div style="height: 15px;"> </div>                                
                                 <div class="hp-sbox-btn">Accéder</div>
                             </html>
                         </vbox>
@@ -206,11 +214,11 @@
         </vbox>
         </vbox>    
             
-		<html> <div style="height: 30px;" > </div> </html>                
+		<html> <div style="height: 30px;"> </div> </html>                
         
         <html>
             <cms-topicTitle>Chiffres clés</cms-topicTitle>
-            <cms-topicSeparator></cms-topicSeparator>
+            <cms-topicSeparator />
         </html>
         
 
@@ -257,7 +265,7 @@
             
           </vbox>
         
-		  <html> <div style="height: 30px;" > </div> </html>            
+		  <html> <div style="height: 30px;"> </div> </html>            
         
     </screen>
         
@@ -267,11 +275,11 @@
       
     <html>
         <cms-topicTitle>Liste de tâches</cms-topicTitle>
-        <cms-topicSeparator></cms-topicSeparator>
+        <cms-topicSeparator />
     </html>      
 	
 	
-	<tasklist name="TLZonebundle" label="My Tasks" displayMode="thumbnail"  searchQN="globalTasks"   style="width:1200px; max-width: 95%; margin:auto"  >
+	<tasklist name="TLZonebundle" label="My Tasks" displayMode="thumbnail" searchQN="globalTasks" style="width:1200px; max-width: 95%; margin:auto">
     <field label="Réf." index="stringIndex1" widget="text" name="reference" />
     <field label="Statut" index="stringIndex2" widget="text" name="statut" />
     <field label="Description" index="stringIndex3" widget="text" name="description" />
@@ -288,27 +296,27 @@
     <field label="creationTime" index="creationTime" widget="text" name="creationTime" />
     <field label="affected" index="affected" widget="text" name="affected" />
     <field label="activityName" index="activityName" widget="text" name="activityName" />
-	<field  label="Processus" index="processName" name="processName" /> 
-	<field  label="ProcessusQN" index="processQN" name="processQN" /> 
-	<field  label="modelQN" index="modelQN" name="modelQN" /> 
-	<field  label="aiId" index="id" name="aiId" /> 
-	<field  label="objectId" index="objectId" name="objectId" /> 
+	<field label="Processus" index="processName" name="processName" /> 
+	<field label="ProcessusQN" index="processQN" name="processQN" /> 
+	<field label="modelQN" index="modelQN" name="modelQN" /> 
+	<field label="aiId" index="id" name="aiId" /> 
+	<field label="objectId" index="objectId" name="objectId" /> 
 	
 	<template>
        <div class="ow-thumbnail ow-thumbnail-${owt_state}"> 
 	    <div class="ow-thumbnail-actions">
-			<div class="ow-thumbnail-action  fa fa-edit" onclick="ApplicationManager.loadTask(${aiId}, '${processQN}', '${activityName}')"  > </div>
-			<div class="ow-thumbnail-action  fa fa-eye"  onclick="ApplicationManager.displayObject(${objectId}, '${modelQN}', '${activityName}')"  > </div>
+			<div class="ow-thumbnail-action  fa fa-edit" onclick="ApplicationManager.loadTask(${aiId}, '${processQN}', '${activityName}')"> </div>
+			<div class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${objectId}, '${modelQN}', '${activityName}')"> </div>
 			<div class="ow-thumbnail-action  ${whoIsForMe_css}" onclick="ApplicationManager.delegateTask(${aiId}, ${objectId},  '${processQN}', '${whoIsForMe}', '${affected}', '${manualTaskId}' )"> </div>
 		</div>
-          <div class="ow-thumbnail-inner"  >
+          <div class="ow-thumbnail-inner">
 			<div class="ow-thumbnail-title-line">
-				<div class="ow-thumbnail-bag"  >${activityName}</div> 
-				<div > 
-					<span class='ow-thumbnail-value'  >${processName}</span>
+				<div class="ow-thumbnail-bag">${activityName}</div> 
+				<div> 
+					<span class="ow-thumbnail-value">${processName}</span>
 				</div> 
 				<div> 
-					<span class='ow-thumbnail-value'  >${reference}</span>
+					<span class="ow-thumbnail-value">${reference}</span>
 				</div> 
 			</div>
 			<div class="ow-thumbnail-details-line">  
@@ -330,7 +338,7 @@
 			</div>
 			
 			
-			<div class="ow-thumbnail-foot-line" >
+			<div class="ow-thumbnail-foot-line">
 			
 				<div>${processName}</div>
 				<div>${activityName}</div>
@@ -347,5 +355,3 @@
    
   </view>
 </search>
-
-	
