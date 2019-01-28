@@ -1,0 +1,114 @@
+
+/************************************************************************/
+/*   START :: TEMPORARY UPDATES TO INTEGRATE INTO AutorisationCri.css   */
+/************************************************************************/
+
+/* Start :: TO BE DELETED AFTER NEW BLINK SEARCH DESIGN */
+.pc-blinkSearchGrid {
+    display: grid;
+    grid-template-columns: 30% 10% auto 20%;
+    grid-template-areas: "pc-refDossier pc-statut . pc-actions"
+    "pc-refFonciere pc-refFonciere pc-localite pc-actions"
+    "pc-projetGrid pc-projetGrid pc-projetGrid pc-actions"
+    "pc-equipeProjet pc-equipeProjet pc-equipeProjet pc-actions";
+    grid-gap: 5px;
+}
+
+.pc-pictoProjet {
+    grid-area: pc-pictoProjet;
+    color: #d1d9dc;
+    font-size: 3.8em;
+    align-self: center;
+}
+
+/* End :: TO BE DELETED AFTER NEW BLINK SEARCH DESIGN */
+
+.pc-blinkArchi {
+    display: grid;
+    grid-template-columns: 5% 30% auto 20%;
+    grid-template-areas: "pc-ba-status pc-ba-reference pc-ba-categorie pc-ba-categorie"
+                         "pc-ba-status pc-ba-ids pc-ba-objet pc-ba-actions";
+    grid-gap: 10px;
+}
+
+.pc-ba-reference {
+    grid-area: pc-ba-reference;
+    background-color: #65bd6b;
+}
+
+/* Start :: Folder Status style */
+.pc-ba-status {
+    grid-area: pc-ba-status;
+    transform: rotate(-90deg);
+    height: 40px;
+    margin-left: -79px;
+    width: 164px;
+    place-self: center;
+    justify-self: start;
+    align-content: end;
+    padding-top: 9px;
+    text-align: center;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--k6-form-header-value-fg);
+}
+
+.pc-ba-status_Autorisé {
+    background-color: rgb(180, 226, 95);    
+    /* border: solid 0.1px #65bd6b; */
+}
+
+.pc-ba-status_Brouillon {
+    background-color: rgb(150, 150, 231);
+}
+
+.pc-ba-status_En.Cours {
+    background-color: lightskyblue;
+}
+
+.pc-ba-status_Ajourné {
+    background-color: rgb(247, 197, 104);
+}
+
+.pc-ba-status_Rejeté {
+    background-color: rgb(199, 193, 185);
+}    
+
+.pc-ba-status_Favorable{
+    background-color:  #b0dfb2;
+}
+
+.pc-ba-status_Défavorable{
+    background-color: rgb(223, 190, 190);
+}
+
+/* End :: Folder Status style */
+
+.pc-ba-categorie {
+    grid-area: pc-ba-categorie;
+    background-color: #fead0d;
+}
+
+.pc-ba-ids {
+    grid-area: pc-ba-ids;
+    background-color: #3388AA;
+    grid-column: 100%;
+    grid-template-areas: "pc-ba-refFonciere  pc-ba-localite pc-ba-maitreOuvrage pc-ba-maitreOeuvre";
+}
+
+.pc-ba-objet {
+    grid-area: pc-ba-objet;
+    background-color: #999;
+    grid-column: 100%;
+    grid-template-areas: "pc-ba-typeProjet pc-ba-natureProjet pc-ba-consistanceProjet";
+}
+
+.pc-ba-actions {
+    grid-area: pc-ba-actions;
+    background-color : #262f3d;
+}
+    
+/************************************************************************/
+/*   START :: TEMPORARY UPDATES TO INTEGRATE INTO AutorisationCri.css   */
+/************************************************************************/
