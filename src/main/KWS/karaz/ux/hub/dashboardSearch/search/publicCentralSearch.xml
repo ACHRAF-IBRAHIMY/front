@@ -142,7 +142,7 @@
                     <html>
                         <div style="height: 70px;" />
                         <div class="hp-sbox-text">
-                            <a><i class="fab fa-ello" /> Pas encore de compte Rokhas ?</a>
+                            <i class="fab fa-ello"></i> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch','search');">Pas encore de compte Rokhas ?</a>
                         </div>                             
                         <div class="hp-sbox-text">
                             <a><i class="fas fa-user-slash" /> Mot de passe oublié ?</a>
