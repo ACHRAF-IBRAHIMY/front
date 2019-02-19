@@ -1,3 +1,98 @@
+/* from css file karazapps/backend/admin/domain/realme/model/realme/web/Domain.css  */
+
+.ico_domain { 
+	background-image: url(img/Domaine_Identification.png);
+}/* from css file karazapps/backend/admin/ecm/repository/model/repository/web/Repository.css  */
+
+.ico_repository { 
+	background-image: url(img/repository.png);
+}/* from css file karazapps/backend/admin/feeder/emailreceiver/model/emailreceiver/web/EmailReceiver.css  */
+
+.ico_emailreciver { 
+	background-image: url(img/E-mail-Receiver.png);
+}/* from css file karazapps/backend/admin/importation/model/Importation/web/Import.css  */
+
+.ico_importations { 
+	background-image: url(img/Import_Export.png);
+}
+/* from css file karazapps/backend/admin/parametrages/model/parametrages/web/Parametrages.css  */
+
+.ico_parametrages { 
+	background-image: url(img/parametrages.png);
+}/* from css file karazapps/backend/admin/profile/model/profile/web/Profiles.css  */
+
+.ico_profiles { 
+	background-image: url(img/Profiles.png);
+}/* from css file karazapps/backend/admin/report/model/report/web/Report.css  */
+
+.ico_report { 
+	background-image: url(img/Report.png);
+}/* from css file karazapps/backend/admin/resources/liste/model/liste/web/Parametres.css  */
+
+.ico_parametres { 
+	background-image: url(img/Parametres.png);
+}/* from css file karazapps/backend/bam/activityinst/model/Activityinst/web/Activityinst.css  */
+
+.ico_activityinst { 
+	background-image: url(img/activityinst.png);
+}/* from css file karazapps/backend/bam/processinst/model/Processinst/web/Processinst.css  */
+
+.ico_processinst { 
+	background-image: url(img/BAM.png);
+}/* from css file karazapps/backend/bam/serverstartup/model/ServerStartup/web/ServerStartup.css  */
+
+.ico_serverstartup { 
+	background-image: url(img/BAM.png);
+}/* from css file karazapps/backend/bam/usersession/model/UserSession/web/UserSession.css  */
+
+.ico_usersession { 
+	background-image: url(img/BAM.png);
+}
+
+.userSessionPermissionTab li {
+	font-family: Candara;
+	padding-left: 20px;
+}/* from css file karazapps/backend/scheduling/execution/model/execution/web/Execution.css  */
+
+.ico_execution { 
+	background-image: url(img/execution.png);
+}/* from css file karazapps/backend/scheduling/job/model/job/web/Job.css  */
+
+.ico_job { 
+	background-image: url(img/Scheduler.png);
+}/* from css file karazapps/backend/scheduling/script/model/script/web/Script.css  */
+
+.ico_script { 
+	background-image: url(img/script.png);
+}
+
+.refreshScriptButton {
+	background: url("img/refresh-64x64.png") ; 
+	background-size: 32px 32px;
+	width:32px;
+	height:32px; 
+	position:absolute;
+	cursor:pointer; 
+	top:2px; 
+	right:20px
+}
+
+.refreshScriptButton:before {
+	
+	
+}
+
+.ScriptCodeTextArea textarea {
+    color: #a2e6a2;
+    font-family: Candara; 
+    background: #303930;
+    font-size: 13px;
+    font-family: monospace;
+    font-weight: normal;
+	
+}/* from css file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/DashboardSearch.css  */
+
+ 
 
  
 .dashboardsearch_icone:before{
@@ -7,4 +102,163 @@
 	padding: 5px;
 	font-size: 22px;
 	top: 7px;
+}
+
+
+}/* from css file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/DashboardSearch.css  */
+
+ 
+
+ 
+.dashboardsearch_icone:before{
+	position: relative;
+	font-family: FontAwesome !important;
+	content: "\f007";
+	padding: 5px;
+	font-size: 22px;
+	top: 7px;
+}
+
+
+.autocomplete-items {
+	width: 100%;
+    cursor: pointer;
+    /* position: absolute; */
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    text-align: left;
+    margin-top: 10px;
+    left: 0;
+    font-size: 15px;
+    right: 0;
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: #38a !important;
+    color: #ffffff;
+}
+
+.searchList{
+    display: none;
+    margin-top: -30px;
+}
+
+.searchList div.searchListD{
+    list-style: none;
+    margin: auto;
+    width: 80%;
+    cursor: pointer;
+    border-bottom: none;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 13.5px;
+}
+
+.searchList .searchListD div{
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.searchList .searchListD div .titleS{
+    font-size:16px; 
+}
+
+.searchList .searchListD div b{
+    color: #38B;
+}
+
+.searchList .searchListD div .fa-bars{
+    display: none;
+    color: #38B;
+    float: right;
+    font-size: 20px;
+    top: -21px;
+    right: 19px;
+    position: relative;
+}
+
+.searchList .searchListD div .fa-bars:hover{
+    color: #eee;
+}
+
+.searchListD div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+
+.divSearchBar{
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.searchList .nbrRes{
+    margin-top: 5px;
+    color: #858383;
+}
+
+/*modal css*/
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.search_icon{
+    position: absolute;
+    color: #38B;
+    cursor: pointer;
+}
+
+
+.search_icon:hover{
+    color: darkgrey;
 }
