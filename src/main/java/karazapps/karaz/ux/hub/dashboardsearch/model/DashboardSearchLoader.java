@@ -86,6 +86,7 @@ public class DashboardSearchLoader {
     	
     	try {  
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/DashboardSearch.css");
+    			WebResourcer.addJSResource("karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js");
     	 
     	} catch (Exception e) {
     		e.printStackTrace();

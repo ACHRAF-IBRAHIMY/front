@@ -29,21 +29,30 @@
       
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         
-		
-        <vbox columns=" 25% 75% " columns-small="auto" contentAlign="center" contentJustify="enter">
-            <vbox>
-
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox columns="100%" contentJustify="center">
+                <html>
+                    <div>
+                        <img src="./img/rokhasRectBlueArFr.svg" alt="Rokhas logo" />
+                    </div>
+                </html>
             </vbox>
-            <html>
-                <div class="hp-logo">
-                    <img src="./img/rokhasRectBlueArFr.svg" alt="Rokhas logo" />
-                </div>
-                <div style="height: 30px;"> </div>
-            </html>
-            <html id="blank-vseparator" />
-        </vbox>&gt;
-           
+            <vbox columns="100%" contentJustify="end">
+                <html>
+                    <div class="form-text-medium">
+                        <span style="margin:0px 20px;"> <a>Accueil</a> </span>
+                        <span style="margin:0px 20px;"> <a>Questions fréquentes</a> </span>
+                        <span style="margin:0px 20px;"> <a>Nous contacter</a> </span>
+                        <span style="margin:0px 20px;"> <a>Termes d'utilisation</a> </span>
+                    </div>
+                </html>
+            </vbox>
+        </vbox>
 
+        <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+        </html>        
+           
         <vbox columns="30% 70%">
             <vbox className="hp-box">
                 <vbox columns="20% 80%">
@@ -133,7 +142,7 @@
                     <html>
                         <div style="height: 70px;" />
                         <div class="hp-sbox-text">
-                            <a><i class="fab fa-ello" /> Pas encore de compte Rokhas ?</a>
+                            <i class="fab fa-ello" /> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch','search','search',{});">Pas encore de compte Rokhas ?</a>
                         </div>                             
                         <div class="hp-sbox-text">
                             <a><i class="fas fa-user-slash" /> Mot de passe oublié ?</a>
