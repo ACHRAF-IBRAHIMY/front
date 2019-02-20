@@ -153,7 +153,8 @@
                 
             </vbox>
             
-            <vbox className="hp-box">
+        <vbox className="hp-box divSearch">
+            <vbox className="hp-box divSearchBar">
                 <html>
                     <div class="hp-sbox-big-title">
                         Bienvenue au guichet digital national des autorisations communales
@@ -166,7 +167,14 @@
                 <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
                     <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
                     </field>
-                    <button className="hp-search_field_icon fas fa-search" label="" postProcessing="search()" separator="!!"> </button>
+                    <button className="hp-search_field_icon fas fa-search" label="" postProcessing="search()" separator="!!">
+                        <postChange>
+                               $(".divSearchBar").hide();
+                               var prefix = document.getElementsByClassName("ow-field-input")[2].value;
+                               restSearchList(prefix);
+                               $(".searchList").show();
+                        </postChange>
+                    </button>
                 </vbox>
                     
 
@@ -210,9 +218,26 @@
                     </vbox>                                    
                     
                 </vbox>
-                
-        </vbox>
+                        </vbox>
+
+            <html>
+            <div class="searchList">
+              <div class="search_icon">
+                  <i class="fas fa-search" />
+              </div>
+               <div><cms-topicTitle>Activités</cms-topicTitle>
+                <cms-topicSeparator />
+                </div>
+                <div class="searchListD">
+                    
+                </div>
+                <div class="nbrRes">
+                    <span>5 </span><span> Résultats</span>
+                </div>
+            </div>
+            </html>    
         </vbox>    
+        </vbox>
             
 		<html> <div style="height: 30px;"> </div> </html>                
         
@@ -352,6 +377,37 @@
 	 
 	 
   </tasklist>
-   
+   <html>
+       <script>
+        var currentFocus;
+                
+                document.getElementsByClassName("ow-field-input")[2].addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = document.getElementsByClassName("ow-field-input")[2];
+                    var val = inp.value;
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    console.log(val);
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete(inp, val);
+                });
+                
+                
+                document.getElementsByClassName("ow-field-input")[2].addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                 if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x);
+                });
+                
+            document.getElementsByClassName("search_icon")[0].getElementsByClassName("fa-search")[0].addEventListener("click",function(){
+			          $(".divSearchBar").show();
+                      $(".searchList").hide();
+            });
+       </script>
+   </html>
   </view>
 </search>

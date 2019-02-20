@@ -105,6 +105,21 @@
 }
 
 
+}/* from css file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/DashboardSearch.css  */
+
+ 
+
+ 
+.dashboardsearch_icone:before{
+	position: relative;
+	font-family: FontAwesome !important;
+	content: "\f007";
+	padding: 5px;
+	font-size: 22px;
+	top: 7px;
+}
+
+
 .autocomplete-items {
 	width: 100%;
     cursor: pointer;
@@ -240,4 +255,10 @@
 .search_icon{
     position: absolute;
     color: #38B;
+    cursor: pointer;
+}
+
+
+.search_icon:hover{
+    color: darkgrey;
 }
