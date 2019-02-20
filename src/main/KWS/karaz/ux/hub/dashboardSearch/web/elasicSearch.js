@@ -1,12 +1,11 @@
-/* from file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js  */
-/* from file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js  */
-    
+
 function restAutoComplete(inp,prefix){
     var result = [];
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
 
         if (this.readyState == 4 && this.status == 200) {
+            closeAllLists();
             var res = JSON.parse(this.responseText);
             console.log(res.suggest.items);
             for(var i=0;i<res.suggest.items[0].options.length;i++){
@@ -29,7 +28,7 @@ function restAutoComplete(inp,prefix){
             "items" : {
                 "prefix" : prefix,
                 "completion" : {
-                    "field" : "tags"
+                    "field" : "tags.completion"
                 }
             }
         }
@@ -60,7 +59,7 @@ function restSearchList(prefix) {
             var res = JSON.parse(this.responseText);
 
             for(var i=0;i<res.hits.hits.length;i++){
-                result.push(res.hits.hits[i]._source);
+                result.push(res.hits.hits[i]);
             }
             
             searchList(result);
@@ -70,24 +69,67 @@ function restSearchList(prefix) {
     xhttp.open("POST","https://cmdbserver.karaz.org:9200/activite_economique/activite/_search");
     xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(JSON.stringify(
-        {
-
-            "query":{
-                "bool":{
-                    "must":[
-                        {
-                            "query_string" : {
-                                "query" : "*"+prefix+"*"
+    var testLanguage = RegExp('[أ-ي]');
+    if(testLanguage.test(prefix)){
+        xhttp.send(JSON.stringify(
+            {
+                "query": {
+                    "bool": {
+                        "must": [
+                            { "multi_match": {
+                                "query": prefix,
+                                "analyzer": "rebuilt_arabic",
+                                "fuzziness": "AUTO",
+                                "minimum_should_match": "70%"
                             }},{
-                            "match_phrase":{
-                                "content.categorie":"IntitulÃ© ActivitÃ©"
+                                "match_phrase": {
+                                    "content.categorie": {
+                                        "query": "Intitulé activité"
+                                    }
+                                }}
+                        ],
+                        "should": [
+                            {
+                                "match": {
+                                    "content.intituleAr": prefix
+                                }
                             }
-                        }]
-                }}
-        }
-
-    ));
+                        ]
+                    }
+                }
+            }
+        ));
+    }else{
+        xhttp.send(JSON.stringify(
+            {
+                "query": {
+                    "bool": {
+                        "must": [
+                            { "multi_match": {
+                                "query": prefix,
+                                "fields": ["tags.keywordsString"],
+                                "analyzer": "rebuilt_french",
+                                "fuzziness": "AUTO",
+                                "minimum_should_match": "70%"
+                            }},{
+                                "match_phrase": {
+                                    "content.categorie": {
+                                        "query": "Intitulé activité"
+                                    }
+                                }}
+                        ],
+                        "should": [
+                            {
+                                "match": {
+                                    "content.intituleFr": prefix
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ));
+    }
 
     return result;
 }
@@ -108,18 +150,14 @@ function searchList(results) {
     for (var j = 0; j < results.length; j++) {
         var b = document.createElement("div");
         b.setAttribute("class","list-group-item result-item");
-        b.innerHTML="<span class=\"titleS\">"+results[j].content.intituleFr+"</span><br>";
-        b.innerHTML+="<span> <b>Nature d'activitÃ© :</b> "+results[j].parents[0].content.intituleFr+"</span>";
-        b.innerHTML+="<span> <b>Type d'activitÃ© :</b> "+results[j].parents[1].content.intituleFr+"</span>";
-        b.innerHTML+="<span> <b>Type d'autorisation :</b> "+results[j].parents[2].content.intituleFr+"</span>";
+        b.innerHTML="<span class=\"titleS\">"+results[j]._source.content.intituleFr+" </span><span style=\"color:red\"> Score:"+results[j]._score+"</span><br>";
+        b.innerHTML+="<span> <b>Nature d'activité :</b> "+results[j]._source.parents[0].content.intituleFr+"</span>";
+        b.innerHTML+="<span> <b>Type d'activité :</b> "+results[j]._source.parents[1].content.intituleFr+"</span>";
+        b.innerHTML+="<span> <b>Type d'autorisation :</b> "+results[j]._source.parents[2].content.intituleFr+"</span>";
        /* b.innerHTML+="<span class=\"details\">"+results[j].parents[0].content.intituleFr+"<span/>";
         b.innerHTML+="<span class=\"details\">"+results[j].parents[0].content.intituleFr+"<span/>";
         b.innerHTML+="<span class=\"details\">"+results[j].parents[0].content.intituleFr+"<span/>";*/
         b.innerHTML+="<i class=\"fas fa-bars\"></i>";
-        b.getElementsByTagName("i")[0].addEventListener("click",function(){
-            
-            $("#activiteModal").show();
-        })
         b.addEventListener("click", function(e) {
             console.log("go to model");
         });
