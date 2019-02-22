@@ -169,7 +169,10 @@
                     </field>
                     <button className="hp-search_field_icon fas fa-search" label="" postProcessing="search()" separator="!!">
                         <postChange>
+                               getTimeCounter();
                                $(".divSearchBar").hide();
+                               closeSearchList();
+                               currentPage=0;
                                var prefix = document.getElementsByClassName("ow-field-input")[2].value;
                                restSearchList(prefix);
                                $(".searchList").show();
@@ -223,16 +226,19 @@
             <html>
             <div class="searchList">
               <div class="search_icon">
-                  <i class="fas fa-search" />
+                  <i class="fas fa-close" />
               </div>
                <div><cms-topicTitle>Activités</cms-topicTitle>
                 <cms-topicSeparator />
                 </div>
+                <p class="nbrRes">Environs <span>0</span> résultats (<span>0.21</span> second)</p>
                 <div class="searchListD">
-                    
+                    <div class="searchGif">
+                        <img src="img/search-move.gif" />
+                    </div>
                 </div>
-                <div class="nbrRes">
-                    <span>5 </span><span> Résultats</span>
+                <div class="pagination">
+                    
                 </div>
             </div>
             </html>    
@@ -403,7 +409,7 @@
                     moveKey(e,x);
                 });
                 
-            document.getElementsByClassName("search_icon")[0].getElementsByClassName("fa-search")[0].addEventListener("click",function(){
+            document.getElementsByClassName("search_icon")[0].getElementsByClassName("fa-close")[0].addEventListener("click",function(){
 			          $(".divSearchBar").show();
                       $(".searchList").hide();
             });

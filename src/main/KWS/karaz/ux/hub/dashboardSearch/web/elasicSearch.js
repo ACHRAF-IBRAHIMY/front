@@ -1,3 +1,13 @@
+/* from file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js  */
+var currentPage = 0;
+var totalPage = 0;
+var timerID = 0;
+var msecc =0;
+var startTime = 0
+var start = 0;
+var end = 0;
+var diff = 0;
+
 
 function restAutoComplete(inp,prefix){
     var result = [];
@@ -7,9 +17,8 @@ function restAutoComplete(inp,prefix){
         if (this.readyState == 4 && this.status == 200) {
             closeAllLists();
             var res = JSON.parse(this.responseText);
-            console.log(res.suggest.items);
-            for(var i=0;i<res.suggest.items[0].options.length;i++){
-                var elm = res.suggest.items[0].options[i].text;
+            for(var i=0;i<res.hits.hits.length;i++){
+                var elm = res.hits.hits[i]._source.value;
                 if(check(result,elm)){
                     result.push(elm);
                 }
@@ -19,21 +28,30 @@ function restAutoComplete(inp,prefix){
     };
     console.log(prefix);
    // xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
-    xhttp.open("POST","https://cmdbserver.karaz.org:9200/activite_economique/activite/_search");
+    xhttp.open("POST","https://cmdbserver.karaz.org:9200/completion_index/completionTerm/_search");
     xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify({
-        "from" : 0, "size" : 5,
-        "suggest": {
-            "items" : {
-                "prefix" : prefix,
-                "completion" : {
-                    "field" : "tags.completion"
+            "size": 5,
+            "query": {
+                "bool":{
+                    "must":[{
+                        "query_string": {
+
+                            "fields":["value"],
+                            "query": "*"+prefix+"*"
+
+                        }
+                    }],
+                    "should":[{
+                        "match_phrase_prefix":{
+                            "value":prefix
+                        }
+                    }]
                 }
             }
         }
-    }));
-
+    ));
     return result;
 }
 
@@ -51,17 +69,27 @@ function check(res,elm){
 
 
 //Search results and redirect to activity model
-function restSearchList(prefix) {
+function restSearchList(prefix,from) {
     var result = [];
     var xhttp = new XMLHttpRequest();
+    $(".searchGif").show();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var res = JSON.parse(this.responseText);
-
+            clearTimeout(timerID);
+            stopChrono();
+            document.getElementsByClassName("nbrRes")[0].getElementsByTagName("span")[0].innerHTML=res.hits.total;
             for(var i=0;i<res.hits.hits.length;i++){
                 result.push(res.hits.hits[i]);
             }
-            
+            $(".searchGif").hide();
+            if(currentPage==0){
+                totalPage = Math.ceil(res.hits.total/4);
+                createPaginationBar(totalPage);
+                if(totalPage!=0){
+                    currentPage=1;
+                }
+            }
             searchList(result);
         }
     };
@@ -73,11 +101,13 @@ function restSearchList(prefix) {
     if(testLanguage.test(prefix)){
         xhttp.send(JSON.stringify(
             {
+                "from":from,"size":4,
                 "query": {
                     "bool": {
                         "must": [
                             { "multi_match": {
                                 "query": prefix,
+                                "fields": ["tags.keywordsString"],
                                 "analyzer": "rebuilt_arabic",
                                 "fuzziness": "AUTO",
                                 "minimum_should_match": "70%"
@@ -102,6 +132,7 @@ function restSearchList(prefix) {
     }else{
         xhttp.send(JSON.stringify(
             {
+                "from":from,"size":4,
                 "query": {
                     "bool": {
                         "must": [
@@ -145,19 +176,18 @@ function searchList(results) {
         y[0].parentNode.removeChild(y[0]);
     }
 
-    document.getElementsByClassName("nbrRes")[0].getElementsByTagName("span")[0].innerHTML=results.length;
 
     for (var j = 0; j < results.length; j++) {
         var b = document.createElement("div");
         b.setAttribute("class","list-group-item result-item");
-        b.innerHTML="<span class=\"titleS\">"+results[j]._source.content.intituleFr+" </span><span style=\"color:red\"> Score:"+results[j]._score+"</span><br>";
-        b.innerHTML+="<span> <b>Nature d'activité :</b> "+results[j]._source.parents[0].content.intituleFr+"</span>";
-        b.innerHTML+="<span> <b>Type d'activité :</b> "+results[j]._source.parents[1].content.intituleFr+"</span>";
-        b.innerHTML+="<span> <b>Type d'autorisation :</b> "+results[j]._source.parents[2].content.intituleFr+"</span>";
-       /* b.innerHTML+="<span class=\"details\">"+results[j].parents[0].content.intituleFr+"<span/>";
-        b.innerHTML+="<span class=\"details\">"+results[j].parents[0].content.intituleFr+"<span/>";
-        b.innerHTML+="<span class=\"details\">"+results[j].parents[0].content.intituleFr+"<span/>";*/
-        b.innerHTML+="<i class=\"fas fa-bars\"></i>";
+        b.innerHTML="<span class=\"titleS\">"+results[j]._source.content.intituleFr+" </span><span class=\"grid-item\" style=\"{color:red;display:none}\"> Score:"+results[j]._score+"</span>";
+        //b.innerHTML+="<div class=\"titleS grid-item\" style=\"{float:right}\">"+results[j]._source.content.intituleAr+" </div>";
+        /*
+        b.innerHTML+="<div class=\"grid-item\"> <b>Nature d'activité :</b> "+results[j]._source.parents[0].content.intituleFr+"</div>";
+        b.innerHTML+="<div class=\"grid-item\"> <b>Type d'activité :</b> "+results[j]._source.parents[1].content.intituleFr+"</div>";
+        b.innerHTML+="<div class=\"grid-item\"> <b>Type d'autorisation :</b> "+results[j]._source.parents[2].content.intituleFr+"</div>";
+        */
+        b.innerHTML+="<p class=\"searchP\"><b>Nature d'activité :</b> "+results[j]._source.parents[0].content.intituleFr+"<b> Type d'activité :</b> "+results[j]._source.parents[1].content.intituleFr+"<b> Type d'autorisation :</b> "+results[j]._source.parents[2].content.intituleFr+"</p>"
         b.addEventListener("click", function(e) {
             console.log("go to model");
         });
@@ -183,7 +213,7 @@ function autocompleteF(inp,arr,val){
         var str = arr[i];
 
         b.innerHTML = str.substring(0,str.toLowerCase().search(val.toLowerCase()));
-        b.innerHTML += "<strong>" + str.substring(str.toLowerCase().search(val.toLowerCase()),str.toLowerCase().search(val.toLowerCase())+val.length) + "</strong>";
+        b.innerHTML += "<span style=\"color: #38a;font-weight: 600;\">" + str.substring(str.toLowerCase().search(val.toLowerCase()),str.toLowerCase().search(val.toLowerCase())+val.length) + "</span>";
         b.innerHTML += arr[i].substr(str.toLowerCase().search(val.toLowerCase())+val.length);
         /*insert a input field that will hold the current array item's value:*/
         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
@@ -336,6 +366,119 @@ function autocomplete(inp,arr) {
                     modal.style.display = "block";
     });
 
-    
+    function createPaginationBar(nbrPage){
+        var p = $(".searchList .pagination");
+        p.html(" ");
+        var a = document.createElement("a");
+                a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
+                a.addEventListener("click",function(){
+                    console.log("!next");
+                    previousPage();
+                    event.preventDefault();
+                });
+                p.append(a);
+
+        for(var i=0;i<nbrPage;i++){
+            if(i==0){
+                a = document.createElement("a");
+                a.innerHTML="1";
+                a.setAttribute("class","active");                
+                a.addEventListener("click",function(){
+                    event.preventDefault();
+                    console.log("1");
+                    getPage(1);
+                });
+        
+                p.append(a);
+            }else{
+                a = document.createElement("a");
+                var j=i+1;
+                console.log(j);
+                a.innerHTML=(j);
+                a.addEventListener("click",function(){
+                    event.preventDefault();    
+                    getPage(j);
+                    console.log(j);
+                });
+                p.append(a);        
+            }
+        }
+        a = document.createElement("a");
+        a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
+       a.addEventListener("click",function(){
+           event.preventDefault();
+            console.log("next");
+            nextPage();
+       });
+        
+        p.append(a);
+    }
+
+
+    function nextPage(){
+        if(currentPage<totalPage){
+            currentPage++;
+            getPage(currentPage);
+        }
+    }
+
+    function previousPage(){
+        if(1<currentPage){
+            currentPage--;
+            getPage(currentPage);
+        }
+    }
+
+    function getPage(page){
+        currentPage=page;
+        closeSearchList();
+        var prefix = document.getElementsByClassName("ow-field-input")[2].value;
+        restSearchList(prefix,(page-1)*4);
+        activePageBar();
+    }
+
+    function activePageBar(){
+        $(".searchList .pagination a").removeClass("active");
+        $(".searchList .pagination a").get(currentPage).setAttribute("class","active");;
+    }
+
+    function closeSearchList(){
+        $(".searchList .searchListD").html("<div class=\"searchGif\"><img src=\"img/search-move.gif\" /></div>");
+    }
+
+    function getTimeCounter(){
+        var start = new Date();
+        chrono();
+    }
+
+    function stopChrono(){
+        var second = msecc/1000;
+        document.getElementsByClassName("searchList")[0].getElementsByClassName("nbrRes")[0].getElementsByTagName("span")[1].innerHTML=second;
+    }
+
+    function chrono(){
+	       end = new Date()
+	       diff = end - start
+	       diff = new Date(diff)
+	       var msec = diff.getMilliseconds()
+	       var sec = diff.getSeconds()
+	       var min = diff.getMinutes()
+	       var hr = diff.getHours()-1
+            if (min < 10){
+                min = "0" + min
+            }
+            if (sec < 10){
+                sec = "0" + sec
+            }
+            if(msec < 10){
+                msec = "00" +msec
+            }
+            else if(msec < 100){
+                msec = "0" +msec
+            }
+            msecc = msec;
+            console.log(msecc+"*******"+msec);
+	        timerID = setTimeout("chrono()", 10)
+        }
 
 //modal scripts
