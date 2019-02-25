@@ -175,6 +175,7 @@
                                currentPage=0;
                                var prefix = document.getElementsByClassName("ow-field-input")[2].value;
                                restSearchList(prefix);
+                               $(".second-search-bar input").val(prefix);
                                $(".searchList").show();
                         </postChange>
                     </button>
@@ -225,12 +226,10 @@
 
             <html>
             <div class="searchList">
-              <div class="search_icon">
-                  <i class="fas fa-close" />
-              </div>
-               <div><cms-topicTitle>Activités</cms-topicTitle>
-                <cms-topicSeparator />
-                </div>
+               <div class="second-search-bar">
+                   <span class="back-span"><i class="fas fa-chevron-left" /> Retour</span>
+                   <input type="text" /><i class="fas fa-eraser" /><i class="fas fa-search" />
+               </div>
                 <p class="nbrRes">Environs <span>0</span> résultats (<span>0.21</span> second)</p>
                 <div class="searchListD">
                     <div class="searchGif">
@@ -399,7 +398,7 @@
                     currentFocus = -1;
                     //close any already open lists of autocompleted values
                     closeAllLists();
-                    restAutoComplete(inp, val);
+                    restAutoComplete(inp,val,true);
                 });
                 
                 
@@ -409,10 +408,45 @@
                     moveKey(e,x);
                 });
                 
-            document.getElementsByClassName("search_icon")[0].getElementsByClassName("fa-close")[0].addEventListener("click",function(){
-			          $(".divSearchBar").show();
+                document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = this;
+                    var val = inp.value;
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    console.log(val);
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete(inp,val,false);
+                });
+                
+                
+                document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                 if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x);
+                });
+                
+            document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
+			          document.getElementsByClassName("ow-field-input")[2].value=""; 
+                      $(".divSearchBar").show();
                       $(".searchList").hide();
             });
+            
+    $(".searchList .second-search-bar i.fa-eraser").click(function(){
+	  $(".searchList .second-search-bar input").val("");
+   });
+
+    $(".searchList .second-search-bar i.fa-search").click(function(){
+        getTimeCounter();
+        closeSearchList();
+        currentPage=0;
+       restSearchList($(".searchList .second-search-bar input").val(),0); 
+    });
+            
        </script>
    </html>
   </view>

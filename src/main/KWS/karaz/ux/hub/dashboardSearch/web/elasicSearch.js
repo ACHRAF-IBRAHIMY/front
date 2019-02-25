@@ -9,7 +9,7 @@ var end = 0;
 var diff = 0;
 
 
-function restAutoComplete(inp,prefix){
+function restAutoComplete(inp,prefix,type){
     var result = [];
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -23,10 +23,9 @@ function restAutoComplete(inp,prefix){
                     result.push(elm);
                 }
             }
-            autocompleteF(inp,result,prefix);
+            autocompleteF(inp,result,prefix,type);
         }
     };
-    console.log(prefix);
    // xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
     xhttp.open("POST","https://cmdbserver.karaz.org:9200/completion_index/completionTerm/_search");
     xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
@@ -85,7 +84,7 @@ function restSearchList(prefix,from) {
             $(".searchGif").hide();
             if(currentPage==0){
                 totalPage = Math.ceil(res.hits.total/4);
-                createPaginationBar(totalPage);
+                createPaginationBar(totalPage,prefix);
                 if(totalPage!=0){
                     currentPage=1;
                 }
@@ -179,15 +178,20 @@ function searchList(results) {
 
     for (var j = 0; j < results.length; j++) {
         var b = document.createElement("div");
+        var intituleFr = results[j]._source.content.intituleFr;
+        var typeAc = checkUndefined(results[j]._source.parents[1]);
+        var nature = checkUndefined(results[j]._source.parents[0]);
+        var typeAt = checkUndefined(results[j]._source.parents[2]);
+        
         b.setAttribute("class","list-group-item result-item");
-        b.innerHTML="<span class=\"titleS\">"+results[j]._source.content.intituleFr+" </span><span class=\"grid-item\" style=\"{color:red;display:none}\"> Score:"+results[j]._score+"</span>";
+        b.innerHTML="<span class=\"titleS\">"+intituleFr+" </span><span class=\"grid-item\" style=\"{color:red;display:none}\"> Score:"+results[j]._score+"</span>";
         //b.innerHTML+="<div class=\"titleS grid-item\" style=\"{float:right}\">"+results[j]._source.content.intituleAr+" </div>";
         /*
         b.innerHTML+="<div class=\"grid-item\"> <b>Nature d'activité :</b> "+results[j]._source.parents[0].content.intituleFr+"</div>";
         b.innerHTML+="<div class=\"grid-item\"> <b>Type d'activité :</b> "+results[j]._source.parents[1].content.intituleFr+"</div>";
         b.innerHTML+="<div class=\"grid-item\"> <b>Type d'autorisation :</b> "+results[j]._source.parents[2].content.intituleFr+"</div>";
         */
-        b.innerHTML+="<p class=\"searchP\"><b>Nature d'activité :</b> "+results[j]._source.parents[0].content.intituleFr+"<b> Type d'activité :</b> "+results[j]._source.parents[1].content.intituleFr+"<b> Type d'autorisation :</b> "+results[j]._source.parents[2].content.intituleFr+"</p>"
+        b.innerHTML+="<p class=\"searchP\"><b>Nature d'activité :</b> "+nature+"<b> Type d'activité :</b> "+typeAc+"<b> Type d'autorisation :</b> "+typeAt+"</p>"
         b.addEventListener("click", function(e) {
             console.log("go to model");
         });
@@ -197,13 +201,20 @@ function searchList(results) {
 }
 
 
-function autocompleteF(inp,arr,val){
+function autocompleteF(inp,arr,val,type){
     /*create a DIV element that will contain the items (values):*/
     a = document.createElement("DIV");
     a.setAttribute("id", "autocomplete-list");
     a.setAttribute("class", "autocomplete-items");
     /*append the DIV element as a child of the autocomplete container:*/
-    inp.parentNode.parentNode.appendChild(a);
+   if(type){
+    console.log(type);   
+    inp.parentNode.parentNode.appendChild(a);   
+   }else{
+    console.log(type);   
+    inp.parentNode.appendChild(a);
+   }
+    
     /*for each item in the array...*/
     for (i = 0; i < arr.length; i++) {
         /*check if the item starts with the same letters as the text field value:*/
@@ -213,7 +224,11 @@ function autocompleteF(inp,arr,val){
         var str = arr[i];
 
         b.innerHTML = str.substring(0,str.toLowerCase().search(val.toLowerCase()));
-        b.innerHTML += "<span style=\"color: #38a;font-weight: 600;\">" + str.substring(str.toLowerCase().search(val.toLowerCase()),str.toLowerCase().search(val.toLowerCase())+val.length) + "</span>";
+        if(str.toLowerCase().search(val.toLowerCase())!=-1){
+                b.innerHTML += "<span>" + str.substring(str.toLowerCase().search(val.toLowerCase()),str.toLowerCase().search(val.toLowerCase())+val.length) + "</span>";
+        }else{
+            b.innerHTML += str.substring(str.toLowerCase().search(val.toLowerCase()),str.toLowerCase().search(val.toLowerCase())+val.length);
+        }
         b.innerHTML += arr[i].substr(str.toLowerCase().search(val.toLowerCase())+val.length);
         /*insert a input field that will hold the current array item's value:*/
         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
@@ -293,6 +308,7 @@ function autocomplete(inp,arr) {
         /*a function to remove the "active" class from all autocomplete items:*/
         for (var i = 0; i < x.length; i++) {
             x[i].classList.remove("autocomplete-active");
+            x[i].getElementsByTagName("span")[0].classList.remove("span-active");
         }
     }
 }
@@ -306,12 +322,15 @@ function autocomplete(inp,arr) {
         if (currentFocus < 0) currentFocus = (x.length - 1);
         /*add class "autocomplete-active":*/
         x[currentFocus].classList.add("autocomplete-active");
+        x[currentFocus].getElementsByTagName("span")[0].classList.add("span-active");
+
     }
 
     function removeActive(x) {
         /*a function to remove the "active" class from all autocomplete items:*/
         for (var i = 0; i < x.length; i++) {
             x[i].classList.remove("autocomplete-active");
+            x[i].getElementsByTagName("span")[0].classList.remove("span-active");
         }
     }
 
@@ -366,14 +385,14 @@ function autocomplete(inp,arr) {
                     modal.style.display = "block";
     });
 
-    function createPaginationBar(nbrPage){
+    function createPaginationBar(nbrPage,prefix){
         var p = $(".searchList .pagination");
         p.html(" ");
         var a = document.createElement("a");
                 a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
                 a.addEventListener("click",function(){
                     console.log("!next");
-                    previousPage();
+                    previousPage(prefix);
                     event.preventDefault();
                 });
                 p.append(a);
@@ -386,7 +405,7 @@ function autocomplete(inp,arr) {
                 a.addEventListener("click",function(){
                     event.preventDefault();
                     console.log("1");
-                    getPage(1);
+                    getPage(1,prefix);
                 });
         
                 p.append(a);
@@ -395,10 +414,9 @@ function autocomplete(inp,arr) {
                 var j=i+1;
                 console.log(j);
                 a.innerHTML=(j);
-                a.addEventListener("click",function(){
+                a.addEventListener("click",function(event){
                     event.preventDefault();    
-                    getPage(j);
-                    console.log(j);
+                    getPage(this.innerHTML,prefix);
                 });
                 p.append(a);        
             }
@@ -408,31 +426,30 @@ function autocomplete(inp,arr) {
        a.addEventListener("click",function(){
            event.preventDefault();
             console.log("next");
-            nextPage();
+            nextPage(prefix);
        });
         
         p.append(a);
     }
 
 
-    function nextPage(){
+    function nextPage(prefix){
         if(currentPage<totalPage){
             currentPage++;
-            getPage(currentPage);
+            getPage(currentPage,prefix);
         }
     }
 
-    function previousPage(){
+    function previousPage(prefix){
         if(1<currentPage){
             currentPage--;
-            getPage(currentPage);
+            getPage(currentPage,prefix);
         }
     }
 
-    function getPage(page){
+    function getPage(page,prefix){
         currentPage=page;
         closeSearchList();
-        var prefix = document.getElementsByClassName("ow-field-input")[2].value;
         restSearchList(prefix,(page-1)*4);
         activePageBar();
     }
@@ -480,5 +497,14 @@ function autocomplete(inp,arr) {
             console.log(msecc+"*******"+msec);
 	        timerID = setTimeout("chrono()", 10)
         }
+    function checkUndefined(text){
+        if(text == undefined){
+            return "";
+        }
+        return text.content.intituleFr;
+    }
+
+   
+
 
 //modal scripts
