@@ -370,6 +370,99 @@
     font-weight: normal;
 	
 }/* from css file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/DashboardSearch.css  */
+/* from css file karazapps/backend/admin/domain/realme/model/realme/web/Domain.css  */
+
+.ico_domain { 
+	background-image: url(img/Domaine_Identification.png);
+}/* from css file karazapps/backend/admin/ecm/repository/model/repository/web/Repository.css  */
+
+.ico_repository { 
+	background-image: url(img/repository.png);
+}/* from css file karazapps/backend/admin/feeder/emailreceiver/model/emailreceiver/web/EmailReceiver.css  */
+
+.ico_emailreciver { 
+	background-image: url(img/E-mail-Receiver.png);
+}/* from css file karazapps/backend/admin/importation/model/Importation/web/Import.css  */
+
+.ico_importations { 
+	background-image: url(img/Import_Export.png);
+}
+/* from css file karazapps/backend/admin/parametrages/model/parametrages/web/Parametrages.css  */
+
+.ico_parametrages { 
+	background-image: url(img/parametrages.png);
+}/* from css file karazapps/backend/admin/profile/model/profile/web/Profiles.css  */
+
+.ico_profiles { 
+	background-image: url(img/Profiles.png);
+}/* from css file karazapps/backend/admin/report/model/report/web/Report.css  */
+
+.ico_report { 
+	background-image: url(img/Report.png);
+}/* from css file karazapps/backend/admin/resources/liste/model/liste/web/Parametres.css  */
+
+.ico_parametres { 
+	background-image: url(img/Parametres.png);
+}/* from css file karazapps/backend/bam/activityinst/model/Activityinst/web/Activityinst.css  */
+
+.ico_activityinst { 
+	background-image: url(img/activityinst.png);
+}/* from css file karazapps/backend/bam/processinst/model/Processinst/web/Processinst.css  */
+
+.ico_processinst { 
+	background-image: url(img/BAM.png);
+}/* from css file karazapps/backend/bam/serverstartup/model/ServerStartup/web/ServerStartup.css  */
+
+.ico_serverstartup { 
+	background-image: url(img/BAM.png);
+}/* from css file karazapps/backend/bam/usersession/model/UserSession/web/UserSession.css  */
+
+.ico_usersession { 
+	background-image: url(img/BAM.png);
+}
+
+.userSessionPermissionTab li {
+	font-family: Candara;
+	padding-left: 20px;
+}/* from css file karazapps/backend/scheduling/execution/model/execution/web/Execution.css  */
+
+.ico_execution { 
+	background-image: url(img/execution.png);
+}/* from css file karazapps/backend/scheduling/job/model/job/web/Job.css  */
+
+.ico_job { 
+	background-image: url(img/Scheduler.png);
+}/* from css file karazapps/backend/scheduling/script/model/script/web/Script.css  */
+
+.ico_script { 
+	background-image: url(img/script.png);
+}
+
+.refreshScriptButton {
+	background: url("img/refresh-64x64.png") ; 
+	background-size: 32px 32px;
+	width:32px;
+	height:32px; 
+	position:absolute;
+	cursor:pointer; 
+	top:2px; 
+	right:20px
+}
+
+.refreshScriptButton:before {
+	
+	
+}
+
+.ScriptCodeTextArea textarea {
+    color: #a2e6a2;
+    font-family: Candara; 
+    background: #303930;
+    font-size: 13px;
+    font-family: monospace;
+    font-weight: normal;
+	
+}/* from css file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/DashboardSearch.css  */
 
  
 
@@ -510,17 +603,18 @@
 }
 
 
-.searchList .searchGif{
+.searchGif{
     text-align: center;
+    display: none;
 }
 
-.searchList .pagination{
+.pagination{
     margin-top: 6px;
     font-size: 14px;
 }
 
-.searchList .pagination a {
-  color: black;
+.pagination a {
+  color: inherit !important;
   padding: 8px 10px;
   border-radius: 3px;
   text-decoration: none;
@@ -531,9 +625,9 @@
     margin-top: 3px;
 }
 
-.searchList .pagination a.active {
+.pagination a.active {
   background-color: #38B;
-  color: white;
+  color: white !important;
 }
 
 .searchList .grid-container {
@@ -654,3 +748,122 @@
     }
 }
 
+/* from css file karazapps/karaz_ux_results/karazuxresults/model/karazuxresults/web/Karazuxresults.css  */
+
+.vpanel-title{
+    text-align: left;
+}
+.vpanel-title span{
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-style: normal;
+}
+.vpanel-title img{
+    width: 100%;
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 30px;
+}
+
+
+.vpanel-body-title{
+    text-align: left;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.vpanel-body-title span{
+     
+
+}
+
+.vpanel-body-title i{
+    margin-right:6px;
+    font-size: 20px;
+}
+
+.vpanel-body-icon i{
+    font-size: 204px;    
+}
+
+.full-search-list{
+    height: 880px;
+}
+
+.full-search-list-item{
+    height: 173px !important;
+    font-size: 12px;
+    display: grid !important;
+    grid-template-columns: 0% 30% 70%;
+}
+
+.full-search-list-item .item-title{  
+    color: white;
+    width: 173px;
+    height: 22px;
+    background: #38a;
+    transform: rotate(-90deg);
+    position: relative;
+    top: 55px;
+    right: 97px;
+    font-size: 16px;
+}
+
+.full-search-list-item .item-icon{
+    position: relative;
+}
+
+.full-search-list-item .item-icon i.fa-file-image{
+    font-size: 130px;
+    color: #ccc;
+}
+
+.full-search-list-item .item-icon i.fa-cogs{
+    color: white;
+    background: #333;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 136px;
+    line-height: 1.6;
+    font-size: 24px;
+    border-radius: 50%;
+}
+
+.full-search-list-item .item-body{
+    text-align: left;
+}
+
+.full-search-list-item .item-body .c-path span{
+    color:#f93;
+}
+
+.full-search-list-item .item-body .item-body-title{
+    font-size: 20px;
+    color: #666;
+    margin-top: 7px;
+}
+
+.full-search-list-item .item-body p{
+    
+}
+
+.div-full-search-bar .autocomplete-items{
+    width: 83%;
+    cursor: pointer;
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 15px;
+    right: auto;
+    left: auto;
+    top: auto;
+}
+
+.rokhas-home{
+    cursor: pointer;
+}

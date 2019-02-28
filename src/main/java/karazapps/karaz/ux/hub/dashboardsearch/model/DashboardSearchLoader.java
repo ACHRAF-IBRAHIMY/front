@@ -35,11 +35,6 @@ public class DashboardSearchLoader {
     
     @PostConstruct
     public void load() {
-//automatique importation statement
-				try { RootMenu.addMenusBE("karazapps/karaz/ux/hub/dashboardsearch/model/DashboardSearch-importation-menu.xml"); } catch (Exception e) { System.out.println("Erreur lors de chargement de menu  importation pour DashboardSearch"  ); }	 
-			ModelCache.addUsePath("karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch:view-importation", "karazapps/karaz/ux/hub/dashboardsearch/model/DashboardSearch-importation-view.xml");
-		//automatique importation statement
-
     
        	ModelCache.addXsdPath("karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch", "karazapps/karaz/ux/hub/dashboardsearch/model/DashboardSearch-model.xsd");
 		ModelCache.addXml0Path("karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch", "karazapps/karaz/ux/hub/dashboardsearch/model/DashboardSearch-ini.xml");
@@ -68,6 +63,8 @@ public class DashboardSearchLoader {
 		
 		ModelCache.addTaskListPath("karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch:taskList-default", "karazapps/karaz/ux/hub/dashboardsearch/model/taskList-TLDashboardSearch.xml");
 		
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/dashboardsearch/search/AllKarazuxresults", "karazapps/karaz/ux/hub/dashboardsearch/model/search-AllKarazuxresults.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch", "karazapps/karaz/ux/hub/dashboardsearch/model/search-PublicCentralSearch.xml");
 		

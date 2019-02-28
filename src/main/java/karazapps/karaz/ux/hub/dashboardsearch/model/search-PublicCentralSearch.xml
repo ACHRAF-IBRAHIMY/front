@@ -165,18 +165,20 @@
                     <div style="height: 50px;" />
                 </html>    
                 <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
+                    <field className="hp-search_field search-label" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
                     </field>
                     <button className="hp-search_field_icon fas fa-search" label="" postProcessing="search()" separator="!!">
                         <postChange>
-                               getTimeCounter();
+                            prefix= $(".search-label input").val();
+                            ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/AllKarazuxresults?query.keys="+prefix, "search", "All Karazuxresults", {});
+                             /*getTimeCounter();
                                $(".divSearchBar").hide();
-                               closeSearchList();
-                               currentPage=0;
-                               var prefix = document.getElementsByClassName("ow-field-input")[2].value;
-                               restSearchList(prefix);
-                               $(".second-search-bar input").val(prefix);
-                               $(".searchList").show();
+                                closeSearchList();
+                                currentPage=0;
+                                prefix = document.getElementsByClassName("ow-field-input")[2].value;
+                                restSearchList(prefix);
+                                $(".second-search-bar input").val(prefix);
+                                $(".searchList").show();*/
                         </postChange>
                     </button>
                 </vbox>
@@ -384,9 +386,9 @@
   </tasklist>
    <html>
        <script>
-        var currentFocus;
+                var currentFocus;
                 
-                document.getElementsByClassName("ow-field-input")[2].addEventListener("input", function () {
+      document.getElementsByClassName("ow-field-input")[2].addEventListener("input", function () {
                     var a, b, i;
                     var inp = document.getElementsByClassName("ow-field-input")[2];
                     var val = inp.value;
@@ -399,16 +401,16 @@
                     //close any already open lists of autocompleted values
                     closeAllLists();
                     restAutoComplete(inp,val,true);
-                });
+      });
                 
                 
-                document.getElementsByClassName("ow-field-input")[2].addEventListener("keydown", function (e) {
+      document.getElementsByClassName("ow-field-input")[2].addEventListener("keydown", function (e) {
                     var x = document.getElementById("autocomplete-list");
-                 if (x) x = x.getElementsByTagName("div");
+                    if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x);
-                });
+      });
                 
-                document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("input", function () {
+      document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("input", function () {
                     var a, b, i;
                     var inp = this;
                     var val = inp.value;
@@ -421,16 +423,16 @@
                     //close any already open lists of autocompleted values
                     closeAllLists();
                     restAutoComplete(inp,val,false);
-                });
+      });
                 
                 
-                document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("keydown", function (e) {
+      document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("keydown", function (e) {
                     var x = document.getElementById("autocomplete-list");
                  if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x);
                 });
                 
-            document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
+      document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
 			          document.getElementsByClassName("ow-field-input")[2].value=""; 
                       $(".divSearchBar").show();
                       $(".searchList").hide();
