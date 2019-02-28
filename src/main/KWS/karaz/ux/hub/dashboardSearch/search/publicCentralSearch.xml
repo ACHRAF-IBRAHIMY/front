@@ -123,8 +123,13 @@
                                },
                             
                                success: function (result) {
+                               
+                               if (result.trim().startsWith('<!-- xxx  -->')){
+															Toaster.push({title: "Erreur d'athentification", position: "top_center", message: "Nom d'utilisateur ou mot de passe incorrects. Veuillez réessayer ...", type:"error", duration:-1});
+																		 }
+							    else {
                                     Toaster.push({title: "Routage", position: "top_center", message: "Votre authentification s'est bien déroulée !", type:"success", duration:-1});                            
-                                    window.location.replace(uri+"/index.jsp");
+                                    window.location.replace(uri+"/index.jsp");}
                                },
                             
                                error: function (err) { 
