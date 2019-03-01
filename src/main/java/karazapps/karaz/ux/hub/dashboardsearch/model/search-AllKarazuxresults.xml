@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="AllKarazuxresults" label="All Karazuxresults">
+
+	<query>
+	</query>
+	<data>
+		<query>
+			<keys />
+            <idObject />
+		</query>
+		<collapsed>false</collapsed>
+	</data>
+	<view>
+		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
+        <script postLoad="true">
+         
+          $(".rokhas-home").click(function(){
+               ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+          });
+           $(".searchbuttun").click();
+           
+           $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .p",function(){
+               currentPage=0;
+               $(".div-full-search-bar .hp-search_field input").val($(this).html());
+               restFullSearchList($(this).html(),0);
+           });
+           $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .item-body-button",function(){
+                var id= $(this).children("input").val(); 
+                ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+           });
+           
+           
+            
+        </script>
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox columns="100%" contentJustify="center">
+                <html>
+                    <div class="rokhas-home">
+                        <img src="./img/rokhasRectBlueArFr.svg" alt="Rokhas logo" />
+                    </div>
+                </html>
+            </vbox>
+            <vbox columns="100%" contentJustify="end">
+                <html>
+                    <div class="form-text-medium">
+                        <span style="margin:0px 20px;"> <a class="rokhas-home">Accueil</a> </span>
+                        <span style="margin:0px 20px;"> <a>Questions fréquentes</a> </span>
+                        <span style="margin:0px 20px;"> <a>Nous contacter</a> </span>
+                        <span style="margin:0px 20px;"> <a>Termes d'utilisation</a> </span>
+                    </div>
+                </html>
+            </vbox>
+        </vbox>
+
+        <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+        </html>        
+           
+        <vbox columns="70% 30%">
+            
+            
+        <vbox className="hp-box divSearch">
+            <vbox className="hp-box divSearchBar div-full-search-bar">
+                <html>
+                    <div class="vpanel-title">
+                        <div class="vpanel-title">
+                           <span>RECHERCHE ACTIVITÉS</span>
+                           <img src="./img/u201.png" />
+                       </div>
+                    </div>
+                    <div class="hp-sbox-text">
+                        <span style="color:#f93;">23</span> résultats pour votre recherche <span style="color:#f93;">Construire école</span>. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
+                    </div>
+                    <div style="height: 50px;" />
+                </html>    
+                <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
+                    <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                        <postChange>
+                                var prefix = root.query.keys;
+                                currentPage=0;
+                                restFullSearchList(prefix,0);
+                         </postChange>
+                    </button>
+                </vbox>
+                    
+
+                <html>
+                    <div style="height: 70px;"> </div>
+                </html>   
+                <html>
+                    <div class="searchGif">
+                        <img src="img/search-move.gif" />
+                    </div>
+                    <div class="full-search-list">
+                        <div class="full-search-list-item hp-box">
+                            <div class="item-title">Classe 2</div>
+                            <div class="item-icon">
+                                <i class="far fa-file-image" />
+                                <i class="fas fa-cogs" />
+                            </div>
+                            <div class="item-body">
+                                <div class="c-path">Activités économiques <span>&gt;</span> Enseignement <span>&gt;</span> Etablissement enseignement professionnel</div>
+                                <div class="item-body-title"><span>École de couture</span></div>
+                                <p>Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...</p>
+                            	
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination pagination-second">
+                        
+                    </div>
+                </html>     
+                
+                        </vbox>    
+        </vbox> 
+        
+        <vbox className="hp-box">
+               <html>
+                   <div class="vpanel-title">
+                       <span>ANNONCES</span>
+                       <img src="./img/u201.png" />
+                   </div>
+               </html>
+                <vbox className="hp-box">
+                    <html>
+                        <div class="vpanel-body-title"><i class="fas fa-chart-line" /><span>Etudes de marchés</span></div>
+                        <div class="vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>    
+                </vbox>
+                <html>
+                    <div style="height: 50px;"> </div>
+                </html> 
+                   <vbox className="hp-box">
+                   <html>
+                        <div class="vpanel-body-title"><i class="far fa-edit" /><span>votre e-parapheur</span></div>
+                        <div class="vpanel-body-icon"><i class="far fa-edit" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>     
+                </vbox>
+                <html>
+                    <div style="height: 50px;"> </div>
+                </html> 
+                   <vbox className="hp-box">
+                    <html>
+                        <div class="vpanel-body-title"><i class="fas fa-cog" /><span>Transformation digitale</span></div>
+                        <div class="vpanel-body-icon"><i class="fas fa-cogs" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>     
+                </vbox>    
+            </vbox>      
+        </vbox>
+            
+        
+        <html> <div style="height: 30px;"> </div> </html>            
+        
+    </screen>
+    <html>
+        <script>
+             document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0];
+                    var val = inp.value;
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    console.log(val);
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete(inp,val,true);
+              });
+                
+                
+          document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x);
+          });
+          
+          
+          
+        </script>
+    </html>
+	</view>
+
+
+</search>

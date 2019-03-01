@@ -69,6 +69,10 @@ public class DashboardSearchLoader {
 		ModelCache.addTaskListPath("karazapps.karaz.ux.hub.dashboardsearch.model.DashboardSearch:taskList-default", "karazapps/karaz/ux/hub/dashboardsearch/model/taskList-TLDashboardSearch.xml");
 		
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/dashboardsearch/search/AllKarazuxresults", "karazapps/karaz/ux/hub/dashboardsearch/model/search-AllKarazuxresults.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/dashboardsearch/search/DetailsActivitySearch", "karazapps/karaz/ux/hub/dashboardsearch/model/search-DetailsActivitySearch.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch", "karazapps/karaz/ux/hub/dashboardsearch/model/search-PublicCentralSearch.xml");
 		
 		try {

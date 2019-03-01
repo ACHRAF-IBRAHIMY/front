@@ -1,5 +1,6 @@
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\Util.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\JXFactory.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\search\allKarazuxresults\backejbs\AllKarazuxresultsBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\Adapter1.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\process\GestionDashboardSearch\impl\EndEventImpl.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\package-info.java
@@ -21,5 +22,6 @@ C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\d
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\DashboardGenericAction.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\process\GestionDashboardSearch\backejbs\StartEventStub.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\AbstractRemoteAction.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\search\detailsActivitySearch\backejbs\DetailsActivitySearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\DashboardSearchJxDoi.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\process\GestionDashboardSearch\backejbs\GestionDashboardSearchProcessBeanLoader.java
