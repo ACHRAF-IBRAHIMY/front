@@ -123,8 +123,13 @@
                                },
                             
                                success: function (result) {
+                               
+                               if (result.trim().startsWith('<!-- xxx  -->')){
+															Toaster.push({title: "Erreur d'athentification", position: "top_center", message: "Nom d'utilisateur ou mot de passe incorrects. Veuillez réessayer ...", type:"error", duration:-1});
+																		 }
+							    else {
                                     Toaster.push({title: "Routage", position: "top_center", message: "Votre authentification s'est bien déroulée !", type:"success", duration:-1});                            
-                                    window.location.replace(uri+"/index.jsp");
+                                    window.location.replace(uri+"/index.jsp");}
                                },
                             
                                error: function (err) { 
@@ -142,7 +147,7 @@
                     <html>
                         <div style="height: 70px;" />
                         <div class="hp-sbox-text">
-                            <i class="fab fa-ello" /> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch','search','search',{});">Pas encore de compte Rokhas ?</a>
+                            <i class="fab fa-ello" /> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Pas encore de compte Rokhas ?</a>
                         </div>                             
                         <div class="hp-sbox-text">
                             <a><i class="fas fa-user-slash" /> Mot de passe oublié ?</a>
@@ -165,11 +170,11 @@
                     <div style="height: 50px;" />
                 </html>    
                 <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
-                    <field className="hp-search_field search-label" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
+                    <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
                     </field>
                     <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
-                            prefix= $(".search-label input").val();
+                            prefix= $(".hp-search_field input").val();
                             ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/AllKarazuxresults?query.keys="+prefix, "search", "All Karazuxresults", {});
                              /*getTimeCounter();
                                $(".divSearchBar").hide();
@@ -229,8 +234,8 @@
             <html>
             <div class="searchList">
                <div class="second-search-bar">
-                   <span class="back-span"><i class="fas fa-chevron-left" /> Retour</span>
-                   <input type="text" /><i class="fas fa-eraser" /><i class="fas fa-search" />
+                   <span class="back-span"><i class="fas fa-chevron-left"></i> Retour</span>
+                   <input type="text"/><i class="fas fa-eraser"></i><i class="fas fa-search"></i>
                </div>
                 <p class="nbrRes">Environs <span>0</span> résultats (<span>0.21</span> second)</p>
                 <div class="searchListD">
@@ -386,7 +391,7 @@
   </tasklist>
    <html>
        <script>
-                var currentFocus;
+        var currentFocus;
                 
       document.getElementsByClassName("ow-field-input")[2].addEventListener("input", function () {
                     var a, b, i;
@@ -447,8 +452,7 @@
         closeSearchList();
         currentPage=0;
        restSearchList($(".searchList .second-search-bar input").val(),0); 
-    });
-            
+    });    
        </script>
    </html>
   </view>
