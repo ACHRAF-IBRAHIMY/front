@@ -2,70 +2,11 @@
 <search name="AllKarazuxresults" label="All Karazuxresults">
 
 	<query>
-
-		<clause type="OR">
-			<criter optional="true">
-				<operand>reference</operand>
-				<operator>like</operator>
-				<value>query.unifiedCriteria</value>
-			</criter>
-			<criter optional="true">
-				<operand>statut</operand>
-				<operator>like</operator>
-				<value>query.unifiedCriteria</value>
-			</criter>
-			<criter optional="true">
-				<operand>nomComplet</operand>
-				<operator>like</operator>
-				<value>query.unifiedCriteria</value>
-			</criter>
-		</clause>
-
-
-
-
-		<clause>
-			<criter optional="true">
-				<operand>reference</operand>
-				<operator>like</operator>
-				<value>query.reference</value>
-			</criter>
-			<criter optional="true">
-				<operand>statut</operand>
-				<operator>like</operator>
-				<value>query.statut</value>
-			</criter>
-			<criter optional="true">
-				<operand>nomComplet</operand>
-				<operator>like</operator>
-				<value>query.nomComplet</value>
-			</criter>
-			<criter optional="true">
-				<operand>dateTraitement</operand>
-				<operator>&gt;=</operator>
-				<value>query.dateTraitement.karazuxresultsn</value>
-			</criter>
-			<criter optional="true">
-				<operand>dateTraitement</operand>
-				<operator>&lt;=</operator>
-				<value>query.dateTraitement.max</value>
-			</criter>
-		</clause>
-
 	</query>
 	<data>
 		<query>
-			<unifiedCriteria />
 			<keys />
-			<reference />
-			<statut />
-			<nomComplet />
-			<dateTraitement>
-				<karazuxresultsn />
-				<max />
-			</dateTraitement>
-
-
+            <idObject />
 		</query>
 		<collapsed>false</collapsed>
 	</data>
@@ -74,9 +15,21 @@
         <script postLoad="true">
          
           $(".rokhas-home").click(function(){
-                ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+               ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });
            $(".searchbuttun").click();
+           
+           $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .p",function(){
+               currentPage=0;
+               $(".div-full-search-bar .hp-search_field input").val($(this).html());
+               restFullSearchList($(this).html(),0);
+           });
+           $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .item-body-button",function(){
+                var id= $(this).children("input").val(); 
+                ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+           });
+           
+           
             
         </script>
         <vbox columns="30% 70%" columns-small="auto">
@@ -122,7 +75,7 @@
                 </html>    
                 <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
                     <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-                    <button className="hp-search_field_icon fas fa-search searchbuttun" label="" postProcessing="search()" separator="!!">
+                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
                                 var prefix = root.query.keys;
                                 currentPage=0;
@@ -150,6 +103,7 @@
                                 <div class="c-path">Activités économiques <span>&gt;</span> Enseignement <span>&gt;</span> Etablissement enseignement professionnel</div>
                                 <div class="item-body-title"><span>École de couture</span></div>
                                 <p>Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...</p>
+                            	
                             </div>
                         </div>
                     </div>

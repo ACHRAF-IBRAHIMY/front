@@ -167,7 +167,7 @@
                 <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
                     <field className="hp-search_field search-label" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
                     </field>
-                    <button className="hp-search_field_icon fas fa-search" label="" postProcessing="search()" separator="!!">
+                    <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
                             prefix= $(".search-label input").val();
                             ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/AllKarazuxresults?query.keys="+prefix, "search", "All Karazuxresults", {});

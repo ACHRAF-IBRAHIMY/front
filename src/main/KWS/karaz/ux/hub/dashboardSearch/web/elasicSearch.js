@@ -1,3 +1,4 @@
+/* from file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js  */
 var currentPage = 0;
 var totalPage = 0;
 var timerID = 0;
@@ -454,10 +455,7 @@ function autocomplete(inp,arr) {
                 if (x) x[currentFocus].click();
             }else{
                 console.log(currentFocus);
-                document.getElementsByClassName("divSearchBar")[0].style.display=none;
-                restSearchList(document.getElementsByClassName("ow-field-input")[2].value);
-                document.getElementsByClassName("searchList")[0].style.display=block;
-
+                $(".divSearchBar .search_button").click();
             }
         }
     }
@@ -471,6 +469,7 @@ function autocomplete(inp,arr) {
                 x[i].parentNode.removeChild(x[i]);
             }
         }
+        currentFocus=-1;
     }
 
     /*execute a function when someone clicks in the document:*/
@@ -614,17 +613,18 @@ function autocomplete(inp,arr) {
        var a = document.querySelector(".full-search-list");
        
        for(i=0;i<results.length;i++){
+           var id = results[i]._id;
            var intituleFr = results[i]._source.content.intituleFr;
            var typeAc = checkUndefined(results[i]._source.parents[1]);
            var nature = checkUndefined(results[i]._source.parents[0]);
            var typeAt = checkUndefined(results[i]._source.parents[2]);
-           var typeAG="activités économiques";
+           var typeAG="Activités économiques";
            var b = document.createElement("div");
            b.setAttribute("class","hp-box full-search-list-item");
            
            var c = document.createElement("div");
            c.setAttribute("class","c-path");
-           c.innerHTML=typeAG+"<span> > </span>"+nature+"<span> > </span>"+typeAt;
+           c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+nature+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+typeAt+"</span>";
            
            var d = document.createElement("div");
            d.setAttribute("class","item-body");
@@ -641,6 +641,11 @@ function autocomplete(inp,arr) {
            d.appendChild(e);
            d.appendChild(f);
            
+           var g = document.createElement("button");
+           g.setAttribute("class","item-body-button hp-sbox-btn");
+           g.innerHTML="Détails<input type=\"hidden\" value=\""+id+"\" > ";
+           
+           d.appendChild(g);
            
            b.innerHTML="<div class=\"item-title\">"+typeAc+"</div>";
            b.innerHTML+="<div class=\"item-icon\"><i class=\"far fa-file-image\" /><i class=\"fas fa-cogs\" /></div>";
@@ -649,6 +654,8 @@ function autocomplete(inp,arr) {
        }
    }
 
+    function redirectDetails(){
+    }
 
     function highlights(request,result){
         var hl ="";
@@ -666,7 +673,6 @@ function autocomplete(inp,arr) {
             }
         }
         return positionsBegin.sort(function(a, b) {return a - b;}).concat(positionsEnd.sort(function(a, b) {return a - b;}));
-;
     }
     
     function addSpansHL(request,result){
@@ -694,7 +700,37 @@ function autocomplete(inp,arr) {
         }
     	return request;
     }
-    
 
+    function getObject(id){
+        var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        console.log(id);    
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xhttp.response);
+            rempl(JSON.parse(xhttp.response));
+        }
+    };
+   // xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
+    xhttp.open("GET","https://cmdbserver.karaz.org:9200/activite_economique/activite/"+id);
+    xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    xhttp.send();
+
+        return ; 
+     }
+
+function rempl(results){
+        var id = results._id;
+        var intituleFr = results._source.content.intituleFr;
+        var typeAc = checkUndefined(results._source.parents[1]);
+        var nature = checkUndefined(results._source.parents[0]);
+        var typeAt = checkUndefined(results._source.parents[2]);
+        var typeAG="Activités économiques";
+        
+        $(".div-fsb-details .vpanel-title .title-2x").html(intituleFr);
+        $(".div-fsb-details .details-body .title-4x").html(intituleFr);
+        $(".div-fsb-details .fsb-container .c-path .p1").html(typeAG);
+        $(".div-fsb-details .fsb-container .c-path .p2").html(nature);
+        $(".div-fsb-details .fsb-container .c-path .p3").html(typeAt);
+}
 
 //modal scripts
