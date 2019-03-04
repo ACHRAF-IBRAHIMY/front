@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus>
+  <menu absId="karaz/ux/hub/portailsearch" label="KRAZ UX HUB" icone="DashboardSearch_icon">
+    <menu relId="search" label="Recherche">
+      <menu relId="PublicCentralSearch" label="PublicCentralSearch" icone="search" xcstt="x">
+        <resource type="search">karaz/ux/hub/portailsearch/search/PublicCentralSearch</resource>
+      </menu>
+       <menu relId="AllKarazuxresults" label="Elastic search" icone="search" xcstt="x">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AllKarazuxresults</resource>
+      </menu>
+      <menu relId="DetailsActivitySearch" label="Elastic search det" icone="search" xcstt="x">
+        <resource type="search">karaz/ux/hub/portailsearch/search/DetailsActivitySearch</resource>
+      </menu>
+    </menu>
+  </menu>
+</menus>
+
