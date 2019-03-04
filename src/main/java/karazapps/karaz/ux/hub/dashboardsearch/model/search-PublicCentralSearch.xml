@@ -29,24 +29,43 @@
       
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         
-        <vbox columns="30% 70%" columns-small="auto">
-            <vbox columns="100%" contentJustify="center">
+        <vbox columns="30% 70%" className="Header-signup" columns-small="auto">
+            <vbox className="Header-signup-logo">
                 <html>
                     <div>
-                        <img src="./img/rokhasRectBlueArFr.svg" alt="Rokhas logo" />
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
                     </div>
                 </html>
             </vbox>
-            <vbox columns="100%" contentJustify="end">
-                <html>
-                    <div class="form-text-medium">
-                        <span style="margin:0px 20px;"> <a>Accueil</a> </span>
-                        <span style="margin:0px 20px;"> <a>Questions fréquentes</a> </span>
-                        <span style="margin:0px 20px;"> <a>Nous contacter</a> </span>
-                        <span style="margin:0px 20px;"> <a>Termes d'utilisation</a> </span>
-                    </div>
-                </html>
-            </vbox>
+						<vbox columns="60% 25% 15%">
+									<html>
+											<div class="Header-signup-menu">
+													<span> <a>Accueil</a> </span>
+													<span> <a>Actualités</a> </span>
+													<span> <a>Simulateur</a> </span>
+													<span> <a>Solutions</a> </span>
+													<span> <a><span class="far fa-question-circle" style="font-size:18px" /> </a> </span>
+											</div>	
+									</html>
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="Inscription" className="button-signup-header button-left">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+									</postChange>						
+								</button>
+								<button label="Connexion" className="button-signup-header">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+									</postChange>					
+								</button>
+							</vbox>
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="FR" className="button-signup-header-cliked button-left">						
+								</button>
+								<button label="ع" className="button-signup-header">						
+								</button>
+							</vbox>
+						</vbox>
         </vbox>
 
         <html id="hSeparator">
