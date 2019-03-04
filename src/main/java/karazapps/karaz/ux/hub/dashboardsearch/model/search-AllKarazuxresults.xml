@@ -65,7 +65,7 @@
                     <div class="vpanel-title">
                         <div class="vpanel-title">
                            <span>RECHERCHE ACTIVITÉS</span>
-                           <img src="./img/u201.png" />
+                           <hr class="header-create-account-horizontal-line hr-hub" />
                        </div>
                     </div>
                     <div class="hp-sbox-text">
@@ -119,7 +119,7 @@
                <html>
                    <div class="vpanel-title">
                        <span>ANNONCES</span>
-                       <img src="./img/u201.png" />
+                        <hr class="header-create-account-horizontal-line hr-hub" />
                    </div>
                </html>
                 <vbox className="hp-box">

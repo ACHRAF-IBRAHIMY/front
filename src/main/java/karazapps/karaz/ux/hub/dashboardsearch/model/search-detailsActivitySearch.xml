@@ -49,15 +49,23 @@
             
             
         <vbox className="hp-box divSearch">
+           
+           
             <vbox className="hp-box divSearchBar div-full-search-bar div-fsb-details">
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
-                           <span>FICHE ACTIVITE  |  <span class="cl-orange title-2x">ÉCOLE DE COUTURE</span></span>
-                           <img src="./img/u201.png" />
+                           <span>FICHE ACTIVITE  |  <span class="cl-orange title-2x" /></span>
+                           <hr class="header-create-account-horizontal-line hr-hub" />
+    <!--                       <img src="./img/u201.png" /> -->
                        </div>
                     </div>
                  </html>
+                <vbox className="hp-box divSearchBar div-full-search-bar search-details-icon">
+                    <html>
+                        <img src="./img/search-move.gif" alt="loading Gif" />
+                    </html>
+                </vbox>
                  <vbox columns="100%" className="fsb-container">
                 <html>   
                     <div class="c-path">
@@ -134,7 +142,7 @@
                <html>
                    <div class="vpanel-title">
                        <span>ANNONCES</span>
-                       <img src="./img/u201.png" />
+                        <hr class="header-create-account-horizontal-line hr-hub" />
                    </div>
                </html>
                 <vbox className="hp-box">

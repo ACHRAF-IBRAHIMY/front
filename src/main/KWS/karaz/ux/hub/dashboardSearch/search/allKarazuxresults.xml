@@ -6,7 +6,7 @@
 	<data>
 		<query>
 			<keys />
-            <idObject/>
+            <idObject />
 		</query>
 		<collapsed>false</collapsed>
 	</data>
@@ -17,6 +17,7 @@
           $(".rokhas-home").click(function(){
                ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });
+          
            $(".searchbuttun").click();
            
            $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .p",function(){
@@ -24,6 +25,7 @@
                $(".div-full-search-bar .hp-search_field input").val($(this).html());
                restFullSearchList($(this).html(),0);
            });
+           
            $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .item-body-button",function(){
                 var id= $(this).children("input").val(); 
                 ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
@@ -65,7 +67,7 @@
                     <div class="vpanel-title">
                         <div class="vpanel-title">
                            <span>RECHERCHE ACTIVITÉS</span>
-                           <img src="./img/u201.png" />
+                           <hr class="header-create-account-horizontal-line hr-hub"/>
                        </div>
                     </div>
                     <div class="hp-sbox-text">
@@ -119,7 +121,7 @@
                <html>
                    <div class="vpanel-title">
                        <span>ANNONCES</span>
-                       <img src="./img/u201.png" />
+                        <hr class="header-create-account-horizontal-line hr-hub"/>
                    </div>
                </html>
                 <vbox className="hp-box">

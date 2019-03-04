@@ -1,4 +1,5 @@
 /* from file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js  */
+/* from file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js  */
 var currentPage = 0;
 var totalPage = 0;
 var timerID = 0;
@@ -708,6 +709,9 @@ function autocomplete(inp,arr) {
         if (this.readyState == 4 && this.status == 200) {
             console.log(xhttp.response);
             rempl(JSON.parse(xhttp.response));
+            $(".div-fsb-details .search-details-icon").hide();
+            $(".div-fsb-details .fsb-container").show();
+            
         }
     };
    // xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");

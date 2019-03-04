@@ -7,7 +7,7 @@
 		<query>
 			
 			<keys />
-			<idObject/>
+			<idObject />
 
 		</query>
 		<collapsed>false</collapsed>
@@ -49,15 +49,23 @@
             
             
         <vbox className="hp-box divSearch">
+           
+           
             <vbox className="hp-box divSearchBar div-full-search-bar div-fsb-details">
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
-                           <span>FICHE ACTIVITE  |  <span class="cl-orange title-2x">ÉCOLE DE COUTURE</span></span>
-                           <img src="./img/u201.png" />
+                           <span>FICHE ACTIVITE  |  <span class="cl-orange title-2x"></span></span>
+                           <hr class="header-create-account-horizontal-line hr-hub"/>
+    <!--                       <img src="./img/u201.png" /> -->
                        </div>
                     </div>
                  </html>
+                <vbox className="hp-box divSearchBar div-full-search-bar search-details-icon">
+                    <html>
+                        <img src="./img/search-move.gif" alt="loading Gif"/>
+                    </html>
+                </vbox>
                  <vbox columns="100%" className="fsb-container">
                 <html>   
                     <div class="c-path">
@@ -74,7 +82,7 @@
                             </html>
                         <html>
                            <span>
-                                <span class="title-2x">Qualifications professionnelles requises</span><br/>
+                                <span class="title-2x">Qualifications professionnelles requises</span><br />
                                 <span class="gris666" style="font-size:14px;">Le gérant doit disposer d'un diplôme reconnu par l'état.</span>
                             </span>
                         </html>    
@@ -85,7 +93,7 @@
                         </html>
                         <html>
                             <span>
-                                <span class="title-2x">Installations techniques et matérielles requises</span><br/>
+                                <span class="title-2x">Installations techniques et matérielles requises</span><br />
                                 <span class="gris666" style="font-size:14px;">Les locaux destinées à l'accueil de l'activité doivent avoir une surface minimale de 500 m2.</span>
                             </span>
                         </html>
@@ -96,7 +104,7 @@
                         </html>
                         <html>  
                             <span>
-                                <span class="title-2x">Normes sanitaires et sécuritaires</span><br/>
+                                <span class="title-2x">Normes sanitaires et sécuritaires</span><br />
                                 <span class="gris666" style="font-size:14px;">Disposer d'extincteurs de feu et de plan d'évacuation affichés dans les différents points d'entrée et de sortie des locaux.</span>
                             </span>
                         </html>
@@ -107,8 +115,8 @@
                         </html>
                         <html>
                         <span>
-                            <span class="title-2x">Références légales</span><br/>
-                            <span class="gris666"  style="font-size:14px;">- Loi organique N° 113-14 relative aux communes<br />
+                            <span class="title-2x">Références légales</span><br />
+                            <span class="gris666" style="font-size:14px;">- Loi organique N° 113-14 relative aux communes<br />
                                   - Arrêté du Wali de la région du Grand Casablanca N° 6242 du 14/06/2005
                            </span>
                         </span>
@@ -134,7 +142,7 @@
                <html>
                    <div class="vpanel-title">
                        <span>ANNONCES</span>
-                       <img src="./img/u201.png" />
+                        <hr class="header-create-account-horizontal-line hr-hub"/>
                    </div>
                </html>
                 <vbox className="hp-box">
