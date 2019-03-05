@@ -18,7 +18,7 @@
           var id = root.query.idObject;
           getObject(id);
           $(".rokhas-home").click(function(){
-                ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });
         </script>
         <vbox columns="30% 70%" columns-small="auto">

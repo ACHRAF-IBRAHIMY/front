@@ -44,7 +44,7 @@
 													<span> <a>Actualités</a> </span>
 													<span> <a>Simulateur</a> </span>
 													<span> <a>Solutions</a> </span>
-													<span > <a><span class="far fa-question-circle" style="font-size:18px" /> </a> </span>
+													<span> <a><span class="far fa-question-circle" style="font-size:18px" /> </a> </span>
 											</div>	
 									</html>
 							<vbox className="vbox-button-signup-header" columns="50% 50%">
@@ -194,7 +194,7 @@
                     <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
                             prefix= $(".hp-search_field input").val();
-                            ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/AllKarazuxresults?query.keys="+prefix, "search", "All Karazuxresults", {});
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix, "search", "All Karazuxresults", {});
                              /*getTimeCounter();
                                $(".divSearchBar").hide();
                                 closeSearchList();
@@ -253,8 +253,8 @@
             <html>
             <div class="searchList">
                <div class="second-search-bar">
-                   <span class="back-span"><i class="fas fa-chevron-left"></i> Retour</span>
-                   <input type="text"/><i class="fas fa-eraser"></i><i class="fas fa-search"></i>
+                   <span class="back-span"><i class="fas fa-chevron-left" /> Retour</span>
+                   <input type="text" /><i class="fas fa-eraser" /><i class="fas fa-search" />
                </div>
                 <p class="nbrRes">Environs <span>0</span> résultats (<span>0.21</span> second)</p>
                 <div class="searchListD">
@@ -431,7 +431,7 @@
       document.getElementsByClassName("ow-field-input")[2].addEventListener("keydown", function (e) {
                     var x = document.getElementById("autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x);
+                    moveKey(e,x,0);
       });
                 
       document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("input", function () {
