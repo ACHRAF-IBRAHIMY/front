@@ -5,7 +5,7 @@
 	</query>
 	<data>
 		<query>
-			<keys />
+			<search />
             <idObject />
 		</query>
 		<collapsed>false</collapsed>
@@ -15,9 +15,8 @@
         <script postLoad="true">
          
           $(".rokhas-home").click(function(){
-               ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });
-          
            $(".searchbuttun").click();
            
            $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .p",function(){
@@ -25,12 +24,13 @@
                $(".div-full-search-bar .hp-search_field input").val($(this).html());
                restFullSearchList($(this).html(),0);
            });
-           
            $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .item-body-button",function(){
                 var id= $(this).children("input").val(); 
-                ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
            });
            
+           
+            
         </script>
         <vbox columns="30% 70%" columns-small="auto">
             <vbox columns="100%" contentJustify="center">
@@ -74,10 +74,10 @@
                     <div style="height: 50px;" />
                 </html>    
                 <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
                     <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
-                                var prefix = root.query.keys;
+                                var prefix = root.query.search;
                                 currentPage=0;
                                 restFullSearchList(prefix,0);
                          </postChange>
@@ -115,7 +115,7 @@
                         </vbox>    
         </vbox> 
         
-        <vbox className="hp-box">
+        <vbox className="hp-box left-box-fsb">
                <html>
                    <div class="vpanel-title">
                        <span>ANNONCES</span>
@@ -177,7 +177,7 @@
           document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
                     var x = document.getElementById("autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x);
+                    moveKey(e,x,1);
           });
           
           

@@ -1,5 +1,3 @@
-/* from file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js  */
-/* from file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/elasicSearch.js  */
 var currentPage = 0;
 var totalPage = 0;
 var timerID = 0;
@@ -178,6 +176,7 @@ function restFullSearchList(prefix,from) {
     $(".searchGif").show();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            removeFullListSearch();
             var res = JSON.parse(this.responseText);
             for(var i=0;i<res.hits.hits.length;i++){
                 result.push(res.hits.hits[i]);
@@ -435,7 +434,7 @@ function autocomplete(inp,arr) {
         }
     }
 
-    function moveKey(e,x){
+    function moveKey(e,x,type){
         if (e.keyCode == 40) {
             /*If the arrow DOWN key is pressed,
             increase the currentFocus variable:*/
@@ -456,7 +455,12 @@ function autocomplete(inp,arr) {
                 if (x) x[currentFocus].click();
             }else{
                 console.log(currentFocus);
-                $(".divSearchBar .search_button").click();
+                if(type==0){
+                    $(".divSearchBar .search_button").click();    
+                }else{
+                    $(".div-full-search-bar .search_button").click();                        
+                }
+                
             }
         }
     }

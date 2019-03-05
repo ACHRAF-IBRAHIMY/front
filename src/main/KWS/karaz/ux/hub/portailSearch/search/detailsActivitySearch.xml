@@ -18,7 +18,7 @@
           var id = root.query.idObject;
           getObject(id);
           $(".rokhas-home").click(function(){
-                ApplicationManager.run("karaz/ux/hub/dashboardsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });
         </script>
         <vbox columns="30% 70%" columns-small="auto">
@@ -55,15 +55,15 @@
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
-                           <span>FICHE ACTIVITE  |  <span class="cl-orange title-2x"></span></span>
-                           <hr class="header-create-account-horizontal-line hr-hub"/>
+                           <span>FICHE ACTIVITE  |  <span class="cl-orange title-2x" /></span>
+                           <hr class="header-create-account-horizontal-line hr-hub" />
     <!--                       <img src="./img/u201.png" /> -->
                        </div>
                     </div>
                  </html>
                 <vbox className="hp-box divSearchBar div-full-search-bar search-details-icon">
                     <html>
-                        <img src="./img/search-move.gif" alt="loading Gif"/>
+                        <img src="./img/search-move.gif" alt="loading Gif" />
                     </html>
                 </vbox>
                  <vbox columns="100%" className="fsb-container">
@@ -142,7 +142,7 @@
                <html>
                    <div class="vpanel-title">
                        <span>ANNONCES</span>
-                        <hr class="header-create-account-horizontal-line hr-hub"/>
+                        <hr class="header-create-account-horizontal-line hr-hub" />
                    </div>
                </html>
                 <vbox className="hp-box">
