@@ -77,7 +77,7 @@
                     <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
                     <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
-                                var prefix = root.query.search;
+                                var prefix = $(".div-full-search-bar .hp-search_field input").val();
                                 currentPage=0;
                                 restFullSearchList(prefix,0);
                          </postChange>

@@ -1,213 +1,270 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="DetailsActivitySearch" label="detais activity search">
 
-	<query>
-	</query>
-	<data>
-		<query>
-			
-			<keys />
-			<idObject />
+    <query>
+    </query>
+    <data>
+        <query>
 
-		</query>
-		<collapsed>false</collapsed>
-	</data>
-	<view>
-		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-        <script postLoad="true">
-          var id = root.query.idObject;
-          getObject(id);
-          $(".rokhas-home").click(function(){
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-          });
-        </script>
-        <vbox columns="30% 70%" columns-small="auto">
-            <vbox columns="100%" contentJustify="center">
-                <html>
+            <keys />
+            <idObject />
+
+        </query>
+        <collapsed>false</collapsed>
+    </data>
+    <view>
+        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+            <script postLoad="true">
+                var id = root.query.idObject;
+                getObject(id);
+                $(".rokhas-home").click(function() {
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "PublicCentralSearch", {});
+                });
+                
+                $(".tab-info-item-s span.new-search").click(function(){
+                   var pre=$(".div-fsb-details .vpanel-title .title-2x").html();
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+pre, "search", "All Karazuxresults", {});
+                });
+                
+            </script>
+            <vbox columns="30% 70%" columns-small="auto">
+                <vbox columns="100%" contentJustify="center">
+                    <html>
                     <div class="rokhas-home">
                         <img src="./img/rokhasRectBlueArFr.svg" alt="Rokhas logo" />
                     </div>
-                </html>
-            </vbox>
-            <vbox columns="100%" contentJustify="end">
-                <html>
+
+                    </html>
+                </vbox>
+                <vbox columns="100%" contentJustify="end">
+                    <html>
                     <div class="form-text-medium">
                         <span style="margin:0px 20px;"> <a class="rokhas-home">Accueil</a> </span>
                         <span style="margin:0px 20px;"> <a>Questions fréquentes</a> </span>
                         <span style="margin:0px 20px;"> <a>Nous contacter</a> </span>
                         <span style="margin:0px 20px;"> <a>Termes d'utilisation</a> </span>
                     </div>
-                </html>
-            </vbox>
-        </vbox>
 
-        <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-        <vbox columns="70% 30%">
-            
-            
-        <vbox className="hp-box divSearch">
-           
-           
-            <vbox className="hp-box divSearchBar div-full-search-bar div-fsb-details">
-                <html>
-                    <div class="vpanel-title">
-                        <div class="vpanel-title">
-                           <span>FICHE ACTIVITE  |  <span class="cl-orange title-2x" /></span>
-                           <hr class="header-create-account-horizontal-line hr-hub" />
-    <!--                       <img src="./img/u201.png" /> -->
-                       </div>
-                    </div>
-                 </html>
-                <vbox className="hp-box divSearchBar div-full-search-bar search-details-icon">
-                    <html>
-                        <img src="./img/search-move.gif" alt="loading Gif" />
                     </html>
                 </vbox>
-                 <vbox columns="100%" className="fsb-container">
-                <html>   
-                    <div class="c-path">
-                         <span class="p p1">Activités économiques</span> <span class="cl-orange">&gt;</span> <span class="p p2">Enseignement</span> <span class="cl-orange">&gt;</span> <span class="p p3">Etablissement enseignement professionnel</span>
-                    </div>
-                    <div style="height: 10px;" />
-                    <div class="details-body"><span class="title-4x gris666">École de couture</span></div>
-                    <p class="description">Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels.</p>
-                </html>    
-                <vbox columns="100%" columns-small="200px 50px" contentAlign="center" className="tab-info">
-                    <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
-                      <html>
-                        <i class="fas fa-graduation-cap" />
+            </vbox>
+
+            <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+
+            </html>
+
+            <vbox columns="70% 30%">
+
+
+                <vbox className="hp-box divSearch">
+
+
+                    <vbox className="hp-box divSearchBar div-full-search-bar div-fsb-details">
+                        <html>
+                        <div class="vpanel-title">
+                            <div class="vpanel-title">
+                                <span>FICHE ACTIVITE | <span class="cl-orange title-2x" /></span>
+                                <hr class="header-create-account-horizontal-line hr-hub" />
+                                <!--                       <img src="./img/u201.png" /> -->
+                            </div>
+                        </div>
+
+                        </html>
+                        <vbox className="hp-box divSearchBar div-full-search-bar search-details-icon">
+                            <html>
+                            <img src="./img/search-move.gif" alt="loading Gif" />
+
                             </html>
-                        <html>
-                           <span>
-                                <span class="title-2x">Qualifications professionnelles requises</span><br />
-                                <span class="gris666" style="font-size:14px;">Le gérant doit disposer d'un diplôme reconnu par l'état.</span>
-                            </span>
-                        </html>    
-                    </vbox>
-                    <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
-                      <html>
-                        <i class="fas fa-industry" />
-                        </html>
-                        <html>
-                            <span>
-                                <span class="title-2x">Installations techniques et matérielles requises</span><br />
-                                <span class="gris666" style="font-size:14px;">Les locaux destinées à l'accueil de l'activité doivent avoir une surface minimale de 500 m2.</span>
-                            </span>
-                        </html>
-                    </vbox>
-                    <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
-                        <html>
-                        <i class="fas fa-fire-extinguisher" />
-                        </html>
-                        <html>  
-                            <span>
-                                <span class="title-2x">Normes sanitaires et sécuritaires</span><br />
-                                <span class="gris666" style="font-size:14px;">Disposer d'extincteurs de feu et de plan d'évacuation affichés dans les différents points d'entrée et de sortie des locaux.</span>
-                            </span>
-                        </html>
-                    </vbox>
-                    <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
-                        <html>
-                        <i class="fas fa-gavel" />
-                        </html>
-                        <html>
-                        <span>
-                            <span class="title-2x">Références légales</span><br />
-                            <span class="gris666" style="font-size:14px;">- Loi organique N° 113-14 relative aux communes<br />
-                                  - Arrêté du Wali de la région du Grand Casablanca N° 6242 du 14/06/2005
-                           </span>
-                        </span>
-                        </html>
                         </vbox>
+                        <vbox columns="100%" className="fsb-container">
+                            <html>
+                            <div class="c-path">
+                                <span class="p p1">Activités économiques</span> <span class="cl-orange">&gt;</span> <span class="p p2">Enseignement</span> <span class="cl-orange">&gt;</span> <span class="p p3">Etablissement enseignement professionnel</span>
+                            </div>
+                            <div style="height: 10px;" />
+                            <div class="details-body"><span class="title-4x gris666">École de couture</span></div>
+                            <p class="description">Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels.</p>
+
+                            </html>
+                            <vbox columns="100%" columns-small="200px 50px" contentAlign="center" className="tab-info">
+                                <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
+                                    <html>
+                                    <i class="fas fa-graduation-cap" />
+
+                                    </html>
+                                    <html>
+                                    <span>
+                                        <span class="title-2x">Qualifications professionnelles requises</span><br />
+                                        <span class="gris666" style="font-size:14px;">Le gérant doit disposer d'un diplôme reconnu par l'état.</span>
+                                    </span>
+
+                                    </html>
+                                </vbox>
+                                <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
+                                    <html>
+                                    <i class="fas fa-industry" />
+
+                                    </html>
+                                    <html>
+                                    <span>
+                                        <span class="title-2x">Installations techniques et matérielles requises</span><br />
+                                        <span class="gris666" style="font-size:14px;">Les locaux destinées à l'accueil de l'activité doivent avoir une surface minimale de 500 m2.</span>
+                                    </span>
+
+                                    </html>
+                                </vbox>
+                                <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
+                                    <html>
+                                    <i class="fas fa-fire-extinguisher" />
+
+                                    </html>
+                                    <html>
+                                    <span>
+                                        <span class="title-2x">Normes sanitaires et sécuritaires</span><br />
+                                        <span class="gris666" style="font-size:14px;">Disposer d'extincteurs de feu et de plan d'évacuation affichés dans les différents points d'entrée et de sortie des locaux.</span>
+                                    </span>
+
+                                    </html>
+                                </vbox>
+                                <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
+                                    <html>
+                                    <i class="fas fa-gavel" />
+
+                                    </html>
+                                    <html>
+                                    <span>
+                                        <span class="title-2x">Références légales</span><br />
+                                        <span class="gris666" style="font-size:14px;">- Loi organique N° 113-14 relative aux communes<br />
+                                            - Arrêté du Wali de la région du Grand Casablanca N° 6242 du 14/06/2005
+                                        </span>
+                                    </span>
+
+                                    </html>
+                                </vbox>
+                                <vbox columns="5% 95%" columns-small="20px 200px" contentAlign="left" className="tab-info-item">
+                                    <html>
+                                    <i class="fas fa-cogs" />
+
+                                    </html>
+                                    <html>
+                                    <span>
+                                        <span class="title-2x">Procédures applicables</span><br />
+                                        <span class="gris666" style="font-size:14px;grid-template-columns: 60% 40%;display: grid;">
+                                            <span class="consult"><i class="fas fa-cog"></i>Autorisation de construire</span> 
+                                            <button class="consult-button b2 consult" ><i class="fas fa-eye"></i> Consulter</button>
+                                            <span class="consult"><i class="fas fa-cog"></i> Arrêté du Wali de la région du Grand Casablanca N° 6242 du 14/06/2005</span>
+                                            <button class="consult-button b2 consult"><i class="fas fa-eye"></i> Consulter</button>
+                                        </span>
+                                    </span>
+
+                                    </html>
+                                </vbox>
+                                <vbox columns="50% 50%" columns-small="20px 200px" contentAlign="center" className="tab-info-item tab-info-item-s">
+                                    <html><span><i class="fas fa-edit"></i>Proposer nouvelle activité</span></html>
+                                    <html><span class="new-search"><i class="fas fa-search"></i>Nouvelle recherche</span></html>
+                                </vbox>
+                            </vbox>
+                        </vbox>
+
+
+                        <html>
+                        <div style="height: 70px;"> </div>
+
+                        </html>
+                        <html>
+                        <div class="searchGif">
+                            <img src="img/search-move.gif" />
+                        </div>
+
+                        </html>
+
                     </vbox>
                 </vbox>
-                    
 
-                <html>
-                    <div style="height: 70px;"> </div>
-                </html>   
-                <html>
-                    <div class="searchGif">
-                        <img src="img/search-move.gif" />
-                    </div>
-                </html>     
-                
-            </vbox>    
-        </vbox> 
-        
-        <vbox className="hp-box">
-               <html>
-                   <div class="vpanel-title">
-                       <span>ANNONCES</span>
-                        <hr class="header-create-account-horizontal-line hr-hub" />
-                   </div>
-               </html>
-                <vbox className="hp-box">
+                <vbox className="hp-box left-box-fsb">
                     <html>
+                    <div class="vpanel-title">
+                        <span>ANNONCES</span>
+                        <hr class="header-create-account-horizontal-line hr-hub" />
+                    </div>
+
+                    </html>
+                    <vbox className="hp-box">
+                        <html>
                         <div class="vpanel-body-title"><i class="fas fa-chart-line" /><span>Etudes de marchés</span></div>
                         <div class="vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
                         <div class="hp-sbox-btn">Détails</div>
-                    </html>    
-                </vbox>
-                <html>
+
+                        </html>
+                    </vbox>
+                    <html>
                     <div style="height: 50px;"> </div>
-                </html> 
-                   <vbox className="hp-box">
-                   <html>
+
+                    </html>
+                    <vbox className="hp-box">
+                        <html>
                         <div class="vpanel-body-title"><i class="far fa-edit" /><span>votre e-parapheur</span></div>
                         <div class="vpanel-body-icon"><i class="far fa-edit" /></div>
                         <div class="hp-sbox-btn">Détails</div>
-                    </html>     
-                </vbox>
-                <html>
-                    <div style="height: 50px;"> </div>
-                </html> 
-                   <vbox className="hp-box">
+
+                        </html>
+                    </vbox>
                     <html>
+                    <div style="height: 50px;"> </div>
+
+                    </html>
+                    <vbox className="hp-box">
+                        <html>
                         <div class="vpanel-body-title"><i class="fas fa-cog" /><span>Transformation digitale</span></div>
                         <div class="vpanel-body-icon"><i class="fas fa-cogs" /></div>
                         <div class="hp-sbox-btn">Détails</div>
-                    </html>     
-                </vbox>    
-            </vbox>      
-        </vbox>
-            
-        
-        <html> <div style="height: 30px;"> </div> </html>            
-        
-    </screen>
-    <html>
+
+                        </html>
+                    </vbox>
+                </vbox>
+            </vbox>
+
+
+            <html>
+            <div style="height: 30px;"> </div>
+
+            </html>
+
+        </screen>
+        <html>
         <script>
-             document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("input", function () {
-                    var a, b, i;
-                    var inp = document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0];
-                    var val = inp.value;
-                    if (!val) {
-                        closeAllLists();
-                        return false;
-                    }
-                    console.log(val);
-                    currentFocus = -1;
-                    //close any already open lists of autocompleted values
+            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("input", function() {
+                var a, b, i;
+                var inp = document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0];
+                var val = inp.value;
+                if (!val) {
                     closeAllLists();
-                    restAutoComplete(inp,val,true);
-              });
-                
-                
-          document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
-                    if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x);
-          });
-          
-          
-          
+                    return false;
+                }
+                console.log(val);
+                currentFocus = -1;
+                //close any already open lists of autocompleted values
+                closeAllLists();
+                restAutoComplete(inp, val, true);
+            });
+
+
+            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function(e) {
+                var x = document.getElementById("autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                moveKey(e, x);
+            });
+
+            $(document).on("click", ".div-fsb-details .fsb-container .p", function() {
+                currentPage = 0;
+                var keyword = $(this).html();
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=" + keyword, "search", "All Karazuxresults", {});
+            });
         </script>
-    </html>
-	</view>
+
+        </html>
+    </view>
 
 
 </search>
