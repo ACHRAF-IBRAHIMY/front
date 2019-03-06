@@ -193,7 +193,11 @@ function restFullSearchList(prefix,from) {
                     currentPage=1;
                 }
             }
-            fullSearchList(result);
+            if(totalPage==0){
+                noResults();
+            }else{
+              fullSearchList(result);
+            }            
         }
     };
  //   xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
@@ -331,7 +335,10 @@ function autocompleteF(inp,arr,val,type){
         b.innerHTML=addSpansHL(val,str);
         
         /*insert a input field that will hold the current array item's value:*/
-        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+        var input = document.createElement("input");
+        input.setAttribute("type","hidden");
+        input.setAttribute("value",str);
+        b.appendChild(input);
         /*execute a function when someone clicks on the item value (DIV element):*/
         b.addEventListener("click", function(e) {
             /*insert the value for the autocomplete text field:*/
@@ -422,7 +429,8 @@ function autocomplete(inp,arr) {
         if (currentFocus < 0) currentFocus = (x.length - 1);
         /*add class "autocomplete-active":*/
         x[currentFocus].classList.add("autocomplete-active");
-        x[currentFocus].getElementsByTagName("span")[0].classList.add("span-active");
+        for(var k=0;k<x[currentFocus].getElementsByTagName("span").length;k++)
+        x[currentFocus].getElementsByTagName("span")[k].classList.add("span-active");
 
     }
 
@@ -658,27 +666,37 @@ function autocomplete(inp,arr) {
            a.appendChild(b);
        }
    }
+    
 
-    function redirectDetails(){
-    }
-
-    function highlights(request,result){
+function highlights(request,result){
         var hl ="";
+        var resultUp = result;
         var positionsBegin=[];
         var positionsEnd=[];
         var j=0;
-        var reqsplit = removeLastSpace(request).split(" ");
+        var reqsplit = removeLastSpace(request).split(" ").sort(function(a, b){return b.length - a.length;});;
+        var existreq = [];
         for(var i=0;i<reqsplit.length;i++){
-            console.log(reqsplit[i]);
-            var pos=result.indexOf(reqsplit[i]);
-            console.log(pos);
-            if(pos!=-1){
-                positionsBegin.push(pos);
-                positionsEnd.push((pos+reqsplit[i].length));
+            if(checkExistReq(reqsplit[i],existreq)===0){
+              var prefix = checkIsPrefix(reqsplit[i],existreq);
+              if(prefix===0){    
+                existreq.push(reqsplit[i]);
+                console.log(reqsplit[i]+" "+existreq);
+                var pos=result.indexOf(reqsplit[i]);    
+                var posUp = resultUp.indexOf(reqsplit[i]);
+                    if(pos!=-1){
+                        resultUp = resultUp.replace(reqsplit[i],"");
+                        positionsBegin.push(pos);
+                        positionsEnd.push((pos+reqsplit[i].length));
+                  }  
+                }
+                
+            }else if(checkExistReq(reqsplit[i],existreq)!=0){
+                
             }
         }
         return positionsBegin.sort(function(a, b) {return a - b;}).concat(positionsEnd.sort(function(a, b) {return a - b;}));
-    }
+    } 
     
     function addSpansHL(request,result){
         var hl="";
@@ -704,6 +722,30 @@ function autocomplete(inp,arr) {
         	 return removeLastSpace(request.substring(0,request.length-1));	
         }
     	return request;
+    }
+
+
+     function checkExistReq(word,tab){
+        var exist =0;
+        for(var i=0;i<tab.length;i++){    
+            if(word===tab[i]){
+                exist++;
+                console.log("exist");
+            }
+        }
+        console.log(exist);
+        return exist;
+    }
+
+    function checkIsPrefix(word,tab){
+      var exist =0;
+      for(var i=0;i<tab.length;i++){
+        if(tab[i].indexOf(word)!=-1){
+                exist++;
+                console.log("exist");
+            }
+      }
+      return exist;
     }
 
     function getObject(id){
@@ -739,6 +781,13 @@ function rempl(results){
         $(".div-fsb-details .fsb-container .c-path .p1").html(typeAG);
         $(".div-fsb-details .fsb-container .c-path .p2").html(nature);
         $(".div-fsb-details .fsb-container .c-path .p3").html(typeAt);
+}
+
+function noResults(){
+    var a = document.createElement("div");
+    a.setAttribute("style","text-align: left;width: 50;margin: auto;width: 60%;");
+    a.innerHTML="Aucune activité ne correspond aux termes de recherche spécifiés.<br/><br/>Suggestions :<br/>- Vérifiez l’orthographe des termes de recherche.<br/>- Essayez d'autres mots.<br/>- Utilisez des mots clés plus généraux.";
+    document.getElementsByClassName("full-search-list")[0].appendChild(a);
 }
 
 //modal scripts

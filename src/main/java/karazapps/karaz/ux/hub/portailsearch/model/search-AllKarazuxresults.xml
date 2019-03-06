@@ -69,7 +69,7 @@
                        </div>
                     </div>
                     <div class="hp-sbox-text">
-                        <span style="color:#f93;">23</span> résultats pour votre recherche <span style="color:#f93;">Construire école</span>. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
+                        <span style="color:#f93;">0</span> résultats pour votre recherche <span style="color:#f93;" />. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
                     </div>
                     <div style="height: 50px;" />
                 </html>    
@@ -93,19 +93,7 @@
                         <img src="img/search-move.gif" />
                     </div>
                     <div class="full-search-list">
-                        <div class="full-search-list-item hp-box">
-                            <div class="item-title">Classe 2</div>
-                            <div class="item-icon">
-                                <i class="far fa-file-image" />
-                                <i class="fas fa-cogs" />
-                            </div>
-                            <div class="item-body">
-                                <div class="c-path">Activités économiques <span>&gt;</span> Enseignement <span>&gt;</span> Etablissement enseignement professionnel</div>
-                                <div class="item-body-title"><span>École de couture</span></div>
-                                <p>Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...</p>
-                            	
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="pagination pagination-second">
                         

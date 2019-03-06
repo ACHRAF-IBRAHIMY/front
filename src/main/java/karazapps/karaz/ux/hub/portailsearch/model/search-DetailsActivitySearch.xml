@@ -234,28 +234,6 @@
         </screen>
         <html>
         <script>
-            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("input", function() {
-                var a, b, i;
-                var inp = document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0];
-                var val = inp.value;
-                if (!val) {
-                    closeAllLists();
-                    return false;
-                }
-                console.log(val);
-                currentFocus = -1;
-                //close any already open lists of autocompleted values
-                closeAllLists();
-                restAutoComplete(inp, val, true);
-            });
-
-
-            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function(e) {
-                var x = document.getElementById("autocomplete-list");
-                if (x) x = x.getElementsByTagName("div");
-                moveKey(e, x);
-            });
-
             $(document).on("click", ".div-fsb-details .fsb-container .p", function() {
                 currentPage = 0;
                 var keyword = $(this).html();
