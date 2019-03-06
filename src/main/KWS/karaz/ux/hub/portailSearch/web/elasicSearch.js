@@ -668,27 +668,29 @@ function autocomplete(inp,arr) {
    }
     
 
-       function highlights(request,result){
+function highlights(request,result){
         var hl ="";
         var resultUp = result;
         var positionsBegin=[];
         var positionsEnd=[];
         var j=0;
-        var reqsplit = removeLastSpace(request).split(" ");
+        var reqsplit = removeLastSpace(request).split(" ").sort(function(a, b){return b.length - a.length;});;
         var existreq = [];
         for(var i=0;i<reqsplit.length;i++){
             if(checkExistReq(reqsplit[i],existreq)===0){
+              var prefix = checkIsPrefix(reqsplit[i],existreq);
+              if(prefix===0){    
                 existreq.push(reqsplit[i]);
                 console.log(reqsplit[i]+" "+existreq);
                 var pos=result.indexOf(reqsplit[i]);    
                 var posUp = resultUp.indexOf(reqsplit[i]);
-                if(posUp!=-1){
                     if(pos!=-1){
                         resultUp = resultUp.replace(reqsplit[i],"");
                         positionsBegin.push(pos);
                         positionsEnd.push((pos+reqsplit[i].length));
-                    }
+                  }  
                 }
+                
             }else if(checkExistReq(reqsplit[i],existreq)!=0){
                 
             }
@@ -725,8 +727,7 @@ function autocomplete(inp,arr) {
 
      function checkExistReq(word,tab){
         var exist =0;
-        for(var i=0;i<tab.length;i++){
-            
+        for(var i=0;i<tab.length;i++){    
             if(word===tab[i]){
                 exist++;
                 console.log("exist");
@@ -736,6 +737,16 @@ function autocomplete(inp,arr) {
         return exist;
     }
 
+    function checkIsPrefix(word,tab){
+      var exist =0;
+      for(var i=0;i<tab.length;i++){
+        if(tab[i].indexOf(word)!=-1){
+                exist++;
+                console.log("exist");
+            }
+      }
+      return exist;
+    }
 
     function getObject(id){
         var xhttp = new XMLHttpRequest();
