@@ -25,6 +25,11 @@
                    var pre=$(".div-fsb-details .vpanel-title .title-2x").html();
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+pre, "search", "All Karazuxresults", {});
                 });
+                $(document).on("click", ".div-fsb-details .fsb-container .p", function() {
+                    currentPage = 0;
+                    var keyword = $(this).html().toLowerCase();
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=" + keyword, "search", "All Karazuxresults", {});
+                });
                 
             </script>
             <vbox columns="30% 70%" columns-small="auto">
@@ -233,13 +238,6 @@
 
         </screen>
         <html>
-        <script>
-            $(document).on("click", ".div-fsb-details .fsb-container .p", function() {
-                currentPage = 0;
-                var keyword = $(this).html();
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=" + keyword, "search", "All Karazuxresults", {});
-            });
-        </script>
 
         </html>
     </view>

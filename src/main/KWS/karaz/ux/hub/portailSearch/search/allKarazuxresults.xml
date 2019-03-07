@@ -21,7 +21,7 @@
            
            $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .p",function(){
                currentPage=0;
-               $(".div-full-search-bar .hp-search_field input").val($(this).html());
+               $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
                restFullSearchList($(this).html(),0);
            });
            $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .item-body-button",function(){
@@ -29,6 +29,30 @@
                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
            });
            
+             document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0];
+                    var val = inp.value.toLowerCase();
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    console.log(val);
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete(inp,val,true);
+              });
+                
+                
+          document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,1);
+          });
+          
+          
+          
            
             
         </script>
@@ -69,7 +93,7 @@
                        </div>
                     </div>
                     <div class="hp-sbox-text">
-                        <span style="color:#f93;">0</span> résultats pour votre recherche <span style="color:#f93;"></span>. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
+                        <span style="color:#f93;">0</span> résultats pour votre recherche <span style="color:#f93;" />. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
                     </div>
                     <div style="height: 50px;" />
                 </html>    
@@ -144,34 +168,7 @@
         <html> <div style="height: 30px;"> </div> </html>            
         
     </screen>
-    <html>
-        <script>
-             document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("input", function () {
-                    var a, b, i;
-                    var inp = document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0];
-                    var val = inp.value;
-                    if (!val) {
-                        closeAllLists();
-                        return false;
-                    }
-                    console.log(val);
-                    currentFocus = -1;
-                    //close any already open lists of autocompleted values
-                    closeAllLists();
-                    restAutoComplete(inp,val,true);
-              });
-                
-                
-          document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
-                    if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,1);
-          });
-          
-          
-          
-        </script>
-    </html>
+
 	</view>
 
 
