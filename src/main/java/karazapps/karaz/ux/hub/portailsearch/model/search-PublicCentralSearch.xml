@@ -28,7 +28,69 @@
       
       
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-        
+        <script postLoad="true">
+             var currentFocus;
+                
+      document.getElementsByClassName("ow-field-input")[2].addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = document.getElementsByClassName("ow-field-input")[2];
+                    var val = inp.value.toLowerCase();
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    console.log(val);
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete(inp,val,true);
+      });
+                
+                
+      document.getElementsByClassName("ow-field-input")[2].addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,0);
+      });
+                
+      document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = this;
+                    var val = inp.value.toLowerCase();
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete(inp,val,false);
+      });
+                
+                
+    document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("keydown", function (e) {
+        var x = document.getElementById("autocomplete-list");
+     if (x) x = x.getElementsByTagName("div");
+        moveKey(e,x);
+    });
+                
+    document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
+          document.getElementsByClassName("ow-field-input")[2].value=""; 
+          $(".divSearchBar").show();
+          $(".searchList").hide();
+    });
+            
+    $(".searchList .second-search-bar i.fa-eraser").click(function(){
+	  $(".searchList .second-search-bar input").val("");
+   });
+
+    $(".searchList .second-search-bar i.fa-search").click(function(){
+        getTimeCounter();
+        closeSearchList();
+        currentPage=0;
+       restSearchList($(".searchList .second-search-bar input").val(),0); 
+    });
+        </script>
         <vbox columns="30% 70%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
                 <html>
@@ -408,71 +470,5 @@
 	 
 	 
   </tasklist>
-   <html>
-       <script>
-        var currentFocus;
-                
-      document.getElementsByClassName("ow-field-input")[2].addEventListener("input", function () {
-                    var a, b, i;
-                    var inp = document.getElementsByClassName("ow-field-input")[2];
-                    var val = inp.value;
-                    if (!val) {
-                        closeAllLists();
-                        return false;
-                    }
-                    console.log(val);
-                    currentFocus = -1;
-                    //close any already open lists of autocompleted values
-                    closeAllLists();
-                    restAutoComplete(inp,val,true);
-      });
-                
-                
-      document.getElementsByClassName("ow-field-input")[2].addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
-                    if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,0);
-      });
-                
-      document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("input", function () {
-                    var a, b, i;
-                    var inp = this;
-                    var val = inp.value;
-                    if (!val) {
-                        closeAllLists();
-                        return false;
-                    }
-                    console.log(val);
-                    currentFocus = -1;
-                    //close any already open lists of autocompleted values
-                    closeAllLists();
-                    restAutoComplete(inp,val,false);
-      });
-                
-                
-      document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
-                 if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x);
-                });
-                
-      document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
-			          document.getElementsByClassName("ow-field-input")[2].value=""; 
-                      $(".divSearchBar").show();
-                      $(".searchList").hide();
-            });
-            
-    $(".searchList .second-search-bar i.fa-eraser").click(function(){
-	  $(".searchList .second-search-bar input").val("");
-   });
-
-    $(".searchList .second-search-bar i.fa-search").click(function(){
-        getTimeCounter();
-        closeSearchList();
-        currentPage=0;
-       restSearchList($(".searchList .second-search-bar input").val(),0); 
-    });    
-       </script>
-   </html>
   </view>
 </search>
