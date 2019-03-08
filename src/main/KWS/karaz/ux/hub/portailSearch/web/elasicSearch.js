@@ -1,3 +1,4 @@
+/* from file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js  */
 var currentPage = 0;
 var totalPage = 0;
 var timerID = 0;
@@ -415,7 +416,8 @@ function autocomplete(inp,arr) {
         /*a function to remove the "active" class from all autocomplete items:*/
         for (var i = 0; i < x.length; i++) {
             x[i].classList.remove("autocomplete-active");
-            x[i].getElementsByTagName("span")[0].classList.remove("span-active");
+            for(var k=0;k<x[i].getElementsByTagName("span").length;k++)
+            x[i].getElementsByTagName("span")[k].classList.remove("span-active");
         }
     }
 }
@@ -438,7 +440,8 @@ function autocomplete(inp,arr) {
         /*a function to remove the "active" class from all autocomplete items:*/
         for (var i = 0; i < x.length; i++) {
             x[i].classList.remove("autocomplete-active");
-            x[i].getElementsByTagName("span")[0].classList.remove("span-active");
+            for(var k=0;k<x[i].getElementsByTagName("span").length;k++)
+            x[i].getElementsByTagName("span")[k].classList.remove("span-active");
         }
     }
 
@@ -668,6 +671,115 @@ function autocomplete(inp,arr) {
    }
     
 
+    function highlights(request,result){
+        var hl ="";
+        var resultUp = result;
+        var positionsBegin=[];
+        var positionsEnd=[];
+        var positions = [new Array(),new Array()];  
+  
+        var j=0;
+        var reqsplit = removeLastSpace(request).split(" ").sort(function(a, b){return b.length - a.length;});
+        var existreq = [];
+  
+        for(var i=0;i<reqsplit.length;i++){
+          var word = reqsplit[i];
+          var pos = hasNext(word,result,-1);
+          while(pos!=-1){
+            if(checkPrefix(positions,pos,pos+word.length).pos===-1){
+              positions[0].push(pos);
+              positions[1].push(pos+word.length);
+              
+            }else if(checkPrefix(positions,pos,pos+word.length).type==true){
+                  var posEx = checkPrefix(positions,pos,pos+word.length).pos;
+                  positions[0][posEx]= Math.min(pos,positions[0][posEx]);
+                  positions[1][posEx]= Math.max(positions[1][posEx],pos+word.length);
+            }
+             pos = hasNext(word,result,pos);
+          }
+        }
+     return [positions[0].sort(function(a, b) {return a - b;}),positions[1].sort(function(a, b) {return a - b;})];
+    } 
+    
+      function hasNext(word,result,posNext){
+        var pos = posNext;
+        pos = result.indexOf(word,posNext+1);
+        return pos;
+      }
+
+      function checkPrefix(positions,posB,posE){
+        var pos = -1;
+        var type = null;
+        for(var i=0;i<positions[0].length;i++){
+          if((posB>=positions[0][i] & posE<=positions[1][i])){
+            pos = i;
+            type=false;
+            return {"pos":pos,"type":type};
+          }else if((posB<=positions[0][i] & posE<=positions[0][i])||(posB>=positions[1][i] & posE>=positions[1][i])){
+            pos = -1;
+            type=false;
+           return {"pos":pos,"type":type};
+          }else{
+            pos = i;
+            type=true;
+            return {"pos":pos,"type":type};
+          }
+        }
+        return {"pos":pos,"type":type};
+      }
+
+    function addSpansHL(request,result){
+        var hl="";
+        var posArray = highlights(request,result);
+        var nbrPos = posArray[0].length;
+        
+      
+            hl+=result.substring(0,posArray[0][0]);
+      for(var i=0;i<nbrPos-1;i++){
+        	hl+="<span>";
+            hl+=result.substring(posArray[0][i],posArray[1][i]);
+            hl+="</span>";
+            hl+=result.substring(posArray[1][i],posArray[0][i+1]);
+        }
+
+        hl+="<span>";
+        hl+=result.substring(posArray[0][nbrPos-1],posArray[1][nbrPos-1]);
+        hl+="</span>";
+        hl+=result.substring(posArray[1][nbrPos-1]);
+        return hl;
+    }
+    
+    function removeLastSpace(request){
+    	if(request.lastIndexOf(" ")==request.length-1){
+        	 return removeLastSpace(request.substring(0,request.length-1));	
+        }
+    	return request;
+    }
+
+
+     function checkExistReq(word,tab){
+        var exist =0;
+        for(var i=0;i<tab.length;i++){    
+            if(word===tab[i]){
+                exist++;
+            }
+        }
+        return exist;
+    }
+
+    function checkIsPrefix(word,tab){
+      var exist =0;
+      for(var i=0;i<tab.length;i++){
+        if(tab[i].indexOf(word)!=-1){
+                exist++;
+            }
+      }
+      return exist;
+    }
+
+
+
+/*
 function highlights(request,result){
         var hl ="";
         var resultUp = result;
@@ -747,6 +859,8 @@ function highlights(request,result){
       }
       return exist;
     }
+
+*/
 
     function getObject(id){
         var xhttp = new XMLHttpRequest();

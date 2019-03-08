@@ -239,7 +239,7 @@
                 
             </vbox>
             
-        <vbox className="hp-box divSearch">
+        <vbox className="hp-box hp-small divSearch">
             <vbox className="hp-box divSearchBar">
                 <html>
                     <div class="hp-sbox-big-title">
@@ -250,7 +250,7 @@
                     </div>
                     <div style="height: 50px;" />
                 </html>    
-                <vbox columns="80% 20%" columns-small="200px 50px" contentAlign="center">
+                <vbox columns="80% 20%" columns-small="80% 20%" contentAlign="center">
                     <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
                     </field>
                     <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
