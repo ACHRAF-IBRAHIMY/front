@@ -1,5 +1,5 @@
-/* from file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js  */
 var currentPage = 0;
+var currentLPage =0;
 var totalPage = 0;
 var timerID = 0;
 var msecc =0;
@@ -69,7 +69,7 @@ function check(res,elm){
 
 
 //Search results and redirect to activity model
-function restSearchList(prefix,from) {
+function restSearchList(prefix,from,prev) {
     var result = [];
     var xhttp = new XMLHttpRequest();
     $(".searchGif").show();
@@ -85,7 +85,7 @@ function restSearchList(prefix,from) {
             $(".searchGif").hide();
             if(currentPage==0){
                 totalPage = Math.ceil(res.hits.total/4);
-                createPaginationBar(totalPage,prefix,0);
+                createPaginationBar(Math.min(totalPage,10),0,prefix,1);
                 if(totalPage!=0){
                     currentPage=1;
                 }
@@ -170,7 +170,7 @@ function removeFullListSearch(){
 }
 
 //Search results and redirect to activity model
-function restFullSearchList(prefix,from) {
+function restFullSearchList(prefix,from,prev,parent) {
     var result = [];
     var xhttp = new XMLHttpRequest();
     removeFullListSearch();
@@ -189,11 +189,19 @@ function restFullSearchList(prefix,from) {
      
             if(currentPage==0){
                 totalPage = Math.ceil(res.hits.total/4);
-                createPaginationBar(totalPage,prefix,1);
+                createPaginationBar(Math.min(totalPage,10),0,prefix,1,false);
                 if(totalPage!=0){
                     currentPage=1;
+                    currentLPage=1;
                 }
+            }else if(currentPage%10==0){
+                currentLPage = (currentPage/10)+1;
+                console.log("begin: "+currentPage+"lpage: "+currentLPage);
+                createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false);
+            }else if(prev==true){
+                createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true);
             }
+            
             if(totalPage==0){
                 noResults();
             }else{
@@ -238,6 +246,29 @@ function restFullSearchList(prefix,from) {
             }
         ));
     }else{
+        if(parent==1){
+          xhttp.send(JSON.stringify(
+            {
+                "from":from,"size":4,
+                "query": {
+                    "bool": {
+                        "must": [
+                            { "multi_match": {
+                                "query": prefix,
+                                "fields": ["tags.keywordsString"],
+                                "analyzer": "rebuilt_french",
+                                "minimum_should_match": "100%"
+                            }},{
+                                "match_phrase": {
+                                    "content.categorie": {
+                                        "query": "Intitulé activité"
+                                    }
+                                }}]
+                    }
+                }
+            }
+        ));  
+        }else{
         xhttp.send(JSON.stringify(
             {
                 "from":from,"size":4,
@@ -268,6 +299,7 @@ function restFullSearchList(prefix,from) {
                 }
             }
         ));
+            }
     }
 
     return result;
@@ -288,9 +320,9 @@ function searchList(results) {
     for (var j = 0; j < results.length; j++) {
         var b = document.createElement("div");
         var intituleFr = results[j]._source.content.intituleFr;
-        var typeAc = checkUndefined(results[j]._source.parents[1]);
-        var nature = checkUndefined(results[j]._source.parents[0]);
-        var typeAt = checkUndefined(results[j]._source.parents[2]);
+        var typeAc = checkUndefined(results[j]._source.parents["Type Activité"]);
+        var nature = checkUndefined(results[j]._source.parents["Nature Activité"]);
+        var typeAt = checkUndefined(results[j]._source.parents["Type Autorisation"]);
         
         b.setAttribute("class","list-group-item result-item");
         b.innerHTML="<span class=\"titleS\">"+intituleFr+" </span><span class=\"grid-item\" style=\"{color:red;display:none}\"> Score:"+results[j]._score+"</span>";
@@ -499,7 +531,7 @@ function autocomplete(inp,arr) {
                     modal.style.display = "block";
     });
 
-    function createPaginationBar(nbrPage,prefix,type){
+    function createPaginationBar(nbrPage,begin,prefix,type,prev){
         var p = $(".pagination");
         p.html(" ");
         var a = document.createElement("a");
@@ -511,26 +543,32 @@ function autocomplete(inp,arr) {
                 });
                 p.append(a);
 
-        for(var i=0;i<nbrPage;i++){
-            if(i==0){
+        for(var i=begin;i<nbrPage;i++){
+            if(i==begin){
                 a = document.createElement("a");
-                a.innerHTML="1";
-                a.setAttribute("class","active");                
+                a.innerHTML=begin+1;
+                if(prev==false){
+                    a.setAttribute("class","active");                
+                }
                 a.addEventListener("click",function(){
                     event.preventDefault();
                     console.log("1");
-                    getPage(1,prefix,type);
+                    getPage(begin+1,prefix,type,false);
                 });
         
                 p.append(a);
             }else{
                 a = document.createElement("a");
+                if(prev==true && i==nbrPage-2){
+                  a.setAttribute("class","active");
+                }
                 var j=i+1;
                 console.log(j);
                 a.innerHTML=(j);
                 a.addEventListener("click",function(event){
-                    event.preventDefault();    
-                    getPage(this.innerHTML,prefix,type);
+                    event.preventDefault();
+                    console.log(this.innerHTML+" "+prefix+" "+type);
+                    getPage(this.innerHTML,prefix,type,false);
                 });
                 p.append(a);        
             }
@@ -541,8 +579,7 @@ function autocomplete(inp,arr) {
            event.preventDefault();
             console.log("next");
             nextPage(prefix,type);
-       });
-        
+       });        
         p.append(a);
     }
 
@@ -550,34 +587,48 @@ function autocomplete(inp,arr) {
     function nextPage(prefix,type){
         if(currentPage<totalPage){
             currentPage++;
-            getPage(currentPage,prefix,type);
+            getPage(currentPage,prefix,type,false);
         }
     }
 
     function previousPage(prefix,type){
         if(1<currentPage){
             currentPage--;
-            getPage(currentPage,prefix,type);
+            if(currentPage<((currentLPage-1)*10)){
+                getPage(currentPage,prefix,type,true);
+            }else{
+                getPage(currentPage,prefix,type,false); 
+            }
         }
+        
     }
 
-    function getPage(page,prefix,type){
+    function getPage(page,prefix,type,prev){
         currentPage=page;
         closeSearchList();
         if(type==0){
-            restSearchList(prefix,(page-1)*4); 
+            restSearchList(prefix,(page-1)*4,prev); 
             var elm = $(".searchList .pagination a");
         }else{
-            restFullSearchList(prefix,(page-1)*4);
+            restFullSearchList(prefix,(page-1)*4,prev,0);
             var elm = $(".pagination-second a");
         }
-        
+        if(prev==true){
+            currentLPage--;
+        }
         activePageBar(elm);
     }
 
     function activePageBar(elm){
         elm.removeClass("active");
-        elm.get(currentPage).setAttribute("class","active");;
+        var cpage = 0;
+        if(currentLPage==1){
+            cpage=currentPage;
+        }else{
+            cpage=currentPage-(10*(currentLPage-1))+1;
+            console.log(cpage+" "+currentLPage+" "+currentPage);
+        }
+        elm.get(cpage).setAttribute("class","active");;
     }
 
     function closeSearchList(){
@@ -618,11 +669,12 @@ function autocomplete(inp,arr) {
             console.log(msecc+"*******"+msec);
 	        timerID = setTimeout("chrono()", 10)
         }
+
     function checkUndefined(text){
         if(text == undefined){
             return "";
         }
-        return text.content.intituleFr;
+        return text;
     }
 
    function fullSearchList(results){
@@ -631,24 +683,24 @@ function autocomplete(inp,arr) {
        for(i=0;i<results.length;i++){
            var id = results[i]._id;
            var intituleFr = results[i]._source.content.intituleFr;
-           var typeAc = checkUndefined(results[i]._source.parents[1]);
-           var nature = checkUndefined(results[i]._source.parents[0]);
-           var typeAt = checkUndefined(results[i]._source.parents[2]);
+           var typeAc = checkUndefined(results[i]._source.parents["Type Activité"]);
+           var nature = checkUndefined(results[i]._source.parents["Nature Activité"]);
+           var typeAt = checkUndefined(results[i]._source.parents["Type Autorisation"]);
            var typeAG="Activités économiques";
            var b = document.createElement("div");
            b.setAttribute("class","hp-box full-search-list-item");
            
            var c = document.createElement("div");
            c.setAttribute("class","c-path");
-           c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+nature+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+typeAt+"</span>";
+           c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
            
            var d = document.createElement("div");
            d.setAttribute("class","item-body");
            
            var e = document.createElement("div");
            e.setAttribute("class","item-body-title");
-           e.innerHTML="<span>"+intituleFr+"</span>";
-           
+           e.innerHTML="<span title=\""+intituleFr+"\">"+subLong(intituleFr,60)+"</span>";
+           e.innerHTML+="<span class=\"complete-text\">"+intituleFr+"</span>";
            
            var f = document.createElement("p");
            f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
@@ -663,13 +715,23 @@ function autocomplete(inp,arr) {
            
            d.appendChild(g);
            
-           b.innerHTML="<div class=\"item-title\">"+typeAc+"</div>";
+           b.innerHTML="<div class=\"item-title\" title=\""+typeAt+"\">"+subLong(typeAt,22)+"</div>";
            b.innerHTML+="<div class=\"item-icon\"><i class=\"far fa-file-image\" /><i class=\"fas fa-cogs\" /></div>";
            b.appendChild(d);
            a.appendChild(b);
        }
    }
-    
+
+
+    function subLong(text,max){
+        if(text.length>max){
+            return text.substring(0,max-6)+"<span class=\"dot-3\">...</span>";
+        }
+        return text;
+    }
+
+
+
 
     function highlights(request,result){
         var hl ="";
@@ -701,6 +763,9 @@ function autocomplete(inp,arr) {
      return [positions[0].sort(function(a, b) {return a - b;}),positions[1].sort(function(a, b) {return a - b;})];
     } 
     
+
+
+
       function hasNext(word,result,posNext){
         var pos = posNext;
         pos = result.indexOf(word,posNext+1);
@@ -777,91 +842,6 @@ function autocomplete(inp,arr) {
       return exist;
     }
 
-
-
-/*
-function highlights(request,result){
-        var hl ="";
-        var resultUp = result;
-        var positionsBegin=[];
-        var positionsEnd=[];
-        var j=0;
-        var reqsplit = removeLastSpace(request).split(" ").sort(function(a, b){return b.length - a.length;});;
-        var existreq = [];
-        for(var i=0;i<reqsplit.length;i++){
-            if(checkExistReq(reqsplit[i],existreq)===0){
-              var prefix = checkIsPrefix(reqsplit[i],existreq);
-              if(prefix===0){    
-                existreq.push(reqsplit[i]);
-                console.log(reqsplit[i]+" "+existreq);
-                var pos=result.indexOf(reqsplit[i]);    
-                var posUp = resultUp.indexOf(reqsplit[i]);
-                    if(pos!=-1){
-                        resultUp = resultUp.replace(reqsplit[i],"");
-                        positionsBegin.push(pos);
-                        positionsEnd.push((pos+reqsplit[i].length));
-                  }  
-                }
-                
-            }else if(checkExistReq(reqsplit[i],existreq)!=0){
-                
-            }
-        }
-        return positionsBegin.sort(function(a, b) {return a - b;}).concat(positionsEnd.sort(function(a, b) {return a - b;}));
-    } 
-    
-    function addSpansHL(request,result){
-        var hl="";
-        var posArray = highlights(request,result);
-        var nbrPos = posArray.length/2;
-        hl+=result.substring(0,posArray[0]);
-        console.log(hl);
-        for(var i=0;i<nbrPos-1;i++){
-        	hl+="<span>";
-            hl+=result.substring(posArray[i],posArray[i+nbrPos]);
-            hl+="</span>";
-            hl+=result.substring(posArray[i+nbrPos],posArray[i+1]);
-        }
-        hl+="<span>";
-        hl+=result.substring(posArray[nbrPos-1],posArray[2*nbrPos-1]);
-        hl+="</span>";
-        hl+=result.substring(posArray[2*nbrPos-1]);
-        return hl;
-    }
-    
-    function removeLastSpace(request){
-    	if(request.lastIndexOf(" ")==request.length-1){
-        	 return removeLastSpace(request.substring(0,request.length-1));	
-        }
-    	return request;
-    }
-
-
-     function checkExistReq(word,tab){
-        var exist =0;
-        for(var i=0;i<tab.length;i++){    
-            if(word===tab[i]){
-                exist++;
-                console.log("exist");
-            }
-        }
-        console.log(exist);
-        return exist;
-    }
-
-    function checkIsPrefix(word,tab){
-      var exist =0;
-      for(var i=0;i<tab.length;i++){
-        if(tab[i].indexOf(word)!=-1){
-                exist++;
-                console.log("exist");
-            }
-      }
-      return exist;
-    }
-
-*/
-
     function getObject(id){
         var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -885,9 +865,9 @@ function highlights(request,result){
 function rempl(results){
         var id = results._id;
         var intituleFr = results._source.content.intituleFr;
-        var typeAc = checkUndefined(results._source.parents[1]);
-        var nature = checkUndefined(results._source.parents[0]);
-        var typeAt = checkUndefined(results._source.parents[2]);
+        var typeAc = checkUndefined(results._source.parents["Type Activité"]);
+        var nature = checkUndefined(results._source.parents["Nature Activité"]);
+        var typeAt = checkUndefined(results._source.parents["Type Autorisation"]);
         var typeAG="Activités économiques";
         
         $(".div-fsb-details .vpanel-title .title-2x").html(intituleFr);
@@ -903,5 +883,3 @@ function noResults(){
     a.innerHTML="Aucune activité ne correspond aux termes de recherche spécifiés.<br/><br/>Suggestions :<br/>- Vérifiez l’orthographe des termes de recherche.<br/>- Essayez d'autres mots.<br/>- Utilisez des mots clés plus généraux.";
     document.getElementsByClassName("full-search-list")[0].appendChild(a);
 }
-
-//modal scripts

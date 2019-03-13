@@ -1,6 +1,5 @@
 /* from css file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/DashboardSearch.css  */
-
- 
+  
 .dashboardsearch_icone:before{
 	position: relative;
 	font-family: FontAwesome !important;
@@ -312,10 +311,23 @@
 }
 
 .full-search-list-item{
+    position: relative;
     height: 173px !important;
     font-size: 12px;
     display: grid !important;
     grid-template-columns: 0% 30% 70%;
+}
+
+.full-search-list-item .complete-text{
+    position: absolute;
+    border: 1px solid black;
+    font-size: 15px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    background: #f6f6f6;
+    right: 0px;
+    bottom: 30px;
+    display:none;
 }
 
 .full-search-list-item .item-title{  
@@ -361,6 +373,7 @@
     font-size: 20px;
     color: #666;
     margin-top: 7px;
+    position: relative;
 }
 
 .full-search-list-item .item-body p{
@@ -368,8 +381,10 @@
 }
 
 .full-search-list-item .item-body .item-body-button{
-    float: right;
     border: none;
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
     margin-left: 0 !important;
     margin-top:0 !important;
     margin-right: 40px !important;
