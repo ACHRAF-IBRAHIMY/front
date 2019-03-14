@@ -256,7 +256,7 @@
                     <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
                             prefix= $(".hp-search_field input").val();
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix, "search", "All Karazuxresults", {});
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
                              /*getTimeCounter();
                                $(".divSearchBar").hide();
                                 closeSearchList();
