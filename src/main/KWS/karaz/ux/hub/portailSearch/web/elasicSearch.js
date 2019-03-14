@@ -7,6 +7,7 @@ var startTime = 0
 var start = 0;
 var end = 0;
 var diff = 0;
+var p=0;
 
 
 function restAutoComplete(inp,prefix,type){
@@ -98,25 +99,23 @@ function restSearchList(prefix,from,prev) {
     xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var testLanguage = RegExp('[أ-ي]');
-    if(testLanguage.test(prefix)){
-        xhttp.send(JSON.stringify(
-            {
-                "from":from,"size":4,
-                "query": {
-                    "bool": {
-                        "must": [
+    var objectJson = {
+            "from":from,"size":4,
+            "query": {
+                "bool": {
+                    "must": [
                             { "multi_match": {
-                                "query": prefix,
-                                "fields": ["tags.keywordsString"],
-                                "analyzer": "rebuilt_arabic",
-                                "fuzziness": "AUTO",
-                                "minimum_should_match": "70%"
-                            }},{
-                                "match_phrase": {
-                                    "content.categorie": {
-                                        "query": "Intitulé activité"
-                                    }
-                                }}
+                            "query": prefix,
+                            "fields": ["tags.keywordsString"],
+                            "analyzer": "rebuilt_arabic",
+                            "fuzziness": "AUTO",
+                            "minimum_should_match": "70%"
+                        }},{
+                            "match_phrase": {
+                            "content.categorie": {
+                            "query": "Intitulé activité"
+                            }
+                        }}
                         ],
                         "should": [
                             {
@@ -127,8 +126,9 @@ function restSearchList(prefix,from,prev) {
                         ]
                     }
                 }
-            }
-        ));
+            };
+    if(testLanguage.test(prefix)){  
+        xhttp.send(JSON.stringify(objectJson));
     }else{
         xhttp.send(JSON.stringify(
             {
@@ -246,60 +246,76 @@ function restFullSearchList(prefix,from,prev,parent) {
             }
         ));
     }else{
+        var objectJson = {
+                    "from":from,"size":4,
+                    "query": {
+                        "bool": {
+                            "must": [
+                                { "multi_match": {
+                                    "query": prefix,
+                                    "fields": ["tags.keywordsString"],
+                                    "analyzer": "rebuilt_french",
+                                    "minimum_should_match": "100%"
+                                }},{
+                                    "match_phrase": {
+                                        "content.categorie": {
+                                            "query": "Intitulé activité"
+                                        }
+                                    }}]
+                        }
+                    }
+                };
+        p=parent;
+        console.log(p);
         if(parent==1){
-          xhttp.send(JSON.stringify(
-            {
-                "from":from,"size":4,
-                "query": {
-                    "bool": {
-                        "must": [
-                            { "multi_match": {
-                                "query": prefix,
-                                "fields": ["tags.keywordsString"],
-                                "analyzer": "rebuilt_french",
-                                "minimum_should_match": "100%"
-                            }},{
-                                "match_phrase": {
-                                    "content.categorie": {
-                                        "query": "Intitulé activité"
-                                    }
-                                }}]
-                    }
-                }
-            }
-        ));  
+            xhttp.send(JSON.stringify(objectJson));  
+        }else if(parent==2){
+            objectJson.query.bool.must[0].multi_match.fields=["parents.TypeActivité"];  
+            delete objectJson.query.bool.must[0].multi_match.analyzer;
+            console.log(JSON.stringify(objectJson));
+            xhttp.send(JSON.stringify(objectJson));  
+        }else if(parent==3){
+            objectJson.query.bool.must[0].multi_match.fields=["parents.NatureActivité"]; 
+            delete objectJson.query.bool.must[0].multi_match.analyzer;
+            console.log(objectJson);
+            xhttp.send(JSON.stringify(objectJson));  
+        }else if(parent==4){
+            objectJson.query.bool.must[0].multi_match.fields=["parents.TypeAutorisation"];  
+            delete objectJson.query.bool.must[0].multi_match.analyzer;
+            console.log(objectJson);
+            xhttp.send(JSON.stringify(objectJson));
         }else{
-        xhttp.send(JSON.stringify(
-            {
-                "from":from,"size":4,
-                "query": {
-                    "bool": {
-                        "must": [
-                            { "multi_match": {
-                                "query": prefix,
-                                "fields": ["tags.keywordsString"],
-                                "analyzer": "rebuilt_french",
-                                "fuzziness": "AUTO",
-                                "minimum_should_match": "70%"
-                            }},{
-                                "match_phrase": {
-                                    "content.categorie": {
-                                        "query": "Intitulé activité"
+            xhttp.send(JSON.stringify(
+                {
+                    "from":from,"size":4,
+                    "query": {
+                        "bool": {
+                            "must": [
+                                { "multi_match": {
+                                    "query": prefix,
+                                    "fields": ["tags.keywordsString"],
+                                    "analyzer": "rebuilt_french",
+                                    "fuzziness": "AUTO",
+                                    "minimum_should_match": "70%"
+                                }},{
+                                    "match_phrase": {
+                                        "content.categorie": {
+                                            "query": "Intitulé activité"
+                                        }
+                                    }}
+                            ],
+                            "should": [
+                                {
+                                    "match": {
+                                        "content.intituleFr": prefix
                                     }
-                                }}
-                        ],
-                        "should": [
-                            {
-                                "match": {
-                                    "content.intituleFr": prefix
                                 }
-                            }
-                        ]
+                            ]
+                        }
                     }
                 }
-            }
-        ));
-            }
+            ));
+        }
     }
 
     return result;
@@ -320,9 +336,9 @@ function searchList(results) {
     for (var j = 0; j < results.length; j++) {
         var b = document.createElement("div");
         var intituleFr = results[j]._source.content.intituleFr;
-        var typeAc = checkUndefined(results[j]._source.parents["Type Activité"]);
-        var nature = checkUndefined(results[j]._source.parents["Nature Activité"]);
-        var typeAt = checkUndefined(results[j]._source.parents["Type Autorisation"]);
+        var typeAc = checkUndefined(results[j]._source.parents["TypeActivité"]);
+        var nature = checkUndefined(results[j]._source.parents["NatureActivité"]);
+        var typeAt = checkUndefined(results[j]._source.parents["TypeAutorisation"]);
         
         b.setAttribute("class","list-group-item result-item");
         b.innerHTML="<span class=\"titleS\">"+intituleFr+" </span><span class=\"grid-item\" style=\"{color:red;display:none}\"> Score:"+results[j]._score+"</span>";
@@ -610,7 +626,7 @@ function autocomplete(inp,arr) {
             restSearchList(prefix,(page-1)*4,prev); 
             var elm = $(".searchList .pagination a");
         }else{
-            restFullSearchList(prefix,(page-1)*4,prev,0);
+            restFullSearchList(prefix,(page-1)*4,prev,p);
             var elm = $(".pagination-second a");
         }
         if(prev==true){
@@ -683,9 +699,9 @@ function autocomplete(inp,arr) {
        for(i=0;i<results.length;i++){
            var id = results[i]._id;
            var intituleFr = results[i]._source.content.intituleFr;
-           var typeAc = checkUndefined(results[i]._source.parents["Type Activité"]);
-           var nature = checkUndefined(results[i]._source.parents["Nature Activité"]);
-           var typeAt = checkUndefined(results[i]._source.parents["Type Autorisation"]);
+           var typeAc = checkUndefined(results[i]._source.parents["TypeActivité"]);
+           var nature = checkUndefined(results[i]._source.parents["NatureActivité"]);
+           var typeAt = checkUndefined(results[i]._source.parents["TypeAutorisation"]);
            var typeAG="Activités économiques";
            var b = document.createElement("div");
            b.setAttribute("class","hp-box full-search-list-item");
@@ -865,16 +881,16 @@ function autocomplete(inp,arr) {
 function rempl(results){
         var id = results._id;
         var intituleFr = results._source.content.intituleFr;
-        var typeAc = checkUndefined(results._source.parents["Type Activité"]);
-        var nature = checkUndefined(results._source.parents["Nature Activité"]);
-        var typeAt = checkUndefined(results._source.parents["Type Autorisation"]);
+        var typeAc = checkUndefined(results._source.parents["TypeActivité"]);
+        var nature = checkUndefined(results._source.parents["NatureActivité"]);
+        var typeAt = checkUndefined(results._source.parents["TypeAutorisation"]);
         var typeAG="Activités économiques";
         
         $(".div-fsb-details .vpanel-title .title-2x").html(intituleFr);
         $(".div-fsb-details .details-body .title-4x").html(intituleFr);
         $(".div-fsb-details .fsb-container .c-path .p1").html(typeAG);
-        $(".div-fsb-details .fsb-container .c-path .p2").html(nature);
-        $(".div-fsb-details .fsb-container .c-path .p3").html(typeAt);
+        $(".div-fsb-details .fsb-container .c-path .p2").html(typeAc);
+        $(".div-fsb-details .fsb-container .c-path .p3").html(nature);
 }
 
 function noResults(){

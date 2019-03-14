@@ -7,6 +7,7 @@
 		<query>
 			<search />
             <idObject />
+            <parentP />
 		</query>
 		<collapsed>false</collapsed>
 	</data>
@@ -22,11 +23,15 @@
            $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .p",function(){
                currentPage=0;
                $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
-               if($(this).attr("class").split(' ')[1]==="p1"){
-                   restFullSearchList($(this).html(),0,false,0);
-               }else{
+                if($(this).attr("class").split(' ')[1]==="p1"){
+                    restFullSearchList($(this).html(),0,false,0);
+                }else if($(this).attr("class").split(' ')[1]==="p2"){
+                    restFullSearchList($(this).html(),0,false,2);
+                }else if($(this).attr("class").split(' ')[1]==="p3"){
+                    restFullSearchList($(this).html(),0,false,3);
+                }else{
                    restFullSearchList($(this).html(),0,false,1);
-               }
+                }
            });
            
            $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .item-body-button",function(){
@@ -104,7 +109,12 @@
                         <postChange>
                                 var prefix = $(".div-full-search-bar .hp-search_field input").val();
                                 currentPage=0;
-                                restFullSearchList(prefix,0,0);
+                                var pp=root.query.parentP;
+                                if(pp==1){
+                                    pp=0;
+                                }
+                                restFullSearchList(prefix,0,pp);
+                                root.query.parentP=0;
                          </postChange>
                     </button>
                 </vbox>
