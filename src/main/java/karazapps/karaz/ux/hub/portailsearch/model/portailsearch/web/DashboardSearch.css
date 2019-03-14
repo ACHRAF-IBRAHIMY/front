@@ -595,3 +595,37 @@
         height: auto !important;
     }  
 }
+
+
+
+.header-menu{
+    margin-left: 14%;
+    display: flex;
+    color: #666;
+    margin-top: 11px;
+    margin-right: 7%;
+    justify-content: space-around;
+    font-size: 14px;
+}
+
+.header-menu button{
+    border: none;
+    color: inherit !important;
+    background: none !important;
+    font-size: 14px !important;
+}
+
+
+.header-menu button span.ow-btn-icon{
+    font-size: 18px !important;
+}
+
+
+.header-menu button:hover{
+    color: #38a !important;
+}
+
+
+.header-menu button span{
+    font-size: 14px !important;
+}
