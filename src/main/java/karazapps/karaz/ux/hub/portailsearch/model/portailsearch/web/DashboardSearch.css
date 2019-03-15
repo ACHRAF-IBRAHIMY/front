@@ -267,7 +267,6 @@
 }
 
 /* from css file karazapps/karaz_ux_results/karazuxresults/model/karazuxresults/web/Karazuxresults.css  */
-
 .vpanel-title{
     text-align: left;
     margin-bottom: 30px;
@@ -340,6 +339,7 @@
     top: 55px;
     right: 97px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .full-search-list-item .item-icon{
@@ -629,3 +629,29 @@
 .header-menu button span{
     font-size: 14px !important;
 }
+
+
+.stat-dashbord{
+    height: 1000px !important;
+}
+
+
+.stat-dashbord .stat{
+    padding: 0px 60px;
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+
+.stat-dashbord .stat i{
+    font-size: 60px;
+}
+
+.stat-dashbord .stat span{
+   font-size: 23px;
+    display: block;
+}
+
+.stat-dashbord .stat-div{
+    height: 100px;
+} 
