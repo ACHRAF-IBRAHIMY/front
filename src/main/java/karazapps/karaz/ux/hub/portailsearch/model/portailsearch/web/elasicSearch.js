@@ -1,3 +1,4 @@
+/* from file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js  */
 var currentPage = 0;
 var currentLPage =0;
 var totalPage = 0;
@@ -579,7 +580,6 @@ function autocomplete(inp,arr) {
                   a.setAttribute("class","active");
                 }
                 var j=i+1;
-                console.log(j);
                 a.innerHTML=(j);
                 a.addEventListener("click",function(event){
                     event.preventDefault();
@@ -708,7 +708,24 @@ function autocomplete(inp,arr) {
            
            var c = document.createElement("div");
            c.setAttribute("class","c-path");
-           c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
+          // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
+           
+           
+           var s = document.createElement("span");
+           s.setAttribute("class","cl-orange");
+           s.innerHTML=" > ";
+           c.appendChild(addEventSpan("p1",typeAG));
+           c.appendChild(s);
+           // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+           c.appendChild(addEventSpan("p2",typeAc));
+           s = document.createElement("span");
+           s.setAttribute("class","cl-orange");
+           s.innerHTML=" > ";
+           c.appendChild(s);
+           // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+           c.appendChild(addEventSpan("p3",nature));
+           
+           
            
            var d = document.createElement("div");
            d.setAttribute("class","item-body");
@@ -726,13 +743,31 @@ function autocomplete(inp,arr) {
            d.appendChild(f);
            
            var g = document.createElement("button");
+           g.addEventListener("click",function(){
+               var id=$(this).children("input").val();
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+
+           });
            g.setAttribute("class","item-body-button hp-sbox-btn");
            g.innerHTML="Détails<input type=\"hidden\" value=\""+id+"\" > ";
            
            d.appendChild(g);
            
-           b.innerHTML="<div class=\"item-title\" title=\""+typeAt+"\">"+subLong(typeAt,22)+"</div>";
-           b.innerHTML+="<div class=\"item-icon\"><i class=\"far fa-file-image\" /><i class=\"fas fa-cogs\" /></div>";
+           var title = document.createElement("div");
+           title.setAttribute("class","item-title");
+           title.setAttribute("title",typeAt);
+           title.innerHTML=subLong(typeAt);
+           title.addEventListener("click",function(){
+               currentPage=0;
+               $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
+               restFullSearchList($(this).html(),0,false,4);
+           });
+           b.appendChild(title);
+           
+           var icons = document.createElement("div");
+           icons.setAttribute("class","item-icon");
+           icons.innerHTML="<i class=\"far fa-file-image\" /><i class=\"fas fa-cogs\" />";
+           b.appendChild(icons);
            b.appendChild(d);
            a.appendChild(b);
        }
@@ -746,7 +781,25 @@ function autocomplete(inp,arr) {
         return text;
     }
 
-
+    function addEventSpan(spanClass,text){
+        var span = document.createElement("span");
+        span.setAttribute("class","p "+spanClass);
+        span.addEventListener("click",function(){
+            currentPage=0;
+           $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
+                if($(this).attr("class").split(' ')[1]==="p1"){
+                    restFullSearchList($(this).html(),0,false,0);
+                }else if($(this).attr("class").split(' ')[1]==="p2"){
+                    restFullSearchList($(this).html(),0,false,2);
+                }else if($(this).attr("class").split(' ')[1]==="p3"){
+                    restFullSearchList($(this).html(),0,false,3);
+                }else{
+                   restFullSearchList($(this).html(),0,false,1);
+                } 
+        });
+        span.innerHTML=text;
+        return span;
+    }
 
 
     function highlights(request,result){

@@ -25,7 +25,8 @@
                    var pre=$(".div-fsb-details .vpanel-title .title-2x").html();
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+pre+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
                 });
-                $(document).on("click", ".div-fsb-details .fsb-container .p", function() {
+                
+                $(".div-fsb-details .fsb-container .p").click(function() {
                     currentPage = 0;
                     var keyword = $(this).html().toLowerCase();
                     var parentP = parseInt($(this).attr("class").split(' ')[1].replace( /^\D+/g, ''));

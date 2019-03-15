@@ -20,7 +20,7 @@
           });
            $(".searchbuttun").click();
            
-           $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .p",function(){
+           $(".div-full-search-bar .full-search-list .full-search-list-item .p").click(function(){
                currentPage=0;
                $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
                 if($(this).attr("class").split(' ')[1]==="p1"){
@@ -34,7 +34,7 @@
                 }
            });
            
-           $(document).on("click",".div-full-search-bar .full-search-list .full-search-list-item .item-body-button",function(){
+           $(".div-full-search-bar .full-search-list .full-search-list-item .item-body-button").click(function(){
                 var id= $(this).children("input").val(); 
                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
            });
