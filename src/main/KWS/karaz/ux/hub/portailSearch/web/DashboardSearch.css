@@ -632,19 +632,22 @@
 
 
 .stat-dashbord{
-    height: 1000px !important;
 }
 
+.stat-dashbord .hp-box{
+    margin: 10px 0.5rem;
+}
 
 .stat-dashbord .stat{
-    padding: 0px 60px;
+    padding: 20px 20px;
     display: grid;
     grid-template-columns: 40% 60%;
 }
 
 
 .stat-dashbord .stat i{
-    font-size: 60px;
+    font-size: 58px;
+    padding: 7px;
 }
 
 .stat-dashbord .stat span{
@@ -653,5 +656,52 @@
 }
 
 .stat-dashbord .stat-div{
-    height: 100px;
+}
+
+.dashbord-right .d1 h1,.dashbord-right .d2 h1{
+    margin: 25px 0 35px 0;
+}
+
+.dashbord-right .d2 .exist-word-list-item{
+    grid-template-columns: 50% 30% 20%;
+    display: grid;
+    text-align: left;
 } 
+
+
+.dashbord-right .d2 .div{
+    width: 80%;
+    margin: auto;
+    overflow: auto;
+    max-height: 500px;
+    margin-top: 55px;
+}
+
+.dashbord-right .d2 .word-list{
+    
+}
+.dashbord-right .d2 .word-list-det{
+    display: none;
+}
+
+.dashbord-right .d2 .word-list-det div{
+    text-align: left;
+}
+
+.dashbord-right .d2 .word-list-det .back-div span{
+    text-align: right !important;
+    color: #38a;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.dashbord-right .d2 .word-list-det .back-div span:hover{
+    color: #777;
+    transition: .5s;
+}
+
+.stat-dashbord .dashbord-right .d2 .word-list-det .div-d2 ul li span{
+    color: #888;
+    font-weight: 600 !important;
+}

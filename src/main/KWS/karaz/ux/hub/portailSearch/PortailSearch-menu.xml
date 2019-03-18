@@ -11,6 +11,9 @@
       <menu relId="DetailsActivitySearch" label="Elastic search det" icone="search" xcstt="x">
         <resource type="search">karaz/ux/hub/portailsearch/search/DetailsActivitySearch</resource>
       </menu>
+      <menu relId="OpinionTextMining" label="Opinion TextMining" icone="search" xcstt="x">
+        <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextMining</resource>
+      </menu>
     </menu>
   </menu>
 </menus>
