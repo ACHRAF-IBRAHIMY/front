@@ -11,9 +11,10 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-         
+             document.getElementsByClassName("back-div")[0].getElementsByTagName("span")[0].addEventListener("click",function(){
+                    removeWordDet();
+               });
                 ESCall();
-                 
         </script>
         
         <vbox columns="30% 70%" columns-small="auto">
@@ -77,15 +78,15 @@
             <div style="height: 30px;"> </div>
         </html>        
            
-        <vbox columns="100%" className="stat-dashbord hp-box">
+        <vbox columns="100%" className="stat-dashbord">
             <vbox columns="18% 82%">
-                <vbox className="dashbord-left" columns="100%">
+                <vbox className="dashbord-left hp-box" columns="100%">
                     
                 </vbox>
                 <vbox columns="100%">
-                    <vbox columns="30% 30% 30%" className="stat-div">
+                    <vbox columns="33% 34% 33%" className="stat-div">
                         <html>
-                            <div class="stat ow-vbox">
+                            <div class="stat ow-vbox hp-box">
                                 <i class="fas fa-file-alt" />
                                 <div>
                                     <span>7800</span>
@@ -94,7 +95,7 @@
                             </div>
                         </html>
                         <html>
-                            <div class="stat ow-vbox">
+                            <div class="stat ow-vbox hp-box">
                                 <i class="fas fa-comment-alt" />
                                 <div>
                                     <span>3000</span>
@@ -103,7 +104,7 @@
                             </div>
                         </html>
                         <html>
-                            <div class="stat ow-vbox">
+                            <div class="stat ow-vbox hp-box">
                                 <i class="fas fa-users" />
                                 <div>
                                     <span>50</span>
@@ -112,15 +113,46 @@
                             </div>
                         </html>
                     </vbox>
-                    <vbox columns="50% 50%">
-                        <vbox columns="100%">
+                    <vbox columns="50% 50%" className="dashbord-right">
+                        <vbox columns="100%" className="hp-box d1">
+                        
                         <html>
+                        <h1>Occurrence des mots dans l'index</h1>
                         <canvas id="myChart" width="400" height="400" />
                             
                         </html>
             
                         </vbox>
-                        <vbox columns="100%" />
+                                  
+                                 
+                        <vbox columns="100%" className="hp-box d2">
+                            <html className="word-list">
+                                <h1>Liste des mots existés</h1>
+                                <div class="div">
+                                    <div class="exist-word-list">
+                                        
+                                    </div>
+                                </div>
+                            </html>
+                            <html className="word-list-det">
+                                <h1>Mot <b /></h1>
+                                <div class="div">
+                                    <div class="div-d1">
+                                        <h4>Les mots dérivés :</h4>
+                                        <div class="div-d1-det" />
+                                    </div>
+                                    <div class="div-d2">
+                                        <h4>Remarques :</h4>
+                                        <ul>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="back-div">
+                                    <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
+                                </div>
+                            </html>
+                        </vbox>
                     </vbox>
                 </vbox>
             </vbox>
