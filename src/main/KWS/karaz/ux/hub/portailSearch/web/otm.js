@@ -13,10 +13,13 @@ function ESCall() {
     };
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:9200/index_classification_test/avis/_search",
+    	type:"post",
+    	url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
         data: JSON.stringify(obj),
         success: function (result) {
             console.log(result);
@@ -143,9 +146,12 @@ function getDetWordKeyLoad(word) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:9200/index_classification_test/avis/_search",
+        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
         data: JSON.stringify(obj),
         success: function (result) {
             getDetWordKey(result, word);
