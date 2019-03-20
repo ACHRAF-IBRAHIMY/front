@@ -705,3 +705,31 @@
     color: #888;
     font-weight: 600 !important;
 }
+
+.main-icon-title{
+    width: 80%;
+    height: 140px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 100%;
+    padding: 20px 30px;
+    border: 1px solid #d0d0d0;
+    cursor: pointer;
+}
+
+.main-icon-title:hover{
+    background-color: #f3f3f3;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.34);
+}
+
+.main-icon-title i{
+    color: #38a;
+    font-size: 40px;
+}
+
+.main-icon-title span{
+    margin-top: 13px;
+    color: #333;
+    font-size: 17px;
+}
+

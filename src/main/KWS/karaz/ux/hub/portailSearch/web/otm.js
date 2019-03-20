@@ -6,7 +6,7 @@ function ESCall() {
             "genres": {
                 "terms": {
                     "field": "Avis",
-                    "size": 12
+                    "size": 20
                 }
             }
         }
@@ -75,6 +75,8 @@ function loaded(data, labels) {
                     ticks: {
                         beginAtZero: true
                     }
+                }],xAxes: [{
+                    display: false
                 }]
             }
         }
