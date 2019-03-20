@@ -292,43 +292,35 @@
                     <div style="height: 70px;"> </div>
                 </html>        
                 
-                <vbox columns="50% 50%">
-                    <vbox>
-                        <vbox columns="20% 80%">
-                            <html>
-                                <div class="hp-sbox-icon fas fa-building" />
-                            </html>
-                            <html>
-                                <div class="hp-sbox-small-title">Autorisations urbanistiques</div>
-                                <div style="height: 10px;"> </div>
-                                <div class="hp-sbox-text">
-                                    Permis de construction, modification, élevation, lotissement, permis d'habiter, copie-conforme au plan autorisé, réceptions, ...
-                                </div>
-                                <div style="height: 15px;"> </div>                                
-                                <div class="hp-sbox-btn">Accéder</div>
-                            </html>
-                        </vbox>
+                    <vbox columns="25% 25% 25% 25%">
+                       <html>
+                           <div class="main-icon-title">
+                                <i class="fas fa-check-square" />
+                                <span>Acceptabilité projets</span>
+                           </div>
+                       </html>
+                        <html>
+                           <div class="main-icon-title">
+                            <i class="fas fa-map-marker-alt" />
+                            <span>Accès au foncier</span>
+                           </div>
+                       </html>
+                          <html>
+                           <div class="main-icon-title">
+                                <i class="far fa-building" />
+                                <span>Autorisations urbanistiques</span>
+                           </div>
+                       </html>
+                        <html>
+                           <div class="main-icon-title">
+                                <i class="fas fa-cog" />
+                                <span>Autorisations économiques</span>
+                           </div>
+                       </html>
+                        
                     </vbox>
                     
-                    <vbox>
-                        <vbox columns="20% 80%">
-                            <html>
-                                <div class="hp-sbox-icon fas fa-cogs" />
-                            </html>
-                            <html>
-                                <div class="hp-sbox-small-title">Autorisations économiques</div>
-                                <div style="height: 10px;"> </div>
-                                <div class="hp-sbox-text">
-                                    Déclaration des activités non classées et autorisations des établissements classés en 2ème et 3ème catégorie.
-                                </div>
-                                <div style="height: 15px;"> </div>                                
-                                <div class="hp-sbox-btn">Accéder</div>
-                            </html>
-                        </vbox>
-                    </vbox>                                    
-                    
                 </vbox>
-                        </vbox>
 
             <html>
             <div class="searchList">

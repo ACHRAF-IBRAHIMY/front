@@ -677,31 +677,118 @@
     margin-top: 55px;
 }
 
-.dashbord-right .d2 .word-list{
-    
+.dashbord-right .d2 .word-list-load-gif{
+    margin-top: 25%;
 }
+
+.dashbord-right .d2 .word-list{
+    display: none;
+}
+
 .dashbord-right .d2 .word-list-det{
     display: none;
 }
+
+.dashbord-right .d2 .word-list-text-avis{
+    display: none;
+}
+
 
 .dashbord-right .d2 .word-list-det div{
     text-align: left;
 }
 
-.dashbord-right .d2 .word-list-det .back-div span{
-    text-align: right !important;
-    color: #38a;
-    cursor: pointer;
-    margin-top: 20px;
-    font-size: 16px;
-}
 
-.dashbord-right .d2 .word-list-det .back-div span:hover{
-    color: #777;
-    transition: .5s;
-}
 
-.stat-dashbord .dashbord-right .d2 .word-list-det .div-d2 ul li span{
+
+
+.stat-dashbord .dashbord-right .d2 .word-list-det .div-d2 .note-div-items span{
     color: #888;
     font-weight: 600 !important;
+}
+
+.main-icon-title{
+    width: 80%;
+    height: 140px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 100%;
+    padding: 20px 30px;
+    border: 1px solid #d0d0d0;
+    cursor: pointer;
+}
+
+.main-icon-title:hover{
+    background-color: #f3f3f3;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.34);
+}
+
+.main-icon-title i{
+    color: #38a;
+    font-size: 40px;
+}
+
+.main-icon-title span{
+    margin-top: 13px;
+    color: #333;
+    font-size: 17px;
+}
+
+.exist-word-list-item span{
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 5px 14px;
+    border-radius: 0px;
+}
+
+
+.stat-dashbord .dashbord-right .d2  .tab {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.stat-dashbord .dashbord-right .d2  .tab td, .stat-dashbord .dashbord-right .d2  .tab th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.stat-dashbord .dashbord-right .d2  .tab tr:nth-child(even){background-color: #f2f2f2;}
+
+
+.stat-dashbord .dashbord-right .d2  .tab th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.stat-dashbord .dashbord-right .d2 .rac{
+    border: 1px solid #ccc;
+    background-color: beige;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-right: 3px;
+}
+
+.back-div {
+    width: 210px;
+    margin: auto;
+    text-align: center !important;
+    background-color: #38a;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-top: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    border:1px solid #38a; 
+}
+
+
+.back-div:hover{
+    background: white;
+    color: #38a;
+    transition: .3s;
 }
