@@ -170,9 +170,10 @@ function getDetWordKeyLoad(word) {
 }
 
 function getDetWordKey(result, word) {
-    $(".stat-dashbord .dashbord-right .d2 .word-list-det h1 b").html(word);
+    $(".stat-dashbord .dashbord-right .d2 .word-list-det .vpanel-title span.cl-orange").html(word);
     var a = filtering(result);
     var hl = result.hits.hits;
+    
     for(var i=0;i<Math.min(5,a.length);i++){
         var sp = document.createElement("span");
         sp.setAttribute("class","rac");
@@ -194,10 +195,12 @@ function getDetWordKey(result, word) {
         td1.innerHTML=span;
         var td2 = document.createElement("td");
         td2.innerHTML="<i class=\"far fa-file-alt\"></i>";
+        td2.innerHTML+="<input type=\"hidden\" value=\""+hl[j]._id+"\">";
         td2.setAttribute("style","cursor:pointer");
         
         td2.addEventListener("click",function(){
-            
+            //alert(this.parentElement.getElementsByTagName("input")[0].value);
+            getAvis(this.parentElement.getElementsByTagName("input")[0].value,word);
         });
         
         tr.appendChild(td1);
@@ -221,11 +224,11 @@ function loadDiv(div,key){
                 $(".dashbord-right .d2 .word-list-load-gif").hide();
                 $(".dashbord-right .d2 .word-list").show();
                 break;            
-        case 2: if(key!=null)getDetWordKey(key.result, key.word);
+        case 2: getDetWordKey(key.result, key.word);
                 $(".dashbord-right .d2 .word-list-load-gif").hide();
                 $(".dashbord-right .d2 .word-list-det").show();
                 break;
-        case 3: getTextAvis(key.avis,key.membre);
+        case 3: getTextAvis(key.avis,key.membre,key.key);
                 $(".dashbord-right .d2 .word-list-load-gif").hide();
                 $(".dashbord-right .d2 .word-list-text-avis").show();
                 break;   
@@ -233,8 +236,10 @@ function loadDiv(div,key){
 }
 
 
-function getTextAvis(avis,membre){
-    
+function getTextAvis(avis,membre,key){
+    $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-membre span").html(membre);
+    $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-avis p").html(avis);
+    $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html(key);
 }
 
 
@@ -342,7 +347,7 @@ function searchBefAft(pos,arr,vr){
 }
 
 
-function getAvis(id) {
+function getAvis(id,key) {
     callLoadGif();
     $.ajax({
     	url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/"+id,
@@ -355,7 +360,8 @@ function getAvis(id) {
             console.log(result);
             var res = {
                 "avis":result._source.Avis,
-                "membre":result.source.MEMBRE
+                "membre":result._source.MEMBRE,
+                "key":key
             }
             loadDiv(3,res);
         },
@@ -364,3 +370,5 @@ function getAvis(id) {
         }
     });
 }
+
+

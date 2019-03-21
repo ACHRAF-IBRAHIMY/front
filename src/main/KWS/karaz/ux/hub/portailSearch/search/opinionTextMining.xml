@@ -15,6 +15,54 @@
                     callLoadGif();
                     loadDiv(1,null);
                });
+               
+               $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .back-span").click(function(){
+                  getDetWordKeyLoad($(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html()); 
+               });
+               
+               $(".stat-dashbord .dashbord-right .search-box button.b").click(function(){
+                   $(".stat-dashbord .dashbord-right .search-box button.b").removeClass("active");
+                   $(this).addClass("active");
+               });
+               
+               $(".stat-dashbord .dashbord-right .search-box button.fa-search").click(function(){
+                   
+                   if($(".stat-dashbord .dashbord-right .search-box button.b1").hasClass("active")){
+                       getDetWordKeyLoad($(".stat-dashbord .dashbord-right .search-box input").val());
+                   }else{
+                       alert("MLT not working yet...");
+                   }
+            
+               });
+               
+               $(".stat-dashbord .dashbord-right .d1 .config-bar span").click(function(){
+                 alert("not working yet ....");
+               });
+               
+               $(".stat-dashbord .dashbord-right .hp-box i.fa-angle-down").click(function(e){
+                   $(this).parent().children(".content").slideToggle(500);
+                   
+                   if($(this).parent().parent().parent().hasClass("d2")){
+                       if(!$(this).hasClass("down")){
+                           $(this).parent().parent().parent().height("auto");
+                           $(this).addClass("down");
+
+                    }else{
+                           $(this).removeClass("down");
+                           $(this).parent().parent().parent().height("640px");
+                       }
+                       
+                   }else{
+                    if(!$(this).hasClass("down")){
+                           $(this).addClass("down");
+
+                    }else{
+                           $(this).removeClass("down");
+                       }
+                   
+                   }
+                });
+               
                 ESCall();
         </script>
         
@@ -115,28 +163,76 @@
                         </html>
                     </vbox>
                     <vbox columns="50% 50%" className="dashbord-right">
-                        <vbox columns="100%" className="hp-box d1">
+                      <vbox>
+                          <vbox columns="100%" className="hp-box d1">
                         
-                        <html>
-                        <h1>Occurrence des mots dans l'index</h1>
-                        <canvas id="myChart" width="400" height="400" />
-                            
-                        </html>
-            
+                            <html>
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            <div class="vpanel-title">
+                                <span>OCCURRENCE DES MOTS DANS L'INDEX</span>
+                                   <hr class="header-create-account-horizontal-line hr-hub" />
+                            </div>
+                                <div class="content">
+                                   <div class="config-bar">
+                                       <span class="sp sp1 fas fa-sort-numeric-up"></span>
+                                       <select class="s1">
+                                           <option value="12"></option>
+                                       </select>
+                                       <span class="separate-span"></span>
+                                       <span class="sp sp2 fas fa-users"></span>
+                                       <select class="s2">
+                                           
+                                       </select>
+                                       <span class="separate-span"></span>
+                                       <span class="chart-type sp sp3 fas fa-chart-bar sp-active"></span>
+                                       <span class="chart-type sp sp4 fas fa-chart-pie"></span>
+                                       <span class="sp sp5 fas fa-redo-alt"></span>
+                                   </div>
+                                    <canvas id="myChart" width="400" height="400" />
+                                </div>
+                            </html>
                         </vbox>
+                    </vbox>         
                                   
-                                 
-                        <vbox columns="100%" className="hp-box d2">
+                        <vbox>
+                           <vbox className="hp-box search-box">
+                               <html>
+                                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                   <div class="vpanel-title">
+                                        <span>RECHERCHE SUR LES AVIS</span>
+                                        <hr class="header-create-account-horizontal-line hr-hub" />
+                                    </div>
+                                    <div class="input-bar content">
+                                        <input type="text" />
+                                        <button class="b b1 active">KEY</button>
+                                        <button class="b b2">MLT</button>
+                                        <button class="fas fa-search" />
+                                    </div>    
+                               </html>   
+                           </vbox>
+                            <vbox columns="100%" className="hp-box d2">
                             <html className="word-list-div word-list">
-                                <h1>Liste des mots existés</h1>
-                                <div class="div">
+                               <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                <div class="vpanel-title">
+                                   <span>LISTE DES MOTS EXISTES</span>
+                                   <hr class="header-create-account-horizontal-line hr-hub" />
+                                </div>
+                                <div class="content">
+                                    <div class="div">
                                     <table class="exist-word-list tab">
                                         
                                     </table>
+                                </div>    
                                 </div>
+                                
                             </html>
                             <html className="word-list-div word-list-det">
-                                <h1>Mot <b /></h1>
+                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    <div class="vpanel-title">
+                                        <span>MOT | <span class="cl-orange" /></span>
+                                       <hr class="header-create-account-horizontal-line hr-hub" />
+                                    </div>
+                             <div class="content">
                                 <div class="div">
                                     <div class="div-d1">
                                         <h4>Les mots dérivés :</h4>
@@ -150,16 +246,34 @@
                                     </div>
                                 </div>
                                 <div class="back-div">
-                                    <span>Retour à la liste des mots</span>
+                                    <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
+                                </div>
                                 </div>
                             </html>
                             <html className="word-list-div word-list-load-gif">
-                                <img src="img/load-text.gif" alt=""/>
+                                <img src="img/load-text.gif" alt="" />
                             </html>
                             <html className="word-list-div word-list-text-avis">
-                               
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                   <div class="vpanel-title">
+                                    <span>MOT | <span class="cl-orange" /></span>
+                                    <hr class="header-create-account-horizontal-line hr-hub" />
+                                </div>
+                               <div class="content">
+                                  <div class="avis-det-full">
+                                   <div class="avis-det-membre">
+                                       MEMBRE : <span />
+                                   </div>
+                                   <div class="avis-det-avis">
+                                       AVIS : <p />
+                                   </div>
+                                   <span class="back-span"><i class="fas fa-angle-double-left" /> Retour</span>
+                               </div>
+                               </div>
                             </html>
                         </vbox>
+                        </vbox>         
+                        
                     </vbox>
                 </vbox>
             </vbox>
