@@ -129,6 +129,7 @@
 .pagination{
     margin-top: 6px;
     font-size: 14px;
+    margin-bottom: 90px;
 }
 
 .pagination a {
@@ -306,7 +307,7 @@
 }
 
 .full-search-list{
-    height: 880px;
+    height: 780px;
 }
 
 .full-search-list-item{
@@ -658,6 +659,19 @@
 .stat-dashbord .stat-div{
 }
 
+.dashbord-right .search-box{
+}
+
+.dashbord-right .d2{
+    position: relative; 
+    height:  640px;
+}
+
+
+.dashbord-right .d1{
+    position: relative;
+}
+
 .dashbord-right .d1 h1,.dashbord-right .d2 h1{
     margin: 25px 0 35px 0;
 }
@@ -670,11 +684,15 @@
 
 
 .dashbord-right .d2 .div{
-    width: 80%;
+    width: 90%;
     margin: auto;
     overflow: auto;
     max-height: 500px;
-    margin-top: 55px;
+}
+
+
+.dashbord-right .d2 .content{
+    height: 600px;
 }
 
 .dashbord-right .d2 .word-list-load-gif{
@@ -698,7 +716,54 @@
     text-align: left;
 }
 
+.stat-dashbord .ow-vl-inner{
+    height: auto;
+}
 
+.stat-dashbord .d1 .config-bar{
+    margin-bottom: 25px;
+}
+
+.stat-dashbord .d1 .config-bar span{
+    width: 38px;
+    height: 38px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    line-height: 200%;
+    margin: 0px -2px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.stat-dashbord .d1 .config-bar .sp{
+    
+}
+
+.stat-dashbord .d1 .config-bar .sp1{
+    border-radius: 2px 0 0 2px;
+}
+
+.stat-dashbord .d1 .config-bar .sp5{
+    border-radius: 0 2px 2px 0;
+}
+
+.stat-dashbord .d1 .config-bar .sp-active{
+    background-color: #38a;
+    color: #fff;
+}
+
+.stat-dashbord .d1 .config-bar select{
+    width: 70px;
+    height: 38px;
+    border: 1px solid #ddd;
+    margin: 0 -2px;
+}
+
+.stat-dashbord .d1 .config-bar .separate-span{
+    width: 5px;
+    display: inline-block;
+    background: #ddd;
+}
 
 
 
@@ -749,11 +814,11 @@
 }
 
 .stat-dashbord .dashbord-right .d2  .tab td, .stat-dashbord .dashbord-right .d2  .tab th {
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
   padding: 8px;
 }
 
-.stat-dashbord .dashbord-right .d2  .tab tr:nth-child(even){background-color: #f2f2f2;}
+.stat-dashbord .dashbord-right .d2  .tab tr:nth-child(even){background-color: #fbfbfb;}
 
 
 .stat-dashbord .dashbord-right .d2  .tab th {
@@ -773,7 +838,12 @@
 }
 
 .back-div {
-    width: 210px;
+    width: 90%;
+    margin: auto;
+    margin-top: 15px;
+    color: #38a;
+    cursor: pointer;
+    /*width: 210px;
     margin: auto;
     text-align: center !important;
     background-color: #38a;
@@ -783,12 +853,110 @@
     margin-top: 25px;
     cursor: pointer;
     font-size: 16px;
-    border:1px solid #38a; 
+    border:1px solid #38a;*/ 
 }
 
 
 .back-div:hover{
-    background: white;
-    color: #38a;
-    transition: .3s;
+    /*background: white;
+    color: #38a;*/
+    transition: .5s;
+    color: inherit;
 }
+
+
+.stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-avis p{
+    border: 1px solid #eee;
+    padding: 6px;
+    border-radius: 3px;
+    margin-top: 3px;
+    font-size: 14px;
+    color: #888;
+ }
+.stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-full{
+    text-align: left;
+    padding: 5px 20px;
+}
+
+.stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-membre{
+        margin-bottom: 11px;
+        color: #333;
+}
+.stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-avis{
+        color: #333;
+} 
+
+.stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-membre span{
+    font-size: 15px;
+    color: #888;
+ }
+
+.stat-dashbord .dashbord-right .d2 .word-list-text-avis .back-span{
+    color: #38a;
+    cursor: pointer;
+}
+
+.stat-dashbord .dashbord-right .d2 .word-list-text-avis .back-span:hover{
+    color: inherit;
+    transition: .5s;
+}
+
+.stat-dashbord .dashbord-right .search-box{
+    position: relative;
+}
+
+.stat-dashbord .dashbord-right .search-box .input-bar {
+    line-height: normal;
+}
+
+.stat-dashbord .dashbord-right .search-box .input-bar input{
+    box-shadow: none;
+    border: 1px solid #ccc;
+    width: 50%;
+    height: 30px;
+    border-radius: 3px 0 0 3px;
+    margin: 0 -2px;
+    padding: 0 9px;
+}
+
+.stat-dashbord .dashbord-right  .search-box .input-bar button{
+    width: 44px;
+    height: 34px;
+    margin: 0 -2px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.stat-dashbord .dashbord-right .search-box .input-bar button.fa-search{
+    border-radius:0 3px 3px 0;
+}
+
+.stat-dashbord .dashbord-right .search-box .input-bar button.active{
+    background: #38a;
+    color: #fff;
+}
+
+.stat-dashbord .dashbord-right .search-box .input-bar button:hover{
+    background: #ccc;
+}
+
+.stat-dashbord .dashbord-right .hp-box i.fa-angle-down{
+    position: absolute;
+    right: 19px;
+    top: 25px;
+    background: #38a;
+    color: #fff;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    line-height: 19px;
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+
+
+.stat-dashbord .dashbord-right .hp-box i.down{
+    transform: rotate(0deg);
+}
+
+
