@@ -14,6 +14,13 @@
       <menu relId="OpinionTextMining" label="Opinion TextMining" icone="search" xcstt="x">
         <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextMining</resource>
       </menu>
+      <menu relId="AcceptabiliteProjets" label="Acceptabilite Projets" icone="search" xcstt="x">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AcceptabiliteProjets</resource>
+      </menu>
+      <menu relId="EtudeImpactEnvironemmental" label="Etude Impact Environemmental" icone="search" xcstt="x">
+        <resource type="search">karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental</resource>
+      </menu>
+      
     </menu>
   </menu>
 </menus>

@@ -35,9 +35,7 @@
             
                });
                
-               $(".stat-dashbord .dashbord-right .d1 .config-bar span").click(function(){
-                 alert("not working yet ....");
-               });
+              
                
                $(".stat-dashbord .dashbord-right .hp-box i.fa-angle-down").click(function(e){
                    $(this).parent().children(".content").slideToggle(500);
@@ -63,7 +61,48 @@
                    }
                 });
                
-                ESCall();
+               $(".stat-dashbord .dashbord-right .d1 .config-bar span.chart-type").click(function(){
+                  $(".stat-dashbord .dashbord-right .d1 .config-bar span.chart-type").removeClass("sp-active");
+                  $(this).addClass("sp-active");
+                 var spNumber = $(this).attr("class").split(" ")[2];
+                 if(spNumber=="sp3"){
+                     updateChart(chartG,4,null);
+                 }else if(spNumber=="sp4"){
+                     updateChart(chartG,3,null);
+                 }
+                 
+               });
+               
+               $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp5").click(function(){
+                   chartG.update();
+               });
+                
+                $(".stat-dashbord .dashbord-right .d1 .config-bar select.s1").change(function(){
+                    var selectval = $(".stat-dashbord .dashbord-right .d1 .config-bar select.s2 option:selected").val();
+                    if(selectval=="null"){
+                        ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),null);
+              		}else{
+                        ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),selectval);  
+                      }
+                   $(".stat-dashbord .dashbord-right .d1 .config-bar span.chart-type").removeClass("sp-active");
+                    $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp3").addClass("sp-active");
+                });
+                
+                $(".stat-dashbord .dashbord-right .d1 .config-bar select.s2").change(function(){
+                    var selectval = $(".stat-dashbord .dashbord-right .d1 .config-bar select.s2 option:selected").val();
+                    if(selectval=="null"){
+                                        ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),null);
+
+                    }else{
+                                        ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),selectval);
+
+                    }
+                    $(".stat-dashbord .dashbord-right .d1 .config-bar span.chart-type").removeClass("sp-active");
+                    $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp3").addClass("sp-active");
+                });                
+                
+                getMembers();
+                ESCall(12,null);
         </script>
         
         <vbox columns="30% 70%" columns-small="auto">
@@ -176,12 +215,15 @@
                                    <div class="config-bar">
                                        <span class="sp sp1 fas fa-sort-numeric-up" />
                                        <select class="s1">
-                                           <option value="12" />
+                                           <option value="12">12</option>
+                                           <option value="20">20</option>
+                                           <option value="40">40</option>
+                                           <option value="60">60</option>
                                        </select>
                                        <span class="separate-span" />
                                        <span class="sp sp2 fas fa-users" />
                                        <select class="s2">
-                                           
+                                           <option value="null">Tous</option>
                                        </select>
                                        <span class="separate-span" />
                                        <span class="chart-type sp sp3 fas fa-chart-bar sp-active" />

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="EtudeImpactEnvironemmental" label="Etude Impact Environemmental">
+
+	<query>
+	</query>
+	<data>
+		<query>
+			<search />
+            <idObject />
+            <parentP />
+		</query>
+		<collapsed>false</collapsed>
+	</data>
+	<view>
+		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
+         <script postLoad="true">
+          $(".rokhas-home").click(function(){
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+          });      
+         </script>
+        
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html>
+                    <div class="rokhas-home">
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                    </div>
+                </html>
+            </vbox>
+            <vbox columns="60% 25% 15%">
+    				       <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
+                               <button label="Accueil">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                                    </postChange>
+                               </button>
+                               <button label="Actualités">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button label="Simulateur">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                                    </postChange>
+                               </button>
+                               <button label="Solutions">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button icon="far fa-question-circle">
+                                   <postChange />
+                               </button>
+							</vbox>
+							
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="Inscription" className="button-signup-header button-left">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+									</postChange>						
+								</button>
+								<button label="Connexion" className="button-signup-header">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+									</postChange>					
+								</button>
+							</vbox>
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="FR" className="button-signup-header-cliked button-left">						
+								</button>
+								<button label="ع" className="button-signup-header">						
+								</button>
+							</vbox>
+						</vbox>
+	
+        </vbox>
+
+        <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+        </html>        
+           
+        <vbox columns="70% 30%">
+            
+            
+        <vbox className="hp-box hp-small div-det-acc">
+                <html>
+                    <div class="vpanel-title">
+                        <div class="vpanel-title">
+                           <span>ACCEPTABILITÉ DES PROJETS | <span class="title-2x" style="color:#38a;">ÉTUDE D'IMPACT SUR L'ENVIRONNEMENT</span></span>
+                           <hr class="header-create-account-horizontal-line hr-hub" />
+                       </div>
+                    </div>
+                </html>
+                <vbox className="accp">
+                <html>
+                    <span style="text-align:left;color:#333;" class="title-4x b-title">
+                        <i class="fas fa-leaf" style="margin-right:10px" />Étude d'impact sur l'environnement 
+                    </span>
+                </html>
+                <vbox className="desc">
+                  <html><p>Cette procédure concerne les projets susceptibles d'impacter négativement les écosystèmes dans lesquels ils se situent. Le dossier d'étude d'impact une fois constitué par l'investisseur à l'aide d'un bureau d'étude agrée est soumis à la commission afin que ses membres puissent donner leurs avis - motivés - sur l'acceptabilité environnementale dudit projet.</p></html>
+                </vbox>    
+                <vbox>
+                    <html className="tags">
+                        <a href="#fs1">Étapes clés</a> | 
+                        <a href="#fs2">Documents requis</a> | 
+                        <a href="#fs3">Membres commission</a> |
+                        <a href="#fs4">Informations complémentaires</a> |
+                        <a href="#fs5">Référentiel juridique</a> |
+                        <a href="#fs6">Glossaire</a>
+                    </html>
+                </vbox>
+                <vbox className="fieldSets">
+                    <fieldSet header="Étapes clés">
+                        
+                    </fieldSet>
+                    <fieldSet header="Documents requis">
+                        
+                    </fieldSet>
+                    <fieldSet header="Membres commission">
+                        
+                    </fieldSet>
+                </vbox>       
+                        
+			</vbox>    
+        </vbox> 
+        
+        <vbox className="hp-box hp-small left-box-fsb">
+               <html>
+                   <div class="vpanel-title">
+                       <span>ANNONCES</span>
+                        <hr class="header-create-account-horizontal-line hr-hub" />
+                   </div>
+               </html>
+                <vbox className="hp-box">
+                    <html>
+                        <div class="vpanel-body-title"><i class="fas fa-chart-line" /><span>Etudes de marchés</span></div>
+                        <div class="vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>    
+                </vbox>
+                <html>
+                    <div style="height: 50px;"> </div>
+                </html> 
+                   <vbox className="hp-box">
+                   <html>
+                        <div class="vpanel-body-title"><i class="far fa-edit" /><span>votre e-parapheur</span></div>
+                        <div class="vpanel-body-icon"><i class="far fa-edit" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>     
+                </vbox>
+                <html>
+                    <div style="height: 50px;"> </div>
+                </html> 
+                   <vbox className="hp-box">
+                    <html>
+                        <div class="vpanel-body-title"><i class="fas fa-cog" /><span>Transformation digitale</span></div>
+                        <div class="vpanel-body-icon"><i class="fas fa-cogs" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>     
+                </vbox>    
+            </vbox>      
+        </vbox>
+            
+        
+        <html> <div style="height: 30px;"> </div> </html>            
+        
+    </screen>
+
+	</view>
+
+
+</search>
