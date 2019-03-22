@@ -959,4 +959,85 @@
     transform: rotate(0deg);
 }
 
+.div-det-acc{
+    text-align: left !important;
+}
 
+.div-det-acc .accp{
+    width: 85%;
+    margin: auto;
+    font-size: 15px;
+}
+
+.div-det-acc .accp .desc{
+    margin-bottom: 35px;
+}
+
+.div-det-acc .accp .acc-titles{
+    height: auto;
+    position: relative;
+}
+
+.div-det-acc .accp .acc-titles .acc-title{
+    font-size: 18px;
+    color: #333;
+}
+
+.div-det-acc .accp .acc-titles p{
+    font-size: 13px;
+}
+
+.div-det-acc .accp .acc-titles button{
+    background-color: #eee;
+    color: black;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 0 20px 10px 0;
+    height: 25px;
+    padding: 0 11px;
+}
+
+.div-det-acc .accp .acc-titles button:hover{
+    background-color: black;
+    color: #fff;
+    transition: .3s;
+}
+
+.div-det-acc .accp .acc-titles .ow-btn-container{
+    text-align: right;
+}
+
+.div-det-acc .accp .acc-titles hr{
+    width: 300px;
+}
+
+.hr-acc{
+    margin: auto !important;  
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.div-det-acc .accp .acc-titles i{
+    font-size: 42px;
+    color: #333;
+}
+
+.div-det-acc .accp .consult-acc{
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+.div-det-acc .tags{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.div-det-acc .tags a{
+    font-size:13px;
+    color: #38a;
+}
+
+.div-det-acc .tags a:hover{
+    color:rgba(255, 153, 0, 1)
+}

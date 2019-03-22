@@ -90,6 +90,12 @@
         currentPage=0;
        restSearchList($(".searchList .second-search-bar input").val(),0); 
     });
+       
+       
+    $(".divSearch .divSearchBar .t1").click(function(){
+       ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets", "search", "Acceptabilite Projets", {});
+    });
+          
         </script>
         <vbox columns="30% 70%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
@@ -294,26 +300,26 @@
                 
                     <vbox columns="25% 25% 25% 25%">
                        <html>
-                           <div class="main-icon-title">
-                                <i class="fas fa-check-square"></i>
+                           <div class="main-icon-title t1">
+                                <i class="fas fa-check-square" />
                                 <span>Acceptabilité projets</span>
                            </div>
                        </html>
                         <html>
-                           <div class="main-icon-title">
-                            <i class="fas fa-map-marker-alt"></i>
+                           <div class="main-icon-title t2">
+                            <i class="fas fa-map-marker-alt" />
                             <span>Accès au foncier</span>
                            </div>
                        </html>
                           <html>
-                           <div class="main-icon-title">
-                                <i class="far fa-building"></i>
+                           <div class="main-icon-title t3">
+                                <i class="far fa-building" />
                                 <span>Autorisations urbanistiques</span>
                            </div>
                        </html>
                         <html>
-                           <div class="main-icon-title">
-                                <i class="fas fa-cog"></i>
+                           <div class="main-icon-title t4">
+                                <i class="fas fa-cog" />
                                 <span>Autorisations économiques</span>
                            </div>
                        </html>
