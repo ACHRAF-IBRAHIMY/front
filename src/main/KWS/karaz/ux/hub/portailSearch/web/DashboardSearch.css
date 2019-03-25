@@ -958,6 +958,9 @@
 .stat-dashbord .dashbord-right .hp-box i.down{
     transform: rotate(0deg);
 }
+.stat-dashbord .dashbord-right .hp-box i.down{
+    transform: rotate(0deg);
+}
 
 .div-det-acc{
     text-align: left !important;
@@ -1040,4 +1043,151 @@
 
 .div-det-acc .tags a:hover{
     color:rgba(255, 153, 0, 1)
+}
+
+
+.fieldSets .p-list-but{
+    margin-bottom: 25px;
+}
+
+.fieldSets .p-list-but span.gen-num{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #666;
+    line-height: 150%;
+    color: white;
+    text-align: center;
+    margin-top: 3px;
+}
+
+.fieldSets .p-list-but .title{
+    font-size: 15px;
+    color: #333;
+}
+
+.fieldSets .p-list-but p{
+    font-size: 12px;
+    color: #999;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.fieldSets .p-list-but .but-orange{
+    border: 1px solid #f93;
+    color: #f93;
+    background-color: #fff;
+    padding: 1px 2px;
+}
+
+.fieldSets .p-list-but .but-orange:hover{
+    color: white;
+    background: #f93;
+    transition: .3s;
+}
+
+.fieldSets .p-list-but .but-blue{
+    border: 1px solid #38a;
+    color: #38a;
+    padding: 1px 2px;
+    background-color: #fff;
+}
+
+
+.fieldSets .p-list-but .but-blue:hover{
+    color: white;
+    background: #38a;
+    transition: .3s;
+}
+
+.fieldSets .p-list-but .inline-html,.fieldSets .p-list-but .ow-btn-container{
+    display: inline;
+}
+
+.fieldSets .p-list-but .gen-num-html{
+    text-align: center;
+}
+
+.note-danger{
+    margin-bottom: 27px;
+}
+
+.note-danger i{
+    font-size: 28px;
+}
+
+.note-danger p{
+    margin: 0;
+    font-size: 11px;
+}
+
+.fieldSets .title-principale{
+    color: #38a;
+    font-size: 16px;
+    margin-bottom: 32px;
+    margin-top: 15px;
+    margin-left: 28px;
+}
+
+.fieldSets .p-list-but .doc-icon i{
+    color: #999;
+    font-size: 24px;
+} 
+
+.fieldSets .p-list-but .doc-icon i.cl-orange{
+    color: #999;
+    font-size: 24px;
+    color: #f93;
+} 
+
+.fieldSets .p-list-but .gen-num-html .fa-user-circle,.fieldSets .p-list-but .gen-num-html .fa-gavel{
+    font-size: 23px;
+    margin-top: 3px;
+    color: #666;
+}
+
+.fieldSets .p-list-but .gen-num-html .fa-gavel{
+    
+}
+
+.div-det-acc .fieldSets .ow-tabpanel-flex .ow-label-pl{
+    color: #666;
+}
+.div-det-acc .fieldSets .ow-tabpanel-flex{
+    margin-bottom: 50px;
+}
+
+.div-det-acc .fieldSets .scroll-top{
+    color: #38a;
+    text-align: right;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.div-det-acc .fieldSets .scroll-top .scroll-top-sp{
+    cursor: pointer;
+}
+
+.div-det-acc .fieldSets .scroll-top .scroll-top-sp:hover{
+    color: #f93;
+} 
+
+.div-det-acc .fieldSets .scroll-top .scroll-top-sp i{
+    transform: rotate(90deg);
+}
+
+.div-det-acc .fieldSets .hr-fieldset hr{
+    margin: auto;
+    border: none;
+    height: 0.7px;
+    flex: 1;
+    background-color: #ddd;
+    width: 97%;
+    margin-bottom: 27px;
+    margin-top: 1px;
+}
+
+.div-det-acc .fieldSets .ow-pl-toolbar{
+    border-bottom: 0;
 }

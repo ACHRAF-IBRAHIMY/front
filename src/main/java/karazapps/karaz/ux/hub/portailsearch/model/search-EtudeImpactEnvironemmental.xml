@@ -17,6 +17,28 @@
           $(".rokhas-home").click(function(){
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });      
+          
+          
+          $(".tags a").click(function(){
+              console.log("href:"+$(this).attr("href"));
+              var pos = $("."+$(this).attr("href").substr(1)).offset().top;
+              $('html,body').animate(
+                     {
+                      scrollTop: pos
+                 },
+                 'slow');   
+          });
+          
+          
+          $(".scroll-top-sp").click(function(){
+              $('html,body').animate(
+                     {
+                      scrollTop: $("body").offset().top
+                 },
+                 'slow'); 
+          });
+          
+          
          </script>
         
         <vbox columns="30% 70%" columns-small="auto">
@@ -100,26 +122,687 @@
                 </html>
                 <vbox className="desc">
                   <html><p>Cette procédure concerne les projets susceptibles d'impacter négativement les écosystèmes dans lesquels ils se situent. Le dossier d'étude d'impact une fois constitué par l'investisseur à l'aide d'un bureau d'étude agrée est soumis à la commission afin que ses membres puissent donner leurs avis - motivés - sur l'acceptabilité environnementale dudit projet.</p></html>
-                </vbox>    
+                </vbox> 
+                <vbox className="note-danger cl-orange" columns="5% 95%">
+                    <html>
+                        <i class="fas fa-exclamation-triangle" />
+                    </html>
+                    <html>
+                        <p>Notez que les démarches, documents requis et toute autre information indiqués par la plateforme Rokhas.ma sont à titre strictement indicatif. Il reste de la responsabilité du demandeur, de <span style="text-decoration: underline;">se renseigner auprès des administrations compétentes</span> sur toute modification réglementaire ou procédurale survenue.</p>
+                    </html>
+                </vbox>   
                 <vbox>
                     <html className="tags">
                         <a href="#fs1">Étapes clés</a> | 
                         <a href="#fs2">Documents requis</a> | 
                         <a href="#fs3">Membres commission</a> |
-                        <a href="#fs4">Informations complémentaires</a> |
-                        <a href="#fs5">Référentiel juridique</a> |
+                        <a href="#fs4">Référentiel juridique</a> |
+                        <a href="#fs5">Informations complémentaires</a> |
                         <a href="#fs6">Glossaire</a>
                     </html>
                 </vbox>
                 <vbox className="fieldSets">
-                    <fieldSet header="Étapes clés">
-                        
+                    <fieldSet header="Étapes clés" className="fs1">
+                        <html className="hr-fieldset">
+                            <hr />
+                        </html>                                                                            
+                        <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">1</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Saisie de la demande </span>
+                                </html>
+                                <button className="but-orange" label="Demandeur" />
+                                <html>
+                                    <p>Saisie en ligne de la demande d'éligibilité à la réalisation de l'étude d'impact l'environnemental du projet.</p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">2</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Qualification de la demande </span>
+                                </html>
+                                <button className="but-blue" label="CRI" />
+                                <html>
+                                    <p>Réception et étude de l'éligibilité du projet à l'étude d'impact l'environnemental.</p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">3</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Préparation du dossier d'étude d'impact du projet </span>
+                                </html>
+                                <button className="but-orange" label="Demandeur" />
+                                <button className="but-orange" label="Bureau d'étude" />
+                                <html>
+                                    <p>Elaboration du dossier technique relatif à l'étude d'impact environnemental du projet d'investissement à l'aide d'un bureau d'étude agrée par le ministère de l'équipement.</p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">4</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Attachement documents requis </span>
+                                </html>
+                                <button className="but-orange" label="Demandeur" />
+                                <html>
+                                    <p>Numérisation et attachement des documents requis et optionnellement des documents complémentaires appuyant le dossier d'étude d'impact environnemental.</p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                           <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">5</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Réception et évaluation du dossier d'étude d'impact environnemental </span>
+                                </html>
+                                <button className="but-blue" label="CRI" />
+                                <html>
+                                    <p>Contrôle de la complétude du dossier numérique.</p>
+                                </html>
+                            </vbox>
+                        </vbox><vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">6</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Ouverture de l'enquête publique </span>
+                                </html>
+                                <button className="but-blue" label="CRI" />
+                                <button className="but-blue" label="Commune" />
+                                <button className="but-blue" label="Préfecture / province" />
+                                <html>
+                                    <p>Demande effectuée par le CRI auprès des autorités locales pour initier une enquête publique relative à l'étude d'impact environnemental du projet. L'enquête est ouverte pendant 20J pour recevoir via la plateforme les oppsition des concernés. L'enquête est soldée par un rapport soumis à la commission.</p>
+                                </html>
+                            </vbox>
+                        </vbox><vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">7</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Publication de l'avis  d'enquête publique </span>
+                                </html>
+                                <button className="but-orange" label="Demandeur" />
+                                <html>
+                                    <p>Publication de l'avis d'enquête dans 2 journaux (Arabe et Français) et attachement des accusés de publication au niveau de la plateforme.</p>
+                                </html>
+                            </vbox>
+                        </vbox><vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">8</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Tenue commission </span>
+                                </html>
+                                <button className="but-blue" label="Membre CRUI" />
+                                <button className="but-blue" label="Membre CRI" />
+                                <html>
+                                    <p>Fourniture des avis par les membres de la CRUI et emission du procès-verbal signé électroniquement</p>
+                                </html>
+                            </vbox>
+                        </vbox><vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">9</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Notification de la décision de la commission </span>
+                                </html>
+                                <button className="but-blue" label="CRI" />
+                                <html>
+                                    <p>Numérisation et attachement des documents requis et optionnellement des documents complémentaires appuyant le dossier d'étude d'impact environnemental.</p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="scroll-top">
+                            <html columns="100%">
+                                <span class="scroll-top-sp">
+                                    <i class="fas fa-angle-double-left" />
+                                    <span>Haut</span>
+                                </span>
+                            </html>
+                        </vbox>
                     </fieldSet>
-                    <fieldSet header="Documents requis">
-                        
+                    <fieldSet header="Documents requis" className="fs2">
+                      <html className="hr-fieldset">
+                            <hr />
+                        </html>  
+                       <vbox className="title-principale">
+                           <html>
+                               <span>Liste des pièces à fournir d’Etude d’Impact sur l’Environnement</span>
+                           </html>
+                       </vbox> 
+                       <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">1</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Certificat foncier ou le lien juridique entre la propriété et le demandeur </span>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" />
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">2</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title"> Copie carte d’identité du porteur du projet </span>
+                                </html>
+                                <html>
+                                    <p>Numérisation et attachement des documents requis et optionnellement des documents complémentaires appuyant le dossier d'étude d'impact environnemental.</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                </html>
+                            </vbox>
+                               <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                        </vbox>
+                           <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">3</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title"> Copie carte d’identité du porteur du projet </span>
+                                </html>
+                                <html>
+                                    <p>Statuts de la société, PV de l'assemblée générale, Attestation fiscale, ...</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox><vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">4</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Plan cadastral </span>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i />
+                                </html>
+                            </vbox>
+                        </vbox><vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">5</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Note de renseignement délivrée par l’Agence Urbaine concernée</span>
+                                </html>
+                                
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox><vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">6</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Plan de situation rattaché aux coordonnées Lambert</span>
+                                </html>
+                                
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox><vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">7</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title"> Image satellitaire </span>
+                                </html>
+                                
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox><vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">8</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Photos du site du projet</span>
+                                </html>
+                                
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox><vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">9</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">CD contenant l’ensemble des pièces jointes demandées</span>
+                                </html>
+                                <html>
+                                    <p>Non applicable dans le cas d'un processus 100% digital</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon ">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                           <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">10</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Etude d’Impact sur l’Environnement</span>
+                                </html>
+                                <html>
+                                    <p>Conformément aux dispositions de l’article 6 de la loi 12-03 relative aux études d’impact sur l’environnement</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="title-principale">
+                            <html>
+                                <span>Liste des pièces à fournir pour l’ouverture d’enquête publique</span>
+                            </html>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">1</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Demande d’ouverture de l’enquête publique</span>
+                                </html>
+                                <html>
+                                    <p>Faisant ressortir les principales caractéristiques techniques du projet soumis à enquête publique</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-pdf cl-orange" />
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">2</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Etude d’Impact sur l’Environnement</span>
+                                </html>
+                                <html>
+                                    <p>Conformément aux dispositions de l’article 6 de la loi 12-03 relative aux études d’impact sur l’environnement</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">3</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Un projet de résumé clair et compréhensible pour le public</span>
+                                </html>
+                                <html>
+                                    <p>Englobant les informations et les principales données contenues dans l’étude d’impact sur l’environnement concernée par l’enquête publique notamment celles relatives aux impacts positifs et/ou négatifs du projet sur l’environnement ainsi que les mesures envisagées pour supprimer, réduire ou compenser les conséquences dommageables du projet sur l’environnement</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">4</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Un plan de situation désignant les limites de la zone d’impact prévisible du projet</span>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="scroll-top">
+                            <html columns="100%">
+                                <span class="scroll-top-sp">
+                                    <i class="fas fa-angle-double-left" />
+                                    <span>Haut</span>
+                                </span>
+                            </html>
+                        </vbox>
                     </fieldSet>
-                    <fieldSet header="Membres commission">
-                        
+                    
+                    <fieldSet header="Membres commission" className="fs3">
+                       <html className="hr-fieldset">
+                            <hr />
+                        </html> 
+                        <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-user-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Gouverneurs de préfectures / provinces</span>
+                                </html>
+                                <html>
+                                    <p>Les gouverneurs des préfectures ou des provinces devant abriter les projets d’investissement ou leurs représentants</p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-user-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Présidents de communes </span>
+                                </html>
+                                <html>
+                                    <p>Les présidents des Conseils communaux devant abriter les projets d’investissement ou l’un de leurs vice-présidents respectifs</p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-user-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Directeur général du Centre régional d’investissement</span>
+                                </html>
+                                
+                            </vbox>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-user-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Directeur général des services de la région </span>
+                                </html>
+                                
+                            </vbox>
+                        </vbox>
+                           <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-user-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Représentant de la Wilaya de région concernée </span>
+                                </html>
+                                
+                            </vbox>
+                        </vbox><vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-user-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Directeur de l’Agence urbaine concernée ou son représentant</span>
+                                </html>
+                                
+                            </vbox>
+                        </vbox><vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-user-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Responsables régionaux des services déconcentrés </span>
+                                </html>
+                                <html>
+                                    <p>Représentants régionaux des établissements publics et tous autres organismes, concernés par le projet ou les projets d’investissement et en particulier dans le cas de l'étude d'impact : Le Directeur Régional de l'Environnement de la Région</p>
+                                </html>
+                            </vbox>
+                        </vbox><vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-user-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Le bureau d’étude qui a réalisé l’étude</span>
+                                </html>
+                               
+                            </vbox>
+                        </vbox>
+                        <vbox className="scroll-top">
+                            <html columns="100%">
+                                <span class="scroll-top-sp">
+                                    <i class="fas fa-angle-double-left" />
+                                    <span>Haut</span>
+                                </span>
+                            </html>
+                        </vbox>
+                    </fieldSet>
+                    <fieldSet label="RÉFÉRENTIEL JURIDIQUE" className="fs4">
+                       <html className="hr-fieldset">
+                            <hr />
+                        </html> 
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-gavel" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Loi 47-18 : Art. 29 Al. b-8</span>
+                                </html>
+                                <html>
+                                    <p>« Examiner les études d’impact sur l’environnement et donner son avis sur l’acceptabilité environnementale des projets d’investissement qui lui sont soumis »</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-gavel" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Décret n° 2-04-563 du 5 kaada 1429</span>
+                                </html>
+                                <html>
+                                    <p>Relatif aux attributions et au fonctionnement du comité national et des comités régionaux des études d'impact sur l'environnement. (B.O. n° 5684 du 20 novembre 2008).</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-gavel" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Décret n° 2-04-564 du 5 kaada 1429 (4 novembre 2008)</span>
+                                </html>
+                                <html>
+                                    <p>Fixant les modalités d'organisation et de déroulement de l'enquête publique relative aux projets soumis aux études d'impact sur l'environnement. (Article 9- 13-14)</p>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                               <span class="fas fa-gavel" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Circulaire conjointe n° D 1998 du 17 Mars 2009</span>
+                                </html>
+                                
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="scroll-top">
+                            <html columns="100%">
+                                <span class="scroll-top-sp">
+                                    <i class="fas fa-angle-double-left" />
+                                    <span>Haut</span>
+                                </span>
+                            </html>
+                        </vbox>
                     </fieldSet>
                 </vbox>       
                         
