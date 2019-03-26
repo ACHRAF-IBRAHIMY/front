@@ -216,36 +216,46 @@ function restFullSearchList(prefix,from,prev,parent) {
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var testLanguage = RegExp('[أ-ي]');
     if(testLanguage.test(prefix)){
-        xhttp.send(JSON.stringify(
-            {
+    	xhttp.send(JSON.stringify(
+                {
                 "from":from,"size":4,
-                "query": {
-                    "bool": {
-                        "must": [
-                            { "multi_match": {
-                                "query": prefix,
-                                "fields": ["tags.keywordsString"],
-                                "analyzer": "rebuilt_arabic",
-                                "fuzziness": "AUTO",
-                                "minimum_should_match": "70%"
-                            }},{
-                                "match_phrase": {
+                  "min_score":3,
+                  "query": {
+                    "bool":{
+                      "must": [{
+                        "multi_match": {
+                          "query": prefix,
+                          "fields": ["tags.keywordsString"],
+                          "analyzer": "rebuilt_french",
+                          "fuzziness": "auto",
+                          "minimum_should_match": "70%",
+                          "boost": 0.5
+                        }
+                      },{
+                        "match_phrase": {
                                     "content.categorie": {
                                         "query": "Intitulé activité"
                                     }
-                                }}
-                        ],
-                        "should": [
-                            {
-                                "match": {
-                                    "content.intituleAr": prefix
                                 }
-                            }
-                        ]
+
+                      }],"should": [
+                        {"multi_match": {
+                          "query": prefix,
+                          "fields": ["tags.keywordSyn"],
+                          "analyzer": "rebuilt_french",
+                          "fuzziness": "auto",
+                          "minimum_should_match": "70%",
+                          "boost": 3
+                        }},{
+                        "match":{
+                            "content.intituleFr":prefix
+                        }}
+                        
+                      ]
                     }
+                  }
                 }
-            }
-        ));
+            ));
     }else{
         var objectJson = {
                     "from":from,"size":4,
