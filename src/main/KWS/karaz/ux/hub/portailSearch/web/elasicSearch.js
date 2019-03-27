@@ -71,101 +71,185 @@ function check(res,elm){
 
 
 //Search results and redirect to activity model
-function restSearchList(prefix,from,prev) {
+function restFullSearchList(prefix, from, prev, parent) {
     var result = [];
     var xhttp = new XMLHttpRequest();
+    removeFullListSearch();
     $(".searchGif").show();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            removeFullListSearch();
             var res = JSON.parse(this.responseText);
-            clearTimeout(timerID);
-            stopChrono();
-            document.getElementsByClassName("nbrRes")[0].getElementsByTagName("span")[0].innerHTML=res.hits.total;
-            for(var i=0;i<res.hits.hits.length;i++){
+            for (var i = 0; i < res.hits.hits.length; i++) {
                 result.push(res.hits.hits[i]);
             }
+            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[0].innerHTML = res.hits.total;
+            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[1].innerHTML = prefix;
+
             $(".searchGif").hide();
-            if(currentPage==0){
-                totalPage = Math.ceil(res.hits.total/4);
-                createPaginationBar(Math.min(totalPage,10),0,prefix,1);
-                if(totalPage!=0){
-                    currentPage=1;
+
+            if (currentPage == 0) {
+                totalPage = Math.ceil(res.hits.total / 4);
+                createPaginationBar(Math.min(totalPage, 10), 0, prefix, 1, false);
+                if (totalPage != 0) {
+                    currentPage = 1;
+                    currentLPage = 1;
                 }
+            } else if (currentPage % 10 == 0) {
+                currentLPage = (currentPage / 10) + 1;
+                console.log("begin: " + currentPage + "lpage: " + currentLPage);
+                createPaginationBar(Number(Math.min(10, totalPage - currentPage)) + Number(currentPage), currentPage - 1, prefix, 1, false);
+            } else if (prev == true) {
+                createPaginationBar(currentPage + 1, Math.max(0, (Number(currentPage)) - 10), prefix, 1, true);
             }
-            searchList(result);
+
+            if (totalPage == 0) {
+                noResults();
+            } else {
+                fullSearchList(result);
+            }
         }
     };
- //   xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
-    xhttp.open("POST","https://cmdbserver.karaz.org:9200/activite_economique/activite/_search");
-    xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    //xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
+    xhttp.open("POST", "https://cmdbserver.karaz.org:9200/activite_economique/activite/_search");
+    xhttp.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var testLanguage = RegExp('[أ-ي]');
-    var objectJson = {
-            "from":from,"size":4,
+    if (testLanguage.test(prefix)) {
+        xhttp.send(JSON.stringify({
+            "from": from,
+            "size": 4,
             "query": {
                 "bool": {
                     "must": [
-                            { "multi_match": {
-                            "query": prefix,
-                            "fields": ["tags.keywordsString"],
-                            "analyzer": "rebuilt_arabic",
-                            "fuzziness": "AUTO",
-                            "minimum_should_match": "70%"
-                        }},{
-                            "match_phrase": {
-                            "content.categorie": {
-                            "query": "Intitulé activité"
+                        {
+                            "multi_match": {
+                                "query": prefix,
+                                "fields": ["tags.keywordsString"],
+                                "analyzer": "rebuilt_arabic",
+                                "fuzziness": "AUTO",
+                                "minimum_should_match": "70%"
                             }
-                        }}
-                        ],
-                        "should": [
-                            {
-                                "match": {
-                                    "content.intituleAr": prefix
+                        }, {
+                            "match_phrase": {
+                                "content.categorie": {
+                                    "query": "Intitulé activité"
                                 }
                             }
+                        }
+                        ],
+                    "should": [
+                        {
+                            "match": {
+                                "content.intituleAr": prefix
+                            }
+                            }
                         ]
-                    }
                 }
-            };
-    if(testLanguage.test(prefix)){  
-        xhttp.send(JSON.stringify(objectJson));
-    }else{
-        xhttp.send(JSON.stringify(
-            {
-                "from":from,"size":4,
-                "query": {
-                    "bool": {
-                        "must": [
-                            { "multi_match": {
+            }
+        }));
+    } else {
+        var objectJson = {
+            "from": from,
+            "size": 4,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "multi_match": {
                                 "query": prefix,
                                 "fields": ["tags.keywordsString"],
                                 "analyzer": "rebuilt_french",
-                                "fuzziness": "AUTO",
-                                "minimum_should_match": "70%"
-                            }},{
-                                "match_phrase": {
-                                    "content.categorie": {
-                                        "query": "Intitulé activité"
-                                    }
-                                }}
-                        ],
-                        "should": [
-                            {
-                                "match": {
-                                    "content.intituleFr": prefix
+                                "minimum_should_match": "100%"
+                            }
+                        }, {
+                            "match_phrase": {
+                                "content.categorie": {
+                                    "query": "Intitulé activité"
                                 }
                             }
-                        ]
-                    }
+                        }]
                 }
             }
-        ));
+        };
+        p = parent;
+        console.log(p);
+        if (parent == 1) {
+            xhttp.send(JSON.stringify(objectJson));
+        } else if (parent == 2) {
+            objectJson.query.bool.must[0].multi_match.fields = ["parents.TypeActivité"];
+            delete objectJson.query.bool.must[0].multi_match.analyzer;
+            console.log(JSON.stringify(objectJson));
+            xhttp.send(JSON.stringify(objectJson));
+        } else if (parent == 3) {
+            objectJson.query.bool.must[0].multi_match.fields = ["parents.NatureActivité"];
+            delete objectJson.query.bool.must[0].multi_match.analyzer;
+            console.log(objectJson);
+            xhttp.send(JSON.stringify(objectJson));
+        } else if (parent == 4) {
+            objectJson.query.bool.must[0].multi_match.fields = ["parents.TypeAutorisation"];
+            delete objectJson.query.bool.must[0].multi_match.analyzer;
+            console.log(objectJson);
+            xhttp.send(JSON.stringify(objectJson));
+        } else {
+            xhttp.send(JSON.stringify({
+                "from":from,"size":4,    
+                "min_score": 7,
+                    "query": {
+                        "bool": {
+                            "must": [{
+                                "multi_match": {
+                                    "query": prefix,
+                                    "fields": ["tags.keywordsString"],
+                                    "analyzer": "rebuilt_french",
+                                    "fuzziness": "auto",
+                                    "minimum_should_match": "70%",
+                                }
+                                }, {
+                                "match_phrase": {
+                                    "content.categorie": "intitulé activité"
+                                }
+                            }],
+                            "should": [
+                                {
+                                    "multi_match": {
+                                        "query": prefix,
+                                        "fields": ["content.intituleFr.keywordSyn"],
+                                        "analyzer": "rebuilt_french",
+                                        "fuzziness": "auto",
+                                        "minimum_should_match": "70%",
+                                        "boost": 50
+                                    }
+                                }, {
+                                    "multi_match": {
+                                        "query": prefix,
+                                        "fields": ["content.intituleFr.keywordsString"],
+                                        "analyzer": "rebuilt_french",
+                                        "fuzziness": "auto",
+                                        "minimum_should_match": "70%",
+                                        "boost": 1.6
+                                    }
+                                }, {
+                                    "multi_match": {
+                                        "query": prefix,
+                                        "fields": ["parents.NatureActivite.keywordSyn", "parents.TypeActivite.keywordSyn", "parents.TypeAutorisation.keywordSyn"],
+                                        "analyzer": "rebuilt_french",
+                                        "fuzziness": "auto",
+                                        "minimum_should_match": "70%",
+                                        "boost": 1.3
+                                    }
+                                }
+      ]
+                        }
+                    }
+                }
+
+            ));
+        }
     }
 
     return result;
 }
-
 function removeFullListSearch(){
     $(".full-search-list").html("");
 }
