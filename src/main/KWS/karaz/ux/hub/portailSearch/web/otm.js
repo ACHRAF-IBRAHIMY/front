@@ -311,8 +311,6 @@ function extractByTag(text, tag) {
     return tab;
 }
 
-
-
 function extractRaw(text, reg) {
     var found = oneByOneRegex(text, reg);
     return found;
@@ -348,8 +346,6 @@ function oneByOneRegex(text, reg) {
     return array;
 }
 
-
-
 function extractArray(text, word) {
     var reg = /[1-9]*-/g;
     var reg2 = /[.]/g;
@@ -358,6 +354,8 @@ function extractArray(text, word) {
     var arr2 = extractRaw(text, reg2);
     var pos1 = searchBefAft(pos, arr[1], 0);
     var pos2 = searchBefAft(pos, arr2[1].concat(arr[0]), 1);
+    if(isNaN(pos1))pos1=0;
+    if(isNaN(pos2))pos2=text.length; 
     console.log(pos1 + "," + pos2 + "," + text.substring(pos1, pos2));
     return text.substring(pos1, pos2);
 }
@@ -368,7 +366,7 @@ function searchBefAft(pos, arr, vr) {
     console.log(vr == 0);
     if (vr == 0) {
         arr.forEach(function (elm) {
-            if ((elm - pos) < 0) {
+            if ((elm - pos) <= 0) {
                 copie.push(elm - pos);
             }
         });

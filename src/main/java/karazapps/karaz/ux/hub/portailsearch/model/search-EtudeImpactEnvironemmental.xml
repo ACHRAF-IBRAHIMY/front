@@ -39,6 +39,10 @@
           });
           
           
+          $(".back-to-acc").click(function(){
+              ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets","search", "Acceptabilite Projets", {});
+          });
+          
          </script>
         
         <vbox columns="30% 70%" columns-small="auto">
@@ -109,7 +113,7 @@
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
-                           <span>ACCEPTABILITÉ DES PROJETS | <span class="title-2x" style="color:#38a;">ÉTUDE D'IMPACT SUR L'ENVIRONNEMENT</span></span>
+                           <span><span class="back-to-acc">ACCEPTABILITÉ DES PROJETS</span> | <span class="title-2x" style="color:#38a;">ÉTUDE D'IMPACT SUR L'ENVIRONNEMENT</span></span>
                            <hr class="header-create-account-horizontal-line hr-hub" />
                        </div>
                     </div>
@@ -136,9 +140,9 @@
                         <a href="#fs1">Étapes clés</a> | 
                         <a href="#fs2">Documents requis</a> | 
                         <a href="#fs3">Membres commission</a> |
-                        <a href="#fs4">Référentiel juridique</a> |
-                        <a href="#fs5">Informations complémentaires</a> |
-                        <a href="#fs6">Glossaire</a>
+                        <a href="#fs4">Résultat</a> |
+                        <a href="#fs5">Référentiel juridique</a> |
+                        <a href="#fs6">Informations complémentaires</a>
                     </html>
                 </vbox>
                 <vbox className="fieldSets">
@@ -182,6 +186,7 @@
                                 <html className="inline-html">    
                                     <span class="title">Préparation du dossier d'étude d'impact du projet </span>
                                 </html>
+                                
                                 <button className="but-orange" label="Demandeur" />
                                 <button className="but-orange" label="Bureau d'étude" />
                                 <html>
@@ -195,7 +200,8 @@
                             </html>
                             <vbox>
                                 <html className="inline-html">    
-                                    <span class="title">Attachement documents requis </span>
+                                    <span class="title">Attachement
+                                    </span>
                                 </html>
                                 <button className="but-orange" label="Demandeur" />
                                 <html>
@@ -702,7 +708,65 @@
                             </html>
                         </vbox>
                     </fieldSet>
-                    <fieldSet label="RÉFÉRENTIEL JURIDIQUE" className="fs4">
+                    <fieldSet label="RÉSULTATS DE LA PROCÉDURE" className="fs4">
+                       <html className="hr-fieldset">
+                            <hr />
+                        </html>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                                <span class="far fa-check-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Une attestation d'acceptabilité  environnementale dûment signée par Monsieur le Wali , si l'avis du CRUI est favorable</span>
+                                </html>
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                            <html className="gen-num-html">
+                                <span class="far fa-check-circle" />
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Une notification dûment signée par le Directeur du CRI, si l'avis du CRUI est défavorable</span>
+                                </html>
+                                
+                            </vbox>
+                            <vbox className="doc-icon cl-orange">
+                                <html>
+                                </html>
+                            </vbox>
+                            <vbox className="doc-icon">
+                                <html>
+                                    <i class="far fa-file-alt" /> 
+                                </html>
+                            </vbox>
+                            
+                        </vbox>
+                        
+                         <vbox className="scroll-top">
+                            <html columns="100%">
+                                <span class="scroll-top-sp">
+                                    <i class="fas fa-angle-double-left" />
+                                    <span>Haut</span>
+                                </span>
+                            </html>
+                        </vbox>
+                    </fieldSet>
+                    
+                    <fieldSet label="RÉFÉRENTIEL JURIDIQUE" className="fs5">
                        <html className="hr-fieldset">
                             <hr />
                         </html> 
@@ -804,11 +868,203 @@
                             </html>
                         </vbox>
                     </fieldSet>
+                    
+                    
+                    <fieldSet header="INFORMATIONS COMPLÉMENTAIRES" className="fs6">
+                        <html className="hr-fieldset">
+                            <hr />
+                        </html>  
+                       <vbox className="title-principale">
+                           <html>
+                               <span>Contenu de l'étude d'impact</span>
+                           </html>
+                       </vbox> 
+                       <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">1</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Description globale de l'état initial du site susceptible d'être affecté par le projet
+                                    </span>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">2</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Description des principales composantes, caractéristiques et étapes de réalisation de projet
+                                    </span>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">3</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Evaluation des impacts positifs, négatifs et nocifs du projet
+                                    </span>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">4</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Mesures pour supprimer, réduire ou compenser les conséquences dommageables du projet
+                                    </span>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">5</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Programme de surveillance et de suivi du projet
+                                    </span>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">6</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Présentation concise portant sur le cadre juridique et institutionnel afférent au projet
+                                    </span>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">7</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Note de synthèse récapitulant le contenu et les conclusions de l'étude
+                                    </span>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">8</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Résumé simplifié des     informations et des principales données     contenues dans l'étude
+                                    </span>
+                                </html>
+                            </vbox>
+                        </vbox>
+                        <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
+                            <html>
+                                <i class="fas fa-exclamation-triangle" />
+                            </html>
+                            <html>
+                                <p>Il est suggéré de s'assurer au préalable que le terrain est habilité à recevoir le type de projet sollicité</p>
+                            </html>
+                        </vbox> 
+                        <vbox className="title-principale">
+                           <html>
+                               <span>A propos de l'enquête publique</span>
+                           </html>
+                       </vbox> 
+                       <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">1</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Ouverture de l'enquête publique
+                                    </span>
+                                </html>
+                                <html>
+                                    <p>L'ouverture de l'enquête publique est ordonnée par arrêté du Gouverneur de la Préfecture ou la Province concernée par le projet. Après réception de la demande par le CRI, le gouverneur dispose de 10 jours ouvrés pour l’établissement de l’arrêté de l’ouverture de l’enquête publique.</p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">2</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Affichage de  l'étude
+                                    </span>
+                                </html>
+                                <html>
+                                    <p>
+                                      Le résumé de l'étude ainsi que l'arrêté seront transmis par la Province ou la Préfecture pour l'affichage dans les locaux de la ou les Communes concernées. Cet affichage est maintenu pendant toute la durée de l'enquête publique.  
+                                    </p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">3</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Conduite de l'enquête publique
+                                    </span>
+                                </html>
+                                <html>
+                                    <p>
+                                        La conduite de l'enquête publique est confiée à une Commission chargée de l'Enquête Publique présidée par l'autorité administrative locale du lieu d'implantation du projet. Cette commission d’enquête publique est composée :
+<br />
+- Du ou des président(s) de la commune ou des communes concernées ou de son représentant ;
+<br />
+- Du représentant de l'autorité gouvernementale chargée de l'environnement ;
+<br />
+- Du représentant de l'autorité ou des autorités gouvernementale(s) chargée(s) du secteur concerné par le projet au niveau national ou régional, selon le cas.
+                                    </p>
+                                </html>
+                            </vbox>
+                        </vbox>
+                          <vbox className="p-list-but" columns="10% 90%">
+                            <html className="gen-num-html">
+                               <span class="gen-num">4</span>
+                            </html>
+                            <vbox>
+                                <html className="inline-html">    
+                                    <span class="title">Délai de l'enquête publique
+                                    </span>
+                                </html>
+                    <html><p>- Le Gouverneur dispose de 10 jours ouvrés à compter de la réception de la demande avant l’établissement de l’arrêté de l’ouverture de l’enquête publique<br />
+                    - Envoi de l’arrêté et du dossier y afférent au président de la commune via la voie hiérarchique (Pacha/Chef cercle, Caid, Président) <br />
+                    - L’annonce aux Journaux se fait 15 jours minimum avant la date d’ouverture des registres au public <br />
+                    - Durée d’ouverture des registres : 20 jours</p></html>
+
+                            </vbox>
+                        </vbox>
+                        <vbox className="scroll-top">
+                            <html columns="100%">
+                                <span class="scroll-top-sp">
+                                    <i class="fas fa-angle-double-left" />
+                                    <span>Haut</span>
+                                </span>
+                            </html>
+                        </vbox>
+                    </fieldSet>
+                    
+                    
+                    
                 </vbox>       
                         
 			</vbox>    
         </vbox> 
-        
+        <vbox className="height-auto-vbox">
         <vbox className="hp-box hp-small left-box-fsb">
                <html>
                    <div class="vpanel-title">
@@ -845,7 +1101,7 @@
                 </vbox>    
             </vbox>      
         </vbox>
-            
+        </vbox>
         
         <html> <div style="height: 30px;"> </div> </html>            
         

@@ -17,6 +17,15 @@
                 $(".rokhas-home").click(function() {
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "PublicCentralSearch", {});
                 });
+                
+            $(".div-det-acc .t1").click(function(){
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets", "search", "Acceptabilite Projets", {});
+            });
+
+            $(".div-det-acc .t2").click(function(){
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/AccesAuFoncier", "search", "Acces Au Foncier", {});
+            });
+            
             </script>
 
             <vbox columns="30% 70%" columns-small="auto">
@@ -187,21 +196,21 @@
                                 </html>
                                 <vbox columns="33% 33% 33%">
                                     <html>
-                                    <div class="main-icon-title">
+                                    <div class="main-icon-title t2">
                                         <i class="fas fa-map-marker-alt" />
                                         <span>Accès au foncier</span>
                                     </div>
 
                                     </html>
                                     <html>
-                                    <div class="main-icon-title">
+                                    <div class="main-icon-title t3">
                                         <i class="far fa-building" />
                                         <span>Autorisations urbanistiques</span>
                                     </div>
 
                                     </html>
                                     <html>
-                                    <div class="main-icon-title">
+                                    <div class="main-icon-title t4">
                                         <i class="fas fa-cog" />
                                         <span>Autorisations économiques</span>
                                     </div>
