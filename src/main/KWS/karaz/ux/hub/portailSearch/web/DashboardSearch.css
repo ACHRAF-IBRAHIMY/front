@@ -1,5 +1,4 @@
-/* from css file karazapps/karaz/ux/hub/dashboardsearch/model/dashboardsearch/web/DashboardSearch.css  */
-  
+/* from css file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/DashboardSearch.css  */  
 .dashboardsearch_icone:before{
 	position: relative;
 	font-family: FontAwesome !important;
@@ -477,6 +476,10 @@
 }
 .left-box-fsb .hp-box{
     height: auto !important;
+}
+
+.left-box-fsb{
+    padding-bottom: 45px;
 }
 
 .icon-margin{
@@ -1060,6 +1063,7 @@
     color: white;
     text-align: center;
     margin-top: 3px;
+    font-size: 15px !important;
 }
 
 .fieldSets .p-list-but .title{
@@ -1068,7 +1072,7 @@
 }
 
 .fieldSets .p-list-but p{
-    font-size: 12px;
+    font-size: 13px;
     color: #999;
     margin: 0;
     margin-top: 5px;
@@ -1109,16 +1113,31 @@
     text-align: center;
 }
 
-.note-danger{
+.fieldSets .p-list-but .gen-num-html span{
+    font-size: 25px;
+}
+
+.note-danger-list-but{
+    width: 80%;
+    margin: auto;
+}
+
+.note-danger,.note-danger-list-but{
     margin-bottom: 27px;
 }
+
+.note-danger-list-but i{
+    font-size: 15px;
+}
+
 
 .note-danger i{
     font-size: 28px;
 }
 
-.note-danger p{
+.note-danger p,.note-danger-list-but p{
     margin: 0;
+    margin-top: 2px;
     font-size: 11px;
 }
 
@@ -1190,4 +1209,113 @@
 
 .div-det-acc .fieldSets .ow-pl-toolbar{
     border-bottom: 0;
+}
+
+.height-auto-vbox .hp-box{
+    height: auto !important;
+}
+
+.back-to-acc:hover{
+    color: #f93; 
+    cursor: pointer;
+}
+.back-to-acc:hover{
+    color: #f93; 
+    cursor: pointer;
+}
+
+.Header-signup .Header-signup-min{
+        display: none;
+        background: #38a;
+        padding: 2px 0px 0 13px;
+}
+
+.Header-signup .Header-signup-min .menu-bar-icon i{
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.Header-signup .Header-signup-min .menu-bar-img{
+    padding-top: 5px;
+}
+    
+
+
+@media (max-width: 640px) {
+    .Header-signup .Header-signup-min{
+        display: block;
+    }
+    
+    .Header-signup .Header-signup-glo{
+        display: none;
+    }
+    
+    .header-menu{
+        margin: 0;
+    }
+    
+    .vbox-button-signup-header .ow-vl-inner,.header-menu .ow-vl-inner{
+        width: 100%;
+        padding-left: 17px;
+    }
+    
+    .vbox-button-signup-header button,.header-menu button{
+        width: 100%;
+        margin: 0;
+        height: 46px;
+        outline: none;
+        text-align: left;
+        border: none;
+    }
+    
+    .vbox-button-signup-header button span,.header-menu button span{
+        font-size: 20px !important;
+    }
+    
+    
+
+    .header-div-toggle{
+            background: #fff;
+            padding: 2px 5px 18px 0px;
+            box-shadow: 0 0 8px 0;
+            display: none;
+    }
+    
+    .Header-signup{
+        position: fixed;
+        width: 100%;
+        height: 507px;
+        top: 0px;
+        z-index: 1000;
+    }
+    
+    .vpanel-title{
+        padding: 8px;
+    }
+    
+    .div-det-acc{
+        padding: 0 !important;
+    }
+    
+    
+    .div-det-acc .fieldSets .ow-tabpanel-flex
+    {
+      padding: 0px 12px;
+      margin-right: -7.5%;
+      margin-left: -7.5%;
+    }
+        
+    .fieldSets .p-list-but .gen-num-html span{
+        width: 50px;
+        height: 50px;
+        line-height: 355%;
+    }
+    
+    .fieldSets .p-list-but .gen-num-html .fas,.fieldSets .p-list-but .gen-num-html .far{
+        font-size: 50px;
+        margin-bottom: 3px;
+    }
+    
 }
