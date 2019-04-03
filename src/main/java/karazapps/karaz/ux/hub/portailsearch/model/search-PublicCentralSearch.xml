@@ -148,6 +148,10 @@
                    <button icon="far fa-question-circle">
                        <postChange />
                    </button>
+                   <button className="butt-otm" label="OTM"> <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpinionTextMining", "search", "PublicCentralSearch", {});
+                       </postChange>
+                   </button>    
+            
                 </vbox>
 
                 <vbox className="vbox-button-signup-header" columns="50% 50%">

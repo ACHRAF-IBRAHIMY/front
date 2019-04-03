@@ -114,11 +114,11 @@
                 </html>
                 <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
                     <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt=""/>
+                        <img src="web/css/img/LogoSquare.svg" alt="" />
                     </html>
-                    <html></html>
+                    <html />
                     <html className="menu-bar-icon">
-                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-bars" />
                     </html>    
                 </vbox>
             </vbox>
@@ -148,6 +148,10 @@
                    <button icon="far fa-question-circle">
                        <postChange />
                    </button>
+                   <button className="butt-otm" label="OTM"> <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpinionTextMining", "search", "PublicCentralSearch", {});
+                       </postChange>
+                   </button>    
+            
                 </vbox>
 
                 <vbox className="vbox-button-signup-header" columns="50% 50%">
