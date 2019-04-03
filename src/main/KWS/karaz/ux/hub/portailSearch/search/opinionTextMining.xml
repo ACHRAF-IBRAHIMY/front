@@ -11,13 +11,15 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
+            
+               var mem = null;
                document.getElementsByClassName("back-div")[0].addEventListener("click",function(){
                     callLoadGif();
-                    loadDiv(1,null);
+                    loadDiv(1,null,mem);
                });
                
                $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .back-span").click(function(){
-                  getDetWordKeyLoad($(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html()); 
+                  getDetWordKeyLoad($(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html(),mem); 
                });
                
                $(".stat-dashbord .dashbord-right .search-box button.b").click(function(){
@@ -28,7 +30,7 @@
                $(".stat-dashbord .dashbord-right .search-box button.fa-search").click(function(){
                    
                    if($(".stat-dashbord .dashbord-right .search-box button.b1").hasClass("active")){
-                       getDetWordKeyLoad($(".stat-dashbord .dashbord-right .search-box input").val());
+                       getDetWordKeyLoad($(".stat-dashbord .dashbord-right .search-box input").val(),null);
                    }else{
                        alert("MLT not working yet...");
                    }
@@ -91,10 +93,12 @@
                 $(".stat-dashbord .dashbord-right .d1 .config-bar select.s2").change(function(){
                     var selectval = $(".stat-dashbord .dashbord-right .d1 .config-bar select.s2 option:selected").val();
                     if(selectval=="null"){
-                                        ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),null);
+                        mem = null;
+                        ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),null);
 
                     }else{
-                                        ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),selectval);
+                        mem = selectval;        
+                        ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),selectval);
 
                     }
                     $(".stat-dashbord .dashbord-right .d1 .config-bar span.chart-type").removeClass("sp-active");
