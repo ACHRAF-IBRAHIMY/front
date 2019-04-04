@@ -1318,4 +1318,19 @@
         margin-bottom: 3px;
     }
     
+    .butt-otm span{
+    background: #38a;
+    padding: 7px;
+    color: #fff;
+    border-radius: 3px;
+    }
+    
+    .butt-otm span:hover{
+    color: #38a;
+    padding: 7px;
+    background: #fff;
+    border-radius: 3px;
+    }
+    
+    
 }

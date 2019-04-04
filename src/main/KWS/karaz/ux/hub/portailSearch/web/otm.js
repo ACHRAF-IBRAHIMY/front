@@ -57,12 +57,12 @@ function ESCall(size, membre) {
                 var data = createArray(result, "aggregations.categories.names.buckets.doc_count");    
             }
             
-            loaded(data, labels);
+            loaded(data, labels,membre);
             $(".dashbord-right .d2 .word-list .tab").html("");
-            loadDiv(1, new Array(data, labels));
+            loadDiv(1, new Array(data, labels),membre);
         },
         error: function (error) {
-            console.log(error.responseText);
+            console.log(error.responseText,membre);
         }
     });
 };
@@ -83,7 +83,7 @@ function createArray(results, path) {
     return arr;
 }
 
-function loaded(data, labels) {
+function loaded(data, labels,membre) {
     console.log(labels.length);
     console.log(data.length);
     var canvas = document.getElementById('myChart');
@@ -129,14 +129,14 @@ function loaded(data, labels) {
             var label = chartData.labels[idx];
             var value = chartData.datasets[0].data[idx];
 
-            getDetWordKeyLoad(label);
+            getDetWordKeyLoad(label,membre);
 
         }
     };
 }
 
 
-function loadList(data, labels) {
+function loadList(data, labels,membre) {
     var list = $(".stat-dashbord .dashbord-right .d2 .word-list .div table");
     for (var i = 0; i < Math.min(12, data.length); i++) {
         var ap = document.createElement("tr");
@@ -155,7 +155,7 @@ function loadList(data, labels) {
         icon.setAttribute("style", "color:#38a;cursor:pointer;");
         icon.addEventListener("click", function () {
             var word = this.parentNode.parentNode.children[0].innerHTML;
-            getDetWordKeyLoad(word);
+            getDetWordKeyLoad(word,membre);
         });
         sp3.appendChild(icon);
 
@@ -167,7 +167,7 @@ function loadList(data, labels) {
     }
 }
 
-function getDetWordKeyLoad(word) {
+function getDetWordKeyLoad(word,membre) {
 
     callLoadGif();
     var obj = {
@@ -185,6 +185,34 @@ function getDetWordKeyLoad(word) {
             }
         }
     };
+    
+    
+    if(membre!=null){
+        obj= {
+              "query": {
+                "bool": {
+                  "must": {
+                    "multi_match": {
+                            "fields": ["Avis"],
+                            "query": word,
+                            "analyzer": "rebuilt_french",
+                            "minimum_should_match": "100%"
+                        }
+                  },
+                  "filter": {
+                    "term": {
+                      "MEMBRE": membre
+                    }
+                  }
+                }
+              },
+              "highlight": {
+                        "fields": {
+                            "Avis": {}
+                        }
+                    }
+            }
+    }
 
     $.ajax({
         type: "POST",
@@ -200,7 +228,7 @@ function getDetWordKeyLoad(word) {
                 "result": result,
                 "word": word
             };
-            loadDiv(2, res);
+            loadDiv(2, res, membre);
         },
         error: function (error) {
             console.log(error.responseText);
@@ -257,15 +285,15 @@ function callLoadGif() {
     $(".dashbord-right .d2 .word-list-load-gif").show();
 }
 
-function loadDiv(div, key) {
+function loadDiv(div, key,membre) {
     switch (div) {
         case 1:
-            if (key != null) loadList(key[0], key[1]);
+            if (key != null) loadList(key[0], key[1],membre);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list").show();
             break;
         case 2:
-            getDetWordKey(key.result, key.word);
+            getDetWordKey(key.result, key.word , membre);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-det").show();
             break;
