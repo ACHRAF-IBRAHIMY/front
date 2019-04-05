@@ -500,7 +500,7 @@ function getMembers() {
             "membres": {
                 "terms": {
                     "field": "MEMBRE",
-                    "size": 50
+                    "size": 300
                 }
             }
         }
@@ -518,14 +518,18 @@ function getMembers() {
         success: function (result) {
             var array = new Array();
             var size = result.aggregations.membres.buckets.length;
+            var nbrAvis = result.hits.total;
             for (var i = 0; i < size; i++) {
                 array.push(result.aggregations.membres.buckets[i].key);
             }
-
+            
+            updateDashbordStat(nbrAvis,size,nbrAvis*2);
             createSelect(array);
+            
         }
     });
 }
+
 
 
 function createSelect(array) {
@@ -533,4 +537,10 @@ function createSelect(array) {
     for (var i = 0; i < array.length; i++) {
         s.append("<option value=\"" + array[i] + "\">" + array[i] + "</option>");
     }
+}
+
+function updateDashbordStat(nbrAvis,nbrMem,nbrNote){
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[1].getElementsByTagName("span")[0].innerHTML=nbrAvis;
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[2].getElementsByTagName("span")[0].innerHTML=nbrMem;
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[0].getElementsByTagName("span")[0].innerHTML=nbrNote;
 }
