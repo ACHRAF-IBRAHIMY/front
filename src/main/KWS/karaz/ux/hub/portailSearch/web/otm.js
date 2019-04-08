@@ -500,7 +500,7 @@ function getMembers() {
             "membres": {
                 "terms": {
                     "field": "MEMBRE",
-                    "size": 50
+                    "size": 300
                 }
             }
         }
@@ -518,14 +518,18 @@ function getMembers() {
         success: function (result) {
             var array = new Array();
             var size = result.aggregations.membres.buckets.length;
+            var nbrAvis = result.hits.total;
             for (var i = 0; i < size; i++) {
                 array.push(result.aggregations.membres.buckets[i].key);
             }
-
+            
+            getNumberRemarque(nbrAvis,size);
             createSelect(array);
+            
         }
     });
 }
+
 
 
 function createSelect(array) {
@@ -533,4 +537,48 @@ function createSelect(array) {
     for (var i = 0; i < array.length; i++) {
         s.append("<option value=\"" + array[i] + "\">" + array[i] + "</option>");
     }
+}
+
+function updateDashbordStat(nbrAvis,nbrMem,nbrNote){
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[1].getElementsByTagName("span")[0].innerHTML=nbrAvis;
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[2].getElementsByTagName("span")[0].innerHTML=nbrMem;
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[0].getElementsByTagName("span")[0].innerHTML=nbrNote;
+}
+
+
+function getNumberRemarque(nbrAvis, nbrMem) {
+    var obj = {
+        "query": {
+            "match_all": {}
+        },
+        "aggs": {
+            "sumR": {
+                "sum": {
+                    "script": {
+                        "lang": "painless",
+                        "source": "doc['Remarques.keyword'].size()"
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    $.ajax({
+        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        type: "POST",
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        data: JSON.stringify(obj),
+        success: function (result) {
+            
+            var nbrRemarques = result.aggregations.sumR.value;
+            updateDashbordStat(nbrAvis,nbrMem,nbrRemarques);
+            
+        }
+    });
+    
 }
