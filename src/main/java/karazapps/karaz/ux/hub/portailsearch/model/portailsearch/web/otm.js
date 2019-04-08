@@ -523,7 +523,7 @@ function getMembers() {
                 array.push(result.aggregations.membres.buckets[i].key);
             }
             
-            updateDashbordStat(nbrAvis,size,nbrAvis*2);
+            getNumberRemarque(nbrAvis,size);
             createSelect(array);
             
         }
@@ -543,4 +543,42 @@ function updateDashbordStat(nbrAvis,nbrMem,nbrNote){
     document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[1].getElementsByTagName("span")[0].innerHTML=nbrAvis;
     document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[2].getElementsByTagName("span")[0].innerHTML=nbrMem;
     document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[0].getElementsByTagName("span")[0].innerHTML=nbrNote;
+}
+
+
+function getNumberRemarque(nbrAvis, nbrMem) {
+    var obj = {
+        "query": {
+            "match_all": {}
+        },
+        "aggs": {
+            "sumR": {
+                "sum": {
+                    "script": {
+                        "lang": "painless",
+                        "source": "doc['Remarques.keyword'].size()"
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    $.ajax({
+        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        type: "POST",
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        data: JSON.stringify(obj),
+        success: function (result) {
+            
+            var nbrRemarques = result.aggregations.sumR.value;
+            updateDashbordStat(nbrAvis,nbrMem,nbrRemarques);
+            
+        }
+    });
+    
 }
