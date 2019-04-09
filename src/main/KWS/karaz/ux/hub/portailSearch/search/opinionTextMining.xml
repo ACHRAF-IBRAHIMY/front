@@ -105,6 +105,10 @@
                     $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp3").addClass("sp-active");
                 });                
                 
+                $(".extract-notes-button").click(function(){
+                    $(".extract-notes").toggle();
+                });
+                
                 getMembers();
                 ESCall(12,null);
         </script>
@@ -181,7 +185,7 @@
                             <div class="stat ow-vbox hp-box">
                                 <i class="fas fa-file-alt" />
                                 <div>
-                                    <span>7800</span>
+                                    <span>0</span>
                                     <span>Remarques</span>
                                 </div>
                             </div>
@@ -190,7 +194,7 @@
                             <div class="stat ow-vbox hp-box">
                                 <i class="fas fa-comment-alt" />
                                 <div>
-                                    <span>3000</span>
+                                    <span>0</span>
                                     <span>Avis</span>
                                 </div>
                             </div>
@@ -199,7 +203,7 @@
                             <div class="stat ow-vbox hp-box">
                                 <i class="fas fa-users" />
                                 <div>
-                                    <span>50</span>
+                                    <span>0</span>
                                     <span>Membres</span>
                                 </div>
                             </div>
@@ -278,7 +282,10 @@
                                         <span>MOT | <span class="cl-orange" /></span>
                                        <hr class="header-create-account-horizontal-line hr-hub" />
                                     </div>
-                             <div class="content">
+                                <div class="back-div">
+                                        <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
+                                </div>
+                                 <div class="content">
                                 <div class="div">
                                     <div class="div-d1">
                                         <h4>Les mots dérivés :</h4>
@@ -291,9 +298,9 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="back-div">
-                                    <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
                                 </div>
+                                <div class="pagination-otm">
+                                    
                                 </div>
                             </html>
                             <html className="word-list-div word-list-load-gif">
@@ -307,13 +314,17 @@
                                 </div>
                                <div class="content">
                                   <div class="avis-det-full">
+                                   <span class="back-span"><i class="fas fa-angle-double-left" /> Retour</span>
                                    <div class="avis-det-membre">
                                        MEMBRE : <span />
                                    </div>
                                    <div class="avis-det-avis">
                                        AVIS : <p />
                                    </div>
-                                   <span class="back-span"><i class="fas fa-angle-double-left" /> Retour</span>
+                                   <button class="extract-notes-button">Extraire les remarques</button>
+                                   <div class="extract-notes">
+                                       
+                                   </div>
                                </div>
                                </div>
                             </html>

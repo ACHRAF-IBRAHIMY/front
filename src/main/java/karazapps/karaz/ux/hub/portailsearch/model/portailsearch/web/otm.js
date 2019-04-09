@@ -1,7 +1,6 @@
 var chartG = null;
 
 function ESCall(size, membre) {
-    console.log(size,membre);
     
     var obj = {
         "aggs": {
@@ -48,7 +47,6 @@ function ESCall(size, membre) {
         },
         data: JSON.stringify(obj),
         success: function (result) {
-            console.log(result);
             if(membre==null){
                 var labels = createArray(result, "aggregations.genres.buckets.key");
                 var data = createArray(result, "aggregations.genres.buckets.doc_count");
@@ -79,13 +77,10 @@ function createArray(results, path) {
     for (var i = 0; i < res.length; i++) {
         arr.push(res[i][key]);
     }
-    console.log(arr);
     return arr;
 }
 
 function loaded(data, labels,membre) {
-    console.log(labels.length);
-    console.log(data.length);
     var canvas = document.getElementById('myChart');
     var ctx = canvas.getContext('2d');
     if (chartG != null) {
@@ -128,7 +123,8 @@ function loaded(data, labels,membre) {
 
             var label = chartData.labels[idx];
             var value = chartData.datasets[0].data[idx];
-
+            activePage=1 ;
+            filePage=0 ;
             getDetWordKeyLoad(label,membre);
 
         }
@@ -155,6 +151,8 @@ function loadList(data, labels,membre) {
         icon.setAttribute("style", "color:#38a;cursor:pointer;");
         icon.addEventListener("click", function () {
             var word = this.parentNode.parentNode.children[0].innerHTML;
+            activePage=1;
+            filePage=0;
             getDetWordKeyLoad(word,membre);
         });
         sp3.appendChild(icon);
@@ -170,7 +168,9 @@ function loadList(data, labels,membre) {
 function getDetWordKeyLoad(word,membre) {
 
     callLoadGif();
+    var offset = (activePage-1)*5;
     var obj = {
+        "size":5,"from":offset,
         "query": {
             "multi_match": {
                 "fields": ["Avis"],
@@ -189,6 +189,7 @@ function getDetWordKeyLoad(word,membre) {
     
     if(membre!=null){
         obj= {
+              "size":5,"from":offset,
               "query": {
                 "bool": {
                   "must": {
@@ -253,9 +254,7 @@ function getDetWordKey(result, word) {
 
     for (var j = 0; j < Math.min(5, hl.length); j++) {
         //var span = addSpansHL(extractByTag(hl[j].highlight.Avis[0],'em'),hl[j].highlight.Avis[0].replace("<em>","").replace("</em>",""));
-        console.log(extractByTag(hl[j].highlight.Avis[0], 'em') + " **** " + hl[j]._source.Avis);
         var span = addSpansHL(extractByTag(hl[j].highlight.Avis[0], 'em'), extractArray(hl[j]._source.Avis, extractByTag(hl[j].highlight.Avis[0], 'em')));
-        console.log(span);
         var tr = document.createElement("tr");
         tr.setAttribute("class", "note-div-item");
         var td1 = document.createElement("td");
@@ -294,11 +293,12 @@ function loadDiv(div, key,membre) {
             break;
         case 2:
             getDetWordKey(key.result, key.word , membre);
+            createPagintionOtm(key.result.hits.total,5,key.word,membre,activePage);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-det").show();
             break;
         case 3:
-            getTextAvis(key.avis, key.membre, key.key);
+            getTextAvis(key.avis, key.membre,key.remarques, key.key);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-text-avis").show();
             break;
@@ -306,10 +306,17 @@ function loadDiv(div, key,membre) {
 }
 
 
-function getTextAvis(avis, membre, key) {
+function getTextAvis(avis, membre,remarques, key) {
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-membre span").html(membre);
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-avis p").html(avis);
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html(key);
+    var p = document.createElement("ul");
+    for(var i=0;i<remarques.length;i++){
+        var l = document.createElement("li");
+        l.innerHTML=remarques[i];
+        p.appendChild(l);
+    }
+    $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .extract-notes").html(p);
 }
 
 
@@ -384,14 +391,12 @@ function extractArray(text, word) {
     var pos2 = searchBefAft(pos, arr2[1].concat(arr[0]), 1);
     if(isNaN(pos1))pos1=0;
     if(isNaN(pos2))pos2=text.length; 
-    console.log(pos1 + "," + pos2 + "," + text.substring(pos1, pos2));
     return text.substring(pos1, pos2);
 }
 
 
 function searchBefAft(pos, arr, vr) {
     var copie = new Array();
-    console.log(vr == 0);
     if (vr == 0) {
         arr.forEach(function (elm) {
             if ((elm - pos) <= 0) {
@@ -425,10 +430,10 @@ function getAvis(id, key) {
             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
         },
         success: function (result) {
-            console.log(result);
             var res = {
                 "avis": result._source.Avis,
                 "membre": result._source.MEMBRE,
+                "remarques" : result._source.Remarques,
                 "key": key
             }
             loadDiv(3, res);
@@ -441,7 +446,6 @@ function getAvis(id, key) {
 
 
 function updateChart(chart, type, key) {
-    console.log(chart);
     switch (type) {
         case 1:
             chart = restUpdateChart(chart, type, key);
@@ -453,16 +457,85 @@ function updateChart(chart, type, key) {
 
         case 3:
             chart.config.type = "pie";
+            chart.data.datasets[0].backgroundColor=tabColor;
+            console.log("chart :"+chart.data.datasets[0].backgroundColor);
             chart.update();
             break;
 
         case 4:
             chart.config.type = "bar";
+            chart.data.datasets[0].backgroundColor="#38a";
             chart.update();
             break;
     }
 
 }
+
+var tabColor = [
+    "#338800",
+    "#338811",
+    "#338822",
+    "#338833",
+    "#338844",
+    "#338855",
+    "#338866",
+    "#338877",
+    "#338888",
+    "#338899",
+    "#3388aa",
+    "#3388bb",
+    "#3388cc",
+    "#3388dd",
+    "#3388ee",
+    "#3388ff",
+    "#3377ff",
+    "#3366ff",
+    "#3355ff",
+    "#3344ff",
+    "#3333ff",
+    "#3322ff",
+    "#3311ff",
+    "#3300ff",
+    "#2200ff",
+    "#1100ff",
+    "#0000ff",
+    "#0000ee",
+    "#0000dd",
+    "#0000cc",
+    "#0000bb",
+    "#0000aa",
+    "#000099",
+    "#000088",
+    "#000077",
+    "#000066",
+    "#000055",
+    "#000044",
+    "#000033",
+    "#000022",
+    "#000011",
+    "#000000",
+    "#000022",
+    "#000044",
+    "#000066",
+    "#000088",
+    "#0000aa",
+    "#0000cc",
+    "#0000ee",
+    "#0000ff",
+    "#2200ff",
+    "#4400ff",
+    "#4422ff",
+    "#4444ff",
+    "#4466ff",
+    "#3388aa",
+    "#3388bb",
+    "#3388cc",
+    "#3388dd",
+    "#3388ee",
+    "#3388ff",
+    "#3377ff"
+]
+
 
 function restUpdateChart(chart, type, key) {
     var obj = {
@@ -582,3 +655,131 @@ function getNumberRemarque(nbrAvis, nbrMem) {
     });
     
 }
+
+var filePage = 0;
+var activePage = 1;
+
+function createPagintionOtm(total,size,word,membre,active){
+  var begin = 0;
+
+  if(filePage!=0){
+    begin = filePage*2;
+  }   
+
+  var totalEx = Math.ceil((total-((filePage-1)*2+5)*5)/5);
+  if(filePage==0){
+      totalEx = Math.ceil(total/5);
+  }    
+    
+  var nbrPage = Math.min(4,2+totalEx);
+  console.log("totalEx :"+totalEx+" nbr page: "+nbrPage);      
+
+  var p = $(".d2 .pagination-otm");
+  p.html(" ");
+  var a = document.createElement("a");
+  a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
+  a.addEventListener("click",function(){
+    previousPageOtm(word,membre);
+    event.preventDefault();
+  });
+  p.append(a);
+    
+  console.log("from "+(begin+1)+" to "+(begin+nbrPage));    
+    
+  for(var i=begin;i<begin+nbrPage+1;i++){
+        a = document.createElement("a");
+        var j=i+1;
+
+        a.innerHTML=(j);
+        if(i==begin){
+            a.addEventListener("click",function(event){
+                event.preventDefault();
+                if(begin!=0){
+                    activePage = this.innerHTML;
+                    getPrevPageFile(word,membre);
+                }else{
+                    getPageOtm(this.innerHTML,word,membre);
+                }
+            });
+        }else if(i==begin+nbrPage){
+           a.addEventListener("click",function(event){
+                event.preventDefault();
+              
+               if((begin+nbrPage+1)!=Math.ceil(total/5)){
+                   activePage = this.innerHTML;
+                   getNextPageFile(word,membre);   
+               }else{
+                   getPageOtm(this.innerHTML,word,membre);
+               }
+                
+            }); 
+        }else{
+           a.addEventListener("click",function(event){
+            event.preventDefault();
+               getPageOtm(this.innerHTML,word,membre);
+            }); 
+        }
+
+        if(i==active-1){
+            a.setAttribute("class","active");             
+         }
+
+        p.append(a);        
+    }
+    
+   a = document.createElement("a");
+   a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
+   a.addEventListener("click",function(){
+        event.preventDefault();
+        nextPageOtm(word,membre,Math.ceil(total/5));
+   });        
+   p.append(a);
+}
+
+
+function getPageOtm(page,word,membre){
+    activePage = page;
+    getDetWordKeyLoad(word,membre);
+}
+
+function previousPageOtm(word,membre){
+    if(activePage!=1){
+        activePage--;
+        if(activePage == (filePage*2)+1 && activePage != 1){
+            getPrevPageFile(word,membre);    
+        }else{
+            getDetWordKeyLoad(word,membre);
+        }
+        console.log("to Prev file Page");
+        console.log(activePage);
+    }
+}
+
+function nextPageOtm(word,membre,total){
+    console.log("total :"+total);
+    if(activePage!=total){
+        activePage++;
+        if((filePage != 0 && activePage == (filePage*2)+5)||(filePage == 0 && activePage==5)){
+            console.log("to Next file Page");
+            getNextPageFile(word,membre);  
+        }else{
+            console.log("No Next file");
+            getDetWordKeyLoad(word,membre);
+        }
+        console.log(activePage);
+    }
+}
+
+function getPrevPageFile(word,membre){
+    filePage=filePage-1;
+    getDetWordKeyLoad(word,membre);
+}
+
+function getNextPageFile(word,membre){
+    filePage=filePage+1;
+    console.log(filePage);
+    getDetWordKeyLoad(word,membre);
+}
+
+
+
