@@ -679,11 +679,15 @@
 }
 
 .dashbord-right .d2 .exist-word-list-item{
-    grid-template-columns: 50% 30% 20%;
+    grid-template-columns: 50% 30% 10% 10%;
     display: grid;
     text-align: left;
 } 
 
+
+.dashbord-right .d2 tr.hide{
+    background: rgba(51,136,170,0.3) !important; 
+}
 
 .dashbord-right .d2 .div{
     width: 90%;
@@ -1354,6 +1358,3 @@
     margin-right: 3px
 }
 
-.extract-notes{
-    display: none;
-}

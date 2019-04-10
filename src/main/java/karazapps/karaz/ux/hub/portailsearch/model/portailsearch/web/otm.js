@@ -136,7 +136,7 @@ function loadList(data, labels,membre) {
     var list = $(".stat-dashbord .dashbord-right .d2 .word-list .div table");
     for (var i = 0; i < Math.min(12, data.length); i++) {
         var ap = document.createElement("tr");
-        ap.setAttribute("class", "exist-word-list-item");
+        ap.setAttribute("class", "exist-word-list-item show");
 
         var sp1 = document.createElement("td");
         sp1.innerHTML = labels[i];
@@ -155,12 +155,41 @@ function loadList(data, labels,membre) {
             filePage=0;
             getDetWordKeyLoad(word,membre);
         });
-        sp3.appendChild(icon);
+        sp3.setAttribute("style","text-align:center");
+        
+        var sp4 = document.createElement("td");
+        sp4.setAttribute("style","text-align:center");
 
+        var icon2 = document.createElement("i");
+        icon2.setAttribute("class", "fas fa-times");
+        icon2.setAttribute("style", "color:#38a;cursor:pointer;");
+        icon2.addEventListener("click", function () {
+            var word = this.parentNode.parentNode.children[0].innerHTML;
+            updateChart(chartG,5,word);
+        });
+        
+        
+        var sp5 = document.createElement("td");
+        sp5.setAttribute("style","text-align:center;display:none");
+ 
+        var icon3 = document.createElement("i");
+        icon3.setAttribute("class", "fas fa-eye");
+        icon3.setAttribute("style", "color:#38a;cursor:pointer;"); 
+        icon3.addEventListener("click", function () {
+            var word = this.parentNode.parentNode.children[0].innerHTML;
+            updateChart(chartG,6,word);
+        });
+        
+        sp3.appendChild(icon);        
+        sp4.appendChild(icon2);
+        sp5.appendChild(icon3);
+        
         ap.appendChild(sp1);
         ap.appendChild(sp2);
         ap.appendChild(sp3);
-
+        ap.appendChild(sp4);
+        ap.appendChild(sp5);
+        
         list.append(ap);
     }
 }
@@ -467,8 +496,89 @@ function updateChart(chart, type, key) {
             chart.data.datasets[0].backgroundColor="#38a";
             chart.update();
             break;
+        case 5:
+            var boucle = chart.data.labels;
+            var search = searchWordListDataset(boucle,key);
+            
+            chart.data.labels.splice(search,1);
+            chart.data.datasets[0].data.splice(search,1);
+            chart.update();
+            var listTab = document.getElementsByClassName("word-list")[0].getElementsByClassName("content")[0].getElementsByClassName("div")[0].getElementsByClassName("exist-word-list")[0].getElementsByTagName("tr");
+            var pos = searchWordListTab(listTab,key);
+            listTab[pos].classList.add("hide");
+            listTab[pos].classList.remove("show");
+            listTab[pos].getElementsByTagName("td")[3].style.display = "none";
+            listTab[pos].getElementsByTagName("td")[4].style.display = "block";
+            break;
+        case 6:
+            var listTab = document.getElementsByClassName("word-list")[0].getElementsByClassName("content")[0].getElementsByClassName("div")[0].getElementsByClassName("exist-word-list")[0].getElementsByTagName("tr");
+            var listTabS = document.getElementsByClassName("word-list")[0].getElementsByClassName("content")[0].getElementsByClassName("div")[0].getElementsByClassName("exist-word-list")[0].getElementsByClassName("show");
+            var posT = searchWordListTab(listTab,key);
+            var array = searchForShowedTr(listTab);
+            var done = false;
+            console.log(array);
+            console.log(posT);
+            var wordMissNbr = listTab[posT].getElementsByTagName("td")[1].innerHTML;
+            for(var i=0;i<array.length;i++){
+                if(posT<array[i] && done==false){
+                    console.log(i);
+                    var wordMiss = listTab[array[i]].getElementsByTagName("td")[0].innerHTML;
+                    
+                    var boucle = chart.data.labels;
+                    console.log("wordMiss : "+wordMiss);
+                    var posMiss = searchWordListDataset(boucle,wordMiss);
+                    console.log(posMiss);
+                    chart.data.labels.splice(posMiss,0,key);
+                    chart.data.datasets[0].data.splice(posMiss,0,wordMissNbr);
+                    chart.update();
+                    done = true;
+                }
+            }
+            
+            if(done==false){
+                chart.data.labels.push(key);
+                chart.data.datasets[0].data.push(wordMissNbr);
+                chart.update();
+            }
+            
+            listTab[posT].classList.remove("hide");
+            listTab[posT].classList.add("show");
+            listTab[posT].getElementsByTagName("td")[4].style.display = "none";
+            listTab[posT].getElementsByTagName("td")[3].style.display = "block";
+            break;
     }
 
+}
+
+
+function searchWordListDataset(boucle,key){
+   var search = null;
+    for(var i=0;i<boucle.length;i++){
+            if(boucle[i]==key){
+                search = i;
+                return search;
+            }
+    }
+    return search;
+}
+
+function searchForShowedTr(listTab){
+    var array= new Array();
+    for(var i=0;i<listTab.length;i++){
+        if(listTab[i].classList.contains("show")){
+            array.push(i);
+        }
+    }
+    return array;
+}
+
+function searchWordListTab(listTab,key){
+    for(var i=0;i<listTab.length;i++){
+        console.log(listTab[i].getElementsByTagName("td")[0].innerHTML+" *** "+key);
+        if(listTab[i].getElementsByTagName("td")[0].innerHTML == key){
+            return i;
+        }
+    }
 }
 
 var tabColor = [
@@ -780,6 +890,3 @@ function getNextPageFile(word,membre){
     console.log(filePage);
     getDetWordKeyLoad(word,membre);
 }
-
-
-
