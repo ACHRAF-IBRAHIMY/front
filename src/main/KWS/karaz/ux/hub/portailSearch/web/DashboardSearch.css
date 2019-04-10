@@ -529,7 +529,6 @@
 .tab-info-item-s span.new-search,.div-fsb-details .fsb-container .p{
     cursor: pointer;
 }
-
 .div-full-search-bar .autocomplete-items{
     width: 83%;
     cursor: pointer;
@@ -690,12 +689,12 @@
     width: 90%;
     margin: auto;
     overflow: auto;
-    max-height: 500px;
+    max-height: 440px;
 }
 
 
 .dashbord-right .d2 .content{
-    height: 600px;
+    height: 440px;
 }
 
 .dashbord-right .d2 .word-list-load-gif{
@@ -841,22 +840,12 @@
 }
 
 .back-div {
-    width: 90%;
+    width: 100%;
     margin: auto;
-    margin-top: 15px;
+    margin-top: -10px;
+    margin-bottom: 16px;
     color: #38a;
     cursor: pointer;
-    /*width: 210px;
-    margin: auto;
-    text-align: center !important;
-    background-color: #38a;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 4px;
-    margin-top: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    border:1px solid #38a;*/ 
 }
 
 
@@ -897,6 +886,9 @@
 .stat-dashbord .dashbord-right .d2 .word-list-text-avis .back-span{
     color: #38a;
     cursor: pointer;
+    margin-left: -20px;
+    margin-bottom: 27px;
+    display: inline-block;
 }
 
 .stat-dashbord .dashbord-right .d2 .word-list-text-avis .back-span:hover{
@@ -1333,4 +1325,35 @@
  	background: #fff;
 	 border-radius: 3px;
  }
- 
+
+.pagination-otm{
+    margin-top: 16px;
+    font-size: 14px;
+    text-align: center !important;
+}
+
+.pagination-otm a {
+  color: inherit !important;
+  padding: 8px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+
+.pagination-otm a.active {
+  background-color: #38B;
+  color: white !important;
+}
+
+.extract-notes-button{
+    border: 1px solid #ccc;
+    background-color: beige;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-right: 3px
+}
+
+.extract-notes{
+    display: none;
+}
