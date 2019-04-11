@@ -18,8 +18,18 @@
                     loadDiv(1,null,mem);
                });
                
+               document.getElementsByClassName("back-div")[1].addEventListener("click",function(){
+                    callLoadGif();
+                    loadDiv(1,null,mem);
+               });
+               
                $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .back-span").click(function(){
-                  getDetWordKeyLoad($(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html(),mem); 
+                 if(typeGlobal==1){
+                      searchMLT($(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html());
+                 }else{
+                      getDetWordKeyLoad($(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html(),mem);
+                 }
+                  
                });
                
                $(".stat-dashbord .dashbord-right .search-box button.b").click(function(){
@@ -32,7 +42,10 @@
                    if($(".stat-dashbord .dashbord-right .search-box button.b1").hasClass("active")){
                        getDetWordKeyLoad($(".stat-dashbord .dashbord-right .search-box input").val(),null);
                    }else{
-                       alert("MLT not working yet...");
+                        filePage=0;
+                        activePage=1;
+                        var word = $(".stat-dashbord .dashbord-right .search-box input").val();
+                        searchMLT(word);
                    }
             
                });
@@ -175,10 +188,12 @@
         </html>        
            
         <vbox columns="100%" className="stat-dashbord">
-            <vbox columns="18% 82%">
-                <vbox className="dashbord-left hp-box" columns="100%">
+            <vbox columns="100%">
+                <!--
+                   <vbox className="dashbord-left hp-box" columns="100%">
                     
                 </vbox>
+                -->
                 <vbox columns="100%">
                     <vbox columns="33% 34% 33%" className="stat-div">
                         <html>
@@ -231,14 +246,16 @@
                                        <span class="separate-span" />
                                        <span class="sp sp2 fas fa-users" />
                                        <select class="s2">
-                                           <option value="null">Tous</option>
+                                           <option value="null">TOUS LES MEMBRES</option>
                                        </select>
                                        <span class="separate-span" />
                                        <span class="chart-type sp sp3 fas fa-chart-bar sp-active" />
                                        <span class="chart-type sp sp4 fas fa-chart-pie" />
                                        <span class="sp sp5 fas fa-redo-alt" />
                                    </div>
+                                   <div class="chart-container" style="position: relative;width:90%;">
                                     <canvas id="myChart" width="400" height="400" />
+                                    </div>
                                 </div>
                             </html>
                         </vbox>
@@ -249,7 +266,7 @@
                                <html>
                                   <i class="fas fa-angle-down" aria-hidden="true" />
                                    <div class="vpanel-title">
-                                        <span>RECHERCHE SUR LES AVIS</span>
+                                        <span>RECHERCHE DANS LES AVIS</span>
                                         <hr class="header-create-account-horizontal-line hr-hub" />
                                     </div>
                                     <div class="input-bar content">
@@ -322,11 +339,32 @@
                                        AVIS : <p />
                                    </div>
                                    <button class="extract-notes-button">Extraire les remarques</button>
-                                   <div class="extract-notes">
+                                   <div class="extract-notes" style="display:none">
                                        
                                    </div>
                                </div>
                                </div>
+                            </html>
+                            <html className="word-list-div mlt-search">
+                                <i class="fas fa-angle-down" aria-hidden="true" />
+                                <div class="vpanel-title">
+                                    <span>RESULTATS</span>
+                                    <hr class="header-create-account-horizontal-line hr-hub" />
+                                </div>
+                                <div class="back-div">
+                                        <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
+                                </div>
+                                <div class="search-info">
+                                    <div class="word"><span /></div><div class="total-hits"><span /> Avis Similaires</div>
+                                </div>
+                                <div class="content">
+                                    <table class="note-div-items tab">
+                                        
+                                    </table>
+                                </div>
+                                <div class="pagination-otm-search">
+                                    
+                                </div>
                             </html>
                         </vbox>
                         </vbox>         

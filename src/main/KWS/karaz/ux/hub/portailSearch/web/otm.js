@@ -1,7 +1,7 @@
 var chartG = null;
 
 function ESCall(size, membre) {
-    
+
     var obj = {
         "aggs": {
             "genres": {
@@ -12,7 +12,7 @@ function ESCall(size, membre) {
             }
         }
     };
-    
+
 
     if (membre != null) {
         obj = {
@@ -27,7 +27,7 @@ function ESCall(size, membre) {
                         "names": {
                             "terms": {
                                 "field": "Avis",
-                                "size":size
+                                "size": size
                             }
                         }
                     }
@@ -47,20 +47,20 @@ function ESCall(size, membre) {
         },
         data: JSON.stringify(obj),
         success: function (result) {
-            if(membre==null){
+            if (membre == null) {
                 var labels = createArray(result, "aggregations.genres.buckets.key");
                 var data = createArray(result, "aggregations.genres.buckets.doc_count");
-            }else{
+            } else {
                 var labels = createArray(result, "aggregations.categories.names.buckets.key");
-                var data = createArray(result, "aggregations.categories.names.buckets.doc_count");    
+                var data = createArray(result, "aggregations.categories.names.buckets.doc_count");
             }
-            
-            loaded(data, labels,membre);
+
+            loaded(data, labels, membre);
             $(".dashbord-right .d2 .word-list .tab").html("");
-            loadDiv(1, new Array(data, labels),membre);
+            loadDiv(1, new Array(data, labels), membre);
         },
         error: function (error) {
-            console.log(error.responseText,membre);
+            console.log(error.responseText, membre);
         }
     });
 };
@@ -80,7 +80,7 @@ function createArray(results, path) {
     return arr;
 }
 
-function loaded(data, labels,membre) {
+function loaded(data, labels, membre) {
     var canvas = document.getElementById('myChart');
     var ctx = canvas.getContext('2d');
     if (chartG != null) {
@@ -123,16 +123,16 @@ function loaded(data, labels,membre) {
 
             var label = chartData.labels[idx];
             var value = chartData.datasets[0].data[idx];
-            activePage=1 ;
-            filePage=0 ;
-            getDetWordKeyLoad(label,membre);
+            activePage = 1;
+            filePage = 0;
+            getDetWordKeyLoad(label, membre);
 
         }
     };
 }
 
 
-function loadList(data, labels,membre) {
+function loadList(data, labels, membre) {
     var list = $(".stat-dashbord .dashbord-right .d2 .word-list .div table");
     for (var i = 0; i < Math.min(12, data.length); i++) {
         var ap = document.createElement("tr");
@@ -151,55 +151,56 @@ function loadList(data, labels,membre) {
         icon.setAttribute("style", "color:#38a;cursor:pointer;");
         icon.addEventListener("click", function () {
             var word = this.parentNode.parentNode.children[0].innerHTML;
-            activePage=1;
-            filePage=0;
-            getDetWordKeyLoad(word,membre);
+            activePage = 1;
+            filePage = 0;
+            getDetWordKeyLoad(word, membre);
         });
-        sp3.setAttribute("style","text-align:center");
-        
+        sp3.setAttribute("style", "text-align:center");
+
         var sp4 = document.createElement("td");
-        sp4.setAttribute("style","text-align:center");
+        sp4.setAttribute("style", "text-align:center");
 
         var icon2 = document.createElement("i");
         icon2.setAttribute("class", "fas fa-times");
         icon2.setAttribute("style", "color:#38a;cursor:pointer;");
         icon2.addEventListener("click", function () {
             var word = this.parentNode.parentNode.children[0].innerHTML;
-            updateChart(chartG,5,word);
+            updateChart(chartG, 5, word);
         });
-        
-        
+
+
         var sp5 = document.createElement("td");
-        sp5.setAttribute("style","text-align:center;display:none");
- 
+        sp5.setAttribute("style", "text-align:center;display:none");
+
         var icon3 = document.createElement("i");
         icon3.setAttribute("class", "fas fa-eye");
-        icon3.setAttribute("style", "color:#38a;cursor:pointer;"); 
+        icon3.setAttribute("style", "color:#38a;cursor:pointer;");
         icon3.addEventListener("click", function () {
             var word = this.parentNode.parentNode.children[0].innerHTML;
-            updateChart(chartG,6,word);
+            updateChart(chartG, 6, word);
         });
-        
-        sp3.appendChild(icon);        
+
+        sp3.appendChild(icon);
         sp4.appendChild(icon2);
         sp5.appendChild(icon3);
-        
+
         ap.appendChild(sp1);
         ap.appendChild(sp2);
         ap.appendChild(sp3);
         ap.appendChild(sp4);
         ap.appendChild(sp5);
-        
+
         list.append(ap);
     }
 }
 
-function getDetWordKeyLoad(word,membre) {
+function getDetWordKeyLoad(word, membre) {
 
     callLoadGif();
-    var offset = (activePage-1)*5;
+    var offset = (activePage - 1) * 5;
     var obj = {
-        "size":5,"from":offset,
+        "size": 5,
+        "from": offset,
         "query": {
             "multi_match": {
                 "fields": ["Avis"],
@@ -214,34 +215,35 @@ function getDetWordKeyLoad(word,membre) {
             }
         }
     };
-    
-    
-    if(membre!=null){
-        obj= {
-              "size":5,"from":offset,
-              "query": {
+
+
+    if (membre != null) {
+        obj = {
+            "size": 5,
+            "from": offset,
+            "query": {
                 "bool": {
-                  "must": {
-                    "multi_match": {
+                    "must": {
+                        "multi_match": {
                             "fields": ["Avis"],
                             "query": word,
                             "analyzer": "rebuilt_french",
                             "minimum_should_match": "100%"
                         }
-                  },
-                  "filter": {
-                    "term": {
-                      "MEMBRE": membre
-                    }
-                  }
-                }
-              },
-              "highlight": {
-                        "fields": {
-                            "Avis": {}
+                    },
+                    "filter": {
+                        "term": {
+                            "MEMBRE": membre
                         }
                     }
+                }
+            },
+            "highlight": {
+                "fields": {
+                    "Avis": {}
+                }
             }
+        }
     }
 
     $.ajax({
@@ -295,7 +297,7 @@ function getDetWordKey(result, word) {
 
         td2.addEventListener("click", function () {
             //alert(this.parentElement.getElementsByTagName("input")[0].value);
-            getAvis(this.parentElement.getElementsByTagName("input")[0].value, word);
+            getAvis(this.parentElement.getElementsByTagName("input")[0].value, word,0);
         });
 
         tr.appendChild(td1);
@@ -310,41 +312,50 @@ function callLoadGif() {
     $(".dashbord-right .d2 .word-list-div").hide();
     $(".stat-dashbord .dashbord-right .d2 .word-list-det .div-d2 table").html("");
     $(".stat-dashbord .dashbord-right .d2 .word-list-det .div-d1 .div-d1-det").html("");
+    $(".stat-dashbord .dashbord-right .d2 .mlt-search table").html("");
     $(".dashbord-right .d2 .word-list-load-gif").show();
 }
 
-function loadDiv(div, key,membre) {
+function loadDiv(div, key, membre) {
     switch (div) {
         case 1:
-            if (key != null) loadList(key[0], key[1],membre);
+            if (key != null) loadList(key[0], key[1], membre);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list").show();
             break;
         case 2:
-            getDetWordKey(key.result, key.word , membre);
-            createPagintionOtm(key.result.hits.total,5,key.word,membre,activePage);
+            getDetWordKey(key.result, key.word, membre);
+            createPagintionOtm(key.result.hits.total, 5, key.word, membre, activePage,0);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-det").show();
             break;
         case 3:
-            getTextAvis(key.avis, key.membre,key.remarques, key.key);
+            getTextAvis(key.avis, key.membre, key.remarques, key.key,key.type);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-text-avis").show();
             break;
+        case 4:
+            searchMLTDiv(key,membre);
+            createPagintionOtm(key.hits.total, 5, membre, null, activePage,1);
+            $(".dashbord-right .d2 .word-list-load-gif").hide();
+            $(".dashbord-right .d2 .mlt-search").show();
+            break;
+                
     }
 }
 
-
-function getTextAvis(avis, membre,remarques, key) {
+var typeGlobal = 0;
+function getTextAvis(avis, membre, remarques, key,type) {
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-membre span").html(membre);
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-avis p").html(avis);
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html(key);
     var p = document.createElement("ul");
-    for(var i=0;i<remarques.length;i++){
+    for (var i = 0; i < remarques.length; i++) {
         var l = document.createElement("li");
-        l.innerHTML=remarques[i];
+        l.innerHTML = remarques[i];
         p.appendChild(l);
     }
+    typeGlobal = type;
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .extract-notes").html(p);
 }
 
@@ -418,8 +429,8 @@ function extractArray(text, word) {
     var arr2 = extractRaw(text, reg2);
     var pos1 = searchBefAft(pos, arr[1], 0);
     var pos2 = searchBefAft(pos, arr2[1].concat(arr[0]), 1);
-    if(isNaN(pos1))pos1=0;
-    if(isNaN(pos2))pos2=text.length; 
+    if (isNaN(pos1)) pos1 = 0;
+    if (isNaN(pos2)) pos2 = text.length;
     return text.substring(pos1, pos2);
 }
 
@@ -449,7 +460,7 @@ function searchBefAft(pos, arr, vr) {
 }
 
 
-function getAvis(id, key) {
+function getAvis(id, key,type) {
     callLoadGif();
     $.ajax({
         url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/" + id,
@@ -462,8 +473,9 @@ function getAvis(id, key) {
             var res = {
                 "avis": result._source.Avis,
                 "membre": result._source.MEMBRE,
-                "remarques" : result._source.Remarques,
-                "key": key
+                "remarques": result._source.Remarques,
+                "key": key,
+                "type":type
             }
             loadDiv(3, res);
         },
@@ -486,25 +498,30 @@ function updateChart(chart, type, key) {
 
         case 3:
             chart.config.type = "pie";
-            chart.data.datasets[0].backgroundColor=tabColor;
-            console.log("chart :"+chart.data.datasets[0].backgroundColor);
+            chart.data.datasets[0].backgroundColor = tabColor;
+            console.log("chart :" + chart.data.datasets[0].backgroundColor.length);
+            chart.data.datasets[0].borderColor = ["#eee"];
+            chart.data.datasets[0].borderWidth = 0.5;
             chart.update();
+
             break;
 
         case 4:
             chart.config.type = "bar";
-            chart.data.datasets[0].backgroundColor="#38a";
+            chart.data.datasets[0].backgroundColor = "#38a";
+            chart.data.datasets[0].borderColor = ["#38a"];
+            chart.data.datasets[0].borderWidth = 0;
             chart.update();
             break;
         case 5:
             var boucle = chart.data.labels;
-            var search = searchWordListDataset(boucle,key);
-            
-            chart.data.labels.splice(search,1);
-            chart.data.datasets[0].data.splice(search,1);
+            var search = searchWordListDataset(boucle, key);
+
+            chart.data.labels.splice(search, 1);
+            chart.data.datasets[0].data.splice(search, 1);
             chart.update();
             var listTab = document.getElementsByClassName("word-list")[0].getElementsByClassName("content")[0].getElementsByClassName("div")[0].getElementsByClassName("exist-word-list")[0].getElementsByTagName("tr");
-            var pos = searchWordListTab(listTab,key);
+            var pos = searchWordListTab(listTab, key);
             listTab[pos].classList.add("hide");
             listTab[pos].classList.remove("show");
             listTab[pos].getElementsByTagName("td")[3].style.display = "none";
@@ -513,34 +530,34 @@ function updateChart(chart, type, key) {
         case 6:
             var listTab = document.getElementsByClassName("word-list")[0].getElementsByClassName("content")[0].getElementsByClassName("div")[0].getElementsByClassName("exist-word-list")[0].getElementsByTagName("tr");
             var listTabS = document.getElementsByClassName("word-list")[0].getElementsByClassName("content")[0].getElementsByClassName("div")[0].getElementsByClassName("exist-word-list")[0].getElementsByClassName("show");
-            var posT = searchWordListTab(listTab,key);
+            var posT = searchWordListTab(listTab, key);
             var array = searchForShowedTr(listTab);
             var done = false;
             console.log(array);
             console.log(posT);
             var wordMissNbr = listTab[posT].getElementsByTagName("td")[1].innerHTML;
-            for(var i=0;i<array.length;i++){
-                if(posT<array[i] && done==false){
+            for (var i = 0; i < array.length; i++) {
+                if (posT < array[i] && done == false) {
                     console.log(i);
                     var wordMiss = listTab[array[i]].getElementsByTagName("td")[0].innerHTML;
-                    
+
                     var boucle = chart.data.labels;
-                    console.log("wordMiss : "+wordMiss);
-                    var posMiss = searchWordListDataset(boucle,wordMiss);
+                    console.log("wordMiss : " + wordMiss);
+                    var posMiss = searchWordListDataset(boucle, wordMiss);
                     console.log(posMiss);
-                    chart.data.labels.splice(posMiss,0,key);
-                    chart.data.datasets[0].data.splice(posMiss,0,wordMissNbr);
+                    chart.data.labels.splice(posMiss, 0, key);
+                    chart.data.datasets[0].data.splice(posMiss, 0, wordMissNbr);
                     chart.update();
                     done = true;
                 }
             }
-            
-            if(done==false){
+
+            if (done == false) {
                 chart.data.labels.push(key);
                 chart.data.datasets[0].data.push(wordMissNbr);
                 chart.update();
             }
-            
+
             listTab[posT].classList.remove("hide");
             listTab[posT].classList.add("show");
             listTab[posT].getElementsByTagName("td")[4].style.display = "none";
@@ -551,100 +568,100 @@ function updateChart(chart, type, key) {
 }
 
 
-function searchWordListDataset(boucle,key){
-   var search = null;
-    for(var i=0;i<boucle.length;i++){
-            if(boucle[i]==key){
-                search = i;
-                return search;
-            }
+function searchWordListDataset(boucle, key) {
+    var search = null;
+    for (var i = 0; i < boucle.length; i++) {
+        if (boucle[i] == key) {
+            search = i;
+            return search;
+        }
     }
     return search;
 }
 
-function searchForShowedTr(listTab){
-    var array= new Array();
-    for(var i=0;i<listTab.length;i++){
-        if(listTab[i].classList.contains("show")){
+function searchForShowedTr(listTab) {
+    var array = new Array();
+    for (var i = 0; i < listTab.length; i++) {
+        if (listTab[i].classList.contains("show")) {
             array.push(i);
         }
     }
     return array;
 }
 
-function searchWordListTab(listTab,key){
-    for(var i=0;i<listTab.length;i++){
-        console.log(listTab[i].getElementsByTagName("td")[0].innerHTML+" *** "+key);
-        if(listTab[i].getElementsByTagName("td")[0].innerHTML == key){
+function searchWordListTab(listTab, key) {
+    for (var i = 0; i < listTab.length; i++) {
+        console.log(listTab[i].getElementsByTagName("td")[0].innerHTML + " *** " + key);
+        if (listTab[i].getElementsByTagName("td")[0].innerHTML == key) {
             return i;
         }
     }
 }
 
 var tabColor = [
-    "#338800",
-    "#338811",
-    "#338822",
-    "#338833",
-    "#338844",
-    "#338855",
-    "#338866",
-    "#338877",
-    "#338888",
-    "#338899",
-    "#3388aa",
-    "#3388bb",
-    "#3388cc",
-    "#3388dd",
-    "#3388ee",
-    "#3388ff",
-    "#3377ff",
-    "#3366ff",
-    "#3355ff",
-    "#3344ff",
-    "#3333ff",
-    "#3322ff",
-    "#3311ff",
-    "#3300ff",
-    "#2200ff",
-    "#1100ff",
-    "#0000ff",
-    "#0000ee",
-    "#0000dd",
-    "#0000cc",
-    "#0000bb",
-    "#0000aa",
-    "#000099",
-    "#000088",
-    "#000077",
-    "#000066",
-    "#000055",
-    "#000044",
-    "#000033",
-    "#000022",
-    "#000011",
-    "#000000",
-    "#000022",
-    "#000044",
-    "#000066",
-    "#000088",
-    "#0000aa",
-    "#0000cc",
-    "#0000ee",
-    "#0000ff",
-    "#2200ff",
-    "#4400ff",
-    "#4422ff",
-    "#4444ff",
-    "#4466ff",
-    "#3388aa",
-    "#3388bb",
-    "#3388cc",
-    "#3388dd",
-    "#3388ee",
-    "#3388ff",
-    "#3377ff"
-]
+    "#18161B",
+    "#2F2B38",
+    "#3100A7",
+    "#3A00C7",
+    "#6000ff",
+    "#4800ff",
+    "#2700FF",
+    "#6339C7",
+    "#5050FF",
+    "#5050FF",
+    "#005EFF",
+    "#3470D6",
+    "#2471A3",
+    "#65558B",
+    "#5D5D5E",
+    "#0277bd",
+    "#2962ff",
+    "#2979ff",
+    "#1e88e5",
+    "#5050FF",
+    "#4D82DC",
+    "#8A8A92",
+    "#2196f3",
+    "#039be5",
+    "#4DB0DC",
+    "#42a5f5",
+    "#9191C5",
+    "#82b1ff",
+    "#64b5f6",
+    "#03a9f4",
+    "#81d4fa",
+    "#90caf9",
+    "#7C7474",
+    "#4fc3f7",
+    "#29b6f6",
+    "#03a9f4",
+    "#0288d1",
+    "#40c4ff",
+    "#5DADE2",
+    "#52F0FF",
+    "#52FCFF",
+    "#80d8ff",
+    "#78FAD8",
+    "#C0FFF2",
+    "#AED6F1",
+    "#bbdefb",
+    "#b3e5fc",
+    "#C0EFFF",
+    "#D2BCFF",
+    "#96A3FF",
+    "#D6D0E2",
+    "#FC88FF",
+    "#FDB5FF",
+    "#D0D1D8",
+    "#FFCFF5",
+    "#e1f5fe",
+    "#E7F2FA",
+    "#E9EAF4",
+    "#EEEFF7",
+    "#F8F8F8"
+];
+
+
 
 
 function restUpdateChart(chart, type, key) {
@@ -705,10 +722,11 @@ function getMembers() {
             for (var i = 0; i < size; i++) {
                 array.push(result.aggregations.membres.buckets[i].key);
             }
-            
-            getNumberRemarque(nbrAvis,size);
+
+            getNumberRemarque(nbrAvis, size);
+            array.sort();
             createSelect(array);
-            
+
         }
     });
 }
@@ -722,10 +740,10 @@ function createSelect(array) {
     }
 }
 
-function updateDashbordStat(nbrAvis,nbrMem,nbrNote){
-    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[1].getElementsByTagName("span")[0].innerHTML=nbrAvis;
-    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[2].getElementsByTagName("span")[0].innerHTML=nbrMem;
-    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[0].getElementsByTagName("span")[0].innerHTML=nbrNote;
+function updateDashbordStat(nbrAvis, nbrMem, nbrNote) {
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[1].getElementsByTagName("span")[0].innerHTML = nbrAvis;
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[2].getElementsByTagName("span")[0].innerHTML = nbrMem;
+    document.getElementsByClassName("stat-div")[0].getElementsByClassName("stat")[0].getElementsByTagName("span")[0].innerHTML = nbrNote;
 }
 
 
@@ -745,8 +763,8 @@ function getNumberRemarque(nbrAvis, nbrMem) {
             }
         }
     }
-    
-    
+
+
     $.ajax({
         url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
         type: "POST",
@@ -757,136 +775,238 @@ function getNumberRemarque(nbrAvis, nbrMem) {
         },
         data: JSON.stringify(obj),
         success: function (result) {
-            
+
             var nbrRemarques = result.aggregations.sumR.value;
-            updateDashbordStat(nbrAvis,nbrMem,nbrRemarques);
-            
+            updateDashbordStat(nbrAvis, nbrMem, nbrRemarques);
+
         }
     });
-    
+
 }
 
 var filePage = 0;
 var activePage = 1;
 
-function createPagintionOtm(total,size,word,membre,active){
-  var begin = 0;
+function createPagintionOtm(total, size, word, membre, active,pagination) {
+    var begin = 0;
 
-  if(filePage!=0){
-    begin = filePage*2;
-  }   
+    if (filePage != 0) {
+        begin = filePage * 2;
+    }
 
-  var totalEx = Math.ceil((total-((filePage-1)*2+5)*5)/5);
-  if(filePage==0){
-      totalEx = Math.ceil(total/5);
-  }    
+    var totalEx = Math.ceil((total - ((filePage - 1) * 2 + 5) * 5) / 5);
     
-  var nbrPage = Math.min(4,2+totalEx);
-  console.log("totalEx :"+totalEx+" nbr page: "+nbrPage);      
 
-  var p = $(".d2 .pagination-otm");
-  p.html(" ");
-  var a = document.createElement("a");
-  a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
-  a.addEventListener("click",function(){
-    previousPageOtm(word,membre);
-    event.preventDefault();
-  });
-  p.append(a);
+    var nbrPage = Math.min(4, 2 + totalEx);
     
-  console.log("from "+(begin+1)+" to "+(begin+nbrPage));    
-    
-  for(var i=begin;i<begin+nbrPage+1;i++){
-        a = document.createElement("a");
-        var j=i+1;
-
-        a.innerHTML=(j);
-        if(i==begin){
-            a.addEventListener("click",function(event){
-                event.preventDefault();
-                if(begin!=0){
-                    activePage = this.innerHTML;
-                    getPrevPageFile(word,membre);
-                }else{
-                    getPageOtm(this.innerHTML,word,membre);
-                }
-            });
-        }else if(i==begin+nbrPage){
-           a.addEventListener("click",function(event){
-                event.preventDefault();
-              
-               if((begin+nbrPage+1)!=Math.ceil(total/5)){
-                   activePage = this.innerHTML;
-                   getNextPageFile(word,membre);   
-               }else{
-                   getPageOtm(this.innerHTML,word,membre);
-               }
-                
-            }); 
-        }else{
-           a.addEventListener("click",function(event){
-            event.preventDefault();
-               getPageOtm(this.innerHTML,word,membre);
-            }); 
-        }
-
-        if(i==active-1){
-            a.setAttribute("class","active");             
-         }
-
-        p.append(a);        
+    if (filePage == 0) {
+        totalEx = Math.ceil(total / 5);
+        nbrPage = Math.min(4,totalEx-1);
     }
     
-   a = document.createElement("a");
-   a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
-   a.addEventListener("click",function(){
+    
+    console.log("totalEx :" + totalEx + " nbr page: " + nbrPage);
+
+    if(pagination==1){
+       var p = $(".d2 .mlt-search .pagination-otm-search")
+    }else{
+        var p = $(".d2 .pagination-otm");   
+    }
+    
+    
+    p.html(" ");
+    var a = document.createElement("a");
+    a.innerHTML = "<i class=\"fas fa-angle-double-left\"></i>";
+    a.addEventListener("click", function () {
+        previousPageOtm(word, membre,pagination);
         event.preventDefault();
-        nextPageOtm(word,membre,Math.ceil(total/5));
-   });        
-   p.append(a);
+    });
+    p.append(a);
+
+    console.log("from " + (begin + 1) + " to " + (begin + nbrPage));
+
+    for (var i = begin; i < begin + nbrPage + 1; i++) {
+        a = document.createElement("a");
+        var j = i + 1;
+
+        a.innerHTML = (j);
+        if (i == begin) {
+            a.addEventListener("click", function (event) {
+                event.preventDefault();
+                if (begin != 0) {
+                    activePage = this.innerHTML;
+                    getPrevPageFile(word, membre,pagination);
+                } else {
+                    getPageOtm(this.innerHTML, word, membre,pagination);
+                }
+            });
+        } else if (i == begin + nbrPage) {
+            a.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                if ((begin + nbrPage + 1) != Math.ceil(total / 5)) {
+                    activePage = this.innerHTML;
+                    getNextPageFile(word, membre,pagination);
+                } else {
+                    getPageOtm(this.innerHTML, word, membre,pagination);
+                }
+
+            });
+        } else {
+            a.addEventListener("click", function (event) {
+                event.preventDefault();
+                getPageOtm(this.innerHTML, word, membre,pagination);
+            });
+        }
+
+        if (i == active - 1) {
+            a.setAttribute("class", "active");
+        }
+
+        p.append(a);
+    }
+
+    a = document.createElement("a");
+    a.innerHTML = "<i class=\"fas fa-angle-double-right\"></i>";
+    a.addEventListener("click", function () {
+        event.preventDefault();
+        nextPageOtm(word, membre, Math.ceil(total / 5),pagination);
+    });
+    p.append(a);
 }
 
 
-function getPageOtm(page,word,membre){
+function getPageOtm(page, word, membre,pagination) {
     activePage = page;
-    getDetWordKeyLoad(word,membre);
+    if(pagination==1){
+        searchMLT(word);
+    }else{
+        getDetWordKeyLoad(word, membre);
+    }
 }
 
-function previousPageOtm(word,membre){
-    if(activePage!=1){
+function previousPageOtm(word, membre,pagination) {
+    if (activePage != 1) {
         activePage--;
-        if(activePage == (filePage*2)+1 && activePage != 1){
-            getPrevPageFile(word,membre);    
-        }else{
-            getDetWordKeyLoad(word,membre);
+        if (activePage == (filePage * 2) + 1 && activePage != 1) {
+            getPrevPageFile(word, membre,pagination);
+        } else {
+            if(pagination==1){
+                searchMLT(word);
+            }else{
+                getDetWordKeyLoad(word, membre);
+            }
         }
         console.log("to Prev file Page");
         console.log(activePage);
     }
 }
 
-function nextPageOtm(word,membre,total){
-    console.log("total :"+total);
-    if(activePage!=total){
+function nextPageOtm(word, membre, total,pagination) {
+    console.log("total :" + total);
+    if (activePage != total) {
         activePage++;
-        if((filePage != 0 && activePage == (filePage*2)+5)||(filePage == 0 && activePage==5)){
+        if ((filePage != 0 && activePage == (filePage * 2) + 5) || (filePage == 0 && activePage == 5)) {
             console.log("to Next file Page");
-            getNextPageFile(word,membre);  
-        }else{
+            getNextPageFile(word, membre,pagination);
+        } else {
             console.log("No Next file");
-            getDetWordKeyLoad(word,membre);
+            if(pagination==1){
+                searchMLT(word);
+            }else{
+                getDetWordKeyLoad(word, membre);
+            }
         }
         console.log(activePage);
     }
 }
 
-function getPrevPageFile(word,membre){
-    filePage=filePage-1;
-    getDetWordKeyLoad(word,membre);
+function getPrevPageFile(word, membre,pagination) {
+    filePage = filePage - 1;
+    if(pagination==1){
+        searchMLT(word)
+    }else{
+        getDetWordKeyLoad(word, membre);    
+    }
 }
 
-function getNextPageFile(word,membre){
-    filePage=filePage+1;
+function getNextPageFile(word, membre,pagination) {
+    filePage = filePage + 1;
     console.log(filePage);
-    getDetWordKeyLoad(word,membre);
+    if(pagination==1){
+        searchMLT(word);
+    }else {
+        getDetWordKeyLoad(word, membre);            
+    }
+    
+}
+
+
+function searchMLT(word) {
+    var from = (activePage-1)*5;
+    var obj = {
+        "size":5,from:from,
+        "query": {
+            "more_like_this": {
+                "fields": ["Avis"],
+                "like": [word],
+                "min_term_freq": 1,
+                "min_doc_freq": 1,
+                "minimum_should_match":"100%"
+            }
+        }
+    };
+    
+    callLoadGif();
+    $.ajax({
+        type: "post",
+        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        data: JSON.stringify(obj),
+        success: function (result) {
+            
+            loadDiv(4,result,word);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+    
+}
+
+
+function searchMLTDiv(result,word){
+    var total = result.hits.total;
+    $(".stat-dashbord .dashbord-right .d2 .mlt-search .total-hits span").html(total);
+    $(".stat-dashbord .dashbord-right .d2 .mlt-search .word").html(word);
+    console.log(result.hits.hits.length);
+    for (var j = 0; j < Math.min(5,result.hits.hits.length); j++) {
+
+        var hl = result.hits.hits[j];
+        var span = hl._source.Avis;
+        var tr = document.createElement("tr");
+        tr.setAttribute("class", "note-div-item");
+        var td1 = document.createElement("td");
+        td1.innerHTML = span;
+        var td2 = document.createElement("td");
+        td2.innerHTML = "<i class=\"far fa-file-alt\"></i>";
+        td2.innerHTML += "<input type=\"hidden\" value=\"" + hl._id + "\">";
+        td2.setAttribute("style", "cursor:pointer");
+
+        td2.addEventListener("click", function () {
+            getAvis(this.parentElement.getElementsByTagName("input")[0].value, word,1);
+            
+        });
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+
+        $(".stat-dashbord .dashbord-right .d2 .mlt-search table.note-div-items").append(tr);
+    }
+    
 }
