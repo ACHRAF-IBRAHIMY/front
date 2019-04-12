@@ -2,25 +2,33 @@
 <menus>
   <menu absId="karaz/ux/hub/portailsearch" label="KRAZ UX HUB" icone="DashboardSearch_icon">
     <menu relId="search" label="Recherche">
-      <menu relId="PublicCentralSearch" label="PublicCentralSearch" icone="search" xcstt="x">
-        <resource type="search">karaz/ux/hub/portailsearch/search/PublicCentralSearch</resource>
-      </menu>
-       <menu relId="AllKarazuxresults" label="Elastic search" icone="search" xcstt="x">
-        <resource type="search">karaz/ux/hub/portailsearch/search/AllKarazuxresults</resource>
-      </menu>
-      <menu relId="DetailsActivitySearch" label="Elastic search det" icone="search" xcstt="x">
-        <resource type="search">karaz/ux/hub/portailsearch/search/DetailsActivitySearch</resource>
-      </menu>
-      <menu relId="OpinionTextMining" label="Opinion TextMining" icone="search" xcstt="x">
-        <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextMining</resource>
-      </menu>
-      <menu relId="AcceptabiliteProjets" label="Acceptabilite Projets" icone="search" xcstt="x">
+      <menu relId="AcceptabiliteProjets" label="Acceptabilite Projets" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/AcceptabiliteProjets</resource>
       </menu>
-      <menu relId="EtudeImpactEnvironemmental" label="Etude Impact Environemmental" icone="search" xcstt="x">
+      <menu relId="AccesAuFoncier" label="Acces Au Foncier" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AccesAuFoncier</resource>
+      </menu>
+      <menu relId="AllKarazuxresults" label="All Karazuxresults" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AllKarazuxresults</resource>
+      </menu>
+      <menu relId="DashletsArchitectSearch" label="Dashlets Architect Search" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/DashletsArchitectSearch</resource>
+      </menu>
+      <menu relId="DetailsActivitySearch" label="detais activity search" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/DetailsActivitySearch</resource>
+      </menu>
+      <menu relId="EtudeImpactEnvironemmental" label="Etude Impact Environemmental" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental</resource>
       </menu>
-      
+      <menu relId="AllGlobalTAskSearch" label="All Global TAsk Search" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/OldallGlobalTAskSearch</resource>
+      </menu>
+      <menu relId="OpinionTextMining" label="Opinion TextMining" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextMining</resource>
+      </menu>
+      <menu relId="PublicCentralSearch" label="Public Central Search" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/PublicCentralSearch</resource>
+      </menu>
     </menu>
   </menu>
 </menus>
