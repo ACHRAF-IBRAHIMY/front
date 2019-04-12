@@ -25,9 +25,9 @@
                
                $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .back-span").click(function(){
                  if(typeGlobal==1){
-                      searchMLT($(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html());
+                      searchMLT($(".stat-dashbord .dashbord-right .d2 .ow-label-pl span.search-word").html());
                  }else{
-                      getDetWordKeyLoad($(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html(),mem);
+                      getDetWordKeyLoad($(".stat-dashbord .dashbord-right .d2 .ow-label-pl span.search-word").html(),mem);
                  }
                   
                });
@@ -224,17 +224,11 @@
                             </div>
                         </html>
                     </vbox>
-                    <vbox columns="50% 50%" className="dashbord-right">
+                    <vbox columns="50% 50%" className="dashbord-right fieldSets">
                       <vbox>
-                          <vbox columns="100%" className="hp-box d1">
-                        
-                            <html>
-                            <i class="fas fa-angle-down" aria-hidden="true" />
-                            <div class="vpanel-title">
-                                <span>OCCURRENCE DES MOTS DANS L'INDEX</span>
-                                   <hr class="header-create-account-horizontal-line hr-hub" />
-                            </div>
-                                <div class="content">
+                         <fieldset header="OCCURRENCE DES MOTS DANS L'INDEX" className="d1">
+                             <html>
+                                 <div class="content">
                                    <div class="config-bar">
                                        <span class="sp sp1 fas fa-sort-numeric-up" />
                                        <select class="s1">
@@ -253,52 +247,42 @@
                                        <span class="chart-type sp sp4 fas fa-chart-pie" />
                                        <span class="sp sp5 fas fa-redo-alt" />
                                    </div>
-                                   <div class="chart-container" style="position: relative;width:90%;">
+                                   <div class="chart-container" style="position: relative;width:95%;height: 619px;">
                                     <canvas id="myChart" width="400" height="400" />
                                     </div>
                                 </div>
-                            </html>
-                        </vbox>
-                    </vbox>         
-                                  
+                             </html>
+                         </fieldset>
+                    </vbox>
                         <vbox>
-                           <vbox className="hp-box search-box">
-                               <html>
-                                  <i class="fas fa-angle-down" aria-hidden="true" />
-                                   <div class="vpanel-title">
-                                        <span>RECHERCHE DANS LES AVIS</span>
-                                        <hr class="header-create-account-horizontal-line hr-hub" />
-                                    </div>
-                                    <div class="input-bar content">
-                                        <input type="text" />
-                                        <button class="b b1 active">KEY</button>
-                                        <button class="b b2">MLT</button>
-                                        <button class="fas fa-search" />
-                                    </div>    
-                               </html>   
-                           </vbox>
-                            <vbox columns="100%" className="hp-box d2">
-                            <html className="word-list-div word-list">
-                               <i class="fas fa-angle-down" aria-hidden="true" />
-                                <div class="vpanel-title">
-                                   <span>LISTE DES MOTS EXISTES</span>
-                                   <hr class="header-create-account-horizontal-line hr-hub" />
+                          <fieldSet header="RECHERCHE DANS LES AVIS" className="search-box">
+                            <html>
+                               <div class="input-bar content">
+                                    <input type="text" />
+                                    <button class="b b1 active">KEY</button>
+                                    <button class="b b2">MLT</button>
+                                    <button class="fas fa-search" />
                                 </div>
+                            </html>
+                            </fieldSet>
+                            
+                           <fieldSet header="LISTE DES MOTS EXISTES" className="d2">
+                               <html className="word-list-div word-list">
                                 <div class="content">
                                     <div class="div">
                                     <table class="exist-word-list tab">
                                         
                                     </table>
-                                </div>    
+                                    </div>
+                                    
                                 </div>
+                                <div class="pagination-word-list" style="margin-top: 30px;">
+                                        
+                                </div>    
                                 
                             </html>
                             <html className="word-list-div word-list-det">
-                                    <i class="fas fa-angle-down" aria-hidden="true" />
-                                    <div class="vpanel-title">
-                                        <span>MOT | <span class="cl-orange" /></span>
-                                       <hr class="header-create-account-horizontal-line hr-hub" />
-                                    </div>
+                                    
                                 <div class="back-div">
                                         <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
                                 </div>
@@ -324,11 +308,6 @@
                                 <img src="img/load-text.gif" alt="" />
                             </html>
                             <html className="word-list-div word-list-text-avis">
-                                <i class="fas fa-angle-down" aria-hidden="true" />
-                                   <div class="vpanel-title">
-                                    <span>MOT | <span class="cl-orange" /></span>
-                                    <hr class="header-create-account-horizontal-line hr-hub" />
-                                </div>
                                <div class="content">
                                   <div class="avis-det-full">
                                    <span class="back-span"><i class="fas fa-angle-double-left" /> Retour</span>
@@ -346,18 +325,16 @@
                                </div>
                             </html>
                             <html className="word-list-div mlt-search">
-                                <i class="fas fa-angle-down" aria-hidden="true" />
-                                <div class="vpanel-title">
-                                    <span>RESULTATS</span>
-                                    <hr class="header-create-account-horizontal-line hr-hub" />
-                                </div>
                                 <div class="back-div">
                                         <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
                                 </div>
                                 <div class="search-info">
-                                    <div class="word"><span></span></div><div class="total-hits"><span></span> Avis Similaires</div>
+                                    <div class="word"><span /></div><div class="total-hits"><span /> Avis Similaires</div>
                                 </div>
                                 <div class="content">
+                                    <div style="margin:auto;color:#333;width:85%;margin-bottom:10px;font-size: 18px;">
+                                        <span>AVIS : </span>
+                                    </div>
                                     <table class="note-div-items tab">
                                         
                                     </table>
@@ -366,7 +343,7 @@
                                     
                                 </div>
                             </html>
-                        </vbox>
+                           </fieldSet>
                         </vbox>         
                         
                     </vbox>
