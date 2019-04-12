@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="DashletsArchitectSearch" label="DashletsArchitectSearch">
+<query> 
+</query> 
+<data>
+		<query> 
+			<keys />
+			<model />
+			<from />
+			<to />  
+			<task>true</task>  
+			<object>true</object>  
+			<document>true</document>  
+			<annotation>true</annotation>  
+			<others>true</others>
+            
+            <userLogin />
+            <userPassword />            
+		</query>
+	</data>
+  <view>
+  <screen id="dashboardMain" noToolBar="true">
+
+    <vbox id="dashboardArchitect" columns="auto 30%">
+<!--    
+<vbox id="blinkSearch" columns="20% auto" height="300px">        -->
+            <!-- search criterias -->
+ <vbox>
+                <framedPanel label="Taches a faire" collapsible="false">
+               <vbox label="Résultat de recherche" >
+                 <vbox columns="33% 33% 33%">
+                 <vbox /><vbox />
+                <html> 
+                <div class="ow-thumbnail-action  fas fa-cogs" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="width: 300px;margin-left: 49%;" > 
+              Toutes les tâches
+               </div>
+                </html>
+</vbox>
+                     <!-- <objectList targetScreen="autorisationViewer" displayMode="thumbnail" searchQN="AllArrondAutorisationConstruction"> -->
+               <tasklist name="ArchetectTask" label="My Tasks" displayMode="thumbnail" searchQN="globalTasks?limit=3" collectionName="task" columns="33% 33% 33%">
+                 <field label="Reference" index="stringIndex1" widget="text" name="reference" />
+				<field label="Statut" index="stringIndex2" widget="text" name="statut" />
+				<field label="Description" index="stringIndex3" widget="text" name="description" />
+				<field label="d4" index="stringIndex4" widget="text" name="detail4" /> 
+				<field label="d5" index="stringIndex5" widget="text" name="detail5" /> 
+				<field label="d6" index="stringIndex6" widget="text" name="detail6" /> 
+				<field label="d7" index="stringIndex7" widget="text" name="detail7" /> 
+				<field label="d8" index="stringIndex8" widget="text" name="detail8" /> 
+				<field label="d9" index="stringIndex9" widget="text" name="detail9" /> 
+				<field label="d10" index="stringIndex10" widget="text" name="detail10" /> 
+				<field label="d11" index="stringIndex11" widget="text" name="detail11" /> 
+				<field label="d12" index="stringIndex12" widget="text" name="detail12" /> 
+				<field label="manualTaskId" index="manualTaskId" widget="text" name="manualTaskId" />
+				<field label="creationTime" index="creationTime" widget="text" name="creationTime" />
+				<field label="affected" index="affected" widget="text" name="affected" />
+				<field label="activityName" index="activityName" widget="text" name="activityName" />
+				<field  label="Processus" index="processName" name="processName" /> 
+				<field  label="ProcessusQN" index="processQN" name="processQN" /> 
+				<field  label="modelQN" index="modelQN" name="modelQN" /> 
+				<field  label="aiId" index="id" name="aiId" /> 
+				<field  label="objectId" index="objectId" name="objectId" /> 
+
+               <vbox >
+          <!--test expression="{task[$i].owt_state},=,mine" separator=","-->
+            <fieldset id="infoTask-$i" labelAlign="float" label="" className="NoUnderlineField fieldSetHeaderBold" collapsible="false">
+      
+                <!--field  label="Date affectation" xpath="task[$i].creationTime" readOnly="true"  /> 
+                <field  label="Processus" xpath="task[$i].processName" readOnly="true"  /> 
+                <field  label="Etape" xpath="task[$i].activityName" readOnly="true"  /> 
+                <field  label="Statut" xpath="task[$i].stringIndex2" readOnly="true"  /--> 
+         <html>
+	          <div style="margin-left: 25px;">
+		       <span style="color: var(--form-button-fg);font-size: 12px;">Date affectation</span>
+	          </div>
+	          <div style="margin-left: 26px;" class="accessibility-afs-3">
+		      <span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].creationTime} </span>
+	          </div>
+
+             <div style="margin-left: 25px;">
+		       <span style="color: var(--form-button-fg);font-size: 12px;">Processus</span>
+	          </div>
+	          <div style="margin-left: 26px;" class="accessibility-afs-3">
+		      <span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].processName|translate }  </span>
+	          </div>
+
+             <div style="margin-left: 25px;">
+		       <span style="color: var(--form-button-fg);font-size: 12px;">Etape</span>
+	          </div>
+	          <div style="margin-left: 26px;" class="accessibility-afs-3">
+		      <span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;"> ${task[$i].activityName|translate }</span>
+	          </div>
+              
+            <div style="margin-left: 25px;">
+		       <span style="color: var(--form-button-fg);font-size: 12px;">Statut</span>
+	          </div>
+	          <div style="margin-left: 26px;" class="accessibility-afs-3">
+		      <span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].stringIndex2} </span>
+	          </div>
+		<div style="margin-top:10px;display:flex;">
+			<span class="ow-thumbnail-action  fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;"> </span>
+			<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${task[$i].objectId}, '${task[$i].modelQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;"> </span>
+			<span class="ow-thumbnail-action  fas fa-user-cog" onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )" style="display: unset;margin-right: 0px;margin-right: 0px;"> </span>
+            
+            <div class="affectation ${task[$i].owt_state}" title="${task[$i].owt_state_message}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message}</div>
+		</div>
+        </html>
+
+                </fieldset>
+                 <script onLoad="true">
+               var label=$("#infoTask-"+$i).find('.ow-pl-toolbar').find('.ow-label-pl');
+               if(label){
+               label[0].outerText=root.task[$i].reference;
+                }
+                 </script>
+               <!--/test-->
+                 </vbox>
+
+                     </tasklist> 
+                  </vbox>
+                </framedPanel>
+ <framedPanel label="Dossiers en cours de traitement" collapsible="false">
+ 
+ </framedPanel>
+<framedPanel label="Indicateurs de performance" collapsible="false">
+
+ </framedPanel>
+<framedPanel label="Astuces, conseils et et nouvelles fonctionnalités" collapsible="false">
+
+ </framedPanel>
+            </vbox>
+        
+            <vbox label="Notifications"> 
+                <fieldset labelAlign="float" label="Notifications" collapsible="false" height="100">
+                    <objectList displayMode="thumbnail" searchQN="notify/email/search/AllEmail?limit=3" >
+<field_ol name="reference" label="Reference" index="stringIndex1" widget="text" />
+      <field_ol name="type" label="Type" index="stringIndex3" widget="text" hidden="true" />
+      <field_ol name="tos" label="To" index="stringIndex4" widget="text" />
+      <field_ol name="ccs" label="Ccs" index="stringIndex5" widget="text" hidden="true" />
+      <field_ol name="bccs" label="Bccs" index="stringIndex6" widget="text" hidden="true" />
+      <field_ol name="subject" label="Subject" index="stringIndex7" widget="text" />
+      <field_ol name="priority" label="Priority" index="intIndex1" widget="integer" hidden="true" />
+      <field_ol name="application" label="Application" index="stringIndex8" widget="text" />
+      <field_ol name="origine" label="Origine" index="stringIndex9" widget="text" />
+      <field_ol name="modelQN" label="ModelQN" index="stringIndex10" widget="text" />
+      <field_ol name="processQN" label="Process QN" index="stringIndex11" widget="text" />
+      <field_ol name="activityName" label="Activity Name" index="stringIndex12" widget="text" hidden="true" />
+      <field_ol name="activityLabel" label="Activity Label" index="stringIndex13" widget="text" />
+      <field_ol name="moment" label="Moment" index="stringIndex14" widget="text" hidden="true" />
+      <field_ol name="affected" label="Affected" index="stringIndex15" widget="text" hidden="true" />
+      <field_ol name="allocation" label="Allocation" index="stringIndex16" widget="text" hidden="true" />
+      <field_ol name="dateCreation" label="DateCreation" index="dateIndex1" widget="date" hidden="true" />
+      <field_ol name="entity" label="Entity" index="stringIndex19" widget="text" hidden="true" />
+  <vbox>
+<fieldset  labelAlign="float" label="" className="fieldSetHeaderNoBorderBottom" collapsible="false">
+
+</fieldset>
+  </vbox>
+ </objectList> 
+                    
+                </fieldset>
+               <!--fieldset labelAlign="float" label="Calendrier commissions" collapsible="false" height="100">
+                    
+                    
+                </fieldset-->
+            </vbox>
+
+           
+    </vbox>  
+
+</screen>
+
+  </view>
+    
+    
+ </search>
