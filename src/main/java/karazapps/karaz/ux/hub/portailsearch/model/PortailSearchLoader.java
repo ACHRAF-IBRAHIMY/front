@@ -88,9 +88,9 @@ public class PortailSearchLoader {
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-PublicCentralSearch.xml");
 		
 		try {
-			RootMenu.addMenus("karazapps/karaz/ux/hub/portailsearch/model/DashboardSearch-menu.xml");
+			RootMenu.addMenus("karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-menu.xml");
 		} catch (Exception e) { 
-			System.out.println("Erreur lors de chargement de menu   karazapps/karaz/ux/hub/portailsearch/model/DashboardSearch-menu.xml");
+			System.out.println("Erreur lors de chargement de menu   karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-menu.xml");
 		}	
 		
 		try {
