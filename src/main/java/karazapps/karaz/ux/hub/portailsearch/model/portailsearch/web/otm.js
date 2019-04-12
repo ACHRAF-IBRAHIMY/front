@@ -134,7 +134,7 @@ function loaded(data, labels, membre) {
 
 function loadList(data, labels, membre) {
     var list = $(".stat-dashbord .dashbord-right .d2 .word-list .div table");
-    for (var i = 0; i < Math.min(12, data.length); i++) {
+    for (var i = 0; i < data.length ; i++) {
         var ap = document.createElement("tr");
         ap.setAttribute("class", "exist-word-list-item show");
 
@@ -190,8 +190,14 @@ function loadList(data, labels, membre) {
         ap.appendChild(sp4);
         ap.appendChild(sp5);
 
+        if(i>=10){
+            ap.setAttribute("style","display:none");
+        }
+        
         list.append(ap);
     }
+    
+    return list;
 }
 
 function getDetWordKeyLoad(word, membre) {
@@ -256,6 +262,8 @@ function getDetWordKeyLoad(word, membre) {
         },
         data: JSON.stringify(obj),
         success: function (result) {
+            $(".stat-dashbord .dashbord-right .d2 .word-list-det .div-d2 table.note-div-items").html("");
+            $(".stat-dashbord .dashbord-right .d2 .word-list-det .div-d1 .div-d1-det").html("");
             var res = {
                 "result": result,
                 "word": word
@@ -268,11 +276,12 @@ function getDetWordKeyLoad(word, membre) {
     });
 }
 
+
+
 function getDetWordKey(result, word) {
-    $(".stat-dashbord .dashbord-right .d2 .word-list-det .vpanel-title span.cl-orange").html(word);
+    
     var a = filtering(result);
     var hl = result.hits.hits;
-
     for (var i = 0; i < Math.min(5, a.length); i++) {
         var sp = document.createElement("span");
         sp.setAttribute("class", "rac");
@@ -285,24 +294,43 @@ function getDetWordKey(result, word) {
 
     for (var j = 0; j < Math.min(5, hl.length); j++) {
         //var span = addSpansHL(extractByTag(hl[j].highlight.Avis[0],'em'),hl[j].highlight.Avis[0].replace("<em>","").replace("</em>",""));
-        var span = addSpansHL(extractByTag(hl[j].highlight.Avis[0], 'em'), extractArray(hl[j]._source.Avis, extractByTag(hl[j].highlight.Avis[0], 'em')));
+        var span = addSpansHL(extractByTag(hl[j].highlight.Avis[0], 'em'),subLong( extractArray(hl[j]._source.Avis, extractByTag(hl[j].highlight.Avis[0], 'em')),150));
+        var span_without =  extractArray(hl[j]._source.Avis, extractByTag(hl[j].highlight.Avis[0], 'em'));
+        console.log(span+" "+span_without);
+        
+        
         var tr = document.createElement("tr");
         tr.setAttribute("class", "note-div-item");
         var td1 = document.createElement("td");
+        td1.setAttribute("style","font-size:14px");
+        td1.setAttribute("title",span_without);
         td1.innerHTML = span;
         var td2 = document.createElement("td");
         td2.innerHTML = "<i class=\"far fa-file-alt\"></i>";
         td2.innerHTML += "<input type=\"hidden\" value=\"" + hl[j]._id + "\">";
-        td2.setAttribute("style", "cursor:pointer");
+        td2.setAttribute("style", "cursor:pointer;text-align:center;width:25px;");
+        td2.setAttribute("title","Afficher l'avis");
+
 
         td2.addEventListener("click", function () {
             //alert(this.parentElement.getElementsByTagName("input")[0].value);
+           $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-full .extract-notes").hide();
             getAvis(this.parentElement.getElementsByTagName("input")[0].value, word,0);
+        });
+        
+        var td3 = document.createElement("td");
+        td3.innerHTML="<i class=\"fas fa-search\"></i>"
+        td3.setAttribute("style","cursor:pointer;text-align:center;width:25px;");
+        td3.setAttribute("title","Recherche par similarité");
+        td3.addEventListener("click",function(){
+            filePage=0;
+            activePage =1;
+            searchMLT(this.parentElement.children[0].getAttribute("title"));
         });
 
         tr.appendChild(td1);
+        tr.appendChild(td3);
         tr.appendChild(td2);
-
 
         $(".stat-dashbord .dashbord-right .d2 .word-list-det .div-d2 table.note-div-items").append(tr);
     }
@@ -319,22 +347,30 @@ function callLoadGif() {
 function loadDiv(div, key, membre) {
     switch (div) {
         case 1:
-            if (key != null) loadList(key[0], key[1], membre);
+            $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("LISTE DES MOTS EXISTES");
+            if (key != null){
+                var table = $(".stat-dashbord .dashbord-right .d2 .word-list .div table tr");
+                table = loadList(key[0], key[1], membre);
+                createPaginationListWords(table.children("tr"),10);
+            } 
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list").show();
             break;
         case 2:
+            $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("MOT | <span class=\"cl-orange\">"+key.word+"</span>");
             getDetWordKey(key.result, key.word, membre);
             createPagintionOtm(key.result.hits.total, 5, key.word, membre, activePage,0);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-det").show();
             break;
         case 3:
+            $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("MOT | <span class=\"cl-orange\">"+subLong(key.key,60)+"</span> <span class=\"cl-orange search-word\" style=\"display:none\">"+key.key+"</span>");
             getTextAvis(key.avis, key.membre, key.remarques, key.key,key.type);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-text-avis").show();
             break;
         case 4:
+            $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("RESULTATS");
             searchMLTDiv(key,membre);
             createPagintionOtm(key.hits.total, 5, membre, null, activePage,1);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
@@ -348,7 +384,7 @@ var typeGlobal = 0;
 function getTextAvis(avis, membre, remarques, key,type) {
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-membre span").html(membre);
     $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-avis p").html(avis);
-    $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .vpanel-title span.cl-orange").html(key);
+    
     var p = document.createElement("ul");
     for (var i = 0; i < remarques.length; i++) {
         var l = document.createElement("li");
@@ -991,7 +1027,9 @@ function searchMLTDiv(result,word){
         var tr = document.createElement("tr");
         tr.setAttribute("class", "note-div-item");
         var td1 = document.createElement("td");
-        td1.innerHTML = span;
+        td1.setAttribute("style","font-size: 14px;");
+        td1.setAttribute("title",span);
+        td1.innerHTML = subLong(span,135);
         var td2 = document.createElement("td");
         td2.innerHTML = "<i class=\"far fa-file-alt\"></i>";
         td2.innerHTML += "<input type=\"hidden\" value=\"" + hl._id + "\">";
@@ -1009,4 +1047,88 @@ function searchMLTDiv(result,word){
         $(".stat-dashbord .dashbord-right .d2 .mlt-search table.note-div-items").append(tr);
     }
     
+}
+
+
+function createPaginationListWords(table,size){
+    console.log("table :"+table+" size :"+table.length);
+    var nbrPage = Math.ceil(table.length/size);
+    var p = $(".stat-dashbord .dashbord-right .d2 .word-list-div .pagination-word-list");
+    p.html("");
+    var a = document.createElement("a");
+    a.innerHTML = "<i class=\"fas fa-angle-double-left\"></i>";
+    a.addEventListener("click", function () {
+        previousPageLW(table);
+        event.preventDefault();
+    });
+    p.append(a);
+
+
+    for (var i = 0; i <nbrPage; i++) {
+        a = document.createElement("a");
+        var j = i + 1;
+        if(j==1){
+            a.setAttribute("class","active");
+        }
+        a.innerHTML = (j);
+        a.addEventListener("click", function (event) {
+            event.preventDefault();
+            getPageLW(this.innerHTML,table);
+        });
+        
+
+        p.append(a);
+    }
+
+    a = document.createElement("a");
+    a.innerHTML = "<i class=\"fas fa-angle-double-right\"></i>";
+    a.addEventListener("click", function () {
+        event.preventDefault();
+        nextPageLW(table);
+    });
+    p.append(a);
+}
+var wordListPage = 1;
+
+function previousPageLW(table){
+  if(wordListPage != 1){
+    wordListPage--;
+    var page =  wordListPage;
+    getPageLW(page,table);
+  }
+    console.log("previous page to :"+page);
+}
+
+function nextPageLW(table){
+  if(wordListPage!=Math.ceil(table.length/10)){
+    wordListPage++;
+    var page = wordListPage;
+    getPageLW(page,table);
+  } 
+  console.log("next page to :"+page);
+}
+
+function getPageLW(page,table){
+   wordListPage = page;
+   tableShows(10,table);
+   console.log("get page :"+page);
+}
+
+function tableShows(size,table){
+  var page = wordListPage;
+  var total = table.length-(wordListPage-1)*size;
+  var start = (wordListPage-1)*size;
+    resetTable(table);
+  for(var i = start;i<start+Math.min(size,total);i++){
+    table.eq(i).show();
+  }
+    
+ $(".pagination-word-list a").removeClass("active");
+ $(".pagination-word-list a").eq(page).addClass("active");    
+}
+
+function resetTable(table){
+  for(var i=0;i<table.length;i++){
+    table.eq(i).hide();
+  }
 }
