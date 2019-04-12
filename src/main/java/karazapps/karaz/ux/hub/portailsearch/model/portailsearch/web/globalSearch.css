@@ -1,0 +1,56 @@
+
+.notif_info_header{
+    grid-template-columns:10% 40% 50%;
+    display: grid;
+    font-family: 'Arial Italique', 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: italic;
+    font-size: 12px;
+    padding-bottom: 6px;
+}
+.sf_notif{
+    font-size: 28px;
+    margin-top: -5px;
+    position: inherit;
+    color:#9a9898;
+}
+.notificone_:before {
+	 content: "\f0e0";
+}
+.notificone_EMAIL:before {
+	 content: "\f0e0";
+}
+.notificone_FCM:before {
+	content: "\f013";
+}
+.notificone_SMS:before {
+	     content: "\f7cd";
+}
+.email_to_cls{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.notif_emailSubject{
+        font-weight: bold;
+}
+#dashboardArchitect  .ow-pagination-bar {
+        height: 43px;
+    background: #949189;
+    overflow: hidden;
+}
+#dashboardArchitect .ow-pagination-sttgroup {
+    display: none;
+ }
+#dashboardArchitect button.ow-button.float{
+    margin-left: 80%;
+    position: relative;
+}
+#dashboardArchitect .dashboardArchitect_serach_Button {
+    color: #757777 !important;
+}
+button.ow-button.dashboardArchitect_serach_Button {
+    padding: 3px 0.75rem;
+    border: 1px solid var(--form-button-fg);
+    outline: none;
+}
