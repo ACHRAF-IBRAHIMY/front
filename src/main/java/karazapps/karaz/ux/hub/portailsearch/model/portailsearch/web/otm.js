@@ -349,9 +349,8 @@ function loadDiv(div, key, membre) {
         case 1:
             $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("LISTE DES MOTS EXISTES");
             if (key != null){
-                var table = $(".stat-dashbord .dashbord-right .d2 .word-list .div table tr");
-                table = loadList(key[0], key[1], membre);
-                createPaginationListWords(table.children("tr"),10);
+                loadList(key[0], key[1], membre);
+                createPaginationListWords(10,key[0].length);
             } 
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list").show();
@@ -1050,11 +1049,13 @@ function searchMLTDiv(result,word){
 }
 
 
-function createPaginationListWords(table,size){
-    console.log("table :"+table+" size :"+table.length);
-    var nbrPage = Math.ceil(table.length/size);
+function createPaginationListWords(size,total){
+    console.log(total);
+    var nbrPage = Math.ceil(total/size);
+    console.log(nbrPage);
     var p = $(".stat-dashbord .dashbord-right .d2 .word-list-div .pagination-word-list");
     p.html("");
+    var table = $(".stat-dashbord .dashbord-right .d2 .word-list .div table tr");
     var a = document.createElement("a");
     a.innerHTML = "<i class=\"fas fa-angle-double-left\"></i>";
     a.addEventListener("click", function () {
@@ -1115,12 +1116,14 @@ function getPageLW(page,table){
 }
 
 function tableShows(size,table){
+ var tab =  $(".stat-dashbord .dashbord-right .d2 .word-list .div table tr");
+    
   var page = wordListPage;
-  var total = table.length-(wordListPage-1)*size;
+  var total = tab.length-(wordListPage-1)*size;
   var start = (wordListPage-1)*size;
-    resetTable(table);
+    resetTable(tab);
   for(var i = start;i<start+Math.min(size,total);i++){
-    table.eq(i).show();
+    tab.eq(i).show();
   }
     
  $(".pagination-word-list a").removeClass("active");
