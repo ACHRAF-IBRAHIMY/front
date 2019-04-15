@@ -20,7 +20,7 @@
       <menu relId="EtudeImpactEnvironemmental" label="Etude Impact Environemmental" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental</resource>
       </menu>
-      <menu relId="AllGlobalTAskSearch" label="All Global TAsk Search" icone="search" xcstt="x">
+      <menu relId="AllGlobalTAskSearch" label="All Global TAsk Search" icone="search">
         <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch]]></resource>
       </menu>
       <menu relId="OpinionTextMining" label="Opinion TextMining" icone="search">
@@ -28,6 +28,9 @@
       </menu>
       <menu relId="PublicCentralSearch" label="Public Central Search" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/PublicCentralSearch</resource>
+      </menu>
+      <menu relId="AllGlobalModelSearch" label="All Global TAsk Search" icone="search" xcstt="x">
+        <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllGlobalModelSearch]]></resource>
       </menu>
     </menu>
   </menu>
