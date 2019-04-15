@@ -29,6 +29,9 @@
       <menu relId="PublicCentralSearch" label="Public Central Search" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/PublicCentralSearch</resource>
       </menu>
+     <menu relId="AllGlobalModelSearch" label="All Global Model Search" icone="search" xcstt="x">
+        <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllGlobalModelSearch]]></resource>
+      </menu>
     </menu>
   </menu>
 </menus>

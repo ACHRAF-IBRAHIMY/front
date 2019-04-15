@@ -94,6 +94,7 @@
                 
                 $(".stat-dashbord .dashbord-right .d1 .config-bar select.s1").change(function(){
                     var selectval = $(".stat-dashbord .dashbord-right .d1 .config-bar select.s2 option:selected").val();
+                    paginationReset();
                     if(selectval=="null"){
                         ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),null);
               		}else{
@@ -121,7 +122,7 @@
                 $(".extract-notes-button").click(function(){
                     $(".extract-notes").toggle();
                 });
-                
+                paginationReset();
                 getMembers();
                 ESCall(12,null);
         </script>
