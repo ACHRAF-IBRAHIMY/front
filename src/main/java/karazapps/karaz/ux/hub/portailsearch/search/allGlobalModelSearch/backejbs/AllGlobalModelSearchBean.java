@@ -41,6 +41,7 @@ public class AllGlobalModelSearchBean implements KarazQuery {
 	private static Logger logger = Logger.getLogger(AllGlobalModelSearchBean.class); 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	XPathExpression<Element> xpath_data_entity = XPathFactory.instance().compile("entity", Filters.element());
+	XPathExpression<Element> xpath_data_searchModel = XPathFactory.instance().compile("query/searchModel", Filters.element());
 
 	private String searchPath = "karaz/ux/hub/portailsearch/search/AllGlobalModelSearch";
 	private Map<String, String> indexationMap=new TreeMap<String, String>(); 
@@ -62,15 +63,21 @@ public class AllGlobalModelSearchBean implements KarazQuery {
 		Element queryData = xmlDoc.getRootElement();
 		sr.close();
 		ArrayList<String> listeSerach=new ArrayList<String>();
-		if(queryData.getChild("searchModel")!=null){
-			for(Element e:queryData.getChild("searchModel").getChildren()){
+		
+		if(xpath_data_searchModel!=null){
+		Element returnMode_elem = xpath_data_searchModel.evaluateFirst(queryData);
+		//System.out.println("returnMode_elem=="+returnMode_elem);
+		if(returnMode_elem!=null){
+			for(Element e:returnMode_elem.getChildren()){
 				if(BaseType.isNotEmty(e.getTextTrim())){
 				listeSerach.add(e.getTextTrim());
 				}
 			}
+		
+		}
 		}
 		PortailTools pt=new PortailTools();
-		logger.debug("listeSerach=="+listeSerach);
+		logger.info("from AllGlobalModelSearchBean aliste=="+listeSerach);
 		int ofsset = DefaultFirstResult;
 		if (firstResult != null){
 			ofsset=firstResult;
@@ -82,7 +89,11 @@ public class AllGlobalModelSearchBean implements KarazQuery {
 		}
 		int maxSize=limit;
 		if(listeSerach.size()<=0) {
-			return new TreeMap<String, Object>();
+			TreeMap<String, Object> xret = new TreeMap<String, Object>();
+			ArrayList<TreeMap<String, String>> aliste = new ArrayList<TreeMap<String, String>>();
+			xret.put(KarazQuery.Result, aliste);
+			xret.put(KarazQuery.TotalCout, 0);
+			return xret;
 		}
 		limit= (limit/listeSerach.size());
 		if(limit<1){
@@ -107,6 +118,7 @@ public class AllGlobalModelSearchBean implements KarazQuery {
 					e.printStackTrace();
 				}
 			}
+			ofsset++;
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -119,7 +131,7 @@ public class AllGlobalModelSearchBean implements KarazQuery {
 		
 		ret.put(KarazQuery.Result, aliste);
 		ret.put(KarazQuery.TotalCout, totalRowCount);
-		logger.debug("aliste==="+aliste);
+		logger.info("from AllGlobalModelSearchBean aliste==="+aliste);
 		// preRunTraitement(query, data);
 		
 
