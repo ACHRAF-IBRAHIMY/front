@@ -39,7 +39,7 @@ function ESCall(size, membre) {
     callLoadGif();
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -254,7 +254,7 @@ function getDetWordKeyLoad(word, membre) {
 
     $.ajax({
         type: "POST",
-        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -356,14 +356,14 @@ function loadDiv(div, key, membre) {
             $(".dashbord-right .d2 .word-list").show();
             break;
         case 2:
-            $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("MOT | <span class=\"cl-orange\">"+key.word+"</span>");
+            $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("MOT | <span class=\"cl-orange\" style=\"text-transform: capitalize;\">"+key.word+"</span>");
             getDetWordKey(key.result, key.word, membre);
             createPagintionOtm(key.result.hits.total, 5, key.word, membre, activePage,0);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-det").show();
             break;
         case 3:
-            $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("MOT | <span class=\"cl-orange\">"+subLong(key.key,60)+"</span> <span class=\"cl-orange search-word\" style=\"display:none\">"+key.key+"</span>");
+            $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("MOT | <span class=\"cl-orange\" style=\"text-transform: none;\" >"+subLong(key.key,60).substring(0,1).toUpperCase()+subLong(key.key,60).substr(1)+"</span> <span class=\"cl-orange search-word\" style=\"display:none\">"+key.key+"</span>");
             getTextAvis(key.avis, key.membre, key.remarques, key.key,key.type);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-text-avis").show();
@@ -498,7 +498,7 @@ function searchBefAft(pos, arr, vr) {
 function getAvis(id, key,type) {
     callLoadGif();
     $.ajax({
-        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/" + id,
+        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/" + id,
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -713,7 +713,7 @@ function restUpdateChart(chart, type, key) {
     }
 
     $.ajax({
-        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
@@ -742,7 +742,7 @@ function getMembers() {
     };
 
     $.ajax({
-        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
@@ -801,7 +801,7 @@ function getNumberRemarque(nbrAvis, nbrMem) {
 
 
     $.ajax({
-        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
@@ -995,7 +995,7 @@ function searchMLT(word) {
     callLoadGif();
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/index_classification_test/avis/_search",
+        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -1035,6 +1035,7 @@ function searchMLTDiv(result,word){
         td2.setAttribute("style", "cursor:pointer");
 
         td2.addEventListener("click", function () {
+            $(".stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-full .extract-notes").hide();
             getAvis(this.parentElement.getElementsByTagName("input")[0].value, word,1);
             
         });
@@ -1134,4 +1135,8 @@ function resetTable(table){
   for(var i=0;i<table.length;i++){
     table.eq(i).hide();
   }
+}
+
+function paginationReset(){
+    wordListPage = 1;
 }
