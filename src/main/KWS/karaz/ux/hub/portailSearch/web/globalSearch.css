@@ -38,9 +38,7 @@
         height: 43px;
     overflow: hidden;
 }
-#dashboardArchitect .ow-pagination-sttgroup {
-    display: none;
- }
+
 #dashboardArchitect button.ow-button.float{
     margin-left: 80%;
     position: relative;
@@ -49,6 +47,24 @@
     color: #757777 !important;
 }
 button.ow-button.dashboardArchitect_serach_Button {
+    padding: 3px 0.75rem;
+    border: 1px solid var(--form-button-fg);
+    outline: none;
+}
+#gobalModelSearch  .ow-pagination-bar {
+        height: 43px;
+    overflow: hidden;
+}
+
+
+#gobalModelSearch button.ow-button.float{
+    margin-left: 80%;
+    position: relative;
+}
+#gobalModelSearch .gobalModelSearch_Button {
+    color: #757777 !important;
+}
+button.ow-button.gobalModelSearch_Button {
     padding: 3px 0.75rem;
     border: 1px solid var(--form-button-fg);
     outline: none;
