@@ -1,25 +1,17 @@
 package karazapps.karaz.ux.hub.portailsearch.search.allGlobalModelSearch.backejbs; 
 
 import java.io.StringReader;
-import java.util.*; 
-import java.text.*; 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-
-
-
-import ma.ribatis.karaz.organization.AbstractKarazUser;
-import ma.ribatis.karaz.server.DynamicQueryBuilder;
-import ma.ribatis.karaz.server.KarazQuery;
-import ma.ribatis.karaz.server.ModelCache;
-import ma.ribatis.karaz.util.BaseType;
-import ma.ribatis.karaz.util.cache.EntityHelper;
-
 
 import org.apache.log4j.Logger;
 import org.jdom2.Document;
@@ -30,6 +22,9 @@ import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 
 import karazapps.karaz.ux.hub.portailsearch.model.PortailTools;
+import ma.ribatis.karaz.organization.AbstractKarazUser;
+import ma.ribatis.karaz.server.KarazQuery;
+import ma.ribatis.karaz.util.BaseType;
 
 @Stateless(name="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch", mappedName="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch") 
 @TransactionManagement(TransactionManagementType.BEAN)
@@ -82,12 +77,13 @@ public class AllGlobalModelSearchBean implements KarazQuery {
 		if (firstResult != null){
 			ofsset=firstResult;
 		}
-		
+		int maxSize=DefaultMaxResults;
 		int limit = DefaultMaxResults;
 		if (maxResult != null){
 			limit=maxResult;
+			maxSize=maxResult;
 		}
-		int maxSize=limit;
+		
 		if(listeSerach.size()<=0) {
 			TreeMap<String, Object> xret = new TreeMap<String, Object>();
 			ArrayList<TreeMap<String, String>> aliste = new ArrayList<TreeMap<String, String>>();
@@ -99,18 +95,32 @@ public class AllGlobalModelSearchBean implements KarazQuery {
 		if(limit<1){
 			limit=1;	
 		}
-		Integer totalRowCount = 100;
+		Integer totalRowCount = 0;
 		TreeMap<String, Object> ret = new TreeMap<String, Object>();
 		ArrayList<TreeMap<String, String>> aliste = new ArrayList<TreeMap<String, String>>();
+		ArrayList<TreeMap<String, String>> alisteFilter = new ArrayList<TreeMap<String, String>>();
+		logger.info("from AllGlobalModelSearchBean ofsset==="+ofsset+" maxSize=="+maxSize+" limit="+limit);
+		try {
+			if(BaseType.isNotEmty(xml)){
+				if(xml.contains("</query>")){
+					xml=(xml.substring(0,xml.indexOf("</query>")))+"</query></data>";
+				}
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		x:while (true) {
 		try {
 			for(String s:listeSerach){
 				try {
-					TreeMap<String, Object> res = pt.executeSearch(s, xml,user, ofsset, 1);
+					TreeMap<String, Object> res = pt.executeSearch(s, xml,user, ofsset, limit);
 					totalRowCount+=(Integer)res.get(KarazQuery.TotalCout);
 					ArrayList<TreeMap<String, String>>  alister =(ArrayList<TreeMap<String, String>>) res.get(KarazQuery.Result);
 					aliste.addAll(alister);
-					if(aliste.size()==maxSize){
+					if(aliste.size()>=maxSize){
+						logger.info("from AllGlobalModelSearchBean break===looop");
+						
 						break x;
 					}
 				} catch (Exception e) {
@@ -118,20 +128,29 @@ public class AllGlobalModelSearchBean implements KarazQuery {
 					e.printStackTrace();
 				}
 			}
-			ofsset++;
+			ofsset=ofsset+limit;
+			if(aliste.size()==0 || aliste.size()<=maxSize){
+				logger.info("from AllGlobalModelSearchBean break===looop 2");
+				break x;
+			}
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 			
 		}
-		if(aliste.size()==0){
-			break x;
-		}
-		}
 		
-		ret.put(KarazQuery.Result, aliste);
+		}
+		if(aliste.size()>maxSize){
+			for(int i=0;i<maxSize;i++){
+				alisteFilter.add(aliste.get(i));
+			}
+		}else{
+			alisteFilter=aliste;
+		}
+		ret.put(KarazQuery.Result, alisteFilter);
 		ret.put(KarazQuery.TotalCout, totalRowCount);
-		logger.info("from AllGlobalModelSearchBean aliste==="+aliste);
+		logger.info("from AllGlobalModelSearchBean aliste==="+aliste.size());
+		logger.info("from AllGlobalModelSearchBean totalRowCount==="+totalRowCount);
 		// preRunTraitement(query, data);
 		
 

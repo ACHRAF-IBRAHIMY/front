@@ -4,7 +4,7 @@
 	</query>
 	<data>
 		<query>
-			<keys />
+			<keys></keys>
 			<model />
 			<from />
 			<to />
@@ -16,202 +16,73 @@
 
 			<userLogin />
 			<userPassword />
-           <unifiedCriteria></unifiedCriteria>
+           <unifiedCriteria /> 
 		</query>
 	</data>
 	<view>
 		<screen id="dashboardMain" noToolBar="true">
 
 			<vbox id="dashboardArchitect" columns="auto 28%">
+
 				<!-- <vbox id="blinkSearch" columns="20% auto" height="300px"> -->
 				<!-- search criterias -->
 				<vbox>
-					<framedPanel label="Taches a faire" collapsible="false">
+					<framedPanel label="Taches a faire" id="taskTodo" collapsible="false">
 						<vbox label="Résultat de recherche">
 							<vbox columns="33% 33% 33%">
 								<vbox />
 								<vbox />
 								<html>
-									<div class="ow-thumbnail-action  fas fa-cogs"
-										onclick="ApplicationManager.run('karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch', 'search', 'Toutes les tâches')"
-										style="width: 300px;margin-left: 49%;">
+									<div class="ow-thumbnail-action  fas fa-cogs" onclick="ApplicationManager.run('karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch', 'search', 'Toutes les tâches')" style="width: 300px;margin-left: 49%;">
 										Toutes les tâches
 									</div>
 								</html>
 							</vbox>
-							<!-- <objectList targetScreen="autorisationViewer" displayMode="thumbnail" 
-								searchQN="AllArrondAutorisationConstruction"> -->
-							<tasklist name="ArchetectTask" label="My Tasks"
-								displayMode="thumbnail" searchQN="globalTasks?limit=3"
-								collectionName="task" columns="33% 33% 33%">
-								<field label="Reference" index="stringIndex1" widget="text"
-									name="reference" />
-								<field label="Statut" index="stringIndex2" widget="text"
-									name="statut" />
-								<field label="Description" index="stringIndex3" widget="text"
-									name="description" />
-								<field label="d4" index="stringIndex4" widget="text" name="detail4" />
-								<field label="d5" index="stringIndex5" widget="text" name="detail5" />
-								<field label="d6" index="stringIndex6" widget="text" name="detail6" />
-								<field label="d7" index="stringIndex7" widget="text" name="detail7" />
-								<field label="d8" index="stringIndex8" widget="text" name="detail8" />
-								<field label="d9" index="stringIndex9" widget="text" name="detail9" />
-								<field label="d10" index="stringIndex10" widget="text"
-									name="detail10" />
-								<field label="d11" index="stringIndex11" widget="text"
-									name="detail11" />
-								<field label="d12" index="stringIndex12" widget="text"
-									name="detail12" />
-								<field label="manualTaskId" index="manualTaskId" widget="text"
-									name="manualTaskId" />
-								<field label="creationTime" index="creationTime" widget="text"
-									name="creationTime" />
-								<field label="affected" index="affected" widget="text"
-									name="affected" />
-								<field label="activityName" index="activityName" widget="text"
-									name="activityName" />
-								<field label="Processus" index="processName" name="processName" />
-								<field label="ProcessusQN" index="processQN" name="processQN" />
-								<field label="modelQN" index="modelQN" name="modelQN" />
-								<field label="aiId" index="id" name="aiId" />
-								<field label="objectId" index="objectId" name="objectId" />
-
-								<vbox>
-									<!--test expression="{task[$i].owt_state},=,mine" separator="," -->
-
-									<html>
-                                      
-										<div
-											class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold">
-											<div class="ow-pl-toolbar">
-												${task[$i].reference}
-												<span class="actions">
-												</span>
-											</div>
-											<div class="ow-pl-inner">
-												<div class="ow-html">
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Date affectation</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].creationTime}
-														</span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Processus</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].processName|translate
-															}  </span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Etape</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">
-															${task[$i].activityName|translate }</span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Statut</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].stringIndex2}
-														</span>
-													</div>
-													<div style="margin-top:10px;display:flex;">
-														<span class="ow-thumbnail-action  fa fa-edit"
-															onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')"
-															style="display: unset;margin-right: 0px;">
-														</span>
-														<span class="ow-thumbnail-action  fa fa-eye"
-															onclick="ApplicationManager.displayObject(${task[$i].objectId}, '${task[$i].modelQN}', '${task[$i].activityName}')"
-															style="display: unset;margin-right: 0px;">
-														</span>
-														<span class="ow-thumbnail-action  fas fa-user-cog"
-															onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )"
-															style="display: unset;margin-right: 0px;margin-right: 0px;">
-														</span>
-
-														<div class="affectation ${task[$i].owt_state}" title="${task[$i].owt_state_message}"
-															style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message}</div>
-													</div>
-												</div>
-												<div style="clear:both">
-												</div>
-											</div>
-										</div>
-									</html>
-									<!--/test -->
-								</vbox>
-
-							</tasklist>
-						</vbox>
+							<vbox>
+							<search searchQN="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=3" />
+                            </vbox>
+                     	</vbox>
 					</framedPanel>
-					<framedPanel label="Dossiers en cours de traitement"
-						collapsible="false">
+					<framedPanel label="Dossiers en cours de traitement" collapsible="false">
+                      <vbox>
+                              <search searchQN="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch?query.returnMode=DataObject&amp;pageSize=3" />
+                      </vbox>
+                         			</framedPanel>
+
+					<framedPanel label="Indicateurs de performance" collapsible="false">
 
 					</framedPanel>
-					<framedPanel label="Indicateurs de performance"
-						collapsible="false">
-
-					</framedPanel>
-					<framedPanel label="Astuces, conseils et et nouvelles fonctionnalités"
-						collapsible="false">
+					<framedPanel label="Astuces, conseils et et nouvelles fonctionnalités" collapsible="false">
 
 					</framedPanel>
 				</vbox>
 
 				<vbox label="Notifications">
-					<fieldset  label="Notifications"
-						collapsible="false" height="100">
+					<fieldset label="Notifications" collapsible="false" height="100">
                         <vbox columns="70% 20%">
                     
-               <field xpath="query.unifiedCriteria"  noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
+               <field xpath="query.unifiedCriteria" noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
                <button className="dashboardArchitect_serach_Button" noLabel="true" icon="fas fa-filter" postProcessing="search()" tooltipX="Appliquer filtres" />
                   </vbox>
-						<objectList displayMode="thumbnail"
-							searchQN="notify/email/search/AllEmail?limit=3&amp;loadXmlXX=true"
-							collectionName="notifs">
-							<field_ol name="reference" label="Reference" index="stringIndex1"
-								widget="text" />
-							<field_ol name="type" label="Type" index="stringIndex3"
-								widget="text" hidden="true" />
-							<field_ol name="tos" label="To" index="stringIndex4"
-								widget="text" />
-							<field_ol name="ccs" label="Ccs" index="stringIndex5"
-								widget="text" hidden="true" />
-							<field_ol name="bccs" label="Bccs" index="stringIndex6"
-								widget="text" hidden="true" />
-							<field_ol name="subject" label="Subject" index="stringIndex7"
-								widget="text" />
-							<field_ol name="priority" label="Priority" index="intIndex1"
-								widget="integer" hidden="true" />
-							<field_ol name="application" label="Application" index="stringIndex8"
-								widget="text" />
-							<field_ol name="origine" label="Origine" index="stringIndex9"
-								widget="text" />
-							<field_ol name="modelQN" label="ModelQN" index="stringIndex10"
-								widget="text" />
-							<field_ol name="processQN" label="Process QN" index="stringIndex11"
-								widget="text" />
-							<field_ol name="activityName" label="Activity Name"
-								index="stringIndex12" widget="text" hidden="true" />
-							<field_ol name="activityLabel" label="Activity Label"
-								index="stringIndex13" widget="text" />
-							<field_ol name="moment" label="Moment" index="stringIndex14"
-								widget="text" hidden="true" />
-							<field_ol name="affected" label="Affected" index="stringIndex15"
-								widget="text" hidden="true" />
-							<field_ol name="allocation" label="Allocation" index="stringIndex16"
-								widget="text" hidden="true" />
-							<field_ol name="dateCreation" label="DateCreation"
-								index="dateIndex1" widget="date" hidden="true" />
-							<field_ol name="entity" label="Entity" index="stringIndex19"
-								widget="text" hidden="true" />
+						<objectList displayMode="thumbnail" searchQN="notify/email/search/AllEmail?limit=3&amp;loadXmlXX=true" collectionName="notifs">
+							<field_ol name="reference" label="Reference" index="stringIndex1" widget="text" />
+							<field_ol name="type" label="Type" index="stringIndex3" widget="text" hidden="true" />
+							<field_ol name="tos" label="To" index="stringIndex4" widget="text" />
+							<field_ol name="ccs" label="Ccs" index="stringIndex5" widget="text" hidden="true" />
+							<field_ol name="bccs" label="Bccs" index="stringIndex6" widget="text" hidden="true" />
+							<field_ol name="subject" label="Subject" index="stringIndex7" widget="text" />
+							<field_ol name="priority" label="Priority" index="intIndex1" widget="integer" hidden="true" />
+							<field_ol name="application" label="Application" index="stringIndex8" widget="text" />
+							<field_ol name="origine" label="Origine" index="stringIndex9" widget="text" />
+							<field_ol name="modelQN" label="ModelQN" index="stringIndex10" widget="text" />
+							<field_ol name="processQN" label="Process QN" index="stringIndex11" widget="text" />
+							<field_ol name="activityName" label="Activity Name" index="stringIndex12" widget="text" hidden="true" />
+							<field_ol name="activityLabel" label="Activity Label" index="stringIndex13" widget="text" />
+							<field_ol name="moment" label="Moment" index="stringIndex14" widget="text" hidden="true" />
+							<field_ol name="affected" label="Affected" index="stringIndex15" widget="text" hidden="true" />
+							<field_ol name="allocation" label="Allocation" index="stringIndex16" widget="text" hidden="true" />
+							<field_ol name="dateCreation" label="DateCreation" index="dateIndex1" widget="date" hidden="true" />
+							<field_ol name="entity" label="Entity" index="stringIndex19" widget="text" hidden="true" />
 							<vbox>
 <html>
                                     <div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold">
@@ -219,8 +90,8 @@
 											<div class="ow-pl-inner">
 												<div class="ow-html">
                                                 <div class="notif_info_header">
-                                                <div class="sf_notif fas notificone_${notifs[$i].type}"></div>
-												<div >${notifs[$i].changeTime}</div>
+                                                <div class="sf_notif fas notificone_${notifs[$i].type}" />
+												<div>${notifs[$i].changeTime}</div>
 												<div class="email_to_cls">${notifs[$i].tos}</div>
 											      </div>
                                               <div class="notif_emailSubject">${notifs[$i].subject}</div>
@@ -229,7 +100,7 @@
 												</div>
                                          <div>
                                           <button class="ow-button usage_r float k-btn-radius" onclick="ApplicationManager.displayObject(${notifs[$i].id}, '${notifs[$i].modelName}', '${notifs[$i].reference}');"> <span class="ow-btn-label">  Voire</span> 
-                                             <div class="ow-vl    ow-postchange"><div class="ow-vl-inner"></div></div>
+                                             <div class="ow-vl    ow-postchange"><div class="ow-vl-inner" /></div>
                                           </button>
                                          </div>
 											</div>

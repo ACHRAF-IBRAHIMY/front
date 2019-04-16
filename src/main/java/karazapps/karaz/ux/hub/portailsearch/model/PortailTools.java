@@ -63,7 +63,9 @@ public ArrayList<TreeMap<String, String>> executeSearch(String resourceQN, Strin
 		ArrayList<TreeMap<String, String>> ret=new ArrayList<TreeMap<String, String>> ();
 		try {
 			AbstractKarazUser user = new AbstractKarazUser.SystemKarazUser("/");
-			   
+//			user.getProfiles().add("ADMINISTRATEUR")  ; 
+//			user.getProfiles().add("admin@karaz")  ;
+//			user.setUserQN("admin@karaz");
 			TreeMap<String, String> ctxp=new TreeMap<String, String>();
 			TreeMap<String, Object> rs = BackEndEJBContext.getKarazQuery(resourceQN).runQuery(xmlQuery, ofsset, limit, user, ctxp);
 			logger.debug("Strat getIdsFromSearch !"+rs.keySet()+" resvalue.."+rs.values());
