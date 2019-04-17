@@ -39,13 +39,13 @@
 								</html>
 							</vbox>
 							<vbox>
-							<search searchQN="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=3" />
+							<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=3" />
                             </vbox>
                      	</vbox>
 					</framedPanel>
 					<framedPanel label="Dossiers en cours de traitement" collapsible="false">
                       <vbox>
-                              <search searchQN="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch?query.returnMode=DataObject&amp;pageSize=3" />
+                              <search searchQN="karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch?query.returnMode=DataObject&amp;pageSize=3" />
                       </vbox>
                          			</framedPanel>
 
