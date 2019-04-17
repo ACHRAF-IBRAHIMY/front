@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="AllGlobalModelSearch" label="AllGlobalTAskSearch">
+<search name="AllObjectGlobalModelSearch" label="AllGlobalTAskSearch">
 <query> 
 </query> 
 <data>
@@ -20,7 +20,7 @@
               <searchQN>cug/cri/urbanisme/autorisation/search/PermisConstruireSerachGlobal</searchQN>
               <searchQN />
             </searchModel>   
-            <returnMode>manualTask</returnMode>
+            <returnMode>DataObject</returnMode>
                  
 		</query>
       <pageSize>10</pageSize> 
@@ -29,123 +29,6 @@
   <screen id="dashboardMain" noToolBar="true">
 
     <vbox id="gobalModelSearch" >
-<test expression="{query.returnMode},=,manualTask" separator=",">
-               <!-- <objectList targetScreen="autorisationViewer" displayMode="thumbnail" searchQN="AllArrondAutorisationConstruction"> -->
-                <vbox columns="0.6% 53% 20% auto">
-                <hx /> 
-               <field xpath="query.keys" noLabel="true" label="" emptyText="Mots clé : N°, Consistance, Nom, ..." widget="text" postProcessingX="search()" />
-               <button className="gobalModelSearch_Button" noLabel="true" icon="fas fa-search" postProcessing="search()" tooltipX="Appliquer filtres" >
- <postChange>
-                                      
-setShowProgressSearch("gobalModelSearch","listTask","loadiing_task");
-
-              </postChange>
-                  </button>
-                  </vbox>
-               <vbox columns="auto" contentJustify="center">
-                <html>
-                   <div id="loadiing_task"><img src="img/load-text.gif" alt="" />
-                   </div>
-               </html>
-                </vbox>
-                <objectList id="listTask" name="ArchetectTask" label="My Tasks" displayMode="thumbnail"  searchQN="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch?query.returnMode=manualTask" collectionName="task" columns="33% 33% 33%">
-             <field label="Reference" index="stringIndex1" widget="text" name="reference" />
-								<field label="Statut" index="stringIndex2" widget="text" name="statut" />
-								<field label="Description" index="stringIndex3" widget="text" name="description" />
-								<field label="d4" index="stringIndex4" widget="text" name="detail4" />
-								<field label="d5" index="stringIndex5" widget="text" name="detail5" />
-								<field label="d6" index="stringIndex6" widget="text" name="detail6" />
-								<field label="d7" index="stringIndex7" widget="text" name="detail7" />
-								<field label="d8" index="stringIndex8" widget="text" name="detail8" />
-								<field label="d9" index="stringIndex9" widget="text" name="detail9" />
-								<field label="d10" index="stringIndex10" widget="text" name="detail10" />
-								<field label="d11" index="stringIndex11" widget="text" name="detail11" />
-								<field label="d12" index="stringIndex12" widget="text" name="detail12" />
-								<field label="manualTaskId" index="manualTaskId" widget="text" name="manualTaskId" />
-								<field label="creationTime" index="creationTime" widget="text" name="creationTime" />
-								<field label="affected" index="affected" widget="text" name="affected" />
-								<field label="activityName" index="activityName" widget="text" name="activityName" />
-								<field label="Processus" index="processName" name="processName" />
-								<field label="ProcessusQN" index="processQN" name="processQN" />
-								<field label="modelQN" index="modelQN" name="modelQN" />
-								<field label="aiId" index="id" name="aiId" />
-								<field label="objectId" index="objectId" name="objectId" />
-
-								<vbox>
-									<html>
-                                      
-										<div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold">
-											<div class="ow-pl-toolbar">
-												${task[$i].reference}
-												<span class="actions">
-												</span>
-											</div>
-											<div class="ow-pl-inner">
-												<div class="ow-html">
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Date affectation</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].creationTime}
-														</span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Processus</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].processName|translate
-															}  </span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Etape</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">
-															${task[$i].activityName|translate }</span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Statut</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].stringIndex2}
-														</span>
-													</div>
-													<div style="margin-top:10px;display:flex;">
-														<span class="ow-thumbnail-action  fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;">
-														</span>
-														<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${task[$i].objectId}, '${task[$i].modelQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;">
-														</span>
-														<span class="ow-thumbnail-action  fas fa-user-cog" onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )" style="display: unset;margin-right: 0px;margin-right: 0px;">
-														</span>
-
-														<div class="affectation ${task[$i].owt_state}" title="${task[$i].owt_state_message|translate} ${task[$i].Lockedby}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message|translate} ${task[$i].Lockedby} </div>
-													</div>
-												</div>
-												<div style="clear:both">
-												</div>
-											</div>
-										</div>
-									</html>
-                                <script onLoad="true">
-                                    console.log("task root********onLoad",root);
-
-                                      if(root.task[$i]){
-                                     $("#loadiing_task").hide();
-                                       }
-
-                                     </script> 
-									<!--/test -->
-								</vbox>
-             </objectList>
-              
-               
-            
-					
-</test>
 <test expression="{query.returnMode},=,DataObject" separator=",">
                 <vbox columns="0.6% 53% 20% auto"> 
                 <hx /> 
@@ -162,7 +45,7 @@ setShowProgressSearch("gobalModelSearch","listTask","loadiing_task");
                    </div>
                </html>
 </vbox>
-                  <objectList  id="listObject" name="listObject" label="My Tasks" displayMode="thumbnail"  searchQN="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch?query.returnMode=DataObject" collectionName="listObject" columns="33% 33% 33%">
+                  <objectList  id="listObject" name="listObject" label="My Tasks" displayMode="thumbnail"  searchQN="karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch?query.returnMode=DataObject" collectionName="listObject" columns="33% 33% 33%">
              <field label="Reference" index="stringIndex1" widget="text" name="reference" />
 				<field label="Statut" index="stringIndex2" widget="text" name="statut" />
 				<field label="Description" index="stringIndex3" widget="text" name="description" />
@@ -266,7 +149,6 @@ setShowProgressSearch("gobalModelSearch","listTask","loadiing_task");
 <script onLoad="true">
 console.log("root********onLoad",root);
 setPaganateSizeValueById("gobalModelSearch",root.pageSize);
-setProgressSearch("gobalModelSearch","listTask","loadiing_task");
 setProgressSearch("gobalModelSearch","listObject","loadiing_object");
 
 
