@@ -42,7 +42,7 @@ public class AllObjectGlobalModelSearchBean implements KarazQuery {
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	XPathExpression<Element> xpath_data_entity = XPathFactory.instance().compile("entity", Filters.element());
 	XPathExpression<Element> xpath_data_searchModel = XPathFactory.instance().compile("query/searchModel", Filters.element());
-
+	//public static Map<String, Integer> ofssetMap=new TreeMap<String, Integer>();
 	private String searchPath = "karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch";
 	private Map<String, String> indexationMap=new TreeMap<String, String>(); 
 	EntityManager em; 
@@ -57,7 +57,7 @@ public class AllObjectGlobalModelSearchBean implements KarazQuery {
 				
 	}
 	public TreeMap<String, Object> runQuery(String xml, Integer firstResult, Integer maxResult, AbstractKarazUser user, TreeMap<String, String> context) throws Exception {
-
+        
 		StringReader sr = new StringReader(xml);
 		Document xmlDoc = new SAXBuilder().build(sr);
 		Element queryData = xmlDoc.getRootElement();
@@ -77,17 +77,20 @@ public class AllObjectGlobalModelSearchBean implements KarazQuery {
 		}
 		}
 		PortailTools pt=new PortailTools();
-		logger.info("from AllGlobalModelSearchBean aliste=="+listeSerach);
+		logger.info("from AllGlobalModelSearchBean aliste=="+listeSerach+" context"+context);
+		
 		int ofsset = DefaultFirstResult;
 		if (firstResult != null){
 			ofsset=firstResult;
 		}
 		int maxSize=DefaultMaxResults;
-		int limit = DefaultMaxResults;
+		int limit = 1;
 		if (maxResult != null){
 			limit=maxResult;
 			maxSize=maxResult;
 		}
+		
+		
 		
 		if(listeSerach.size()<=0) {
 			TreeMap<String, Object> xret = new TreeMap<String, Object>();
@@ -96,11 +99,12 @@ public class AllObjectGlobalModelSearchBean implements KarazQuery {
 			xret.put(KarazQuery.TotalCout, 0);
 			return xret;
 		}
-		limit= (limit/listeSerach.size());
+       limit= (limit/listeSerach.size());
 		if(limit<1){
 			limit=1;	
 		}
 		Integer totalRowCount = 0;
+		Integer totalMaxRowCount = 0;
 		TreeMap<String, Object> ret = new TreeMap<String, Object>();
 		ArrayList<TreeMap<String, String>> aliste = new ArrayList<TreeMap<String, String>>();
 		ArrayList<TreeMap<String, String>> alisteFilter = new ArrayList<TreeMap<String, String>>();
@@ -115,27 +119,66 @@ public class AllObjectGlobalModelSearchBean implements KarazQuery {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		for(String s:listeSerach){
+			try {
+				TreeMap<String, Object> res = pt.executeSearch(s, xml,user, 0, 1);
+				ArrayList<TreeMap<String, String>>  alister =(ArrayList<TreeMap<String, String>>) res.get(KarazQuery.Result);
+				if(res==null || res.size()==0 || alister==null || alister.size()==0 ){
+					logger.info("from AllGlobalModelSearchBean continue===looop");
+					continue ;
+				}
+				totalRowCount+=(Integer)res.get(KarazQuery.TotalCout);
+				if(totalMaxRowCount<=totalRowCount){
+					totalMaxRowCount=totalRowCount;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		int modulo=(totalRowCount%maxSize);
+		int numberOfPages=0;
+		int currentPage=(ofsset/maxSize);
+		if(modulo>0){
+		numberOfPages=(totalRowCount/maxSize)+1;
+		}else{
+			numberOfPages=(totalRowCount/maxSize);
+		}
+		ofsset=currentPage*limit;
+        if(currentPage==numberOfPages){
+        	ofsset=totalMaxRowCount-maxSize;
+        	limit=maxSize;
+        }
 		x:while (true) {
-		try {
+		try { 
+			int retSize=0;
 			for(String s:listeSerach){
 				try {
+					
 					TreeMap<String, Object> res = pt.executeSearch(s, xml,user, ofsset, limit);
-					totalRowCount+=(Integer)res.get(KarazQuery.TotalCout);
 					ArrayList<TreeMap<String, String>>  alister =(ArrayList<TreeMap<String, String>>) res.get(KarazQuery.Result);
-					aliste.addAll(alister);
-					if(aliste.size()>=maxSize){
-						logger.info("from AllGlobalModelSearchBean break===looop");
-						
-						break x;
-					}
+					logger.info("from AllGlobalModelSearchBean executeSearch ="+s+" res=="+res.size()+" ofsset="+ofsset+" limit"+limit+"alister ret"+alister.size());
+					 
+					 boolean cheek=(res==null || res.size()==0 ||  alister==null || alister.size()==0);
+					 if(!cheek){
+						 aliste.addAll(alister);
+						 retSize+=alister.size();
+						 if(aliste.size()>=maxSize){
+								logger.info("from AllGlobalModelSearchBean break===looop"+aliste.size());
+								break x;
+					    }
+					 }
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			ofsset=ofsset+limit;
-			if(aliste.size()==0 || aliste.size()<=maxSize){
+			ofsset+=limit;
+			
+			//aliste.size()==0 || 
+			if(retSize<=0){
 				logger.info("from AllGlobalModelSearchBean break===looop 2");
+//				ofssetMap.clear();
 				break x;
 			}
 		} catch (Exception e) {
@@ -149,11 +192,13 @@ public class AllObjectGlobalModelSearchBean implements KarazQuery {
 			for(int i=0;i<maxSize;i++){
 				alisteFilter.add(aliste.get(i));
 			}
+
 		}else{
 			alisteFilter=aliste;
 		}
 		ret.put(KarazQuery.Result, alisteFilter);
 		ret.put(KarazQuery.TotalCout, totalRowCount);
+		logger.info("from AllGlobalModelSearchBean alisteFilter==="+alisteFilter.size());
 		logger.info("from AllGlobalModelSearchBean aliste==="+aliste.size());
 		logger.info("from AllGlobalModelSearchBean totalRowCount==="+totalRowCount);
 		// preRunTraitement(query, data);

@@ -32,7 +32,7 @@
      <menu relId="AllObjectGlobalModelSearch" label="All Global Model Search(object)" icone="search" xcstt="x">
         <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch]]></resource>
       </menu>
-      <menu relId="AllTaskGlobalModelSearch" label="All Global Model Search(object)" icone="search" xcstt="x">
+      <menu relId="AllTaskGlobalModelSearch" label="All Global Model Search(Task)" icone="search" xcstt="x">
         <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch]]></resource>
       </menu>
     </menu>
