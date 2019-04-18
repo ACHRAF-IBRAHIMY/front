@@ -4,7 +4,7 @@
 	</query>
 	<data>
 		<query>
-			<keys></keys>
+			<keys />
 			<model />
 			<from />
 			<to />
@@ -17,6 +17,10 @@
 			<userLogin />
 			<userPassword />
            <unifiedCriteria /> 
+            <searchModel>
+              <searchQN>cug/cri/urbanisme/autorisation/search/PermisConstruireSerachGlobal</searchQN>
+              <searchQN />
+            </searchModel> 
 		</query>
 	</data>
 	<view>
@@ -39,13 +43,15 @@
 								</html>
 							</vbox>
 							<vbox>
-							<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=3" />
+ 
+							<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=3&amp;limit=3" />
                             </vbox>
                      	</vbox>
 					</framedPanel>
 					<framedPanel label="Dossiers en cours de traitement" collapsible="false">
                       <vbox>
-                              <search searchQN="karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch?query.returnMode=DataObject&amp;pageSize=3" />
+               
+                              <search searchQN="karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch?query.returnMode=DataObject&amp;pageSize=3&amp;limit=3" />
                       </vbox>
                          			</framedPanel>
 

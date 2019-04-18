@@ -1,4 +1,4 @@
-function setPaganateSizeValueById(divId,size){
+function setPaganateSizeValueById(divId,childId,size){
 	try{
 console.log("setPaganateSizeValueById(divId,size) ......."+divId+"size=="+size ); 
          if(size>=10){
@@ -17,7 +17,7 @@ console.log("setPaganateSizeValueById(divId,size) ......."+divId+"size=="+size )
       var v6=parseInt(500/size)*size;
      var v7=parseInt(1000/size)*size;
 var optionsStr= '<option value="'+v0+'" selected="true">'+v0+'</option><option value="'+v1+'">'+v1+'</option><option value="'+v2+'">'+v2+'</option><option value="'+v3+'">'+v3+'</option><option value="'+v4+'">'+v4+'</option><option value="'+v5+'">'+v5+'</option> <option value="'+v6+'">'+v6+'</option><option value="'+v7+'">'+v7+'</option>';
-$("#"+divId+ " .ow-pagination-pageSize").each(function(i) {
+$("#"+divId+" #"+childId+" .ow-pagination-pageSize").each(function(i) {
 $(this).empty();
 $(this).html(optionsStr);
 $(this).val(v0).change();
@@ -59,7 +59,7 @@ console.log("setShowProgressSearch......." );
 		console.log("ERROR in Javascript function setShowProgressSearch ......."+e);
 	}
 }
-function setPaganateSizeValueById(divId,size,timeOut){
+function setPaganateSizeValueById(divId,childId,size,timeOut){
 	try{
 console.log("setPaganateSizeValueById(divId,size) ......."+divId+"size=="+size ); 
 setTimeout(function(){ 
@@ -79,7 +79,7 @@ if(size>=10){
       var v6=parseInt(500/size)*size;
      var v7=parseInt(1000/size)*size;
 var optionsStr= '<option value="'+v0+'" selected="true">'+v0+'</option><option value="'+v1+'">'+v1+'</option><option value="'+v2+'">'+v2+'</option><option value="'+v3+'">'+v3+'</option><option value="'+v4+'">'+v4+'</option><option value="'+v5+'">'+v5+'</option> <option value="'+v6+'">'+v6+'</option><option value="'+v7+'">'+v7+'</option>';
-$("#"+divId+ " .ow-pagination-pageSize").each(function(i) {
+$("#"+divId+" #"+childId+" .ow-pagination-pageSize").each(function(i) {
 $(this).empty();
 $(this).html(optionsStr);
 $(this).val(v0).change();
