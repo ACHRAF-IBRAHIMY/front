@@ -1449,3 +1449,67 @@
 }
 
 
+/* otc.css */
+
+.cf .cf-2 .cf-menu{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.cf .cf-2 .cf-menu .cf-type-butt{
+    text-align: center;
+    font-size: 18px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #eee;
+    padding: 16px;
+    margin-top: -10px;
+    color: #aaa;
+    cursor: pointer
+}
+
+.cf .cf-2 .cf-menu .div-1{
+    margin-left:-10px 
+}
+
+.cf .cf-2 .cf-menu .div-2{
+    margin-right:-10px
+}
+
+.cf .cf-2 .cf-menu .active{
+    background: #eee;
+    color: #666;
+}
+
+.cf .cf-2 .clusters{
+    display: grid;
+    width: 75%;
+    grid-template-columns: 15% 35% 30% 20%;
+    margin: auto;
+    margin-top: 15px
+}
+
+.cf .cf-2 .clusters .cluster-item{
+    text-align: center;
+    border: 1px solid #ddd;
+    color: #999;
+    
+}
+
+.cf .cf-2 .clusters .sp1,.cf .cf-2 .clusters .sp2,.cf .cf-2 .clusters .sp3,.cf .cf-2 .clusters .sp4{
+    border: 1px solid #ddd;
+    color: #999;
+    padding: 5px;
+    display: block;
+    border-right:none;
+    height: 28px;
+}
+
+.cf .cf-2 .clusters .sp4{
+    border-radius:0 3px 3px 0;
+    border-right: 1px solid #ddd;
+}
+
+.cf .cf-2 .clusters .sp1{
+    border-radius:3px 0 0 3px;
+}

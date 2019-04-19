@@ -26,6 +26,9 @@
       <menu relId="OpinionTextMining" label="Opinion TextMining" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextMining</resource>
       </menu>
+      <menu relId="OpinionTextClassification" label="Opinion TextClassification" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextClassification</resource>
+      </menu>
       <menu relId="PublicCentralSearch" label="Public Central Search" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/PublicCentralSearch</resource>
       </menu>
