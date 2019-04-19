@@ -69,3 +69,60 @@ button.ow-button.gobalModelSearch_Button {
     border: 1px solid var(--form-button-fg);
     outline: none;
 }
+#gobalModelSearch .date_title{
+padding-top: 7px;padding-left: 32px;   
+ font-family: 'Arial Italique', 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: italic;
+    font-size: 12px;
+}
+#gobalModelSearch .inforow_0{
+grid-template-columns: 28px 94%;
+    display: grid;
+}
+#gobalModelSearch .inforow_1{
+grid-template-columns: 82% 18%;
+display:grid;
+}
+#gobalModelSearch .inforow_2{
+    padding-top: 5px;
+    padding-left: 30px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #666666;
+}
+#gobalModelSearch .icon_acceedossier{
+font-size:30px;
+color: #a7a3a3;
+cursor: pointer;
+}
+#gobalModelSearch .icon_pc{
+    margin-right: 0px;
+    font-size: 20px;
+    color: #a7a3a3;
+}
+#gobalModelSearch .info_town{
+    
+     
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    color: #999999;
+}
+#gobalModelSearch .inforow_3{
+    padding-left: 30px;
+}
+#gobalModelSearch .inforow_4{
+    padding-left: 30px;
+    color: #3388AA;
+}
+#gobalModelSearch .inforow_5{
+grid-template-columns: 10% auto 10%;
+    text-align: center;
+    display: grid;
+    padding-bottom: 5px;
+}
+#gobalModelSearch .main_search{
+font-family: 'Roboto Regular', 'Roboto';
+}
