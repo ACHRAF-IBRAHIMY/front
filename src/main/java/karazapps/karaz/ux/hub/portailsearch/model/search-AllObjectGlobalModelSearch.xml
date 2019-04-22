@@ -17,31 +17,65 @@
             <userLogin />
             <userPassword />
             <searchModel>
-              <searchQN>cug/cri/urbanisme/autorisation/search/PermisConstruireSerachGlobal</searchQN>
-              <searchQN />
+              <!--searchQN>cug/cri/urbanisme/autorisation/search/PermisConstruireSerachGlobal</searchQN-->
+               <searchQN>cug/cri/securite/impressionplan/search/AllImpressionplan</searchQN>
+              <searchQN>cug/cri/urbanisme/autorisation/search/BlinkSearchPermisConstruire</searchQN>
+              <!--searchQN>referentiel/aviscommission/search/AllAvisCommission</searchQN-->
             </searchModel>   
+             <cle />
             <returnMode>DataObject</returnMode>
-                 
+             <currentUser />   
+           <!--draftStatus>Brouillon</draftStatus>
+        <checkStatus>false</checkStatus>
+        <rejectStatus>Rejeté</rejectStatus-->
+         <architectlogin />
+<unifiedCriteria />
 		</query>
       <pageSize>10</pageSize> 
+      <searchId />
 	</data>
   <view>
   <screen id="dashboardMain" noToolBar="true">
-
+<script onLoad="true">
+console.log("root********onLoad",root);
+root.searchId=new Date().getTime();
+context.formRender.notifyObservers("searchId");
+root.query.currentUser="admin@karaz";
+//root.query.architectlogin="admin@karaz";
+context.formRender.notifyObservers("query.architectlogin");
+context.formRender.notifyObservers("query.currentUser");
+</script> 
     <vbox id="gobalModelSearch">
 <test expression="{query.returnMode},=,DataObject" separator=",">
                 <vbox columns="0.6% 53% 20% auto"> 
                 <hx /> 
-               <field xpath="query.keys" noLabel="true" label="" emptyText="Mots clé : N°, Consistance, Nom, ..." widget="text" postProcessingX="search()" />
+               <field xpath="query.keys" noLabel="true" label="" emptyText="Mots clé : N°, Consistance, Nom, ..." widget="text" postProcessingX="search()">
+<postChange>
+root.query.cle=root.query.keys;
+root.query.unifiedCriteria=root.query.keys;
+context.formRender.notifyObservers("query.cle");
+context.formRender.notifyObservers("query.unifiedCriteria");
+</postChange>
+</field>
                <button className="gobalModelSearch_Button" noLabel="true" icon="fas fa-search" postProcessing="search()" tooltipX="Appliquer filtres">
                <postChange>
-                                      setShowProgressSearch("gobalModelSearch","listObject","loadiing_object");
-              </postChange>
+                                     setShowProgressSearch("gobalModelSearch","listObject","loadiing_object"+root.searchId);
+                                     // forceClickElement("gobalModelSearch","listObject","ow-pagination-reload");
+                                setPaganateSizeValueById("gobalModelSearch","listObject",root.pageSize,500);
+                               setTimeout(function(){ 
+                               
+                          if(root.listObject=="" || !root.listObject ){
+                               hideLoadingElement("loadiing_object"+root.searchId);
+                                 // alert("hideLoadingElement loadiing_object"+root.searchId);
+                              }
+                             }, 1000);
+                                       
+              </postChange> 
                   </button>
                   </vbox>
              <vbox columns="auto" contentJustify="center">
                <html>
-                   <div id="loadiing_object"><img src="img/load-text.gif" alt="" />
+                   <div id="loadiing_object${searchId}"><img src="img/load-text.gif" alt="" />
                    </div>
                </html>
 </vbox>
@@ -113,14 +147,12 @@
 														</span>
 													</div>
 													<div style="margin-top:10px;display:flex;">
-														<span class="ow-thumbnail-action  fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;">
+														
+														<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${listObject[$i].id}, '${listObject[$i].modelName}', '${listObject[$i].activityName}')" style="display: unset;margin-right: 0px;">
 														</span>
-														<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${task[$i].objectId}, '${task[$i].modelQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;">
-														</span>
-														<span class="ow-thumbnail-action  fas fa-user-cog" onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )" style="display: unset;margin-right: 0px;margin-right: 0px;">
-														</span>
+														
 
-														<div class="affectation ${task[$i].owt_state}" title="${task[$i].owt_state_message}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${listObject[$i].owt_state_message}</div>
+														
 													</div>
 												</div>
 												<div style="clear:both">
@@ -134,7 +166,7 @@
                                   console.log("task root********onLoad",root);
 
                                       if(root.listObject[$i]){
-                                     $("#loadiing_object").hide();
+                                      hideLoadingElement("loadiing_object"+root.searchId); 
                                        }
 
 </script>   
@@ -145,11 +177,13 @@
                
                 
 </test>
-            </vbox>
-<script onLoad="true">
+             </vbox>
+<script onLoad="true" delay="500">
 console.log("root********onLoad",root);
-setPaganateSizeValueById("gobalModelSearch",root.pageSize);
-setProgressSearch("gobalModelSearch","listObject","loadiing_object");
+//alert("postLoad");
+setPaganateSizeValueById("gobalModelSearch","listObject",root.pageSize);
+setProgressSearch("gobalModelSearch","listObject","loadiing_object"+root.searchId);
+//$("#gobalModelSearch .gobalModelSearch_Button).unbind('click');
 
 
 </script>       

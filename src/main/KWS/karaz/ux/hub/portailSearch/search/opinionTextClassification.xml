@@ -11,9 +11,11 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-        	typeClassification = 0
+        	 typeClassification = 0
              getAllNotesClass();
-             getAllClusters();
+             getAllClusters(false,0);
+             getAllClusters(false,1);
+             getAllClusters(true,0);
              $(".cf .cf-2 .clusters select").change(function(){
                  var cluster = $(".cf .cf-2 .clusters select option:selected").val();
                  findByCluster(cluster);
@@ -24,14 +26,36 @@
                  $(this).addClass("active");
                  
                  if($(this).hasClass("div-1")){
-                     typeClassification=0
-                     getAllClusters()
+                     typeClassification=0;
+                     getAllClusters(true,typeClassification);
                  }else{
-                     typeClassification=1
-                     getAllClusters()
+                     typeClassification=1;
+                     getAllClusters(true,typeClassification);
                  }
-                 
              });
+             
+             $(".cf .cf-1 .menu .acc span").click(function(){
+                var val = ""; 
+                
+               if($(this).hasClass("mlt")){
+                   val = "mlt"                 
+               }else{
+                   val = "km"
+               }
+                 
+                var active = $(this).hasClass("active");
+                
+                if(active){
+                    $(this).removeClass("active");
+                }else{   
+                    $(".cf .cf-1 .menu .acc span").removeClass("active");
+                    $(this).addClass("active");
+                }
+                
+                doColorCluster(val,active);
+             
+             });
+             
              
         </script>
         
@@ -97,6 +121,10 @@
              <vbox className="cf" columns="50% 50%">
                  <fieldSet className="cf-1" label="Liste des remarques">
                      <html>
+                         <div class="menu">
+                           <div class="config"><span>Modifier</span></div>
+                           <div class="acc"><i class="fas fa-palette"></i><span class="mlt">MLT</span><span class="km">Kmeans</span></div>
+                         </div>
                          <div class="menu-config">
                              <div class="item">Index : <span class="index-name"> </span> | Size : <span class="size-match-all"> </span> </div>
                          </div>
@@ -121,7 +149,7 @@
                         <select name="Clusters" class="select-cluster sp2" id="">
                              
                          </select>
-                         <span class="sp-sep"></span>
+                         <span class="sp-sep" />
                          <span class="sp3">Taille</span>
                          <span class="sp4">0</span>
                      </html>
