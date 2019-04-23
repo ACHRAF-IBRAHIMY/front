@@ -17,14 +17,15 @@
             <userLogin />
             <userPassword />             
 		</query>
+
 	</data>
   <view>
   <screen id="dashboardMain" noToolBar="true">
 
-    <vbox id="dashboardArchitect" columns="auto 30%">
+    <vbox id="globalTaskdivId" columns="auto 30%">
                 <framedPanel label="Taches a faire" collapsible="false">
                 <vbox>
-							<search searchQN="karaz/ux/hub/portailsearch/search/AllGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=9" />
+							<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=9" />
                             </vbox>
                 </framedPanel>
 <framedPanel label="Indicateurs de performance" collapsible="false">
@@ -34,14 +35,7 @@
             </vbox>
         
 
- <script onLoad="true">
-console.log("root********onLoad",root);
-setPaganateSizeValueById("dashboardArchitect",root.pageSize);
-setProgressSearch("dashboardArchitect","listTask","loadiing_task");
-setProgressSearch("dashboardArchitect","listObject","loadiing_object");
-
-
-</script>           
+           
 
 </screen>
 

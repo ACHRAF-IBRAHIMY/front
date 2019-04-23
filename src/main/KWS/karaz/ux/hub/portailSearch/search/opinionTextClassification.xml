@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="OpinionTextClassification" label="Opinion TextClassification">
+
+	<query>
+	</query>
+	<data>
+		<query>
+		</query>
+		<collapsed>false</collapsed>
+	</data>
+	<view>
+		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
+        <script postLoad="true">
+        	 typeClassification = 0
+             getAllNotesClass();
+             getAllClusters(false,0);
+             getAllClusters(false,1);
+             getAllClusters(true,0);
+             $(".cf .cf-2 .clusters select").change(function(){
+                 var cluster = $(".cf .cf-2 .clusters select option:selected").val();
+                 findByCluster(cluster);
+             });
+             
+             $(".cf .cf-2 .cf-menu .cf-type-butt").click(function(){
+                 $(".cf .cf-2 .cf-menu .cf-type-butt").removeClass("active");
+                 $(this).addClass("active");
+                 
+                 if($(this).hasClass("div-1")){
+                     typeClassification=0;
+                     getAllClusters(true,typeClassification);
+                 }else{
+                     typeClassification=1;
+                     getAllClusters(true,typeClassification);
+                 }
+             });
+             
+             $(".cf .cf-1 .menu .acc span").click(function(){
+                var val = ""; 
+                
+               if($(this).hasClass("mlt")){
+                   val = "mlt"                 
+               }else{
+                   val = "km"
+               }
+                 
+                var active = $(this).hasClass("active");
+                
+                if(active){
+                    $(this).removeClass("active");
+                }else{   
+                    $(".cf .cf-1 .menu .acc span").removeClass("active");
+                    $(this).addClass("active");
+                }
+                
+                doColorCluster(val,active);
+             
+             });
+             
+             
+        </script>
+        
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html>
+                    <div class="rokhas-home">
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                    </div>
+                </html>
+            </vbox>
+            <vbox columns="60% 25% 15%">
+    				       <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
+                               <button label="Accueil">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                                    </postChange>
+                               </button>
+                               <button label="Actualités">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button label="Simulateur">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                                    </postChange>
+                               </button>
+                               <button label="Solutions">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button icon="far fa-question-circle">
+                                   <postChange />
+                               </button>
+							</vbox>
+							
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="Inscription" className="button-signup-header button-left">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+									</postChange>						
+								</button>
+								<button label="Connexion" className="button-signup-header">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+									</postChange>					
+								</button>
+							</vbox>
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="FR" className="button-signup-header-cliked button-left">						
+								</button>
+								<button label="ع" className="button-signup-header">						
+								</button>
+							</vbox>
+						</vbox>
+	
+        </vbox>    
+        
+        <html> <div style="height: 30px;"> </div> </html>  
+        
+             <vbox className="cf" columns="50% 50%">
+                 <fieldSet className="cf-1" label="Liste des remarques">
+                     <html>
+                         <div class="menu">
+                           <div class="config"><span>Modifier</span></div>
+                           <div class="acc"><i class="fas fa-palette"></i><span class="mlt">MLT</span><span class="km">Kmeans</span></div>
+                         </div>
+                         <div class="menu-config">
+                             <div class="item">Index : <span class="index-name"> </span> | Size : <span class="size-match-all"> </span> </div>
+                         </div>
+                         <div class="tab">
+                             
+                         </div>
+                         <div class="menu-config-bottom">
+                         </div>
+                     </html>
+                 </fieldSet>
+                 <fieldSet className="cf-2" label="Classification">
+                     <html className="cf-menu" columns="50% 50%">
+                         <div class="cf-type-butt div-1 active">
+                             <span>Classification par MLT</span>
+                         </div>
+                         <div class="cf-type-butt div-2">
+                             <span>Clustring avec Kmeans</span>
+                         </div>
+                     </html>
+                     <html className="clusters">
+                        <i class="fas fa-layer-group sp1" />
+                        <select name="Clusters" class="select-cluster sp2" id="">
+                             
+                         </select>
+                         <span class="sp-sep" />
+                         <span class="sp3">Taille</span>
+                         <span class="sp4">0</span>
+                     </html>
+                     <html>
+                         <div class="menu-config">
+                             <div class="item">Cluster : <span class="index-name"> </span> | Size : <span class="size-match-all"> </span> </div>
+                         </div>
+                         <div class="tab">
+                             
+                         </div>
+                         <div class="menu-config-bottom">
+                         </div>
+                     </html>
+                 </fieldSet>
+             </vbox>
+        
+    </screen>
+
+	</view>
+</search>

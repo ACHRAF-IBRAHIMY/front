@@ -105,10 +105,10 @@
     });         
           
         </script>
-        <vbox columns="30% 70%" className="Header-signup" columns-small="auto">
+        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
                 <html className="Header-signup-glo">
-                    <div class="rokhas-home">
+                    <div class="rokhas-home" style="margin-left: 50px;">
                         <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
                     </div>
                 </html>
@@ -124,12 +124,7 @@
             </vbox>
             
             <vbox columns="60% 25% 15%" className="header-div-toggle">
-               <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
-                   <button label="Accueil">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-                        </postChange>
-                   </button>
+               <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
                    <button label="Actualités">
                         <postChange>
 
@@ -140,7 +135,17 @@
                             ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
                         </postChange>
                    </button>
+                    <button label="Open data">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                        </postChange>
+                   </button>
                    <button label="Solutions">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button label="Ressources">
                         <postChange>
 
                         </postChange>
@@ -148,9 +153,14 @@
                    <button icon="far fa-question-circle">
                        <postChange />
                    </button>
+                   <vbox columns="50% 50%">
                    <button className="butt-otm" label="OTM"> <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpinionTextMining", "search", "PublicCentralSearch", {});
                        </postChange>
-                   </button>    
+                   </button>
+                    <button className="butt-otm" label="OTC"> <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpinionTextClassification", "search", "OpinionTextClassification", {});
+                       </postChange>
+                   </button>
+                   </vbox>    
             
                 </vbox>
 
@@ -180,17 +190,18 @@
         </html>        
            
         <vbox columns="30% 70%">
-            <vbox className="hp-box">
+           <vbox>
+            <vbox className="hp-box last-log">
                 <vbox columns="20% 80%">
                     <html>
-                        <div class="hp-box-icon fas fa-user-lock" />
+                        <div class="hp-box-icon fas fa-user" />
                     </html>
                     <html>
                         <div class="hp-box-small-title"> Accédez à votre espace privé</div>       
                     </html>    
                 </vbox>
                 <html>
-                    <div style="height: 50px;"> </div>
+                    <div style="height: 10px;"> </div>
                 </html>                
                 <vbox>
                     <field widget="text" className="hp-text-input" xpath="userLogin" emptyText="Nom utilisateur" noLabel="true" width="80%">
@@ -202,7 +213,7 @@
                         <validation type="required" errorMessage="Veuillez saisir votre mot de passe !" />
                     </field>
 
-                    <button className="hp-box-btn HomePageLoginButton" label="Se connecter">
+                    <button className="hp-box-btn HomePageLoginButton buttonLog" label="Se connecter">
                         <postChange>
                             <!--  Routing credentials check depending to authentication domain (@rokhas / @casaurba)-->
                             let myUrl='kas/signin';
@@ -271,105 +282,244 @@
                 </vbox>
                 <vbox>
                     <html>
-                        <div style="height: 70px;" />
+                        <div style="height: 10px;" />
                         <div class="hp-sbox-text">
-                            <i class="fab fa-ello" /> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Pas encore de compte Rokhas ?</a>
+                            <i class="fas fa-user-plus"></i> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Pas encore de compte Rokhas ?</a>
                         </div>                             
                         <div class="hp-sbox-text">
-                            <a><i class="fas fa-user-slash" /> Mot de passe oublié ?</a>
+                            <a><i class="fas fa-user-times" /> Mot de passe oublié ?</a>
                         </div>
                         <div style="height: 10px;"> </div>                                                                  
                     </html>
                 </vbox>
                 
             </vbox>
-            
-        <vbox className="hp-box hp-small divSearch">
-            <vbox className="hp-box divSearchBar">
+            <vbox className="hp-box last-log">
+                <vbox columns="20% 80%">
+                    <html>
+                        <div class="hp-box-icon fas fa-folder" />
+                    </html>
+                    <html>
+                        <div class="hp-box-small-title"> Etat d'avancement dossier</div>       
+                    </html>    
+                </vbox>
                 <html>
-                    <div class="hp-sbox-big-title">
-                        Bienvenue au guichet digital national des autorisations communales
-                    </div>
-                    <div class="hp-sbox-text">
-                        Soumettez votre demande d'autoriation, suivez son traitement en ligne et recevez par e-mail votre document signé éléctroniquement
-                    </div>
-                    <div style="height: 50px;" />
-                </html>    
-                <vbox columns="80% 20%" columns-small="80% 20%" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherchez une activité à autoriser avant de procéder ...">
+                    <div style="height: 10px;"> </div>
+                </html>                
+                <vbox>
+                    <field widget="text" className="hp-text-input" xpath="demandeId" emptyText="Votre N° de demande" noLabel="true" width="80%">
+                        <bag position="leading" className="hp-bag-input fas fa-folder-open" />
+                        <validation type="required" errorMessage="Veuillez saisir votre N° de demande !" />
                     </field>
-                    <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
-                        <postChange>
-                            prefix= $(".hp-search_field input").val();
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
-                             /*getTimeCounter();
-                               $(".divSearchBar").hide();
-                                closeSearchList();
-                                currentPage=0;
-                                prefix = document.getElementsByClassName("ow-field-input")[2].value;
-                                restSearchList(prefix);
-                                $(".second-search-bar input").val(prefix);
-                                $(".searchList").show();*/
-                        </postChange>
+                    <field widget="text" className="hp-text-input" xpath="CIN" postEnter="" separator="!!" emptyText="Votre N° de CIN ou N° RC" noLabel="true" height="100">
+                        <bag position="leading" className="hp-bag-input fas fa-address-card" />
+                        <validation type="required" errorMessage="Veuillez saisir votre N° de CIN ou N° RC !" />
+                    </field>
+
+                    <button className="hp-box-btn HomePageLoginButton buttonLog" label="Vérifier">
+                        <postChange>  
+                        </postChange>                                  
                     </button>
                 </vbox>
-                    
+            </vbox>
+            
+            
+            </vbox>
+            
+        <vbox className="hp-box hp-small divSearch height-973">
+                <vbox className="hp-box divSearchBar">
+                    <html>
+                        <div class="hp-sbox-big-title">
+                            Pont de confiance Usager / Administration
+                        </div>
+                        <div class="hp-sbox-text">
+                            Un parcours d'autorisation 100% digital, 100% traçable avec Zéro papier déposé et Zéro papier délivré.
+                        </div>
+                        <div style="height: 50px;" />
+                    </html>    
+                    <vbox columns="80% 20%" columns-small="80% 20%" contentAlign="center">
+                        <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ...">
+                        </field>
+                        <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
+                            <postChange>
+                                prefix= $(".hp-search_field input").val();
+                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                            </postChange>
+                        </button>
+                    </vbox>
+                    <html className="link-div-ref">
+                        <a>Référentiel des activités</a>
+                    </html>
+
+                    <html>
+                        <div style="height: 70px;"> </div>
+                    </html>        
+
+                        <vbox columns="66% 34%" className="div-main-icons">
+                           <html>
+                               <div class="main-icon-title-bx t1">
+                                   <div class="title">
+                                       Quelle demande déposer ?
+                                   </div>
+                                   <div class="par">
+                                    <i class="fas fa-map-signs" />     
+                                   <span>Répondez à quelques questions pour être mieux orienté.</span>
+                                   <button class="main-icon-button">
+                                       DÉMARRER SIMULATION
+                                   </button>
+                                   </div>
+                                   
+                               </div>
+                           </html>
+                           <vbox>
+                           <html>
+                               <div class="main-icon-title t3">
+                                   <div style="display:grid;grid-template-columns:15% 85%">
+                                        <i class="fas fa-map-marker-alt" />
+                                       <span>Autorisations urbanistiques</span>
+                                    </div>
+                               </div>
+                           </html>
+                           <html>
+                               <div style="height:25px" />
+                           </html>
+                           <html>
+                               <div class="main-icon-title t4">
+                                   <div style="display:grid;grid-template-columns:15% 85%">
+                                        <i class="fas fa-cog" />
+                                        <span>Autorisations économiques</span>
+                                    </div>
+                               </div>
+                           </html>
+                           </vbox>
+                        </vbox>
+                        <vbox columns="40% 0% 40% 13%" className="support"> 
+                            <html className="support-html">
+                                <i class="fas fa-paper-plane" />
+                                <span>Support@rokhas.ma</span>
+                            </html>
+                            <html>
+                                
+                            </html>
+                            <html className="support-html">
+                                <i class="fas fa-phone" />
+                                <span>+212 (0) 5 22 23 23 44</span>
+                            </html>
+                            <html className="support-time">
+                                <span style="font-size:12px;">08:30 à 18:30</span>
+                            </html>
+                        </vbox>
+                    </vbox>
 
                 <html>
-                    <div style="height: 70px;"> </div>
-                </html>        
-                
-                    <vbox columns="25% 25% 25% 25%">
-                       <html>
-                           <div class="main-icon-title t1">
-                                <i class="fas fa-check-square" />
-                                <span>Acceptabilité projets</span>
-                           </div>
-                       </html>
-                        <html>
-                           <div class="main-icon-title t2">
-                            <i class="fas fa-map-marker-alt" />
-                            <span>Accès au foncier</span>
-                           </div>
-                       </html>
-                          <html>
-                           <div class="main-icon-title t3">
-                                <i class="far fa-building" />
-                                <span>Autorisations urbanistiques</span>
-                           </div>
-                       </html>
-                        <html>
-                           <div class="main-icon-title t4">
-                                <i class="fas fa-cog" />
-                                <span>Autorisations économiques</span>
-                           </div>
-                       </html>
-                        
-                    </vbox>
-                    
-                </vbox>
+                    <div class="searchList">
+                       <div class="second-search-bar">
+                           <span class="back-span"><i class="fas fa-chevron-left" /> Retour</span>
+                           <input type="text" /><i class="fas fa-eraser" /><i class="fas fa-search" />
+                       </div>
+                        <p class="nbrRes">Environs <span>0</span> résultats (<span>0.21</span> second)</p>
+                        <div class="searchListD">
+                            <div class="searchGif">
+                                <img src="img/search-move.gif" />
+                            </div>
+                        </div>
+                        <div class="pagination">
 
-            <html>
-            <div class="searchList">
-               <div class="second-search-bar">
-                   <span class="back-span"><i class="fas fa-chevron-left" /> Retour</span>
-                   <input type="text" /><i class="fas fa-eraser" /><i class="fas fa-search" />
-               </div>
-                <p class="nbrRes">Environs <span>0</span> résultats (<span>0.21</span> second)</p>
-                <div class="searchListD">
-                    <div class="searchGif">
-                        <img src="img/search-move.gif" />
+                        </div>
                     </div>
-                </div>
-                <div class="pagination">
-                    
-                </div>
-            </div>
-            </html>    
-        </vbox>    
+                </html>    
+            </vbox>    
         </vbox>
             
 		<html> <div style="height: 30px;"> </div> </html>                
+        
+        <html>
+            <cms-topicTitle>COMMENT CA MARCHE ?</cms-topicTitle>
+            <cms-topicSeparator />
+        </html>
+        
+
+        <vbox columns="20% 20% 20% 20% 20%">
+             <html>                
+                <box-card style="    height: 210px !important;">
+                    <html><span class="main-number">1</span></html>
+                    <box-small-title>Créer votre espace privé sur rokhas.ma</box-small-title>
+                    <button class="main-btn">Procéder</button>
+                </box-card>
+             </html>                
+
+             <html>                
+                <box-card style="    height: 210px !important;">
+                   <html><span class="main-number">2</span></html>
+                    <box-small-title>Saisissez votre demande en ligne</box-small-title>
+                </box-card>
+             </html>
+            
+             <html>                
+                <box-card style="    height: 210px !important;">
+                    <html><span class="main-number">3</span></html>
+                    <box-small-title>Attachez vos pièces justificatives</box-small-title>
+                </box-card>
+             </html>
+            
+             <html>                
+                <box-card style="    height: 210px !important;">
+                    <html><span class="main-number">4</span></html>
+                    <box-small-title>Suivez le traitement du dossier en ligne
+                    </box-small-title>
+                              
+                </box-card>
+             </html> 
+             <html>                
+                <box-card style="    height: 210px !important;">
+                    <html><span class="main-number">5</span></html>
+                    <box-small-title>Recevez votre document e-signé</box-small-title>
+                </box-card>
+             </html>            
+            
+          </vbox>
+          
+          <html> <div style="height: 30px;"> </div> </html>                
+        
+        <html>
+            <cms-topicTitle>RESSOURCES PRATIQUES</cms-topicTitle>
+            <cms-topicSeparator />
+        </html>
+        
+
+        <vbox columns="25% 25% 25% 25%">
+             <html>                
+                <box-card style="height:178px">
+                    <box-icon class="fas fa-video h-icon"> </box-icon>
+                    <box-big-title>Guides vidéos</box-big-title>
+                </box-card>
+             </html>                
+
+             <html>                
+                <box-card style="height:178px">
+                    <box-icon class="fas fa-question-circle h-icon"> </box-icon>  
+                    <box-big-title>Questions fréquentes</box-big-title>
+                                          
+                </box-card>
+             </html>
+            
+             <html>                
+                <box-card style="height:178px">
+                    <box-icon class="fas fa-gavel h-icon"> </box-icon>  
+                    <box-big-title>Réglementation</box-big-title>                      
+                </box-card>
+             </html>
+            
+             <html>                
+                <box-card style="height:178px">
+                    <box-icon class="fas fa-download h-icon"> </box-icon>  
+                    <box-big-title>Téléchargements</box-big-title>
+                </box-card>
+             </html>            
+            
+          </vbox>
+        
+		  <html> <div style="height: 30px;"> </div> </html>            
         
         <html>
             <cms-topicTitle>Chiffres clés</cms-topicTitle>
@@ -379,133 +529,55 @@
 
         <vbox columns="25% 25% 25% 25%">
              <html>                
-                <box-card>
+                <box-card class="card-bx">
                     <box-icon class="fas fa-university"> </box-icon>
                     <box-big-title>121</box-big-title>
                     <box-small-title>Commune</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Liste des communes couvertes</a></box-text>                    
+                    <box-text><a>Couverture géographique <i class="fas fa-external-link-alt"></i></a></box-text>                    
                 </box-card>
              </html>                
 
              <html>                
-                <box-card>
+                <box-card class="card-bx">
                     <box-icon class="fas fa-folder"> </box-icon>  
                     <box-big-title>+300</box-big-title>
                     <box-small-title>Dossier traité / jour</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Indicateurs de performance</a></box-text>                      
+                    <box-text><a>Performance par commune <i class="fas fa-external-link-alt"></i></a></box-text>                      
                 </box-card>
              </html>
             
              <html>                
-                <box-card>
+                <box-card class="card-bx">
                     <box-icon class="fas fa-user-tie"> </box-icon>  
                     <box-big-title>+900</box-big-title>
                     <box-small-title>Fonctionnaire</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Statistiques d'utilisation</a></box-text>                      
+                    <box-text><a>Accèder à l'espace d'échange <i class="fas fa-external-link-alt"></i></a></box-text>                      
                 </box-card>
              </html>
             
              <html>                
-                <box-card>
+                <box-card class="card-bx">
                     <box-icon class="fas fa-users"> </box-icon>  
-                    <box-big-title>+5000</box-big-title>
+                    <box-big-title>+10000</box-big-title>
                     <box-small-title>Utilisateur</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Répartition des usagers</a></box-text>                       
+                    <box-text><a>Question fréquentes <i class="fas fa-external-link-alt"></i></a></box-text>                       
                 </box-card>
              </html>            
             
           </vbox>
+      <html> <div style="height: 30px;"> </div> </html>            
+
         
-		  <html> <div style="height: 30px;"> </div> </html>            
         
     </screen>
         
     /********************************************************/
     /*      END :: #MFB :: grid Rokhas 3.0 Home page        */
     /********************************************************/ 
-      
-    <html>
-        <cms-topicTitle>Liste de tâches</cms-topicTitle>
-        <cms-topicSeparator />
-    </html>      
-	
-	
-	<tasklist name="TLZonebundle" label="My Tasks" displayMode="thumbnail" searchQN="globalTasks" style="width:1200px; max-width: 95%; margin:auto">
-    <field label="Réf." index="stringIndex1" widget="text" name="reference" />
-    <field label="Statut" index="stringIndex2" widget="text" name="statut" />
-    <field label="Description" index="stringIndex3" widget="text" name="description" />
-    <field label="d4" index="stringIndex4" widget="text" name="detail4" /> 
-    <field label="d5" index="stringIndex5" widget="text" name="detail5" /> 
-    <field label="d6" index="stringIndex6" widget="text" name="detail6" /> 
-    <field label="d7" index="stringIndex7" widget="text" name="detail7" /> 
-    <field label="d8" index="stringIndex8" widget="text" name="detail8" /> 
-    <field label="d9" index="stringIndex9" widget="text" name="detail9" /> 
-    <field label="d10" index="stringIndex10" widget="text" name="detail10" /> 
-    <field label="d11" index="stringIndex11" widget="text" name="detail11" /> 
-    <field label="d12" index="stringIndex12" widget="text" name="detail12" /> 
-    <field label="manualTaskId" index="manualTaskId" widget="text" name="manualTaskId" />
-    <field label="creationTime" index="creationTime" widget="text" name="creationTime" />
-    <field label="affected" index="affected" widget="text" name="affected" />
-    <field label="activityName" index="activityName" widget="text" name="activityName" />
-	<field label="Processus" index="processName" name="processName" /> 
-	<field label="ProcessusQN" index="processQN" name="processQN" /> 
-	<field label="modelQN" index="modelQN" name="modelQN" /> 
-	<field label="aiId" index="id" name="aiId" /> 
-	<field label="objectId" index="objectId" name="objectId" /> 
-	
-	<template>
-       <div class="ow-thumbnail ow-thumbnail-${owt_state}"> 
-	    <div class="ow-thumbnail-actions">
-			<div class="ow-thumbnail-action  fa fa-edit" onclick="ApplicationManager.loadTask(${aiId}, '${processQN}', '${activityName}')"> </div>
-			<div class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${objectId}, '${modelQN}', '${activityName}')"> </div>
-			<div class="ow-thumbnail-action  ${whoIsForMe_css}" onclick="ApplicationManager.delegateTask(${aiId}, ${objectId},  '${processQN}', '${whoIsForMe}', '${affected}', '${manualTaskId}' )"> </div>
-		</div>
-          <div class="ow-thumbnail-inner">
-			<div class="ow-thumbnail-title-line">
-				<div class="ow-thumbnail-bag">${activityName}</div> 
-				<div> 
-					<span class="ow-thumbnail-value">${processName}</span>
-				</div> 
-				<div> 
-					<span class="ow-thumbnail-value">${reference}</span>
-				</div> 
-			</div>
-			<div class="ow-thumbnail-details-line">  
-				<div class="ow-t1">${description}</div>
-				<div class="ow-t1">${detail5}</div> 
-				<div class="ow-t1">${statut}</div> 
-			</div>
-			<div class="ow-thumbnail-details-line"> 
-				<div class="ow-t1">${detail4}</div>  
-				<div class="ow-t1">${detail6}</div> 
-				<div class="ow-t1">${detail7}</div>
-				<div class="ow-t1">${detail8}</div>  
-			</div>
-			<div class="ow-thumbnail-details-line"> 
-				<div class="ow-t1">${detail9}</div>  
-				<div class="ow-t1">${detail10}</div> 
-				<div class="ow-t1">${detail11}</div>
-				<div class="ow-t1">${detail12}</div>  
-			</div>
-			
-			
-			<div class="ow-thumbnail-foot-line">
-			
-				<div>${processName}</div>
-				<div>${activityName}</div>
-				<div>${creationTime}</div> 
-				<div class="affectation ${owt_state} ">${owt_state_message}</div>
-			</div>
-          </div> 
-		</div> 
-      </template>
-	 
-	 
-	 
-  </tasklist>
+   
   </view>
 </search>

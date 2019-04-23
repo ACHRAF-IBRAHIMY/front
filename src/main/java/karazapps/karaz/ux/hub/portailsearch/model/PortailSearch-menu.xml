@@ -26,13 +26,16 @@
       <menu relId="OpinionTextMining" label="Opinion TextMining" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextMining</resource>
       </menu>
+      <menu relId="OpinionTextClassification" label="Opinion TextClassification" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextClassification</resource>
+      </menu>
       <menu relId="PublicCentralSearch" label="Public Central Search" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/PublicCentralSearch</resource>
       </menu>
      <menu relId="AllObjectGlobalModelSearch" label="All Global Model Search(object)" icone="search" xcstt="x">
         <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch]]></resource>
       </menu>
-      <menu relId="AllTaskGlobalModelSearch" label="All Global Model Search(object)" icone="search" xcstt="x">
+      <menu relId="AllTaskGlobalModelSearch" label="All Global Model Search(Task)" icone="search" xcstt="x">
         <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch]]></resource>
       </menu>
     </menu>
