@@ -7,12 +7,12 @@ function getAllNotesClass(){
     var obj = {"size":1000,"query":{"match_all":{}}};
     $.ajax({
         type: "post",
-        //url: "https://cmdbserver.karaz.org:9200/index_classification_cluster/avis/_search",
-        url: "http://localhost:9200/index_classification_cluster/avis/_search",
+        url: "https://cmdbserver.karaz.org:9200/index_classification_cluster/avis/_search",
+        //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-          //  xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -90,12 +90,12 @@ function getAllClusters(draw,typeClass){
     var obj = { "aggs" : {"classes" : {"terms" : { "field" : cluster,"size":100 }}}};
     $.ajax({
         type: "post",
-        //url: "https://cmdbserver.karaz.org:9200/index_classification_cluster/avis/_search",
-        url: url,
+        url: "https://cmdbserver.karaz.org:9200/index_classification_cluster/avis/_search",
+        //url: url,
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-         //    xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -148,12 +148,12 @@ function findByCluster(cluster){
     }
      $.ajax({
         type: "post",
-        //url: "https://cmdbserver.karaz.org:9200/index_classification_cluster/avis/_search",
-        url: url,
+        url: "https://cmdbserver.karaz.org:9200/index_classification_cluster/avis/_search",
+        //url: url,
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-        //    xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
         },
         data: JSON.stringify(obj),
         success: function (result) {

@@ -21,7 +21,7 @@
               <searchQN />
             </searchModel>   
             <returnMode>manualTask</returnMode>
-                 
+            <qmodelName>%</qmodelName>
 		</query>
       <pageSize>10</pageSize>
 <searchId /> 
@@ -37,17 +37,26 @@ context.formRender.notifyObservers("searchId");
     <vbox id="gobalTaskModelSearch">
 <test expression="{query.returnMode},=,manualTask" separator=",">
                <!-- <objectList targetScreen="autorisationViewer" displayMode="thumbnail" searchQN="AllArrondAutorisationConstruction"> -->
-                <vbox columns="0.6% 53% 20% auto">
-                <hx /> 
+                <vbox columns="0.6% 53% auto 20%">
+                <hx />  
                <field xpath="query.keys" noLabel="true" label="" emptyText="Mots clé : N°, Consistance, Nom, ..." widget="text" postProcessingX="search()" />
+               <field xpath="query.qmodelName" noLabel="true" labelAlignx="top" label="Nom Modèle" widget="select">
+                <option value="%AutorisationConstruction%" label="Permis de Construire" />
+                <option value="%PermishabiterHabitation%" label="Permis d'habiter" />
+                <option value="%Impressionplan%" label="Impression plan" />
+                <option value="%" label="Tous les modèles" />
+                <postChange>
+                  root.query.model=root.query.qmodelName;
+                  context.formRender.notifyObservers("query.model");
+               </postChange>
+               </field>
                <button className="gobalModelSearch_Button" noLabel="true" icon="fas fa-search" postProcessing="search()" tooltipX="Appliquer filtres">
                 <postChange>
                                       
-                //setShowProgressSearch("gobalTaskModelSearch"+root.searchId,"listTask","loadiing_task"+root.searchId);
-                
+                  setShowProgressSearch("gobalTaskModelSearch"+root.searchId,"listTask","loadiing_task"+root.searchId);
                 //forceClickElement("gobalTaskModelSearch"+root.searchId,"listTask","ow-pagination-reload");
-setPaganateSizeValueById("gobalTaskModelSearch"+root.searchId,"listTask",root.pageSize,500);
-                setTimeout(function(){ 
+                setPaganateSizeValueById("gobalTaskModelSearch"+root.searchId,"listTask",root.pageSize,500);
+                  setTimeout(function(){ 
                                
                                if(root.task=="" || !root.task ){
                                hideLoadingElement("loadiing_task"+root.searchId);

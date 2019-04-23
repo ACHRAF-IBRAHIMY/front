@@ -798,9 +798,94 @@
     margin: auto;
 }
 
+.buttonLog
+{
+    width: 149px !important;
+    height: 40px !important;
+    border-radius: 5px !important;
+    text-transform: uppercase;
+    position: relative;
+    right: -56%;
+}
+
+.div-main-icons{
+    width: 90%; margin: auto;
+}
+
+.main-icon-title-bx{
+    text-align: left;
+    position: relative;
+    border: 1px solid #ddd;
+    width: 90%;
+    height: 100%;
+    padding: 21px;
+    cursor: pointer;
+}
+
+.main-icon-title-bx .par{
+    display:grid;
+    grid-template-columns:12% 87%;
+    font-size:18px;
+    color:#777;
+    margin: auto;
+    margin-top: 25px;
+    width: 90%;
+}
+
+.main-icon-title-bx .par i{
+    font-size: 36px;
+}
+
+.main-icon-title-bx .title
+{
+    font-size: 22px;
+    color: black;
+    margin-left: 71px;    
+    
+}
+
+.main{
+    height: 193px;
+}
+
+.main-btn{
+    margin-top: 8px;
+    height: 24px;
+    font-size: 14px;
+    border: 1px solid #000;
+    border-radius: 11px;
+    float: right; 
+}
+
+.main-number{
+    color: #38a;
+    border: 2px solid #38a;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    line-height: 132%;
+    display: block;
+    font-size: 41px;
+    margin: auto;
+    margin-bottom: 23px;
+}
+
+
+.main-icon-button{
+    color: #fff;
+    background: #38a;
+    border: none;
+    padding: 9px;
+    border-radius: 4px;
+    margin-top: 32px;
+    position: absolute;
+    right: 31px;
+    bottom: 23px;
+    font-size: 16px;
+}
+
 .main-icon-title{
-    width: 80%;
-    height: 140px;
+    width: 100%;
     margin: auto;
     display: grid;
     grid-template-columns: 100%;
@@ -809,18 +894,41 @@
     cursor: pointer;
 }
 
-.main-icon-title:hover{
+.support{
+    width: 78%;
+    margin: auto;
+    margin-top: 48px;
+}
+
+.support .support-html{
+    color: #38a;
+    font-size: 23px;
+}
+
+.support .support-html span {font-weight: 900;}
+
+.support .support-time{
+    font-size: 12px;
+    display: block;
+    position: relative;
+    bottom: -12px;
+}
+
+.support .support-html i{
+    color: #777;
+}
+
+.main-icon-title:hover,.main-icon-title-bx:hover{
     background-color: #f3f3f3;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.34);
 }
 
 .main-icon-title i{
     color: #38a;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .main-icon-title span{
-    margin-top: 13px;
     color: #333;
     font-size: 17px;
 }
@@ -1447,5 +1555,3 @@
     color: #999;
     text-align: center;
 }
-
-

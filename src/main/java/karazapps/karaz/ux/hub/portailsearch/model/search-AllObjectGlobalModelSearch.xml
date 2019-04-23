@@ -16,12 +16,16 @@
             
             <userLogin />
             <userPassword />
-            <searchModel>
+            <searchModel> 
               <!--searchQN>cug/cri/urbanisme/autorisation/search/PermisConstruireSerachGlobal</searchQN-->
-               <searchQN>cug/cri/securite/impressionplan/search/AllImpressionplan</searchQN>
+               <!--searchQN>cug/cri/securite/impressionplan/search/AllImpressionplan</searchQN-->
               <searchQN>cug/cri/urbanisme/autorisation/search/BlinkSearchPermisConstruire</searchQN>
               <!--searchQN>referentiel/aviscommission/search/AllAvisCommission</searchQN-->
+             <!--searchQN>referentiel/commission/search/AllCommissions</searchQN-->
+
+         
             </searchModel>   
+            <searchQNS>%</searchQNS>
              <cle />
             <returnMode>DataObject</returnMode>
              <currentUser />   
@@ -40,9 +44,9 @@
 console.log("root********onLoad",root);
 root.searchId=new Date().getTime();
 context.formRender.notifyObservers("searchId");
-root.query.currentUser="admin@karaz";
-//root.query.architectlogin="admin@karaz";
-context.formRender.notifyObservers("query.architectlogin");
+root.query.currentUser=root.uid;
+/*root.query.architectlogin=root.uid;
+context.formRender.notifyObservers("query.architectlogin");*/
 context.formRender.notifyObservers("query.currentUser");
 </script> 
     <vbox id="gobalModelSearch">
@@ -57,6 +61,26 @@ context.formRender.notifyObservers("query.cle");
 context.formRender.notifyObservers("query.unifiedCriteria");
 </postChange>
 </field>
+           <field xpath="query.searchQNS" noLabel="true" labelAlignx="top" label="Nom Modèle" widget="select">
+                <option value="cug/cri/urbanisme/autorisation/search/BlinkSearchPermisConstruire" label="Permis de Construire" />
+                <!--option value="cug/cri/urbanisme/autorisation/search/BlinkSearchPermisConstruire" label="Permis d'habiter" /-->
+                <!--option value="cug/cri/securite/impressionplan/search/AllImpressionplan" label="Impression plan" /-->
+                <option value="%" label="Tous les modèles" />
+                <postChange>
+           // console.log("root0********searchQNS",root); 
+                 var searchQNS=root.query.searchQNS;
+                    if(searchQNS=="%"){
+                       root.query.searchModel=[];
+                         root.query.searchModel.push({searchQN:"cug/cri/urbanisme/autorisation/search/BlinkSearchPermisConstruire"});
+                        // root.query.searchModel.push({searchQN:"cug/cri/securite/impressionplan/search/AllImpressionplan"});
+                    }else{
+                     root.query.searchModel={};
+                     root.query.searchModel.searchQN=searchQNS;
+                    }
+                  context.formRender.notifyObservers("query.searchModel");  
+                   //console.log("root********searchQNS",root);
+               </postChange>
+               </field>
                <button className="gobalModelSearch_Button" noLabel="true" icon="fas fa-search" postProcessing="search()" tooltipX="Appliquer filtres">
                <postChange>
                                      setShowProgressSearch("gobalModelSearch","listObject","loadiing_object"+root.searchId);
@@ -102,64 +126,50 @@ context.formRender.notifyObservers("query.unifiedCriteria");
 				<field label="aiId" index="id" name="aiId" /> 
 				<field label="objectId" index="objectId" name="objectId" /> 
 
-               <vbox>
-          <!--test expression="{task[$i].owt_state},=,mine" separator=","-->
-            <html>
+               <vbox>  
+          <test expression="{listObject[$i].modelName},=,karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction" separator=",">
+                       
+                        <search searchQN="dataLoader:cug/cri/urbanisme/autorisation/XMLDataLoader?operation=displayPermisConstObject&amp;id={listObject[$i].id}" />
+                       
+          </test>
+           <test expression="{listObject[$i].modelName},=,karazapps.cug.cri.securite.impressionplan.model.Impressionplan" separator=",">
+               <vbox> 
+              <html>
                                       
-										<div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold">
-											<div class="ow-pl-toolbar">
-												${listObject[$i].reference}
-												<span class="actions">
-												</span>
+										<div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold main_search">
+											<div class="ow-pl-toolbar inforow_0">
+												<div class="fas fa-building icon_pc" />
+												<div>${listObject[$i].reference}</div>
 											</div>
-											<div class="ow-pl-inner">
-												<div class="ow-html">
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Date affectation</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${listObject[$i].creationTime}
+                                            <div class="inforow_1">
+                                               <div class="date_title">
+                                               <span>
+														e-Déposé 12/03/2019 12:31</span>
+                                               </div>
+                                              <div class="icon_acceedossier">
+                                               <span class="fas fa-folder-open" onclick="ApplicationManager.displayObject(${listObject[$i].id}, '${listObject[$i].modelName}', '${listObject[$i].activityName}')" title="Accéder au dossier" style="display: unset;margin-right: 0px;">
 														</span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Processus</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${listObject[$i].processName|translate
-															}  </span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Etape</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">
-															${listObject[$i].activityName|translate }</span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Statut</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${listObject[$i].stringIndex2}
-														</span>
-													</div>
-													<div style="margin-top:10px;display:flex;">
-														
-														<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${listObject[$i].id}, '${listObject[$i].modelName}', '${listObject[$i].activityName}')" style="display: unset;margin-right: 0px;">
-														</span>
-														
-
-														
-													</div>
-												</div>
-												<div style="clear:both">
-												</div>
-											</div>
-										</div>
+                                             </div>
+                                            </div>
+                                         <div class="inforow_2">
+                                          <div class="k-text-truncate" style="width:85%">EXCELLENCE IMMO REAL ESTEXCELLENCE IMMO REAL EST</div>
+                                          <div class="info_town">COMMUNE LAHRAWIYINE</div>
+                                         </div>
+                                         <div class="inforow_3">
+                                          <p><span style="color:#666666;">Aménagement intérieur</span><span style="font-size:12px;color:#3388AA;"> </span><span style="font-size:12px;color:#999999;">(Petits Projets)</span></p>
+                                         </div>
+                                         <div class="inforow_4">
+                                           <p><span>Villa ou immeuble moins de 11.5 m dans un lotissement réceptionné</span></p>
+                                         </div>
+                                         <div class="inforow_5">
+                                            <div />
+                                           <div style="background: #3388aa;color: white;border-radius: 3px;"><span>Tenue commission</span></div>
+                                            <div />
+                                         </div>
+									 </div>
 									</html>
+            </vbox> 
+          </test>
                    
              <!--/test-->
                                <script onLoad="true">
@@ -179,7 +189,7 @@ context.formRender.notifyObservers("query.unifiedCriteria");
 </test>
              </vbox>
 <script onLoad="true" delay="500">
-console.log("root********onLoad",root);
+
 //alert("postLoad");
 setPaganateSizeValueById("gobalModelSearch","listObject",root.pageSize);
 setProgressSearch("gobalModelSearch","listObject","loadiing_object"+root.searchId);
