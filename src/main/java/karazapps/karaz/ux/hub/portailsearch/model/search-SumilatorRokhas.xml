@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="SumilatorRokhas" label="Sumilator Rokhas">
+
+	<query>
+	</query>
+	<data>
+		<query>
+			<search />
+            <idObject />
+            <parentP />
+		</query>
+		<collapsed>false</collapsed>
+	</data>
+	<view>
+		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
+        <script postLoad="true">
+                   
+        </script>
+        
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html>
+                    <div class="rokhas-home">
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                    </div>
+                </html>
+            </vbox>
+            <vbox columns="60% 25% 15%">
+    				       <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
+                               <button label="Accueil">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                                    </postChange>
+                               </button>
+                               <button label="Actualités">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button label="Simulateur">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                                    </postChange>
+                               </button>
+                               <button label="Solutions">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button icon="far fa-question-circle">
+                                   <postChange />
+                               </button>
+							</vbox>
+							
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="Inscription" className="button-signup-header button-left">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+									</postChange>						
+								</button>
+								<button label="Connexion" className="button-signup-header">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+									</postChange>					
+								</button>
+							</vbox>
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="FR" className="button-signup-header-cliked button-left">						
+								</button>
+								<button label="ع" className="button-signup-header">						
+								</button>
+							</vbox>
+						</vbox>
+	
+        </vbox>
+
+        <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+        </html>        
+           
+        <vbox columns="70% 30%">
+            
+            
+        <vbox className="hp-box hp-small divSearch">
+            <vbox className="hp-box divSearchBar div-full-search-bar">
+                <html>
+                    <div class="vpanel-title">
+                        <div class="vpanel-title">
+                           <span>RECHERCHE ACTIVITÉS</span>
+                           <hr class="header-create-account-horizontal-line hr-hub" />
+                       </div>
+                    </div>
+                    <div class="hp-sbox-text">
+                        <span style="color:#f93;">0</span> résultats pour votre recherche <span style="color:#f93;" />. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
+                    </div>
+                    <div style="height: 50px;" />
+                </html>    
+                <vbox columns="80% 20%" columns-small="80% 20%" contentAlign="center">
+                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                        <postChange>
+                                var prefix = $(".div-full-search-bar .hp-search_field input").val();
+                                currentPage=0;
+                                var pp=root.query.parentP;
+                                if(pp==1){
+                                    pp=0;
+                                }
+                                console.log(pp);
+                                restFullSearchList(prefix,0,false,pp);
+                                root.query.parentP=0;
+                         </postChange>
+                    </button>
+                </vbox>
+                    
+
+                <html>
+                    <div style="height: 70px;"> </div>
+                </html>   
+                <html>
+                    <div class="searchGif">
+                        <img src="img/search-move.gif" />
+                    </div>
+                    <div class="full-search-list">
+                        
+                    </div>
+                    <div class="pagination pagination-second">
+                        
+                    </div>
+                </html>     
+                
+                        </vbox>    
+        </vbox> 
+        
+        <vbox className="hp-box hp-small left-box-fsb">
+               <html>
+                   <div class="vpanel-title">
+                       <span>ANNONCES</span>
+                        <hr class="header-create-account-horizontal-line hr-hub" />
+                   </div>
+               </html>
+                <vbox className="hp-box">
+                    <html>
+                        <div class="vpanel-body-title"><i class="fas fa-chart-line" /><span>Etudes de marchés</span></div>
+                        <div class="vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>    
+                </vbox>
+                <html>
+                    <div style="height: 50px;"> </div>
+                </html> 
+                   <vbox className="hp-box">
+                   <html>
+                        <div class="vpanel-body-title"><i class="far fa-edit" /><span>votre e-parapheur</span></div>
+                        <div class="vpanel-body-icon"><i class="far fa-edit" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>     
+                </vbox>
+                <html>
+                    <div style="height: 50px;"> </div>
+                </html> 
+                   <vbox className="hp-box">
+                    <html>
+                        <div class="vpanel-body-title"><i class="fas fa-cog" /><span>Transformation digitale</span></div>
+                        <div class="vpanel-body-icon"><i class="fas fa-cogs" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>     
+                </vbox>    
+            </vbox>      
+        </vbox>
+            
+        
+        <html> <div style="height: 30px;"> </div> </html>            
+        
+    </screen>
+
+	</view>
+
+
+</search>

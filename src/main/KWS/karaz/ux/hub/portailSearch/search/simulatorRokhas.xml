@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="SumilatorRokhas" label="Sumilator Rokhas">
+
+	<query>
+	</query>
+	<data>
+		<query>
+			<search />
+            <idObject />
+            <parentP />
+		</query>
+		<collapsed>false</collapsed>
+	</data>
+	<view>
+		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
+        <script postLoad="true">
+                   
+        </script>
+        
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html>
+                    <div class="rokhas-home">
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                    </div>
+                </html>
+            </vbox>
+            <vbox columns="60% 25% 15%">
+    				       <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
+                               <button label="Accueil">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                                    </postChange>
+                               </button>
+                               <button label="Actualités">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button label="Simulateur">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                                    </postChange>
+                               </button>
+                               <button label="Solutions">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button icon="far fa-question-circle">
+                                   <postChange />
+                               </button>
+							</vbox>
+							
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="Inscription" className="button-signup-header button-left">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+									</postChange>						
+								</button>
+								<button label="Connexion" className="button-signup-header">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+									</postChange>					
+								</button>
+							</vbox>
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="FR" className="button-signup-header-cliked button-left">						
+								</button>
+								<button label="ع" className="button-signup-header">						
+								</button>
+							</vbox>
+						</vbox>
+	
+        </vbox>
+
+        <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+        </html>        
+           
+            
+            
+        <vbox className="hp-box hp-small simulator">
+            <vbox className="hp-box">
+                <html>
+                    <div class="vpanel-title">
+                        <div class="vpanel-title">
+                           <span>SIMULATEUR DE PROCÉDURES</span>
+                           <hr class="header-create-account-horizontal-line hr-hub" />
+                       </div>
+                    </div>
+                    <div class="hp-sbox-text">
+                        Vos réponses aux question posées vous permettront d'obtenir des informations sur les documents requis<span style="color:#f93;">*</span>, les principales étapes de la procédures, les délais moyens nécessaires pour leurs accomplissement ainsi que les documents qui vous seront délivrés à la fin de la procédure. 
+                    </div>
+                    <div style="height: 50px;" />
+                </html>    
+                <vbox columns="60% 40%">
+                    <vbox className="hp-box simulator-qr">
+                    <html>
+                    <div class="vpanel-title">
+                        <div class="vpanel-title">
+                           <span>QUESTIONS / RÈPONSES</span>
+                           <hr class="header-create-account-horizontal-line hr-hub" />
+                       </div>
+                    </div>
+                    </html>
+                    <html>
+                        <div class="qr">
+                            <div class="ques-rep">
+                                <div class="ques">Quelle est la nature de votre demande d'autorisation ?</div>
+                                <div class="rep">
+                                    <div class="rep-type-0" style="display: grid;grid-template-columns: 50% 50%;">
+                                       <div style="display: grid;grid-template-columns: 10% 90%;">
+                                            <span class="check">
+                                                <span class="check-ent"></span>
+                                            </span>
+                                            <span class="rep-check">Autorisation urbanistique</span>   
+                                        </div>
+                                        <div style="display: grid;grid-template-columns: 10% 90%;">
+                                            <span class="check">
+                                                <span class="check-ent"></span>
+                                            </span>
+                                            <span class="rep-check">Autorisation urbanistique</span>   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ques-rep">
+                                <div class="ques">Quel type d'autorisation souhaitez vous obtenir ?</div>
+                                <div class="rep">
+                                    <select class="rep-type-1">
+                                       <option value="Permis de construire">Permis de construire</option>
+                                       <option value="Permis de construire">Permis de construire</option>
+                                       <option value="Permis de construire">Permis de construire</option>
+                                       <option value="Permis de construire">Permis de construire</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ques-rep">
+                                <div class="ques">Quelle est la surface plancher de la construction projetée ?</div>
+                                <div class="rep">
+                                    <input type="text" placeholder="Surface plancher (m2)" class="rep-type-2" />
+                                </div>
+                            </div>
+                        </div>
+                    </html>
+                    </vbox>
+                    <vbox className="docs-qr">
+                        <fieldSet header="DOCUMENTS REQUIS"></fieldSet>
+                        <fieldSet header="ÉTAPES CLÉS"></fieldSet>
+                        <fieldSet header="DOCUMENTS DÉLIVRÉS"></fieldSet>
+                        <fieldSet header="COÛT ÉSTIMATIF"></fieldSet>
+                        <fieldSet header="DOCUMENTS COMPLEMENTAIRES"></fieldSet>
+                    </vbox>    
+                </vbox>
+                    
+
+                <html>
+                    <div style="height: 70px;"> </div>
+                </html>   
+                     
+                
+                        </vbox>    
+        </vbox> 
+        
+        
+            
+        
+        <html> <div style="height: 30px;"> </div> </html>            
+        
+    </screen>
+
+	</view>
+
+
+</search>

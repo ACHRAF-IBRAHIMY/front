@@ -92,6 +92,8 @@ public class PortailSearchLoader {
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpinionTextMining", "karazapps/karaz/ux/hub/portailsearch/model/search-OpinionTextMining.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-PublicCentralSearch.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/SumilatorRokhas", "karazapps/karaz/ux/hub/portailsearch/model/search-SumilatorRokhas.xml");
 		
 		try {
 			RootMenu.addMenus("karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-menu.xml");
