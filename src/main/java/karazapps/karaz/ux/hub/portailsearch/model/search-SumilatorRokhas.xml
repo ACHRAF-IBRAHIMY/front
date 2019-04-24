@@ -78,95 +78,92 @@
             <div style="height: 30px;"> </div>
         </html>        
            
-        <vbox columns="70% 30%">
             
             
-        <vbox className="hp-box hp-small divSearch">
-            <vbox className="hp-box divSearchBar div-full-search-bar">
+        <vbox className="hp-box hp-small simulator">
+            <vbox className="hp-box">
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
-                           <span>RECHERCHE ACTIVITÉS</span>
+                           <span>SIMULATEUR DE PROCÉDURES</span>
                            <hr class="header-create-account-horizontal-line hr-hub" />
                        </div>
                     </div>
                     <div class="hp-sbox-text">
-                        <span style="color:#f93;">0</span> résultats pour votre recherche <span style="color:#f93;" />. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
+                        Vos réponses aux question posées vous permettront d'obtenir des informations sur les documents requis<span style="color:#f93;">*</span>, les principales étapes de la procédures, les délais moyens nécessaires pour leurs accomplissement ainsi que les documents qui vous seront délivrés à la fin de la procédure. 
                     </div>
                     <div style="height: 50px;" />
                 </html>    
-                <vbox columns="80% 20%" columns-small="80% 20%" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                        <postChange>
-                                var prefix = $(".div-full-search-bar .hp-search_field input").val();
-                                currentPage=0;
-                                var pp=root.query.parentP;
-                                if(pp==1){
-                                    pp=0;
-                                }
-                                console.log(pp);
-                                restFullSearchList(prefix,0,false,pp);
-                                root.query.parentP=0;
-                         </postChange>
-                    </button>
+                <vbox columns="60% 40%">
+                    <vbox className="hp-box simulator-qr">
+                    <html>
+                    <div class="vpanel-title">
+                        <div class="vpanel-title">
+                           <span>QUESTIONS / RÈPONSES</span>
+                           <hr class="header-create-account-horizontal-line hr-hub" />
+                       </div>
+                    </div>
+                    </html>
+                    <html>
+                        <div class="qr">
+                            <div class="ques-rep">
+                                <div class="ques">Quelle est la nature de votre demande d'autorisation ?</div>
+                                <div class="rep">
+                                    <div class="rep-type-0" style="display: grid;grid-template-columns: 50% 50%;">
+                                       <div style="display: grid;grid-template-columns: 10% 90%;">
+                                            <span class="check">
+                                                <span class="check-ent" />
+                                            </span>
+                                            <span class="rep-check">Autorisation urbanistique</span>   
+                                        </div>
+                                        <div style="display: grid;grid-template-columns: 10% 90%;">
+                                            <span class="check">
+                                                <span class="check-ent" />
+                                            </span>
+                                            <span class="rep-check">Autorisation urbanistique</span>   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ques-rep">
+                                <div class="ques">Quel type d'autorisation souhaitez vous obtenir ?</div>
+                                <div class="rep">
+                                    <select class="rep-type-1">
+                                       <option value="Permis de construire">Permis de construire</option>
+                                       <option value="Permis de construire">Permis de construire</option>
+                                       <option value="Permis de construire">Permis de construire</option>
+                                       <option value="Permis de construire">Permis de construire</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ques-rep">
+                                <div class="ques">Quelle est la surface plancher de la construction projetée ?</div>
+                                <div class="rep">
+                                    <input type="text" placeholder="Surface plancher (m2)" class="rep-type-2" />
+                                </div>
+                            </div>
+                        </div>
+                    </html>
+                    </vbox>
+                    <vbox className="docs-qr">
+                        <fieldSet header="DOCUMENTS REQUIS" />
+                        <fieldSet header="ÉTAPES CLÉS" />
+                        <fieldSet header="DOCUMENTS DÉLIVRÉS" />
+                        <fieldSet header="COÛT ÉSTIMATIF" />
+                        <fieldSet header="DOCUMENTS COMPLEMENTAIRES" />
+                    </vbox>    
                 </vbox>
                     
 
                 <html>
                     <div style="height: 70px;"> </div>
                 </html>   
-                <html>
-                    <div class="searchGif">
-                        <img src="img/search-move.gif" />
-                    </div>
-                    <div class="full-search-list">
-                        
-                    </div>
-                    <div class="pagination pagination-second">
-                        
-                    </div>
-                </html>     
+                     
                 
                         </vbox>    
         </vbox> 
         
-        <vbox className="hp-box hp-small left-box-fsb">
-               <html>
-                   <div class="vpanel-title">
-                       <span>ANNONCES</span>
-                        <hr class="header-create-account-horizontal-line hr-hub" />
-                   </div>
-               </html>
-                <vbox className="hp-box">
-                    <html>
-                        <div class="vpanel-body-title"><i class="fas fa-chart-line" /><span>Etudes de marchés</span></div>
-                        <div class="vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-                    </html>    
-                </vbox>
-                <html>
-                    <div style="height: 50px;"> </div>
-                </html> 
-                   <vbox className="hp-box">
-                   <html>
-                        <div class="vpanel-body-title"><i class="far fa-edit" /><span>votre e-parapheur</span></div>
-                        <div class="vpanel-body-icon"><i class="far fa-edit" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-                    </html>     
-                </vbox>
-                <html>
-                    <div style="height: 50px;"> </div>
-                </html> 
-                   <vbox className="hp-box">
-                    <html>
-                        <div class="vpanel-body-title"><i class="fas fa-cog" /><span>Transformation digitale</span></div>
-                        <div class="vpanel-body-icon"><i class="fas fa-cogs" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-                    </html>     
-                </vbox>    
-            </vbox>      
-        </vbox>
+        
             
         
         <html> <div style="height: 30px;"> </div> </html>            

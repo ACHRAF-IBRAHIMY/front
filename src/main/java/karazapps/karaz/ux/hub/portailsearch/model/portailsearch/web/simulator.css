@@ -1,0 +1,66 @@
+.simulator .simulator-qr .qr{
+    padding: 20px;
+    text-align: left;
+    color: #38a;
+}
+
+.simulator .simulator-qr .ques-rep{
+    margin-bottom: 40px;
+}
+
+.simulator .simulator-qr .ques{
+    
+}
+
+.simulator .simulator-qr .rep{
+    margin-top: 13px;
+}
+
+.simulator .simulator-qr .rep-type-0,.simulator .simulator-qr .rep-type-1,.simulator .simulator-qr .rep-type-2{
+    
+}
+
+.simulator .simulator-qr input{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: 27px;
+    width: 45%;
+    padding-left: 9px;
+    margin-left: 11px;
+    color: #888;
+}
+
+.simulator .simulator-qr select{
+    border: 2px solid #eee;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: 30px;
+    width: 46%;
+    padding-left: 9px;
+    margin-left: 11px;
+    color: #888;
+}
+
+.simulator .simulator-qr .check{
+    display: block;
+    border: 3px solid #ccc;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+}
+
+.simulator .simulator-qr .check-ent{
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 18%;
+}
+
+.simulator .simulator-qr .active-check{
+    background: #ccc;
+}
+
