@@ -132,7 +132,7 @@
                    </button>
                    <button label="Simulateur">
                         <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SumilatorRokhas", "search", "Simulator Rokhas", {});
                         </postChange>
                    </button>
                     <button label="Open data">
