@@ -45,3 +45,32 @@ function createQuestion(type,obj){
         
     }
 }
+
+function bin2int(num){
+    return parseInt(num,2);
+}
+
+function int2bin(num){
+  return (num).toString(2);
+}
+
+
+function bin2vec(num){
+  return num.split('');
+}
+
+function predictBin(){
+  return Math.floor((Math.random() * 1099511627775) + 1);
+}
+
+function completVec(size,vec){
+  var nbr = size-vec.length;
+  for(var i=0;i<nbr;i++){
+    vec.unshift("0");
+  }
+  return vec;
+}
+
+function vec2bin(vec){
+  return vec.join('');
+}

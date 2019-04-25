@@ -14,7 +14,9 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-                   
+            $(".simulator .simulator-qr .check-ent").click(function(){
+                $(this).toggleClass("active-check");
+            });       
         </script>
         
         <vbox columns="30% 70%" columns-small="auto">
@@ -22,7 +24,7 @@
                 <html>
                     <div class="rokhas-home">
                         <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
+                </div>
                 </html>
             </vbox>
             <vbox columns="60% 25% 15%">
@@ -80,8 +82,8 @@
            
             
             
-        <vbox className="hp-box hp-small simulator">
-            <vbox className="hp-box">
+        <vbox className="hp-small simulator">
+            <vbox className="hp-box simulator-sub">
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
@@ -112,13 +114,13 @@
                                     <div class="rep-type-0" style="display: grid;grid-template-columns: 50% 50%;">
                                        <div style="display: grid;grid-template-columns: 10% 90%;">
                                             <span class="check">
-                                                <span class="check-ent"></span>
+                                                <span class="check-ent" />
                                             </span>
                                             <span class="rep-check">Autorisation urbanistique</span>   
                                         </div>
                                         <div style="display: grid;grid-template-columns: 10% 90%;">
                                             <span class="check">
-                                                <span class="check-ent"></span>
+                                                <span class="check-ent" />
                                             </span>
                                             <span class="rep-check">Autorisation urbanistique</span>   
                                         </div>
@@ -146,11 +148,11 @@
                     </html>
                     </vbox>
                     <vbox className="docs-qr">
-                        <fieldSet header="DOCUMENTS REQUIS"></fieldSet>
-                        <fieldSet header="ÉTAPES CLÉS"></fieldSet>
-                        <fieldSet header="DOCUMENTS DÉLIVRÉS"></fieldSet>
-                        <fieldSet header="COÛT ÉSTIMATIF"></fieldSet>
-                        <fieldSet header="DOCUMENTS COMPLEMENTAIRES"></fieldSet>
+                        <fieldSet header="DOCUMENTS REQUIS" />
+                        <fieldSet header="ÉTAPES CLÉS" />
+                        <fieldSet header="DOCUMENTS DÉLIVRÉS" />
+                        <fieldSet header="COÛT ÉSTIMATIF" />
+                        <fieldSet header="DOCUMENTS COMPLEMENTAIRES" />
                     </vbox>    
                 </vbox>
                     

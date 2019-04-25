@@ -14,7 +14,9 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-                   
+            $(".simulator .simulator-qr .check-ent").click(function(){
+                $(this).toggleClass("active-check");
+            });       
         </script>
         
         <vbox columns="30% 70%" columns-small="auto">
@@ -22,7 +24,7 @@
                 <html>
                     <div class="rokhas-home">
                         <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
+                </div>
                 </html>
             </vbox>
             <vbox columns="60% 25% 15%">
@@ -80,8 +82,8 @@
            
             
             
-        <vbox className="hp-box hp-small simulator">
-            <vbox className="hp-box">
+        <vbox className="hp-small simulator">
+            <vbox className="hp-box simulator-sub">
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">

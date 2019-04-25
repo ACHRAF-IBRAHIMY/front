@@ -1,3 +1,15 @@
+.simulator .simulator-sub{
+    padding: 20px 34px;    
+}
+
+.simulator .hp-sbox-text {
+    margin-left: 10px;
+}
+
+.simulator .simulator-qr{
+    margin-left: 10px !important;
+}
+
 .simulator .simulator-qr .qr{
     padding: 20px;
     text-align: left;
@@ -29,6 +41,7 @@
     padding-left: 9px;
     margin-left: 11px;
     color: #888;
+    outline: none;
 }
 
 .simulator .simulator-qr select{
@@ -41,6 +54,7 @@
     padding-left: 9px;
     margin-left: 11px;
     color: #888;
+    outline: none;
 }
 
 .simulator .simulator-qr .check{
@@ -49,6 +63,7 @@
     height: 22px;
     width: 22px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .simulator .simulator-qr .check-ent{
@@ -63,4 +78,3 @@
 .simulator .simulator-qr .active-check{
     background: #ccc;
 }
-
