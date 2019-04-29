@@ -133,7 +133,7 @@
                     <vbox className="docs-qr">
                         <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div">
                             <html>
-                                <div class="docs-container"></div>
+                                <div class="docs-container" />
                             </html>
                         </fieldSet>
                         <fieldSet header="ÉTAPES CLÉS" />

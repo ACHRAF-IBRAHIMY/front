@@ -8,6 +8,8 @@
 
 .simulator .simulator-qr{
     margin-left: 10px !important;
+    position: relative;
+    height: 300px !important;
 }
 
 .simulator .simulator-qr .qr{
@@ -21,7 +23,7 @@
 }
 
 .simulator .simulator-qr .ques{
-    
+     margin-bottom: 17px;   
 }
 
 .simulator .simulator-qr .rep{
@@ -77,4 +79,70 @@
 
 .simulator .simulator-qr .active-check{
     background: #ccc;
+}
+
+.simulator .simulator-qr .next-button{
+    position: absolute;
+    left: 25%;
+    bottom: 30px;
+}
+
+.simulator .simulator-qr .next-button .stopped{
+    background: #999;
+}
+
+.simulator .simulator-qr .next-button .stopped:hover{
+    background: #999;
+    color: #fff;
+    border: none;
+}
+
+.simulator .simulator-qr .next-button button{
+    background: #38a;
+    color: white;
+    border: none;
+    width: 182px;
+    font-size: 21px;
+    height: 40px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.simulator .simulator-qr .next-button button:hover{
+    border: 1px solid #38a;
+    color: #38a;
+    background: #fff;
+    transition-duration: .3s;
+}
+
+.simulator .danger-text{
+    text-align: left;
+    width: 85%;
+    margin: auto;
+    font-size: 13px;
+}
+
+.simulator .danger-text .fa-exclamation-triangle{
+    font-size: 35px;
+    color: #ffb65b;
+        
+}
+
+.simulator .docs-container .doc-item{
+    display: grid;
+    grid-template-columns: 10% 90%;
+    text-align: left;
+    width: 80%;
+    margin: auto;
+    color: #777;
+    margin-bottom: 9px;
+}
+
+
+.simulator .docs-container .doc-item i{
+    font-size: 28px;
+}
+
+.simulator .docs-container .doc-item span{
+    padding: 4px;
 }
