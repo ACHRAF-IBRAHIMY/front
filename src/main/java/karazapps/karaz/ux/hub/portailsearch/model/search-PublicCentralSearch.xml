@@ -104,6 +104,9 @@
         $(".header-div-toggle").toggle("fast"); 
     });         
           
+    $(".to-simulator").click(function(){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
+    });      
         </script>
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
@@ -132,7 +135,7 @@
                    </button>
                    <button label="Simulateur">
                         <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SumilatorRokhas", "search", "Simulator Rokhas", {});
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
                         </postChange>
                    </button>
                     <button label="Open data">
@@ -364,7 +367,7 @@
                                    <div class="par">
                                     <i class="fas fa-map-signs" />     
                                    <span>Répondez à quelques questions pour être mieux orienté.</span>
-                                   <button class="main-icon-button">
+                                   <button class="main-icon-button to-simulator">
                                        DÉMARRER SIMULATION
                                    </button>
                                    </div>
