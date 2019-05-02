@@ -26,7 +26,11 @@
             intializeVectArray();
             
            $(".simulator .simulator-qr .next-button button.next-rq").click(function(){           
-               nextClick();
+               if(!$(this).hasClass("stopped"))nextClick();
+           });            
+            
+           $(".simulator .simulator-qr .next-button button.back-rq").click(function(){           
+               if(!$(this).hasClass("stopped"))backClick();
            });            
             
             
@@ -136,7 +140,13 @@
                                 <div class="docs-container" />
                             </html>
                         </fieldSet>
-                        <fieldSet header="ÉTAPES CLÉS" />
+                        <fieldSet header="ÉTAPES CLÉS">
+                            <html>
+                                <div class="steps-container">
+                                    
+                                </div>
+                            </html>
+                        </fieldSet>
                         <fieldSet header="DOCUMENTS DÉLIVRÉS" />
                         <fieldSet header="COÛT ÉSTIMATIF" />
                         <fieldSet header="DOCUMENTS COMPLEMENTAIRES" />

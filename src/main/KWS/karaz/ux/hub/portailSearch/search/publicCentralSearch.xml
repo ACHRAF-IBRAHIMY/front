@@ -104,6 +104,9 @@
         $(".header-div-toggle").toggle("fast"); 
     });         
           
+    $(".to-simulator").click(function(){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
+    });      
         </script>
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
@@ -132,7 +135,7 @@
                    </button>
                    <button label="Simulateur">
                         <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SumilatorRokhas", "search", "Simulator Rokhas", {});
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
                         </postChange>
                    </button>
                     <button label="Open data">
@@ -284,7 +287,7 @@
                     <html>
                         <div style="height: 10px;" />
                         <div class="hp-sbox-text">
-                            <i class="fas fa-user-plus"></i> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Pas encore de compte Rokhas ?</a>
+                            <i class="fas fa-user-plus" /> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Pas encore de compte Rokhas ?</a>
                         </div>                             
                         <div class="hp-sbox-text">
                             <a><i class="fas fa-user-times" /> Mot de passe oublié ?</a>
@@ -364,7 +367,7 @@
                                    <div class="par">
                                     <i class="fas fa-map-signs" />     
                                    <span>Répondez à quelques questions pour être mieux orienté.</span>
-                                   <button class="main-icon-button">
+                                   <button class="main-icon-button to-simulator">
                                        DÉMARRER SIMULATION
                                    </button>
                                    </div>
@@ -534,7 +537,7 @@
                     <box-big-title>121</box-big-title>
                     <box-small-title>Commune</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Couverture géographique <i class="fas fa-external-link-alt"></i></a></box-text>                    
+                    <box-text><a>Couverture géographique <i class="fas fa-external-link-alt" /></a></box-text>                    
                 </box-card>
              </html>                
 
@@ -544,7 +547,7 @@
                     <box-big-title>+300</box-big-title>
                     <box-small-title>Dossier traité / jour</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Performance par commune <i class="fas fa-external-link-alt"></i></a></box-text>                      
+                    <box-text><a>Performance par commune <i class="fas fa-external-link-alt" /></a></box-text>                      
                 </box-card>
              </html>
             
@@ -554,7 +557,7 @@
                     <box-big-title>+900</box-big-title>
                     <box-small-title>Fonctionnaire</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Accèder à l'espace d'échange <i class="fas fa-external-link-alt"></i></a></box-text>                      
+                    <box-text><a>Accèder à l'espace d'échange <i class="fas fa-external-link-alt" /></a></box-text>                      
                 </box-card>
              </html>
             
@@ -564,7 +567,7 @@
                     <box-big-title>+10000</box-big-title>
                     <box-small-title>Utilisateur</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Question fréquentes <i class="fas fa-external-link-alt"></i></a></box-text>                       
+                    <box-text><a>Question fréquentes <i class="fas fa-external-link-alt" /></a></box-text>                       
                 </box-card>
              </html>            
             

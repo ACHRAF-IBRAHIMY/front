@@ -14,8 +14,10 @@
 
 .simulator .simulator-qr .qr{
     padding: 20px;
+    width: 90%;
+    margin: auto;
     text-align: left;
-    color: #38a;
+    color: #38a
 }
 
 .simulator .simulator-qr .ques-rep{
@@ -83,12 +85,13 @@
 
 .simulator .simulator-qr .next-button{
     position: absolute;
-    left: 25%;
+    left: 35%;
     bottom: 30px;
 }
 
 .simulator .simulator-qr .next-button .stopped{
     background: #999;
+    cursor: inherit;
 }
 
 .simulator .simulator-qr .next-button .stopped:hover{
@@ -101,9 +104,9 @@
     background: #38a;
     color: white;
     border: none;
-    width: 182px;
-    font-size: 21px;
-    height: 40px;
+    width: 110px;
+    font-size: 18px;
+    height: 35px;
     border-radius: 3px;
     outline: none;
 }
@@ -128,7 +131,7 @@
         
 }
 
-.simulator .docs-container .doc-item{
+.simulator .docs-container .doc-item,.simulator .steps-container .doc-item{
     display: grid;
     grid-template-columns: 10% 90%;
     text-align: left;
@@ -138,11 +141,20 @@
     margin-bottom: 9px;
 }
 
+.simulator .steps-container .doc-item span.icon-number{
+    border: 2px solid;
+    width: 30px;
+    height: 30px;
+    background: #777;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 100%;
+}
 
-.simulator .docs-container .doc-item i{
+.simulator .docs-container .doc-item i,.simulator .steps-container .doc-item i{
     font-size: 28px;
 }
 
-.simulator .docs-container .doc-item span{
+.simulator .docs-container .doc-item span,.simulator .steps-container .doc-item span{
     padding: 4px;
 }
