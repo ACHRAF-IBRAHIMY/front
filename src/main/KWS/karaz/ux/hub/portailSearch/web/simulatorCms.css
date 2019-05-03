@@ -1,0 +1,134 @@
+.simulator-cms{
+    display: block;
+    margin: 10px 2rem;
+    color: var(--fg1);
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 3px 3px 3px #0004;
+    border: 1px solid #DDD;
+    height: 800px;
+    box-sizing: border-box;
+}
+
+
+.simulator-cms .navbar-sim-cms{
+    border: 1px solid #eee;
+}
+
+.simulator-cms .navbar-sim-cms-item{
+    display: grid;
+    grid-template-columns: 13% 90%;
+    padding: 6px;
+    border: 1px solid #eee;
+    background: #fff;
+    cursor: pointer;
+}
+
+.simulator-cms .navbar-sim-cms-item:hover{
+    background: #efefef; 
+}
+
+.simulator-cms .active{
+    background: #eee;
+}
+
+.simulator-cms .navbar-sim-cms-item i{
+    padding: 4px;
+}
+
+.simulator-cms .navbar-sim-cms-item span{
+    padding: 2px;
+}
+
+
+
+
+.simulator-cms .container-sim-cms .container-1{
+    margin: 3px;
+    background: #fff;
+    width: 98%;
+    height: 749px;
+}
+
+
+.simulator-cms .container-sim-cms .container-2,.simulator-cms .container-sim-cms .container-3,.simulator-cms .container-sim-cms .container-4{
+    display: none;
+}
+
+.simulator-cms .side-bar{
+    margin: 3px;
+    background: #fff;
+    height: 792px;
+}
+
+.simulator-cms .side-bar .header{
+    height: 100px;
+    border: 1px solid #eee;
+    text-align: center;
+    padding: 15px;
+}
+
+
+
+.simulator-cms .side-bar .header i{
+    font-size: 45px;
+    padding: 9px;
+    color: #38a;
+}
+
+.simulator-cms .side-bar .header span{
+    font-size: 32px;
+    color: #38a;
+}
+
+
+
+.simulator-cms .side-bar .body{
+    height: 749px;
+    border: 1px solid #eee;
+    border: 1px solid #eee;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.simulator-cms .side-bar .body .div-1{
+    
+}
+
+.simulator-cms .side-bar .body .div-1 .cms-form .form-grid{
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.simulator-cms .side-bar .body .div-1 .cms-form div.class-responses div.responses-sim-cms{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.simulator-cms .side-bar .body .div-1 .cms-form div.form-grid span{
+    border: 1px solid #eee;
+    padding: 5px;
+}
+
+.simulator-cms .side-bar .body .div-1 .cms-form div.form-grid i{
+    border: 1px solid #eee;
+    padding: 5px;
+}
+
+.simulator-cms .side-bar .body .div-1 .cms-form .header-cms-form{
+    border: 1px solid #eee;
+    padding: 5px;
+    text-align: center;
+    background: #eee;
+    font-size: 18px;
+    border-radius: 4px 4px 0 0;
+}
+
+.simulator-cms .side-bar .body .div-1 .link-sim-cms{
+    color: #38a;
+    cursor: pointer;
+}
+
+.simulator-cms .side-bar .body .div-2{
+    
+}

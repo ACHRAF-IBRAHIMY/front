@@ -1406,8 +1406,41 @@
 
 
 @media (max-width: 640px) {
+    
+    
+    .main-icon-button{
+        color: #fff;
+        background: #38a;
+        border: none;
+        padding: 9px;
+        border-radius: 4px;
+        margin-top: 32px;
+        position: static;
+    }
+    
+    .buttonLog {
+        position: relative;
+        right: 0;
+        margin: auto;
+    }
+    
+    .full-grid-small{
+            display: grid;
+            grid-template-columns: 100%;
+     }
+    
+    .main-icon-title-bx{
+        text-align: left;
+        position: relative;
+        border: 1px solid #ddd;
+        width: 100%;
+        margin-bottom: 25px;
+        padding: 21px;
+        cursor: pointer;
+    }
+    
     .Header-signup .Header-signup-min{
-        display: block;
+        display: none;
     }
     
     .Header-signup .Header-signup-glo{
@@ -1479,6 +1512,8 @@
         font-size: 50px;
         margin-bottom: 3px;
     }
+       
+}
        
 }
 

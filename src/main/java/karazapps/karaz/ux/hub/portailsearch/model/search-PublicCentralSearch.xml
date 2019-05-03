@@ -194,7 +194,7 @@
            
         <vbox columns="30% 70%">
            <vbox>
-            <vbox className="hp-box last-log">
+            <vbox className="hp-box last-log hp-small">
                 <vbox columns="20% 80%">
                     <html>
                         <div class="hp-box-icon fas fa-user" />
@@ -297,7 +297,7 @@
                 </vbox>
                 
             </vbox>
-            <vbox className="hp-box last-log">
+            <vbox className="hp-box last-log hp-small">
                 <vbox columns="20% 80%">
                     <html>
                         <div class="hp-box-icon fas fa-folder" />
@@ -364,7 +364,7 @@
                                    <div class="title">
                                        Quelle demande déposer ?
                                    </div>
-                                   <div class="par">
+                                   <div class="par full-grid-small">
                                     <i class="fas fa-map-signs" />     
                                    <span>Répondez à quelques questions pour être mieux orienté.</span>
                                    <button class="main-icon-button to-simulator">
@@ -377,7 +377,7 @@
                            <vbox>
                            <html>
                                <div class="main-icon-title t3">
-                                   <div style="display:grid;grid-template-columns:15% 85%">
+                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%">
                                         <i class="fas fa-map-marker-alt" />
                                        <span>Autorisations urbanistiques</span>
                                     </div>
@@ -388,7 +388,7 @@
                            </html>
                            <html>
                                <div class="main-icon-title t4">
-                                   <div style="display:grid;grid-template-columns:15% 85%">
+                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%">
                                         <i class="fas fa-cog" />
                                         <span>Autorisations économiques</span>
                                     </div>

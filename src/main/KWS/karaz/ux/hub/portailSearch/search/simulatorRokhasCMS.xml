@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="SimulatorRokhasCMS" label="Simulator Rokhas CMS">
+
+	<query>
+	</query>
+	<data>
+		<query>
+			<search />
+            <idObject />
+            <parentP />
+		</query>
+		<collapsed>false</collapsed>
+	</data>
+	<view>
+		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
+        <script postLoad="true">
+            
+        </script>
+        
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html>
+                    <div class="rokhas-home">
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                </div>
+                </html>
+            </vbox>
+            <vbox columns="60% 25% 15%">
+    				       <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
+                               <button label="Accueil">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                                    </postChange>
+                               </button>
+                               <button label="Actualités">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button label="Simulateur">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                                    </postChange>
+                               </button>
+                               <button label="Solutions">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button icon="far fa-question-circle">
+                                   <postChange />
+                               </button>
+							</vbox>
+							
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="Inscription" className="button-signup-header button-left">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+									</postChange>						
+								</button>
+								<button label="Connexion" className="button-signup-header">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+									</postChange>					
+								</button>
+							</vbox>
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="FR" className="button-signup-header-cliked button-left">						
+								</button>
+								<button label="ع" className="button-signup-header">						
+								</button>
+							</vbox>
+						</vbox>
+	
+        </vbox>
+
+        <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+        </html>        
+           
+            
+            
+        <vbox className="hp-small simulator-cms" columns="70% 30%">
+            <vbox>
+                <vbox className="navbar-sim-cms" columns="20% 20% 20% 20% 20%">
+                    <html>
+                        <div class="navbar-sim-cms-item">
+                            <i class="fas fa-project-diagram"></i>
+                           <span>Arbre de décision</span>
+                    </div>
+                    </html>
+                    <html>
+                        <div class="navbar-sim-cms-item">
+                           <i class="fas fa-file-alt"></i>
+                           <span>Liste des documents</span>
+                        </div>
+                    </html><html>
+                        <div class="navbar-sim-cms-item">
+                            <i class="fas fa-tasks"></i>
+                           <span>Liste des étapes</span>
+                        </div>
+                    </html><html>
+                        <div class="navbar-sim-cms-item">
+                           <i class="fas fa-table"></i>
+                           <span>Matrice de classement</span>
+                        </div>
+                    </html>
+                </vbox>
+                <vbox className="container-sim-cms">
+                    <vbox className="container-1"></vbox>
+                    <vbox className="container-2"></vbox>
+                    <vbox className="container-3"></vbox>
+                    <vbox className="container-4"></vbox>
+                    <vbox className="container-load"></vbox>
+                </vbox>
+            </vbox>
+            <vbox className="side-bar">
+                <vbox className="header">
+                    <html>
+                        <i class="fas fa-cogs"></i>
+                        <span>Rokhas Simulateur</span>
+                    </html>
+                </vbox>
+                <vbox className="body">
+                    <vbox className="div-1">
+                        <html>
+                           
+                            <div class="cms-form">
+                               <div class="header-cms-form">First child</div>
+                               <div class="body-cms-form">
+                                <div class="class-title form-grid"><span>Parent </span><span>Root </span></div>
+                                <div class="class-oid form-grid"><span>Object Id </span><span>12459</span></div>
+                                <div class="class-question form-grid"><span>Question </span><span class="link-sim-cms">Quel est votre question ?</span></div>
+                                <div class="class-responses">
+                                  <span>Childrens : </span>
+                                   <div class="responses-sim-cms">
+                                     <div><span class="link-sim-cms">Child 1 </span></div>
+                                     <div><span class="link-sim-cms">Child 2 </span></div>
+                                     <div><span class="link-sim-cms">Child 3 </span></div>
+                                   </div>
+                                </div>
+                                </div>
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="div-2">
+                        
+                    </vbox>
+                </vbox>
+            </vbox>        
+        </vbox> 
+        
+        
+            
+        
+        <html> <div style="height: 30px;"> </div> </html>            
+        
+    </screen>
+
+	</view>
+
+
+</search>

@@ -2,6 +2,17 @@
     padding: 20px 34px;    
 }
 
+.membre-span{
+    border: 1px solid #f93;
+    color: #f93;
+    border-radius: 9px;
+    margin-left: 5px;
+    height: 23px;
+    padding: 3px;
+    display: inline-block;
+    font-size: 12px;
+}
+
 .simulator .hp-sbox-text {
     margin-left: 10px;
 }
@@ -131,7 +142,7 @@
         
 }
 
-.simulator .docs-container .doc-item,.simulator .steps-container .doc-item{
+.simulator .docs-container .doc-item,.simulator .steps-container .doc-item,.simulator .docs-comp-container .doc-item{
     display: grid;
     grid-template-columns: 10% 90%;
     text-align: left;
@@ -151,10 +162,10 @@
     line-height: 100%;
 }
 
-.simulator .docs-container .doc-item i,.simulator .steps-container .doc-item i{
+.simulator .docs-container .doc-item i,.simulator .steps-container .doc-item i,.simulator .docs-comp-container .doc-item i{
     font-size: 28px;
 }
 
-.simulator .docs-container .doc-item span,.simulator .steps-container .doc-item span{
+.simulator .docs-container .doc-item span,.simulator .steps-container .doc-item span,.simulator .docs-comp-container .doc-item span{
     padding: 4px;
 }
