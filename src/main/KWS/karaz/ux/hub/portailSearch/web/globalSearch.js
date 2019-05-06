@@ -3,7 +3,7 @@ function setPaganateSizeValueById(divId,childId,size){
 console.log("setPaganateSizeValueById(divId,size) ......."+divId+"size=="+size ); 
          if(size>=10){
          return;
-         } 
+         }  
         var v0=size;
 	    var v1=size*2;
 
