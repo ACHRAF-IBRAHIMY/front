@@ -1407,6 +1407,9 @@
 
 @media (max-width: 640px) {
     
+    .stay-grid{
+        display: grid !important;
+    }
     
     .main-icon-button{
         color: #fff;
@@ -1426,7 +1429,7 @@
     
     .full-grid-small{
             display: grid;
-            grid-template-columns: 100%;
+            grid-template-columns: 100% !important;
      }
     
     .main-icon-title-bx{

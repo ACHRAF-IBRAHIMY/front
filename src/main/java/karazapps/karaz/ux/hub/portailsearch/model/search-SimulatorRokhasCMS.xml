@@ -14,7 +14,26 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
+            startTreant();
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button").click(function(){
+                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
+                updateNode(id);
+            });
             
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question i.fa-edit").click(function(){
+                modeUpdate();
+            });
+            
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click(function(){
+                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span input").val();
+                if(id!=undefined){
+                    getQuestionCms(id);
+                }
+                
+            });
+            
+            
+
         </script>
         
         <vbox columns="30% 70%" columns-small="auto">
@@ -84,7 +103,7 @@
             <vbox>
                 <vbox className="navbar-sim-cms" columns="20% 20% 20% 20% 20%">
                     <html>
-                        <div class="navbar-sim-cms-item">
+                        <div class="navbar-sim-cms-item active">
                             <i class="fas fa-project-diagram" />
                            <span>Arbre de décision</span>
                     </div>
@@ -107,7 +126,11 @@
                     </html>
                 </vbox>
                 <vbox className="container-sim-cms">
-                    <vbox className="container-1" />
+                    <vbox className="container-1">
+                        <html>
+                            <div id="tree-simple" style="width:100%; height: 720px"> </div>
+                        </html>
+                    </vbox>
                     <vbox className="container-2" />
                     <vbox className="container-3" />
                     <vbox className="container-4" />
@@ -126,11 +149,12 @@
                         <html>
                            
                             <div class="cms-form">
-                               <div class="header-cms-form">First child</div>
+                              <input type="hidden" class="class-id" value="" />
+                               <div class="header-cms-form"><input type="text" value="First child" /></div>
                                <div class="body-cms-form">
-                                <div class="class-title form-grid"><span>Parent </span><span>Root </span></div>
-                                <div class="class-oid form-grid"><span>Object Id </span><span>12459</span></div>
-                                <div class="class-question form-grid"><span>Question </span><span class="link-sim-cms">Quel est votre question ?</span></div>
+                                <div class="class-title form-grid"><span>Parent </span><span><input type="text" value="Root" /></span></div>
+                                <div class="class-oid form-grid"><span>Object Id </span><span><input type="text" value="12459" /></span></div>
+                                <div class="class-question form-grid"><span>Question </span><span class="link-sim-cms" style="display: grid;grid-template-columns: 85% 14%;"><span style="border:none;">Quel est votre question ?</span><i class="fas fa-edit" /></span></div>
                                 <div class="class-responses">
                                   <span>Childrens : </span>
                                    <div class="responses-sim-cms">
@@ -139,12 +163,45 @@
                                      <div><span class="link-sim-cms">Child 3 </span></div>
                                    </div>
                                 </div>
+                                <div class="class-update-button">
+                                    <button>Enregistrer</button>
+                                </div>
                                 </div>
                             </div>
                         </html>
                     </vbox>
                     <vbox className="div-2">
-                        
+                        <html>
+                            <div class="cms-form">
+                              <input type="hidden" class="class-id-qr" value="" />
+                               <div class="header-cms-form">Modifier la question</div>
+                               <div class="body-cms-form">
+                                    <div class="class-question-q form-grid"><span>Question </span><span class="link-sim-cms">Quel est votre question ?</span></div>
+                                    <div class="class-type-question form-grid">
+                                        <span>Type </span>
+                                        <span class="link-sim-cms">
+                                            <select>
+                                                <option value="checked">Check box</option>
+                                                <option value="select">Select</option>
+                                                <option value="input">Input</option>
+                                                <option value="input-conditional">Input Conditionnel</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    <div class="class-responses-q">
+                                      <span>Reponse : </span>
+                                       <div class="responses-sim-cms">
+                                         <div><span class="link-sim-cms"><input type="text" value="Rep1" /></span></div>
+                                         <div><span class="link-sim-cms"><input type="text" value="Rep2" /></span></div>
+                                         <div><span class="link-sim-cms"><input type="text" value="Rep3" /></span></div>
+                                       </div>
+                                    </div>
+                                    <div class="class-update-button">
+                                        <button>Enregistrer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </html>
                     </vbox>
                 </vbox>
             </vbox>        
