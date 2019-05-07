@@ -1,4 +1,6 @@
-
+var scrollTop = 0;
+var scrollLeft = 0;
+    
 
 ;( function() {
     // Polyfill for IE to use startsWith
@@ -1823,11 +1825,14 @@
      * @Returns the configured node
      */
     
+    
     TreeNode.prototype.createButtonAdd = function (node) {
         var but = document.createElement("button");
         but.innerHTML = "add";
         but.setAttribute("class", "add-button-class");
         but.addEventListener("click", function () {
+            scrollTop = $("#tree-simple").scrollTop();
+            scrollLeft = $("#tree-simple").scrollLeft();
             addChild(node.getElementsByClassName("node-id")[0].innerHTML);
         });
         var but1 = document.createElement("button");
@@ -1836,6 +1841,7 @@
         but1.addEventListener("click", function () {
             showUpdate(node.getElementsByClassName("node-id")[0].innerHTML);
         });
+        
         
         node.appendChild(but);
         node.appendChild(but1);

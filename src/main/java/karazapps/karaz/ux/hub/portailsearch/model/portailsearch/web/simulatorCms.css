@@ -51,6 +51,7 @@
 }
 
 
+
 .simulator-cms .container-sim-cms .container-2,.simulator-cms .container-sim-cms .container-3,.simulator-cms .container-sim-cms .container-4{
     display: none;
 }
@@ -58,6 +59,20 @@
 .simulator-cms .side-bar{
     margin: 3px;
     height: 792px;
+}
+
+.simulator-cms .container-sim-cms .container-1 .button-upload-es{
+    text-align: center;
+    padding: 14px;
+}
+
+.simulator-cms .container-sim-cms .container-1 .button-upload-es button{
+    color: white;
+    background: red;
+    font-size: 16px;
+    border: none;
+    padding: 6px;
+    border-radius: 2px;
 }
 
 .simulator-cms .side-bar .header{
@@ -89,7 +104,7 @@
     font-size: 16px;
 }
 
-.simulator-cms .side-bar .body .div-1,.simulator-cms .side-bar .body .div-2{
+.simulator-cms .side-bar .body .div-1,.simulator-cms .side-bar .body .div-2,.simulator-cms .side-bar .body .div-3{
     border: 1px solid #eee;
     padding: 15px;
     background: #fff;
@@ -97,33 +112,46 @@
     margin-top: 6px;
 }
 
-.simulator-cms .side-bar .body .cms-form input{
+.simulator-cms .side-bar .body .div-3{
+    display: none;
+}
+
+.simulator-cms .side-bar .body .cms-form input,
+.simulator-cms .side-bar .body .cms-form-2 input{
     border: none;
     text-align: center;
     background: inherit;
 }
 
-.simulator-cms .side-bar .body  .cms-form select{
+.simulator-cms .side-bar .body .cms-form-2 input.reponses,.simulator-cms .side-bar .body .cms-form-2 input.placeholder{
+    width: 95%;
+    border: 1px solid #eee;
+    padding: 7px;
+    text-align: left;
+}
+
+
+.simulator-cms .side-bar .body  .cms-form select,.simulator-cms .side-bar .body  .cms-form-2 select{
     width: 100%;
     height: 34px;
     border-radius: 2px;
 }
 
-.simulator-cms .side-bar .body  .div-2 .cms-form select{
+.simulator-cms .side-bar .body  .div-2 .cms-form select,.simulator-cms .side-bar .body  .div-3 .cms-form-2 select{
     height: auto;
 }
 
-.simulator-cms .side-bar .body  .cms-form .form-grid{
+.simulator-cms .side-bar .body  .cms-form .form-grid,.simulator-cms .side-bar .body  .cms-form-2 .form-grid{
     display: grid;
     grid-template-columns: 30% 70%;
 }
 
-.simulator-cms .side-bar .body .cms-form div.class-responses div.responses-sim-cms{
+.simulator-cms .side-bar .body .cms-form div.class-responses div.responses-sim-cms,.simulator-cms .side-bar .body .cms-form-2 div.class-responses div.responses-sim-cms{
     display: grid;
     grid-template-columns: 33% 33% 33%;
 }
 
-.simulator-cms .side-bar .body .cms-form div.form-grid span{
+.simulator-cms .side-bar .body .cms-form div.form-grid span,.simulator-cms .side-bar .body .cms-form-2 div.form-grid span{
     border: 1px solid #eee;
     padding: 5px;
 }
@@ -137,13 +165,14 @@
     border: 1px solid #eee;
 }
 
-.simulator-cms .side-bar .body  .cms-form .class-update-button {
+.simulator-cms .side-bar .body  .cms-form .class-update-button,.simulator-cms .side-bar .body  .cms-form-2 .class-update-button {
     margin-top: 14px;
     text-align: right;
     padding: 7px;
 }
 
-.simulator-cms .side-bar .body  .cms-form .class-update-button button {
+.simulator-cms .side-bar .body  .cms-form .class-update-button button ,
+.simulator-cms .side-bar .body  .cms-form-2 .class-update-button button {
     background: #38a;
     border: none;
     color: white;
@@ -153,7 +182,7 @@
 }
 
 
-.simulator-cms .side-bar .body .cms-form .header-cms-form{
+.simulator-cms .side-bar .body .cms-form .header-cms-form,.simulator-cms .side-bar .body .cms-form-2 .header-cms-form{
     border: 1px solid #eee;
     padding: 5px;
     text-align: center;

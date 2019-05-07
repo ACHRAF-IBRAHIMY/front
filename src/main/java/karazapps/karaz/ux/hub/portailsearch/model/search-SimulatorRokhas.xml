@@ -19,11 +19,7 @@
             });       
             
                         
-            for(key in Object.keys(tree)){
-               getQuestion(key,0);
-            }
-            
-            intializeVectArray();
+            getTreeFromEs(1);
             
            $(".simulator .simulator-qr .next-button button.next-rq").click(function(){           
                if(!$(this).hasClass("stopped"))nextClick();
