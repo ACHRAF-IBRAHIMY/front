@@ -29,8 +29,8 @@
              <cle />
             <returnMode>DataObject</returnMode>
              <currentUser />   
-           <draftStatus></draftStatus>
-        <rejectStatus></rejectStatus>
+           <draftStatus />
+        <rejectStatus />
          <architectlogin />
 <unifiedCriteria />
        <tos />
@@ -186,6 +186,7 @@ context.formRender.notifyObservers("query.unifiedCriteria");
                                        }
 
 </script>   
+
                  </vbox>
                </objectList>
                
@@ -203,7 +204,15 @@ setProgressSearch("gobalModelSearch","listObject","loadiing_object"+root.searchI
 
 
 </script>       
-  
+<script postLoad="true" delay="6000">
+                                 
+
+                                      if(!root.listObject[0]){
+									   //alert("task root********onLoad"+root.listObject[0]);
+                                      hideLoadingElement("loadiing_object"+root.searchId); 
+                                       }
+
+</script>   
           
 
 </screen>
