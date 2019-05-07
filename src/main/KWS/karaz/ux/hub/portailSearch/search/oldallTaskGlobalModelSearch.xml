@@ -188,7 +188,15 @@ setProgressSearch("gobalTaskModelSearch"+root.searchId,"listObject","loadiing_ob
 
 
 </script>      
-  
+<script postLoad="true" delay="6000">
+                                 
+
+                                      if(!root.listTask[0]){
+									   //alert("task root********onLoad"+root.listTask[0]);
+                                      hideLoadingElement("loadiing_task"+root.searchId); 
+                                       }
+
+</script>   
           
 
 </screen>

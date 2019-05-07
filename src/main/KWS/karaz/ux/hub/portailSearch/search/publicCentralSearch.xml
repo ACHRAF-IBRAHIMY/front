@@ -175,7 +175,8 @@
                     </button>
                     <button label="Connexion" className="button-signup-header">	
                         <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
                         </postChange>					
                     </button>
                 </vbox>
@@ -219,7 +220,8 @@
                     <button className="hp-box-btn HomePageLoginButton buttonLog" label="Se connecter">
                         <postChange>
                             <!--  Routing credentials check depending to authentication domain (@rokhas / @casaurba)-->
-                            let myUrl='kas/signin';
+                       ApplicationManager.run('/karazal/kas/loginSamlSP','openLinkLocal','openLinkLocal'); 
+                       /*     let myUrl='kas/signin';
                             //let uri='http://37.59.82.23:8080/karazal';
                             let uri='http://preprodrokhas.karaz.org:8080/karazal';                            
                             let myDomain = 'karaz';
@@ -278,7 +280,7 @@
                                 
                                 }
                             });   
-                            
+                            */
                         </postChange>                                  
                     
                     </button>

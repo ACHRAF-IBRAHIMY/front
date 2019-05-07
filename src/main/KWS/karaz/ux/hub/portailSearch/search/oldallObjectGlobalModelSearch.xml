@@ -29,25 +29,31 @@
              <cle />
             <returnMode>DataObject</returnMode>
              <currentUser />   
-           <!--draftStatus>Brouillon</draftStatus>
-        <checkStatus>false</checkStatus>
-        <rejectStatus>Rejeté</rejectStatus-->
+           <draftStatus />
+        <rejectStatus />
          <architectlogin />
 <unifiedCriteria />
+       <tos />
 		</query>
       <pageSize>10</pageSize> 
       <searchId />
+	  <isforMe />
 	</data>
   <view>
   <screen id="dashboardMain" noToolBar="true">
 <script onLoad="true">
-console.log("root********onLoad",root);
+console.log("root********onLoad query",root);
 root.searchId=new Date().getTime();
 context.formRender.notifyObservers("searchId");
+//alert("post load");
+if("true"==root.isforMe){
 root.query.currentUser=root.uid;
 /*root.query.architectlogin=root.uid;
 context.formRender.notifyObservers("query.architectlogin");*/
 context.formRender.notifyObservers("query.currentUser");
+root.query.tos=userEmail;
+context.formRender.notifyObservers("query.tos");
+}
 </script> 
     <vbox id="gobalModelSearch">
 <test expression="{query.returnMode},=,DataObject" separator=",">
@@ -129,7 +135,7 @@ context.formRender.notifyObservers("query.unifiedCriteria");
                <vbox>  
           <test expression="{listObject[$i].modelName},=,karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction" separator=",">
                        
-                        <search  searchQN="dataLoader:cug/cri/urbanisme/autorisation/XMLDataLoader?operation=displayPermisConstObject&amp;id={listObject[$i].id}" />
+                        <search searchQN="dataLoader:cug/cri/urbanisme/autorisation/XMLDataLoader?operation=displayPermisConstObject&amp;id={listObject[$i].id}" />
                        
           </test>
            <test expression="{listObject[$i].modelName},=,karazapps.cug.cri.securite.impressionplan.model.Impressionplan" separator=",">
@@ -138,12 +144,12 @@ context.formRender.notifyObservers("query.unifiedCriteria");
                                       
 										<div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold main_search">
 											<div class="ow-pl-toolbar inforow_0">
-												<div class="fas fa-building icon_pc" ></div>
+												<div class="fas fa-building icon_pc" />
 												<div>${listObject[$i].reference}</div>
 											</div>
-                                            <div class="inforow_1" >
+                                            <div class="inforow_1">
                                                <div class="date_title">
-                                               <span >
+                                               <span>
 														e-Déposé 12/03/2019 12:31</span>
                                                </div>
                                               <div class="icon_acceedossier">
@@ -151,7 +157,7 @@ context.formRender.notifyObservers("query.unifiedCriteria");
 														</span>
                                              </div>
                                             </div>
-                                         <div class="inforow_2" >
+                                         <div class="inforow_2">
                                           <div class="k-text-truncate" style="width:85%">EXCELLENCE IMMO REAL ESTEXCELLENCE IMMO REAL EST</div>
                                           <div class="info_town">COMMUNE LAHRAWIYINE</div>
                                          </div>
@@ -162,9 +168,9 @@ context.formRender.notifyObservers("query.unifiedCriteria");
                                            <p><span>Villa ou immeuble moins de 11.5 m dans un lotissement réceptionné</span></p>
                                          </div>
                                          <div class="inforow_5">
-                                            <div/>
+                                            <div />
                                            <div style="background: #3388aa;color: white;border-radius: 3px;"><span>Tenue commission</span></div>
-                                            <div/>
+                                            <div />
                                          </div>
 									 </div>
 									</html>
@@ -180,6 +186,7 @@ context.formRender.notifyObservers("query.unifiedCriteria");
                                        }
 
 </script>   
+
                  </vbox>
                </objectList>
                
@@ -197,7 +204,15 @@ setProgressSearch("gobalModelSearch","listObject","loadiing_object"+root.searchI
 
 
 </script>       
-  
+<script postLoad="true" delay="6000">
+                                 
+
+                                      if(!root.listObject[0]){
+									   //alert("task root********onLoad"+root.listObject[0]);
+                                      hideLoadingElement("loadiing_object"+root.searchId); 
+                                       }
+
+</script>   
           
 
 </screen>
