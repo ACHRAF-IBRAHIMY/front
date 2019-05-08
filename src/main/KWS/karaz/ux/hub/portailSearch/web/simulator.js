@@ -134,11 +134,11 @@ function createArrayPredict(size){
     return vect;
 }
 
-
 function getQuestion(id,type){
+    loadQuestion();
     $.ajax({
         type: "get",
-        //url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/"+id,
+        //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
         url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/"+id,
         datatype: "application/json",
         contentType: "application/json",
@@ -157,58 +157,62 @@ function getQuestion(id,type){
     });
 }
 
-var tree = {
-    "0": {
-        "1": {
-             "2":{
-                "3":{
-
+var tree = [{
+    "0": [{
+        "1": [{
+            "2": [{
+                    "3": []
+               },
+                {
+                    "3": []
                 },
-                "3-":{
-
-                },
-                "7":{
-                   "3":{
-
-                   }
-                },
-
-             },
-             "6":{
-                "5":{
-
-                }
-            }
-        },
-        "4":{
-            "7":{
-                "5":{}
-            }
-        }
-    }
-};
+                {
+                    "7": [{
+                        "3": []
+                }],
+             }],
+            "6": [{
+                "5": []
+            }]
+        }]},{
+        "4": [{
+            "7": [{
+                "5": []
+            }]
+        }]
+    
+}]}];
 
 
-var arrayVect = [new Array(),new Array()];
+var arrayVect = [new Array(),new Array(),new Array()];
 
 function addToArrayVect(key,value,type){
     var index = arrayVect[0].indexOf(key);
     if(index==-1){
         arrayVect[0].push(key);
         arrayVect[1].push(value);
+        arrayVect[2].push(type);
     }else{
         arrayVect[1][index]= value;
+        arrayVect[2][index]=type;
     }
 }
 
 function popArrayVect(){
     arrayVect[0].pop();
     arrayVect[1].pop();
+    arrayVect[2].pop();
+}
+
+function loadQuestion(){
+    var str = "<img src=\"img/Bars-load.gif\" style=\"margin: auto;display: block;height: 100px;\" alt=\"\"/>";
+    $(".simulator .simulator-qr .qr").html(str);
 }
 
 function intializeVectArray(){
     arrayVect[0].push(Object.keys(tree)[0]);
     arrayVect[1].push(0);
+    arrayVect[2].push(0);
 }
 
 function nextClick(){
@@ -227,7 +231,7 @@ function nextClick(){
             
             case 0:
                 var val = $(".simulator .simulator-qr .rep-pred .check .active-check").parent().parent().children("input").val();
-                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val);  
+                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
                 startButton(1);  
                 var str = getTreeHier(tree,arrayVect); 
                 var treeLocal = eval("tree"+str);
@@ -238,7 +242,7 @@ function nextClick(){
             case 1:
                 var val = $(".simulator .simulator-qr .rep-pred option:selected").val();
                 startButton(1);
-                addToArrayVect(arrayVect[0][arrayVect[0].length-1],val);
+                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
                 var str = getTreeHier(tree,arrayVect); 
                 var treeLocal = eval("tree"+str);
                 console.log(str);
@@ -249,7 +253,7 @@ function nextClick(){
                 var val = $(".simulator .simulator-qr .rep-pred").val();
                 console.log(val);
                 console.log(Object.keys(arrayVect)[Object.keys(arrayVect).length-1]);
-                addToArrayVect(arrayVect[0][arrayVect[0].length-1],val);
+                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
                 startButton(1);
                 var str = getTreeHier(tree,arrayVect); 
                 var treeLocal = eval("tree"+str);
@@ -268,7 +272,7 @@ function nextClick(){
                 }
                 
                 console.log(Object.keys(arrayVect)[Object.keys(arrayVect).length-1]);
-                addToArrayVect(arrayVect[0][arrayVect[0].length-1],val);
+                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
                 startButton(1);
                 var str = getTreeHier(tree,arrayVect); 
                 var treeLocal = eval("tree"+str);
@@ -281,41 +285,44 @@ function nextClick(){
 } 
 
 
+
 function traitementResponse(treeLocal,val){
     if(existBody(treeLocal)){
-        if(Object.keys(treeLocal).length == 1){
-            var id = Object.keys(treeLocal)[0].replace(/-/g,'');
-        }else{
-            var id = Object.keys(treeLocal)[val].replace(/-/g,'');            
-        }
+      if(treeLocal.length == 1){
+        var id = Object.keys(treeLocal[0])[0];
+        addToArrayVect(arrayVect[0][arrayVect [0].length-1],val+1,1);
+      }else{
+        var id = Object.keys(treeLocal[val])[0];   
+      }  
+        console.log(id);
         getQuestion(id,0);    
-        addToArrayVect(id,0);
+        addToArrayVect(id,0,0);
     }else{
-          endFunctionSend();
+      console.log("end");
+      endFunctionSend();
     }
 }
+
 
 function endFunctionSend(){
     reps = [];
     stopedButton(0);
+    
     var search = makeResponse(arrayVect);
-    var inte = searchInMatrix(matrix,search).docs;
-    var inte2 = searchInMatrix(matrix,search).steps;
-    var vector = bin2vec(int2bin(inte));
-    var vector2 = bin2vec(int2bin(inte2));
-    console.log(vector2);
-    vector = completVec(28,vector);
-    vector2 = completVec(10,vector2);
-    sendRequestBulk(bulkRequest(vector,0),0);
-    sendRequestBulk(bulkRequest(vector2,1),1);
+    var objSearchMatrix = searchInMatrix(matrix,search);
+
+    countDoc(0,objSearchMatrix);
+    countDoc(1,objSearchMatrix);
+    countDoc(2,objSearchMatrix);
+    
+    
 }
 
-
 function getTreeHier(treeGl,array) {
-    var str = "";
+    var str = "[0][0]";
     console.log(array);
-    for(var i=0;i<array[0].length;i++){
-        str+="["+array[0][i]+"]";
+    for(var i=1;i<array[0].length;i++){
+        str+="["+Math.max(0,(array[2][i-1]-1))+"]["+(array[0][i])+"]";
     }
     return str;
 }
@@ -328,12 +335,10 @@ function existBody(treeGl){
     }
 }
 
-
 var qsts = ["0","1","2","3","4","5","6","7"];
 var reps = [];
 
-function makeResponse(array){
-    
+function makeResponse(array){    
     for(var i =0 ; i< qsts.length;i++){
         reps.push(0);
     }
@@ -346,12 +351,12 @@ function makeResponse(array){
     return reps.join('');
 }               
 
-var matrix = [["11110000","11130000","11320000","11120000","11310000","11330000","11210001","11230001","11220001","11220002","11210002","11230002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023]];
+var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000]];
 
 function searchInMatrix(matrix,key){
      var index = matrix[0].indexOf(key);
      if(index!=-1){
-        return { docs :matrix[1][index], steps :matrix[2][index]};
+        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index]};
      }else{
          alert("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin. Essayez autorisation urbanistique => permis de construire");
          return null;
@@ -385,7 +390,7 @@ function bulkRequest(vector,type){
 function sendRequestBulk(bulk,type){
     $.ajax({
         type: "post",
-        //url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/"+id,
+        //url: "http://localhost:9200/_msearch",
         url: "https://cmdbserver.karaz.org:9200/_msearch",
         datatype: "application/json",
         contentType: "application/x-ndjson",
@@ -395,8 +400,8 @@ function sendRequestBulk(bulk,type){
         },
         success: function (result) {    
             console.log(result);
-            if(type==0){
-                addDocs(result.responses);
+            if(type==0 || type==2){
+                addDocs(result.responses,type);
             }else{
                 addSteps(result.responses);                
             }
@@ -408,6 +413,76 @@ function sendRequestBulk(bulk,type){
 
 }
 
+function countDoc(type,objSearchMatrix) {
+    var obj = {
+        "query": {
+            "match_all": {}
+        }
+    };
+
+    if (type == 0 || type == 2 || type == 20) {
+        var url = "simulator_index_docs/docs/_count";
+    } else if (type == 1) {
+        var url = "simulator_index_qr/qrs/_count";
+    }
+
+    $.ajax({
+        type: "post",
+      //  url: "http://localhost:9200/" + url,
+        url: "https://cmdbserver.karaz.org:9200/"+url,
+        datatype: "application/json",
+        contentType: "application/json",
+        data: obj,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {
+            if (type == 0) {
+                var inte = objSearchMatrix.docs;
+                var vector = bin2vec(int2bin(inte));
+                vector = completVec(result.count, vector);
+                var bulk = bulkRequest(vector, 0);
+                if (bulk != "") {
+                    sendRequestBulk(bulkRequest(vector, 0), 0);
+                } else {
+                    addDocs([], 0);
+                }
+            } else if (type == 1) {
+                var inte2 = objSearchMatrix.steps;
+                var vector2 = bin2vec(int2bin(inte2));
+                vector2 = completVec(result.count, vector2);
+                var bulk2 = bulkRequest(vector2, 1);
+                if (bulk2 != "") {
+                    sendRequestBulk(bulkRequest(vector2, 1), 1);
+                } else {
+                    addSteps([]);
+                }
+            } else if (type == 2) {
+                var inte3 = objSearchMatrix.docsComp;
+                var vector3 = bin2vec(int2bin(inte3));
+                vector3 = completVec(result.count, vector3);
+                var bulk3 = bulkRequest(vector3, 0);
+                if (bulk3 != "") {
+                    console.log(bulk3.length + " ln");
+                    sendRequestBulk(bulkRequest(vector3, 0), 2);
+                } else {
+                    addDocs([], 2);
+                }
+                
+            } else if (type == 20) {
+                
+                
+
+
+            }
+            result.count
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    })
+
+}
 
 function backClick(){
     popArrayVect();
@@ -419,8 +494,12 @@ function backClick(){
     getQuestion(id,0);
 }
 
-function addDocs(result){
-    var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0];
+function addDocs(result,type){
+    if(type==0){
+        var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0];
+    }else if(type==2){
+        var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0];    
+    }
     docContainer.innerHTML="";
     for(var i =0 ; i <result.length;i++){
         var doc = document.createElement("div");
@@ -436,6 +515,7 @@ function addDocs(result){
     }
 }
 
+
 function addSteps(result){
     var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("steps-container")[0];
     docContainer.innerHTML="";
@@ -448,9 +528,25 @@ function addSteps(result){
         var docName = document.createElement("span");
         docName.innerHTML = result[i].hits.hits[0]._source.title;
         docName.setAttribute("class","doc-name");
+        
         doc.appendChild(icon);
+        if(result[i].hits.hits[0]._source.membres != undefined){
+            for(var j=0;j<result[i].hits.hits[0]._source.membres.length;j++){
+                var spa = "<span class=\"membre-span\">"+result[i].hits.hits[0]._source.membres[j]+"</span>"
+                docName.innerHTML+=spa;
+            }
+        }
+        
         doc.appendChild(docName);
+        var det = document.createElement("div");
+        det.setAttribute("style","font-size:14px;color:#888;margin-bottom:10px");
+        det.innerHTML = checkUndefined(result[i].hits.hits[0]._source.detail);
+        var detadd = document.createElement("div");
+        doc.appendChild(detadd);
+        doc.appendChild(det);
         docContainer.appendChild(doc);
+        
+
     }
 }
 

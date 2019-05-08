@@ -1,0 +1,82 @@
+/* start procedure  */
+button.ow-button.PCD-button-signup-header{
+    background-color: #F0F0F0;
+    color: var(--edit-button);
+    border: 1px solid var(--edit-button);
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+button.ow-button.PCD-button-signup-header:hover{
+    background-color: #ffffff;
+}
+.div-det-acc .accp{
+    width: 85%;
+    margin: auto;
+    font-size: 15px;
+    color: #999999
+}
+.PCD-hr-acc{
+    margin: auto !important;  
+    margin-top: 1em !important;
+    margin-bottom: 3em !important;
+}
+
+.PCD-hp-box {
+    display: block;
+    padding: 1.25rem;
+    margin: 10px 2rem;
+    color: #999999;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 3px 3px 3px #0004;
+    border: 1px solid #DDD; 
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+ } 
+.PDC-prag-p + .PDC-prag-pp  { margin-top: 10px; }
+/* start btn moteur recherche */
+.PDC-btn-container-right .ow-btn-container{
+    text-align: right !important;
+}
+.PCD-moteur-search {
+    background: #38A !important;
+    color: white !important;
+}
+/* end btn moteur recherche */
+
+/* icon size */
+.PCD-vpanel-body-icon i{ 
+    font-size: 10rem;   
+}
+
+/*  */
+.PCD-tooltip{
+    float: right;
+    font-size: 1em !important;
+    color: #38A;  
+}
+.PCD-filtre-scf{
+    font-size: 13px;
+    color: #999999;
+    float: right;
+    margin: 0.5em 2rem !important;
+}
+
+.PCD-parent-ann{
+    display: grid;
+    grid-template-columns: 12% auto 5%;
+}
+.PDC-hov-title >  .ow-pl-toolbar .ow-label-pl:hover{
+    color: #f93 !important; 
+    cursor: pointer;
+}
+/*  */
+/* end procedure  */

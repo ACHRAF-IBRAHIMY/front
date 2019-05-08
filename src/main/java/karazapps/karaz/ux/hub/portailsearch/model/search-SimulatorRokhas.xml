@@ -19,11 +19,7 @@
             });       
             
                         
-            for(key in Object.keys(tree)){
-                getQuestion(key,0);
-            }
-            
-            intializeVectArray();
+            getTreeFromEs(1);
             
            $(".simulator .simulator-qr .next-button button.next-rq").click(function(){           
                if(!$(this).hasClass("stopped"))nextClick();
@@ -126,7 +122,7 @@
                     </html>
                     <html>
                         <div class="qr">
-                            
+                            <img src="img/Bars-load.gif" style="margin: auto;display: block;height: 100px;" alt="" />
                         </div>
                         <div class="next-button">
                             <button class="back-rq stopped">Précédent</button>
@@ -149,7 +145,13 @@
                         </fieldSet>
                         <fieldSet header="DOCUMENTS DÉLIVRÉS" />
                         <fieldSet header="COÛT ÉSTIMATIF" />
-                        <fieldSet header="DOCUMENTS COMPLEMENTAIRES" />
+                        <fieldSet header="DOCUMENTS COMPLEMENTAIRES">
+                            <html>
+                                <div class="docs-comp-container">
+                                    
+                                </div>
+                            </html>
+                        </fieldSet>
                     </vbox> 
                        
                 </vbox>

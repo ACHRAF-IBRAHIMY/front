@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="SimulatorRokhasCMS" label="Simulator Rokhas CMS">
+
+	<query>
+	</query>
+	<data>
+		<query>
+			<search />
+            <idObject />
+            <parentP />
+		</query>
+		<collapsed>false</collapsed>
+	</data>
+	<view>
+		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
+        <script postLoad="true">
+            getTreeFromEs(0);
+
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.save").click(function(){
+                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
+                updateNode(id);
+            });
+
+            $(".simulator-cms .side-bar .body .div-2 .cms-form .class-update-button button").click(function(){
+                getQuestionDet();
+            });
+            
+            $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-update-button button").click(function(){
+                addQuestionForm();
+            });
+            
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question i.fa-edit").click(function(){
+                modeUpdate();
+            });
+
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question i.fa-plus").click(function(){
+                showAddQuestionForm();
+            });
+            
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click(function(){
+                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span input").val();
+                if(id!=undefined){
+                    getQuestionCms(id);
+                }
+                
+            });
+            
+            $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-type-question select").change(function(){
+                var type = $(this).children("option:selected").val();
+                if(type=="input"){
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-responses-q").hide();
+                }else{
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-responses-q").show();                
+                }
+
+                if(type=="input" || type=="input-conditional"){
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-placeholder").show();
+                }else{
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-placeholder").hide();                
+                }
+            });
+
+            $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button").click(function(){
+                uploadTreeToES();
+            });
+
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.class-end-button").click(function(){
+                $(".simulator-cms .side-bar .body").hide();
+                getAllCms(0,createAllCms);
+                $(".simulator-cms .side-bar .body1 input.tree-pos").val();
+                $(".simulator-cms .side-bar .body1").show();
+            });
+
+            $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button.save").click(function(){
+                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
+                makeMatrixClass(id);
+            });
+
+
+
+            dragscroll.reset();
+            
+
+        </script>
+        
+        <vbox columns="30% 70%" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html>
+                    <div class="rokhas-home">
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                </div>
+                </html>
+            </vbox>
+            <vbox columns="60% 25% 15%">
+    				       <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
+                               <button label="Accueil">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                                    </postChange>
+                               </button>
+                               <button label="Actualités">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button label="Simulateur">
+                                    <postChange>
+                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                                    </postChange>
+                               </button>
+                               <button label="Solutions">
+                                    <postChange>
+                                        
+                                    </postChange>
+                               </button>
+                               <button icon="far fa-question-circle">
+                                   <postChange />
+                               </button>
+							</vbox>
+							
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="Inscription" className="button-signup-header button-left">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+									</postChange>						
+								</button>
+								<button label="Connexion" className="button-signup-header">	
+									<postChange>
+											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+									</postChange>					
+								</button>
+							</vbox>
+							<vbox className="vbox-button-signup-header" columns="50% 50%">
+								<button label="FR" className="button-signup-header-cliked button-left">						
+								</button>
+								<button label="ع" className="button-signup-header">						
+								</button>
+							</vbox>
+						</vbox>
+	
+        </vbox>
+
+        <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+        </html>        
+           
+            
+            
+        <vbox className="hp-small simulator-cms" columns="70% 30%">
+            <vbox>
+                <vbox className="navbar-sim-cms" columns="20% 20% 20% 20% 20%">
+                    <html>
+                        <div class="navbar-sim-cms-item active">
+                            <i class="fas fa-project-diagram" />
+                           <span>Arbre de décision</span>
+                    </div>
+                    </html>
+                    <html>
+                        <div class="navbar-sim-cms-item">
+                           <i class="fas fa-file-alt" />
+                           <span>Liste des documents</span>
+                        </div>
+                    </html><html>
+                        <div class="navbar-sim-cms-item">
+                            <i class="fas fa-tasks" />
+                           <span>Liste des étapes</span>
+                        </div>
+                    </html><html>
+                        <div class="navbar-sim-cms-item">
+                           <i class="fas fa-table" />
+                           <span>Matrice de classement</span>
+                        </div>
+                    </html>
+                </vbox>
+                <vbox className="container-sim-cms">
+                    <vbox className="container-1">
+                        <html>
+                            <div id="tree-simple" class="dragscroll" style="width:100%; height: 685px"> </div>
+                            <div class="button-upload-es">
+                                <button><span>Sauvegarder dans ES</span></button>
+                                <span class="valide" style = "display:none" >Indexé <i class="fas fa-check"></i></span>
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="container-2" />
+                    <vbox className="container-3" />
+                    <vbox className="container-4" />
+                    <vbox className="container-load" />
+                </vbox>
+            </vbox>
+            <vbox className="side-bar">
+                <vbox className="header">
+                    <html>
+                        <i class="fas fa-cogs" />
+                        <span>Rokhas Simulateur</span>
+                    </html>
+                </vbox>
+                <vbox className="body">
+                    <vbox className="div-1">
+                        <html>
+                           
+                            <div class="cms-form">
+                              <input type="hidden" class="class-id" value="" />
+                               <div class="header-cms-form"><input type="text" value="First child" /></div>
+                               <div class="body-cms-form">
+                                <div class="class-title form-grid"><span>Parent </span><span><input type="text" value="Root" /></span></div>
+                                <div class="class-oid form-grid"><span>Object Id </span><span><input type="text" value="12459" /></span></div>
+                                <div class="class-question form-grid"><span>Question </span><span class="link-sim-cms" style="display: grid;grid-template-columns: 85% 14%;"><span style="border:none;">Quel est votre question ?</span><i class="fas fa-edit" /><i style="display:none" class="fas fa-plus" /></span></div>
+                                <div class="class-responses">
+                                  <span>Childrens : </span>
+                                   <div class="responses-sim-cms">
+                                     <div><span class="link-sim-cms">Child 1 </span></div>
+                                     <div><span class="link-sim-cms">Child 2 </span></div>
+                                     <div><span class="link-sim-cms">Child 3 </span></div>
+                                   </div>
+                                </div>
+                                <div class="class-update-button">
+                                   <button class="class-end-button" style="background: red;">Fin du chemin</button>
+                                   <button class="save">Sauvegarder</button>
+                                </div>
+                                </div>
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="div-2">
+                        <html>
+                            <div class="cms-form">
+                              <input type="hidden" class="class-id-qr" value="" />
+                               <div class="header-cms-form">Modifier la question</div>
+                               <div class="body-cms-form">
+                                    <div class="class-question-q form-grid"><input type="hidden" class="id" /><span>Question </span><span class="link-sim-cms">Quel est votre question ?</span></div>
+                                    <div class="class-type-question form-grid">
+                                        <span>Type </span>
+                                        <span class="link-sim-cms">
+                                            <select>
+                                                <option value="check">Check box</option>
+                                                <option value="select">Select</option>
+                                                <option value="input">Input</option>
+                                                <option value="input-conditional">Input Conditionnel</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    <div class="class-responses-q">
+                                      <span>Reponse : </span>
+                                       <div class="responses-sim-cms">
+                                         <div><span class="link-sim-cms"><input type="text" value="Rep1" /></span></div>
+                                         <div><span class="link-sim-cms"><input type="text" value="Rep2" /></span></div>
+                                         <div><span class="link-sim-cms"><input type="text" value="Rep3" /></span></div>
+                                       </div>
+                                    </div>
+                                    <div class="class-update-button">
+                                        <button>Sauvegarder</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="div-3">
+                        <html>
+                            <div class="cms-form-2">
+                              <input type="hidden" class="class-id-qr" value="" />
+                               <div class="header-cms-form">Ajouter une question</div>
+                               <div class="body-cms-form">
+                                    <div class="class-question-q form-grid"><span>Question </span><span class="link-sim-cms"><input type="text" placeholder="votre Question" /></span></div>
+                                    <div class="class-type-question form-grid">
+                                        <span>Type </span>
+                                        <span class="link-sim-cms">
+                                            <select>
+                                                <option value="checked">Check box</option>
+                                                <option value="select">Select</option>
+                                                <option value="input">Input</option>
+                                                <option value="input-conditional">Input Conditionnel</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    <div class="class-responses-q">
+                                      <span>Reponses : </span>
+                                       <div class="responses-sim-cms">
+                                         <input class="reponses" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
+                                       </div>
+                                    </div>
+                                    <div class="class-placeholder" style="display:none;">
+                                      <span>Placeholder : </span>
+                                       <div class="responses-sim-cms">
+                                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
+                                       </div>
+                                    </div>
+                                    <div class="class-update-button">
+                                        <button>Ajouter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </html>
+                    </vbox>
+                </vbox>
+                <vbox className="body1">
+                        <vbox className="docs-in">
+                            <html>
+                                <div class="header-doc">
+                                    <span class="docs-requis active"><i class="fas fa-file-alt"></i> Documents Requis</span>
+                                    <span class="docs-comp"><i class="fas fa-file-alt"></i> Documents complémentaires</span>
+                                    <span class="steps"><i class="fas fa-tasks"></i> Etapes</span>
+                                </div>
+                                <div class="docs-added">
+                                    
+                                </div>
+                                <div class="separate"></div>
+                                <div class="docs-list">
+                                         
+                                </div>
+                                <div class="docs-in-buttons">
+                                    <button class="save">Sauvegarder</button>
+                                </div>
+                            </html>
+                        </vbox>                          
+                </vbox>
+            </vbox>        
+        </vbox> 
+        
+        
+            
+        
+        <html> <div style="height: 30px;"> </div> </html>            
+        
+    </screen>
+
+	</view>
+
+
+</search>

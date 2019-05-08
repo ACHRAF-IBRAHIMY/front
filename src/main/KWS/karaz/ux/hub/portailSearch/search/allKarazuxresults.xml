@@ -140,7 +140,7 @@
                     </div>
                     <div style="height: 50px;" />
                 </html>    
-                <vbox columns="80% 20%" columns-small="80% 20%" contentAlign="center">
+                <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
                     <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
                     <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>

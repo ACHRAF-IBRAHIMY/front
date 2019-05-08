@@ -21,11 +21,20 @@
               <searchQN>cug/cri/urbanisme/autorisation/search/PermisConstruireSerachGlobal</searchQN>
               <searchQN />
             </searchModel> 
+			<tos />
 		</query>
 	</data>
 	<view>
 		<screen id="dashboardMain" noToolBar="true">
+<script onLoad="true">
+var x2js = new X2JS();
+var userData = x2js.xml_str2json(karazDataUserXml);
+console.log(" userData email", userData.User.email);
+root.query.tos=userData.User.email;
+context.formRender.notifyObservers("query.tos");
 
+
+</script> 
 			<vbox id="dashboardArchitect" columns="72% 28%">
 
 				<!-- <vbox id="blinkSearch" columns="20% auto" height="300px"> -->
@@ -44,14 +53,14 @@
 							</vbox>
 							<vbox>
  
-							<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=3&amp;limit=3" />
+							<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=3&amp;limit=3" /> 
                             </vbox>
                      	</vbox>
 					</framedPanel>
 					<framedPanel label="Dossiers en cours de traitement" collapsible="false">
                       <vbox>
                
-                              <search searchQN="karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch?query.returnMode=DataObject&amp;pageSize=3&amp;limit=3" />
+                              <search searchQN="karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch?query.returnMode=DataObject&amp;pageSize=3&amp;limit=3&amp;isforMe=true&amp;query.draftStatus=Brouillon&amp;query.rejectStatus=Rejeté" />
                       </vbox>
                          			</framedPanel>
 
@@ -70,7 +79,7 @@
                <field xpath="query.unifiedCriteria" noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
                <button className="dashboardArchitect_serach_Button" noLabel="true" icon="fas fa-filter" postProcessing="search()" tooltipX="Appliquer filtres" />
                   </vbox>
-						<objectList displayMode="thumbnail" searchQN="notify/email/search/AllEmail?limitxx=3&amp;loadXmlXX=true" collectionName="notifs">
+						<objectList displayMode="thumbnail" searchQN="notify/email/search/AllEmail?limitxx=3" collectionName="notifs">
 							<field_ol name="reference" label="Reference" index="stringIndex1" widget="text" />
 							<field_ol name="type" label="Type" index="stringIndex3" widget="text" hidden="true" />
 							<field_ol name="tos" label="To" index="stringIndex4" widget="text" />

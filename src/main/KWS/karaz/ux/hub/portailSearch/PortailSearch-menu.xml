@@ -35,11 +35,32 @@
       <menu relId="SimulatorRokhas" label="Simulator Rokhas" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/SimulatorRokhas</resource>
       </menu>
+      <menu relId="SimulatorRokhasCMS" label="Simulator Rokhas CMS" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/SimulatorRokhasCMS</resource>
+      </menu>
      <menu relId="AllObjectGlobalModelSearch" label="All Global Model Search(object)" icone="search" xcstt="x">
         <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch]]></resource>
       </menu>
       <menu relId="AllTaskGlobalModelSearch" label="All Global Model Search(Task)" icone="search" xcstt="x">
         <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch]]></resource>
+      </menu>
+      <menu relId="proceduresUrbanisme" label="procedures Urbanisme" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/proceduresUrbanisme</resource>
+      </menu>
+      <menu relId="proceduresEconomique" label="procedures Economique" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/proceduresEconomique</resource>
+      </menu>
+      <menu relId="autorisationMorcellement" label="Autorisations de morcellement" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/autorisationMorcellement</resource>
+      </menu>
+      <menu relId="autorusationLotissement" label="Autorisations de Lotissement" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/autorusationLotissement</resource>
+      </menu>
+      <menu relId="autorusationConstructionGroupesHabitations" label="Autorisations de Construction de Groupes d'Habitations" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/autorusationConstructionGroupesHabitations</resource>
+      </menu>
+      <menu relId="AutorisationsConstructionGrandsProjets" label="Autorisations de Construction Grands Projets" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationsConstructionGrandsProjets</resource>
       </menu>
     </menu>
   </menu>

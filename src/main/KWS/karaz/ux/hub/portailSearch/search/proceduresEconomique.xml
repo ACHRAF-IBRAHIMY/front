@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="proceduresEconomique" label="procedure Economique">
+
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+        </query>
+        <collapsed>false</collapsed>
+    </data>
+    <view>
+        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+            <script postLoad="true">
+                $(".rokhas-home").click(function() {
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "PublicCentralSearch", {});
+                });
+                
+            $(".div-det-acc .t1").click(function(){
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets", "search", "Acceptabilite Projets", {});
+            });
+
+            $(".div-det-acc .t2").click(function(){
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/AccesAuFoncier", "search", "Acces Au Foncier", {});
+            });
+            // add right icon to ANNONCES header
+            PCD_addtitle();
+            // header color 
+            PCD_headerfieldset_color(".pcd-ha-color");
+            </script>
+
+            <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html className="Header-signup-glo">
+                    <div class="rokhas-home" style="margin-left: 50px;">
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                    </div>
+                </html>
+                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
+                    <html className="menu-bar-img">
+                        <img src="web/css/img/LogoSquare.svg" alt="" />
+                    </html>
+                    <html />
+                    <html className="menu-bar-icon">
+                        <i class="fas fa-bars" />
+                    </html>    
+                </vbox>
+            </vbox>
+            
+            <vbox columns="60% 25% 15%" className="header-div-toggle">
+               <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
+                   <button label="Actualités">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button label="Simulateur">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
+                        </postChange>
+                   </button>
+                    <button label="Open data">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                        </postChange>
+                   </button>
+                   <button label="Solutions">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button label="Ressources">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button icon="far fa-question-circle">
+                       <postChange />
+                   </button>
+                     
+            
+                </vbox>
+
+                <vbox className="vbox-button-signup-header" columns="50% 50%">
+                    <button label="Inscription" className="button-signup-header button-left">	
+                        <postChange>
+                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+                        </postChange>						
+                    </button>
+                    <button label="Connexion" className="button-signup-header">	
+                        <postChange>
+                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                        </postChange>					
+                    </button>
+                </vbox>
+                <vbox className="vbox-button-signup-header" columns="50% 50%">
+                    <button label="FR" className="button-signup-header-cliked button-left">						
+                    </button>
+                    <button label="ع" className="button-signup-header">						
+                    </button>
+                </vbox>
+              </vbox>
+            </vbox>
+
+            <html id="hSeparator">
+            <div style="height: 30px;"> </div>
+
+            </html>
+
+            <vbox columns="70% 30%">
+
+  
+                <fieldset header="AUTORISATIONS D'EXPLOITATION ÉCONOMIQUE" collapsible="false" className="div-det-acc pcd-ha-color ">
+                    <vbox>
+                        
+                        <vbox className="vpanel-body accp">
+
+                            <vbox className="desc">
+                                <html>
+                                    <p class="PDC-prag-p">
+                                        Les autorisations économiques constituent l'aboutissement du processus administratif de tout projet et marque le démarrage effectif de l'activité économique. Plusieurs types d'autorisation sont concernées, 
+                                        lesquelles différent en termes de procédures applicables, de documents requis et d'entités responsables de leurs délivrance. 
+                                        Vous trouverez ci-après les démarches à suivre pour chaque procédure applicable.
+                                    </p>
+                                    <p class="PDC-prag-p">
+                                        Pour ce type particulier d'autorisation, il est très important d'identifier de façon précise l'activité économique dont on souhaite obtenir l'autorisation avant de procéder.
+                                    </p>
+
+                                </html>
+                                <vbox className="PDC-btn-container-right"> 
+                                    <button label="Moteur de recherche d'activités" icon="fas fa-search" className="PCD-moteur-search">
+                                        <postChange>
+
+                                        </postChange>
+                                    </button>
+                                </vbox> 
+                            </vbox>
+                            <vbox className="acc-titles">
+
+
+                                <vbox columns="10% 90%">
+                                    <html>
+                                        <i class="fas fa-shopping-basket" />
+                                    </html>
+
+                                    <vbox>
+                                        <html>
+                                            <span class="acc-title">Simples déclations</span>
+                                            <p>
+                                            L'ouverture des établissements accueillant des activités non classées est soumise à une procédures de déclaration préalable aboutissant à la délivrance par la commune ou l'arrondissement d'un recipicé. 
+                                            Ce recipicé permet au concerné d''ouvrir son activité à condition de se conformer aux cahiers des charges établis par la commune ainsi qu'à toute réglementation gérant son secteur d'activité. Une visite de contrôle "à posteriori" est effectuée par les services communaux après le début de l'exploitation de l'établissement.
+                                            </p>
+
+                                        </html>
+                                        <button className="det-but" label="Détail">
+                                            <postChange>
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                            </postChange>
+                                        </button>
+                                    </vbox>
+                                </vbox>
+
+                                <html>
+                                    <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                                </html>
+
+                                <vbox columns="10% 90%">
+                                    <html>
+                                        <i class="fas fa-cogs" />
+                                    </html>
+
+                                    <vbox>
+                                        <html>
+                                            <span class="acc-title">Etablissements de 3ème catégorie</span>
+                                            <p>
+                                                Les établissements classés en 3ème catégorie désignent les activités de commerce, de service ou de fabrication artisanale utilisant des procédés, des outils ou des équipements susceptibles de présenter des causes d'insalubrité, d'incommodité ou de danger. 
+                                                L'ouverture de tels établissements est soumis également à une procédure de déclaration préalable dont la délivrance du recipicé est conditionnée par l'avis favorable d'une commission mixte.
+                                            </p>
+
+                                        </html>
+                                        <button className="det-but" label="Détail">
+                                            <postChange>
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                            </postChange>
+                                        </button>
+                                    </vbox>
+                                </vbox>
+
+                                <html>
+                                    <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                                </html>
+
+                                <vbox columns="10% 90%">
+                                    <html>
+                                        <i class="fas fa-industry" />
+                                    </html>
+
+                                    <vbox>
+                                        <html>
+                                            <span class="acc-title">Etablissements en 2ème catégorie</span>
+                                            <p>
+                                                Les établissements classés en 2ème catégorie désignent les activités de commerce, 
+                                                de service ou de fabrication industrielle utilisant des procédés, 
+                                                des outils ou des équipements susceptibles de présenter des causes d'insalubrité, d'incommodité ou de danger. De tels établissements ne peuvent être ouverts à l'exploitation qu'après obtention d'une autorisation émanant des services communaux.
+                                            </p>
+
+                                        </html>
+                                        <button className="det-but" label="Détail">
+                                            <postChange>
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                            </postChange>
+                                        </button>
+                                    </vbox>
+                                </vbox>
+
+                                <html>
+                                    <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                                </html>
+
+                                <vbox columns="10% 90%">
+                                    <html>
+                                        <i class="fas fa-map-signs" />
+                                    </html>
+
+                                    <vbox>
+                                        <html>
+                                            <span class="acc-title">Affichage publicitaire</span>
+                                            <p>
+                                                L'utilisation des dispositifs publicitaire dans ses différentes formats nécessite 
+                                                l'obtention de la part des services communaux des autorisations appropriées et 
+                                                le règlement de droits fiscaux institués par l'arrêté fiscal propre à chaque commune. 
+                                                L'autorisation obtenue possède généralement une durée de validité d'un an et doit être renouvelée ou annulée annuellement à l'initiative du demandeur.
+                                            </p>
+
+                                        </html>
+                                        <button className="det-but" label="Détail">
+                                            <postChange>
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                            </postChange>
+                                        </button>
+                                    </vbox>
+                                </vbox>
+
+                                <html>
+                                    <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                                </html>
+
+                                <vbox columns="10% 90%">
+                                    <html>
+                                        <i class="fas fa-signal" />
+                                    </html>
+
+                                    <vbox>
+                                        <html>
+                                            <span class="acc-title">Occupation du domaine public par les réseaux et équipements télécom</span>
+                                            <p>
+                                                L'utilisation du domaine public pour le déploiement de réseaux filaires ou l'installation 
+                                                d'équipements de télécommunication nécessite l'obtention préalable par l'opérateur concerné d'une autorisation appropriée. 
+                                                L'autorisation précise explicitement les  délimitations géographique des travaux, 
+                                                la nature des équipements à installer et les dates de réalisation de ces travaux.
+                                            </p>
+
+                                        </html>
+                                        <button className="det-but" label="Détail">
+                                            <postChange>
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                            </postChange>
+                                        </button>
+                                    </vbox>
+                                </vbox>
+
+                                <html>
+                                    <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                                </html>
+
+                                <vbox columns="10% 90%">
+                                    <html>
+                                        <i class="fas fa-road" />
+                                    </html>
+
+                                    <vbox>
+                                        <html>
+                                            <span class="acc-title">Occupation du domaine public par les réseaux publics</span>
+                                            <p>
+                                                Le déploiement et la maintenance des réseaux publics (Eau, Électricité, Assainissement, Éclairage public) 
+                                                nécessite généralement l'ouverture de tranchées au niveau des voies public. 
+                                                Ces interventions ne peuvent avois lieu qu'après obtention par la régie ou le concessionnaire d'une autorisation d'aoccupation du domaine public et 
+                                                le règlement des frais associées à la dégradation de la chaussée.
+                                            </p>
+
+                                        </html>
+                                        <button className="det-but" label="Détail">
+                                            <postChange>
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                            </postChange>
+                                        </button>
+                                    </vbox>    
+                                </vbox>
+
+                                <html>
+                                    <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                                </html>
+
+                                <vbox columns="10% 90%">
+                                    <html>
+                                        <i class="fas fa-coffee" />
+                                    </html>
+
+                                    <vbox>
+                                        <html>
+                                            <span class="acc-title">Occupation du domaine public pour des utilisations courantes</span>
+                                            <p>
+                                                Les activités économiques, sociales et culturelles permanentes ou occasionnelles font souvent appel à l'utilisation du domaine public (Terrasses de café, Bâches, Tournage, 
+                                                Stationnement réservé, ...). Cette exploitation de l'espace commun ne peut avoir lieu qu'après obtention d'une autorisation de la part des services communaux et l'acquittement par le bénéficiaire des droits associés, 
+                                                conformément à l'arrêté fiscal communal.
+                                            </p>
+                                        </html>
+                                        <button className="det-but" label="Détail">
+                                            <postChange>
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                            </postChange>
+                                        </button>
+                                    </vbox>    
+                                </vbox>
+
+                     
+                            </vbox>
+
+                       
+
+                        </vbox>
+                    </vbox>
+                </fieldset>
+                
+                <vbox>
+		
+	                <fieldset header="ANNONCES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color">
+                <!-- <i class="fas fa-info-circle PCD-tooltip" title="Il s'agit d'indicateurs contextuels représentants la performances relatifs au processus, à l'entité ou à l'utilisateur concerné"/> -->
+                    <html>
+                        <div class="vpanel-body-title PCD-filtre-scf">
+                            <i class="fas fa-filter" style="font-size:13px;" /><span>Filtres</span>
+                            
+                        </div>
+                    </html>
+                    
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                        <div class="vpanel-body-title PCD-parent-ann">
+                            <i class="fas fa-chart-line" /><span>Etudes de marchés</span> 
+                            <i class="fas fa-info-circle PCD-tooltip" title="Représente le délai moyen (en jour) que je mets pour valider mon avis à compter du jour de la tenue commission"/>
+                        </div>
+                        <div class="PCD-vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+
+                        </html>
+                    </vbox>
+                    <html>
+                    <div style="height: 50px;"> </div>
+
+                    </html>
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                        <div class="vpanel-body-title PCD-parent-ann">
+                            <i class="far fa-edit" /><span>votre e-parapheur</span>
+                            <i class="fas fa-info-circle PCD-tooltip" title="Représente l'évolution des délais d'emission des PV commission"/>
+                        </div>
+                        <div class="PCD-vpanel-body-icon"><i class="far fa-edit" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+
+                        </html>
+                    </vbox>
+                    <html>
+                    <div style="height: 50px;"> </div>
+
+                    </html>
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                        <div class="vpanel-body-title PCD-parent-ann">
+                            <i class="fas fa-cog" /><span>Transformation digitale</span>
+                            <i class="fas fa-info-circle PCD-tooltip" title="Représente l'évolution des délais d'emission des PV commission"/>                        
+                        </div>
+                        <div class="PCD-vpanel-body-icon"><i class="fas fa-cogs" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+
+                        </html>
+                    </vbox>    
+                  
+                  
+                </fieldset>
+	             </vbox>
+	             
+            </vbox>
+
+
+            <html>
+            <div style="height: 30px;"> </div>
+
+            </html>
+
+        </screen>
+
+    </view>
+
+
+</search>

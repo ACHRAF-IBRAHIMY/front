@@ -195,7 +195,7 @@
            
         <vbox columns="30% 70%">
            <vbox>
-            <vbox className="hp-box last-log">
+            <vbox className="hp-box last-log hp-small">
                 <vbox columns="20% 80%">
                     <html>
                         <div class="hp-box-icon fas fa-user" />
@@ -299,7 +299,7 @@
                 </vbox>
                 
             </vbox>
-            <vbox className="hp-box last-log">
+            <vbox className="hp-box last-log hp-small">
                 <vbox columns="20% 80%">
                     <html>
                         <div class="hp-box-icon fas fa-folder" />
@@ -342,7 +342,7 @@
                         </div>
                         <div style="height: 50px;" />
                     </html>    
-                    <vbox columns="80% 20%" columns-small="80% 20%" contentAlign="center">
+                    <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
                         <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ...">
                         </field>
                         <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
@@ -366,7 +366,7 @@
                                    <div class="title">
                                        Quelle demande déposer ?
                                    </div>
-                                   <div class="par">
+                                   <div class="par full-grid-small">
                                     <i class="fas fa-map-signs" />     
                                    <span>Répondez à quelques questions pour être mieux orienté.</span>
                                    <button class="main-icon-button to-simulator">
@@ -379,7 +379,7 @@
                            <vbox>
                            <html>
                                <div class="main-icon-title t3">
-                                   <div style="display:grid;grid-template-columns:15% 85%">
+                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%">
                                         <i class="fas fa-map-marker-alt" />
                                        <span>Autorisations urbanistiques</span>
                                     </div>
@@ -390,7 +390,7 @@
                            </html>
                            <html>
                                <div class="main-icon-title t4">
-                                   <div style="display:grid;grid-template-columns:15% 85%">
+                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%">
                                         <i class="fas fa-cog" />
                                         <span>Autorisations économiques</span>
                                     </div>
@@ -399,14 +399,14 @@
                            </vbox>
                         </vbox>
                         <vbox columns="40% 0% 40% 13%" className="support"> 
-                            <html className="support-html">
+                            <html className="support-html full-grid-small">
                                 <i class="fas fa-paper-plane" />
                                 <span>Support@rokhas.ma</span>
                             </html>
                             <html>
                                 
                             </html>
-                            <html className="support-html">
+                            <html className="support-html full-grid-small">
                                 <i class="fas fa-phone" />
                                 <span>+212 (0) 5 22 23 23 44</span>
                             </html>

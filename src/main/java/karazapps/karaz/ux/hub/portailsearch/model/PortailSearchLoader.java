@@ -81,6 +81,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-AllTaskGlobalModelSearch.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AutorisationsConstructionGrandsProjets", "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationsConstructionGrandsProjets.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DashletsArchitectSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DashletsArchitectSearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DetailsActivitySearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DetailsActivitySearch.xml");
@@ -94,6 +96,18 @@ public class PortailSearchLoader {
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-PublicCentralSearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "karazapps/karaz/ux/hub/portailsearch/model/search-SimulatorRokhas.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/SimulatorRokhasCMS", "karazapps/karaz/ux/hub/portailsearch/model/search-SimulatorRokhasCMS.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/autorisationMorcellement", "karazapps/karaz/ux/hub/portailsearch/model/search-autorisationMorcellement.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/autorusationConstructionGroupesHabitations", "karazapps/karaz/ux/hub/portailsearch/model/search-autorusationConstructionGroupesHabitations.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/autorusationLotissement", "karazapps/karaz/ux/hub/portailsearch/model/search-autorusationLotissement.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/proceduresEconomique", "karazapps/karaz/ux/hub/portailsearch/model/search-proceduresEconomique.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/proceduresUrbanisme", "karazapps/karaz/ux/hub/portailsearch/model/search-proceduresUrbanisme.xml");
 		
 		try {
 			RootMenu.addMenus("karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-menu.xml");
@@ -113,12 +127,18 @@ public class PortailSearchLoader {
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/globalSearch.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/mainDefault.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otc.css");
+    			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/ProceduresCSS.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulator.css");
+    			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulatorCms.css");
+    			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/Treant.css");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/globalSearch.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otc.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otm.js");
+    			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/proceduresJS.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulator.js");
+    			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulatorCms.js");
+    			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/Treant.js");
     	 
     	} catch (Exception e) {
     		e.printStackTrace();
