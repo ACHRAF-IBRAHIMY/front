@@ -16,7 +16,7 @@
         <script postLoad="true">
             getTreeFromEs(0);
 
-            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button").click(function(){
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.save").click(function(){
                 var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
                 updateNode(id);
             });
@@ -63,6 +63,20 @@
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button").click(function(){
                 uploadTreeToES();
             });
+
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.class-end-button").click(function(){
+                $(".simulator-cms .side-bar .body").hide();
+                getAllCms(0,createAllCms);
+                $(".simulator-cms .side-bar .body1 input.tree-pos").val();
+                $(".simulator-cms .side-bar .body1").show();
+            });
+
+            $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button.save").click(function(){
+                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
+                makeMatrixClass(id);
+            });
+
+
 
             dragscroll.reset();
             
@@ -162,13 +176,16 @@
                     <vbox className="container-1">
                         <html>
                             <div id="tree-simple" class="dragscroll" style="width:100%; height: 685px"> </div>
-                            <div class="button-upload-es"><button>Enregistrer dans ES</button></div>
+                            <div class="button-upload-es">
+                                <button><span>Sauvegarder dans ES</span></button>
+                                <span class="valide" style = "display:none" >Indexé <i class="fas fa-check"></i></span>
+                            </div>
                         </html>
                     </vbox>
                     <vbox className="container-2" />
                     <vbox className="container-3" />
                     <vbox className="container-4" />
-                    <vbox className="container-load"/>
+                    <vbox className="container-load" />
                 </vbox>
             </vbox>
             <vbox className="side-bar">
@@ -198,7 +215,8 @@
                                    </div>
                                 </div>
                                 <div class="class-update-button">
-                                    <button>Enregistrer</button>
+                                   <button class="class-end-button" style="background: red;">Fin du chemin</button>
+                                   <button class="save">Sauvegarder</button>
                                 </div>
                                 </div>
                             </div>
@@ -210,7 +228,7 @@
                               <input type="hidden" class="class-id-qr" value="" />
                                <div class="header-cms-form">Modifier la question</div>
                                <div class="body-cms-form">
-                                    <div class="class-question-q form-grid"><input type="hidden" class="id"/><span>Question </span><span class="link-sim-cms">Quel est votre question ?</span></div>
+                                    <div class="class-question-q form-grid"><input type="hidden" class="id" /><span>Question </span><span class="link-sim-cms">Quel est votre question ?</span></div>
                                     <div class="class-type-question form-grid">
                                         <span>Type </span>
                                         <span class="link-sim-cms">
@@ -231,7 +249,7 @@
                                        </div>
                                     </div>
                                     <div class="class-update-button">
-                                        <button>Enregistrer</button>
+                                        <button>Sauvegarder</button>
                                     </div>
                                 </div>
                             </div>
@@ -243,7 +261,7 @@
                               <input type="hidden" class="class-id-qr" value="" />
                                <div class="header-cms-form">Ajouter une question</div>
                                <div class="body-cms-form">
-                                    <div class="class-question-q form-grid"><span>Question </span><span class="link-sim-cms"><input type="text" placeholder="votre Question"/></span></div>
+                                    <div class="class-question-q form-grid"><span>Question </span><span class="link-sim-cms"><input type="text" placeholder="votre Question" /></span></div>
                                     <div class="class-type-question form-grid">
                                         <span>Type </span>
                                         <span class="link-sim-cms">
@@ -258,13 +276,13 @@
                                     <div class="class-responses-q">
                                       <span>Reponses : </span>
                                        <div class="responses-sim-cms">
-                                         <input class="reponses" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3"/>
+                                         <input class="reponses" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                                        </div>
                                     </div>
                                     <div class="class-placeholder" style="display:none;">
                                       <span>Placeholder : </span>
                                        <div class="responses-sim-cms">
-                                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3"/>
+                                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                                        </div>
                                     </div>
                                     <div class="class-update-button">
@@ -274,6 +292,27 @@
                             </div>
                         </html>
                     </vbox>
+                </vbox>
+                <vbox className="body1">
+                        <vbox className="docs-in">
+                            <html>
+                                <div class="header-doc">
+                                    <span class="docs-requis active"><i class="fas fa-file-alt"></i> Documents Requis</span>
+                                    <span class="docs-comp"><i class="fas fa-file-alt"></i> Documents complémentaires</span>
+                                    <span class="steps"><i class="fas fa-tasks"></i> Etapes</span>
+                                </div>
+                                <div class="docs-added">
+                                    
+                                </div>
+                                <div class="separate"></div>
+                                <div class="docs-list">
+                                         
+                                </div>
+                                <div class="docs-in-buttons">
+                                    <button class="save">Sauvegarder</button>
+                                </div>
+                            </html>
+                        </vbox>                          
                 </vbox>
             </vbox>        
         </vbox> 

@@ -64,6 +64,7 @@
 .simulator-cms .container-sim-cms .container-1 .button-upload-es{
     text-align: center;
     padding: 14px;
+    position: relative;
 }
 
 .simulator-cms .container-sim-cms .container-1 .button-upload-es button{
@@ -71,8 +72,25 @@
     background: red;
     font-size: 16px;
     border: none;
-    padding: 6px;
+    padding: 0;
     border-radius: 2px;
+}
+
+.simulator-cms .container-sim-cms .container-1 .button-upload-es button span{
+    padding: 6px;
+    display: block;
+}
+
+.simulator-cms .container-sim-cms .container-1 .button-upload-es button span.active{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide{
+    position: absolute;
+    margin: 6px;
+    margin-left: 15px;
+    color: green;
+    font-size: 15px;
 }
 
 .simulator-cms .side-bar .header{
@@ -198,4 +216,89 @@
 
 .simulator-cms .side-bar .body .div-2{
     
+}
+
+.simulator-cms .side-bar .body1{
+    padding: 10px;
+    border: 1px solid #eee;
+    background: #fff;
+    height: 692px;
+    display: none;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .header-doc{
+    display: grid;
+}
+.simulator-cms .side-bar .body1 .docs-in .header-doc span{
+    padding: 7px;
+    border: 1px solid #eee;
+    background: #fff;
+    width: 95%;
+    font-size: 15px;
+    margin: auto;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .header-doc span.active{
+    background: #eee;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .header-doc span i{
+    margin-right: 6px;
+}
+.simulator-cms .side-bar .body1 .docs-in .docs-added{
+    border: 1px solid #eee;
+    width: 95%;
+    margin: auto;
+    height: 200px;
+    overflow: auto;
+    padding: 10px;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .separate{
+    width: 95%;
+    border: 1px solid #eee;
+    margin: auto;
+    background: #eee;
+    height: 5px;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .docs-list{
+    border: 1px solid #eee;
+    width: 95%;
+    margin: auto;
+    height: 260px;
+    overflow: auto;
+    padding: 10px;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .docs-in-buttons{
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button.save{
+    border: none;
+    color: white;
+    background: #38a;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .doc-item {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    width: 92%;
+    margin: 7px auto;
+    font-size: 15px;
+    color: #38a;
+}
+
+
+.simulator-cms .side-bar .body1 .docs-in .doc-item i {
+    padding: 3px;
+}
+
+.simulator-cms .side-bar .body1 .docs-in .doc-item i.fa-close,.simulator-cms .side-bar .body1 .docs-in .doc-item i.fa-plus {
+    cursor: pointer;
 }

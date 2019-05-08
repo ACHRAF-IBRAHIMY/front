@@ -29,25 +29,31 @@
              <cle />
             <returnMode>DataObject</returnMode>
              <currentUser />   
-           <!--draftStatus>Brouillon</draftStatus>
-        <checkStatus>false</checkStatus>
-        <rejectStatus>Rejeté</rejectStatus-->
+           <draftStatus />
+        <rejectStatus />
          <architectlogin />
 <unifiedCriteria />
+       <tos />
 		</query>
       <pageSize>10</pageSize> 
       <searchId />
+	  <isforMe />
 	</data>
   <view>
   <screen id="dashboardMain" noToolBar="true">
 <script onLoad="true">
-console.log("root********onLoad",root);
+console.log("root********onLoad query",root);
 root.searchId=new Date().getTime();
 context.formRender.notifyObservers("searchId");
+//alert("post load");
+if("true"==root.isforMe){
 root.query.currentUser=root.uid;
 /*root.query.architectlogin=root.uid;
 context.formRender.notifyObservers("query.architectlogin");*/
 context.formRender.notifyObservers("query.currentUser");
+root.query.tos=userEmail;
+context.formRender.notifyObservers("query.tos");
+}
 </script> 
     <vbox id="gobalModelSearch">
 <test expression="{query.returnMode},=,DataObject" separator=",">
@@ -180,6 +186,7 @@ context.formRender.notifyObservers("query.unifiedCriteria");
                                        }
 
 </script>   
+
                  </vbox>
                </objectList>
                
@@ -197,7 +204,15 @@ setProgressSearch("gobalModelSearch","listObject","loadiing_object"+root.searchI
 
 
 </script>       
-  
+<script postLoad="true" delay="6000">
+                                 
+
+                                      if(!root.listObject[0]){
+									   //alert("task root********onLoad"+root.listObject[0]);
+                                      hideLoadingElement("loadiing_object"+root.searchId); 
+                                       }
+
+</script>   
           
 
 </screen>
