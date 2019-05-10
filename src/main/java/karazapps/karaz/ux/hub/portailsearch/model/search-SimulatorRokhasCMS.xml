@@ -14,6 +14,7 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
+            
             getTreeFromEs(0);
 
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.save").click(function(){
@@ -66,80 +67,110 @@
 
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.class-end-button").click(function(){
                 $(".simulator-cms .side-bar .body").hide();
-                getAllCms(0,createAllCms);
+                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
+                objectJsonMatrixColumns = {};
+                beginStepsMatrixColumns(id);
+                $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
+                $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
+                $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
+                $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-requis").addClass("active");
+                $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).hide();
+                $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();
                 $(".simulator-cms .side-bar .body1 input.tree-pos").val();
                 $(".simulator-cms .side-bar .body1").show();
+                step = 0;
             });
 
+            var step = 0;
             $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button.save").click(function(){
                 var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
-                makeMatrixClass(id);
+                nextStepDocsIn(step,id);
+                step++;
+                if(step==3)step=0;
             });
 
-
+            $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+                        $(".header-div-toggle").toggle("fast"); 
+                    });
 
             dragscroll.reset();
             
 
         </script>
         
-        <vbox columns="30% 70%" columns-small="auto">
+        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
-                <html>
-                    <div class="rokhas-home">
+                <html className="Header-signup-glo">
+                    <div class="rokhas-home" style="margin-left: 50px;">
                         <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                </div>
+                    </div>
                 </html>
+                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
+                    <html className="menu-bar-img">
+                        <img src="web/css/img/LogoSquare.svg" alt="" />
+                    </html>
+                    <html />
+                    <html className="menu-bar-icon">
+                        <i class="fas fa-bars" />
+                    </html>    
+                </vbox>
             </vbox>
-            <vbox columns="60% 25% 15%">
-    				       <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
-                               <button label="Accueil">
-                                    <postChange>
-                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-                                    </postChange>
-                               </button>
-                               <button label="Actualités">
-                                    <postChange>
-                                        
-                                    </postChange>
-                               </button>
-                               <button label="Simulateur">
-                                    <postChange>
-                                        ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
-                                    </postChange>
-                               </button>
-                               <button label="Solutions">
-                                    <postChange>
-                                        
-                                    </postChange>
-                               </button>
-                               <button icon="far fa-question-circle">
-                                   <postChange />
-                               </button>
-							</vbox>
-							
-							<vbox className="vbox-button-signup-header" columns="50% 50%">
-								<button label="Inscription" className="button-signup-header button-left">	
-									<postChange>
-											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-									</postChange>						
-								</button>
-								<button label="Connexion" className="button-signup-header">	
-									<postChange>
-											ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-									</postChange>					
-								</button>
-							</vbox>
-							<vbox className="vbox-button-signup-header" columns="50% 50%">
-								<button label="FR" className="button-signup-header-cliked button-left">						
-								</button>
-								<button label="ع" className="button-signup-header">						
-								</button>
-							</vbox>
-						</vbox>
-	
-        </vbox>
+            
+            <vbox columns="60% 25% 15%" className="header-div-toggle">
+               <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
+                   <button label="Actualités">
+                        <postChange>
 
+                        </postChange>
+                   </button>
+                   <button label="Simulateur">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
+                        </postChange>
+                   </button>
+                    <button label="Open data">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                        </postChange>
+                   </button>
+                   <button label="Solutions">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button label="Ressources">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button icon="far fa-question-circle">
+                       <postChange />
+                   </button>
+                      
+            
+                </vbox>
+
+                <vbox className="vbox-button-signup-header" columns="50% 50%">
+                    <button label="Inscription" className="button-signup-header button-left">	
+                        <postChange>
+                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+                        </postChange>						
+                    </button>
+                    <button label="Connexion" className="button-signup-header">	
+                        <postChange>
+                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
+                        </postChange>					
+                    </button>
+                </vbox>
+                <vbox className="vbox-button-signup-header" columns="50% 50%">
+                    <button label="FR" className="button-signup-header-cliked button-left">						
+                    </button>
+                    <button label="ع" className="button-signup-header">						
+                    </button>
+                </vbox>
+            </vbox>
+        </vbox>
         <html id="hSeparator">
             <div style="height: 30px;"> </div>
         </html>        
@@ -204,7 +235,12 @@
                                <div class="header-cms-form"><input type="text" value="First child" /></div>
                                <div class="body-cms-form">
                                 <div class="class-title form-grid"><span>Parent </span><span><input type="text" value="Root" /></span></div>
-                                <div class="class-oid form-grid"><span>Object Id </span><span><input type="text" value="12459" /></span></div>
+                                <div class="class-oid form-grid">
+                                    <span>Etat </span>
+                                    <span class="classee">
+                                       Non Classé  
+                                    </span>
+                                </div>
                                 <div class="class-question form-grid"><span>Question </span><span class="link-sim-cms" style="display: grid;grid-template-columns: 85% 14%;"><span style="border:none;">Quel est votre question ?</span><i class="fas fa-edit" /><i style="display:none" class="fas fa-plus" /></span></div>
                                 <div class="class-responses">
                                   <span>Childrens : </span>
@@ -309,7 +345,8 @@
                                          
                                 </div>
                                 <div class="docs-in-buttons">
-                                    <button class="save">Sauvegarder</button>
+                                    <button class="save">Suivant</button>
+                                    <button class="save" style="display:none;">Sauvegarder</button>
                                 </div>
                             </html>
                         </vbox>                          

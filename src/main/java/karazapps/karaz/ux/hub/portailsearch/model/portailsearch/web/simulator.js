@@ -125,6 +125,20 @@ function vec2bin(vec){
   return vec.join('');
 }
 
+function completeArrayMatrix(ar1,ar2,size){
+    console.log(ar1);
+    console.log(ar2);
+    var list = [];  
+      for(var i=0;i<size;i++){
+          if(ar1.indexOf(i.toString())!=-1){
+            list.push(ar2[ar1.indexOf(i.toString())]);
+          }else{
+            list.push(0);
+          }
+      }
+     console.log(list); 
+    return list.join("");
+}
 
 function createArrayPredict(size){
     var vect = [];
@@ -309,6 +323,7 @@ function endFunctionSend(){
     stopedButton(0);
     
     var search = makeResponse(arrayVect);
+    console.log("search :"+search);
     var objSearchMatrix = searchInMatrix(matrix,search);
 
     countDoc(0,objSearchMatrix);
@@ -335,16 +350,17 @@ function existBody(treeGl){
     }
 }
 
-var qsts = ["0","1","2","3","4","5","6","7"];
-var reps = [];
+var qsts = [];
 
 function makeResponse(array){    
+    var reps = [];
+
     for(var i =0 ; i< qsts.length;i++){
         reps.push(0);
     }
     
     for(var i =0 ; i< array[0].length ; i++){
-        var index = qsts.indexOf(array[0][i]);
+        var index = qsts.indexOf(array[0][i].toString());
         reps[index]= array[1][i];
     }
     
@@ -412,6 +428,59 @@ function sendRequestBulk(bulk,type){
     })
 
 }
+
+function firstEsTreeCall(){
+    var bulk = "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
+    $.ajax({
+        type: "post",
+        //url: "http://localhost:9200/_msearch",
+        url: "https://cmdbserver.karaz.org:9200/_msearch",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data:bulk,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {    
+            console.log(result);
+            var sizeQuestions = result.responses[0].hits.hits.length;
+            var columns = result.responses[1].hits.hits;
+            console.log("matrix length :" + columns.length);
+            matrix = [[],[],[],[]];
+            qsts =[];
+            for(var i=0;i<result.responses[0].hits.hits.length;i++){
+                qsts.push(result.responses[0].hits.hits[i]._source.id.toString());
+            }
+            
+            qsts.sort(function(a, b) {
+                return Number(a) - Number(b);
+            })
+
+
+            for(var i=0;i<columns.length;i++){
+                var ar1 = columns[i]._source.list; 
+                var ar2 = columns[i]._source.list_rep;
+                console.log(ar1);
+                matrix[0].push(completeArrayMatrix(ar1,ar2,sizeQuestions)); 
+                matrix[1].push(columns[i]._source.docs_requis);
+                matrix[2].push(columns[i]._source.steps);
+                matrix[3].push(columns[i]._source.docs_comp);
+
+                console.log(completeArrayMatrix(ar1,ar2,sizeQuestions));
+            }
+
+
+            for(key in Object.keys(tree)){
+                getQuestion(key,0);
+            }
+            intializeVectArray();
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    })
+}
+
 
 function countDoc(type,objSearchMatrix) {
     var obj = {
