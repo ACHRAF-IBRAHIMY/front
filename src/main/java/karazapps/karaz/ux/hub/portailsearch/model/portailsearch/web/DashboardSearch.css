@@ -229,6 +229,22 @@
 
 
 @media (max-width: 640px) {
+	.Header-signup-logo{
+        display:block !important;    
+    }
+    
+    .simulator .simulator-qr .qr{
+        width:100%;
+        padding:0;
+    }
+    
+    .simulator .docs-container .doc-item, .simulator .steps-container .doc-item, .simulator .docs-comp-container .doc-item {
+        grid-template-columns: 15% 85%;
+    }
+    
+    .simulator .simulator-qr{
+        margin-left : 0px !important;
+    }
     .searchList .searchListD .result-item{
         height: auto;
     }

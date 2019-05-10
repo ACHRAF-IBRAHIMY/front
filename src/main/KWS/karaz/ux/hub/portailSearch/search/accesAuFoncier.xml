@@ -25,66 +25,86 @@
             $(".div-det-acc .t2").click(function(){
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AccesAuFoncier", "search", "Acces Au Foncier", {});
             });
+
+            $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+                        $(".header-div-toggle").toggle("fast"); 
+                    });
             
             </script>
 
-            <vbox columns="30% 70%" columns-small="auto">
-                <vbox className="Header-signup-logo">
-                    <html>
-                    <div class="rokhas-home">
+            <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html className="Header-signup-glo">
+                    <div class="rokhas-home" style="margin-left: 50px;">
                         <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
                     </div>
-
+                </html>
+                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
+                    <html className="menu-bar-img">
+                        <img src="web/css/img/LogoSquare.svg" alt="" />
                     </html>
+                    <html />
+                    <html className="menu-bar-icon">
+                        <i class="fas fa-bars" />
+                    </html>    
                 </vbox>
-                <vbox columns="60% 25% 15%">
-                    <vbox className="header-menu" columns="22% 22% 22% 22% 12%">
-                        <button label="Accueil">
-                            <postChange>
-                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-                            </postChange>
-                        </button>
-                        <button label="Actualités">
-                            <postChange>
-
-                            </postChange>
-                        </button>
-                        <button label="Simulateur">
-                            <postChange>
-                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=activité&amp;query.parentP=0", "search", "All Karazuxresults", {});
-                            </postChange>
-                        </button>
-                        <button label="Solutions">
-                            <postChange>
-
-                            </postChange>
-                        </button>
-                        <button icon="far fa-question-circle">
-                            <postChange />
-                        </button>
-                    </vbox>
-
-                    <vbox className="vbox-button-signup-header" columns="50% 50%">
-                        <button label="Inscription" className="button-signup-header button-left">
-                            <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                            </postChange>
-                        </button>
-                        <button label="Connexion" className="button-signup-header">
-                            <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                            </postChange>
-                        </button>
-                    </vbox>
-                    <vbox className="vbox-button-signup-header" columns="50% 50%">
-                        <button label="FR" className="button-signup-header-cliked button-left">
-                        </button>
-                        <button label="ع" className="button-signup-header">
-                        </button>
-                    </vbox>
-                </vbox>
-
             </vbox>
+            
+            <vbox columns="60% 25% 15%" className="header-div-toggle">
+               <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
+                   <button label="Actualités">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button label="Simulateur">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
+                        </postChange>
+                   </button>
+                    <button label="Open data">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                        </postChange>
+                   </button>
+                   <button label="Solutions">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button label="Ressources">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button icon="far fa-question-circle">
+                       <postChange />
+                   </button>
+                      
+            
+                </vbox>
+
+                <vbox className="vbox-button-signup-header" columns="50% 50%">
+                    <button label="Inscription" className="button-signup-header button-left">	
+                        <postChange>
+                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+                        </postChange>						
+                    </button>
+                    <button label="Connexion" className="button-signup-header">	
+                        <postChange>
+                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
+                        </postChange>					
+                    </button>
+                </vbox>
+                <vbox className="vbox-button-signup-header" columns="50% 50%">
+                    <button label="FR" className="button-signup-header-cliked button-left">						
+                    </button>
+                    <button label="ع" className="button-signup-header">						
+                    </button>
+                </vbox>
+            </vbox>
+        </vbox>
 
             <html id="hSeparator">
             <div style="height: 30px;"> </div>
@@ -165,7 +185,7 @@
                                 </html>
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="fas fa-tree"></i>
+                                        <i class="fas fa-tree" />
                                     </html>
                                     <vbox>
                                         <html>
@@ -188,7 +208,7 @@
                                 </html>
                                    <vbox columns="10% 90%">
                                     <html>
-                                    <i class="fas fa-recycle"></i>
+                                    <i class="fas fa-recycle" />
 
                                     </html>
                                     <vbox>
@@ -212,7 +232,7 @@
                                 </html>
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="fas fa-university"></i>
+                                        <i class="fas fa-university" />
                                    </html>
                                     <vbox>
                                         <html>
@@ -234,7 +254,7 @@
                                 </html>
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="fas fa-cog"></i>
+                                        <i class="fas fa-cog" />
                                     </html>
                                     <vbox>
                                         <html>
@@ -256,7 +276,7 @@
                                 </html>
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="fas fa-info-circle"></i>
+                                        <i class="fas fa-info-circle" />
                                     </html>
                                     <vbox>
                                         <html>
@@ -280,7 +300,7 @@
                                 </html>
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="far fa-clone"></i>
+                                        <i class="far fa-clone" />
                                     </html>
                                     <vbox>
                                         <html>

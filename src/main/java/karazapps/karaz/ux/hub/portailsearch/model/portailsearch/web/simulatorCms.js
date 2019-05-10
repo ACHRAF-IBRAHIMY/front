@@ -42,8 +42,9 @@ function addChild(id) {
     var obj = {
         text: {
             name: "Child "+(length+1),
-            question_id: "0",
+            question_id: "-1",
             question:"Quel est votre question ?",
+            status:0,
             id: newId
         },
         children: []
@@ -83,6 +84,12 @@ function showUpdate(id){
     $(".cms-form .body-cms-form .class-question .link-sim-cms span").html(obj.text.question+"<input type=\"hidden\" value=\""+obj.text.question_id+"\"/>");    
     $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html("");
     
+    if(obj.text.status == 0){
+        $(".cms-form .body-cms-form .class-oid span.classee").html("Non Classé");
+    }else{
+        $(".cms-form .body-cms-form .class-oid span.classee").html("Classé");
+    }
+
     for(var i =0 ; i< obj.children.length;i++){
         $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html($(".cms-form .body-cms-form .class-responses .responses-sim-cms").html()+"<div><span class=\"link-sim-cms\">"+obj.children[i].text.name+"</span></div>");    
     }
@@ -104,10 +111,18 @@ function updateNode(id){
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
     }
-    
-    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title"); 
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title");
     refrechTreant();
     showUpdate(id);
+}
+
+function removeNode(id){
+    var list = id.split("-");
+    var pos = list.pop();
+    var str  = getParentPath(list);
+    eval("simple_chart_config.nodeStructure"+str+".children.splice(pos,1)");
+    setIdTree([],simple_chart_config.nodeStructure.children);
+    refrechTreant();
 }
 
 function updateNodeWithQuestion(id,question){
@@ -321,8 +336,8 @@ function createSelectQuestion(select,id){
 }
 
 function refrechTreant() {
-    console.log(scrollTop);
-    console.log(scrollLeft);
+	scrollTop = $("#tree-simple").scrollTop();
+    scrollLeft = $("#tree-simple").scrollLeft();
     my_chart.destroy();
     my_chart = new Treant(simple_chart_config, function () {}, $);
     $("#tree-simple").scrollTop(scrollTop);
@@ -334,17 +349,43 @@ function convertTreeComp2SimpleTree(tree){
   var obj = {};
   obj[tree.text.question_id]=[];
   newObj.push(obj);
-  var array = [[],[]]; 
+  var array = [[],[]];
+  matrixBulk = []; 
   return conevertTo(tree,array,newObj);
 }
 
+var matrixBulk = [];
 
 function conevertTo(tree,array,newObj){
   for(var i=0;i<tree.children.length;i++){
+
+    if(tree.children[i].text.question_id==-1){
+        if(tree.children[i].text.status==1){
+            var list = tree.children[i].text.id.split("-");
+            var obj = simple_chart_config.nodeStructure;    
+            var culumns = getMatrixColumns(list,obj);
+            console.log(tree.children[i].text.columns_id+"*/*/*/*/*/*/*"+tree.children[i].text.id);
+            var matrixColumn = getMatrixColumns(list,obj);
+            var reps = [];
+            for(var j=0;j<list.length;j++){
+                reps.push(Number(list[j])+1);
+            }
+            var bulk = {
+                "id":tree.children[i].text.columns_id,
+                "list":matrixColumn,
+                "list_rep": reps
+            }
+            
+            matrixBulk.push(bulk);
+        }
+        continue;
+    }
+    
     var obj = {};
     var sousTree = tree.children[i];
     obj[tree.children[i].text.question_id]=[];
     str = getTreeHierS(array);
+        
     console.log("obj :"+JSON.stringify(newObj));
     eval("newObj"+str+".push(obj)");
     
@@ -376,6 +417,7 @@ function uploadTreeToES(){
     var treeObject = {};
     treeObject["treeComp"]= simple_chart_config.nodeStructure;
     treeObject["treeSimp"]= convertTreeComp2SimpleTree(simple_chart_config.nodeStructure);
+    
     $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button span").addClass("active");
     $(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide").hide();
 
@@ -392,6 +434,8 @@ function uploadTreeToES(){
         success: function (result) {
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button span").removeClass("active");
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide").show();
+            var bulks = createBulkRequestMatrix();
+            sendRequestBulkMatrix(bulks);
         },
         error: function (error) {
             console.log(error.responseText);
@@ -399,11 +443,43 @@ function uploadTreeToES(){
     }); 
 }
 
+function createBulkRequestMatrix(){
+    var str = "";
+    for(var i=0;i<matrixBulk.length;i++){
+        str += "{ \"update\" : { \"_index\" : \"simulator_index_matrix\", \"_type\":\"columns\" ,\"_id\" : \""+matrixBulk[i].id+"\" } } \n";
+        str += "{\"script\" : \"ctx.list = "+JSON.stringify(matrixBulk[i].list).replace(/"/g,"\\\"")+" \"}\n";
+        str += "{ \"update\" : { \"_index\" : \"simulator_index_matrix\", \"_type\":\"columns\" ,\"_id\" : \""+matrixBulk[i].id+"\" } } \n";
+        str += "{\"script\" : \"ctx.list_rep = \'"+JSON.stringify(matrixBulk[i].list_rep)+"\' \"}\n";
+    }
+    console.log(str);
+    return str;
+}
+
+function sendRequestBulkMatrix(bulks){
+    $.ajax({
+        type: "post",
+        //url: "http://localhost:9200/_msearch",
+        url: "https://cmdbserver.karaz.org:9200/_bulk",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data:bulks,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {    
+            console.log(result);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    })
+};
+
 function getTreeFromEs(type){
     $.ajax({
         type: "get",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/1",
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/2",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -415,10 +491,8 @@ function getTreeFromEs(type){
                 startTreant();
            }else if(type==1){
                tree = result._source.treeSimp;
-               for(key in Object.keys(tree)){
-                    getQuestion(key,0);
-                }
-                intializeVectArray();
+               
+                firstEsTreeCall();
            }
         },
         error: function (error) {
@@ -427,7 +501,7 @@ function getTreeFromEs(type){
     });
 }
 
-function getAllCms(type,callback){
+function getAllCms(type,callback,hiddenList){
     var obj = {"size":1000,"query":{"match_all":{}}};
     if(type==0 || type==2){
         var url = "simulator_index_docs/docs/_search";
@@ -447,8 +521,8 @@ function getAllCms(type,callback){
         },
         data: JSON.stringify(obj),
         success: function (result) {
-            console.log(result['hits']['hits']);
-            callback(result['hits']['hits'],type);
+            console.log(hiddenList);
+            callback(result['hits']['hits'],0,hiddenList);
         },
         error: function (error) {
             console.log(error.responseText);
@@ -456,7 +530,7 @@ function getAllCms(type,callback){
     });
 }
 
-function createAllCms(response,type){
+function createAllCms(response,type,hiddenList){
     if(type==0){
         intilizeVector(response.length);
         var divGlo = document.querySelector(".simulator-cms .side-bar .body1 .docs-in .docs-list");
@@ -494,7 +568,15 @@ function createAllCms(response,type){
         docItem.appendChild(i2);
         divGlo.appendChild(docItem);
     }
+
     arrayOfdivTabs = transformDivTotab();
+    hiddenList = getIndexOfBin(completVec(response.length,hiddenList));
+    
+    for(var j=0;j<hiddenList.length;j++){
+        var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((hiddenList[j]+1).toString())];
+        addDocItemToDocAdded(index);
+    }
+
 }
 
 function addDocItemToDocAdded(index){
@@ -549,6 +631,53 @@ function transformDivTotab(){
 
 /* matrice de classement */
 
+var objectJsonMatrixColumns = {};
+
+function nextStepDocsIn(type,id){
+    if(type==0){
+        console.log(objectJsonMatrixColumns+" "+Object.keys(objectJsonMatrixColumns).length);
+        if(Object.keys(objectJsonMatrixColumns).length==0){
+            objectJsonMatrixColumns = makeMatrixClass(id);
+            getAllCms(0,createAllCms,[]);
+        }else{
+            console.log(makeMatrixClass(id)["docs_requis"]);
+            objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id)["docs_requis"];
+            console.log("else :"+JSON.stringify(objectJsonMatrixColumns));
+            getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
+        }
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-comp").addClass("active");
+        
+    }else if(type==1){
+        objectJsonMatrixColumns["docs_comp"] = getListDocsAdded();
+        var list = [];
+        if(objectJsonMatrixColumns["steps"]!=undefined) list = bin2vec(int2bin(objectJsonMatrixColumns["steps"]));
+        getAllCms(1,createAllCms,list);        
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.steps").addClass("active");
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).hide();
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).show();
+        
+    }else if(type==2){
+        objectJsonMatrixColumns["steps"] = getListDocsAdded();
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-requis").addClass("active");
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).hide();
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();
+        console.log(objectJsonMatrixColumns);
+        addMatrixElement(objectJsonMatrixColumns,id);
+    }
+        
+    
+
+}
+
 function makeMatrixClass(id){
     var list = id.split("-");
     var obj = simple_chart_config.nodeStructure;    
@@ -561,28 +690,92 @@ function makeMatrixClass(id){
     }
 
     var objectJson = {
-        id:id,
+        id:"0",
         list:getMatrixColumns(list,obj),
         list_rep:reps,
         docs_requis:getListDocsAdded()
     }
 
-    addMatrixElement(objectJson);
+    return objectJson;
+
 }
 
-function addMatrixElement(objectJson){
+function beginStepsMatrixColumns(id){
+    var list = id.split("-");
+    var str = getParentPath(list);
+    var objStatus = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]");
+    var columns_id = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]");
+    
+    if(objStatus!=0){
+        readMatrixCms(columns_id);
+    }else{
+        getAllCms(0,createAllCms,[]);    
+    }
+    
+}
+
+function readMatrixCms(id){
+    $.ajax({
+        type: "get",
+        //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_matrix/columns/"+id,
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {
+            objectJsonMatrixColumns = result._source;
+            objectJsonMatrixColumns["id"] = result._id;    
+            getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns.docs_requis)));
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    }); 
+}
+
+function getIndexOfBin(vectorBin){
+  var list = [];
+  for(var i=0; i<vectorBin.length;i++){
+    if(vectorBin[i]==1){
+        list.push(i);
+    }
+  }  
+  return list;
+}
+
+
+function addMatrixElement(objectJson,id){
+
+    var idObject = objectJson.id;
+    if(idObject==0){
+        var str = "";    
+    }else{
+        var str = idObject;
+    }
+
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_matrix/columns/" + objectJson.id,
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_matrix/columns/" + str,
         datatype: "application/json",
         data:JSON.stringify(objectJson),
         contentType: "application/json",
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
         },
-        success: function (result) {
+        success:function (result) {
                 console.log(result);
+                $(".simulator-cms .side-bar .body1").hide();
+                $(".simulator-cms .side-bar .body").show();
+                var list = id.split("-");
+                var str  = getParentPath(list);
+                eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=1");
+                eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]=result._id");
+                eval("simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]=\"classe-evo\"");
+                showUpdate(id);
+                refrechTreant();             
         },
         error: function (error) {
             console.log(error.responseText);
@@ -609,6 +802,7 @@ var vector = [];
 
     
 function intilizeVector(size){
+    vector = [];
     for(var i=0;i<size;i++){
         vector.push(0);
     }
@@ -623,3 +817,23 @@ function getListDocsAdded(){
     console.log(vector.join('')+"**"+bin2int(vector.join('')));
     return bin2int(vector.join(''));
 }
+
+function setIdTree(list,childs){
+    var str = getParentPath(list);
+    console.log(str);
+    for(var i=0;i<childs.length;i++){
+      var new_list= [];
+      new_list = new_list.concat(list);
+      new_list.push(i.toString());
+      console.log(list);
+      console.log(new_list);
+      var newId = new_list.join("-");
+      console.log(newId);
+      
+      eval("simple_chart_config.nodeStructure"+str+"[\"children\"][i][\"text\"][\"id\"]= newId");
+      var new_child = eval("simple_chart_config.nodeStructure"+str+"[\"children\"][i][\"children\"]")
+      if(new_child.length!=0){         
+          setIdTree(new_list,new_child);                     
+       }
+    }
+  }

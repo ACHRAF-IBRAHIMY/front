@@ -1827,8 +1827,10 @@ var scrollLeft = 0;
     
     
     TreeNode.prototype.createButtonAdd = function (node) {
+        var buttons = document.createElement("div");
+        buttons.setAttribute("class","tree-buttons");
         var but = document.createElement("button");
-        but.innerHTML = "add";
+        but.innerHTML = "<i class=\"fas fa-plus\"></i>";
         but.setAttribute("class", "add-button-class");
         but.addEventListener("click", function () {
             scrollTop = $("#tree-simple").scrollTop();
@@ -1836,15 +1838,25 @@ var scrollLeft = 0;
             addChild(node.getElementsByClassName("node-id")[0].innerHTML);
         });
         var but1 = document.createElement("button");
-        but1.innerHTML = "det";
+        but1.innerHTML = "<i class=\"fas fa-bars\"></i>";
         but1.setAttribute("class", "add-button-class");
         but1.addEventListener("click", function () {
             showUpdate(node.getElementsByClassName("node-id")[0].innerHTML);
         });
+
+        var but2 = document.createElement("button");
+        but2.innerHTML = "<i class=\"fas fa-close\"></i>";
+        but2.setAttribute("class", "add-button-class");
+        but2.addEventListener("click", function () {
+            removeNode(node.getElementsByClassName("node-id")[0].innerHTML);
+        });
         
         
-        node.appendChild(but);
-        node.appendChild(but1);
+        buttons.appendChild(but);
+        buttons.appendChild(but1);
+        buttons.appendChild(but2);
+
+        node.appendChild(buttons);
 
         return node;
     }

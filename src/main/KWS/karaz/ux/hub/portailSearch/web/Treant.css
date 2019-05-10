@@ -27,12 +27,26 @@
 }
 
 
+.classe-evo{
+    background: #e3f6f2 !important;
+}
 
+.tree-buttons{
+    text-align: center;
+}
+
+.tree-buttons button{
+    width: 35px;
+}
+
+.Treant.Treant-loaded .node .node-question{
+	height: 68px;
+}
 
 .Treant.Treant-loaded .node .node-docIn,.Treant.Treant-loaded .node .node-docOut,.Treant.Treant-loaded .node .node-id,.Treant.Treant-loaded .node .node-question_id{
     display: none;
 }
 
-.Treant.Treant-loaded .node .node-id{
+.Treant.Treant-loaded .node .node-id,.Treant.Treant-loaded .node .node-columns_id,.Treant.Treant-loaded .node .node-status{
     display: none;
 }
