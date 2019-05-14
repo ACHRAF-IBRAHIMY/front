@@ -145,6 +145,7 @@
             showUpdate("");
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click();
             dragscroll.reset();
+            loadQuestionsFromEs();
 
             
 
@@ -268,7 +269,7 @@
                     <vbox className="container-2">
                         <html>
                             <div class="add-doc-class">
-                                <i class="fas fa-plus"></i> Ajouter un document
+                                <i class="fas fa-plus" /> Ajouter un document
                             </div>
                             <div class="container-docs">
                             
@@ -278,7 +279,7 @@
                     <vbox className="container-3">
                         <html>
                             <div class="add-doc-class">
-                                <i class="fas fa-plus"></i> Ajouter une étape
+                                <i class="fas fa-plus" /> Ajouter une étape
                             </div>
                             <div class="container-steps">
                             
@@ -450,7 +451,7 @@
                               <input type="hidden" class="class-id-qr" value="" />
                                <div class="header-cms-form">Modifier le document</div>
                                <div class="body-cms-form">
-                                    <input type="hidden" class="input-id" value=""/>
+                                    <input type="hidden" class="input-id" value="" />
                                     <div class="class-question-q form-grid"><span>Titre </span><span class="link-sim-cms"><input type="text" placeholder="Titre du document" /></span></div>
                                     <div class="class-type-question form-grid">
                                         <span>Type </span>
@@ -474,7 +475,7 @@
                               <input type="hidden" class="class-id-qr" value="" />
                                <div class="header-cms-form">Modifier l'étape</div>
                                <div class="body-cms-form">
-                                    <input type="hidden" class="input-id" value=""/>
+                                    <input type="hidden" class="input-id" value="" />
                                     <div class="class-question-q form-grid"><span>Titre </span><span class="link-sim-cms"><input type="text" placeholder="Titre du document" /></span></div>
                                     <div class="class-desc-q form-grid"><span>Description </span><span class="link-sim-cms"><input type="text" placeholder="Description" /></span></div>
                                     <div class="class-membre-q form-grid"><span>Membres</span><span class="link-sim-cms"><input type="text" placeholder="Séparer par - Exemple : membre1-membre2" /></span></div>

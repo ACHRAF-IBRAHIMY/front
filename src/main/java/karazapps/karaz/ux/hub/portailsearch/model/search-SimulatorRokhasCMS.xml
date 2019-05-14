@@ -145,6 +145,7 @@
             showUpdate("");
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click();
             dragscroll.reset();
+            loadQuestionsFromEs();
 
             
 

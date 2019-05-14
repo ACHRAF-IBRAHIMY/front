@@ -45,7 +45,8 @@ function addChild(id) {
             question_id: "-1",
             question:"Quel est votre question ?",
             status:0,
-            id: newId
+            id: newId,
+            rep_size:0
         },
         children: []
     };
@@ -99,6 +100,55 @@ function showUpdate(id){
         $(".simulator-cms .side-bar .body1").hide();
 }
 
+var qstList = [];
+
+
+function loadQuestionsFromEs(){
+    var obj = {
+        "size":4000,"query":{
+            "match_all": {}
+        }
+    };
+
+    $.ajax({
+        type: "post",
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/_search",
+        //url: "http://localhost:9200/index_classification_cluster/avis/_search",
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        data: JSON.stringify(obj),
+        success: function (result) {
+            qstList = [];
+            for(var i=0;i<result.hits.hits.length;i++){
+                var qstObj = {
+                    "id":result.hits.hits[i]._id,
+                    "question":result.hits.hits[i]._source.question,
+                    "rep":result.hits.hits[i]._source.response.content,
+                    "type_rep":result.hits.hits[i]._source.response.type
+                };
+                qstList.push(qstObj);
+            }
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function indexOfQst(id,list){
+    for(var i =0 ; i<list.length;i++){
+        if(id.toString()==list[i].id.toString()){
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
 function updateNode(id){
 
     var title = $(".cms-form .header-cms-form input").val();
@@ -108,10 +158,13 @@ function updateNode(id){
             var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").val();
             var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").html();   
         console.log(questionId+"****"+question);
+        var repSize = qstList[indexOfQst(questionId,qstList)].rep.length;
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
+        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"rep_size\"]=repSize");
     }
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title");
+    
     refrechTreant();
     showUpdate(id);
 }
@@ -120,7 +173,14 @@ function removeNode(id){
     var list = id.split("-");
     var pos = list.pop();
     var str  = getParentPath(list);
-    eval("simple_chart_config.nodeStructure"+str+".children.splice(pos,1)");
+    console.log(getParentPath(id.split("-")));
+    var treeObj = eval("simple_chart_config.nodeStructure"+getParentPath(id.split("-")));
+    getIdDeletedColumns(treeObj);
+    if(id!=""){
+        eval("simple_chart_config.nodeStructure"+str+".children.splice(pos,1)");
+    }else{
+        eval("simple_chart_config.nodeStructure.children=[]");
+    }
     setIdTree([],simple_chart_config.nodeStructure.children);
     refrechTreant();
 }
@@ -373,7 +433,7 @@ function conevertTo(tree,array,newObj){
             var bulk = {
                 "id":tree.children[i].text.columns_id,
                 "list":matrixColumn,
-                "list_rep": reps
+                "list_rep": parcourirTreeReps(tree.children[i].text.id)
             }
             
             matrixBulk.push(bulk);
@@ -402,6 +462,27 @@ function conevertTo(tree,array,newObj){
   return newObj;
 }
 
+function parcourirTreeReps(id){
+    var list = id.split("-");
+    var newList = [];
+    var sample_tree = simple_chart_config.nodeStructure;
+    console.log(sample_tree.text.rep_size)
+    var repSize = sample_tree.text.rep_size;
+    for(var i=0;i<list.length;i++){
+      console.log(sample_tree);
+      
+      if(sample_tree.children.length==1 && repSize != 1){
+        newList.push(-1);
+      }else{
+        newList.push(Number(list[i])+1);
+      }
+      console.log(list[i]);
+      sample_tree = sample_tree.children[list[i]];
+      console.log(newList);
+      repSize = sample_tree.text.rep_size;
+    }
+    return newList;
+}
 
 function getTreeHierS(array) {
     var str = "[0][0]";
@@ -424,7 +505,7 @@ function uploadTreeToES(){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/2",
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/3",
         datatype: "application/json",
         data:JSON.stringify(treeObject),
         contentType: "application/json",
@@ -435,7 +516,10 @@ function uploadTreeToES(){
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button span").removeClass("active");
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide").show();
             var bulks = createBulkRequestMatrix();
+            var bulks2 = deleteBulkRequest(deleted);
             sendRequestBulkMatrix(bulks);
+            sendRequestBulkMatrix(bulks2);
+            deleted = [];
         },
         error: function (error) {
             console.log(error.responseText);
@@ -447,9 +531,9 @@ function createBulkRequestMatrix(){
     var str = "";
     for(var i=0;i<matrixBulk.length;i++){
         str += "{ \"update\" : { \"_index\" : \"simulator_index_matrix\", \"_type\":\"columns\" ,\"_id\" : \""+matrixBulk[i].id+"\" } } \n";
-        str += "{\"script\" : \"ctx.list = "+JSON.stringify(matrixBulk[i].list).replace(/"/g,"\\\"")+" \"}\n";
+        str += "{\"script\" : \"ctx._source.list = "+JSON.stringify(matrixBulk[i].list).replace(/"/g,"\\\"")+" \"}\n";
         str += "{ \"update\" : { \"_index\" : \"simulator_index_matrix\", \"_type\":\"columns\" ,\"_id\" : \""+matrixBulk[i].id+"\" } } \n";
-        str += "{\"script\" : \"ctx.list_rep = \'"+JSON.stringify(matrixBulk[i].list_rep)+"\' \"}\n";
+        str += "{\"script\" : \"ctx._source.list_rep = "+JSON.stringify(matrixBulk[i].list_rep)+" \"}\n";
     }
     console.log(str);
     return str;
@@ -479,7 +563,7 @@ function getTreeFromEs(type){
     $.ajax({
         type: "get",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/2",
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/3",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -1221,9 +1305,61 @@ function createColumns(type,arrayQst){
         var tr = document.createElement("tr");
         for(var i=0;i<arrayQst.length;i++){
             var td = document.createElement("td");
-            td.innerHTML = arrayQst[i];
+            if(arrayQst[i]==-1){
+                td.innerHTML = "All";
+            }else{
+                td.innerHTML = arrayQst[i];
+            }
+            
             tr.appendChild(td);
         }
         divGlobal.appendChild(tr);
     }
 }
+
+function getIdDeletedColumns(tree){
+    var newObj = [];
+    var obj = {};
+    obj[tree.text.question_id]=[];
+    var array = [[],[]]; 
+    if(tree.text.question_id==-1){
+        if(tree.text.status==1){
+            deleted.push(tree.text.columns_id);
+        }
+    }    return deletedCol(tree,array,newObj);
+}
+  
+var deleted = [];
+
+function deletedCol(tree,array,newObj){
+    for(var i=0;i<tree.children.length;i++){
+      if(tree.children[i].text.question_id==-1){
+          if(tree.children[i].text.status==1){
+              deleted.push(tree.children[i].text.columns_id);
+              console.log(tree.children[i].text.columns_id);
+          }
+      }
+      var obj = {};
+      var sousTree = tree.children[i];
+      obj[tree.children[i].text.question_id]=[];
+      str = getTreeHierS(array);
+      array[0].push(tree.children[i].text.question_id);
+      array[1].push(i);
+      if(tree.children[i].text.children!=0){
+        newObj = deletedCol(sousTree,array,newObj);
+      }
+      array[0].pop();
+      array[1].pop();
+    }
+    return newObj;
+  }
+  
+  function deleteBulkRequest(array){
+    var str = "";
+    for(var i=0;i<array.length;i++){
+      str+="{ \"delete\" : { \"_index\" : \"simulator_index_matrix\", \"_type\":\"columns\", \"_id\" : \""+array[i]+"\" } }\n";
+    }
+    console.log(str)
+    return str;
+}
+  
