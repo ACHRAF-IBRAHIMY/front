@@ -80,3 +80,32 @@ button.ow-button.PCD-button-signup-header:hover{
 }
 /*  */
 /* end procedure  */
+
+/* start Non decrit */
+.PCD-not-described{
+    background: #666666;
+    padding: 1.3em 0.3em;
+    color: #FFF;
+}
+.PCD-not-described p{
+    margin-bottom: 0.3em !important;
+}
+
+.PCD-not-described i{
+    font-size: 28px;
+}
+ul {
+    margin: 0;
+  }
+  ul.dashed {
+    list-style-type: none;
+  }
+  ul.dashed > li {
+    text-indent: -5px;
+  }
+  ul.dashed > li:before {
+    content: "-";
+    text-indent: -5px;
+    margin-right: 3px;
+  }
+ /* start Non decrit */

@@ -17,6 +17,28 @@
             
             getTreeFromEs(0);
 
+             $(".simulator-cms .navbar-sim-cms .navbar-sim-cms-item").click(function(){
+                $(".simulator-cms .navbar-sim-cms .navbar-sim-cms-item").removeClass("active");
+                $(this).addClass("active");
+                var page = $(this).attr("class").split(" ")[1].split("-")[1];
+                $(".simulator-cms .container-sim-cms .ow-vbox").hide();
+                
+                if(page=="1"){
+                    showDivManager(2);
+                }else if(page=="2"){
+                    showDivManager(1);
+                    getAllDocsClass(0);
+                }else if(page=="3"){
+                    showDivManager(3);
+                    getAllDocsClass(1);
+                }else if(page=="4"){
+                    showDivManager(6);
+                    getAllCoumnsMatrixCn4();
+                }
+
+                $(".simulator-cms .container-sim-cms .container-"+page).show();
+            });
+
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.save").click(function(){
                 var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
                 updateNode(id);
@@ -91,9 +113,39 @@
 
             $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
                         $(".header-div-toggle").toggle("fast"); 
-                    });
+            });
 
+            $(".simulator-cms .side-bar .body .div-4 .class-update-button button").click(function(){
+                var docObj = getModifyObject(0);
+                getMaxDocsClass(0,docObj);
+                console.log(docObj);
+            });
+            $(".simulator-cms .side-bar .body .div-5 .class-update-button button").click(function(){
+                var docObj = getModifyObject(1);
+                getMaxDocsClass(1,docObj);
+                console.log(docObj);
+            });
+            $(".simulator-cms .side-bar .body .div-6 .class-update-button button").click(function(){
+                var docObj = getModifyObject(2);
+                updateDocClass(0,docObj);
+            });
+            $(".simulator-cms .side-bar .body .div-7 .class-update-button button").click(function(){
+                var docObj = getModifyObject(3);
+                updateDocClass(1,docObj);
+            });
+            
+            $(".simulator-cms .container-sim-cms .container-2 .add-doc-class").click(function(){
+                showDivManager(1);
+            });
+
+            $(".simulator-cms .container-sim-cms .container-3 .add-doc-class").click(function(){
+                showDivManager(3);
+            });
+
+            showUpdate("");
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click();
             dragscroll.reset();
+
             
 
         </script>
@@ -181,23 +233,23 @@
             <vbox>
                 <vbox className="navbar-sim-cms" columns="20% 20% 20% 20% 20%">
                     <html>
-                        <div class="navbar-sim-cms-item active">
+                        <div class="navbar-sim-cms-item nav-1 active">
                             <i class="fas fa-project-diagram" />
                            <span>Arbre de décision</span>
                     </div>
                     </html>
                     <html>
-                        <div class="navbar-sim-cms-item">
+                        <div class="navbar-sim-cms-item nav-2">
                            <i class="fas fa-file-alt" />
                            <span>Liste des documents</span>
                         </div>
                     </html><html>
-                        <div class="navbar-sim-cms-item">
+                        <div class="navbar-sim-cms-item nav-3">
                             <i class="fas fa-tasks" />
                            <span>Liste des étapes</span>
                         </div>
                     </html><html>
-                        <div class="navbar-sim-cms-item">
+                        <div class="navbar-sim-cms-item nav-4">
                            <i class="fas fa-table" />
                            <span>Matrice de classement</span>
                         </div>
@@ -213,9 +265,33 @@
                             </div>
                         </html>
                     </vbox>
-                    <vbox className="container-2" />
-                    <vbox className="container-3" />
-                    <vbox className="container-4" />
+                    <vbox className="container-2">
+                        <html>
+                            <div class="add-doc-class">
+                                <i class="fas fa-plus" /> Ajouter un document
+                            </div>
+                            <div class="container-docs">
+                            
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="container-3">
+                        <html>
+                            <div class="add-doc-class">
+                                <i class="fas fa-plus" /> Ajouter une étape
+                            </div>
+                            <div class="container-steps">
+                            
+                            </div>
+                        </html>
+                    </vbox>    
+                    <vbox className="container-4">
+                        <html>
+                            <table class="tab-matrix">
+                            
+                            </table>
+                        </html>
+                    </vbox>
                     <vbox className="container-load" />
                 </vbox>
             </vbox>
@@ -323,6 +399,88 @@
                                     </div>
                                     <div class="class-update-button">
                                         <button>Ajouter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="div-4">
+                        <html>
+                            <div class="cms-form-2">
+                              <input type="hidden" class="class-id-qr" value="" />
+                               <div class="header-cms-form">Ajouter un document</div>
+                               <div class="body-cms-form">
+                                    <div class="class-question-q form-grid"><span>Titre </span><span class="link-sim-cms"><input type="text" placeholder="Titre du document" /></span></div>
+                                    <div class="class-type-question form-grid">
+                                        <span>Type </span>
+                                        <span class="link-sim-cms">
+                                            <select>
+                                                <option value="type-1">Type 1</option>
+                                                <option value="type-2">Type 2</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    <div class="class-update-button">
+                                        <button>Ajouter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="div-5">
+                        <html>
+                            <div class="cms-form-2">
+                              <input type="hidden" class="class-id-qr" value="" />
+                               <div class="header-cms-form">ajouter une étape</div>
+                               <div class="body-cms-form">
+                                    <div class="class-question-q form-grid"><span>Titre </span><span class="link-sim-cms"><input type="text" placeholder="Titre du document" /></span></div>
+                                    <div class="class-desc-q form-grid"><span>Description </span><span class="link-sim-cms"><input type="text" placeholder="Description" /></span></div>
+                                    <div class="class-membre-q form-grid"><span>Membres</span><span class="link-sim-cms"><input type="text" placeholder="Séparer par - Exemple : membre1-membre2" /></span></div>
+                                    
+                                    <div class="class-update-button">
+                                        <button>Ajouter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="div-6">
+                        <html>
+                            <div class="cms-form-2">
+                              <input type="hidden" class="class-id-qr" value="" />
+                               <div class="header-cms-form">Modifier le document</div>
+                               <div class="body-cms-form">
+                                    <input type="hidden" class="input-id" value="" />
+                                    <div class="class-question-q form-grid"><span>Titre </span><span class="link-sim-cms"><input type="text" placeholder="Titre du document" /></span></div>
+                                    <div class="class-type-question form-grid">
+                                        <span>Type </span>
+                                        <span class="link-sim-cms">
+                                            <select>
+                                                <option value="type-1">Type 1</option>
+                                                <option value="type-2">Type 2</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    <div class="class-update-button">
+                                        <button>Modifier</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </html>
+                    </vbox>
+                    <vbox className="div-7">
+                        <html>
+                            <div class="cms-form-2">
+                              <input type="hidden" class="class-id-qr" value="" />
+                               <div class="header-cms-form">Modifier l'étape</div>
+                               <div class="body-cms-form">
+                                    <input type="hidden" class="input-id" value="" />
+                                    <div class="class-question-q form-grid"><span>Titre </span><span class="link-sim-cms"><input type="text" placeholder="Titre du document" /></span></div>
+                                    <div class="class-desc-q form-grid"><span>Description </span><span class="link-sim-cms"><input type="text" placeholder="Description" /></span></div>
+                                    <div class="class-membre-q form-grid"><span>Membres</span><span class="link-sim-cms"><input type="text" placeholder="Séparer par - Exemple : membre1-membre2" /></span></div>
+                                    
+                                    <div class="class-update-button">
+                                        <button>Modifier</button>
                                     </div>
                                 </div>
                             </div>

@@ -8,22 +8,9 @@ function PCD_headerfieldset_color(pcdClasstype) {
 }
 function PCD_add_header_style_action(pcdClasstype, pcdSecondheader){
 
-
 	PCD_headerfieldset_color(pcdClasstype);
-	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl").css("color","#999999");
+	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('karaz/ux/hub/portailsearch/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
+	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").append(` | <span class="title-2x" style="color:#38a; ">`+ pcdSecondheader + `</span>`);	
 
-    if(pcdClasstype == ".pcd-header-ACGP"){
-		$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").append(` | <span class="title-2x" style="color:#38a;">`+ pcdSecondheader + `</span>`);
-    }
-	else if (pcdClasstype == ".pcd-header-ACGH"){
-		$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").append(` | <span class="title-2x" style="color:#38a;">`+ pcdSecondheader + `</span>`);
-	} 
-	else if (pcdClasstype == ".pcd-header-AM"){
-		$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").append(` | <span class="title-2x" style="color:#38a;">`+ pcdSecondheader + `</span>`);
-	} 
-	else if (pcdClasstype == ".pcd-header-AL"){
-		$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").append(` | <span class="title-2x" style="color:#38a;">`+ pcdSecondheader + `</span>`);
-	} 
-	
 }
 /* start procedure  */

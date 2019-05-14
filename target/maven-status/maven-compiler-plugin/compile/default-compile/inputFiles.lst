@@ -12,8 +12,11 @@ C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\p
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\backejbs\GestionDashboardSearchProcessBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\backejbs\StartEventStub.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\PortailSearchXpaths.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\CertificatReceptionProjets\backejbs\CertificatReceptionProjetsBean.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\AutorisationsConstructionPetitsProjets\backejbs\AutorisationsConstructionPetitsProjetsBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\oldallGlobalTAskSearch\backejbs\OldallGlobalTAskSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\PortailSearchBrowser.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\AutorisationRefection\backejbs\AutorisationRefectionBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\autorusationConstructionGroupesHabitations\backejbs\AutorusationConstructionGroupesHabitationsBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\simulatorRokhasCMS\backejbs\SimulatorRokhasCMSBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\impl\EndEventImpl.java
@@ -27,11 +30,14 @@ C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\p
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\oldallObjectGlobalModelSearch\backejbs\OldallObjectGlobalModelSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\PortailTools.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\autorusationLotissement\backejbs\AutorusationLotissementBean.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\PermisHabiterEtCertificatConformite\backejbs\PermisHabiterEtCertificatConformiteBean.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\AutorisationDemolition\backejbs\AutorisationDemolitionBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\AutorisationsConstructionGrandsProjets\backejbs\AutorisationsConstructionGrandsProjetsBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\backejbs\StartEvent.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\allGlobalTAskSearch\backejbs\AllGlobalTAskSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\Util.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\simulatorRokhas\backejbs\SimulatorRokhasBean.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\AutorisationRegularisation\backejbs\AutorisationRegularisationBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\oldallTaskGlobalModelSearch\backejbs\OldallTaskGlobalModelSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\backejbs\EndEventStub.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\JXFactory.java

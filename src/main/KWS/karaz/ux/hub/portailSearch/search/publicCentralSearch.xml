@@ -92,12 +92,12 @@
     });
        
        
-    $(".divSearch .divSearchBar .t1").click(function(){
-       ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets", "search", "Acceptabilite Projets", {});
+    $(".divSearch .divSearchBar .t3").click(function(){
+       ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresUrbanisme", "search", "Procedures Urbanisme", {});
     });
         
-    $(".divSearch .divSearchBar .t2").click(function(){
-       ApplicationManager.run("karaz/ux/hub/portailsearch/search/AccesAuFoncier", "search", "Acces Au Foncier", {});
+    $(".divSearch .divSearchBar .t4").click(function(){
+       ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresEconomique", "search", "Procedures Economique", {});
     });    
          
     $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
