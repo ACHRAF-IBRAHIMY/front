@@ -45,7 +45,8 @@ function addChild(id) {
             question_id: "-1",
             question:"Quel est votre question ?",
             status:0,
-            id: newId
+            id: newId,
+            rep_size:0
         },
         children: []
     };
@@ -99,6 +100,55 @@ function showUpdate(id){
         $(".simulator-cms .side-bar .body1").hide();
 }
 
+var qstList = [];
+
+
+function loadQuestionsFromEs(){
+    var obj = {
+        "size":4000,"query":{
+            "match_all": {}
+        }
+    };
+
+    $.ajax({
+        type: "post",
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/_search",
+        //url: "http://localhost:9200/index_classification_cluster/avis/_search",
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        data: JSON.stringify(obj),
+        success: function (result) {
+            qstList = [];
+            for(var i=0;i<result.hits.hits.length;i++){
+                var qstObj = {
+                    "id":result.hits.hits[i]._id,
+                    "question":result.hits.hits[i]._source.question,
+                    "rep":result.hits.hits[i]._source.response.content,
+                    "type_rep":result.hits.hits[i]._source.response.type
+                };
+                qstList.push(qstObj);
+            }
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function indexOfQst(id,list){
+    for(var i =0 ; i<list.length;i++){
+        if(id.toString()==list[i].id.toString()){
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
 function updateNode(id){
 
     var title = $(".cms-form .header-cms-form input").val();
@@ -108,10 +158,13 @@ function updateNode(id){
             var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").val();
             var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").html();   
         console.log(questionId+"****"+question);
+        var repSize = qstList[indexOfQst(questionId,qstList)].rep.length;
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
+        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"rep_size\"]=repSize");
     }
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title");
+    
     refrechTreant();
     showUpdate(id);
 }
@@ -120,7 +173,14 @@ function removeNode(id){
     var list = id.split("-");
     var pos = list.pop();
     var str  = getParentPath(list);
-    eval("simple_chart_config.nodeStructure"+str+".children.splice(pos,1)");
+    console.log(getParentPath(id.split("-")));
+    var treeObj = eval("simple_chart_config.nodeStructure"+getParentPath(id.split("-")));
+    getIdDeletedColumns(treeObj);
+    if(id!=""){
+        eval("simple_chart_config.nodeStructure"+str+".children.splice(pos,1)");
+    }else{
+        eval("simple_chart_config.nodeStructure.children=[]");
+    }
     setIdTree([],simple_chart_config.nodeStructure.children);
     refrechTreant();
 }
@@ -373,7 +433,7 @@ function conevertTo(tree,array,newObj){
             var bulk = {
                 "id":tree.children[i].text.columns_id,
                 "list":matrixColumn,
-                "list_rep": reps
+                "list_rep": parcourirTreeReps(tree.children[i].text.id)
             }
             
             matrixBulk.push(bulk);
@@ -402,6 +462,27 @@ function conevertTo(tree,array,newObj){
   return newObj;
 }
 
+function parcourirTreeReps(id){
+    var list = id.split("-");
+    var newList = [];
+    var sample_tree = simple_chart_config.nodeStructure;
+    console.log(sample_tree.text.rep_size)
+    var repSize = sample_tree.text.rep_size;
+    for(var i=0;i<list.length;i++){
+      console.log(sample_tree);
+      
+      if(sample_tree.children.length==1 && repSize != 1){
+        newList.push(-1);
+      }else{
+        newList.push(Number(list[i])+1);
+      }
+      console.log(list[i]);
+      sample_tree = sample_tree.children[list[i]];
+      console.log(newList);
+      repSize = sample_tree.text.rep_size;
+    }
+    return newList;
+}
 
 function getTreeHierS(array) {
     var str = "[0][0]";
@@ -424,7 +505,7 @@ function uploadTreeToES(){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/2",
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/3",
         datatype: "application/json",
         data:JSON.stringify(treeObject),
         contentType: "application/json",
@@ -435,7 +516,10 @@ function uploadTreeToES(){
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button span").removeClass("active");
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide").show();
             var bulks = createBulkRequestMatrix();
+            var bulks2 = deleteBulkRequest(deleted);
             sendRequestBulkMatrix(bulks);
+            sendRequestBulkMatrix(bulks2);
+            deleted = [];
         },
         error: function (error) {
             console.log(error.responseText);
@@ -447,9 +531,9 @@ function createBulkRequestMatrix(){
     var str = "";
     for(var i=0;i<matrixBulk.length;i++){
         str += "{ \"update\" : { \"_index\" : \"simulator_index_matrix\", \"_type\":\"columns\" ,\"_id\" : \""+matrixBulk[i].id+"\" } } \n";
-        str += "{\"script\" : \"ctx.list = "+JSON.stringify(matrixBulk[i].list).replace(/"/g,"\\\"")+" \"}\n";
+        str += "{\"script\" : \"ctx._source.list = "+JSON.stringify(matrixBulk[i].list).replace(/"/g,"\\\"")+" \"}\n";
         str += "{ \"update\" : { \"_index\" : \"simulator_index_matrix\", \"_type\":\"columns\" ,\"_id\" : \""+matrixBulk[i].id+"\" } } \n";
-        str += "{\"script\" : \"ctx.list_rep = \'"+JSON.stringify(matrixBulk[i].list_rep)+"\' \"}\n";
+        str += "{\"script\" : \"ctx._source.list_rep = "+JSON.stringify(matrixBulk[i].list_rep)+" \"}\n";
     }
     console.log(str);
     return str;
@@ -479,7 +563,7 @@ function getTreeFromEs(type){
     $.ajax({
         type: "get",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/2",
+        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/3",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -837,3 +921,445 @@ function setIdTree(list,childs){
        }
     }
   }
+
+
+function getAllDocsClass(type){
+    if(type==0){
+      var index = "simulator_index_docs/docs/_search";
+    }else if(type==1){
+      var index = "simulator_index_steps/steps/_search";
+    }
+
+  var obj = {"size":1000,"query":{"match_all":{}}};
+  $.ajax({
+      type: "post",
+      url: "https://cmdbserver.karaz.org:9200/"+index,
+      //url: "http://localhost:9200/index_classification_cluster/avis/_search",
+      datatype: "application/json",
+      contentType: "application/json",
+      beforeSend: function (xhr) {
+           xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+      },
+      data: JSON.stringify(obj),
+      success: function (result) {
+          console.log(result['hits']['hits']);
+          getAllDocsClassDiv(result['hits']['hits'],type);
+      },
+      error: function (error) {
+          console.log(error.responseText);
+      }
+  });
+}
+
+function getAllDocsClassDiv(data,type){
+  if(type==0){
+      var tab = document.getElementsByClassName("simulator-cms")[0].getElementsByClassName("container-sim-cms")[0].getElementsByClassName("container-2")[0].getElementsByClassName("container-docs")[0];
+      $(".simulator-cms .container-sim-cms .container-2 .container-docs").html("");
+      
+  }else if(type==1){
+      var tab = document.getElementsByClassName("simulator-cms")[0].getElementsByClassName("container-sim-cms")[0].getElementsByClassName("container-3")[0].getElementsByClassName("container-steps")[0];
+      $(".simulator-cms .container-sim-cms .container-3 .container-steps").html("");
+  }
+  
+  
+  for(var i=0;i<data.length;i++){
+      var divG = document.createElement("div");
+      divG.setAttribute("class","item");
+      
+      var div1 = document.createElement("i");
+      div1.setAttribute("class","fas fa-file");
+     
+      var div2 = document.createElement("div");
+      div2.setAttribute("class","note");
+      div2.innerHTML = data[i]["_source"]["title"];
+      
+      var inpH = document.createElement("input");
+      inpH.setAttribute("type","hidden");
+      inpH.setAttribute("class","id-note");
+      inpH.setAttribute("value",data[i]["_id"]);
+     
+      var div3 = document.createElement("i");
+      div3.setAttribute("class","fas fa-bars");
+      div3.setAttribute("style","cursor:pointer");
+      div3.addEventListener("click",function(){
+        if(type==0){
+            var id = this.parentElement.getElementsByClassName("id-note")[0].value;
+            showDivManager(4);
+            getDocClass(type,id);
+        }else{
+            var id = this.parentElement.getElementsByClassName("id-note")[0].value;
+            showDivManager(5);
+            getDocClass(type,id);
+        }        
+    });
+     
+      var div4 = document.createElement("i");
+      div4.setAttribute("class","fas fa-close");
+      div4.setAttribute("style","cursor:pointer");
+      div4.addEventListener("click",function(){
+        var id = this.parentElement.getElementsByClassName("id-note")[0].value;
+        this.parentElement.style.display = "none";
+        removeDocObject(type,id);
+      });
+      
+      divG.appendChild(div1);
+      divG.appendChild(div2);
+      divG.appendChild(inpH);
+      divG.appendChild(div3);
+      divG.appendChild(div4);
+      
+      tab.appendChild(divG);
+  }
+  
+}
+
+function showDivManager(type){
+    if(type==1){
+        $(".simulator-cms .side-bar .body .div-1").hide();
+        $(".simulator-cms .side-bar .body .div-2").hide();
+        $(".simulator-cms .side-bar .body .div-3").hide();
+        $(".simulator-cms .side-bar .body .div-4").show();
+        $(".simulator-cms .side-bar .body .div-5").hide();
+        $(".simulator-cms .side-bar .body .div-6").hide();
+        $(".simulator-cms .side-bar .body .div-7").hide();
+    }else if(type==2){
+        $(".simulator-cms .side-bar .body .div-4").hide();
+        $(".simulator-cms .side-bar .body .div-1").show();
+        $(".simulator-cms .side-bar .body .div-2").show();
+        $(".simulator-cms .side-bar .body .div-5").hide();
+        $(".simulator-cms .side-bar .body .div-6").hide();
+        $(".simulator-cms .side-bar .body .div-7").hide();
+    }else if(type==3){
+        $(".simulator-cms .side-bar .body .div-4").hide();
+        $(".simulator-cms .side-bar .body .div-1").hide();
+        $(".simulator-cms .side-bar .body .div-2").hide();
+        $(".simulator-cms .side-bar .body .div-5").show();
+        $(".simulator-cms .side-bar .body .div-6").hide();
+        $(".simulator-cms .side-bar .body .div-7").hide();
+    }else if(type==4){
+        $(".simulator-cms .side-bar .body .div-4").hide();
+        $(".simulator-cms .side-bar .body .div-1").hide();
+        $(".simulator-cms .side-bar .body .div-2").hide();
+        $(".simulator-cms .side-bar .body .div-5").hide();
+        $(".simulator-cms .side-bar .body .div-6").show();
+        $(".simulator-cms .side-bar .body .div-7").hide();
+    }else if(type==5){
+        $(".simulator-cms .side-bar .body .div-4").hide();
+        $(".simulator-cms .side-bar .body .div-1").hide();
+        $(".simulator-cms .side-bar .body .div-2").hide();
+        $(".simulator-cms .side-bar .body .div-5").hide();       
+        $(".simulator-cms .side-bar .body .div-6").hide();
+        $(".simulator-cms .side-bar .body .div-7").show();
+    }else if(type==6){
+        $(".simulator-cms .side-bar .body .div-4").hide();
+        $(".simulator-cms .side-bar .body .div-1").hide();
+        $(".simulator-cms .side-bar .body .div-2").hide();
+        $(".simulator-cms .side-bar .body .div-5").hide();       
+        $(".simulator-cms .side-bar .body .div-6").hide();
+        $(".simulator-cms .side-bar .body .div-7").hide();
+    }
+}
+
+function updateDocClass(type,doc){
+    if(type==0){
+        var index = "simulator_index_docs/docs/";
+      }else if(type==1){
+        var index = "simulator_index_steps/steps/";
+      }
+
+
+      var id = null;
+
+      if(doc.id == undefined){
+          id ="";
+      }else{
+          id = doc.id;
+      }
+  
+    $.ajax({
+        type: "post",
+        url: "https://cmdbserver.karaz.org:9200/"+index+id,
+        //url: "http://localhost:9200/index_classification_cluster/avis/_search",
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        data: JSON.stringify(doc),
+        success: function (result) {
+            setTimeout(getAllDocsClass(type),2000);
+            console.log(result);
+            //getAllDocsClassDiv(result['hits']['hits'],type);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function getModifyObject(type){
+    var obj = {};
+    switch(type){
+        case 0: obj.title = $(".simulator-cms .side-bar .body .div-4 .class-question-q input").val();
+                obj.type = $(".simulator-cms .side-bar .body .div-4 .class-type-question select option:selected").val();
+                break;
+        case 1: obj.title = $(".simulator-cms .side-bar .body .div-5 .class-question-q input").val();
+                obj.description = $(".simulator-cms .side-bar .body .div-5 .class-desc-q input").val();
+                obj.membres = $(".simulator-cms .side-bar .body .div-5 .class-membre-q input").val().split("-");
+                break;
+        case 2: obj.id = $(".simulator-cms .side-bar .body .div-6 .input-id").val();
+                obj.title = $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val();
+                obj.type = $(".simulator-cms .side-bar .body .div-6 .class-type-question select option:selected").val();
+                break;
+        case 3: obj.id = $(".simulator-cms .side-bar .body .div-7 .input-id").val();
+                obj.title = $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val();
+                obj.description = $(".simulator-cms .side-bar .body .div-7 .class-desc-q input").val();
+                obj.membres = $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val().split("-");
+                break;
+    }
+    return obj;
+}
+
+function detailsDocObject(result,type){
+    if(type==0){
+        $(".simulator-cms .side-bar .body .div-6 .input-id").val(result._id);
+        $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val(result._source.title);
+        var selected = Number(result._source.type.split("-")[1])-1;
+        $(".simulator-cms .side-bar .body .div-6 .class-type-question select option").eq(selected).select();
+    }else if(type==1){
+        $(".simulator-cms .side-bar .body .div-7 .input-id").val(result._id);
+        $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val(result._source.title);
+        $(".simulator-cms .side-bar .body .div-7 .class-desc-q input").val(result._source.description);
+        $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val(result._source.membres.join("-"));
+    }
+}
+
+function getDocClass(type,id){
+    if(type==0){
+        var index = "simulator_index_docs/docs/";
+    }else if(type==1){
+        var index = "simulator_index_steps/steps/";
+    }
+
+    $.ajax({
+        type: "get",
+        url: "https://cmdbserver.karaz.org:9200/"+index+id,
+        //url: "http://localhost:9200/index_classification_cluster/avis/_search",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {
+            console.log(result);
+            detailsDocObject(result,type);
+            //getAllDocsClassDiv(result['hits']['hits'],type);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function removeDocObject(type,id){
+    if(type==0){
+        var index = "simulator_index_docs/docs/";
+    }else if(type==1){
+        var index = "simulator_index_steps/steps/";
+    }
+
+    $.ajax({
+        type: "delete",
+        url: "https://cmdbserver.karaz.org:9200/"+index+id,
+        //url: "http://localhost:9200/index_classification_cluster/avis/_search",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {
+            console.log(result);
+            setTimeout(getAllDocsClass(type),2000);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function getMaxDocsClass(type,object){
+    var obj = {
+        "aggs" : {
+            "max_id" : { "max" : { "field" : "id" } }
+        }
+    };
+    if(type==0){
+        var index = "simulator_index_docs/docs/_search";
+    }else if(type==1){
+        var index = "simulator_index_steps/steps/_search";
+    }
+
+    $.ajax({
+        type: "post",
+        url: "https://cmdbserver.karaz.org:9200/"+index,
+        //url: "http://localhost:9200/index_classification_cluster/avis/_search",
+        contentType: "application/json",
+        datatype:"application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {
+            console.log(Number(result.aggregations.max_id.value)+1);
+            object.id = Number(result.aggregations.max_id.value)+1;
+            updateDocClass(type,object);
+            //getAllDocsClass(type);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function getAllCoumnsMatrixCn4(){
+    var bulk = "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
+    $(".simulator-cms .container-sim-cms .container-4 table.tab-matrix").html("");
+
+    $.ajax({
+        type: "post",
+        //url: "http://localhost:9200/_msearch",
+        url: "https://cmdbserver.karaz.org:9200/_msearch",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data:bulk,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {    
+            console.log(result);
+            var columns = result.responses[0].hits.hits;
+            var columnsMatrix = result.responses[1].hits.hits;
+            columns.sort(function(a, b) {
+                return Number(a._id) - Number(b._id);
+            });
+
+            console.log(columns);
+            var arrayQst = [[],[]];
+            for(var i=0;i<columns.length;i++){
+                var str = "Q"+columns[i]._id;
+                console.log(str.toString());
+                arrayQst[0].push(str);
+                arrayQst[1].push(columns[i]._source.question);
+            }
+            arrayQst[0].push("Docs Requis");
+            arrayQst[1].push("Docs Requis");
+            arrayQst[0].push("Docs Comp");
+            arrayQst[1].push("Docs Comp");
+            arrayQst[0].push("Steps");
+            arrayQst[1].push("Steps");
+            var size = columnsMatrix.length;
+            console.log(size);
+            createColumns(0,arrayQst);
+            
+            for(var i=0;i<size;i++){
+                var listQr = columnsMatrix[i]._source.list;
+                var listRep = columnsMatrix[i]._source.list_rep;
+            
+                var arrayReps = [];
+                
+                for(var j = 0 ;j< columns.length;j++){
+                    arrayReps.push(0);
+                }
+                
+                for(var j=0;j<listQr.length;j++){
+                    arrayReps[Number(listQr[j])]= listRep[j];
+                }
+
+                arrayReps.push(columnsMatrix[i]._source.docs_requis);
+                arrayReps.push(columnsMatrix[i]._source.docs_comp);
+                arrayReps.push(columnsMatrix[i]._source.steps);
+
+                createColumns(1,arrayReps);
+            }
+
+            
+        },
+        error: function (error){
+            console.log(error.responseText);
+        }
+    })
+
+}
+
+function createColumns(type,arrayQst){
+    var divGlobal = document.querySelector(".simulator-cms .container-sim-cms .container-4 table.tab-matrix");
+    if(type==0){
+        var tr = document.createElement("tr");
+        for(var i=0;i<arrayQst[0].length;i++){
+            var td = document.createElement("th");
+            td.innerHTML = arrayQst[0][i];
+            td.setAttribute("title",arrayQst[1][i]);
+            tr.appendChild(td);
+        }
+        
+        divGlobal.appendChild(tr);
+    }else if(type==1){
+        var tr = document.createElement("tr");
+        for(var i=0;i<arrayQst.length;i++){
+            var td = document.createElement("td");
+            if(arrayQst[i]==-1){
+                td.innerHTML = "All";
+            }else{
+                td.innerHTML = arrayQst[i];
+            }
+            
+            tr.appendChild(td);
+        }
+        divGlobal.appendChild(tr);
+    }
+}
+
+function getIdDeletedColumns(tree){
+    var newObj = [];
+    var obj = {};
+    obj[tree.text.question_id]=[];
+    var array = [[],[]]; 
+    if(tree.text.question_id==-1){
+        if(tree.text.status==1){
+            deleted.push(tree.text.columns_id);
+        }
+    }    return deletedCol(tree,array,newObj);
+}
+  
+var deleted = [];
+
+function deletedCol(tree,array,newObj){
+    for(var i=0;i<tree.children.length;i++){
+      if(tree.children[i].text.question_id==-1){
+          if(tree.children[i].text.status==1){
+              deleted.push(tree.children[i].text.columns_id);
+              console.log(tree.children[i].text.columns_id);
+          }
+      }
+      var obj = {};
+      var sousTree = tree.children[i];
+      obj[tree.children[i].text.question_id]=[];
+      str = getTreeHierS(array);
+      array[0].push(tree.children[i].text.question_id);
+      array[1].push(i);
+      if(tree.children[i].text.children!=0){
+        newObj = deletedCol(sousTree,array,newObj);
+      }
+      array[0].pop();
+      array[1].pop();
+    }
+    return newObj;
+  }
+  
+  function deleteBulkRequest(array){
+    var str = "";
+    for(var i=0;i<array.length;i++){
+      str+="{ \"delete\" : { \"_index\" : \"simulator_index_matrix\", \"_type\":\"columns\", \"_id\" : \""+array[i]+"\" } }\n";
+    }
+    console.log(str)
+    return str;
+}
+  

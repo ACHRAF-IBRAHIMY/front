@@ -62,6 +62,24 @@
       <menu relId="AutorisationsConstructionGrandsProjets" label="Autorisations de Construction Grands Projets" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationsConstructionGrandsProjets</resource>
       </menu>
+      <menu relId="AutorisationsConstructionPetitsProjets" label="Autorisations de Construction petits projets" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationsConstructionPetitsProjets</resource>
+      </menu>
+      <menu relId="CertificatReceptionProjets" label="Certificat de réception de projets" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/CertificatReceptionProjets</resource>
+      </menu>
+      <menu relId="PermisHabiterEtCertificatConformite" label="Permis d'habiter et certificat de conformité" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/PermisHabiterEtCertificatConformite</resource>
+      </menu>
+      <menu relId="AutorisationRefection" label="Autorisation de réfection" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationRefection</resource>
+      </menu>
+      <menu relId="AutorisationDemolition" label="Autorisation de démolition" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationDemolition</resource>
+      </menu>
+      <menu relId="AutorisationRegularisation" label="Autorisation de régularisation" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationRegularisation</resource>
+      </menu>
     </menu>
   </menu>
 </menus>

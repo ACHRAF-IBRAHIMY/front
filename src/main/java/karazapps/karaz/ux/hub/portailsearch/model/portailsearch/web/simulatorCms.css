@@ -41,8 +41,6 @@
 }
 
 
-
-
 .simulator-cms .container-sim-cms .container-1{
     margin: 3px;
     background: #fff;
@@ -53,12 +51,68 @@
 
 
 .simulator-cms .container-sim-cms .container-2,.simulator-cms .container-sim-cms .container-3,.simulator-cms .container-sim-cms .container-4{
+    margin: 3px;
+    background: #fff;
+    width: 98%;
+    height: 749px;
+    padding-top: 30px;
     display: none;
+}
+
+
+.simulator-cms .container-sim-cms .container-2 .container-docs,.simulator-cms .container-sim-cms .container-3 .container-steps{
+    margin-left: 31px;
+    width: 51%;
+    overflow: auto;
+    max-height: 599px;
+    font-size: 16px;
+    margin-top: 35px;
+}
+
+.simulator-cms .container-sim-cms .container-2 .container-docs .item,.simulator-cms .container-sim-cms .container-3 .container-steps .item{
+    border: 1px solid #eee;
+    display: grid;
+    width: 95%;
+    margin: auto;
+    grid-template-columns: 8% 72% 10% 10%;
+}
+
+.simulator-cms .container-sim-cms .container-2 .container-docs .item i,.simulator-cms .container-sim-cms .container-3 .container-steps .item i{
+    padding : 5px;
+}
+
+.simulator-cms .container-sim-cms .container-2 .add-doc-class,.simulator-cms .container-sim-cms .container-3 .add-doc-class {
+    width: 91%;
+    margin: auto;
+    color: #38a;
+    cursor: pointer;
+    margin-top: 15px;
 }
 
 .simulator-cms .side-bar{
     margin: 3px;
     height: 792px;
+}
+
+.simulator-cms .container-sim-cms .container-4 table.tab-matrix{
+    width: 90%;
+    margin: auto;
+    overflow: auto;
+    height: 600px;
+}
+
+
+.simulator-cms .container-sim-cms .container-4 table.tab-matrix tr th{
+    border: 1px solid #ddd;
+    padding: 7px;
+    background: #eee;
+    text-align: center;
+}
+
+.simulator-cms .container-sim-cms .container-4 table.tab-matrix tr td{
+    border: 1px solid #ddd;
+    padding: 7px;
+    text-align: center;
 }
 
 .simulator-cms .container-sim-cms .container-1 .button-upload-es{
@@ -118,11 +172,10 @@
 
 .simulator-cms .side-bar .body{
     height: 750px;
-    //border: 1px solid #eee;
     font-size: 16px;
 }
 
-.simulator-cms .side-bar .body .div-1,.simulator-cms .side-bar .body .div-2,.simulator-cms .side-bar .body .div-3{
+.simulator-cms .side-bar .body .div-1,.simulator-cms .side-bar .body .div-2,.simulator-cms .side-bar .body .div-3,.simulator-cms .side-bar .body .div-4{
     border: 1px solid #eee;
     padding: 15px;
     background: #fff;
@@ -130,7 +183,15 @@
     margin-top: 6px;
 }
 
-.simulator-cms .side-bar .body .div-3{
+.simulator-cms .side-bar .body .div-5,.simulator-cms .side-bar .body .div-6,.simulator-cms .side-bar .body .div-7{
+    border: 1px solid #eee;
+    padding: 15px;
+    background: #fff;
+    height: 340px;
+    margin-top: 6px;
+}
+
+.simulator-cms .side-bar .body .div-3,.simulator-cms .side-bar .body .div-4,.simulator-cms .side-bar .body .div-5,.simulator-cms .side-bar .body .div-6,.simulator-cms .side-bar .body .div-7{
     display: none;
 }
 
@@ -153,10 +214,18 @@
     width: 100%;
     height: 34px;
     border-radius: 2px;
+    border: 1px solid #eee;
+
+}
+
+.simulator-cms .side-bar .body .cms-form div.class-responses div.responses-sim-cms .link-sim-cms{
+    background: aliceblue;
+    border-radius: 2px;
+    padding: 2px 5px;
 }
 
 .simulator-cms .side-bar .body  .div-2 .cms-form select,.simulator-cms .side-bar .body  .div-3 .cms-form-2 select{
-    height: auto;
+    border: 1px solid #eee;
 }
 
 .simulator-cms .side-bar .body  .cms-form .form-grid,.simulator-cms .side-bar .body  .cms-form-2 .form-grid{

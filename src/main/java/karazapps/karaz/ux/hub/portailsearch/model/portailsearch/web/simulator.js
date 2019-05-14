@@ -137,7 +137,7 @@ function completeArrayMatrix(ar1,ar2,size){
           }
       }
      console.log(list); 
-    return list.join("");
+    return list;
 }
 
 function createArrayPredict(size){
@@ -324,7 +324,7 @@ function endFunctionSend(){
     
     var search = makeResponse(arrayVect);
     console.log("search :"+search);
-    var objSearchMatrix = searchInMatrix(matrix,search);
+    var objSearchMatrix = searchInMatrix2(matrix,search);
 
     countDoc(0,objSearchMatrix);
     countDoc(1,objSearchMatrix);
@@ -364,17 +364,40 @@ function makeResponse(array){
         reps[index]= array[1][i];
     }
     
-    return reps.join('');
+    return reps;
 }               
 
 var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000]];
 
 function searchInMatrix(matrix,key){
      var index = matrix[0].indexOf(key);
+
      if(index!=-1){
         return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index]};
      }else{
-         alert("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin. Essayez autorisation urbanistique => permis de construire");
+         alert("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
+         return null;
+     }
+}
+
+function searchInMatrix2(matrix,listKey){
+    var index = -1;
+    for(var i=0;i<matrix[0].length;i++){
+        for(var j=0;j<matrix[0][i].length;j++){
+            if(matrix[0][i][j]!=listKey[j] && matrix[0][i][j]!=-1){
+              break;
+            }
+        }
+      if(j==matrix[0][i].length){
+         index = i;
+         break;
+      }
+    }
+    
+    if(index!=-1){
+        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index]};
+     }else{
+         alert("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
          return null;
      }
 }

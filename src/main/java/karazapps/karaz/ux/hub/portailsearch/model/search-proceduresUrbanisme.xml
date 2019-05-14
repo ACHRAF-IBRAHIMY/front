@@ -142,8 +142,9 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                         <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
-                                            </postChange>
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/autorisationMorcellement", "search", "Autorisations de morcellement", {});
+<!--                                                 ApplicationManager.run("cug/cri/urbanisme/daycommission/search/autorisationMorcellement", "search", "Autorisations de morcellement", {});                                       
+ -->                                        </postChange>
                                         </button>
                                     </vbox>
                                 </vbox>
@@ -169,7 +170,9 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                         <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/autorusationLotissement", "search", "Autorisations de Lotissement", {});
+                                       
+
                                          </postChange>
                                         </button>
                                     </vbox>
@@ -196,7 +199,8 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                             <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/autorusationConstructionGroupesHabitations", "search", "Autorisations de Construction de Groupes d'Habitations", {});
+
                                             </postChange>
                                         </button>
                                     </vbox>
@@ -223,7 +227,8 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                             <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationsConstructionGrandsProjets", "search", "Autorisations de Construction Grands Projets", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationsConstructionGrandsProjets", "search", "Autorisations de Construction Grands Projets", {});                                                
                                             </postChange>
                                         </button>
                                     </vbox>
@@ -250,7 +255,8 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                             <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationsConstructionPetitsProjets", "search", "Autorisations de Construction petits projets", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationsConstructionPetitsProjets", "search", "Autorisations de Construction petits projets", {});
                                             </postChange>
                                         </button>
                                     </vbox>
@@ -262,7 +268,7 @@
 
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="far fa-check-square" />
+                                        <i class="fa fa-check-square-o" />
                                     </html>
 
                                     <vbox>
@@ -276,7 +282,8 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                             <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/CertificatReceptionProjets", "search", "Certificat de réception de projets", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/CertificatReceptionProjets", "search", "Certificat de réception de projets", {});
                                             </postChange>
                                         </button>
                                     </vbox>
@@ -288,7 +295,7 @@
 
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="fas fa-key" />
+                                        <i class="fa fa-key" />
                                     </html>
 
                                     <vbox>
@@ -303,7 +310,8 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                             <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/PermisHabiterEtCertificatConformite", "search", "Permis d'habiter et certificat de conformité", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PermisHabiterEtCertificatConformite", "search", "Permis d'habiter et certificat de conformité", {});
                                             </postChange>
                                         </button>
                                     </vbox>
@@ -329,7 +337,8 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                             <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationRefection", "search", "Autorisation de réfection", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationRefection", "search", "Autorisation de réfection", {});
                                             </postChange>
                                         </button>
                                     </vbox>    
@@ -341,7 +350,7 @@
 
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="fas fa-eraser" />
+                                        <i class="fa fa-eraser" />
                                     </html>
 
                                     <vbox>
@@ -356,7 +365,8 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                             <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationDemolition", "search", "Autorisation de démolition", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationDemolition", "search", "Autorisation de démolition", {});
                                             </postChange>
                                         </button>
                                     </vbox>    
@@ -373,7 +383,7 @@
 
                                     <vbox>
                                         <html>
-                                            <span class="acc-title">Régularisation</span>
+                                            <span class="acc-title">Autorisation de régularisation</span>
                                             <p>
                                                 Cette procédure concerne particuliérement les constructions ayant été réalisées sans obtention préalable des autorisations nécessaires
                                                  ou bien celles réalisées sans respecter les plans autorisés. Cette procédure n'est applicable que si la construction concernée n'a fait objet d'aucun procès-verbal d'infraction. 
@@ -383,7 +393,8 @@
                                         </html>
                                         <button className="det-but" label="Détail">
                                             <postChange>
-                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                                                <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationRegularisation", "search", "Autorisation de régularisation", {}); -->
+                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AutorisationRegularisation", "search", "Autorisation de régularisation", {});
                                             </postChange>
                                         </button>
                                     </vbox>    

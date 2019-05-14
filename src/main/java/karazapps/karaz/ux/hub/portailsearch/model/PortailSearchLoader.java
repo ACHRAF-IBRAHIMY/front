@@ -81,7 +81,17 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-AllTaskGlobalModelSearch.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AutorisationDemolition", "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationDemolition.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AutorisationRefection", "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationRefection.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AutorisationRegularisation", "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationRegularisation.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AutorisationsConstructionGrandsProjets", "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationsConstructionGrandsProjets.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AutorisationsConstructionPetitsProjets", "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationsConstructionPetitsProjets.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/CertificatReceptionProjets", "karazapps/karaz/ux/hub/portailsearch/model/search-CertificatReceptionProjets.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DashletsArchitectSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DashletsArchitectSearch.xml");
 
@@ -92,6 +102,8 @@ public class PortailSearchLoader {
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpinionTextClassification", "karazapps/karaz/ux/hub/portailsearch/model/search-OpinionTextClassification.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpinionTextMining", "karazapps/karaz/ux/hub/portailsearch/model/search-OpinionTextMining.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/PermisHabiterEtCertificatConformite", "karazapps/karaz/ux/hub/portailsearch/model/search-PermisHabiterEtCertificatConformite.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-PublicCentralSearch.xml");
 

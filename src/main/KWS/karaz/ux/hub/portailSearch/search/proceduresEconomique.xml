@@ -142,7 +142,7 @@
 
                                 <vbox columns="10% 90%">
                                     <html>
-                                        <i class="fas fa-shopping-basket" />
+                                        <i class="fa fa-shopping-basket" />
                                     </html>
 
                                     <vbox>
