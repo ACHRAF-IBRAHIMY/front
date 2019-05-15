@@ -31,9 +31,9 @@
         <script postLoad="true">
              var currentFocus;
                 
-      document.getElementsByClassName("ow-field-input")[2].addEventListener("input", function () {
+      document.querySelector(".divSearchBar input").addEventListener("input", function () {
                     var a, b, i;
-                    var inp = document.getElementsByClassName("ow-field-input")[2];
+                    var inp = document.querySelector(".divSearchBar input");
                     var val = inp.value.toLowerCase();
                     if (!val) {
                         closeAllLists();
@@ -100,13 +100,37 @@
        ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresEconomique", "search", "Procedures Economique", {});
     });    
          
-    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").toggle("fast"); 
-    });         
           
     $(".to-simulator").click(function(){
         ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-    });      
+    });
+
+
+
+    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+        $(".header-div-toggle").slideToggle(); 
+    });         
+   
+    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
+    });
+
+    $(".header-div-toggle .dropdown").mouseenter(function(){
+        $(".header-div-toggle .dropdown-content").slideDown();
+    }).mouseleave(function(){
+        $(".header-div-toggle .dropdown-content").slideUp();
+    });
+
+
+
+
+    $(".folder-feature .folder-feature-header i").click(function(){
+        $(".folder-feature").find("div").hide("fast",function(){
+            $(".folder-feature").animate({'width':'hide'});
+        });
+    });
+
+
         </script>
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
@@ -140,7 +164,21 @@
                    </button>
                     <button label="Open data">
                         <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
+                        </postChange>
+                   </button>
+                   <button label="Ressources" className="dropdown">
+                        <html>
+                            <div class="dropdown-content">
+                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
+                                    Référentiel juridique</a>
+                                <hr/>
+                                <a >Guides vidéos</a><hr/>
+                                <a >Utilitaires</a>
+                            </div>
+                        </html>
+                        <postChange>
+
                         </postChange>
                    </button>
                    <button label="Solutions">
@@ -148,22 +186,13 @@
 
                         </postChange>
                    </button>
-                   <button label="Ressources">
-                        <postChange>
-
-                        </postChange>
-                   </button>
+                   
                    <button icon="far fa-question-circle">
-                       <postChange />
-                   </button>
-                   <vbox columns="50% 50%">
-                   <button className="butt-otm" label="OTM"> <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpinionTextMining", "search", "PublicCentralSearch", {});
+                       <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
                        </postChange>
                    </button>
-                    <button className="butt-otm" label="OTC"> <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpinionTextClassification", "search", "OpinionTextClassification", {});
-                       </postChange>
-                   </button>
-                   </vbox>    
+                    
             
                 </vbox>
 
@@ -299,6 +328,7 @@
                 </vbox>
                 
             </vbox>
+            <vbox className="relative-position">
             <vbox className="hp-box last-log hp-small">
                 <vbox columns="20% 80%">
                     <html>
@@ -323,9 +353,37 @@
 
                     <button className="hp-box-btn HomePageLoginButton buttonLog" label="Vérifier">
                         <postChange>  
+                        $(".folder-feature").find("div").show("fast");
+                        $(".folder-feature").animate({'width':'show'},function(){});
                         </postChange>                                  
                     </button>
                 </vbox>
+            </vbox>
+            <vbox className="folder-feature ">
+                <html>
+                    <div class="folder-feature-header">
+                        <div><span>PCT-PANF-MRF-69961/2019</span><i class="fas fa-close"></i></div>
+                        <hr/>
+                    </div>
+                    <div class="folder-feature-body">    
+                        <div class="folder-steps">
+                            <ul class="progressbar">
+                                <li class="bf-active"><span class="step-title">Saisie</span><span class="step-date">04-02-2019</span></li>
+                                <li class="bf-active"><span class="step-title">Chargement document</span><span class="step-date">06-02-2019</span></li>
+                                <li class="bf-active"><span class="step-title">Commission</span><span class="step-date"></span></li>
+                                <li class="active"><span class="step-title">Décision président</span><span class="step-date"></span></li>
+                                <li class=""><span class="step-title">Préparation e-signature</span><span class="step-date"></span></li>
+                                <li class=""><span class="step-title">e-signature</span><span class="step-date"></span></li>
+                            </ul>
+                        </div>
+                        <div class="folder-feature-button">
+                            <button onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">
+                                CRÉER COMPTE ROKHAS
+                            </button>
+                        </div>
+                    </div>
+                </html>
+            </vbox>
             </vbox>
             
             
@@ -449,7 +507,7 @@
                 <box-card style="    height: 210px !important;">
                     <html><span class="main-number">1</span></html>
                     <box-small-title>Créer votre espace privé sur rokhas.ma</box-small-title>
-                    <button class="main-btn">Procéder</button>
+                    <button class="main-btn" onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Procéder</button>
                 </box-card>
              </html>                
 

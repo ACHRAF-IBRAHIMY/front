@@ -219,7 +219,7 @@ function popArrayVect(){
 }
 
 function loadQuestion(){
-    var str = "<img src=\"img/Bars-load.gif\" style=\"margin: auto;display: block;height: 100px;\" alt=\"\"/>";
+    var str = "<img src=\"img/load-text.gif\" style=\"margin: auto;display: block;height: 100px;\" alt=\"\"/>";
     $(".simulator .simulator-qr .qr").html(str);
 }
 

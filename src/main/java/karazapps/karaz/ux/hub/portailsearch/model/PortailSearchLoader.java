@@ -99,6 +99,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "karazapps/karaz/ux/hub/portailsearch/model/search-EtudeImpactEnvironemmental.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpendataFrame", "karazapps/karaz/ux/hub/portailsearch/model/search-OpendataFrame.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpinionTextClassification", "karazapps/karaz/ux/hub/portailsearch/model/search-OpinionTextClassification.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpinionTextMining", "karazapps/karaz/ux/hub/portailsearch/model/search-OpinionTextMining.xml");
