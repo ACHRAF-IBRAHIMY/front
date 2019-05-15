@@ -92,14 +92,35 @@ function showUpdate(id){
     }
 
     for(var i =0 ; i< obj.children.length;i++){
-        $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html($(".cms-form .body-cms-form .class-responses .responses-sim-cms").html()+"<div><span class=\"link-sim-cms\">"+obj.children[i].text.name+"</span></div>");    
+        var doc = document.createElement("div");
+        var span = document.createElement("span");
+        var input = document.createElement("input");
+        input.setAttribute("class","index");
+        input.setAttribute("value",i);
+        input.setAttribute("type","hidden");
+        span.setAttribute("class","link-sim-cms");
+        span.innerHTML = obj.children[i].text.name;
+        span.addEventListener("click",function(){
+            if(id==""){
+                var newId = this.parentNode.getElementsByClassName("index")[0].value;
+            }else{
+                var newId = id+"-"+this.parentNode.getElementsByClassName("index")[0].value;
+            }
+            showUpdate(newId);
+        });
+        doc.appendChild(input);
+        doc.appendChild(span);
+        
+        $(".cms-form .body-cms-form .class-responses .responses-sim-cms").append(doc);
+
+
+       // $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html($(".cms-form .body-cms-form .class-responses .responses-sim-cms").html()+"<div><span class=\"link-sim-cms\">"+obj.children[i].text.name+"</span></div>");    
     }
         $(".cms-form .body-cms-form .class-question .link-sim-cms i.fa-edit").show();
         $(".cms-form .body-cms-form .class-question .link-sim-cms i.fa-plus").hide();
         $(".simulator-cms .side-bar .body").show();
         $(".simulator-cms .side-bar .body1").hide();
 }
-
 var qstList = [];
 
 

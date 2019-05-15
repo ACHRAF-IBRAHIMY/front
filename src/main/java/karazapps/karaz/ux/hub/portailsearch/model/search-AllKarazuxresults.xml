@@ -55,8 +55,9 @@
               });
                 
                 $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").toggle("fast"); 
-    });
+                    $(".header-div-toggle").toggle("fast"); 
+                });
+
           document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
                     var x = document.getElementById("autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
@@ -96,7 +97,21 @@
                    </button>
                     <button label="Open data">
                         <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
+                        </postChange>
+                   </button>
+                   <button label="Ressources" className="dropdown">
+                        <html>
+                            <div class="dropdown-content">
+                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
+                                    Référentiel juridique</a>
+                                <hr />
+                                <a>Guides vidéos</a><hr />
+                                <a>Utilitaires</a>
+                            </div>
+                        </html>
+                        <postChange>
+
                         </postChange>
                    </button>
                    <button label="Solutions">
@@ -104,15 +119,13 @@
 
                         </postChange>
                    </button>
-                   <button label="Ressources">
-                        <postChange>
-
-                        </postChange>
-                   </button>
+                   
                    <button icon="far fa-question-circle">
-                       <postChange />
+                       <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
+                       </postChange>
                    </button>
-                       
+                    
             
                 </vbox>
 

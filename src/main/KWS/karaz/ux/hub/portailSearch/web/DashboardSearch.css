@@ -1,3 +1,196 @@
+/* from css file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/DashboardSearch.css  */
+  
+.header-div-toggle .dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.header-div-toggle .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #eee;
+    min-width: 160px;
+    box-shadow: 4px 3px 7px 0px rgba(0,0,0,0.3);
+    border: 1px solid #ccc;
+    z-index: 1;
+    margin-top: 6px;
+}
+  
+.header-div-toggle .dropdown-content a {
+    font-size: 12px;
+    color: #666666;
+    padding: 12px 10px;
+    text-decoration: none;
+    text-align: left;
+    display: block;
+}
+
+.header-div-toggle .dropdown-content hr{
+    height: 1px;
+    width: 85%;
+    margin: auto;
+    background: #ccc;
+    border: 1px solid #eee;
+}
+  
+.header-div-toggle .dropdown-content a:hover {
+      background-color: #f1f1f1;
+      color: #38a;
+}
+  
+.folder-feature{
+    width: 232%;
+    position: absolute;
+    margin-left: -26px !important;
+    top: -10px;
+    z-index: 1;
+    left: 100%;
+    display: none;
+    padding: 1.25rem;
+    margin: 10px 2rem;
+    color: var(--fg1);
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 3px 3px 3px #0004;
+    border: 1px solid #DDD;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.folder-feature .folder-feature-header{
+    text-align: left;
+}
+
+.folder-feature .folder-feature-header div{
+    text-align: left;
+    display: grid;
+    grid-template-columns: 94% 10%;
+    padding-bottom: 5px;
+}
+
+.folder-feature .folder-feature-header hr{
+    background: #ddd;
+    margin: auto;
+    width: 100%;
+    height: 1px;
+    border: 1px solid #eee;
+}
+
+.folder-feature .folder-feature-header i{
+    background: #38a;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 17px;
+    line-height: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.folder-feature .folder-feature-header span{
+    font-size: 19px;
+}
+  
+.folder-feature .folder-feature-body{
+    padding: 20px 0px;
+}
+
+.relative-position{
+    position: relative;
+    height: 280px !important;
+}
+
+.folder-feature .folder-feature-body .progressbar {
+    counter-reset: step;
+}
+
+.folder-feature .folder-feature-body .progressbar li {
+    list-style: none;
+    display: inline-block;
+    width: 15.66%;
+    position: relative;
+    text-align: center;
+    vertical-align:top;
+}
+
+.folder-feature .folder-feature-body .progressbar li span.step-date{
+    font-size: 12px;
+    display: block;
+    color: #000;
+}
+
+.folder-feature .folder-feature-body .progressbar li span.step-title{
+    font-size: 15px;
+}
+
+.folder-feature .folder-feature-body .progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    border: 4px solid #aaa;
+    border-radius: 100%;
+    font-size: 26px;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    background-color: #fff;
+  }
+
+  .folder-feature .folder-feature-body .progressbar li:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #ddd;
+    top: 27.5px;
+    left: -50%;
+    z-index : -1;
+  }
+  .folder-feature .folder-feature-body .progressbar li:first-child:after {
+    content: none;
+  }
+
+  .folder-feature .folder-feature-body .progressbar li.bf-active {
+    color: green;
+  }
+
+  .folder-feature .folder-feature-body .progressbar li.bf-active:before {
+    border-color: green;
+  } 
+
+  .folder-feature .folder-feature-body .progressbar li.bf-active + li:after {
+    background-color: green;
+  }
+
+  .folder-feature .folder-feature-body .progressbar li.active {
+    color: #38a;
+  }
+
+  .folder-feature .folder-feature-body .progressbar li.active:before {
+    border-color: #38a;
+    background-color: #38a;
+    color: #fff;
+  }
+
+  .folder-feature .folder-feature-button{
+    text-align: right;
+    padding: 7px 25px;
+  }
+
+  .folder-feature .folder-feature-button button{
+    color: #fff;
+    border: none;
+    background: #38a;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 4px;
+  }
+
+
 .dashboardsearch_icone:before{
 	position: relative;
 	font-family: FontAwesome !important;
@@ -9,14 +202,14 @@
 
 
 .autocomplete-items {
-	width: 100%;
+    width: 100%;
     cursor: pointer;
-    /* position: absolute; */
+    position: relative;
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
-    z-index: 99;
-    top: 100%;
+    z-index: 106;
+    top: 0%;
     text-align: left;
     margin-top: 10px;
     left: 0;
@@ -855,7 +1048,7 @@
 .main-icon-title-bx .title
 {
     font-size: 22px;
-    color: black;
+    color: #666;
     margin-left: 71px;    
     
 }
@@ -945,7 +1138,7 @@
 }
 
 .main-icon-title span{
-    color: #333;
+    color: #666;
     font-size: 17px;
 }
 
@@ -1521,8 +1714,8 @@
     .header-div-toggle{
             background: #fff;
             padding: 2px 5px 18px 0px;
-            box-shadow: 0 0 8px 0;
-            display: block;
+            box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.4);
+            display: none;
     }
     
     .Header-signup{

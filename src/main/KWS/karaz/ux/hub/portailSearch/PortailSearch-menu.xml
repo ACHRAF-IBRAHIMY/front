@@ -80,6 +80,9 @@
       <menu relId="AutorisationRegularisation" label="Autorisation de régularisation" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationRegularisation</resource>
       </menu>
+      <menu relId="OpendataFrame" label="Open data page" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/OpendataFrame</resource>
+      </menu>
     </menu>
   </menu>
 </menus>

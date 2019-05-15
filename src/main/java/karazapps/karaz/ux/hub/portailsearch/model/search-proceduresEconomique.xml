@@ -29,6 +29,20 @@
             PCD_addtitle();
             // header color 
             PCD_headerfieldset_color(".pcd-ha-color");
+
+                $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+        $(".header-div-toggle").slideToggle(); 
+    });         
+   
+    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
+    });
+
+    $(".header-div-toggle .dropdown").mouseenter(function(){
+        $(".header-div-toggle .dropdown-content").slideDown();
+    }).mouseleave(function(){
+        $(".header-div-toggle .dropdown-content").slideUp();
+    });
             </script>
 
             <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -63,7 +77,21 @@
                    </button>
                     <button label="Open data">
                         <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
+                        </postChange>
+                   </button>
+                   <button label="Ressources" className="dropdown">
+                        <html>
+                            <div class="dropdown-content">
+                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
+                                    Référentiel juridique</a>
+                                <hr />
+                                <a>Guides vidéos</a><hr />
+                                <a>Utilitaires</a>
+                            </div>
+                        </html>
+                        <postChange>
+
                         </postChange>
                    </button>
                    <button label="Solutions">
@@ -71,15 +99,13 @@
 
                         </postChange>
                    </button>
-                   <button label="Ressources">
-                        <postChange>
-
-                        </postChange>
-                   </button>
+                   
                    <button icon="far fa-question-circle">
-                       <postChange />
+                       <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
+                       </postChange>
                    </button>
-                     
+                    
             
                 </vbox>
 
@@ -91,7 +117,8 @@
                     </button>
                     <button label="Connexion" className="button-signup-header">	
                         <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
                         </postChange>					
                     </button>
                 </vbox>
@@ -101,9 +128,8 @@
                     <button label="ع" className="button-signup-header">						
                     </button>
                 </vbox>
-              </vbox>
             </vbox>
-
+        </vbox>
             <html id="hSeparator">
             <div style="height: 30px;"> </div>
 

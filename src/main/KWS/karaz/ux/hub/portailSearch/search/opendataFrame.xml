@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="OpendataFrame" label="Open data page">
+
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+        </query>
+        <collapsed>false</collapsed>
+    </data>
+    <view>
+        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+            <script postLoad="true">
+            
+    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+        $(".header-div-toggle").toggle("fast"); 
+    });
+
+        $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+        $(".header-div-toggle").slideToggle(); 
+    });         
+   
+    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
+    });
+
+    $(".header-div-toggle .dropdown").mouseenter(function(){
+        $(".header-div-toggle .dropdown-content").slideDown();
+    }).mouseleave(function(){
+        $(".header-div-toggle .dropdown-content").slideUp();
+    });
+
+            </script>
+    <html>
+        <iframe src="https://dataurba.ma?noHF=true" class="openUrlIframe" onload="if(typeof openUrlIFrameOnload !== 'undefined') {openUrlIFrameOnload(this);} " style="height: 100vh;width: 100%;"></iframe>
+    </html>
+        </screen>
+
+    </view>
+
+
+</search>
