@@ -1,6 +1,7 @@
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\allObjectGlobalModelSearch\backejbs\AllObjectGlobalModelSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\PortailSearch.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\package-info.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\faqPage\backejbs\FaqPageBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\allTaskGlobalModelSearch\backejbs\AllTaskGlobalModelSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\autorusationMorcellement\backejbs\AutorusationMorcellementBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\impl\StartEventImpl.java
@@ -43,6 +44,7 @@ C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\p
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\JXFactory.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\Adapter2.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\AbstractRemoteAction.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\refrentielJuridique\backejbs\RefrentielJuridiqueBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\detailsActivitySearch\backejbs\DetailsActivitySearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\Adapter1.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\oldallGlobalModelSearch\backejbs\OldallGlobalModelSearchBean.java

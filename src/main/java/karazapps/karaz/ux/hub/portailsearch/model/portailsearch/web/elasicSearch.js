@@ -1,4 +1,3 @@
-/* from file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js  */
 var currentPage = 0;
 var currentLPage =0;
 var totalPage = 0;
@@ -69,189 +68,74 @@ function check(res,elm){
     return true;
 }
 
+var typePage = 0;
+var articles = [{
+    "_source":{
+         "title":"DECRET N° 2-13-424 APPROUVANT LE REGLEMENT GENERAL DE CONSTRUCTION",
+         "type":"URBANISME",
+         "text":"Décret n° 2-13-424 du 13 rejeb 1434 (24 mai 2013) approuvant le règlement général de construction fixant la forme et les conditions de délivrance des autorisations et des pièces exigibles en application de la législation relative à l'urbanisme et aux lotissements, groupes d'habitations et morcellements ainsi que des textes pris pour leur application."
+    }         
+    },{
+    "_source":{
+         "title":"ARRETE N° 3214.13 FIXANT LES PIECES CONSTITUTIVES DES DOSSIERS D'AUTORISATIONS D’URBANISME",
+         "type":"URBANISME",
+         "text":"Arrêté conjoint du Ministre de l’Urbanisme et de l’Aménagement du Territoire et du Ministre de l’Intérieur n° 3214.13 du 10 moharram 1435 (14 novembre 2013) fixant les pièces constitutives des dossiers exigibles aux demandes d’autorisation en application de la législation relative à l’urbanisme et aux lotissements, groupes d’habitations et morcellements ainsi que des textes pris pour leur application."
+    }         
+    },{
+    "_source":{
+         "title":"DAHIR DU 25 AOUT 1914 PORTANT REGLEMENTATION DES ETABLISSEMENTS CLASSES",
+         "type":"ÉCONOMIQUE",
+         "text":"Dahir du 25 août 1914 (3 chaoual 1332) portant réglementation des établissements insalubres, incommodes ou dangereux, tel qu’il a été modifié et complété par les dahirs des 13 octobre 1933, 11 août 1937, 9 juin 1938, 9 novembre 1942 et 18 janvier 1950..."
+    }         
+    },{
+    "_source":{
+         "title":"LOI 47-18 PORTANT REFORME DES CENTRES REGIONAUX D’INVESTISSEMENT",
+         "type":"INVESTISSEMENT",
+         "text":"Loi 47-18 portant réforme des Centres Régionaux d’Investissement et création des commissions régionales unifiées d’investissement."
+    }         
+    },{
+    "_source":{
+         "title":"REGLEMENT DE SECURITE CONTRE LES RISQUES D'INCENDIE ET DE PANIQUE DANS LES CONSTRUCTIONS",
+         "type":"URBANISME",
+         "text":"Décret 2.14.499_Fr d'application du règlement fixant les règles de sécurité contre les risques d'incendie et de panique dans les constructions."
+    }         
+    }];
 
-//Search results and redirect to activity model
-function restFullSearchList(prefix, from, prev, parent) {
-    var result = [];
-    var xhttp = new XMLHttpRequest();
-    removeFullListSearch();
-    $(".searchGif").show();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            removeFullListSearch();
-            var res = JSON.parse(this.responseText);
-            for (var i = 0; i < res.hits.hits.length; i++) {
-                result.push(res.hits.hits[i]);
+var faqs = [
+    {
+        "type":"PIECES REQUISES",
+        "content":[
+            {
+                "question":"Quels sont les pièces requises pour l'obtention d'un permis de construire ?",
+                "response":"Le réglement général de construction publié sous forme de décret (N° 2-13-424), a fixé la liste des pièces requises pour le dépôt d'un permis de construire. Certains documents sont obligatoires au dépôt, d'autre peuvent être déposées après obtention de l'avis favorable de la commission. Les documents demandé ..."
+            },
+            {
+                "question":"Est ce que la feuille d'alignement est un document obligatoire pour le dépôt d'une demande ?",
+                "response":"Non, la feuille d'alignement n'est pas un document requis par la réglementation et ne doit aucunement bloquer ni la réception de la demande ni son instruction. Néanmoins, l'architecte et l'administration a souvent besoin de ce document afin de vérifier la conformité du plan à la réalité du terrain et à la ..."
             }
-            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[0].innerHTML = res.hits.total;
-            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[1].innerHTML = prefix;
-
-            $(".searchGif").hide();
-
-            if (currentPage == 0) {
-                totalPage = Math.ceil(res.hits.total / 4);
-                createPaginationBar(Math.min(totalPage, 10), 0, prefix, 1, false);
-                if (totalPage != 0) {
-                    currentPage = 1;
-                    currentLPage = 1;
-                }
-            } else if (currentPage % 10 == 0) {
-                currentLPage = (currentPage / 10) + 1;
-                console.log("begin: " + currentPage + "lpage: " + currentLPage);
-                createPaginationBar(Number(Math.min(10, totalPage - currentPage)) + Number(currentPage), currentPage - 1, prefix, 1, false);
-            } else if (prev == true) {
-                createPaginationBar(currentPage + 1, Math.max(0, (Number(currentPage)) - 10), prefix, 1, true);
+        ],
+    },{
+        "type":"ACCES A LA PLATEFORME",
+        "content":[
+            {
+                "question":"Je suis fonctionnaire et j'ai été muté d'une administration à une autre. Est ce que je garde mon compte ?",
+                "response":"Entant que fonctionnaire, votre droits d'accès rokhas sont intimement liés à l'administration dont vous faire partie. Vous pouvez néanmoins garder - si vous le souhaitez - votre nom utilisateur précédent en le demandant à l'équipe Support au même temps que vous indiquez vos nouvelles attributions au sein de ..."
+            },
+            {
+                "question":"Je ne me souviens plus de mon nom d'utilisateur, ni de mon mot de passe. Que faire ?",
+                "response":"Vous pouvez récupérez votre nom d'utilisateur et réinitialiser votre mot de passe, si vous avec accès à l'e-mail communiqué lors de la création de votre compte d'accès. Dans ce cas, il faut cliquez sur le lien \"J'ai oublié mon mot de passe\", puis saisir votre adresse e-mail. En accédant à votre boite e-mail, vous pou ..."
             }
-
-            if (totalPage == 0) {
-                noResults();
-            } else {
-                fullSearchList(result);
-            }
-        }
-    };
-    //xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
-    xhttp.open("POST", "https://cmdbserver.karaz.org:9200/activite_economique/activite/_search");
-    xhttp.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    var testLanguage = RegExp('[أ-ي]');
-    if (testLanguage.test(prefix)) {
-        xhttp.send(JSON.stringify({
-            "from": from,
-            "size": 4,
-            "query": {
-                "bool": {
-                    "must": [
-                        {
-                            "multi_match": {
-                                "query": prefix,
-                                "fields": ["tags.keywordsString"],
-                                "analyzer": "rebuilt_arabic",
-                                "fuzziness": "AUTO",
-                                "minimum_should_match": "70%"
-                            }
-                        }, {
-                            "match_phrase": {
-                                "content.categorie": {
-                                    "query": "Intitulé activité"
-                                }
-                            }
-                        }
-                        ],
-                    "should": [
-                        {
-                            "match": {
-                                "content.intituleAr": prefix
-                            }
-                            }
-                        ]
-                }
-            }
-        }));
-    } else {
-        var objectJson = {
-            "from": from,
-            "size": 4,
-            "query": {
-                "bool": {
-                    "must": [
-                        {
-                            "multi_match": {
-                                "query": prefix,
-                                "fields": ["tags.keywordsString"],
-                                "analyzer": "rebuilt_french",
-                                "minimum_should_match": "100%"
-                            }
-                        }, {
-                            "match_phrase": {
-                                "content.categorie": {
-                                    "query": "Intitulé activité"
-                                }
-                            }
-                        }]
-                }
-            }
-        };
-        p = parent;
-        console.log(p);
-        if (parent == 1) {
-            xhttp.send(JSON.stringify(objectJson));
-        } else if (parent == 2) {
-            objectJson.query.bool.must[0].multi_match.fields = ["parents.TypeActivité"];
-            delete objectJson.query.bool.must[0].multi_match.analyzer;
-            console.log(JSON.stringify(objectJson));
-            xhttp.send(JSON.stringify(objectJson));
-        } else if (parent == 3) {
-            objectJson.query.bool.must[0].multi_match.fields = ["parents.NatureActivité"];
-            delete objectJson.query.bool.must[0].multi_match.analyzer;
-            console.log(objectJson);
-            xhttp.send(JSON.stringify(objectJson));
-        } else if (parent == 4) {
-            objectJson.query.bool.must[0].multi_match.fields = ["parents.TypeAutorisation"];
-            delete objectJson.query.bool.must[0].multi_match.analyzer;
-            console.log(objectJson);
-            xhttp.send(JSON.stringify(objectJson));
-        } else {
-            xhttp.send(JSON.stringify({
-                "from":from,"size":4,    
-                "min_score": 7,
-                    "query": {
-                        "bool": {
-                            "must": [{
-                                "multi_match": {
-                                    "query": prefix,
-                                    "fields": ["tags.keywordsString"],
-                                    "analyzer": "rebuilt_french",
-                                    "fuzziness": "auto",
-                                    "minimum_should_match": "70%",
-                                }
-                                }, {
-                                "match_phrase": {
-                                    "content.categorie": "intitulé activité"
-                                }
-                            }],
-                            "should": [
-                                {
-                                    "multi_match": {
-                                        "query": prefix,
-                                        "fields": ["content.intituleFr.keywordSyn"],
-                                        "analyzer": "rebuilt_french",
-                                        "fuzziness": "auto",
-                                        "minimum_should_match": "70%",
-                                        "boost": 50
-                                    }
-                                }, {
-                                    "multi_match": {
-                                        "query": prefix,
-                                        "fields": ["content.intituleFr.keywordsString"],
-                                        "analyzer": "rebuilt_french",
-                                        "fuzziness": "auto",
-                                        "minimum_should_match": "70%",
-                                        "boost": 1.6
-                                    }
-                                }, {
-                                    "multi_match": {
-                                        "query": prefix,
-                                        "fields": ["parents.NatureActivite.keywordSyn", "parents.TypeActivite.keywordSyn", "parents.TypeAutorisation.keywordSyn"],
-                                        "analyzer": "rebuilt_french",
-                                        "fuzziness": "auto",
-                                        "minimum_should_match": "70%",
-                                        "boost": 1.3
-                                    }
-                                }
-      ]
-                        }
-                    }
-                }
-
-            ));
-        }
+        ]
     }
+];
 
-    return result;
-}
+
 function removeFullListSearch(){
     $(".full-search-list").html("");
+}
+
+function testWidth(width,nbr){
+    return width > nbr;
 }
 
 //Search results and redirect to activity model
@@ -267,9 +151,14 @@ function restFullSearchList(prefix,from,prev,parent) {
             for(var i=0;i<res.hits.hits.length;i++){
                 result.push(res.hits.hits[i]);
             }
-            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[0].innerHTML= res.hits.total;
-            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[1].innerHTML= prefix;
             
+            console.log("typePage :"+typePage);
+
+            if(typePage!=1 && typePage !=2){
+                document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[0].innerHTML = res.hits.total;
+                document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[1].innerHTML = prefix;
+            }
+
             $(".searchGif").hide();
      
             if(currentPage==0){
@@ -287,10 +176,15 @@ function restFullSearchList(prefix,from,prev,parent) {
                 createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true);
             }
             
-            if(totalPage==0){
+            
+            if (totalPage == 0 && typePage ==0) {
                 noResults();
+            }else if( typePage==1){
+                fullSearchList(articles);
+            }else if( typePage==2){
+                fullSearchList(faqs);
             }else{
-              fullSearchList(result);
+                fullSearchList(result);
             }            
         }
     };
@@ -785,9 +679,128 @@ function autocomplete(inp,arr) {
         return text;
     }
 
+   function loadPageBytype(type){
+       typePage = type;
+   } 
+
    function fullSearchList(results){
        var a = document.querySelector(".full-search-list");
-       
+       if(typePage== 1){
+        for(i=0;i<results.length;i++){
+            var id = results[i]._id;
+            var titleTx = results[i]._source.title;
+            var text = results[i]._source.text;
+            var type = results[i]._source.type;
+            var b = document.createElement("div");
+            b.setAttribute("class","hp-box full-search-list-item");
+            b.setAttribute("style","grid-template-columns: 0% 100%")
+            var d = document.createElement("div");
+            d.setAttribute("class","item-body");
+            d.setAttribute("style","padding:0 18px");
+            var e = document.createElement("div");
+            e.setAttribute("class","item-body-title");
+            e.setAttribute("style","font-size:16px");
+            e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+            var f = document.createElement("p");
+            f.innerHTML = text;
+            d.appendChild(e);
+            d.appendChild(f);
+            var g = document.createElement("a");
+            g.addEventListener("click",function(){
+                var id=$(this).children("input").val();
+                //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+            });
+            g.setAttribute("class","item-body-button");
+            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;");
+            g.innerHTML="Texte intégral<input type=\"hidden\" value=\""+id+"\" > ";
+            d.appendChild(g);
+            var title = document.createElement("div");
+            title.setAttribute("class","item-title");
+            title.setAttribute("title",type);
+            var style = "line-height:30px;top: 51px;height: 30px;";
+
+            if(type=="URBANISME"){
+                style+="background:#38a";
+            }else if(type=="INVESTISSEMENT"){
+                style+="background:#f90";
+            }else if(type=="ÉCONOMIQUE"){
+                style+="background:#363";
+            }
+
+            title.setAttribute("style",style);
+            title.innerHTML=subLong(type);
+            b.appendChild(title);
+            b.appendChild(d);
+            a.appendChild(b);
+        }
+       }else if(typePage == 2){
+           var a1 = document.querySelectorAll(".faq-fieldset .full-search-list")[0];
+           var a2 = document.querySelectorAll(".faq-fieldset .full-search-list")[1];
+            for(i=0;i<results[0].content.length;i++){
+                var id = results[0].content[i]._id;
+                var titleTx = results[0].content[i].question;
+                var text = results[0].content[i].response;
+                var b = document.createElement("div");
+                b.setAttribute("class","hp-box full-search-list-item");
+                b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+                var d = document.createElement("div");
+                d.setAttribute("class","item-body");
+                d.setAttribute("style","padding:0 18px");
+                var e = document.createElement("div");
+                e.setAttribute("class","item-body-title");
+                e.setAttribute("style","font-size:16px");
+                e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+                var f = document.createElement("p");
+                f.innerHTML = text;
+                f.setAttribute("style","font-size: 14px;");
+                d.appendChild(e);
+                d.appendChild(f);
+                var g = document.createElement("a");
+                g.addEventListener("click",function(){
+                var id=$(this).children("input").val();
+                //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                });
+                g.setAttribute("class","item-body-button");
+                g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+                g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
+                d.appendChild(g);
+                b.appendChild(d);
+                a1.appendChild(b);
+            }
+
+            for(i=0;i<results[1].content.length;i++){
+                var id = results[1].content[i]._id;
+                var titleTx = results[1].content[i].question;
+                var text = results[1].content[i].response;
+                var b = document.createElement("div");
+                b.setAttribute("class","hp-box full-search-list-item");
+                b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+                var d = document.createElement("div");
+                d.setAttribute("class","item-body");
+                d.setAttribute("style","padding:0 18px");
+                var e = document.createElement("div");
+                e.setAttribute("class","item-body-title");
+                e.setAttribute("style","font-size:16px");
+                e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+                var f = document.createElement("p");
+                f.innerHTML = text;
+                f.setAttribute("style","font-size: 14px;");
+                d.appendChild(e);
+                d.appendChild(f);
+                var g = document.createElement("a");
+                g.addEventListener("click",function(){
+                var id=$(this).children("input").val();
+                //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                });
+                g.setAttribute("class","item-body-button");
+                g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+                g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
+                d.appendChild(g);
+                b.appendChild(d);
+                a2.appendChild(b);
+            }
+
+       }else{
        for(i=0;i<results.length;i++){
            var id = results[i]._id;
            var intituleFr = results[i]._source.content.intituleFr;
@@ -797,12 +810,9 @@ function autocomplete(inp,arr) {
            var typeAG="Activités économiques";
            var b = document.createElement("div");
            b.setAttribute("class","hp-box full-search-list-item");
-           
            var c = document.createElement("div");
            c.setAttribute("class","c-path");
           // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
-           
-           
            var s = document.createElement("span");
            s.setAttribute("class","cl-orange");
            s.innerHTML=" > ";
@@ -816,35 +826,25 @@ function autocomplete(inp,arr) {
            c.appendChild(s);
            // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
            c.appendChild(addEventSpan("p3",nature));
-           
-           
-           
            var d = document.createElement("div");
            d.setAttribute("class","item-body");
-           
            var e = document.createElement("div");
            e.setAttribute("class","item-body-title");
            e.innerHTML="<span title=\""+intituleFr+"\">"+subLong(intituleFr,60)+"</span>";
            e.innerHTML+="<span class=\"complete-text\">"+intituleFr+"</span>";
-           
            var f = document.createElement("p");
            f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
-           
            d.appendChild(c);
            d.appendChild(e);
            d.appendChild(f);
-           
            var g = document.createElement("button");
            g.addEventListener("click",function(){
                var id=$(this).children("input").val();
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
-
            });
            g.setAttribute("class","item-body-button hp-sbox-btn");
            g.innerHTML="Détails<input type=\"hidden\" value=\""+id+"\" > ";
-           
            d.appendChild(g);
-           
            var title = document.createElement("div");
            title.setAttribute("class","item-title");
            title.setAttribute("title",typeAt);
@@ -855,7 +855,6 @@ function autocomplete(inp,arr) {
                restFullSearchList($(this).html(),0,false,4);
            });
            b.appendChild(title);
-           
            var icons = document.createElement("div");
            icons.setAttribute("class","item-icon");
            icons.innerHTML="<i class=\"far fa-file-image\" /><i class=\"fas fa-cogs\" />";
@@ -863,6 +862,7 @@ function autocomplete(inp,arr) {
            b.appendChild(d);
            a.appendChild(b);
        }
+    }
    }
 
 

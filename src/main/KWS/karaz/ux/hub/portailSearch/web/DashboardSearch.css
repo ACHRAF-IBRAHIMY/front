@@ -1,5 +1,39 @@
-/* from css file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/DashboardSearch.css  */
-  
+ 
+.faq-fieldset .full-search-list{
+    height: auto;
+}
+
+.pagination-new-style{
+    grid-template-columns: 50% 50%;
+    display: grid;
+    padding: 10px 52px;
+    color: #999;
+}
+
+.pagination-new-style .pagination-1{
+    text-align: left;
+}
+.pagination-new-style .pagination-2{
+    text-align: right;
+}
+
+.pagination-new-style .pagination-1 i{
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pagination-new-style .pagination-1 .num-span{
+    padding: 2px 13px;
+    border: 1px solid #999;
+    border-radius: 2px;
+}
+
+.faq-fieldset .ow-pl-toolbar{
+ color: #999 !important;
+ text-align: left !important;
+}
+
 .header-div-toggle .dropdown {
     position: relative;
     display: inline-block;
@@ -426,15 +460,68 @@
         display:block !important;    
     }
     
+    .relative-position{
+        height: auto !important;
+    }
+
+    .pagination-new-style{
+        grid-template-columns: 100%;
+        display: grid;
+        padding: 10px 10px;
+    }
+    
+    .pagination-new-style .pagination-1{
+        text-align: center;
+    }
+    .pagination-new-style .pagination-2{
+        text-align: center;
+        margin-top: 13px;
+    }
+    
+    .pagination-new-style .pagination-1 i{
+        padding: 3px;
+    }
+    
+    .folder-feature{
+        position: static;
+        width: auto;
+        margin-left: 0.6rem !important;
+        margin: 4px 0.6rem;
+    }
+
+    .folder-feature .folder-feature-body ul{
+        padding: 0;
+    }
+
+    .folder-feature .folder-feature-body ul li{
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 15px; 
+    }
+
+    .full-search-list-item .item-body .item-body-button{
+        position: static !important;
+    }
+
+    .folder-feature .folder-feature-body ul li:after{
+        display: none;
+    }
+
+    .folder-feature .folder-feature-button{
+        text-align: center;
+    }
+
     .simulator .simulator-qr .qr{
-        width:100%;
-        padding:0;
+        width:100% !important;
+        padding:0 !important;
     }
     
     .simulator .docs-container .doc-item, .simulator .steps-container .doc-item, .simulator .docs-comp-container .doc-item {
         grid-template-columns: 15% 85%;
     }
     
+
+
     .simulator .simulator-qr{
         margin-left : 0px !important;
     }
@@ -1584,6 +1671,10 @@
 
 .height-auto-vbox .hp-box{
     height: auto !important;
+}
+
+.height-986{
+    height: 98.6% !important;
 }
 
 .back-to-acc:hover{

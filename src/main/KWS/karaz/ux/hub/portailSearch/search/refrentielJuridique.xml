@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="SimulatorRokhas" label="Simulator Rokhas">
+<search name="RefrentielJuridique" label="Refrentiel Juridique">
 
 	<query>
 	</query>
@@ -14,36 +14,21 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-            $(".simulator .simulator-qr .check-ent").click(function(){
-                $(this).toggleClass("active-check");
-            });       
-
-           
-            getTreeFromEs(1);
-            
-           $(".simulator .simulator-qr .next-button button.next-rq").click(function(){           
-               if(!$(this).hasClass("stopped"))nextClick();
-           });            
-            
-           $(".simulator .simulator-qr .next-button button.back-rq").click(function(){           
-               if(!$(this).hasClass("stopped"))backClick();
-           });            
-            
-           $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").slideToggle(); 
-    });         
-   
-    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
-    });
-
-    $(".header-div-toggle .dropdown").mouseenter(function(){
-        $(".header-div-toggle .dropdown-content").slideDown();
-    }).mouseleave(function(){
-        $(".header-div-toggle .dropdown-content").slideUp();
-    }); 
-            
-            
+                loadPageBytype(1);
+                $(".searchbuttun").click();
+                $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+		        $(".header-div-toggle").slideToggle(); 
+		    });         
+		   
+		    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
+		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
+		    });
+		
+		    $(".header-div-toggle .dropdown").mouseenter(function(){
+		        $(".header-div-toggle .dropdown-content").slideDown();
+		    }).mouseleave(function(){
+		        $(".header-div-toggle .dropdown-content").slideUp();
+		    }); 
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -131,95 +116,98 @@
                 </vbox>
             </vbox>
         </vbox>
-
         <html id="hSeparator">
             <div style="height: 30px;"> </div>
         </html>        
            
+        <vbox columns="70% 30%">
             
             
-        <vbox className="hp-small simulator">
-            <vbox className="hp-box simulator-sub">
+        <vbox className="hp-box hp-small divSearch">
+            <vbox className="hp-box divSearchBar div-full-search-bar">
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
-                           <span>SIMULATEUR DE PROCÉDURES</span>
+                           <span>RÉFÉRENTIEL JURIDIQUE</span>
                            <hr class="header-create-account-horizontal-line hr-hub" />
                        </div>
                     </div>
                     <div class="hp-sbox-text">
-                        Vos réponses aux question posées vous permettront d'obtenir des informations sur les documents requis<span style="color:#f93;">*</span>, les principales étapes de la procédures, les délais moyens nécessaires pour leurs accomplissement ainsi que les documents qui vous seront délivrés à la fin de la procédure. 
+                        Vous trouverez ici les textes de loi et réglementation encadrant les procédures administratives gérées par la plateforme Rokhas. Saisissez un mot clé pour accéder directement à l'article recherché ou bien afficher le texte intégral de la référence juridique.
                     </div>
                     <div style="height: 50px;" />
                 </html>    
-                <vbox columns="60% 40%">
-                    <vbox className="hp-box simulator-qr">
-                    <html>
-                    <div class="vpanel-title">
-                        <div class="vpanel-title">
-                           <span>QUESTIONS / RÈPONSES</span>
-                           <hr class="header-create-account-horizontal-line hr-hub" />
-                       </div>
-                    </div>
-                    </html>
-                    <html>
-                        <div class="qr">
-                            <img src="img/load-text.gif" style="margin: auto;display: block;height: 100px;" alt="" />
-                        </div>
-                        <div class="next-button">
-                            <button class="back-rq stopped">Précédent</button>
-                            <button class="next-rq">Suivant</button>    
-                        </div>
-                    </html>
-                    </vbox>
-                    <vbox className="docs-qr">
-                        <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div">
-                            <html>
-                                <div class="docs-container" />
-                            </html>
-                        </fieldSet>
-                        <fieldSet header="ÉTAPES CLÉS">
-                            <html>
-                                <div class="steps-container">
-                                    
-                                </div>
-                            </html>
-                        </fieldSet>
-                        <fieldSet header="DOCUMENTS DÉLIVRÉS" />
-                        <fieldSet header="COÛT ÉSTIMATIF" />
-                        <fieldSet header="DOCUMENTS COMPLEMENTAIRES">
-                            <html>
-                                <div class="docs-comp-container">
-                                    
-                                </div>
-                            </html>
-                        </fieldSet>
-                    </vbox> 
-                       
+                <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
+                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                        <postChange>
+                                var prefix = $(".div-full-search-bar .hp-search_field input").val();
+                                currentPage=0;
+                                var pp=root.query.parentP;
+                                if(pp==1){
+                                    pp=0;
+                                }
+                                restFullSearchList(prefix,0,false,pp);
+                                root.query.parentP=0;
+                         </postChange>
+                    </button>
                 </vbox>
-                <html>
-                    <div style="height: 70px;"> </div>
-                </html>
-                       
-               <vbox className="danger-text" columns="5% 95%">
-                    <html>
-                        <i class="fas fa-exclamation-triangle" />
-                   </html>    
-                    <html>
-                        <span>Des variations peuvent être constatées entre les informations fournies par le simulateur Rokhas.ma et le déroulement réel de la procédure lors du dépôt de la demande sur la plateforme.<br />Ces potentielles variations dépendent généralement de la nature particulière de certains dossiers, de l'évaluation de l'administration compétente et de la localisation du projet concerné
-                        </span>
-                    </html>    
-                </vbox>
+                    
 
                 <html>
                     <div style="height: 70px;"> </div>
                 </html>   
-                     
+                <html>
+                    <div class="searchGif">
+                        <img src="img/search-move.gif" />
+                    </div>
+                    <div class="full-search-list">
+                        
+                    </div>
+                    <div class="pagination pagination-second">
+                        
+                    </div>
+                </html>     
                 
-            </vbox>    
+                        </vbox>    
         </vbox> 
         
-        
+        <vbox className="hp-box hp-small left-box-fsb">
+               <html>
+                   <div class="vpanel-title">
+                       <span>ANNONCES</span>
+                        <hr class="header-create-account-horizontal-line hr-hub" />
+                   </div>
+               </html>
+                <vbox className="hp-box">
+                    <html>
+                        <div class="vpanel-body-title"><i class="fas fa-chart-line" /><span>Etudes de marchés</span></div>
+                        <div class="vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>    
+                </vbox>
+                <html>
+                    <div style="height: 50px;"> </div>
+                </html> 
+                   <vbox className="hp-box">
+                   <html>
+                        <div class="vpanel-body-title"><i class="far fa-edit" /><span>votre e-parapheur</span></div>
+                        <div class="vpanel-body-icon"><i class="far fa-edit" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>     
+                </vbox>
+                <html>
+                    <div style="height: 50px;"> </div>
+                </html> 
+                   <vbox className="hp-box">
+                    <html>
+                        <div class="vpanel-body-title"><i class="fas fa-cog" /><span>Transformation digitale</span></div>
+                        <div class="vpanel-body-icon"><i class="fas fa-cogs" /></div>
+                        <div class="hp-sbox-btn">Détails</div>
+                    </html>     
+                </vbox>    
+            </vbox>      
+        </vbox>
             
         
         <html> <div style="height: 30px;"> </div> </html>            

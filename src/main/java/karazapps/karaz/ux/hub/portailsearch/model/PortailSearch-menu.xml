@@ -83,6 +83,12 @@
       <menu relId="OpendataFrame" label="Open data page" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/OpendataFrame</resource>
       </menu>
+      <menu relId="RefrentielJuridique" label="Refrentiel Juridique" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/RefrentielJuridique</resource>
+      </menu>
+      <menu relId="FaqPage" label="Faq Page" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/FaqPage</resource>
+      </menu>
     </menu>
   </menu>
 </menus>
