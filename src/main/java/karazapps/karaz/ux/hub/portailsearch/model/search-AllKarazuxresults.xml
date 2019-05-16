@@ -14,10 +14,10 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-         
-          $(".rokhas-home").click(function(){
-               ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-          });
+        
+        
+          loadPageBytype(0);
+          
            $(".searchbuttun").click();
            
            $(".div-full-search-bar .full-search-list .full-search-list-item .p").click(function(){
@@ -54,15 +54,27 @@
                     restAutoComplete(inp,val,true);
               });
                 
-                $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-                    $(".header-div-toggle").toggle("fast"); 
-                });
 
           document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
                     var x = document.getElementById("autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x,1);
-          });          
+          }); 
+          
+          $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+		        $(".header-div-toggle").slideToggle(); 
+		    });         
+		   
+		    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
+		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
+		    });
+		
+		    $(".header-div-toggle .dropdown").mouseenter(function(){
+		        $(".header-div-toggle .dropdown-content").slideDown();
+		    }).mouseleave(function(){
+		        $(".header-div-toggle .dropdown-content").slideUp();
+		    }); 
+		            
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">

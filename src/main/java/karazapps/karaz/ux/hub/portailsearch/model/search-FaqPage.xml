@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="AllKarazuxresults" label="All Karazuxresults">
+<search name="FaqPage" label="Faq Page">
 
 	<query>
 	</query>
@@ -14,54 +14,9 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-        
-        
-          loadPageBytype(0);
-          
-           $(".searchbuttun").click();
-           
-           $(".div-full-search-bar .full-search-list .full-search-list-item .p").click(function(){
-               currentPage=0;
-               $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
-                if($(this).attr("class").split(' ')[1]==="p1"){
-                    restFullSearchList($(this).html(),0,false,0);
-                }else if($(this).attr("class").split(' ')[1]==="p2"){
-                    restFullSearchList($(this).html(),0,false,2);
-                }else if($(this).attr("class").split(' ')[1]==="p3"){
-                    restFullSearchList($(this).html(),0,false,3);
-                }else{
-                   restFullSearchList($(this).html(),0,false,1);
-                }
-           });
-           
-           $(".div-full-search-bar .full-search-list .full-search-list-item .item-body-button").click(function(){
-                var id= $(this).children("input").val(); 
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
-           });
-           
-             document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("input", function () {
-                    var a, b, i;
-                    var inp = document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0];
-                    var val = inp.value.toLowerCase();
-                    if (!val) {
-                        closeAllLists();
-                        return false;
-                    }
-                    console.log(val);
-                    currentFocus = -1;
-                    //close any already open lists of autocompleted values
-                    closeAllLists();
-                    restAutoComplete(inp,val,true);
-              });
-                
-
-          document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
-                    if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,1);
-          }); 
-          
-          $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+                loadPageBytype(2);
+                $(".searchbuttun").click();
+                $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
 		        $(".header-div-toggle").slideToggle(); 
 		    });         
 		   
@@ -74,7 +29,6 @@
 		    }).mouseleave(function(){
 		        $(".header-div-toggle .dropdown-content").slideUp();
 		    }); 
-		            
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -174,17 +128,17 @@
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
-                           <span>RECHERCHE ACTIVITÉS</span>
+                           <span>QUESTIONS FREQUENTES</span>
                            <hr class="header-create-account-horizontal-line hr-hub" />
                        </div>
                     </div>
                     <div class="hp-sbox-text">
-                        <span style="color:#f93;">0</span> résultats pour votre recherche <span style="color:#f93;" />. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
+                        Vous trouverez ici des réponses complètes aux questions les plus fréquemment posées par les usagers et par les fonctionnaires. Vous pouvez y accéder soit en consultant les rubriques questions/réponses, soit en saisissant vos mots clés dans la zone de recherche ci-dessous.                    
                     </div>
                     <div style="height: 50px;" />
                 </html>    
                 <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Posez votre question ici ..." />
                     <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
                                 var prefix = $(".div-full-search-bar .hp-search_field input").val();
@@ -193,7 +147,6 @@
                                 if(pp==1){
                                     pp=0;
                                 }
-                                console.log(pp);
                                 restFullSearchList(prefix,0,false,pp);
                                 root.query.parentP=0;
                          </postChange>
@@ -205,18 +158,55 @@
                     <div style="height: 70px;"> </div>
                 </html>   
                 <html>
-                    <div class="searchGif">
-                        <img src="img/search-move.gif" />
-                    </div>
-                    <div class="full-search-list">
-                        
-                    </div>
-                    <div class="pagination pagination-second">
-                        
-                    </div>
-                </html>     
-                
-                        </vbox>    
+                    
+                </html>    
+                <vbox>
+                        <fieldset label="PIECES REQUISES" className="faq-fieldset">
+                            <html>
+                                <div class="faq-qr full-search-list" />
+                                <div class="searchGif">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+                                        <i class="fas fa-angle-double-left" />
+                                        <i class="fas fa-angle-left" />
+                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
+                                        <i class="fas fa-angle-right" />
+                                        <i class="fas fa-angle-double-right" />
+                                        <i class="fas fa-sync-alt" />
+                                    </div>
+                                    
+                                    <div class="pagination-2">
+                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
+                                    </div>
+                                </div>
+                            </html>
+                        </fieldset>
+                        <fieldset label="ACCES A LA PLATEFORME" className="faq-fieldset">
+                            <html>
+                                <div class="faq-qr full-search-list" />
+                                <div class="searchGif">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+                                        <i class="fas fa-angle-double-left" />
+                                        <i class="fas fa-angle-left" />
+                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
+                                        <i class="fas fa-angle-right" />
+                                        <i class="fas fa-angle-double-right" />
+                                        <i class="fas fa-sync-alt" />
+                                    </div>
+                                    
+                                    <div class="pagination-2">
+                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
+                                    </div>
+                                </div>
+                            </html>
+                        </fieldset>
+                    </vbox>     
+                </vbox>    
         </vbox> 
         
         <vbox className="hp-box hp-small left-box-fsb">

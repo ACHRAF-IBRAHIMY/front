@@ -18,10 +18,7 @@
                 $(this).toggleClass("active-check");
             });       
 
-            $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-                $(".header-div-toggle").toggle("fast"); 
-            });
-
+           
             getTreeFromEs(1);
             
            $(".simulator .simulator-qr .next-button button.next-rq").click(function(){           
@@ -32,6 +29,19 @@
                if(!$(this).hasClass("stopped"))backClick();
            });            
             
+           $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+        $(".header-div-toggle").slideToggle(); 
+    });         
+   
+    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
+    });
+
+    $(".header-div-toggle .dropdown").mouseenter(function(){
+        $(".header-div-toggle .dropdown-content").slideDown();
+    }).mouseleave(function(){
+        $(".header-div-toggle .dropdown-content").slideUp();
+    }); 
             
             
         </script>

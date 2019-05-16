@@ -20,10 +20,6 @@
                 $(".rokhas-home").click(function() {
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "PublicCentralSearch", {});
                 });
-                
-                $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-                        $(".header-div-toggle").toggle("fast"); 
-                    });
 
                 $(".tab-info-item-s span.new-search").click(function(){
                    var pre=$(".div-fsb-details .vpanel-title .title-2x").html();

@@ -125,10 +125,23 @@
 
 
     $(".folder-feature .folder-feature-header i").click(function(){
-        $(".folder-feature").find("div").hide("fast",function(){
+        if(testWidth($(window).width(),640)){
+            $(".folder-feature").find("div").hide("fast");
             $(".folder-feature").animate({'width':'hide'});
-        });
+        }else{
+            $(".folder-feature").slideUp();
+        }
     });
+
+    $(".reglementation-card").click(function(){
+        ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{})
+    });
+
+    $(".faq-card").click(function(){
+        ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
+    });
+
+
 
 
         </script>
@@ -172,9 +185,9 @@
                             <div class="dropdown-content">
                                 <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
                                     Référentiel juridique</a>
-                                <hr/>
-                                <a >Guides vidéos</a><hr/>
-                                <a >Utilitaires</a>
+                                <hr />
+                                <a>Guides vidéos</a><hr />
+                                <a>Utilitaires</a>
                             </div>
                         </html>
                         <postChange>
@@ -353,8 +366,15 @@
 
                     <button className="hp-box-btn HomePageLoginButton buttonLog" label="Vérifier">
                         <postChange>  
-                        $(".folder-feature").find("div").show("fast");
-                        $(".folder-feature").animate({'width':'show'},function(){});
+            
+                        if(testWidth($(window).width(),640)){
+                            $(".folder-feature").find("div").show("fast");
+                            $(".folder-feature").animate({'width':'show'},function(){});
+                        }else{
+                            $(".folder-feature").find("div").show("fast");
+                            $(".folder-feature").slideDown();
+                        }
+                        
                         </postChange>                                  
                     </button>
                 </vbox>
@@ -362,18 +382,18 @@
             <vbox className="folder-feature ">
                 <html>
                     <div class="folder-feature-header">
-                        <div><span>PCT-PANF-MRF-69961/2019</span><i class="fas fa-close"></i></div>
-                        <hr/>
+                        <div><span>PCT-PANF-MRF-69961/2019</span><i class="fas fa-close" /></div>
+                        <hr />
                     </div>
                     <div class="folder-feature-body">    
                         <div class="folder-steps">
                             <ul class="progressbar">
                                 <li class="bf-active"><span class="step-title">Saisie</span><span class="step-date">04-02-2019</span></li>
                                 <li class="bf-active"><span class="step-title">Chargement document</span><span class="step-date">06-02-2019</span></li>
-                                <li class="bf-active"><span class="step-title">Commission</span><span class="step-date"></span></li>
-                                <li class="active"><span class="step-title">Décision président</span><span class="step-date"></span></li>
-                                <li class=""><span class="step-title">Préparation e-signature</span><span class="step-date"></span></li>
-                                <li class=""><span class="step-title">e-signature</span><span class="step-date"></span></li>
+                                <li class="bf-active"><span class="step-title">Commission</span><span class="step-date" /></li>
+                                <li class="active"><span class="step-title">Décision président</span><span class="step-date" /></li>
+                                <li class=""><span class="step-title">Préparation e-signature</span><span class="step-date" /></li>
+                                <li class=""><span class="step-title">e-signature</span><span class="step-date" /></li>
                             </ul>
                         </div>
                         <div class="folder-feature-button">
@@ -389,7 +409,7 @@
             
             </vbox>
             
-        <vbox className="hp-box hp-small divSearch height-973">
+        <vbox className="hp-box hp-small divSearch height-986">
                 <vbox className="hp-box divSearchBar">
                     <html>
                         <div class="hp-sbox-big-title">
@@ -552,29 +572,28 @@
 
         <vbox columns="25% 25% 25% 25%">
              <html>                
-                <box-card style="height:178px">
+                <box-card style="height:178px;cursor:pointer" class="video-card">
                     <box-icon class="fas fa-video h-icon"> </box-icon>
                     <box-big-title>Guides vidéos</box-big-title>
                 </box-card>
              </html>                
 
              <html>                
-                <box-card style="height:178px">
+                <box-card style="height:178px;cursor:pointer" class="faq-card">
                     <box-icon class="fas fa-question-circle h-icon"> </box-icon>  
                     <box-big-title>Questions fréquentes</box-big-title>
-                                          
                 </box-card>
              </html>
             
              <html>                
-                <box-card style="height:178px">
+                <box-card style="height:178px;cursor:pointer" class="reglementation-card">
                     <box-icon class="fas fa-gavel h-icon"> </box-icon>  
                     <box-big-title>Réglementation</box-big-title>                      
                 </box-card>
              </html>
             
              <html>                
-                <box-card style="height:178px">
+                <box-card style="height:178px;cursor:pointer" class="download-card">
                     <box-icon class="fas fa-download h-icon"> </box-icon>  
                     <box-big-title>Téléchargements</box-big-title>
                 </box-card>
