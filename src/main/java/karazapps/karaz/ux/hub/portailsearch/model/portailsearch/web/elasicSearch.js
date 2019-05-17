@@ -1044,3 +1044,181 @@ function noResults(){
     a.innerHTML="Aucune activité ne correspond aux termes de recherche spécifiés.<br/><br/>Suggestions :<br/>- Vérifiez l’orthographe des termes de recherche.<br/>- Essayez d'autres mots.<br/>- Utilisez des mots clés plus généraux.";
     document.getElementsByClassName("full-search-list")[0].appendChild(a);
 }
+
+
+
+/*feature etat d'avancement dossier*/
+var URL_WS_1 = "http://urbarokhas.karaz.org:8080";
+var URL_WS_SEARCH_ALL_AUTORISATION = URL_WS_1+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction";
+var URL_WS_KDATA_OBJECT = URL_WS_1+"/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction/";
+
+
+function getFolderId(ref,cin){
+    $.ajax({
+        type: "get",
+        url: URL_WS_SEARCH_ALL_AUTORISATION+"?query.reference="+ref.trim().toUpperCase()+"&query.mocinrc="+cin+"&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=10&sortInfo=id=ASC",
+        datatype: "application/json",
+        contentType: "application/json",
+        success: function (result) { 
+            console.log(result);
+            var newArray = transformFolder2Array(result.data);
+            var index = newArray[1].indexOf(ref.trim().toUpperCase());
+            if(index!=-1){
+                getFolder(newArray[0][index],ref.trim().toUpperCase());
+            }else{
+                alert("No response");
+            }
+        },
+        error: function(error){
+
+        }
+    });
+}
+
+function getFolder(id,ref){
+    $.ajax({
+        type: "get",
+        url: URL_WS_KDATA_OBJECT+id+"?processStates=true&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K",
+        datatype: "application/json",
+        contentType: "application/json",
+        success: function (result) {
+            console.log(result); 
+            var array1 = arrayHistoricGenrated(result.historic);
+            var array2 = refrechArrayHistoriques(array1);
+            console.log(array2[0][0].length);
+            if(array2[0][0].length>7){
+                array2[0][0] = array2[0][0].splice(array2[0][0].length-7,array2[0][0].length);
+                array2[0][1] = array2[0][1].splice(array2[0][1].length-7,array2[0][1].length);
+                array2[0][2] = array2[0][2].splice(array2[0][2].length-7,array2[0][2].length);
+            }
+
+            arrayHistoricGenratedDiv(array2[0],ref);
+            if(testWidth($(window).width(),640)){
+                $(".folder-feature").find("div").show("fast");
+                $(".folder-feature").animate({'width':'show'},function(){});
+            }else{
+                $(".folder-feature").find("div").show("fast");
+                $(".folder-feature").slideDown();
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
+
+function testExactFolder(ref,newRef){
+    if(ref==newRef){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function createFolderStatus(array){
+    for(var i=0;i<array.length;i++){
+        console.log(array[i]);
+    }
+}
+
+function transformFolder2Array(result){
+    var newArray = [[],[]];
+    
+    for(var i=0;i<result.length;i++){
+        newArray[0].push(result[i].id);
+        newArray[1].push(result[i].stringIndex1);
+    }
+
+    return newArray;
+}
+
+
+function arrayHistoricGenratedDiv(historiques,ref){
+
+    var divGlo = $(".folder-feature .folder-feature-body .progressbar");
+    divGlo.html("");
+    $(".folder-feature .folder-feature-header div span").html(ref);
+
+    for(var i=0;i<historiques[0].length;i++){
+        var label = historiques[0][i];
+        var date = historiques[1][i];
+        var status = historiques[2][i];
+        var li = document.createElement("li");
+        if(status =="done"){
+            li.setAttribute("class","bf-active");
+            li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\">"+date.split(" ")[0]+"</span>";
+        }else if(status =="active"){
+            li.setAttribute("class","active");
+            li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\"></span>";
+        }else{
+            li.setAttribute("class","");
+            li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\"></span>";
+        }
+        divGlo.append(li);        
+    }
+}
+
+function arrayHistoricGenrated(historiques){
+    var generatedArray = [[],[],[],[]];
+    var object = 1;
+
+    for(var i=0;i<historiques.length;i++){
+      var index = generatedArray[0].indexOf(historiques[i].LABEL.replace(/V[0-9]+/g,"").trim().toLowerCase())
+      
+      if(index!=-1){
+        
+        
+        if(stringToDate( historiques[i].START_TIME) >= stringToDate(generatedArray[1][index])){
+          if(index==0){
+            object++;
+          } 
+           generatedArray[1][index]=historiques[i].START_TIME;
+           generatedArray[2][index]=historiques[i].STATUS;
+           generatedArray[3][index]=object;          
+        }
+        
+      }else{
+        generatedArray[0].push(historiques[i].LABEL.replace(/V[0-9]+/g,"").trim().toLowerCase());
+        generatedArray[1].push(historiques[i].START_TIME);
+        generatedArray[2].push(historiques[i].STATUS);
+        generatedArray[3].push(object);
+      }
+    }
+
+    return generatedArray;
+}
+
+
+function stringToDate(str){
+  if(str==""){
+    return new Date();
+  }
+  var timeSplit = str.split(" ");
+  var date = timeSplit[0];
+  var dateSplit = date.split("/");
+  var hourSplit = timeSplit[1].split(":");
+
+  return new Date(dateSplit[2],dateSplit[1],dateSplit[0],hourSplit[0],hourSplit[1],hourSplit[2],0);
+}
+
+function refrechArrayHistoriques(hist){
+  var objects = [];
+  var indexs= [];
+  var index =0;
+  for(var i=0;i<hist[3].length;i++){
+    if(indexs.indexOf(hist[3][i])==-1){
+      indexs.push(hist[3][i]);
+      var obj = [[],[],[]];
+      obj[0].push(hist[0][i]);
+      obj[1].push(hist[1][i]);
+      obj[2].push(hist[2][i]);
+      objects.push(obj);
+    }else{
+      objects[indexs.indexOf(hist[3][i])][0].push(hist[0][i]);
+      objects[indexs.indexOf(hist[3][i])][1].push(hist[1][i]);
+      objects[indexs.indexOf(hist[3][i])][2].push(hist[2][i]);
+      
+    }
+  }
+  return objects;
+}
