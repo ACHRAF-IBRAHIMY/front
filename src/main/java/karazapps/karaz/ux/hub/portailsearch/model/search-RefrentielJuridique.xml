@@ -29,6 +29,15 @@
 		    }).mouseleave(function(){
 		        $(".header-div-toggle .dropdown-content").slideUp();
 		    }); 
+
+            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,1);
+          }); 
+          
+
+
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">

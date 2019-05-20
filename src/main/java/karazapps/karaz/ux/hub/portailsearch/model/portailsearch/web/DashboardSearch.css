@@ -1,4 +1,22 @@
- 
+
+
+/*res*/
+
+.res-div-height{
+   height: 44%; 
+}
+
+.res-sep-height{
+    height:12%;
+}
+
+.last-log .hp-box-icon {
+    
+    font-size: 2.9vw !important;
+}
+
+/*res*/
+
 .faq-fieldset .full-search-list{
     height: auto;
 }
@@ -47,7 +65,7 @@
     box-shadow: 4px 3px 7px 0px rgba(0,0,0,0.3);
     border: 1px solid #ccc;
     z-index: 1;
-    margin-top: 6px;
+    margin-top: 3.5px;
 }
   
 .header-div-toggle .dropdown-content a {
@@ -351,6 +369,7 @@
 .searchGif{
     text-align: center;
     display: none;
+    line-height: 50;
 }
 
 .pagination{
@@ -462,6 +481,10 @@
         display:block !important;    
     }
     
+    .searchGif{
+        line-height: 0;
+    }
+
     .relative-position{
         height: auto !important;
     }
@@ -599,8 +622,10 @@
 }
 
 .vpanel-body-icon i{
-    font-size: 204px;    
+    font-size: 12vw;    
 }
+
+
 
 .full-search-list{
     height: 780px;
@@ -648,7 +673,7 @@
     color: #ccc;
 }
 
-.full-search-list-item .item-icon i.fa-cogs{
+.full-search-list-item .item-icon i.fa-cogs,.full-search-list-item .item-icon i.fa-building{
     color: white;
     background: #333;
     width: 40px;
@@ -667,14 +692,16 @@
 
 
 .full-search-list-item .item-body .item-body-title{
-    font-size: 20px;
+    font-size: 1.3vw;
     color: #666;
     margin-top: 7px;
     position: relative;
 }
 
-.full-search-list-item .item-body p{
-    
+.full-search-list-item .item-body p {
+    font-size: 1.2vw;
+    text-align: right;
+    width: 95%;
 }
 
 .full-search-list-item .item-body .item-body-button{
@@ -770,13 +797,19 @@
 
 .left-box-fsb .hp-box{
     color: #ccc;
+    margin: 10px 2vw !important;
 }
+
 .left-box-fsb .hp-box{
     height: auto !important;
 }
 
 .left-box-fsb{
     padding-bottom: 45px;
+}
+
+.left-box-fsb .hp-sbox-btn{
+    margin-top: 20px !important;
 }
 
 .icon-margin{
@@ -1096,14 +1129,17 @@
     margin: auto;
 }
 
-.buttonLog
-{
+
+.last-log .ow-btn-container{
+    text-align: right !important;
+}
+
+.buttonLog{
     width: 149px !important;
     height: 40px !important;
     border-radius: 5px !important;
     text-transform: uppercase;
-    position: relative;
-    right: -56%;
+    display: inline !important;
 }
 
 .div-main-icons{
@@ -1130,13 +1166,16 @@
     width: 90%;
 }
 
-.main-icon-title-bx .par i{
-    font-size: 36px;
+.main-icon-title-bx .par i {
+    font-size: 2.5vw;
+    line-height: 120%;
+    height: 100%;
+    display: block;
 }
 
 .main-icon-title-bx .title
 {
-    font-size: 22px;
+    font-size: 1.6vw;
     color: #666;
     margin-left: 71px;    
     
@@ -1175,10 +1214,7 @@
     border: none;
     padding: 9px;
     border-radius: 4px;
-    margin-top: 32px;
-    position: absolute;
-    right: 31px;
-    bottom: 23px;
+    margin-top: 16px;
     font-size: 16px;
 }
 
@@ -1186,14 +1222,15 @@
     width: 100%;
     margin: auto;
     display: grid;
+    height: 100%;
     grid-template-columns: 100%;
-    padding: 20px 30px;
+    padding: 20px 0px;
     border: 1px solid #d0d0d0;
     cursor: pointer;
 }
 
 .support{
-    width: 78%;
+    width: 85%;
     margin: auto;
     margin-top: 48px;
 }
@@ -1203,7 +1240,7 @@
     font-size: 23px;
 }
 
-.support .support-html span {font-weight: 900;}
+.support .support-html span {font-weight: 900;    white-space: nowrap;}
 
 .support .support-time{
     font-size: 12px;
@@ -1223,7 +1260,9 @@
 
 .main-icon-title i{
     color: #38a;
-    font-size: 50px;
+    font-size: 3vw;
+    line-height: 107%;
+    height: 100%;
 }
 
 .main-icon-title span{
@@ -1792,7 +1831,6 @@
     .vbox-button-signup-header button,.header-menu button{
         width: 100%;
         margin: 0;
-        height: 46px;
         outline: none;
         text-align: left;
         border: none;
@@ -1802,13 +1840,24 @@
         font-size: 20px !important;
     }
     
-    
+    .header-div-toggle .dropdown-content{
+        position: static;
+    }
 
     .header-div-toggle{
-            background: #fff;
+            background: #3ba5c1;
             padding: 2px 5px 18px 0px;
             box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.4);
             display: none;
+    }
+
+    .header-menu button {
+        color: #e1eef4 !important;
+    }
+
+    
+    .header-menu button:hover {
+        color: #050f6c !important;
     }
     
     .Header-signup{
@@ -1867,7 +1916,7 @@
        
 }
        
-}
+
 
 .butt-otm span{
  	background: #38a;
