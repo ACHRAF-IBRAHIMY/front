@@ -165,8 +165,8 @@
                 </vbox>
             </vbox>
             
-            <vbox columns="60% 25% 15%" className="header-div-toggle">
-               <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
+            <vbox columns="75% 25%" className="header-div-toggle">
+               <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
                    <button label="Actualités">
                         <postChange>
 
@@ -222,12 +222,6 @@
                                 //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
                                 ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
                         </postChange>					
-                    </button>
-                </vbox>
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="FR" className="button-signup-header-cliked button-left">						
-                    </button>
-                    <button label="ع" className="button-signup-header">						
                     </button>
                 </vbox>
             </vbox>
@@ -344,7 +338,7 @@
                 
             </vbox>
             <vbox className="relative-position">
-            <vbox className="hp-box last-log hp-small">
+            <vbox className="hp-box last-log  hp-small">
                 <vbox columns="20% 80%">
                     <html>
                         <div class="hp-box-icon fas fa-folder" />
@@ -464,31 +458,33 @@
                                    <div class="title">
                                        Quelle demande déposer ?
                                    </div>
-                                   <div class="par full-grid-small">
+                                <div class="par full-grid-small">
                                     <i class="fas fa-map-signs" />     
                                    <span>Répondez à quelques questions pour être mieux orienté.</span>
-                                   <button class="main-icon-button to-simulator">
+                                </div>
+                                <div style="text-align:right;">
+                                    <button class="main-icon-button to-simulator">
                                        DÉMARRER SIMULATION
                                    </button>
-                                   </div>
+                                </div>
                                    
                                </div>
                            </html>
                            <vbox>
-                           <html>
+                           <html className="res-div-height">
                                <div class="main-icon-title t3">
-                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%">
+                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
                                         <i class="fas fa-map-marker-alt" />
                                        <span>Autorisations urbanistiques</span>
                                     </div>
                                </div>
                            </html>
-                           <html>
+                           <html className="res-sep-height">
                                <div style="height:25px" />
                            </html>
-                           <html>
+                           <html className="res-div-height">
                                <div class="main-icon-title t4">
-                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%">
+                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
                                         <i class="fas fa-cog" />
                                         <span>Autorisations économiques</span>
                                     </div>
@@ -544,7 +540,7 @@
 
         <vbox columns="20% 20% 20% 20% 20%">
              <html>                
-                <box-card style="    height: 210px !important;">
+                <box-card style="    height: 210px !important;padding: 15px;">
                     <html><span class="main-number">1</span></html>
                     <box-small-title>Créer votre espace privé sur rokhas.ma</box-small-title>
                     <button class="main-btn" onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Procéder</button>
@@ -552,21 +548,21 @@
              </html>                
 
              <html>                
-                <box-card style="    height: 210px !important;">
+                <box-card style="    height: 210px !important;padding: 15px;">
                    <html><span class="main-number">2</span></html>
                     <box-small-title>Saisissez votre demande en ligne</box-small-title>
                 </box-card>
              </html>
             
              <html>                
-                <box-card style="    height: 210px !important;">
+                <box-card style="    height: 210px !important;padding: 15px;">
                     <html><span class="main-number">3</span></html>
                     <box-small-title>Attachez vos pièces justificatives</box-small-title>
                 </box-card>
              </html>
             
              <html>                
-                <box-card style="    height: 210px !important;">
+                <box-card style="    height: 210px !important;padding: 15px;">
                     <html><span class="main-number">4</span></html>
                     <box-small-title>Suivez le traitement du dossier en ligne
                     </box-small-title>
@@ -574,7 +570,7 @@
                 </box-card>
              </html> 
              <html>                
-                <box-card style="    height: 210px !important;">
+                <box-card style="    height: 210px !important;padding: 15px;">
                     <html><span class="main-number">5</span></html>
                     <box-small-title>Recevez votre document e-signé</box-small-title>
                 </box-card>

@@ -24,7 +24,8 @@
                currentPage=0;
                $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
                 if($(this).attr("class").split(' ')[1]==="p1"){
-                    restFullSearchList($(this).html(),0,false,0);
+                    alert($(this).attr("class").split(' ')[1]);
+                   restFullSearchList($(this).html(),0,false,1);
                 }else if($(this).attr("class").split(' ')[1]==="p2"){
                     restFullSearchList($(this).html(),0,false,2);
                 }else if($(this).attr("class").split(' ')[1]==="p3"){
