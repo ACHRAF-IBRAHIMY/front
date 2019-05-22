@@ -144,6 +144,8 @@ function restFullSearchList(prefix,from,prev,parent) {
     var xhttp = new XMLHttpRequest();
     removeFullListSearch();
     $(".searchGif").show();
+    
+
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             removeFullListSearch();
@@ -192,16 +194,19 @@ function restFullSearchList(prefix,from,prev,parent) {
     var index = "";   
     if(typePage==0){
         xhttp.open("POST","https://cmdbserver.karaz.org:9200/activite_economique/activite/_search");
+        xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        
     }else if(typePage==1){
         xhttp.open("POST","https://cmdbserver.karaz.org:9200/reglementation_index/reglementation/_search");
-    }else if(typePage==2){
-        xhttp.open("POST","https://cmdbserver.karaz.org:9200/activite_economique/activite/_search");
+        xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        
     }
 
-    xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    
     var testLanguage = RegExp('[أ-ي]');
-    if(typePage==0 || typePage==2){
+    if(typePage==0){
         if(testLanguage.test(prefix)){
         xhttp.send(JSON.stringify(
             {
@@ -376,9 +381,220 @@ function restFullSearchList(prefix,from,prev,parent) {
             ));
         }
     }
+    }else if(typePage==2){
+        RestSearchFaq(prefix,0,2,0);
     }
 
     return result;
+}
+
+function generateRequestFaqSearch(prefix,type,from,size){
+    
+    if(prefix.trim()!=""){
+        var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"70%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+    }else{
+        var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+    }
+
+    return str;
+}
+
+var faqPages = [1,1,1,1,1,1];
+var faqGlobalPages = [1,1,1,1,1,1];
+var totalFaqPages = [0,0,0,0,0,0];
+
+function intializeFaqPages(){
+    faqPages = [1,1,1,1,1,1];
+    totalFaqPages = [0,0,0,0,0,0];
+    faqGlobalPages = [1,1,1,1,1,1];
+}
+
+function generatePaginationFaqPage(index,prefix){
+   $(".faq-fieldset .pagination-new-style").eq(index).html("");
+    var p1 = document.createElement("div");
+    p1.setAttribute("class","pagination-1");
+    var icon1 = document.createElement("i");
+    icon1.setAttribute("class","fas fa-angle-double-left");
+    icon1.addEventListener("click",function(){
+        if(faqGlobalPages[index]>1){
+            faqGlobalPages[index]--;
+            faqPages[index]=(faqGlobalPages[index]-1)*3+1;
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+        }
+    });
+    var icon2 = document.createElement("i");
+    icon2.setAttribute("class","fas fa-angle-left");
+    icon2.addEventListener("click",function(){
+        if(faqPages[index]>1){
+            faqPages[index]--;
+            if(faqPages[index]%3==0){
+                faqGlobalPages[index]--;    
+            }
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+        }
+    });
+    var icon3 = document.createElement("i");
+    icon3.setAttribute("class","fas fa-angle-right");
+    icon3.addEventListener("click",function(){
+        if(faqPages[index]<Math.ceil(totalFaqPages[index]/2)){
+            faqPages[index]++;
+            if(faqPages[index]%3==1){
+                faqGlobalPages[index]++    
+            }
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+        }
+    });
+    var icon4 = document.createElement("i");
+    icon4.setAttribute("class","fas fa-angle-double-right");
+    icon4.addEventListener("click",function(){
+        if(faqGlobalPages[index]<Math.ceil(Math.ceil(totalFaqPages[index]/2)/3)){
+            faqGlobalPages[index]++;
+            faqPages[index]=(faqGlobalPages[index]-1)*3+1;
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+        }
+    });
+
+    var spanG = document.createElement("span");
+    var span1 = document.createElement("span");
+    span1.setAttribute("class","num-span");
+    span1.innerHTML = faqPages[index];
+    var span2 = document.createElement("span");
+    span2.innerHTML = Math.ceil(totalFaqPages[index]/2);
+
+    spanG.innerHTML+="Page ";
+    spanG.appendChild(span1);
+    spanG.innerHTML+=" Sur ";
+    spanG.appendChild(span2);
+
+    p1.appendChild(icon1);
+    p1.appendChild(icon2);
+    p1.appendChild(spanG);
+    p1.appendChild(icon3);
+    p1.appendChild(icon4);
+ 
+    var p2 = document.createElement("div");
+    p2.setAttribute("class","pagination-2");
+    spanG = document.createElement("span");
+    span1 = document.createElement("span");
+    span1.setAttribute("class","num-span");
+    span1.innerHTML = faqPages[index];
+    span2 = document.createElement("span");
+    span2.innerHTML = Math.min(2*faqPages[index],totalFaqPages[index]);
+    var span3 = document.createElement("span");
+    span3.innerHTML = totalFaqPages[index];
+    spanG.innerHTML= "Page ";
+    spanG.appendChild(span1);
+    spanG.innerHTML += " - ";
+    spanG.appendChild(span2);
+    spanG.innerHTML +=" / ";
+    spanG.appendChild(span3);
+    p2.appendChild(spanG);
+
+    $(".faq-fieldset .pagination-new-style").eq(index).append(p1);
+    $(".faq-fieldset .pagination-new-style").eq(index).append(p2);
+
+}
+
+
+function RestSearchFaq(prefix,page,size,type){
+    var str =""
+    
+    
+    if(type==0){
+        $(".faq-fieldset").hide();
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size); 
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size); 
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
+        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size); 
+        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size);     
+    }else if(type==1){
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size);
+    }else if(type==2){
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size); 
+    }else if(type==3){
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
+    }else if(type==4){
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
+    }else if(type==5){
+        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size); 
+    }else if(type==6){
+        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size); 
+    }
+
+    console.log(str);
+
+    $.ajax({
+        type: "post",
+        //url: "http://localhost:9200/_msearch",
+        url: "https://cmdbserver.karaz.org:9200/_msearch",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data:str,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {    
+            console.log(result);
+            $(".searchGif").hide();
+            if(type!=0){
+                fullCreateFaqByType(result.responses[0].hits.hits,type);
+                generatePaginationFaqPage((type-1),prefix);
+       
+            }else if(type==0){
+                for(var i=0;i<result.responses.length;i++){
+                    if(result.responses[i].hits.hits.length!=0){
+                        fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
+                    }
+                    totalFaqPages[i]=result.responses[i].hits.total;
+                    generatePaginationFaqPage(i,prefix);
+                }
+                
+            }
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    })
+
+}
+
+
+function fullCreateFaqByType(results,type){
+    $(".faq-fieldset").eq((Number(type)-1)).show();
+    var a1 = document.querySelectorAll(".faq-fieldset .full-search-list")[(Number(type)-1)];
+    a1.innerHTML="";
+    for(i=0;i<results.length;i++){
+        var id = results[i]._id;
+        var titleTx = results[i]._source.QUESTIONS;
+        var text = results[i]._source.REPONSES;
+        var b = document.createElement("div");
+        b.setAttribute("class","hp-box full-search-list-item");
+        b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+        var d = document.createElement("div");
+        d.setAttribute("class","item-body");
+        d.setAttribute("style","padding:0 18px");
+        var e = document.createElement("div");
+        e.setAttribute("class","item-body-title");
+        e.setAttribute("style","font-size:16px");
+        e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+        var f = document.createElement("p");
+        f.innerHTML = text;
+        f.setAttribute("style","font-size: 14px;text-align:left");
+        d.appendChild(e);
+        d.appendChild(f);
+        var g = document.createElement("a");
+        g.addEventListener("click",function(){
+        var id=$(this).children("input").val();
+        //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+        });
+        g.setAttribute("class","item-body-button");
+        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+        g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
+        d.appendChild(g);
+        b.appendChild(d);
+        a1.appendChild(b);
+    }
 }
 
 //Create list of results
@@ -796,7 +1012,7 @@ function autocomplete(inp,arr) {
             var title = document.createElement("div");
             title.setAttribute("class","item-title");
             title.setAttribute("title",type);
-            var style = "line-height:30px;top: 51px;height: 30px;";
+            var style = "line-height:30px;top: 51px;height: 30px;right: 92px;";
 
             if(type=="URBANISME"){
                 style+="background:#38a";
@@ -831,7 +1047,7 @@ function autocomplete(inp,arr) {
                 e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
                 var f = document.createElement("p");
                 f.innerHTML = text;
-                f.setAttribute("style","font-size: 14px;");
+                f.setAttribute("style","font-size: 14px;text-align:left");
                 d.appendChild(e);
                 d.appendChild(f);
                 var g = document.createElement("a");
@@ -863,7 +1079,7 @@ function autocomplete(inp,arr) {
                 e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
                 var f = document.createElement("p");
                 f.innerHTML = text;
-                f.setAttribute("style","font-size: 14px;");
+                f.setAttribute("style","font-size: 14px;text-align:left;");
                 d.appendChild(e);
                 d.appendChild(f);
                 var g = document.createElement("a");
@@ -1141,6 +1357,7 @@ var URL_WS_KDATA_OBJECT = URL_WS_1+"/karazortal/access/rest/kdata/object/karazap
 
 
 function getFolderId(ref,cin){
+    $(".relative-position .last-log .loadGif").show();
     $.ajax({
         type: "get",
         url: URL_WS_SEARCH_ALL_AUTORISATION+"?query.reference="+ref.trim().toUpperCase()+"&query.mocinrc="+cin+"&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=10&sortInfo=id=ASC",
@@ -1150,10 +1367,20 @@ function getFolderId(ref,cin){
             console.log(result);
             var newArray = transformFolder2Array(result.data);
             var index = newArray[1].indexOf(ref.trim().toUpperCase());
-            if(index!=-1){
+            if(index!=-1 && ref.trim()!=""){
+                $(".folder-feature-body .folder-steps .no-response").hide();
                 getFolder(newArray[0][index],ref.trim().toUpperCase());
             }else{
-                alert("No response");
+                $(".relative-position .last-log .loadGif").hide();
+                $(".folder-feature-body .folder-steps .no-response").show();
+                $(".folder-feature .folder-feature-body .progressbar").html("");
+                if(testWidth($(window).width(),640)){
+                    $(".folder-feature").find("div:not(.no-response)").show("fast");
+                    $(".folder-feature").animate({'width':'show'},function(){});
+                }else{
+                    $(".folder-feature").find("div:not(.no-response)").show("fast");
+                    $(".folder-feature").slideDown();
+                }
             }
         },
         error: function(error){
@@ -1181,12 +1408,14 @@ function getFolder(id,ref){
 
             arrayHistoricGenratedDiv(array2[0],ref);
             if(testWidth($(window).width(),640)){
-                $(".folder-feature").find("div").show("fast");
+                $(".folder-feature").find("div:not(.no-response)").show("fast");
                 $(".folder-feature").animate({'width':'show'},function(){});
             }else{
-                $(".folder-feature").find("div").show("fast");
+                $(".folder-feature").find("div:not(.no-response)").show("fast");
                 $(".folder-feature").slideDown();
             }
+            $(".relative-position .last-log .loadGif").hide();
+
         },
         error: function(error){
             console.log(error);
@@ -1312,7 +1541,7 @@ function refrechArrayHistoriques(hist){
 
 function getColIcon(typeAut){
     var tabAct = ["simple déclaration","établissement classé","occupation domaine public","activité courante"];
-    var tabActc = ["","permis de construire","permis d'habiter","réceptions","démolition","régularisation","réfection","dérogation aux documents d’urbanisme"];
+    var tabActc = ["autorisations urbanisme","permis de construire","permis d'habiter","réceptions","démolition","régularisation","réfection","dérogation aux documents d’urbanisme"];
     var tabColor1 = ["#38a","#36a048","#712ea4","#cd4141"];
     var tabColor2 = ["#c5bb48","#c5bb48","#c5bb48","#c5bb48","#c5bb48","#c5bb48","#c5bb48","#c5bb48"];
     var tabIcon = ["fas fa-cogs","fas fa-building"];
@@ -1343,4 +1572,3 @@ function getColIcon(typeAut){
         type:inde
     }
 }
-

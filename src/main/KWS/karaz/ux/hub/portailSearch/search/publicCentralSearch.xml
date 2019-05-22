@@ -339,12 +339,17 @@
             </vbox>
             <vbox className="relative-position">
             <vbox className="hp-box last-log  hp-small">
-                <vbox columns="20% 80%">
+                <vbox columns="20% 65% 15%">
                     <html>
                         <div class="hp-box-icon fas fa-folder" />
                     </html>
                     <html>
                         <div class="hp-box-small-title"> Etat d'avancement dossier</div>       
+                    </html>
+                    <html>
+                        <div style="height:50px">
+                            <img src="img/loadgif3.gif" style="width:50px;display:none;" class="loadGif" />
+                        </div>
                     </html>    
                 </vbox>
                 <html>
@@ -380,7 +385,7 @@
                         
                         /*
                         if(testWidth($(window).width(),640)){
-                            $(".folder-feature").find("div").show("fast");
+                            $(".folder-feature").find("div:not(.no-response)").show("fast");
                             $(".folder-feature").animate({'width':'show'},function(){});
                         }else{
                             $(".folder-feature").find("div").show("fast");
@@ -391,6 +396,7 @@
                         
                         </postChange>                                  
                     </button>
+                    
                 </vbox>
             </vbox>
             <vbox className="folder-feature ">
@@ -402,18 +408,10 @@
                     <div class="folder-feature-body">    
                         <div class="folder-steps">
                             <ul class="progressbar">
-                                <li class="bf-active"><span class="step-title">Saisie</span><span class="step-date">04-02-2019</span></li>
-                                <li class="bf-active"><span class="step-title">Chargement document</span><span class="step-date">06-02-2019</span></li>
-                                <li class="bf-active"><span class="step-title">Commission</span><span class="step-date" /></li>
-                                <li class="active"><span class="step-title">Décision président</span><span class="step-date" /></li>
-                                <li class=""><span class="step-title">Préparation e-signature</span><span class="step-date" /></li>
-                                <li class=""><span class="step-title">e-signature</span><span class="step-date" /></li>
                             </ul>
-                        </div>
-                        <div class="folder-feature-button">
-                            <button onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">
-                                CRÉER COMPTE ROKHAS
-                            </button>
+                            <div class="no-response">
+                                Aucun dossier ne correspond aux critères saisis. Veuillez renseigner la référence du dossier de façon complète.
+                            </div>
                         </div>
                     </div>
                 </html>

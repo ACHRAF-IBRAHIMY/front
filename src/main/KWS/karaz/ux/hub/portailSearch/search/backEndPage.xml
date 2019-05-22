@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="BackEndPage" label="Back End Page">
+
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+        </query>
+        <collapsed>false</collapsed>
+    </data>
+    <view>
+        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+            <script postLoad="true">
+            </script>
+        </screen>
+    </view>
+
+
+</search>

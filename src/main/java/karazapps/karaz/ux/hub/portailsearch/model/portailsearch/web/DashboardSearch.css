@@ -1,5 +1,3 @@
-
-
 /*res*/
 
 .res-div-height{
@@ -110,6 +108,14 @@
     box-sizing: border-box;
 }
 
+.folder-feature .folder-feature-body .folder-steps .no-response{
+    width: 90%;
+    margin: auto;
+    margin-top: 6%;
+    font-size: 16px;
+    display: none;
+}
+
 .folder-feature .folder-feature-header{
     text-align: left;
 }
@@ -151,7 +157,7 @@
 
 .relative-position{
     position: relative;
-    height: 280px !important;
+    height: 295px !important;
 }
 
 .folder-feature .folder-feature-body .progressbar {
@@ -477,6 +483,22 @@
 
 
 @media (max-width: 640px) {
+    .last-log .hp-box-small-title {
+        text-align: center;
+    }
+
+    .div-main-icons .ow-vl-inner{
+        height: 100%;
+    }
+
+    .relative-position .ow-vl-inner{
+        height: 100%;
+    }
+
+    .vpanel-body-icon i {
+        font-size: 50vw;
+    }
+
 	.Header-signup-logo{
         display:block !important;    
     }
@@ -505,6 +527,7 @@
     
     .pagination-new-style .pagination-1 i{
         padding: 3px;
+        margin: 5px;
     }
     
     .folder-feature{
@@ -660,7 +683,7 @@
     position: relative;
     top: 55px;
     right: 97px;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
 }
 
@@ -1753,7 +1776,28 @@
     }
     
     .main-icon-title-bx .title{
-        margin-left: 20px;
+        margin-left: 10px;
+        font-size: 20px;
+    }
+
+    .main-icon-title-bx .par i {
+        font-size: 30px;
+    }
+
+    .main-icon-title i {
+        font-size: 40px;
+    }
+
+    .last-log .hp-box-icon{
+        font-size: 3rem !important;
+    }
+
+    .item-body p{
+        font-size: 14px !important;
+    }
+
+    .full-search-list-item .item-body .item-body-title {
+        font-size: 16px;
     }
 
     .main-icon-button{

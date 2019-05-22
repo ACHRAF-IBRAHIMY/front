@@ -89,6 +89,9 @@
       <menu relId="FaqPage" label="Faq Page" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/FaqPage</resource>
       </menu>
+      <menu relId="BackEndPage" label="Back End Page" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/BackEndPage</resource>
+      </menu>
     </menu>
   </menu>
 </menus>
