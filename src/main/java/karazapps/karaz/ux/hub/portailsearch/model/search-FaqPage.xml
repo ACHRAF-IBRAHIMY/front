@@ -29,6 +29,13 @@
 		    }).mouseleave(function(){
 		        $(".header-div-toggle .dropdown-content").slideUp();
 		    }); 
+
+            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,1);
+            }); 
+
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -147,6 +154,7 @@
                                 if(pp==1){
                                     pp=0;
                                 }
+                                intializeFaqPages();
                                 restFullSearchList(prefix,0,false,pp);
                                 root.query.parentP=0;
                          </postChange>
@@ -161,10 +169,15 @@
                     
                 </html>    
                 <vbox>
+                <html>
+                    <div class="searchGif">
+                                <img src="img/search-move.gif" />
+                    </div>
+                </html>
                         <fieldset label="PIECES REQUISES" className="faq-fieldset">
                             <html>
                                 <div class="faq-qr full-search-list" />
-                                <div class="searchGif">
+                                <div class="searchGif2" style="display:none">
                                     <img src="img/search-move.gif" />
                                 </div>
                                 <div class="pagination-new-style">
@@ -186,7 +199,95 @@
                         <fieldset label="ACCES A LA PLATEFORME" className="faq-fieldset">
                             <html>
                                 <div class="faq-qr full-search-list" />
-                                <div class="searchGif">
+                                <div class="searchGif2" style="display:none">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+                                        <i class="fas fa-angle-double-left" />
+                                        <i class="fas fa-angle-left" />
+                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
+                                        <i class="fas fa-angle-right" />
+                                        <i class="fas fa-angle-double-right" />
+                                        <i class="fas fa-sync-alt" />
+                                    </div>
+                                    
+                                    <div class="pagination-2">
+                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
+                                    </div>
+                                </div>
+                            </html>
+                        </fieldset>
+                        <fieldset label="GENERAL" className="faq-fieldset">
+                            <html>
+                                <div class="faq-qr full-search-list" />
+                                <div class="searchGif2" style="display:none">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+                                        <i class="fas fa-angle-double-left" />
+                                        <i class="fas fa-angle-left" />
+                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
+                                        <i class="fas fa-angle-right" />
+                                        <i class="fas fa-angle-double-right" />
+                                        <i class="fas fa-sync-alt" />
+                                    </div>
+                                    
+                                    <div class="pagination-2">
+                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
+                                    </div>
+                                </div>
+                            </html>
+                        </fieldset>
+                        <fieldset label="E-SIGN" className="faq-fieldset">
+                            <html>
+                                <div class="faq-qr full-search-list" />
+                                <div class="searchGif2" style="display:none">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+                                        <i class="fas fa-angle-double-left" />
+                                        <i class="fas fa-angle-left" />
+                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
+                                        <i class="fas fa-angle-right" />
+                                        <i class="fas fa-angle-double-right" />
+                                        <i class="fas fa-sync-alt" />
+                                    </div>
+                                    
+                                    <div class="pagination-2">
+                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
+                                    </div>
+                                </div>
+                            </html>
+                        </fieldset>
+                        <fieldset label="ARCHITECTE" className="faq-fieldset">
+                            <html>
+                                <div class="faq-qr full-search-list" />
+                                <div class="searchGif2" style="display:none">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+                                        <i class="fas fa-angle-double-left" />
+                                        <i class="fas fa-angle-left" />
+                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
+                                        <i class="fas fa-angle-right" />
+                                        <i class="fas fa-angle-double-right" />
+                                        <i class="fas fa-sync-alt" />
+                                    </div>
+                                    
+                                    <div class="pagination-2">
+                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
+                                    </div>
+                                </div>
+                            </html>
+                        </fieldset>
+                        <fieldset label="ADMINISTRATION" className="faq-fieldset">
+                            <html>
+                                <div class="faq-qr full-search-list" />
+                                <div class="searchGif2" style="display:none">
                                     <img src="img/search-move.gif" />
                                 </div>
                                 <div class="pagination-new-style">
