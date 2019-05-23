@@ -498,8 +498,7 @@ function generatePaginationFaqPage(index,prefix){
 
 function RestSearchFaq(prefix,page,size,type){
     var str =""
-    
-    
+    $(".faq-vbox .no-response-find").hide();
     if(type==0){
         $(".faq-fieldset").hide();
         str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size); 
@@ -511,7 +510,7 @@ function RestSearchFaq(prefix,page,size,type){
     }else if(type==1){
         str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size);
     }else if(type==2){
-        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size); 
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size);               
     }else if(type==3){
         str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
     }else if(type==4){
@@ -522,7 +521,10 @@ function RestSearchFaq(prefix,page,size,type){
         str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size); 
     }
 
-    console.log(str);
+    if(type!=0){
+        $(".faq-fieldset .full-search-list").eq(type-1).html("");
+        $(".faq-fieldset .searchGif2").eq(type-1).show();
+    }
 
     $.ajax({
         type: "post",
@@ -537,19 +539,25 @@ function RestSearchFaq(prefix,page,size,type){
         success: function (result) {    
             console.log(result);
             $(".searchGif").hide();
+            $(".faq-fieldset .searchGif2").hide();        
             if(type!=0){
                 fullCreateFaqByType(result.responses[0].hits.hits,type);
                 generatePaginationFaqPage((type-1),prefix);
-       
             }else if(type==0){
+                var k = 0;
+                
                 for(var i=0;i<result.responses.length;i++){
                     if(result.responses[i].hits.hits.length!=0){
                         fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
+                        k++;
                     }
                     totalFaqPages[i]=result.responses[i].hits.total;
                     generatePaginationFaqPage(i,prefix);
                 }
-                
+
+                if(k==0){
+                    $(".faq-vbox .no-response-find").show();
+                }
             }
         },
         error: function (error) {
@@ -987,7 +995,7 @@ function autocomplete(inp,arr) {
             }
             var b = document.createElement("div");
             b.setAttribute("class","hp-box full-search-list-item");
-            b.setAttribute("style","grid-template-columns: 0% 100%")
+            b.setAttribute("style","grid-template-columns: 0% 100%;height: 173px;")
             var d = document.createElement("div");
             d.setAttribute("class","item-body");
             d.setAttribute("style","padding:0 40px");
@@ -1108,6 +1116,7 @@ function autocomplete(inp,arr) {
            var setting = getColIcon(typeAt);
            var b = document.createElement("div");
            b.setAttribute("class","hp-box full-search-list-item");
+           b.setAttribute("style","height: 173px;");
            var c = document.createElement("div");
            c.setAttribute("class","c-path");
           // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
@@ -1362,7 +1371,6 @@ function getFolderId(ref,cin){
         type: "get",
         url: URL_WS_SEARCH_ALL_AUTORISATION+"?query.reference="+ref.trim().toUpperCase()+"&query.mocinrc="+cin+"&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=10&sortInfo=id=ASC",
         datatype: "application/json",
-        contentType: "application/json",
         success: function (result) { 
             console.log(result);
             var newArray = transformFolder2Array(result.data);
@@ -1394,7 +1402,6 @@ function getFolder(id,ref){
         type: "get",
         url: URL_WS_KDATA_OBJECT+id+"?processStates=true&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K",
         datatype: "application/json",
-        contentType: "application/json",
         success: function (result) {
             console.log(result); 
             var array1 = arrayHistoricGenrated(result.historic);

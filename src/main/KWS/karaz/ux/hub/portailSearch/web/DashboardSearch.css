@@ -1,5 +1,111 @@
 /*res*/
 
+.back-end-menu{
+    height: 600px;
+    width: 85%;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.back-end-menu .ow-gbox{
+    gap:14px;
+}
+
+.back-end-menu .ow-vbox{
+
+}
+
+.back-end-menu .ow-vbox .ow-html{
+    height: 100%;
+}
+
+.back-end-menu box-card{
+    position: relative;    
+}
+
+.back-end-menu box-card:hover{
+    background: #eee;
+}
+
+.back-end-menu box-big-title{
+    position: absolute;
+    top: 60%;
+    left: 9%;
+    width: 80%;
+}
+
+.back-end-menu box-icon{
+    position: absolute;
+    top: 24%;
+    right: 50%;
+    font-size: 6rem !important;
+}
+
+.no-response-find .btn-show-support-form{
+    color: white;
+    background: #38a;
+    border: none;
+    border-radius: 2px;
+    padding: 6px;
+    margin: 30px;
+}
+
+.no-response-find .support-form{
+    padding: 20px 0px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 60%;
+    margin: auto;
+}
+
+.no-response-find .support-form-over{
+    margin: auto;
+    background: #ddd;
+    border-radius: 1px;
+    display: none;
+    border: 1px solid #999;
+}
+
+.no-response-find .title-suport-faq{
+    color: #38a;
+    text-transform: uppercase;
+    font-size: 2vw;
+    margin-bottom: 22px;
+    font-weight: bolder;
+}
+
+.no-response-find .support-form .f{
+    margin: 6px;
+}
+
+.no-response-find .support-form .f input{
+    width: 80%;
+    padding: 8px 3%;
+    border-radius: 1px;
+    background: #eee;
+    border: none;
+    color: #333;
+    border: 1px solid #999;
+}
+
+.no-response-find .support-form .f textarea{
+    width: 80%;
+    background: #eee;
+    color: #666;
+    height: 117px;
+    padding: 8px 3%;
+    resize: none;
+}
+
+.no-response-find .support-form .f4 button{
+    width: 86%;
+    padding: 8px 3%;
+    display: block;
+    margin: auto;
+    color: #38a;
+    background: #eee;
+    border: 1px solid #999;
+}
+
 .res-div-height{
    height: 44%; 
 }
@@ -481,18 +587,45 @@
     font-weight: 600;
 }
 
+.relative-position .ow-vl-inner{
+    height: 100%;
+}
+
+.div-main-icons .ow-vl-inner{
+    height: 100%;
+}
+
+.faq-fieldset .searchGif2{
+    padding: 80px;
+    height: 406px;
+    display: none;
+}
+
+
 
 @media (max-width: 640px) {
+
+    .header-div-toggle .dropdown-content hr{
+        background: #38a;
+        border-color: #fff;
+        width: 95%;
+    }
+
+    .header-div-toggle .dropdown-content a{
+        font-size: 14px;
+        color: #38a;
+    }
+
+    .no-response-find .support-form{
+        width: 100%;
+    }
+
+    .no-response-find .title-suport-faq{
+        font-size: 20px;
+    }
+
     .last-log .hp-box-small-title {
         text-align: center;
-    }
-
-    .div-main-icons .ow-vl-inner{
-        height: 100%;
-    }
-
-    .relative-position .ow-vl-inner{
-        height: 100%;
     }
 
     .vpanel-body-icon i {
@@ -656,7 +789,7 @@
 
 .full-search-list-item{
     position: relative;
-    height: 173px !important;
+    height: 173px;
     font-size: 12px;
     display: grid !important;
     grid-template-columns: 0% 30% 70%;
@@ -1881,11 +2014,14 @@
     }
     
     .vbox-button-signup-header button span,.header-menu button span{
-        font-size: 20px !important;
+        font-size: 19px !important;
+        text-transform: uppercase;
     }
     
     .header-div-toggle .dropdown-content{
         position: static;
+        background: #fff;
+        border:none;
     }
 
     .header-div-toggle{
@@ -1896,7 +2032,8 @@
     }
 
     .header-menu button {
-        color: #e1eef4 !important;
+        color:#f2f4f4 !important;
+        margin: 5px 0;
     }
 
     
