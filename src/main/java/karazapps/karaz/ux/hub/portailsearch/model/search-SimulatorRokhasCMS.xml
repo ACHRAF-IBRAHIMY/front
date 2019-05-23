@@ -170,7 +170,7 @@
             </vbox>
             
             <vbox columns="60% 25% 15%" className="header-div-toggle">
-               <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
+ <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
                    <button label="Actualités">
                         <postChange>
 
@@ -216,12 +216,7 @@
                         </postChange>					
                     </button>
                 </vbox>
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="FR" className="button-signup-header-cliked button-left">						
-                    </button>
-                    <button label="ع" className="button-signup-header">						
-                    </button>
-                </vbox>
+                 
             </vbox>
         </vbox>
         <html id="hSeparator">
