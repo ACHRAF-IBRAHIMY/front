@@ -625,7 +625,8 @@
     }
 
     .last-log .hp-box-small-title {
-        text-align: center;
+        text-align: center !important;
+        font-size:1.3rem !important;
     }
 
     .vpanel-body-icon i {
