@@ -239,7 +239,7 @@
                         <div class="hp-box-icon fas fa-user" />
                     </html>
                     <html>
-                        <div class="hp-box-small-title"> Accédez à votre espace privé</div>       
+                        <div class="hp-box-small-title" style="font-size:1.3rem"> Accédez à votre espace privé</div>       
                     </html>    
                 </vbox>
                 <html>
@@ -344,7 +344,7 @@
                         <div class="hp-box-icon fas fa-folder" />
                     </html>
                     <html>
-                        <div class="hp-box-small-title"> Etat d'avancement dossier</div>       
+                        <div class="hp-box-small-title" style="font-size:1.3rem"> Etat d'avancement dossier</div>       
                     </html>
                     <html>
                         <div style="height:50px">

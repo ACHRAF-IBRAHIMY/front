@@ -499,6 +499,7 @@ function generatePaginationFaqPage(index,prefix){
 function RestSearchFaq(prefix,page,size,type){
     var str =""
     $(".faq-vbox .no-response-find").hide();
+    
     if(type==0){
         $(".faq-fieldset").hide();
         str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size); 
@@ -1202,7 +1203,7 @@ function autocomplete(inp,arr) {
         span.innerHTML=text;
         return span;
     }
-
+    
 
     function highlights(request,result){
         var hl ="";
@@ -1243,10 +1244,11 @@ function autocomplete(inp,arr) {
         return pos;
       }
 
-      function checkPrefix(positions,posB,posE){
+    function checkPrefix(positions,posB,posE){
         var pos = -1;
         var type = null;
         for(var i=0;i<positions[0].length;i++){
+          
           if((posB>=positions[0][i] & posE<=positions[1][i])){
             pos = i;
             type=false;
@@ -1254,7 +1256,6 @@ function autocomplete(inp,arr) {
           }else if((posB<=positions[0][i] & posE<=positions[0][i])||(posB>=positions[1][i] & posE>=positions[1][i])){
             pos = -1;
             type=false;
-           return {"pos":pos,"type":type};
           }else{
             pos = i;
             type=true;
@@ -1262,7 +1263,7 @@ function autocomplete(inp,arr) {
           }
         }
         return {"pos":pos,"type":type};
-      }
+    }
 
     function addSpansHL(request,result){
         var hl="";
@@ -1407,10 +1408,10 @@ function getFolder(id,ref){
             var array1 = arrayHistoricGenrated(result.historic);
             var array2 = refrechArrayHistoriques(array1);
             console.log(array2[0][0].length);
-            if(array2[0][0].length>7){
-                array2[0][0] = array2[0][0].splice(array2[0][0].length-7,array2[0][0].length);
-                array2[0][1] = array2[0][1].splice(array2[0][1].length-7,array2[0][1].length);
-                array2[0][2] = array2[0][2].splice(array2[0][2].length-7,array2[0][2].length);
+            if(array2[0][0].length>12){
+                array2[0][0] = array2[0][0].splice(array2[0][0].length-12,array2[0][0].length);
+                array2[0][1] = array2[0][1].splice(array2[0][1].length-12,array2[0][1].length);
+                array2[0][2] = array2[0][2].splice(array2[0][2].length-12,array2[0][2].length);
             }
 
             arrayHistoricGenratedDiv(array2[0],ref);
@@ -1462,11 +1463,14 @@ function arrayHistoricGenratedDiv(historiques,ref){
     divGlo.html("");
     $(".folder-feature .folder-feature-header div span").html(ref);
 
+    var proc = 100/historiques[0].length;
+
     for(var i=0;i<historiques[0].length;i++){
         var label = historiques[0][i];
         var date = historiques[1][i];
         var status = historiques[2][i];
         var li = document.createElement("li");
+        li.setAttribute("style","width:"+(proc-1)+"%");
         if(status =="done"){
             li.setAttribute("class","bf-active");
             li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\">"+date.split(" ")[0]+"</span>";
