@@ -1,5 +1,50 @@
 /*res*/
 
+
+.height-auto-vbox-first > .ow-vl-inner {
+    height: auto !important;
+}
+
+.last-log-info{
+    line-height: 1.3;
+    text-align: left;
+    font-size: 0.8vw;
+    width: 100%;
+    padding: 0.4vw;
+}
+
+.yb-btn-home{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    color: white;
+    background: #38a;
+    border: none;
+    border-radius: 1px;
+    padding: 9px 22px;
+    width: 90%;
+    font-size: 17px;
+    margin: 15px auto;
+    cursor: pointer;
+    border: 1px solid #38a;
+}
+
+.yb-btn-home:hover{
+    color:#38a;
+    background: white;
+    transition: .3s;
+}
+
+.yb-btn-home span{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.yb-btn-home i{
+    text-align: left;
+    line-height: 102%;
+    font-size: 22px;
+}
+
 .back-end-menu{
     height: 600px;
     width: 85%;
@@ -120,6 +165,10 @@
 }
 
 /*res*/
+
+.global-div-temp .hp-box{
+    margin: 10px 1rem !important;
+}
 
 .faq-fieldset .full-search-list{
     height: auto;
@@ -628,6 +677,7 @@
         text-align: center !important;
         font-size:1.3rem !important;
     }
+
 
     .vpanel-body-icon i {
         font-size: 50vw;
@@ -1905,6 +1955,10 @@
 
 @media (max-width: 640px) {
     
+    .last-log-info{
+        font-size: 10px;
+    }
+
     .stay-grid .ow-gbox{
         display: grid !important;
     }

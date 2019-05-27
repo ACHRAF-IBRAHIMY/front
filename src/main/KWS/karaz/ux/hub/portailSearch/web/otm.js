@@ -39,11 +39,11 @@ function ESCall(size, membre) {
     callLoadGif();
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -254,11 +254,11 @@ function getDetWordKeyLoad(word, membre) {
 
     $.ajax({
         type: "POST",
-        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -498,11 +498,11 @@ function searchBefAft(pos, arr, vr) {
 function getAvis(id, key,type) {
     callLoadGif();
     $.ajax({
-        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/" + id,
+        url: URL_SEARCH+"/index_classification/avis/" + id,
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
             var res = {
@@ -713,12 +713,12 @@ function restUpdateChart(chart, type, key) {
     }
 
     $.ajax({
-        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification/avis/_search",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -742,12 +742,12 @@ function getMembers() {
     };
 
     $.ajax({
-        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification/avis/_search",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -801,12 +801,12 @@ function getNumberRemarque(nbrAvis, nbrMem) {
 
 
     $.ajax({
-        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification/avis/_search",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -995,11 +995,11 @@ function searchMLT(word) {
     callLoadGif();
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
