@@ -133,12 +133,12 @@ function loadQuestionsFromEs(){
 
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/_search",
+        url: URL_SEARCH+"/simulator_index_qr/qrs/_search",
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -249,11 +249,11 @@ function getQuestionCms(id){
     $.ajax({
         type: "get",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/" + id,
+        url: URL_SEARCH+"/simulator_index_qr/qrs/" + id,
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
                 console.log(result);
@@ -336,12 +336,12 @@ function addQuestionCms(objectUp){
 
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/_search",
+        url: URL_SEARCH+"/simulator_index_qr/qrs/_search",
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -361,7 +361,7 @@ function updateQuestionCms(id,obj){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/" + id,
+        url: URL_SEARCH+"/simulator_index_qr/qrs/" + id,
         datatype: "application/json",
         data:JSON.stringify(obj),
         contentType: "application/json",
@@ -385,12 +385,12 @@ function createSelectQuestion(select,id){
 
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/_search",
+        url: URL_SEARCH+"/simulator_index_qr/qrs/_search",
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {   
@@ -526,7 +526,7 @@ function uploadTreeToES(){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/3",
+        url: URL_SEARCH+"/simulator_index_tree/tree/3",
         datatype: "application/json",
         data:JSON.stringify(treeObject),
         contentType: "application/json",
@@ -564,7 +564,7 @@ function sendRequestBulkMatrix(bulks){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
-        url: "https://cmdbserver.karaz.org:9200/_bulk",
+        url: URL_SEARCH+"/_bulk",
         datatype: "application/json",
         contentType: "application/x-ndjson",
         data:bulks,
@@ -584,11 +584,11 @@ function getTreeFromEs(type){
     $.ajax({
         type: "get",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_tree/tree/3",
+        url: URL_SEARCH+"/simulator_index_tree/tree/3",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
            if(type==0){
@@ -617,12 +617,12 @@ function getAllCms(type,callback,hiddenList){
 
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/"+url,
+        url: URL_SEARCH+"/"+url,
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+             xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
         success: function (result) {
@@ -823,11 +823,11 @@ function readMatrixCms(id){
     $.ajax({
         type: "get",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_matrix/columns/"+id,
+        url: URL_SEARCH+"/simulator_index_matrix/columns/"+id,
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
             objectJsonMatrixColumns = result._source;
@@ -863,7 +863,7 @@ function addMatrixElement(objectJson,id){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_matrix/columns/" + str,
+        url: URL_SEARCH+"/simulator_index_matrix/columns/" + str,
         datatype: "application/json",
         data:JSON.stringify(objectJson),
         contentType: "application/json",
@@ -954,12 +954,12 @@ function getAllDocsClass(type){
   var obj = {"size":1000,"query":{"match_all":{}}};
   $.ajax({
       type: "post",
-      url: "https://cmdbserver.karaz.org:9200/"+index,
+      url: URL_SEARCH+"/"+index,
       //url: "http://localhost:9200/index_classification_cluster/avis/_search",
       datatype: "application/json",
       contentType: "application/json",
       beforeSend: function (xhr) {
-           xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+           xhr.setRequestHeader("Authorization", AUTH);
       },
       data: JSON.stringify(obj),
       success: function (result) {
@@ -1099,7 +1099,7 @@ function updateDocClass(type,doc){
   
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/"+index+id,
+        url: URL_SEARCH+"/"+index+id,
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
@@ -1164,11 +1164,11 @@ function getDocClass(type,id){
 
     $.ajax({
         type: "get",
-        url: "https://cmdbserver.karaz.org:9200/"+index+id,
+        url: URL_SEARCH+"/"+index+id,
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         contentType: "application/json",
         beforeSend: function (xhr) {
-             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+             xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
             console.log(result);
@@ -1190,7 +1190,7 @@ function removeDocObject(type,id){
 
     $.ajax({
         type: "delete",
-        url: "https://cmdbserver.karaz.org:9200/"+index+id,
+        url: URL_SEARCH+"/"+index+id,
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -1220,13 +1220,13 @@ function getMaxDocsClass(type,object){
 
     $.ajax({
         type: "post",
-        url: "https://cmdbserver.karaz.org:9200/"+index,
+        url: URL_SEARCH+"/"+index,
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         contentType: "application/json",
         datatype:"application/json",
         data: JSON.stringify(obj),
         beforeSend: function (xhr) {
-             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+             xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
             console.log(Number(result.aggregations.max_id.value)+1);
@@ -1247,12 +1247,12 @@ function getAllCoumnsMatrixCn4(){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
-        url: "https://cmdbserver.karaz.org:9200/_msearch",
+        url: URL_SEARCH+"/_msearch",
         datatype: "application/json",
         contentType: "application/x-ndjson",
         data:bulk,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {    
             console.log(result);
@@ -1383,4 +1383,3 @@ function deletedCol(tree,array,newObj){
     console.log(str)
     return str;
 }
-  

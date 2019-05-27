@@ -231,108 +231,39 @@
             <div style="height: 30px;"> </div>
         </html>        
            
-        <vbox columns="30% 70%">
-           <vbox>
+        <vbox columns="30% 70%" className="global-div-temp">
+           <vbox className="height-auto-vbox-first">
             <vbox className="hp-box last-log hp-small">
                 <vbox columns="20% 80%">
                     <html>
                         <div class="hp-box-icon fas fa-user" />
                     </html>
                     <html>
-                        <div class="hp-box-small-title" style="font-size:1.3rem"> Accédez à votre espace privé</div>       
+                        <div class="hp-box-small-title" style="font-size:1.3rem">Espace privé</div>       
                     </html>    
                 </vbox>
                 <html>
                     <div style="height: 10px;"> </div>
                 </html>                
                 <vbox>
-                    <field widget="text" className="hp-text-input" xpath="userLogin" emptyText="Nom utilisateur" noLabel="true" width="80%">
-                        <bag position="leading" className="hp-bag-input fas fa-user" />
-                        <validation type="required" errorMessage="Veuillez saisir votre nom d'utilisateur !" />
-                    </field>
-                    <field widget="password" className="hp-text-input" xpath="userPassword" postEnter="x=$('.HomePageLoginButton').click()!!expr!!string" separator="!!" emptyText="Mot de passe" noLabel="true" height="100">
-                        <bag position="leading" className="hp-bag-input fas fa-lock" />
-                        <validation type="required" errorMessage="Veuillez saisir votre mot de passe !" />
-                    </field>
-
-                    <button className="hp-box-btn HomePageLoginButton buttonLog" label="Se connecter">
-                        <postChange>
-                            <!--  Routing credentials check depending to authentication domain (@rokhas / @casaurba)-->
-                       ApplicationManager.run('/karazal/kas/loginSamlSP','openLinkLocal','openLinkLocal'); 
-                       /*     let myUrl='kas/signin';
-                            //let uri='http://37.59.82.23:8080/karazal';
-                            let uri='http://preprodrokhas.karaz.org:8080/karazal';                            
-                            let myDomain = 'karaz';
-                            let myLogin = root.userLogin;
-                            let myPassword = root.userPassword;             
-                            
-                            myDomain = myLogin.split('@')[1];
-                                        
-                            switch(myDomain) {                           
-                              case 'casaurba' :
-                                uri='https://www.casaurba.ma/karazortal';
-                                myUrl = uri+'/kas/signin';
-                                Toaster.push({title: "Authentification", position: "top_center", message: "Authentification reussie. Vous allez être connecté au service Casaurba.", type:"success", duration:-1});
-                                window.location.replace(uri+"/index.jsp");
-                                break;
-                              case 'casaurba.ma':
-                                uri='https://www.casaurba.ma/karazortal';
-                                myUrl = uri+'/kas/signin';
-                                Toaster.push({title: "Authentification", position: "top_center", message: "Authentification reussie. Vous allez être connecté au service Casaurba.", type:"success", duration:-1});   
-                                break;
-                              case 'rokhas.ma':
-                                uri='https://www.rokhas.ma/karazortal';
-                                myUrl = uri+'/kas/signin';
-                                Toaster.push({title: "Authentification", position: "top_center", message: "Authentification reussie. Vous allez être connecté au service Rokhas.", type:"success", duration:-1});    break;                                
-                              default:
-                                myUrl = 'kas/signin';
-                            }
-                            
-                        
-                            // Ajax's call to user authentication service
-                            
-                            $.ajax({
-                            
-                               type: "POST",
-                            
-                               url: myUrl,
-
-                               data: {
-                                   "j_username" : myLogin,
-                                   "j_password": myPassword,
-                               },
-                            
-                               success: function (result) {
-                               
-                               if (result.trim().startsWith('<!-- xxx  -->')){
-															Toaster.push({title: "Erreur d'athentification", position: "top_center", message: "Nom d'utilisateur ou mot de passe incorrects. Veuillez réessayer ...", type:"error", duration:-1});
-																		 }
-							    else {
-                                    Toaster.push({title: "Routage", position: "top_center", message: "Votre authentification s'est bien déroulée !", type:"success", duration:-1});                            
-                                    window.location.replace(uri+"/index.jsp");}
-                               },
-                            
-                               error: function (err) { 
-                                    Toaster.push({title: "Erreur d'athentification", position: "top_center", message: "Nom d'utilisateur ou mot de passe incorrects. Veuillez réessayer ...", type:"error", duration:-1});
-                                    console.log("error on isOn" + err, err); 
-                                
-                                }
-                            });   
-                            */
-                        </postChange>                                  
-                    
-                    </button>
+                    <html>
+                        <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');">
+                            <i class="fas fa-unlock" />
+                            <span>Se Connecter</span>
+                        </div>
+                        <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">
+                            <i class="fas fa-user-plus" />
+                            <span>S'enregistrer</span>
+                        </div>
+                    </html>
                 </vbox>
                 <vbox>
                     <html>
-                        <div style="height: 10px;" />
-                        <div class="hp-sbox-text">
-                            <i class="fas fa-user-plus" /> <a onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Pas encore de compte Rokhas ?</a>
-                        </div>                             
+                        <div style="height: 20px;" />                            
                         <div class="hp-sbox-text">
                             <a><i class="fas fa-user-times" /> Mot de passe oublié ?</a>
                         </div>
-                        <div style="height: 10px;"> </div>                                                                  
+                        <div style="height: 26px;"> </div>                                                                  
                     </html>
                 </vbox>
                 
@@ -344,7 +275,7 @@
                         <div class="hp-box-icon fas fa-folder" />
                     </html>
                     <html>
-                        <div class="hp-box-small-title" style="font-size:1.3rem"> Etat d'avancement dossier</div>       
+                        <div class="hp-box-small-title" style="font-size:1.3rem"> Etat dossier</div>       
                     </html>
                     <html>
                         <div style="height:50px">
@@ -356,14 +287,15 @@
                     <div style="height: 10px;"> </div>
                 </html>                
                 <vbox>
-                    <field widget="text" className="hp-text-input" xpath="demandeId" emptyText="Votre N° de demande" noLabel="true" width="80%">
+                    <field widget="text" className="hp-text-input" xpath="demandeId" emptyText="Votre référence dossier" noLabel="true" width="80%">
                         <bag position="leading" className="hp-bag-input fas fa-folder-open" />
-                        <validation type="required" errorMessage="Veuillez saisir votre N° de demande !" />
+                        <validation type="required" errorMessage="Veuillez saisir votre référence dossier !" />
                     </field>
-                    <field widget="text" className="hp-text-input" xpath="CIN" postEnter="" separator="!!" emptyText="Votre N° de CIN ou N° RC" noLabel="true" height="100">
-                        <bag position="leading" className="hp-bag-input fas fa-address-card" />
-                        <validation type="required" errorMessage="Veuillez saisir votre N° de CIN ou N° RC !" />
-                    </field>
+                    <html>
+                        <div class="last-log-info">
+                            <span>Saisissez la référence du dossier recherché tel qu'elle apparait  sur la demande soumise. <span class="">Exemple : PCT-PANF-MRF-456/2020</span></span>
+                        </div>
+                    </html>
 
                     <button className="hp-box-btn HomePageLoginButton2 buttonLog" label="Vérifier">
                         <postChange>  

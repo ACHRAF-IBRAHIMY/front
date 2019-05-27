@@ -9,6 +9,11 @@ var end = 0;
 var diff = 0;
 var p=0;
 
+//var AUTH = "Basic cm9raGFzX3VzZXI6YWRtaW4x";
+var URL_SEARCH = "https://cmdbserver.karaz.org:9200";
+//var URL_SEARCH = "https://localhost:9200";
+var AUTH = "Basic cmVhZGFsbDpyZWFkYWxs";
+
 
 function restAutoComplete(inp,prefix,type){
     var result = [];
@@ -28,8 +33,8 @@ function restAutoComplete(inp,prefix,type){
         }
     };
    // xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
-    xhttp.open("POST","https://cmdbserver.karaz.org:9200/completion_index/completionTerm/_search");
-    xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    xhttp.open("POST",URL_SEARCH+"/completion_index/completionTerm/_search");
+    xhttp.setRequestHeader("Authorization",AUTH);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify({
             "size": 5,
@@ -193,13 +198,13 @@ function restFullSearchList(prefix,from,prev,parent) {
  //   xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
     var index = "";   
     if(typePage==0){
-        xhttp.open("POST","https://cmdbserver.karaz.org:9200/activite_economique/activite/_search");
-        xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhttp.open("POST",URL_SEARCH+"/activite_economique/activite/_search");
+        xhttp.setRequestHeader("Authorization",AUTH);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         
     }else if(typePage==1){
-        xhttp.open("POST","https://cmdbserver.karaz.org:9200/reglementation_index/reglementation/_search");
-        xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhttp.open("POST",URL_SEARCH+"/reglementation_index/reglementation/_search");
+        xhttp.setRequestHeader("Authorization",AUTH);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         
     }
@@ -530,12 +535,12 @@ function RestSearchFaq(prefix,page,size,type){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
-        url: "https://cmdbserver.karaz.org:9200/_msearch",
+        url: URL_SEARCH+"/_msearch",
         datatype: "application/json",
         contentType: "application/x-ndjson",
         data:str,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {    
             console.log(result);
@@ -1327,8 +1332,8 @@ function autocomplete(inp,arr) {
         }
     };
    // xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
-    xhttp.open("GET","https://cmdbserver.karaz.org:9200/activite_economique/activite/"+id);
-    xhttp.setRequestHeader("Authorization","Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    xhttp.open("GET",URL_SEARCH+"/activite_economique/activite/"+id);
+    xhttp.setRequestHeader("Authorization",AUTH);
     xhttp.send();
 
         return ; 
@@ -1408,10 +1413,10 @@ function getFolder(id,ref){
             var array1 = arrayHistoricGenrated(result.historic);
             var array2 = refrechArrayHistoriques(array1);
             console.log(array2[0][0].length);
-            if(array2[0][0].length>12){
-                array2[0][0] = array2[0][0].splice(array2[0][0].length-12,array2[0][0].length);
-                array2[0][1] = array2[0][1].splice(array2[0][1].length-12,array2[0][1].length);
-                array2[0][2] = array2[0][2].splice(array2[0][2].length-12,array2[0][2].length);
+            if(array2[0][0].length>10){
+                array2[0][0] = array2[0][0].splice(array2[0][0].length-10,array2[0][0].length);
+                array2[0][1] = array2[0][1].splice(array2[0][1].length-10,array2[0][1].length);
+                array2[0][2] = array2[0][2].splice(array2[0][2].length-10,array2[0][2].length);
             }
 
             arrayHistoricGenratedDiv(array2[0],ref);

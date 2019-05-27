@@ -92,6 +92,9 @@
       <menu relId="BackEndPage" label="Back End Page" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/BackEndPage</resource>
       </menu>
+      <menu relId="FaqDetail" label="Faq Detail" icone="search">
+      	<resource type="search">karaz/ux/hub/portailsearch/search/FaqDetail</resource>
+      </menu>
     </menu>
   </menu>
 </menus>

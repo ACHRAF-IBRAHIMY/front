@@ -153,11 +153,11 @@ function getQuestion(id,type){
     $.ajax({
         type: "get",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: "https://cmdbserver.karaz.org:9200/simulator_index_qr/qrs/"+id,
+        url: URL_SEARCH+"/simulator_index_qr/qrs/"+id,
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {    
             if(type==0){
@@ -430,12 +430,12 @@ function sendRequestBulk(bulk,type){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
-        url: "https://cmdbserver.karaz.org:9200/_msearch",
+        url: URL_SEARCH+"/_msearch",
         datatype: "application/json",
         contentType: "application/x-ndjson",
         data:bulk,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {    
             console.log(result);
@@ -457,12 +457,12 @@ function firstEsTreeCall(){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
-        url: "https://cmdbserver.karaz.org:9200/_msearch",
+        url: URL_SEARCH+"/_msearch",
         datatype: "application/json",
         contentType: "application/x-ndjson",
         data:bulk,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {    
             console.log(result);
@@ -521,12 +521,12 @@ function countDoc(type,objSearchMatrix) {
     $.ajax({
         type: "post",
       //  url: "http://localhost:9200/" + url,
-        url: "https://cmdbserver.karaz.org:9200/"+url,
+        url: URL_SEARCH+"/"+url,
         datatype: "application/json",
         contentType: "application/json",
         data: obj,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
             if (type == 0) {
