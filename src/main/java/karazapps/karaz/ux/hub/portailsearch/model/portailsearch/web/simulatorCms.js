@@ -79,7 +79,7 @@ function showUpdate(id){
     var str  = getParentPath(list);
     var obj  = eval("simple_chart_config.nodeStructure"+str);
     console.log(obj);
-    $(".cms-form .header-cms-form input").val(obj.text.name);
+    $(".cms-form .header-cms-form span").html(obj.text.name);
     $(".cms-form  input.class-id").val(obj.text.id);
     $(".cms-form .body-cms-form .class-title span").eq(1).children("input").val(obj.text.name);
     $(".cms-form .body-cms-form .class-question .link-sim-cms span").html(obj.text.question+"<input type=\"hidden\" value=\""+obj.text.question_id+"\"/>");    
@@ -89,8 +89,21 @@ function showUpdate(id){
         $(".cms-form .body-cms-form .class-oid span.classee").html("Non Classé");
     }else{
         $(".cms-form .body-cms-form .class-oid span.classee").html("Classé");
+        var icon = document.createElement("i");
+        icon.setAttribute("class","fa fa-close");
+        icon.setAttribute("style","cursor: pointer;color: red;margin: auto 5px;");
+        icon.setAttribute("title","Annuler la classification");
+        icon.addEventListener("click",function(){
+            deleted.push(eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]"));
+        	eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
+            eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]");
+            eval("delete simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]");
+            showUpdate(id);
+        });
+        $(".cms-form .body-cms-form .class-oid span.classee").append(icon);
     }
 
+    
     for(var i =0 ; i< obj.children.length;i++){
         var doc = document.createElement("div");
         var span = document.createElement("span");
@@ -112,14 +125,13 @@ function showUpdate(id){
         doc.appendChild(span);
         
         $(".cms-form .body-cms-form .class-responses .responses-sim-cms").append(doc);
-
-
        // $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html($(".cms-form .body-cms-form .class-responses .responses-sim-cms").html()+"<div><span class=\"link-sim-cms\">"+obj.children[i].text.name+"</span></div>");    
     }
         $(".cms-form .body-cms-form .class-question .link-sim-cms i.fa-edit").show();
         $(".cms-form .body-cms-form .class-question .link-sim-cms i.fa-plus").hide();
         $(".simulator-cms .side-bar .body").show();
         $(".simulator-cms .side-bar .body1").hide();
+       
 }
 var qstList = [];
 
@@ -134,7 +146,6 @@ function loadQuestionsFromEs(){
     $.ajax({
         type: "post",
         url: URL_SEARCH+"/simulator_index_qr/qrs/_search",
-        //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -169,10 +180,9 @@ function indexOfQst(id,list){
 }
 
 
-
 function updateNode(id){
 
-    var title = $(".cms-form .header-cms-form input").val();
+    var title = $(".cms-form .body-cms-form .class-title input").val();
     var list = id.split("-");
     var str  = getParentPath(list);
     if($(".cms-form .body-cms-form .class-question .link-sim-cms span select").html()!=undefined){
@@ -207,7 +217,7 @@ function removeNode(id){
 }
 
 function updateNodeWithQuestion(id,question){
-    var title = $(".cms-form .header-cms-form input").val();
+    var title = $(".cms-form .header-cms-form span").html();
     var idsec = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
     var list = idsec.split("-");
     var str  = getParentPath(list);
@@ -232,17 +242,24 @@ function modeUpdate(){
 
 function showQuestion(results){
     $(".cms-form .body-cms-form .class-question-q input.id").val(results._source.id);
-    $(".cms-form .body-cms-form .class-question-q .link-sim-cms").html("<input type=\"text\" value=\""+results._source.question+"\">");
+    $(".cms-form .body-cms-form .class-question-q .link-sim-cms").html("<textarea>"+results._source.question+"</textarea>");
     for(var j=0;j<$(".cms-form .body-cms-form .class-type-question select option").length;j++){
         if($(".cms-form .body-cms-form .class-type-question select option").eq(j).val()==results._source.response.type){
            $(".cms-form .body-cms-form .class-type-question select option").eq(j).select(); 
         }
     }
     $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("");
-    for(var i=0;i<results._source.response.content.length;i++){
+    let str = results._source.response.content.join("//");
+    $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("<div><textarea style=\"width: 98%;border: 1px solid #eee;\">"+str+"</textarea></div>");
+    
+    /*
+    for(var i=0;i<results._source.response.content.length;i++){    
         $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html($(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html()+"<div><input type=\"text\" value=\""+results._source.response.content[i]+"\"/></div>")
     }
+    */
+
     $(".simulator-cms .side-bar .body .div-2").show();
+    $(".simulator-cms .side-bar .body .div-3").hide();
 }
 
 function getQuestionCms(id){
@@ -270,15 +287,12 @@ function getQuestionCms(id){
 function getQuestionDet(){
     var obj = {};
     var id = $(".cms-form .body-cms-form .class-question-q input.id").val();
-    var question = $(".cms-form .body-cms-form .class-question-q .link-sim-cms input").val();
+    var question = $(".cms-form .body-cms-form .class-question-q .link-sim-cms textarea").val();
     var type = $(".cms-form .body-cms-form .class-type-question select option:selected").val();
     var content = [];
     
-    for(var i=0;i<$(".cms-form .body-cms-form .class-responses-q .responses-sim-cms div").length;i++){
-        content.push($(".cms-form .body-cms-form .class-responses-q .responses-sim-cms div").eq(i).children("input").val());
-    }
+    content=$(".cms-form .body-cms-form .class-responses-q .responses-sim-cms div textarea").val().split("//");
     
-
     obj["id"]=id;
     obj["question"]=question;
     obj["response"]={
@@ -290,8 +304,9 @@ function getQuestionDet(){
     updateQuestionCms(id,obj);
 }
 
+
 function showAddQuestionForm(){
-    $(".cms-form-2 .body-cms-form .class-question-q .link-sim-cms input").val("");
+    $(".cms-form-2 .body-cms-form .class-question-q .link-sim-cms textarea").val("");
     $(".cms-form-2 .body-cms-form .class-type-question select option").eq(0).select();
     $(".cms-form-2 .body-cms-form .class-responses-q .responses-sim-cms input").val("");
     $(".simulator-cms .side-bar .body .div-2").hide();
@@ -300,7 +315,7 @@ function showAddQuestionForm(){
 
 function addQuestionForm(){
     var obj = {};
-    var question = $(".cms-form-2 .body-cms-form .class-question-q .link-sim-cms input").val();
+    var question = $(".cms-form-2 .body-cms-form .class-question-q .link-sim-cms textarea").val();
     var type = $(".cms-form-2 .body-cms-form .class-type-question select option:selected").val();
     var content = [];
     if(type != "input"){
@@ -347,7 +362,6 @@ function addQuestionCms(objectUp){
         success: function (result) {
             objectUp["id"]=result.hits.hits.length;   
             updateQuestionCms(result.hits.hits.length,objectUp);
-            updateNodeWithQuestion(result.hits.hits.length,objectUp.question);
             
         },
         error: function (error) {
@@ -358,6 +372,7 @@ function addQuestionCms(objectUp){
 
 
 function updateQuestionCms(id,obj){
+    updateNodeWithQuestion(id,obj.question);
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
@@ -369,7 +384,8 @@ function updateQuestionCms(id,obj){
             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
         },
         success: function (result) {
-                console.log(result);
+            console.log(result);
+            loadQuestionsFromEs();
         },
         error: function (error) {
             console.log(error.responseText);
@@ -591,12 +607,13 @@ function getTreeFromEs(type){
             xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
+            alert("it's not ready yet,we testing something !");
            if(type==0){
                 simple_chart_config.nodeStructure = result._source.treeComp;
                 startTreant();
+                loadQuestionsFromEs();
            }else if(type==1){
                tree = result._source.treeSimp;
-               
                 firstEsTreeCall();
            }
         },

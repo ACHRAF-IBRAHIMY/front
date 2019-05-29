@@ -95,6 +95,10 @@
       <menu relId="FaqDetail" label="Faq Detail" icone="search">
       	<resource type="search">karaz/ux/hub/portailsearch/search/FaqDetail</resource>
       </menu>
+      <menu relId="NewfreqQuestion" label="Nouvelle faq" icone="search">
+      	<resource type="search">karaz/ux/hub/portailsearch/search/NewfreqQuestion</resource>
+      </menu>
+      
     </menu>
   </menu>
 </menus>

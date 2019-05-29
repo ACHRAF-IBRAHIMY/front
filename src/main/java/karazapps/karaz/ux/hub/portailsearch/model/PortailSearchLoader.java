@@ -105,6 +105,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/FaqPage", "karazapps/karaz/ux/hub/portailsearch/model/search-FaqPage.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/NewfreqQuestion", "karazapps/karaz/ux/hub/portailsearch/model/search-NewfreqQuestion.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpendataFrame", "karazapps/karaz/ux/hub/portailsearch/model/search-OpendataFrame.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpinionTextClassification", "karazapps/karaz/ux/hub/portailsearch/model/search-OpinionTextClassification.xml");

@@ -15,7 +15,7 @@
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
             
-            getTreeFromEs(0);
+            getTreeFromEs(0);            
 
              $(".simulator-cms .navbar-sim-cms .navbar-sim-cms-item").click(function(){
                 $(".simulator-cms .navbar-sim-cms .navbar-sim-cms-item").removeClass("active");
@@ -83,8 +83,12 @@
                 }
             });
 
-            $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button").click(function(){
+            $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button.save").click(function(){
                 uploadTreeToES();
+            });
+
+            $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button.reset").click(function(){
+                getTreeFromEs(0);
             });
 
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.class-end-button").click(function(){
@@ -145,7 +149,7 @@
             showUpdate("");
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click();
             dragscroll.reset();
-            loadQuestionsFromEs();
+            
 
             
 
@@ -256,7 +260,8 @@
                         <html>
                             <div id="tree-simple" class="dragscroll" style="width:100%; height: 685px"> </div>
                             <div class="button-upload-es">
-                                <button><span>Sauvegarder dans ES</span></button>
+                                <button class="reset" style="background:green"><span>Réinitialiser</span></button>
+                                <button class="save"><span>Sauvegarder dans ES</span></button>
                                 <span class="valide" style="display:none">Indexé <i class="fas fa-check" /></span>
                             </div>
                         </html>
@@ -304,9 +309,9 @@
                            
                             <div class="cms-form">
                               <input type="hidden" class="class-id" value="" />
-                               <div class="header-cms-form"><input type="text" value="First child" /></div>
+                               <div class="header-cms-form"><span></span></div>
                                <div class="body-cms-form">
-                                <div class="class-title form-grid"><span>Parent </span><span><input type="text" value="Root" /></span></div>
+                                <div class="class-title form-grid"><span>Node </span><span><input type="text" value="Root" /></span></div>
                                 <div class="class-oid form-grid">
                                     <span>Etat </span>
                                     <span class="classee">
@@ -369,7 +374,7 @@
                               <input type="hidden" class="class-id-qr" value="" />
                                <div class="header-cms-form">Ajouter une question</div>
                                <div class="body-cms-form">
-                                    <div class="class-question-q form-grid"><span>Question </span><span class="link-sim-cms"><input type="text" placeholder="votre Question" /></span></div>
+                                    <div class="class-question-q form-grid"><span>Question </span><span class="link-sim-cms"><textarea placeholder="votre Question"></textarea></span></div>
                                     <div class="class-type-question form-grid">
                                         <span>Type </span>
                                         <span class="link-sim-cms">

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="NewfreqQuestion" label="Nouvelle Question Fréquente">
+
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+        </query>
+        <collapsed>false</collapsed>
+    </data>
+    <view>
+        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+                 <script postLoad="true">
+          $(".rokhas-home").click(function(){
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+          });      
+          
+          
+          $(".tags a").click(function(){
+              console.log("href:"+$(this).attr("href"));
+              var pos = $("."+$(this).attr("href").substr(1)).offset().top;
+              $('html,body').animate(
+                     {
+                      scrollTop: pos
+                 },
+                 'slow');   
+          });
+          
+          
+          $(".scroll-top-sp").click(function(){
+              $('html,body').animate(
+                     {
+                      scrollTop: $("body").offset().top
+                 },
+                 'slow'); 
+          });
+          
+          
+          $(".back-to-acc").click(function(){
+              ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets","search", "Acceptabilite Projets", {});
+          });
+
+
+          // add right icon to ANNONCES header
+          PCD_addtitle();
+
+          // add style to main header
+          <!-- PCD_add_header_style_action(".pcd-header-NQF", "Quels sont les pièces requises pour l'obtention d'un permis de construire ?"); -->
+
+          // header color 
+          PCD_headerfieldset_color(".pcd-ha-color");
+          
+         </script>
+           <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
+            <vbox className="Header-signup-logo">
+                <html className="Header-signup-glo">
+                    <div class="rokhas-home" style="margin-left: 50px;">
+                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                    </div>
+                </html>
+                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
+                    <html className="menu-bar-img">
+                        <img src="web/css/img/LogoSquare.svg" alt="" />
+                    </html>
+                    <html />
+                    <html className="menu-bar-icon">
+                        <i class="fas fa-bars" />
+                    </html>    
+                </vbox>
+            </vbox>
+            
+            <vbox columns="60% 25% 15%" className="header-div-toggle">
+ <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
+                   <button label="Actualités">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button label="Simulateur">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
+                        </postChange>
+                   </button>
+                    <button label="Open data">
+                        <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
+                        </postChange>
+                   </button>
+                   <button label="Ressources" className="dropdown">
+                        <html>
+                            <div class="dropdown-content">
+                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
+                                    Référentiel juridique</a>
+                                <hr />
+                                <a>Guides vidéos</a><hr />
+                                <a>Utilitaires</a>
+                            </div>
+                        </html>
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   <button label="Solutions">
+                        <postChange>
+
+                        </postChange>
+                   </button>
+                   
+                   <button icon="far fa-question-circle">
+                       <postChange>
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
+                       </postChange>
+                   </button>
+                    
+            
+                </vbox>
+
+                <vbox className="vbox-button-signup-header" columns="50% 50%">
+                    <button label="Inscription" className="button-signup-header button-left">	
+                        <postChange>
+                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+                        </postChange>						
+                    </button>
+                    <button label="Connexion" className="button-signup-header">	
+                        <postChange>
+                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
+                        </postChange>					
+                    </button>
+                </vbox>
+                 
+            </vbox>
+        </vbox>
+            <html id="hSeparator">
+                <div style="height: 30px;" />
+
+            </html>
+            <vbox columns="70% 30%">
+                <vbox> 
+
+                <fieldset label="NOUVELLE QUESTION FRÉQUENTE" collapsible="false" className="pcd-header-NQF div-det-acc PDC-hov-title ">   
+                     <fieldset label="DONNÉES QUESTION" className="NQF-shadow">
+                         <vbox className="DC-Customized-fields-NQF NQF-edit-float">
+                            <field label="Question" widget="text" labelAlign="float" xpath="question" postProcessing="search()">
+                                    <postChange>
+                                        
+                                    </postChange>
+                            </field>
+                            <vbox contentAlign="center" columns="40% 60%" className="NQF-edit-select-float">  
+                                <field widget="select" label="Catégorie" labelAlign="float" xpath="categ">
+                                    <option value="GENERAL" label="Général" />
+                                    <option value="E-SIGN" label="Signature électronique" />
+                                    <option value="ARCHITECTE" label="Architecte" /> 
+                                    <option value="DOCUMENT" label="Document" />  
+                                    <option value="PLATEFORME" label="Platforme" />
+                                    <option value="ADMINISTRATION" label="Administration" />
+
+                                </field> 
+                                <vbox /> 
+                            </vbox>
+                        </vbox>  
+                        
+     
+                     </fieldset>
+                     
+
+
+                     <fieldset label="DONNÉES RÉPONSE" className="NQF-shadow">
+                        <field widget="htmlEditor" xpath="NFQ-response" />
+
+                     </fieldset>
+                          <vbox columns="auto 45%" className="DC-box-btn-filtrer"> 
+                          <hx />
+                          <vbox columns="33% 33% auto" style="margin-right: 2em;"> 
+                                
+                                <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
+                                    <postChange>
+                                        NQF_preview_QR();
+                                    </postChange>
+                                </button>
+                                <button label="nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal" postProcessing="search()">
+                                    <postChange>
+                                        NQF_new_QR();
+                                    </postChange>
+                                </button>
+                                <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal" postProcessing="search()">
+                                    <postChange>
+                                        NQF_save_QR();
+                                    </postChange>
+                                </button>
+                                
+
+                          </vbox> 
+
+                        </vbox>
+
+                     <vbox className="NQF-vue-question"> 
+                        <vbox columns="85% auto">
+                            <html>
+                                <h4 class="NQF-prev-quest"><b>Quels sont les pièces requises pour l'obtention d'un permis de construire ?</b></h4>
+                                <p class="NQF-prev-resp">Signature électronique des plans architecturaux par l'architecte et dans certains cas par les co-concepteurs du projet (Architecte en groupement, géomètre topographe, ...) ainsi que le cahier des charges associé au projet de lotissement.</p>
+                                <p hidden="hidden" class="NQF-categorie">  </p>
+                                <p hidden="hidden" class="NQF-id" />
+
+                            </html>
+                            <vbox />
+                        </vbox>
+                        <vbox columns="85% auto" className="NQF-btn-alg"> 
+                            <vbox />
+                            <button label="Editer " className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue  ">
+                                    <postChange>
+                                        let question = $(".NQF-vue-question .NQF-prev-quest b").text();
+	                                    let resp = $(".NQF-prev-resp").text();
+                                        let categ = $(".NQF-categorie").val();
+                                        let ID = $(".NQF-id").val();
+	                                    console.log(ID)
+
+                                        $(".NQF-edit-float .ow-field-container.ow-field-text-container").addClass("focusedInput");
+                                        $('.ow-field-input[data-xpath="question"]').val(question);
+                                        if(categ == "E-SIGN" ){
+                                            $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+                                            $('.ow-field-input-select[data-xpath="categ"]').text("Signature électronique" );
+                                        } else if (categ == "GENERAL") {
+                                            $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")                                            
+                                            $('.ow-field-input-select[data-xpath="categ"]').text("Général");
+                                        } else if (categ == "DOCUMENT") {
+                                            $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")                                            
+                                            $('.ow-field-input-select[data-xpath="categ"]').text("Document");
+                                        } else if (categ == "PLATEFORME") {
+                                            $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")                                            
+                                            $('.ow-field-input-select[data-xpath="categ"]').text("Plateforme");
+                                        } else if (categ == "ARCHITECTE") {
+                                            $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")                                            
+                                            $('.ow-field-input-select[data-xpath="categ"]').text("Architecte");
+                                        } else if (categ == "ADMINISTRATION") {
+                                            $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")                                            
+                                            $('.ow-field-input-select[data-xpath="categ"]').text("Administration");
+                                        }
+                                        
+                                        $('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').text(resp)
+                                    </postChange>
+                            </button>
+                        </vbox>
+                     </vbox> 
+
+                
+                </fieldset>
+                </vbox>
+                <vbox>
+                <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color">
+
+                    
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                            <div class="vpanel-body-title PCD-parent-ann" style="margin-bottom: 1.5em;">
+                                <i class="far fa-edit" /><span style="font-size: 14px;">Signature électronique</span> 
+                            </div>
+
+                            <div class="NFQ-quest-type-esign">
+                                
+                              <!-- Les questions s'affiche ici                                  -->
+                            </div>
+                            
+                        </html>
+                    </vbox>
+
+                    <html>
+                    <div style="height: 50px;"> </div>
+                    </html>
+
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                            <div class="vpanel-body-title PCD-parent-ann">
+                                <i class="far fa-question-circle" /><span style="font-size: 14px;">Générale</span> 
+                            </div>
+                            
+                            <div class="NFQ-quest-type-general">
+                                
+                              <!-- Les questions s'affiche ici                                  -->
+                            </div>
+                        </html>
+                    </vbox>
+
+                    <html>
+                    <div style="height: 50px;"> </div>
+                    </html>
+
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                            <div class="vpanel-body-title PCD-parent-ann">
+                                <i class="far fa-file-pdf" /><span style="font-size: 14px;">Document</span> 
+                            </div>
+                            
+                            <div class="NFQ-quest-type-Document">
+                                
+                              <!-- Les questions s'affiche ici                                  -->
+                            </div>
+                        </html>
+                    </vbox>
+
+                    <html>
+                    <div style="height: 50px;"> </div>
+                    </html>
+
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                            <div class="vpanel-body-title PCD-parent-ann">
+                                <i class="fab fa-simplybuilt" /><span style="font-size: 14px;">Platforme</span> 
+                            </div>
+                            
+                            <div class="NFQ-quest-type-plat">
+                                
+                              <!-- Les questions s'affiche ici                                  -->
+                            </div>
+                        </html>
+                    </vbox>
+
+                    <html>
+                    <div style="height: 50px;"> </div>
+                    </html>
+
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                            <div class="vpanel-body-title PCD-parent-ann">
+                                <i class="fas fa-user" /><span style="font-size: 14px;">Architecte</span> 
+                            </div>
+                            
+                            <div class="NFQ-quest-type-archit">
+                                
+                              <!-- Les questions s'affiche ici                                  -->
+                            </div>
+                        </html>
+                    </vbox>
+
+                    <html>
+                    <div style="height: 50px;"> </div>
+                    </html>
+
+                    <vbox className="PCD-hp-box ">
+                        <html>
+                            <div class="vpanel-body-title PCD-parent-ann">
+                                <i class="fas fa-users-cog" /><span style="font-size: 14px;">Administration </span> 
+                            </div>
+                            
+                            <div class="NFQ-quest-type-adminis">
+                                
+                              <!-- Les questions s'affiche ici                                  -->
+                            </div>
+                        </html>
+                    </vbox>
+
+                   
+                  
+                  
+                </fieldset>
+                </vbox>
+            </vbox>
+
+
+            <html>
+                <div style="height: 30px;" />
+            </html>
+            
+
+        </screen>
+        <script onLoad="true">
+                $(".NQF-vue-question").hide();
+                RestSearchFaqSec("",0,10,4,".NFQ-quest-type-esign")
+                RestSearchFaqSec("",0,10,3,".NFQ-quest-type-general")
+                RestSearchFaqSec("",0,10,1,".NFQ-quest-type-Document")
+                RestSearchFaqSec("",0,10,2,".NFQ-quest-type-plat")
+                RestSearchFaqSec("",0,10,5,".NFQ-quest-type-archit")
+                RestSearchFaqSec("",0,10,6,".NFQ-quest-type-adminis")
+        </script>
+        
+    </view>
+
+
+</search>

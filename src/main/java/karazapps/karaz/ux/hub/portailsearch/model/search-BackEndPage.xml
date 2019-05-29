@@ -43,7 +43,7 @@
                 </vbox>
                 <vbox className="">
                     <html>                
-                        <box-card style="cursor:pointer" class="video-card" onclick="javascript:alert('not ready yet...');">
+                        <box-card style="cursor:pointer" class="video-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/NewfreqQuestion','search',' ',{});">
                             <box-icon class="fas fa-question-circle "> </box-icon>
                             <box-big-title>Indexation FAQ</box-big-title>
                         </box-card>
