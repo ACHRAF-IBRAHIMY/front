@@ -407,6 +407,7 @@ function generateRequestFaqSearch(prefix,type,from,size){
 var faqPages = [1,1,1,1,1,1];
 var faqGlobalPages = [1,1,1,1,1,1];
 var totalFaqPages = [0,0,0,0,0,0];
+var typesList = ["DOCUMENT","PLATEFORME","GENERAL","E-SIGN","ARCHITECTE","ADMINISTRATION"];
 
 function intializeFaqPages(){
     faqPages = [1,1,1,1,1,1];
@@ -414,8 +415,14 @@ function intializeFaqPages(){
     faqGlobalPages = [1,1,1,1,1,1];
 }
 
-function generatePaginationFaqPage(index,prefix){
-   $(".faq-fieldset .pagination-new-style").eq(index).html("");
+
+
+function generatePaginationFaqPage(index,prefix,typeUse){
+    if(typeUse==-1){
+        $(".faq-fieldset .pagination-new-style").eq(0).html("");
+    }else{
+        $(".faq-fieldset .pagination-new-style").eq(index).html("");        
+    }
     var p1 = document.createElement("div");
     p1.setAttribute("class","pagination-1");
     var icon1 = document.createElement("i");
@@ -495,13 +502,70 @@ function generatePaginationFaqPage(index,prefix){
     spanG.appendChild(span3);
     p2.appendChild(spanG);
 
-    $(".faq-fieldset .pagination-new-style").eq(index).append(p1);
-    $(".faq-fieldset .pagination-new-style").eq(index).append(p2);
+    if(typeUse==-1){
+        $(".faq-fieldset .pagination-new-style").eq(0).append(p1);
+        $(".faq-fieldset .pagination-new-style").eq(0).append(p2);    
+    }else{
+        $(".faq-fieldset .pagination-new-style").eq(index).append(p1);
+        $(".faq-fieldset .pagination-new-style").eq(index).append(p2);
+    }
 
 }
 
 
-function RestSearchFaq(prefix,page,size,type){
+function getQsFaq(id,type){
+    $.ajax({
+        type: "get",
+        url: URL_SEARCH+"/faq_index/qr/" + id,
+        datatype: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization",AUTH);
+        },
+        success: function (result) {
+            if(type==0){
+            	$(".NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
+				$(".NQF-prev-resp").text(result._source.REPONSES);
+				$(".NQF-categorie").val(result._source.type);
+				$(".NQF-id").val(id);
+				$(".NQF-vue-question").show();
+
+				let a = $(".NQF-categorie")
+				console.log(a.val());
+			
+            }else if(type==1){
+                console.log(result._source.type);
+                createDivQuestionFaq(result);
+                RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1);
+                //traitement youssef
+            } 
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+
+function createDivQuestionFaq(result){
+    $(".qst-faq .vpanel-title .blue-small").html(subLong(result._source.QUESTIONS,110));
+    $(".qst-faq .vpanel-title .blue-small").attr("title",result._source.QUESTIONS);
+    $(".qst-faq .vpanel-body .qst-body").html(result._source.QUESTIONS);
+    $(".qst-faq .vpanel-body .response-body").html(result._source.REPONSES);
+    $(".other-qst-faq .vpanel-title .blue-small").html(getTypeFaq(result._source.type));
+}
+
+function getTypeFaq(type){
+    var types = ["E-SIGN","ADMINISTRATION","ARCHITECTE","DOCUMENT","PLATEFORME","GENERAL"];
+    var listType = ["e-Signature","Administration","Architecte","Pieces requises","Plateforme","Général"];
+    var index = types.indexOf(type);
+    return listType[index];
+}
+
+function NQF_add_questionDet(quest, cls) {
+	$(cls+":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt"><div class="vpanel-body-title " style="font-size: 14px;"><span class = 'NFQ-click-btn' >`+quest+`</span></div><hr class="NQF-horizontal-line " /></div>`)
+}
+
+function RestSearchFaqDet(prefix,page,size,type){
     var str =""
     $(".faq-vbox .no-response-find").hide();
     
@@ -534,7 +598,71 @@ function RestSearchFaq(prefix,page,size,type){
 
     $.ajax({
         type: "post",
-        //url: "http://localhost:9200/_msearch",
+        url: URL_SEARCH+"/_msearch",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data:str,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {    
+				   console.log(result);
+				   for(var i=0;i<result.responses.length;i++){
+                    if(result.responses[i].hits.hits.length!=0){
+						 
+						for(let j=0; j<result.responses[i].hits.hits.length; j++){
+							NQF_add_questionDet(result.responses[i].hits.hits[j]._source.QUESTIONS, ".NFQ-quest-type")
+						}
+						$(".NFQ-quest-type").append('<span  class="NFQ-end"/>');
+						
+                    }
+				}	   
+			
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    })
+	
+}
+
+
+function RestSearchFaq(prefix,page,size,type,typeUse){
+    var str =""
+    $(".faq-vbox .no-response-find").hide();
+    
+    if(type==0){
+        $(".faq-fieldset").hide();
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size); 
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size); 
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
+        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size); 
+        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size);     
+    }else if(type==1){
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size);
+    }else if(type==2){
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size);               
+    }else if(type==3){
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
+    }else if(type==4){
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
+    }else if(type==5){
+        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size); 
+    }else if(type==6){
+        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size); 
+    }
+
+    if(type!=0 && typeUse != -1){
+        $(".faq-fieldset .full-search-list").eq(type-1).html("");
+        $(".faq-fieldset .searchGif2").eq(type-1).show();
+    }else if(typeUse == -1){
+        $(".faq-fieldset .full-search-list").eq(0).html("");
+        $(".faq-fieldset .searchGif2").eq(0).show();
+    }
+
+    $.ajax({
+        type: "post",
         url: URL_SEARCH+"/_msearch",
         datatype: "application/json",
         contentType: "application/x-ndjson",
@@ -546,10 +674,10 @@ function RestSearchFaq(prefix,page,size,type){
             console.log(result);
             $(".searchGif").hide();
             $(".faq-fieldset .searchGif2").hide();        
-            if(type!=0){
+            if(type!=0 && typeUse!=-1){
                 fullCreateFaqByType(result.responses[0].hits.hits,type);
                 generatePaginationFaqPage((type-1),prefix);
-            }else if(type==0){
+            }else if(type==0 && typeUse!=-1){
                 var k = 0;
                 
                 for(var i=0;i<result.responses.length;i++){
@@ -564,13 +692,17 @@ function RestSearchFaq(prefix,page,size,type){
                 if(k==0){
                     $(".faq-vbox .no-response-find").show();
                 }
+            }else if(typeUse==-1){
+                console.log("hello");
+                fullCreateFaqByType(result.responses[0].hits.hits,1);
+                generatePaginationFaqPage((type-1),prefix,-1);
+                totalFaqPages[type-1]=result.responses[0].hits.total;
             }
         },
         error: function (error) {
             console.log(error.responseText);
         }
     })
-
 }
 
 
@@ -600,7 +732,7 @@ function fullCreateFaqByType(results,type){
         var g = document.createElement("a");
         g.addEventListener("click",function(){
         var id=$(this).children("input").val();
-        //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
         });
         g.setAttribute("class","item-body-button");
         g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
@@ -1372,35 +1504,60 @@ var URL_WS_KDATA_OBJECT = URL_WS_1+"/karazortal/access/rest/kdata/object/karazap
 
 
 function getFolderId(ref,cin){
-    $(".relative-position .last-log .loadGif").show();
-    $.ajax({
-        type: "get",
-        url: URL_WS_SEARCH_ALL_AUTORISATION+"?query.reference="+ref.trim().toUpperCase()+"&query.mocinrc="+cin+"&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=10&sortInfo=id=ASC",
-        datatype: "application/json",
-        success: function (result) { 
-            console.log(result);
-            var newArray = transformFolder2Array(result.data);
-            var index = newArray[1].indexOf(ref.trim().toUpperCase());
-            if(index!=-1 && ref.trim()!=""){
-                $(".folder-feature-body .folder-steps .no-response").hide();
-                getFolder(newArray[0][index],ref.trim().toUpperCase());
-            }else{
-                $(".relative-position .last-log .loadGif").hide();
-                $(".folder-feature-body .folder-steps .no-response").show();
-                $(".folder-feature .folder-feature-body .progressbar").html("");
-                if(testWidth($(window).width(),640)){
-                    $(".folder-feature").find("div:not(.no-response)").show("fast");
-                    $(".folder-feature").animate({'width':'show'},function(){});
+    if(ref.trim()==""){
+        $(".last-log input").blur();
+        $(".folder-feature .folder-feature-header i").click();
+    }else{
+        $(".relative-position .last-log .loadGif").show();
+        $(".relative-position .folder-feature-header span").html(ref);    
+        $.ajax({
+            type: "get",
+            url: URL_WS_SEARCH_ALL_AUTORISATION+"?query.reference="+ref.trim().toUpperCase()+"&query.mocinrc="+cin+"&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=10&sortInfo=id=ASC",
+            datatype: "application/json",
+            success: function (result) { 
+                var newArray = transformFolder2Array(result.data);
+                var index = newArray[1].indexOf(ref.trim().toUpperCase());
+                if(index!=-1){
+                    $(".folder-feature-body .folder-steps .no-response").hide();
+                    getFolder(newArray[0][index],ref.trim().toUpperCase());
                 }else{
-                    $(".folder-feature").find("div:not(.no-response)").show("fast");
-                    $(".folder-feature").slideDown();
-                }
-            }
-        },
-        error: function(error){
+                    $(".relative-position .last-log .loadGif").hide();
+                    $(".folder-feature-body .folder-steps .no-response").show();
+                    $(".folder-feature .folder-feature-body .progressbar").html("");
+                    $(".folder-feature-body .folder-steps .no-response .ref").html(ref);
 
+                    if(testWidth($(window).width(),640)){
+                        $(".folder-feature").find("div:not(.no-response)").show("fast");
+                        $(".folder-feature").animate({'width':'show'},function(){});
+                    }else{
+                        $(".folder-feature").find("div:not(.no-response)").show("fast");
+                        $(".folder-feature").slideDown();
+                    }
+                }
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    }
+}
+
+var prefixList = [["PCT","MRC","MDF","LOT"],["PH"],["ODPT"]];
+var autList = ["permis construire","permis d'habiter","ODP telecom"];
+
+function getWsLink(ref){
+    var prefix = ref.split("-")[0];
+    for(var i=0;i<prefixList.length;i++){
+        if(prefixList[i].indexOf(prefix)!=-1){
+            break;
         }
-    });
+    }
+
+    if(i==prefixList.length){
+        return null;
+    }else{
+        return autList[i];
+    }
 }
 
 function getFolder(id,ref){

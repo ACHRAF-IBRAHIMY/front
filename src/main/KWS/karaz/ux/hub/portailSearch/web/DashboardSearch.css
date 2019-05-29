@@ -1,5 +1,107 @@
+
+
+ /* start NQF */
+ .DC-Customized-fields-NQF .ow-field-input-line{
+    border: unset;
+    border-bottom: 1.5px solid #DDD;
+	}
+	
+    .DC-Customized-fields-NQF .ow-field-core.labelAlign-float{
+        margin-left: 3em !important;
+        margin-right: 3em !important;
+    }
+    .DC-btn-filtrer-NQF{
+        background-color: white!important;
+        border-radius: 0px !important;
+        color: #757575 !important;
+        padding-bottom: 0px !important;
+    }
+    .NQF-btn-color-normal{
+        border-bottom: 1px solid #555 !important;
+    }
+    .ow-button.usage_r.DC-btn-filtrer-NQF{
+        padding: 0 !important;
+    }
+    .NQF-vue-question{
+        margin: 3em 0.5em;
+        border: 1px solid #DDD;
+        border-radius: 2px;
+        padding: 0.5em 2em;
+        font-size: 13px;
+        color: #757575;
+    }
+    .NQF-btn-color .ow-btn-label{
+        color: #38A;
+    }
+    .NQF-btn-alg .ow-btn-container{
+        text-align: right
+    }
+    .NQF-btn-color-blue{
+        border-bottom: 1px solid #38A !important;
+    }
+    .NQF-btn-alg{
+        padding-bottom: 1em;
+    }
+    .NQF-horizontal-line{
+        height: 1px !important;
+        border: none;
+        background-color: #e3e4e5;
+        flex: 1;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        margin: 0 20%;
+    }
+    
+    .NFQ-mgn-bt{
+        margin-bottom: 1em;
+	}
+	.NFQ-click-btn:hover{
+        cursor: pointer;
+        color: #38A;
+	}
+/*end NQF*/
+
+
 /*res*/
 
+.text-align-left{
+    text-align: left;
+}
+
+.qst-faq{
+    padding: 1.25rem 40px !important;
+}
+
+.qst-faq .vpanel-body .qst-body,.qst-faq .vpanel-body .response-body{
+    margin-bottom: 10px;
+}
+
+.qst-faq .vpanel-body .qst-body{
+    color: #666;
+    font-size: 16px;
+}
+
+.qst-faq .vpanel-body .response-body{
+    font-size: 14px;
+}
+.qst-faq .link-footer{
+    text-align: right;
+}
+
+.qst-faq .link-footer a{
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.qst-faq .link-footer a:hover{
+    color: black;
+    transition: .3s;
+    text-decoration: none;
+}
+
+.hp-sec{
+    height: auto !important;
+}
 
 .height-auto-vbox-first > .ow-vl-inner {
     height: auto !important;
@@ -56,8 +158,8 @@
     gap:14px;
 }
 
-.back-end-menu .ow-vbox{
-
+.back-end-menu .ow-vl-inner{
+    height: 100% !important;
 }
 
 .back-end-menu .ow-vbox .ow-html{
@@ -244,9 +346,9 @@
 }
   
 .folder-feature{
-    width: 232%;
+    width: 233%;
     position: absolute;
-    margin-left: -26px !important;
+    margin-left: -16px !important;
     top: -10px;
     z-index: 1;
     left: 100%;
@@ -267,7 +369,8 @@
     width: 90%;
     margin: auto;
     margin-top: 6%;
-    font-size: 16px;
+    font-size: 17px;
+    color: red;
     display: none;
 }
 
@@ -653,6 +756,14 @@
 
 
 @media (max-width: 640px) {
+	
+	.back-end-menu{
+        height: auto;
+    }
+
+    .back-end-menu box-card{
+        height: 290px;
+    }
 
     .header-div-toggle .dropdown-content hr{
         background: #38a;

@@ -13,7 +13,6 @@
 			<document>true</document>  
 			<annotation>true</annotation>  
 			<others>true</others>
-            
             <userLogin />
             <userPassword />
             <demandeId />
@@ -143,7 +142,11 @@
         ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
     });
 
-
+    $(".last-log input").keydown(function(ev){
+        if ( event.which == 13 ) {
+            $(".check-ref").click();  
+        }
+    });
 
 
         </script>
@@ -293,27 +296,23 @@
                     </field>
                     <html>
                         <div class="last-log-info">
-                            <span>Saisissez la référence du dossier recherché tel qu'elle apparait  sur la demande soumise. <span class="">Exemple : PCT-PANF-MRF-456/2020</span></span>
+                            <span>Saisissez la référence du dossier recherché telle qu'elle figure sur la demande soumise.<span class="">Exemple : PCT-PANF-MRF-456/2020</span></span>
                         </div>
                     </html>
 
-                    <button className="hp-box-btn HomePageLoginButton2 buttonLog" label="Vérifier">
+                    <button className="hp-box-btn HomePageLoginButton2 buttonLog check-ref" label="Vérifier">
                         <postChange>  
                         
                         let ref = root.demandeId;
-                        let cin = root.CIN;
 
-                        if(cin==undefined){
-                            cin="";
-                        }
+                        
 
                         if(ref==undefined){
                             ref="";
                         }
 
 
-                        console.log(cin+" "+ref);
-                        getFolderId(ref,cin);
+                        getFolderId(ref,"");
                         
                         /*
                         if(testWidth($(window).width(),640)){
@@ -334,7 +333,7 @@
             <vbox className="folder-feature ">
                 <html>
                     <div class="folder-feature-header">
-                        <div><span>PCT-PANF-MRF-69961/2019</span><i class="fas fa-close" /></div>
+                        <div><span /><i class="fas fa-close" /></div>
                         <hr />
                     </div>
                     <div class="folder-feature-body">    
@@ -342,8 +341,7 @@
                             <ul class="progressbar">
                             </ul>
                             <div class="no-response">
-                                Aucun dossier ne correspond aux critères saisis. Veuillez renseigner la référence du dossier de façon complète.
-                            </div>
+                            La référence du dossier <span class="ref" style="font-weight: 700;" /> n’existe pas. Veuillez renseigner la référence du dossier telle qu’elle figure sur la demande soumise.</div>
                         </div>
                     </div>
                 </html>
