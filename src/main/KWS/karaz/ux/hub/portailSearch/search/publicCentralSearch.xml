@@ -217,7 +217,7 @@
                 <vbox className="vbox-button-signup-header" columns="50% 50%">
                     <button label="Inscription" className="button-signup-header button-left">	
                         <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+                                ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
                         </postChange>						
                     </button>
                     <button label="Connexion" className="button-signup-header">	
@@ -254,7 +254,7 @@
                             <i class="fas fa-unlock" />
                             <span>Se Connecter</span>
                         </div>
-                        <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">
+                        <div class="yb-btn-home" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">
                             <i class="fas fa-user-plus" />
                             <span>S'enregistrer</span>
                         </div>
@@ -471,7 +471,7 @@
                 <box-card style="    height: 210px !important;padding: 15px;">
                     <html><span class="main-number">1</span></html>
                     <box-small-title>Créer votre espace privé sur rokhas.ma</box-small-title>
-                    <button class="main-btn" onclick="javascript:ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});">Procéder</button>
+                    <button class="main-btn" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
                 </box-card>
              </html>                
 
