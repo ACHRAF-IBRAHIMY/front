@@ -16,6 +16,17 @@ function PCD_add_header_style_action(pcdClasstype, pcdSecondheader){
 /* start procedure  */
 
 /* start NQF */
+
+function PCD_header_style_quest_type(qtypeCls, fontAwsCls){
+
+	$(qtypeCls+"> .ow-pl-toolbar .ow-label-pl:not(:has(>i))").prepend('<i class="'+fontAwsCls+' NFQ-fa-style" />')
+	
+}
+
+
+
+
+
 function NQF_edit() {
 
 	let question = $(".NQF-vue-question .NQF-prev-quest b").text();
@@ -60,7 +71,7 @@ function NQF_preview_QR() {
 	
 	let question = $('.ow-field-input[data-xpath="question"]').val();
 	let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-	let resp = $('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').text()
+	let resp = $('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').html()
 	console.log(!(question != "" && categ != "" && resp != ""));
 	
 	if ( question == "" && categ == "" && resp == ""){
@@ -68,7 +79,7 @@ function NQF_preview_QR() {
 
 	}else{
 		$(".NQF-vue-question .NQF-prev-quest >b").text(question);
-		$(".NQF-prev-resp").text(resp);
+		$(".NQF-prev-resp").html(resp);
 		$(".NQF-vue-question").show();
 		
 	}
@@ -80,8 +91,9 @@ function NQF_new_QR(){
 	$('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').text("")
 	$(".NQF-id").val("");
 	
-	$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput")
 	$(".NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput");
+	$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
+	
 	
 	$(".NQF-vue-question").hide();
 
@@ -92,12 +104,12 @@ function NQF_new_QR(){
 function NQF_save_QR() {
 	let question = $('.ow-field-input[data-xpath="question"]').val();
 	let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-	let resp = $('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').text()
+	let resp = $('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').html()
 	let ID = $(".NQF-id").val();
 
 
 	$(".NQF-vue-question .NQF-prev-quest >b").text(question);
-	$(".NQF-prev-resp").text(resp);
+	$(".NQF-prev-resp").html(resp);
 	var req = {
 		"QUESTIONS": "",
 		"REPONSES": "",
@@ -105,6 +117,7 @@ function NQF_save_QR() {
 	}
 	req.QUESTIONS = question;
 	req.REPONSES = resp;
+	
 	// type
 	if(categ == "Signature électronique" ){
 		req.type = "E-SIGN";
@@ -137,7 +150,8 @@ function NQF_save_QR() {
 	}
 	// $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput")
 	// $(".NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput");
-	setTimeout(function(){$(".ow-btn-container i.fa-check").remove()}, 2000);
+	setTimeout(function(){$(".ow-btn-container i.fa-check").remove(),
+	                      $(".NQF-edit-modif").hide()}, 2000);
 }
 
 function NQF_add_question(quest, id, cls) {
@@ -154,11 +168,6 @@ function NQF_add_question(quest, id, cls) {
 
 
 }
-
-
-
-
-
 
 
 
@@ -250,7 +259,7 @@ function RestSearchFaqSec(prefix, page, size, type, cls) {
 						
 						// console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
 					}
-					$(".NFQ-quest-type").append('<span  class="NFQ-end"/>');
+					$(cls).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Voir tous les questions<span>`);
 
 					// fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
 					// k++;
@@ -265,5 +274,5 @@ function RestSearchFaqSec(prefix, page, size, type, cls) {
 
 
 }
-// 
+
 /*end NQF */
