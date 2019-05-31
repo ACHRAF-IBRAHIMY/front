@@ -180,4 +180,36 @@ ul {
 	    box-shadow: 3px 3px 3px rgba(102, 102, 102,0.34) !important;
 	    margin: 1em 0 !important;
 	}
+/* start left field */	
+.NFQ-fieldset{
+    display: block;
+    padding: 1.25rem;   
+    color: #999999;
+    background-color: white;
+    border-radius: 2px;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+}
+.NFQ-fa-style{
+    font-size: 20px;
+    line-height: .75em;
+    vertical-align: -15%;
+    margin: auto;
+    margin-right: 4px;
+}
+.NFQ-end{
+    font-size: 11px;
+    float: right;
+    color: #38A;
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+/* start left field */
+
+.NQF-freq-quest > .ow-pl-inner{
+    height: 1077px;
+    overflow: auto;
+}
 /*end NQF*/
