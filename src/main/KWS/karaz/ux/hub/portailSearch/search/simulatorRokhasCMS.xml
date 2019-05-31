@@ -83,6 +83,21 @@
                 }
             });
 
+             $(".simulator-cms .side-bar .body .div-2 .cms-form .class-type-question select").change(function(){
+                var type = $(this).children("option:selected").val();
+                if(type=="input"){
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-responses-q").hide();
+                }else{
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form  .class-responses-q").show();                
+                }
+
+                if(type=="input" || type=="input-conditional"){
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").show();
+                }else{
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();                
+                }
+            });
+
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button.save").click(function(){
                 uploadTreeToES();
             });
@@ -92,19 +107,29 @@
             });
 
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.class-end-button").click(function(){
-                $(".simulator-cms .side-bar .body").hide();
-                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
-                objectJsonMatrixColumns = {};
-                beginStepsMatrixColumns(id);
-                $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
-                $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
-                $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
-                $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-requis").addClass("active");
-                $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).hide();
-                $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();
-                $(".simulator-cms .side-bar .body1 input.tree-pos").val();
-                $(".simulator-cms .side-bar .body1").show();
-                step = 0;
+                if(removeMtrixCLass==true){
+                   alert("Vous avez annulé la classification de ce noeud, Veuillez d'abord annuler ou sauvegarder vos modifications."); 
+                }else{
+                    $(".simulator-cms .side-bar .body").hide();
+                    var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
+                    objectJsonMatrixColumns = {};
+                    beginStepsMatrixColumns(id);
+                    $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
+                    $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
+                    $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
+                    $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-requis").addClass("active");
+                    $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).hide();
+                    $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();
+                    $(".simulator-cms .side-bar .body1 input.tree-pos").val();
+                    $(".simulator-cms .side-bar .body1").show();
+                    step = 0;
+                }
+            });
+
+
+            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.reset").click(function(){
+                var id = $(".cms-form  input.class-id").val(); 
+                showUpdate(id);
             });
 
             var step = 0;
@@ -150,8 +175,10 @@
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click();
             dragscroll.reset();
             
+            $(".container-sim-cms").click(function(){
+                $(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide").hide();
+            });
 
-            
 
         </script>
         
@@ -258,7 +285,9 @@
                 <vbox className="container-sim-cms">
                     <vbox className="container-1">
                         <html>
-                            <div id="tree-simple" class="dragscroll" style="width:100%; height: 685px"> </div>
+                            <div id="tree-simple" class="dragscroll" style="width:100.5%; height: 741px"> 
+                                <div class="gif-load-simulator-cms"><img src="img/load-text.gif" /></div>
+                            </div>
                             <div class="button-upload-es">
                                 <button class="reset" style="background:green"><span>Réinitialiser</span></button>
                                 <button class="save"><span>Sauvegarder dans ES</span></button>
@@ -304,12 +333,12 @@
                     </html>
                 </vbox>
                 <vbox className="body">
-                    <vbox className="div-1">
+                    <vbox className="div-1" style="display:none">
                         <html>
                            
                             <div class="cms-form">
                               <input type="hidden" class="class-id" value="" />
-                               <div class="header-cms-form"><span></span></div>
+                               <div class="header-cms-form"><span /></div>
                                <div class="body-cms-form">
                                 <div class="class-title form-grid"><span>Node </span><span><input type="text" value="Root" /></span></div>
                                 <div class="class-oid form-grid">
@@ -330,12 +359,13 @@
                                 <div class="class-update-button">
                                    <button class="class-end-button" style="background: red;">Fin du chemin</button>
                                    <button class="save">Sauvegarder</button>
+                                   <button class="reset" style="background: #999;">Annuler</button>
                                 </div>
                                 </div>
                             </div>
                         </html>
                     </vbox>
-                    <vbox className="div-2">
+                    <vbox className="div-2" style="display:none">
                         <html>
                             <div class="cms-form">
                               <input type="hidden" class="class-id-qr" value="" />
@@ -355,12 +385,16 @@
                                     </div>
                                     <div class="class-responses-q">
                                       <span>Reponse : </span>
+                                       <div class="responses-sim-cms"></div>
+                                        
+                                    </div>
+                                    <div class="class-placeholder-q" style="display:none">
+                                      <span>Placeholder : </span>
                                        <div class="responses-sim-cms">
-                                         <div><span class="link-sim-cms"><input type="text" value="Rep1" /></span></div>
-                                         <div><span class="link-sim-cms"><input type="text" value="Rep2" /></span></div>
-                                         <div><span class="link-sim-cms"><input type="text" value="Rep3" /></span></div>
+                                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                                        </div>
                                     </div>
+                                    
                                     <div class="class-update-button">
                                         <button>Sauvegarder</button>
                                     </div>
@@ -374,7 +408,7 @@
                               <input type="hidden" class="class-id-qr" value="" />
                                <div class="header-cms-form">Ajouter une question</div>
                                <div class="body-cms-form">
-                                    <div class="class-question-q form-grid"><span>Question </span><span class="link-sim-cms"><textarea placeholder="votre Question"></textarea></span></div>
+                                    <div class="class-question-q form-grid"><span>Question </span><span class="link-sim-cms"><textarea placeholder="votre Question" /></span></div>
                                     <div class="class-type-question form-grid">
                                         <span>Type </span>
                                         <span class="link-sim-cms">

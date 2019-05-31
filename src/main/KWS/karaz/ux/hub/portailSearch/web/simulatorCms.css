@@ -6,10 +6,19 @@
     border-radius: 2px;
     box-shadow: 3px 3px 3px #0004;
     border: 1px solid #DDD;
-    height: 800px;
+    height: 870px;
     box-sizing: border-box;
 }
 
+
+.gif-load-simulator-cms{
+    display: block;
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    height: 100%;
+    padding-top: 20%;
+}
 
 .simulator-cms .navbar-sim-cms{
     border: 1px solid #eee;
@@ -46,7 +55,7 @@
     margin: 3px;
     background: #fff;
     width: 98%;
-    height: 749px;
+    height: 800px;
 }
 
 
@@ -99,7 +108,7 @@
     width: 90%;
     margin: auto;
     overflow: auto;
-    height: 600px;
+    max-height: 600px;
 }
 
 
@@ -108,12 +117,14 @@
     padding: 7px;
     background: #eee;
     text-align: center;
+    height: 50px;
 }
 
 .simulator-cms .container-sim-cms .container-4 table.tab-matrix tr td{
     border: 1px solid #ddd;
     padding: 7px;
     text-align: center;
+    height: 50px;
 }
 
 .simulator-cms .container-sim-cms .container-1 .button-upload-es{
@@ -180,7 +191,6 @@
     border: 1px solid #eee;
     padding: 15px;
     background: #fff;
-    height: 340px;
     margin-top: 6px;
 }
 
@@ -203,7 +213,7 @@
     background: inherit;
 }
 
-.simulator-cms .side-bar .body .cms-form-2 input.reponses,.simulator-cms .side-bar .body .cms-form-2 input.placeholder{
+.simulator-cms .side-bar .body .cms-form-2 input.reponses,.simulator-cms .side-bar .body input.placeholder{
     width: 95%;
     border: 1px solid #eee;
     padding: 7px;
@@ -248,7 +258,7 @@
     padding: 5px;
 }
 
-.simulator-cms .side-bar .body  .cms-form .class-responses,.simulator-cms .side-bar .body  .cms-form .class-responses-q {
+.simulator-cms .side-bar .body  .cms-form .class-responses,.simulator-cms .side-bar .body  .cms-form .class-responses-q ,.simulator-cms .side-bar .body  .cms-form .class-placeholder-q{
     padding: 6px;
     border: 1px solid #eee;
 }
