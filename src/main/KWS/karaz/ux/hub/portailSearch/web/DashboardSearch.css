@@ -1,5 +1,4 @@
 
-
  /* start NQF */
  .DC-Customized-fields-NQF .ow-field-input-line{
     border: unset;
@@ -411,6 +410,16 @@
   
 .folder-feature .folder-feature-body{
     padding: 20px 0px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 10% 80% 10%;
+}
+
+.folder-feature .folder-feature-body i.fa-caret-right,.folder-feature .folder-feature-body i.fa-caret-left{
+    font-size: 80px;
+    line-height: 120%;
+    cursor: pointer;
+    text-align: center;
 }
 
 .relative-position{
@@ -469,6 +478,10 @@
     z-index : -1;
   }
   .folder-feature .folder-feature-body .progressbar li:first-child:after {
+    content: none;
+  }
+
+  .folder-feature .folder-feature-body .progressbar li.first-step:after{
     content: none;
   }
 
@@ -1257,6 +1270,7 @@
     margin-right: 7%;
     justify-content: space-around;
     font-size: 14px;
+    visibility: hidden;
 }
 
 .header-menu button{

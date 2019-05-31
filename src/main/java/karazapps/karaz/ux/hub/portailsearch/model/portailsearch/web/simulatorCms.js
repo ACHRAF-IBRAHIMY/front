@@ -74,7 +74,13 @@ function startTreant(){
     my_chart = new Treant(simple_chart_config, function () {}, $);
 }
 
+
+var removeMtrixCLass = false;
+
 function showUpdate(id){
+    $(".simulator-cms .side-bar .div-1").show();
+    $(".simulator-cms .side-bar .div-2").hide();
+    removeMtrixCLass = false;
     var list = id.split("-");
     var str  = getParentPath(list);
     var obj  = eval("simple_chart_config.nodeStructure"+str);
@@ -94,11 +100,8 @@ function showUpdate(id){
         icon.setAttribute("style","cursor: pointer;color: red;margin: auto 5px;");
         icon.setAttribute("title","Annuler la classification");
         icon.addEventListener("click",function(){
-            deleted.push(eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]"));
-        	eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
-            eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]");
-            eval("delete simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]");
-            showUpdate(id);
+            removeMtrixCLass = true;
+            $(".cms-form .body-cms-form .class-oid span.classee").html("Non Classé");
         });
         $(".cms-form .body-cms-form .class-oid span.classee").append(icon);
     }
@@ -133,6 +136,7 @@ function showUpdate(id){
         $(".simulator-cms .side-bar .body1").hide();
        
 }
+
 var qstList = [];
 
 
@@ -196,6 +200,13 @@ function updateNode(id){
     }
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title");
     
+    if(removeMtrixCLass == true){
+        deleted.push(eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]"));
+        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
+        eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]");
+        eval("delete simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]");
+    }
+
     refrechTreant();
     showUpdate(id);
 }
@@ -243,20 +254,32 @@ function modeUpdate(){
 function showQuestion(results){
     $(".cms-form .body-cms-form .class-question-q input.id").val(results._source.id);
     $(".cms-form .body-cms-form .class-question-q .link-sim-cms").html("<textarea>"+results._source.question+"</textarea>");
+    
+    var type=results._source.response.type;
+
     for(var j=0;j<$(".cms-form .body-cms-form .class-type-question select option").length;j++){
         if($(".cms-form .body-cms-form .class-type-question select option").eq(j).val()==results._source.response.type){
-           $(".cms-form .body-cms-form .class-type-question select option").eq(j).select(); 
+            $(".cms-form .body-cms-form .class-type-question select option").eq(j).prop("selected",true); 
         }
     }
+
+    if(type=="input"){
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-responses-q").hide();
+    }else{
+        $(".simulator-cms .side-bar .body .div-2 .cms-form  .class-responses-q").show();                
+    }
+
+    if(type=="input" || type=="input-conditional"){
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val(results._source.response.placeholder);
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").show();
+    }else{
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val("");
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();                
+    }
+
     $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("");
     let str = results._source.response.content.join("//");
     $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("<div><textarea style=\"width: 98%;border: 1px solid #eee;\">"+str+"</textarea></div>");
-    
-    /*
-    for(var i=0;i<results._source.response.content.length;i++){    
-        $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html($(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html()+"<div><input type=\"text\" value=\""+results._source.response.content[i]+"\"/></div>")
-    }
-    */
 
     $(".simulator-cms .side-bar .body .div-2").show();
     $(".simulator-cms .side-bar .body .div-3").hide();
@@ -273,9 +296,7 @@ function getQuestionCms(id){
             xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
-                console.log(result);
-                showQuestion(result);
-            
+                showQuestion(result);            
         },
         error: function (error) {
             console.log(error.responseText);
@@ -299,6 +320,11 @@ function getQuestionDet(){
         "type":type,
         "content":content
     };
+
+    if(type=="input" || type=="input-conditional"){
+        var placeholder = $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val();
+        obj["response"]["placeholder"]=placeholder;
+    }
 
     console.log(obj);
     updateQuestionCms(id,obj);
@@ -597,9 +623,12 @@ function sendRequestBulkMatrix(bulks){
 };
 
 function getTreeFromEs(type){
+    if(type==0){
+        $(".container-sim-cms #tree-simple").html("<div class=\"gif-load-simulator-cms\"><img src=\"img/load-text.gif\" /></div>");
+    }
+
     $.ajax({
         type: "get",
-        //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
         url: URL_SEARCH+"/simulator_index_tree/tree/3",
         datatype: "application/json",
         contentType: "application/json",
@@ -607,7 +636,6 @@ function getTreeFromEs(type){
             xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
-            alert("it's not ready yet,we testing something !");
            if(type==0){
                 simple_chart_config.nodeStructure = result._source.treeComp;
                 startTreant();

@@ -1494,9 +1494,6 @@ function noResults(){
 }
 
 
-
-
-
 /*feature etat d'avancement dossier*/
 var URL_WS_1 = "http://urbarokhas.karaz.org:8080";
 var URL_WS_SEARCH_ALL_AUTORISATION = URL_WS_1+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction";
@@ -1504,22 +1501,38 @@ var URL_WS_KDATA_OBJECT = URL_WS_1+"/karazortal/access/rest/kdata/object/karazap
 
 
 function getFolderId(ref,cin){
+    $(".folder-feature .folder-feature-body i.fa-caret-right,.folder-feature .folder-feature-body i.fa-caret-left").hide();
+    var indexOf = getWsLink(ref.trim()); 
+    console.log("indexOf :"+indexOf);
+
     if(ref.trim()==""){
         $(".last-log input").blur();
         $(".folder-feature .folder-feature-header i").click();
+    }else if(ref.trim()!="" && indexOf==null ){
+        $(".folder-feature-body .folder-steps .no-response").show();
+        $(".folder-feature .folder-feature-body .progressbar").html("");
+        $(".folder-feature-body .folder-steps .no-response .ref").html(ref);
+
+        if(testWidth($(window).width(),640)){
+            $(".folder-feature").find("div:not(.no-response)").show("fast");
+            $(".folder-feature").animate({'width':'show'},function(){});
+        }else{
+            $(".folder-feature").find("div:not(.no-response)").show("fast");
+            $(".folder-feature").slideDown();
+        }
     }else{
         $(".relative-position .last-log .loadGif").show();
         $(".relative-position .folder-feature-header span").html(ref);    
         $.ajax({
             type: "get",
-            url: URL_WS_SEARCH_ALL_AUTORISATION+"?query.reference="+ref.trim().toUpperCase()+"&query.mocinrc="+cin+"&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=10&sortInfo=id=ASC",
+            url: autListId[indexOf].url+"?query.reference="+ref.trim().toUpperCase()+"&apiKey="+autListId[indexOf].apiKey+"&offset=0&limit=10&sortInfo=id=ASC",
             datatype: "application/json",
             success: function (result) { 
                 var newArray = transformFolder2Array(result.data);
                 var index = newArray[1].indexOf(ref.trim().toUpperCase());
                 if(index!=-1){
                     $(".folder-feature-body .folder-steps .no-response").hide();
-                    getFolder(newArray[0][index],ref.trim().toUpperCase());
+                    getFolder(newArray[0][index],ref.trim().toUpperCase(),indexOf);
                 }else{
                     $(".relative-position .last-log .loadGif").hide();
                     $(".folder-feature-body .folder-steps .no-response").show();
@@ -1542,11 +1555,56 @@ function getFolderId(ref,cin){
     }
 }
 
-var prefixList = [["PCT","MRC","MDF","LOT"],["PH"],["ODPT"]];
-var autList = ["permis construire","permis d'habiter","ODP telecom"];
+var prefixList = [["AMN","PCT","GRP","LOT","MDF","MRC","ELV"],["PH"],["ODP-AP"],["EC"],["ODP-AN"],["ODP"],["SD"]];
+var autListId = [
+    {
+        "url":"http://91.121.57.204:8080/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction",
+        "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+        "url_id":"http://91.121.57.204:8080/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction",
+    },
+    {
+        "url":"http://91.121.57.204:8080/karazortal/access/rest/kdata/search/urbanisme_permishabiter_search_AllPermishabiterHabitation",
+        "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+        "url_id":"http://91.121.57.204:8080/karazortal/access/rest/kdata/object/karazapps.urbanisme.permishabiter.model.PermishabiterHabitation"
+    },
+    {
+        "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationafp_search_AllAutorisationAFP",
+        "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+        "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationafp.model.AutorisationAFP"
+    },
+    {
+        "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationec_search_AllAutorisationEC",
+        "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+        "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationec.model.AutorisationEC"
+    },
+    {
+        "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationoan_search_AllAutorisationOAN",
+        "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+        "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationoan.model.AutorisationOAN"
+    },{
+        "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationodp_search_AllAutorisationODPTelecom",
+        "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+        "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationodp.model.AutorisationODP"
+    },{
+        "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationsd_search_AllAutorisationSD",
+        "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+        "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationsd.model.AutorisationSD"
+    }
+
+];
+
 
 function getWsLink(ref){
     var prefix = ref.split("-")[0];
+    
+    if(prefix=="ODP"){
+        if(ref.split("-")[1]=="AN"){
+            prefix+="-AN";
+        }else if(ref.split("-")[1]=="AN"){
+            prefix+="-AP";
+        }
+    }
+    
     for(var i=0;i<prefixList.length;i++){
         if(prefixList[i].indexOf(prefix)!=-1){
             break;
@@ -1556,41 +1614,74 @@ function getWsLink(ref){
     if(i==prefixList.length){
         return null;
     }else{
-        return autList[i];
+        return i;
     }
 }
 
-function getFolder(id,ref){
+function getFolder(id,ref,indexOf){
     $.ajax({
         type: "get",
-        url: URL_WS_KDATA_OBJECT+id+"?processStates=true&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K",
+        url: autListId[indexOf].url_id+"/"+id+"?processStates=true&apiKey="+autListId[indexOf].apiKey,
         datatype: "application/json",
         success: function (result) {
-            console.log(result); 
             var array1 = arrayHistoricGenrated(result.historic);
             var array2 = refrechArrayHistoriques(array1);
-            console.log(array2[0][0].length);
-            if(array2[0][0].length>10){
-                array2[0][0] = array2[0][0].splice(array2[0][0].length-10,array2[0][0].length);
-                array2[0][1] = array2[0][1].splice(array2[0][1].length-10,array2[0][1].length);
-                array2[0][2] = array2[0][2].splice(array2[0][2].length-10,array2[0][2].length);
-            }
 
-            arrayHistoricGenratedDiv(array2[0],ref);
+/* 
+        console.log(array2);
+
+        if(array2[0][0].length>10){
+            array2[0][0] = array2[0][0].splice(array2[0][0].length-10,array2[0][0].length);
+            array2[0][1] = array2[0][1].splice(array2[0][1].length-10,array2[0][1].length);
+            array2[0][2] = array2[0][2].splice(array2[0][2].length-10,array2[0][2].length);
+        }
+*/
+            var begEnd = begEndSteps(array2[0][2]);
+            arrayHistoricGenratedDiv(array2[0],ref,begEnd);
+            
             if(testWidth($(window).width(),640)){
                 $(".folder-feature").find("div:not(.no-response)").show("fast");
                 $(".folder-feature").animate({'width':'show'},function(){});
             }else{
+                $(".folder-feature .folder-feature-body i.fa-caret-right,.folder-feature .folder-feature-body i.fa-caret-left").hide();
                 $(".folder-feature").find("div:not(.no-response)").show("fast");
                 $(".folder-feature").slideDown();
             }
-            $(".relative-position .last-log .loadGif").hide();
 
+            $(".relative-position .last-log .loadGif").hide();
         },
         error: function(error){
             console.log(error);
         }
     });
+}
+
+function begEndSteps(tab){
+    var beg = 0;
+    var end = tab.length-1;  
+    if(tab.indexOf("active")!=-1){
+    if(tab.length<=10){
+        return {"begin":beg,"end":end};    
+    }else if(tab.indexOf("active") < tab.length-3 && tab.indexOf("active") > 3){
+        return {"begin":tab.indexOf("active")-3,"end":tab.indexOf("active")+3};
+    }else{ 
+      if( tab.indexOf("tree") <= 3){
+        return {"begin":beg,"end":beg+6}
+      }else if( tab.indexOf("active") >= tab.length-3 ){
+        return {"begin":end-6,"end":end};
+      }
+    }
+    }else{
+      if(tab.length>=10){
+        if(tab[0]=="active"){
+           return {"begin":end-6,"end":end};
+        }else{
+          return {"begin":beg,"end":beg+6}
+        }
+      }else{
+        return {"begin":beg,"end":end};    
+      }
+    }
 }
 
 function testExactFolder(ref,newRef){
@@ -1619,32 +1710,123 @@ function transformFolder2Array(result){
 }
 
 
-function arrayHistoricGenratedDiv(historiques,ref){
+var UID = {
+	_current: 0,
+	getNew: function(){
+		this._current++;
+		return this._current;
+	}
+};
+
+var proc = 13;
+var beginStep = 0;
+var endStep = 10;
+var totalStep = 10;
+
+/*
+function showSteps(beg,end){
+    var stepsH = $(".folder-feature .folder-feature-body .progressbar li");
+    for(var i=0;i<stepsH.length;i++){
+        if( (i>=begEnd.begin && i<=begEnd.end) || !testWidth($(window).width(),640) ){
+            li.setAttribute("style","width:"+(proc-1)+"%");
+        }else{
+            li.setAttribute("style","visibility:hidden;width:0;height:0");
+        }
+    }    
+}*/
+
+function nextGeneratedDiv(){
+    if(endStep+6<totalStep){    
+        var begEnd = {
+            "begin":beginStep+6,
+            "end":Math.min(endStep+6,totalStep)
+        };
+    }else{
+        console.log("this");
+        var begEnd = {
+            "begin":totalStep-6,
+            "end":totalStep
+        };
+    }
+    arrayHistoricGenratedDiv(historiquesGlo,refer,begEnd);
+}
+
+function prevGeneratedDiv(){
+    if(beginStep-6>6){    
+        var begEnd = {
+            "begin": Math.max(0,beginStep-6),
+            "end": endStep-6
+        };
+    }else{
+        var begEnd = {
+            "begin": 0,
+            "end": 6
+        };
+    }
+    arrayHistoricGenratedDiv(historiquesGlo,refer,begEnd);
+}
+
+var historiquesGlo = [];
+var refer = "";
+function arrayHistoricGenratedDiv(historiques,ref,begEnd){
+
+    historiquesGlo = historiques;
+    refer = ref;
 
     var divGlo = $(".folder-feature .folder-feature-body .progressbar");
     divGlo.html("");
     $(".folder-feature .folder-feature-header div span").html(ref);
 
-    var proc = 100/historiques[0].length;
+    var leng =  (begEnd.end-begEnd.begin+1);
+
+    proc = 100/leng;
+
+    if(historiques[0].length>10){
+        $(".folder-feature .folder-feature-body i.fa-caret-right,.folder-feature .folder-feature-body i.fa-caret-left").show();
+    }
+
+    totalStep = historiques[0].length-1;
 
     for(var i=0;i<historiques[0].length;i++){
         var label = historiques[0][i];
         var date = historiques[1][i];
         var status = historiques[2][i];
         var li = document.createElement("li");
-        li.setAttribute("style","width:"+(proc-1)+"%");
+        
+        beginStep = begEnd.begin;
+        endStep = begEnd.end;
+
+        if( (i>=begEnd.begin && i<=begEnd.end) || !testWidth($(window).width(),640) ){
+            li.setAttribute("style","width:"+(proc-1)+"%");
+        }else{
+            li.setAttribute("style","visibility:hidden;width:0;height:0");
+        }
+        
         if(status =="done"){
-            li.setAttribute("class","bf-active");
+            if(i==begEnd.begin){
+                li.setAttribute("class","bf-active first-step");
+            }else{
+                li.setAttribute("class","bf-active");
+            }
             li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\">"+date.split(" ")[0]+"</span>";
         }else if(status =="active"){
-            li.setAttribute("class","active");
+            if(i==begEnd.begin){
+                li.setAttribute("class","active first-step");
+            }else{
+                li.setAttribute("class","active");
+            }
             li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\"></span>";
         }else{
-            li.setAttribute("class","");
+            if(i==begEnd.begin){
+                li.setAttribute("class","first-step");
+            }else{
+                li.setAttribute("class","");
+            }
             li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\"></span>";
         }
         divGlo.append(li);        
     }
+
 }
 
 function arrayHistoricGenrated(historiques){

@@ -149,6 +149,14 @@
     });
 
 
+    $(".folder-feature .folder-feature-body i.fa-caret-right").click(function(){
+        nextGeneratedDiv();
+    });
+
+    $(".folder-feature .folder-feature-body i.fa-caret-left").click(function(){
+        prevGeneratedDiv();    
+    });
+
         </script>
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
@@ -333,16 +341,18 @@
             <vbox className="folder-feature ">
                 <html>
                     <div class="folder-feature-header">
-                        <div><span></span><i class="fas fa-close" /></div>
+                        <div><span /><i class="fas fa-close" /></div>
                         <hr />
                     </div>
                     <div class="folder-feature-body">    
+                        <div><i class="fas fa-caret-left"></i></div>
                         <div class="folder-steps">
                             <ul class="progressbar">
                             </ul>
                             <div class="no-response">
-                            La référence du dossier <span class="ref" style="font-weight: 700;"></span> n’existe pas. Veuillez renseigner la référence du dossier telle qu’elle figure sur la demande soumise.</div>
+                            La référence du dossier <span class="ref" style="font-weight: 700;" /> n’existe pas. Veuillez renseigner la référence du dossier telle qu’elle figure sur la demande soumise.</div>
                         </div>
+                        <div><i class="fas fa-caret-right"></i></div>
                     </div>
                 </html>
             </vbox>
@@ -372,7 +382,7 @@
                             </postChange>
                         </button>
                     </vbox>
-                    <html className="link-div-ref">
+                    <html className="link-div-ref" style="visibility:hidden">
                         <a>Référentiel des activités</a>
                     </html>
 
