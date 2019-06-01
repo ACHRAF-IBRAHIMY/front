@@ -2352,3 +2352,78 @@
     color: #999;
     text-align: center;
 }
+
+#retageHomePage button.ow-button.float{
+    margin-left: 80%;
+    position: relative;
+}
+#retageHomePage .search_Button {
+    color: #757777 !important;
+}
+
+#retageHomePage .hp-search_btn {
+ height: 36px;
+    width: 119px;
+    border: 1.8px solid;
+    border-radius: 0.5em;
+    /* border-radius: 6px; */
+    font-weight: bold;
+    letter-spacing: 1.1px;
+    background: #ededed;
+    color: #3388AA;
+    /* border: 5px #3388AA; */
+    margin: 4px;
+}
+
+#retageHomePage .hp-search_btn:hover {
+    background: var(--form-button-fg);
+	color: white;
+}
+#retageHomePage .search_buttonAR_ar {
+     background: var(--form-button-fg);
+	color: white;
+}
+#retageHomePage .search_buttonFR_fr {
+     background: var(--form-button-fg);
+	color: white;
+}
+
+#retageHomePage .hp-sbox-big-title {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: var(--fg0);
+    text-align: center;
+    margin: 0.5rem 0 0 1rem;
+}
+#retageHomePage .hp-sbox-text {
+    font-size: 1rem;
+    display: block;
+    color: var(--fg1);
+    margin-left: 1rem;
+    margin-right: 2rem;
+    text-align: left;
+    margin-top: 10px;
+}
+
+#retageHomePage .hp-sbox-big-title-ar {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--fg0);
+    text-align: center;
+    margin: 0.5rem 0 0 1rem;
+}
+
+#retageHomePage .hp-sbox-text-ar {
+    font-size: 1.1rem;
+    display: block;
+    color: var(--fg1);
+    margin-left: 1rem;
+    margin-right: 2rem;
+    text-align: left;
+    margin-top: 10px;
+	text-align: right;
+	word-wrap: break-word;
+}
+#retageHomePage .res-div-height-ar {
+	 height: 44%;
+}
