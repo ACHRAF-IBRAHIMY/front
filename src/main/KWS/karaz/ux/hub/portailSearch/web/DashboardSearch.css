@@ -2414,7 +2414,7 @@
 }
 
 #retageHomePage .hp-sbox-text-ar {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
     display: block;
     color: var(--fg1);
     margin-left: 1rem;
@@ -2433,12 +2433,12 @@
   font-size: 1.2em;
 }
 #retageHomePage .search_buttonAR_ar .ow-btn-label {
-    font-family: Droid Arabic Kufi, sans-serif;
-	font-size: 1.2em;
+        font-family: Noto Kufi Arabic;
+    font-size: 13px;
 }
 #retageHomePage .search_buttonAR_fr .ow-btn-label {
-    font-family: Droid Arabic Kufi, sans-serif;
-    font-size: 1.2em;
+        font-family: Noto Kufi Arabic;
+    font-size: 13px;
 }
 #retageHomePage .support {
     width: 85%;
@@ -2522,6 +2522,12 @@
     grid-template-columns: 25% 25% 25% 25%;display: grid;
 	 padding-left: 20%;
 }
+#retageHomePage .support-time-ar {
+    font-size: 12px;
+    display: block;
+    position: relative;
+    bottom: -40px;
+}
 @media screen and (max-width: 900px){
 #retageHomePage .ow-gbox {
     display: contents;
@@ -2547,5 +2553,19 @@
 #retageHomePage .separate_div {
     width:30%;
 }
+#retageHomePage .support-time-ar {
+    font-size: 12px;
+    display: block;
+    position: relative;
+    bottom: 0px;
+}
 
+}
+#retageHomePage .footer_logo{
+       justify-content: center;
+    display: flex;
+    margin-top: 3px;
+    margin-bottom: 2px;
+	
+	
 }
