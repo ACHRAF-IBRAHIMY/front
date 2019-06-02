@@ -99,7 +99,7 @@
                            </vbox>
 						   <vbox />
 						   
-                          <vbox columns="40% 0% 40% 13%" className="support"> 
+                          <vbox columns="40% 0% 46% 13%" className="support"> 
                             <html className="support-html full-grid-small">
                                 <i class="fas fa-paper-plane" />
                                 <span>support@rokhas.ma</span>
