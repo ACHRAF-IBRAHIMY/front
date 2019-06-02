@@ -17,25 +17,19 @@
       
       
     <screen id="retageHomePage" labelWidth="80" label="My Dashboard" noToolBar="true">      
-       
-        <vbox  className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo"> 
-                    <div class="rokhas-home" style="margin-left: 50px;" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/RetageProdHomePage", "search", "Public central search", {});'>
+       <script onLoad="true">
+	   $(".app-footer").empty();
+	   </script>
+        <vbox className="Header-signup" columns-smallx="auto">
+            <vbox className="header_logo">
+                <html > 
+                    <div  onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/RetageProdHomePage&quot;, &quot;search&quot;, &quot;Public central search&quot;, {});">
                         <img src="./img/rokhasRectBlueArFr.svg" style="height: 60px;margin-top: 16px;margin-bottom: 25px;" />
                     </div>
                 </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
+                
             </vbox>
-            <vbox columns="70% auto" className="Header-signup-logo">
+            <vbox columns="70% auto" className="header_lang_btn">
             <button className="hp-search_btn  search_buttonAR_{query.lang}" label="العربية" separator="!!">
                             <postChange>
                                 root.query.lang="ar";
@@ -78,7 +72,7 @@
                     <html>
                         <div style="height: 50px;"> </div>
                     </html>        
-                     <vbox columns="5% 40% 10% 40%">
+                     <vbox columns="5% 40% 10% 40%" className="btn-link-prod">
 					 <vbox />
 					 <vbox>
                            <html className="res-div-height">
@@ -103,9 +97,8 @@
                            </html>
 						   </vbox>
                            </vbox>
-						   <html>
-                        <div style="height: 50px;"> </div>
-                    </html> 
+						   <vbox />
+						   
                           <vbox columns="40% 0% 40% 13%" className="support"> 
                             <html className="support-html full-grid-small">
                                 <i class="fas fa-paper-plane" />
@@ -129,7 +122,7 @@
         
 		<vbox />  
 		</vbox>
-        <vbox columns="15% 70% 15%" className="global-div-temp" visible="{query.lang},=,ar">
+        <vbox id="retageHomePage-ar" columns="15% 70% 15%" className="global-div-temp" visible="{query.lang},=,ar">
           
          <vbox />   
         <vbox className="hp-box hp-small divSearch height-986">
@@ -139,12 +132,12 @@
                             توحيد علامتي كازا إربا و رخص
                         </div>
 						 <div style="height: 50px;" />
-                        <div class="hp-sbox-text-ar"  >
+                        <div class="hp-sbox-text-ar">
                             
 في إطار تعميم و توحيد المساطر الخاصة بتدبير الرخص على الصعيد الوطني، فإن منصتكم الخاصة بتدبير الرخص ذات الطابع العمراني (كازا إربا) و تلك الخاصة بتدبير الرخص ذات الطابع الإقتصادي ستحملان من الآن فصاعدا هوية وحيدة و موحدة : <b>رخص</b>
                         </div>
                         <div style="height: 10px;" />
-						<div class="hp-sbox-text-ar" >
+						<div class="hp-sbox-text-ar">
 						
                            <b>اضغطوا على الزر الموافق لطبيعة حسابكم من أجل الولوج إلى فضاء عملكم الخاص. المرجو الإنتباه إلى أنه <u>لن يطرأ على فضاء عملكم الخاص أي تغيير قبل المرور إلى النسخة الثالثة</u> من منصة رخص الموحدة</b>
                         </div>
@@ -154,7 +147,7 @@
                     <html>
                         <div style="height: 50px;"> </div>
                     </html>        
-                     <vbox columns="5% 40%  5% 40%">
+                     <vbox columns="5% 40%  5% 40%" className="btn-link-prod">
 					 <vbox />
 					 <vbox>
                            
@@ -162,7 +155,7 @@
                                <div class="main-icon-title t3" style="width:80%">
                                    <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
                                         <i class="fas fa-cog" />
-                                        <span style="font-size: 1.1rem;">الرخص الإقتصادية</span>
+                                        <span style="font-size: 1.4rem;">الرخص الإقتصادية</span>
                                     </div>
                                </div>
                            </html>
@@ -173,7 +166,7 @@
                                <div class="main-icon-title t4" style="width:80%">
                                    <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
                                         <i class="fas fa-map-marker-alt" />
-                                       <span style="font-size: 1.1rem;">رخص التعمير</span>
+                                       <span style="font-size: 1.4rem;">رخص التعمير</span>
                                     </div>
                                </div>
                            </html>
@@ -181,10 +174,8 @@
 						    
 						   
                            </vbox>
-						   <html>
-                        <div style="height: 50px;"> </div>
-                    </html> 
-                          <vbox columns="40% 0% 40% 13%" className="support"> 
+						  <vbox />
+                          <vbox columns="40% 0% 46% 18%" className="support"> 
                             <html className="support-html full-grid-small">
                                 <i class="fas fa-paper-plane" />
                                 <span>support@rokhas.ma</span>
@@ -207,10 +198,49 @@
         
 		<vbox />  
 		</vbox>
-                 
+		<vbox id="shareFooter" name="shareFooter" >
+		<vbox>
+		 <html>
+		 <div id="footerBanner"> </div> 
+		 </html>
+		 </vbox >
+		 <vbox className="providerMention" columns="16% 68% 16%">
+		
+		 <html>
+		 <div > © Rokhas 2019</div> 
+		 </html>
+		
+		 <vbox className="separate_div" />
+		 
+		  <html>
+		 <div class="footer_acess_icon" > <div >
+		<a class="item order0 " href="#">
+			<span class="itemLabel  contact "></span>
+		</a>
+	</div>
 
-        
-        
+	<div >
+		<a class="item order1 " href="#">
+			<span class="itemLabel  security "></span>
+		</a>
+	</div>
+
+	<div >
+		<a class="item order2 " href="#">
+			<span class="itemLabel  legales "></span>
+		</a>
+	</div>
+
+	<div >
+		<a class="item order3 " href="#">
+			<span class="itemLabel  faq "></span>
+		</a>
+	</div></div> 
+		 </html>
+		 
+		 </vbox >
+		</vbox >
+		
     </screen>
         
     /********************************************************/
