@@ -29,7 +29,7 @@
                 </html>
                 
             </vbox>
-            <vbox columns="70% auto" className="header_lang_btn">
+            <vbox columns="52% auto" className="header_lang_btn">
             <button className="hp-search_btn  search_buttonAR_{query.lang}" label="العربية" separator="!!">
                             <postChange>
                                 root.query.lang="ar";
@@ -102,7 +102,10 @@
 						   <html>
                            <div style="height: 20px;"> </div>
                           </html>  
-                          <vbox columns="40% 0% 46% 13%" className="support"> 
+                          <vbox columns="7% 40% 0% 46%" className="support"> 
+						  <html className="support-time">
+                                <!--span style="font-size:12px;">08:30 à 18:30</span-->
+                            </html>
                             <html className="support-html full-grid-small">
                                 <i class="fas fa-paper-plane" />
                                 <span>support@rokhas.ma</span>
@@ -115,9 +118,7 @@
                                 <span>+212 (0) 5 22 23 23 44</span><div style="margin-top: -13px;">
 								<span style="font-size:12px;color: var(--fg1);font-weight: normal">08:30 à 18:30</span></div>
                             </html>
-                            <html className="support-time">
-                                <!--span style="font-size:12px;">08:30 à 18:30</span-->
-                            </html>
+                            
                         </vbox>
                     </vbox>
 
@@ -181,23 +182,22 @@
 						  <html>
                            <div style="height: 20px;"> </div>
                           </html>
-                          <vbox columns="45% 0% 52% 18%" className="support"> 
+                          <vbox columns="1% 46% 0% 46%" className="support"> 
+						   <vbox />
                             <html className="support-html full-grid-small">
                                 <i class="fas fa-paper-plane" />
-                                <span>support@rokhas.ma</span>
+                                <span style="font-size: 22px;">support@rokhas.ma</span>
                             </html>
                             <html>
                                 
                             </html>
                             <html className="support-html full-grid-small">
                                 <i class="fas fa-phone" />
-                                <span>+212 (0) 5 22 23 23 44</span>
+                                <span style="font-size: 20px;">+212 (0) 5 22 23 23 44</span>
 								<div style="margin-top: -13px;">
 								<span style="font-size:12px;color: var(--fg1);font-weight: normal">08:30 à 18:30</span></div>
                             </html>
-                            <html className="support-time-ar">
-                                <!--span style="font-size:12px;">08:30 à 18:30</span-->
-                            </html>
+                            
                         </vbox>
                     </vbox>
 
@@ -205,49 +205,6 @@
             </vbox>    
         
 		<vbox />  
-		</vbox>
-		<vbox id="shareFooter" name="shareFooter">
-		<html> 
-                    <div class="footer_logo">
-                        <img src="./img/Logo-Rokhas-ar-fr-blanc.svg" style="height: 60px;margin-top: 24px;margin-bottom: 4px;" />
-                    </div>
-                </html>
-		
-		 <vbox className="providerMention" columns="16% 68% 16%">
-		
-		 <html>
-		 <div> © Rokhas 2019</div> 
-		 </html>
-		
-		 <vbox className="separate_div" />
-		 
-		  <html>
-		 <div class="footer_acess_icon"> <div>
-		<a class="item order0 " href="#">
-			<span class="itemLabel  contact " />
-		</a>
-	</div>
-
-	<div>
-		<a class="item order1 " href="#">
-			<span class="itemLabel  security " />
-		</a>
-	</div>
-
-	<div>
-		<a class="item order2 " href="#">
-			<span class="itemLabel  legales " />
-		</a>
-	</div>
-
-	<div>
-		<a class="item order3 " href="#">
-			<span class="itemLabel  faq " />
-		</a>
-	</div></div> 
-		 </html>
-		 
-		 </vbox>
 		</vbox>
 		
     </screen>
