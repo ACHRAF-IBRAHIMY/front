@@ -1,3 +1,8 @@
+function removeExpanded(){
+    $(".simulator .docs-qr div.ow-pl").removeClass("expanded");
+}
+
+
 function addQuestion(qst){ 
     $(".simulator .simulator-qr .qr").html("");
     createQuestion(qst.response.type,qst);
@@ -32,6 +37,7 @@ function createQuestion(type,obj){
             }else{
                 resDiv.setAttribute("style","display: grid;grid-template-columns: 10% 90%;");
             }
+
             var input = document.createElement("input");
             input.setAttribute("type","hidden");
             input.setAttribute("value",i+1);
@@ -44,10 +50,11 @@ function createQuestion(type,obj){
                 $(this).parent().parent().find(".check-ent").removeClass("active-check");
                 $(this).children(".check-ent").addClass("active-check");
                 if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
-                   $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped"); 
+                   $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                   removeExpanded(); 
                 }
-                
             });
+
             var checkEnt = document.createElement("span");
             checkEnt.setAttribute("class","check-ent");
             if(i==0)checkEnt.setAttribute("class","check-ent active-check");
@@ -70,11 +77,24 @@ function createQuestion(type,obj){
          check.innerHTML = obj.response.content[i];   
          response.appendChild(check);
        }
+       response.addEventListener("change",function(){
+            if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
+                $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                removeExpanded(); 
+            }
+       });
        q2.appendChild(response);    
     }else if(type=="input"){
        var response = document.createElement("input");
        response.setAttribute("class","rep-pred rep-type-2");
        response.setAttribute("placeholder",obj.response.placeholder);
+       response.addEventListener("input",function(){
+        if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
+            $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            removeExpanded(); 
+         }
+       });
+
        q2.appendChild(response);
     }else if(type="input-conditional"){
         var size = obj.response.content.length;
@@ -88,6 +108,12 @@ function createQuestion(type,obj){
         }
         response.setAttribute("class","rep-pred rep-type-3");
         response.setAttribute("placeholder",obj.response.placeholder);
+        response.addEventListener("input",function(){
+            if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
+                $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                removeExpanded(); 
+             }
+           });
         q2.appendChild(response);
     }
     
@@ -249,8 +275,6 @@ function nextClick(){
                 startButton(1);  
                 var str = getTreeHier(tree,arrayVect); 
                 var treeLocal = eval("tree"+str);
-                console.log(str);
-                console.log(treeLocal);
                 traitementResponse(treeLocal,val-1)
                 break;
             case 1:
@@ -259,8 +283,6 @@ function nextClick(){
                 addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
                 var str = getTreeHier(tree,arrayVect); 
                 var treeLocal = eval("tree"+str);
-                console.log(str);
-                console.log(treeLocal);
                 traitementResponse(treeLocal,val-1)
                 break;
             case 2:
@@ -271,8 +293,6 @@ function nextClick(){
                 startButton(1);
                 var str = getTreeHier(tree,arrayVect); 
                 var treeLocal = eval("tree"+str);
-                console.log(str);
-                console.log(treeLocal);
                 traitementResponse(treeLocal,0);       
                 break;
             case 3:
@@ -440,6 +460,7 @@ function sendRequestBulk(bulk,type){
         success: function (result) {    
             console.log(result);
             if(type==0 || type==2){
+                $(".simulator .simulator-qr .next-button img").hide();
                 addDocs(result.responses,type);
             }else{
                 addSteps(result.responses);                
@@ -447,6 +468,8 @@ function sendRequestBulk(bulk,type){
         },
         error: function (error) {
             console.log(error.responseText);
+            $(".simulator .simulator-qr .next-button img").hide();
+
         }
     })
 
@@ -506,6 +529,7 @@ function firstEsTreeCall(){
 
 
 function countDoc(type,objSearchMatrix) {
+    $(".simulator .simulator-qr .next-button img").show();
     var obj = {
         "query": {
             "match_all": {}
@@ -529,6 +553,11 @@ function countDoc(type,objSearchMatrix) {
             xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
+            console.log(objSearchMatrix);
+            if(objSearchMatrix==null){
+                $(".simulator .simulator-qr .next-button img").hide();
+            }else{
+
             if (type == 0) {
                 var inte = objSearchMatrix.docs;
                 var vector = bin2vec(int2bin(inte));
@@ -563,11 +592,8 @@ function countDoc(type,objSearchMatrix) {
                 
             } else if (type == 20) {
                 
-                
-
-
             }
-            result.count
+        }
         },
         error: function (error) {
             console.log(error.responseText);
@@ -587,23 +613,31 @@ function backClick(){
 }
 
 function addDocs(result,type){
-    if(type==0){
-        var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0];
-    }else if(type==2){
-        var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0];    
-    }
-    docContainer.innerHTML="";
-    for(var i =0 ; i <result.length;i++){
-        var doc = document.createElement("div");
-        doc.setAttribute("class","doc-item");
-        var icon = document.createElement("i");
-        icon.setAttribute("class","far fa-file-alt");
-        var docName = document.createElement("span");
-        docName.innerHTML = result[i].hits.hits[0]._source.title;
-        docName.setAttribute("class","doc-name");
-        doc.appendChild(icon);
-        doc.appendChild(docName);
-        docContainer.appendChild(doc);
+    if(result.length==0){
+        
+    }else{
+        if(type==0){
+            $(".simulator .docs-qr div.ow-pl").eq(0).addClass("expanded");
+            var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0];
+        }else if(type==2){
+            $(".simulator .docs-qr div.ow-pl").eq(4).addClass("expanded");
+            var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0];    
+        }
+        
+        docContainer.innerHTML="";
+        
+        for(var i =0 ; i <result.length;i++){
+            var doc = document.createElement("div");
+            doc.setAttribute("class","doc-item");
+            var icon = document.createElement("i");
+            icon.setAttribute("class","far fa-file-alt");
+            var docName = document.createElement("span");
+            docName.innerHTML = result[i].hits.hits[0]._source.title;
+            docName.setAttribute("class","doc-name");
+            doc.appendChild(icon);
+            doc.appendChild(docName);
+            docContainer.appendChild(doc);
+        }
     }
 }
 
@@ -611,6 +645,11 @@ function addDocs(result,type){
 function addSteps(result){
     var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("steps-container")[0];
     docContainer.innerHTML="";
+    
+    if(result.length!=0){
+        $(".simulator .docs-qr div.ow-pl").eq(1).addClass("expanded");
+    }
+
     for(var i =0 ; i <result.length;i++){
         var doc = document.createElement("div");
         doc.setAttribute("class","doc-item");
@@ -637,7 +676,6 @@ function addSteps(result){
         doc.appendChild(detadd);
         doc.appendChild(det);
         docContainer.appendChild(doc);
-        
 
     }
 }

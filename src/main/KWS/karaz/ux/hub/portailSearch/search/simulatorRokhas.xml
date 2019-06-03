@@ -43,7 +43,9 @@
         $(".header-div-toggle .dropdown-content").slideUp();
     }); 
             
-            
+                        removeExpanded();
+
+
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -86,9 +88,9 @@
                             <div class="dropdown-content">
                                 <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
                                     Référentiel juridique</a>
-                                <hr/>
-                                <a >Guides vidéos</a><hr/>
-                                <a >Utilitaires</a>
+                                <hr />
+                                <a>Guides vidéos</a><hr />
+                                <a>Utilitaires</a>
                             </div>
                         </html>
                         <postChange>
@@ -164,6 +166,7 @@
                         <div class="next-button">
                             <button class="back-rq stopped">Précédent</button>
                             <button class="next-rq">Suivant</button>    
+                            <img src="img/loadgif3.gif"  style="width: 49px;display: inline-block;vertical-align: middle;display:none;"/>
                         </div>
                     </html>
                     </vbox>
@@ -222,6 +225,5 @@
     </screen>
 
 	</view>
-
 
 </search>

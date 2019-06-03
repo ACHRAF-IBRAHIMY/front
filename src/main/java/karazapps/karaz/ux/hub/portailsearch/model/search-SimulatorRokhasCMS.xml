@@ -44,8 +44,14 @@
                 updateNode(id);
             });
 
-            $(".simulator-cms .side-bar .body .div-2 .cms-form .class-update-button button").click(function(){
+            $(".simulator-cms .side-bar .body .div-2 .cms-form .class-update-button button.save").click(function(){
                 getQuestionDet();
+            });
+
+            $(".simulator-cms .side-bar .body .div-2 .cms-form .class-update-button button.remove").click(function(){
+                if(confirm("Si vous acceptez la question va être supprimée et donc le noeud sera vide, n'oubliez pas de lier ce noeud à une question déjà stockée.")){
+                    removeQuestion();                
+                }
             });
             
             $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-update-button button").click(function(){
@@ -103,7 +109,10 @@
             });
 
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button.reset").click(function(){
-                getTreeFromEs(0);
+                if(confirm("Veuillez vous réinitialiser ?")){
+                    getTreeFromEs(0);
+                }
+                    
             });
 
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.class-end-button").click(function(){
@@ -396,7 +405,8 @@
                                     </div>
                                     
                                     <div class="class-update-button">
-                                        <button>Sauvegarder</button>
+                                        <button class="save">Sauvegarder</button>
+                                        <button class="remove" style="background:red">Supprimer</button>
                                     </div>
                                 </div>
                             </div>
@@ -413,7 +423,7 @@
                                         <span>Type </span>
                                         <span class="link-sim-cms">
                                             <select>
-                                                <option value="checked">Check box</option>
+                                                <option value="check">Check box</option>
                                                 <option value="select">Select</option>
                                                 <option value="input">Input</option>
                                                 <option value="input-conditional">Input Conditionnel</option>
