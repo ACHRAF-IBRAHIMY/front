@@ -65,7 +65,7 @@
     border-left: none;
     border-right: none;
     height: 30px;
-    width: 46%;
+    width: 75%;
     padding-left: 9px;
     margin-left: 11px;
     color: #888;
@@ -95,9 +95,6 @@
 }
 
 .simulator .simulator-qr .next-button{
-    position: absolute;
-    left: 35%;
-    bottom: 30px;
 }
 
 .simulator .simulator-qr .next-button .stopped{

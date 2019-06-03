@@ -212,4 +212,31 @@ ul {
     height: 1077px;
     overflow: auto;
 }
+
+/*added */
+.NQF-new-quest-btn .ow-vl-inner .ow-btn-container{
+    text-align: center !important ;
+}
+.NQF-new-quest-btn .ow-button {
+    background: var(--form-button-hover-bg) !important;
+    color: var(--form-button-hover-fg) !important;
+}
+.NQF-shadow .ow-label-pl, .NQF-header-NQF .ow-label-pl{
+    color: #999;
+}
+.NQF-header-NQF .ow-pl-inner{
+        padding: 10px 2em 2em 2em !important;
+        
+}
+
+.NQF-quest-delete{
+    grid-template-columns: auto 5%;
+    display: grid;
+    grid-column-gap: 1em;
+}
+.NFQ-close-quest:hover{
+    
+    color:red;
+    cursor: pointer;
+}
 /*end NQF*/

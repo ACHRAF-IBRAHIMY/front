@@ -523,7 +523,6 @@ function getQsFaq(id,type){
         },
         success: function (result) {
             if(type==0){
-                
 				$(".NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
 				$(".NQF-prev-resp").html(result._source.REPONSES);
 				$(".NQF-categorie").val(result._source.type);
@@ -532,7 +531,13 @@ function getQsFaq(id,type){
 				$(".NQF-edit-modif").hide();
 				$(".NQF-btn-alg").show();
 				let a = $(".NQF-categorie")
-				console.log(a.val());
+				var pos = $(".pcd-header-NQF").offset().top;
+             	$('html,body').animate(
+                  {
+                      scrollTop: pos
+                  },
+				  'slow'); 
+				  $(".NQF-new-quest-btn").hide();
 
             }else if(type==1){
                 console.log(result._source.type);

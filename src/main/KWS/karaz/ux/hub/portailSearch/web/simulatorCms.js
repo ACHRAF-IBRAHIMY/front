@@ -5,7 +5,7 @@ var simple_chart_config = {
         // levelSeparation: 30,
         subTeeSeparation:   30,
         levelSeparation:    60,
-        siblingSeparation:  60,
+        sizblingSeparation:  60,
         nodeAlign: "BOTTOM",
         node: { HTMLclass: "evolution-tree" },
         connectors: {
@@ -304,6 +304,40 @@ function getQuestionCms(id){
     });
 }
 
+function removeQuestion(){
+    var id = $(".cms-form .body-cms-form .class-question-q input.id").val();
+    restRemoveQuestion(id);
+}
+
+function restRemoveQuestion(id){
+    $.ajax({
+        type: "delete",
+        url: URL_SEARCH+"/simulator_index_qr/qrs/"+id,
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {
+            console.log(result);
+            loadQuestionsFromEs();
+            var title = $(".cms-form .header-cms-form span").html();
+            var idsec = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
+            var list = idsec.split("-");
+            var str  = getParentPath(list);
+            var questionId =  "-1";
+            var question =  "Quel est votre question ?";   
+            console.log(questionId+"****"+question);
+            eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
+            eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
+            eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title"); 
+            refrechTreant();
+            showUpdate(idsec);       
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
 
 function getQuestionDet(){
     var obj = {};

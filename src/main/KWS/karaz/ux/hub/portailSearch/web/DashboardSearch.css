@@ -2162,9 +2162,7 @@
 }
 
 .simulator .simulator-qr .next-button{
-    position: static !important;
-    bottom :0 !important;
-    left: 0 !important;
+    
 }
 
 .simulator .simulator-qr select{
