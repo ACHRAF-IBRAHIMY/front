@@ -17,6 +17,7 @@
             
             getTreeFromEs(0);            
 
+
              $(".simulator-cms .navbar-sim-cms .navbar-sim-cms-item").click(function(){
                 $(".simulator-cms .navbar-sim-cms .navbar-sim-cms-item").removeClass("active");
                 $(this).addClass("active");
@@ -347,7 +348,12 @@
                            
                             <div class="cms-form">
                               <input type="hidden" class="class-id" value="" />
-                               <div class="header-cms-form"><span /></div>
+                               <div class="header-cms-form">
+                                    <span class="node-name">
+                                    
+                                    </span> 
+                                    
+                                </div>
                                <div class="body-cms-form">
                                 <div class="class-title form-grid"><span>Node </span><span><input type="text" value="Root" /></span></div>
                                 <div class="class-oid form-grid">
@@ -356,7 +362,7 @@
                                        Non Classé  
                                     </span>
                                 </div>
-                                <div class="class-question form-grid"><span>Question </span><span class="link-sim-cms" style="display: grid;grid-template-columns: 85% 14%;"><span style="border:none;">Quel est votre question ?</span><i class="fas fa-edit" /><i style="display:none" class="fas fa-plus" /></span></div>
+                                <div class="class-question form-grid"><span>Question </span><span class="link-sim-cms" style="display: grid;grid-template-columns: 85% 14%;"><span class="qst" style="border:none;" title="10">Quel est votre question ?</span><span class="update" style="display:none;position:relative;"></span><i class="fas fa-edit" /><i style="display:none" class="fas fa-plus" /><i style="display:none" class="fas fa-pen "></i></span></div>
                                 <div class="class-responses">
                                   <span>Childrens : </span>
                                    <div class="responses-sim-cms">

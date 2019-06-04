@@ -78,6 +78,9 @@ function startTreant(){
 var removeMtrixCLass = false;
 
 function showUpdate(id){
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").show();
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.update").hide();
+            
     $(".simulator-cms .side-bar .div-1").show();
     $(".simulator-cms .side-bar .div-2").hide();
     removeMtrixCLass = false;
@@ -88,7 +91,8 @@ function showUpdate(id){
     $(".cms-form .header-cms-form span").html(obj.text.name);
     $(".cms-form  input.class-id").val(obj.text.id);
     $(".cms-form .body-cms-form .class-title span").eq(1).children("input").val(obj.text.name);
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span").html(obj.text.question+"<input type=\"hidden\" value=\""+obj.text.question_id+"\"/>");    
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html(obj.text.question);    
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",obj.text.question_id);    
     $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html("");
     
     if(obj.text.status == 0){
@@ -189,15 +193,22 @@ function updateNode(id){
     var title = $(".cms-form .body-cms-form .class-title input").val();
     var list = id.split("-");
     var str  = getParentPath(list);
-    if($(".cms-form .body-cms-form .class-question .link-sim-cms span select").html()!=undefined){
-            var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").val();
-            var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").html();   
-        console.log(questionId+"****"+question);
+    /*if($(".cms-form .body-cms-form .class-question .link-sim-cms span select").html()!=undefined){
+        var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").val();
+        var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").html();   
         var repSize = qstList[indexOfQst(questionId,qstList)].rep.length;
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"rep_size\"]=repSize");
-    }
+    }*/
+
+    var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title");
+    var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html();
+    var repSize = qstList[indexOfQst(questionId,qstList)].rep.length;
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"rep_size\"]=repSize");
+    
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title");
     
     if(removeMtrixCLass == true){
@@ -234,7 +245,6 @@ function updateNodeWithQuestion(id,question){
     var str  = getParentPath(list);
     var questionId =  id;
     var question =  question;   
-    console.log(questionId+"****"+question);
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title"); 
@@ -242,13 +252,19 @@ function updateNodeWithQuestion(id,question){
     showUpdate(idsec);
 }
 
+
 function modeUpdate(){
     var idQuestion = $(".cms-form .body-cms-form .class-question .link-sim-cms span input").val();
-    console.log(idQuestion);
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span").html("<select style=\"display:none\"></select>");
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.update").html("<input style=\"text-align: left;border: none;height: 28px;width: 85%;outline: none;\" placeHolder=\"Question\"/><i class=\"fas fa-eye\"></i>");
     $(".cms-form .body-cms-form .class-question .link-sim-cms i.fa-edit").hide();
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").hide();
     $(".cms-form .body-cms-form .class-question .link-sim-cms i.fa-plus").show();
-    createSelectQuestion(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByTagName("select")[0],idQuestion);
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.update").show();
+    //createSelectQuestion(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByTagName("input")[0],idQuestion);
+    autoCompleteSim(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByClassName("update")[0].getElementsByTagName("input")[0],"simulator_index_qr","question");
+    document.querySelector(".cms-form .body-cms-form .class-question .link-sim-cms span.update .fa-eye").addEventListener("click",function(){
+        getAllCmsQuestion(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByClassName("update")[0].getElementsByTagName("input")[0],"simulator_index_qr");
+    });
 }
 
 function showQuestion(results){
@@ -1461,4 +1477,136 @@ function deletedCol(tree,array,newObj){
     }
     console.log(str)
     return str;
+}
+
+/* auto complete */
+function autoCompleteSim(inp,index,field){
+    inp.addEventListener("input",function(){
+        var req = inp.value;
+        restAutoComplete(inp,req,index,field);
+    });
+}
+
+function restAutoComplete(inp,req,index,field){
+    
+    var obj = {"size":5,"query": 
+    {
+    "bool":{
+        "must":[{
+            "query_string": {
+                "fields":[field],
+                "query": "*"+req+"*",
+                "fuzziness": "AUTO",
+                "minimum_should_match": "100%"
+            }
+        }],
+        "should":[{
+            "match_phrase_prefix":{
+                "value":req
+            }
+        }]
+    }
+    }};
+    
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH+"/"+index+"/_search",
+        contentType: "application/json",
+        datatype:"application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            createListeRes(inp,result.hits.hits,req);
+            console.log(result);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });    
+}
+
+function getAllCmsQuestion(inp,index){
+    var obj = {
+            "size":50,"query":{
+            "match_all":{}
+        }
+    };
+
+    console.log("test");
+    
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH+"/"+index+"/_search",
+        contentType: "application/json",
+        datatype:"application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            console.log("test");
+            console.log(result);
+
+            createListeRes(inp,result.hits.hits,"");
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    }); 
+}
+
+function createListeRes(inp,arr,val){
+    closeAllListsSim();
+    a = document.createElement("DIV");
+    a.setAttribute("id", "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    /*append the DIV element as a child of the autocomplete container:*/
+    inp.parentNode.appendChild(a);
+   
+    
+    /*for each item in the array...*/
+    for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        /*create a DIV element for each matching element:*/
+        var b = document.createElement("DIV");
+        /*make the matching letters bold:*/
+        var str = arr[i]._source.question;
+        b.setAttribute("title",str);
+        if(val==""){
+            b.innerHTML=str.toLowerCase();
+        }else{
+            b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
+        }
+        
+        /*insert a input field that will hold the current array item's value:*/
+        var input = document.createElement("input");
+        input.setAttribute("type","hidden");
+        input.setAttribute("value",arr[i]._id);
+        b.appendChild(input);
+        /*execute a function when someone clicks on the item value (DIV element):*/
+        b.addEventListener("click", function(e) {
+            /*insert the value for the autocomplete text field:*/
+            inp.value = this.getElementsByTagName("input")[0].value;
+            $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html(this.getAttribute("title"));    
+            $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",this.getElementsByTagName("input")[0].value); 
+            $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").show();
+            $(".cms-form .body-cms-form .class-question .link-sim-cms span.update").hide();
+            $(".cms-form .body-cms-form .class-question .link-sim-cms .fa-edit").show();
+            $(".cms-form .body-cms-form .class-question .link-sim-cms .fa-plus").hide();
+            /*close the list of autocompleted values,
+            (or any other open lists of autocompleted values:*/
+            closeAllListsSim();
+        });
+        a.appendChild(b);
+    }
+}
+
+
+function closeAllListsSim() {
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+        x[i].parentNode.removeChild(x[i]);
+    }
 }
