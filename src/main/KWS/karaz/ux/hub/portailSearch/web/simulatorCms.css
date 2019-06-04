@@ -1,3 +1,28 @@
+
+.simulator-cms .autocomplete-items{
+    width: 111%;
+    border-top: 1px solid #38a;
+    cursor: pointer;
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: 1px solid #d4d4d4;
+    z-index: 106;
+    top: 67%;
+    text-align: left;
+    margin-top: 10px;
+    left: 0;
+    font-size: 15px;
+    right: 0;
+    height: 475px;
+    overflow: auto;
+}
+
+.simulator-cms .autocomplete-items span{
+    border: none !important;
+    padding: 0 !important;
+}
+
 .simulator-cms{
     display: block;
     margin: 10px 2rem;
