@@ -1831,7 +1831,7 @@ var scrollLeft = 0;
         buttons.setAttribute("class","tree-buttons");
         var but = document.createElement("button");
         but.innerHTML = "<i class=\"fas fa-plus\"></i>";
-        but.setAttribute("class", "add-button-class");
+        but.setAttribute("class", "add-button-class add");
         but.addEventListener("click", function () {
             scrollTop = $("#tree-simple").scrollTop();
             scrollLeft = $("#tree-simple").scrollLeft();
@@ -1839,22 +1839,53 @@ var scrollLeft = 0;
         });
         var but1 = document.createElement("button");
         but1.innerHTML = "<i class=\"fas fa-bars\"></i>";
-        but1.setAttribute("class", "add-button-class");
+        but1.setAttribute("class", "add-button-class det");
         but1.addEventListener("click", function () {
             showUpdate(node.getElementsByClassName("node-id")[0].innerHTML);
         });
 
         var but2 = document.createElement("button");
         but2.innerHTML = "<i class=\"fas fa-close\"></i>";
-        but2.setAttribute("class", "add-button-class");
+        but2.setAttribute("class", "add-button-class rm");
         but2.addEventListener("click", function () {
             removeNode(node.getElementsByClassName("node-id")[0].innerHTML);
         });
-        
+
+        var but3 = document.createElement("button");
+        but3.innerHTML = "<i class=\"fas fa-minus\"></i>";
+        but3.setAttribute("class", "add-button-class red");
+        but3.addEventListener("click", function () {
+            reduitNode(node.getElementsByClassName("node-id")[0].innerHTML,0);
+        });
+
+        var but4 = document.createElement("button");
+        but4.innerHTML = "<i class=\"fas fa-eye\"></i>";
+        but4.setAttribute("class", "add-button-class show");
+        but4.addEventListener("click", function () {
+            showSubTree(node.getElementsByClassName("node-id")[0].innerHTML);
+        });
+
+        var but5 = document.createElement("button");
+        but5.innerHTML = "<i class=\"fas fa-copy\"></i>";
+        but5.setAttribute("class", "add-button-class copy");
+        but5.addEventListener("click", function () {
+            copySubTree(node.getElementsByClassName("node-id")[0].innerHTML);
+        });
+
+        var but6 = document.createElement("button");
+        but6.innerHTML = "<i class=\"fas fa-paste\"></i>";
+        but6.setAttribute("class", "add-button-class paste");
+        but6.addEventListener("click", function () {
+            pasteSubTree(node.getElementsByClassName("node-id")[0].innerHTML);
+        });
         
         buttons.appendChild(but);
         buttons.appendChild(but1);
         buttons.appendChild(but2);
+        buttons.appendChild(but3);
+        buttons.appendChild(but4);
+        buttons.appendChild(but5);
+        buttons.appendChild(but6);
 
         node.appendChild(buttons);
 
