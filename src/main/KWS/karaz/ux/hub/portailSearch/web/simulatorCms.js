@@ -29,6 +29,8 @@ var simple_chart_config = {
     }
 };
 
+var nodeStructures = [];
+
 function addChild(id) {
     var list = id.split("-");
     var str = getParentPath(list);
@@ -56,6 +58,167 @@ function addChild(id) {
     console.log(newId);
     showUpdate(newId.toString());
 }
+
+function reduitNode(id,type){
+    var list = id.split("-");
+    var str = getParentPath(list);
+    
+    var subTree = eval("simple_chart_config.nodeStructure" + str + "[\"children\"]"); 
+    var subTreeStr = JSON.parse(JSON.stringify(subTree));
+
+    var obj = {
+        "node_id":id,
+        "tree":subTreeStr
+    };
+
+    console.log("obj :"+JSON.stringify(obj)+" str :"+str);
+    nodeStructures.push(obj);
+
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"red\"]=1");
+    eval("simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]+=\" classe-red\"");
+    eval("simple_chart_config.nodeStructure"+str+"[\"children\"]=[]");
+    if(type==0){
+        refrechTreant();
+    }
+}
+
+function showSubTree(id){
+    var list = id.split("-");
+    var str = getParentPath(list);
+    var obj = findSubTreeById(id,0);
+    
+    nodeStructures.splice(obj.index,1);
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"red\"]=0");
+    var rpl = eval("simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"].replace(\/ classe-red\/g,\"\").trim()");
+    eval("simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]=rpl");
+    eval("simple_chart_config.nodeStructure" + str + "[\"children\"]=obj.subTree.tree");
+    refrechTreant();
+};
+
+var copy = null;
+
+function copySubTree(id){
+    var list = id.split("-");
+    var str = getParentPath(list);
+
+    var copyTree = getContentSubTree(id);
+    
+    copy = JSON.parse(JSON.stringify(copyTree));
+
+    console.log("copied1 :"+ JSON.stringify(copy));
+    eval("simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]+=\" copied\""); 
+    reduitAll();   
+    refrechTreant();
+}
+
+
+
+function pasteSubTree(id){
+    var list = id.split("-");
+    var str = getParentPath(list);
+    showCopy();
+    var list2 = copy.text.id.toString().split("-");
+    var str2 = getParentPath(list2);
+    console.log("list : "+str2);
+    eval("simple_chart_config.nodeStructure"+str+"=copy");    
+    var lastId = copy.text.id.toString();
+    setIdTree([],simple_chart_config.nodeStructure.children);
+    var rpl = eval("simple_chart_config.nodeStructure"+str2+"[\"HTMLclass\"].replace(\/ copied\/g,\"\").trim()");
+    eval("simple_chart_config.nodeStructure"+str2+"[\"HTMLclass\"]=rpl");
+    console.log("lastId :"+lastId);
+    copy = null;
+    removeRed();
+    reduitAll();   
+    refrechTreant();
+}
+
+function showPaste(){
+    var selector = document.querySelectorAll(".evolution-tree .copy");
+
+    for(var i=0;i<selector.length;i++){
+        selector[i].style.display = "none";
+    }
+
+    var selector2 = document.querySelectorAll(".evolution-tree .paste");
+    
+    for(var i=0;i<selector2.length;i++){
+        selector2[i].style.display = "inline-block";
+    }
+}
+
+function showCopy(){
+    var selector = document.querySelectorAll(".evolution-tree .paste");
+
+    for(var i=0;i<selector.length;i++){
+        selector[i].style.display = "none";
+    }
+
+    var selector2 = document.querySelectorAll(".evolution-tree .copy");
+    
+    for(var i=0;i<selector2.length;i++){
+        selector2[i].style.display = "inline-block";
+    }
+}
+
+function removeRed(){
+    var tempNodeStructures = simple_chart_config.nodeStructure; 
+    
+    nodeStructures.sort(function(a, b) {
+        return a.node_id.length - b.node_id.length;
+    });
+
+    for(var i=0;i<nodeStructures.length;i++){
+        var list = nodeStructures[i].node_id.split("-");
+        var str = getParentPath(list);
+        var obj = findSubTreeById(nodeStructures[i].node_id,0);
+        try{
+            eval("tempNodeStructures" + str + "[\"children\"]=obj.subTree.tree");
+        }
+        catch(e){
+            continue;
+        }
+        
+    }
+    
+    return tempNodeStructures;       
+}
+
+function reduitAll(){
+    nodeStructures = [];
+    var nodeStructureTemp = getRedNodes(simple_chart_config.nodeStructure,[],[]);
+    nodeStructureTemp.sort(function(a, b) {
+        return b.length - a.length;
+    });
+    
+    console.log("-----------"+nodeStructureTemp);
+
+    for(var i=0;i<nodeStructureTemp.length;i++){
+        reduitNode(nodeStructureTemp[i],1);
+    };
+
+};
+
+function findSubTreeById(id,type){
+    if(type==0){
+        for(var i=0;i<nodeStructures.length;i++){
+            if(nodeStructures[i].node_id == id){
+                return { "subTree":nodeStructures[i],"index":i};
+            }
+        }
+    }else{
+        var arr = [];
+        for(var i=0;i<nodeStructures.length;i++){
+            if(nodeStructures[i].node_id.startsWith(id)){
+                var array = [];
+                array = JSON.stringify(nodeStructures[i]);
+                var ar = { "nodeStructure":JSON.parse(array)};
+                arr.push(ar);
+            }
+        }
+        return arr;
+    }
+}
+
 
 
 function getParentPath(list) {
@@ -515,6 +678,11 @@ function refrechTreant() {
     my_chart = new Treant(simple_chart_config, function () {}, $);
     $("#tree-simple").scrollTop(scrollTop);
     $("#tree-simple").scrollLeft(scrollLeft);
+    if(copy!=null){
+        showPaste();
+    }else{
+        
+    }
 }
 
 function convertTreeComp2SimpleTree(tree){
@@ -575,6 +743,38 @@ function conevertTo(tree,array,newObj){
   return newObj;
 }
 
+function getRedNodes(tree,array,newObj){
+  
+    for(var i=0;i<tree.children.length;i++){
+   
+      console.log(tree.children[i].text);
+      if(tree.children[i].text.red==1){
+         newObj.push(tree.children[i].text.id);
+      }
+      
+      var sousTree = tree.children[i];
+              
+      array.push(i);
+      
+      if(tree.children[i].text.children!=0){
+        newObj = getRedNodes(sousTree,array,newObj);
+      }
+      
+      array.pop();
+    }
+    
+    
+    return newObj;
+}
+
+function getContentSubTree(id){
+    var list = id.split("-");
+    var all = removeRed();
+    var str = getParentPath(list);
+    return eval("all"+str);
+}
+
+
 function parcourirTreeReps(id){
     var list = id.split("-");
     var newList = [];
@@ -607,8 +807,11 @@ function getTreeHierS(array) {
     return str;
 }
 
+
+
 function uploadTreeToES(){
     var treeObject = {};
+    simple_chart_config.nodeStructure = removeRed();
     treeObject["treeComp"]= simple_chart_config.nodeStructure;
     treeObject["treeSimp"]= convertTreeComp2SimpleTree(simple_chart_config.nodeStructure);
     
@@ -633,6 +836,7 @@ function uploadTreeToES(){
             sendRequestBulkMatrix(bulks);
             sendRequestBulkMatrix(bulks2);
             deleted = [];
+            reduitAll();
         },
         error: function (error) {
             console.log(error.responseText);
@@ -676,6 +880,7 @@ function getTreeFromEs(type){
     if(type==0){
         $(".container-sim-cms #tree-simple").html("<div class=\"gif-load-simulator-cms\"><img src=\"img/load-text.gif\" /></div>");
     }
+    nodeStructures=[];
 
     $.ajax({
         type: "get",
@@ -688,6 +893,7 @@ function getTreeFromEs(type){
         success: function (result) {
            if(type==0){
                 simple_chart_config.nodeStructure = result._source.treeComp;
+                reduitAll();
                 startTreant();
                 loadQuestionsFromEs();
            }else if(type==1){
@@ -1025,8 +1231,6 @@ function setIdTree(list,childs){
       var new_list= [];
       new_list = new_list.concat(list);
       new_list.push(i.toString());
-      console.log(list);
-      console.log(new_list);
       var newId = new_list.join("-");
       console.log(newId);
       

@@ -21,15 +21,46 @@
     height: 150px;
 }
 
+.evolution-tree .show,.evolution-tree .paste{
+    display: none;
+}
+
 .evolution-tree p {
     margin: 4px;
     font-size: 15px;
 }
 
+.evolution-tree .node-red{
+    display: none;
+}
+
+.copied{
+    background: #29a7bb !important;
+    color: #fff !important;
+}
+
+.copied button{
+    color: #38a !important;
+}
 
 .classe-evo{
     background: #e3f6f2 !important;
 }
+
+.classe-red{
+    background: #ffeded !important;
+    border-color: black !important;
+    color:#666 !important;
+}
+
+.classe-red .red,.classe-red .add,.classe-red .rm{
+    display: none;
+}
+
+.classe-red .show{
+    display: inline-block;
+}
+
 
 .tree-buttons{
     text-align: center;
