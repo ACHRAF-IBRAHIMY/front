@@ -67,14 +67,14 @@
                 showAddQuestionForm();
             });
             
-            $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click(function(){
-                var id = $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span input").val();
+           $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span.qst").click(function(){
+                var id = $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title");
                 if(id!=undefined){
                     getQuestionCms(id);
                 }
                 
             });
-            
+             
             $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-type-question select").change(function(){
                 var type = $(this).children("option:selected").val();
                 if(type=="input"){
