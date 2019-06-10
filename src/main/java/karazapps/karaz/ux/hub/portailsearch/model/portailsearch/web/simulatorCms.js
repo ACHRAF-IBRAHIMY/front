@@ -97,6 +97,104 @@ function showSubTree(id){
 
 var copy = null;
 
+function moveLeftNode(id){
+    var list = id.split("-");
+    var node = list[list.length-1];
+    list.pop();
+    var str = getParentPath(list);
+    console.log(node);
+    console.log(Number(node)-1);
+    console.log("str");
+    var nbrChild = eval("simple_chart_config.nodeStructure" + str + "[\"children\"].length");
+    console.log(nbrChild);
+    if(node != 0 & nbrChild > 1 ){
+        console.log(list);
+        var id2 = list.join("-")+"-"+(Number(node)-1); 
+        var stockNode = getContentSubTree(id); 
+        var stockNode2 = getContentSubTree(id2);    
+        var str1 = getParentPath(id.split("-"));
+        var str2 = getParentPath(id2.split("-"));
+        eval("simple_chart_config.nodeStructure" + str1 + "=stockNode2");
+        eval("simple_chart_config.nodeStructure" + str2 + "=stockNode");
+        setIdTree([],simple_chart_config.nodeStructure.children);
+        reduitAll();
+        refrechTreant();
+    }else if( node ==0 & nbrChild > 1){
+        var id2 = list.join("-")+"-"+(Number(nbrChild)-1); 
+        var stockNode = getContentSubTree(id); 
+        var stockNode2 = getContentSubTree(id2);    
+        var str1 = getParentPath(id.split("-"));
+        var str2 = getParentPath(id2.split("-"));
+        eval("simple_chart_config.nodeStructure" + str1 + "=stockNode2");
+        eval("simple_chart_config.nodeStructure" + str2 + "=stockNode");
+        setIdTree([],simple_chart_config.nodeStructure.children);
+        reduitAll();
+        refrechTreant();
+    }
+     
+}
+
+function moveRightNode(id){
+    
+    var list = id.split("-");
+    var node = list[list.length-1];
+    list.pop();
+    var str = getParentPath(list);
+    var nbrChild = eval("simple_chart_config.nodeStructure" + str + "[\"children\"].length");
+    console.log(nbrChild);
+    if(node != nbrChild-1 & nbrChild > 1 ){
+        console.log(list);
+        var id2 = list.join("-")+"-"+(Number(node)+1); 
+        var stockNode = getContentSubTree(id); 
+        var stockNode2 = getContentSubTree(id2);    
+        var str1 = getParentPath(id.split("-"));
+        var str2 = getParentPath(id2.split("-"));
+        eval("simple_chart_config.nodeStructure" + str1 + "=stockNode2");
+        eval("simple_chart_config.nodeStructure" + str2 + "=stockNode");
+        setIdTree([],simple_chart_config.nodeStructure.children);
+        reduitAll();
+        refrechTreant();
+    }else if( node ==nbrChild-1 & nbrChild > 1){
+        var id2 = list.join("-")+"-0"; 
+        var stockNode = getContentSubTree(id); 
+        var stockNode2 = getContentSubTree(id2);    
+        var str1 = getParentPath(id.split("-"));
+        var str2 = getParentPath(id2.split("-"));
+        eval("simple_chart_config.nodeStructure" + str1 + "=stockNode2");
+        eval("simple_chart_config.nodeStructure" + str2 + "=stockNode");
+        setIdTree([],simple_chart_config.nodeStructure.children);
+        reduitAll();
+        refrechTreant();
+    }
+}
+
+function moveUpNode(id){
+    var list = id.split("-");
+    var node = list[list.length-1];
+    list.pop();
+    var strChild = getParentPath(list);
+    list.pop();
+    var str = getParentPath(list);
+    //var nbrChild = eval("simple_chart_config.nodeStructure" + str + "[\"children\"].length");
+    console.log(id);
+    if( id != "" && id.split("-").length > 1 ){
+        console.log(list);
+        var stockNode = getContentSubTree(id); 
+        var nb = id.split("-")[id.split("-").length-1];
+        eval("simple_chart_config.nodeStructure" + str + "[\"children\"].push(stockNode)");
+        eval("simple_chart_config.nodeStructure" + strChild + "[\"children\"].splice(nb,1)");
+        setIdTree([],simple_chart_config.nodeStructure.children);
+        reduitAll();
+        refrechTreant();
+    }
+}
+
+
+function moveDownNode(){
+    alert("Not working yet !!");
+}
+
+
 function copySubTree(id){
     var list = id.split("-");
     var str = getParentPath(list);

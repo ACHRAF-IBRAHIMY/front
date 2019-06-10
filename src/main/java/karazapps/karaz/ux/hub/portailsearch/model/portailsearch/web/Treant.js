@@ -1829,6 +1829,17 @@ var scrollLeft = 0;
     TreeNode.prototype.createButtonAdd = function (node) {
         var buttons = document.createElement("div");
         buttons.setAttribute("class","tree-buttons");
+        
+        var buttons2 = document.createElement("div");
+        buttons2.setAttribute("class","tree-buttons");
+        
+        var but0 = document.createElement("button");
+        but0.innerHTML = "<i class=\"fas fa-chevron-left\"></i>";
+        but0.setAttribute("class", "add-button-class mr");
+        but0.addEventListener("click", function () {
+            moveLeftNode(node.getElementsByClassName("node-id")[0].innerHTML);
+        });
+        
         var but = document.createElement("button");
         but.innerHTML = "<i class=\"fas fa-plus\"></i>";
         but.setAttribute("class", "add-button-class add");
@@ -1837,6 +1848,7 @@ var scrollLeft = 0;
             scrollLeft = $("#tree-simple").scrollLeft();
             addChild(node.getElementsByClassName("node-id")[0].innerHTML);
         });
+
         var but1 = document.createElement("button");
         but1.innerHTML = "<i class=\"fas fa-bars\"></i>";
         but1.setAttribute("class", "add-button-class det");
@@ -1879,6 +1891,28 @@ var scrollLeft = 0;
             pasteSubTree(node.getElementsByClassName("node-id")[0].innerHTML);
         });
         
+        var but7 = document.createElement("button");
+        but7.innerHTML = "<i class=\"fas fa-chevron-right\"></i>";
+        but7.setAttribute("class", "add-button-class ml");
+        but7.addEventListener("click", function () {
+            moveRightNode(node.getElementsByClassName("node-id")[0].innerHTML);
+        });
+
+        var but8 = document.createElement("button");
+        but8.innerHTML = "<i class=\"fas fa-chevron-up\"></i>";
+        but8.setAttribute("class", "add-button-class ml");
+        but8.addEventListener("click", function () {
+            moveUpNode(node.getElementsByClassName("node-id")[0].innerHTML);
+        });
+
+        var but9 = document.createElement("button");
+        but9.innerHTML = "<i class=\"fas fa-chevron-down\"></i>";
+        but9.setAttribute("class", "add-button-class ml");
+        but9.addEventListener("click", function () {
+            moveDownNode(node.getElementsByClassName("node-id")[0].innerHTML);
+        });
+
+        buttons2.appendChild(but0);
         buttons.appendChild(but);
         buttons.appendChild(but1);
         buttons.appendChild(but2);
@@ -1886,8 +1920,12 @@ var scrollLeft = 0;
         buttons.appendChild(but4);
         buttons.appendChild(but5);
         buttons.appendChild(but6);
+        buttons2.appendChild(but8);
+        //buttons2.appendChild(but9);
+        buttons2.appendChild(but7);
 
         node.appendChild(buttons);
+        node.appendChild(buttons2);
 
         return node;
     }
