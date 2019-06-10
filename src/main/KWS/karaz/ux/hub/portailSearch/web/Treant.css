@@ -18,7 +18,7 @@
 .evolution-tree{
     width: 224px;
     margin: 10px;
-    height: 150px;
+    height: 180px;
 }
 
 .evolution-tree .show,.evolution-tree .paste{
@@ -67,7 +67,7 @@
 }
 
 .tree-buttons button{
-    width: 35px;
+    width: 30px;
 }
 
 .Treant.Treant-loaded .node .node-question{
