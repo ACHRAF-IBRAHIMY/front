@@ -1,5 +1,9 @@
-function removeExpanded(){
-    $(".simulator .docs-qr div.ow-pl").removeClass("expanded");
+function removeExpanded(type){
+    if(type==1){
+        $(".simulator .docs-qr div.ow-pl").removeClass("expanded");
+    }else if(type ==2){
+        $(".faq-vbox .faq-fieldset").removeClass("expanded");
+    }
 }
 
 

@@ -416,7 +416,86 @@ function intializeFaqPages(){
 }
 
 
+function generatePaginationFaqPage(index,prefix,typeUse){
+    $(".faq-fieldset .pagination-new-style").eq(index).html("");
+    var p = $(".faq-fieldset .pagination-new-style").eq(index);
+    var begin = (faqGlobalPages[index]-1)*3;
+    var nbrPage = begin + Math.min(3,Math.ceil(totalFaqPages[index]/2)-(faqGlobalPages[index]-1)*3);
+    console.log("begin :"+begin+" nbrPage :"+nbrPage);
+    var a = document.createElement("a");
+        a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
+        a.addEventListener("click",function(){
+            if(faqPages[index]>1){
+                faqPages[index]--;
+                if(faqPages[index]%3==0){
+                    faqGlobalPages[index]--;    
+                }
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+            } 
+            event.preventDefault();
+        });
+        p.append(a);
 
+    for(var i=begin;i<nbrPage;i++){
+    
+    if(i==begin){
+        a = document.createElement("a");
+        a.innerHTML=begin+1;
+        console.log( (Number(faqPages[index])-1) + " = " + i);
+        if( i == (Number(faqPages[index])-1)){
+            a.setAttribute("class","active");
+
+        }
+
+        a.addEventListener("click",function(){
+            if(faqGlobalPages[index]>1){
+                faqGlobalPages[index]--;
+                faqPages[index]=(faqGlobalPages[index]-1)*3+1;
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+            }else{
+                faqPages[index]= 1;
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+            }
+            event.preventDefault();
+        });
+
+        p.append(a);
+    }else{
+        console.log( (Number(faqPages[index])-1) + " = " + i);
+        
+
+        a = document.createElement("a");
+        var j=i+1;
+        a.innerHTML=(i+1);
+        if( i == (Number(faqPages[index])-1)){
+            console.log(a.innerHTML+" notBeg");
+            a.setAttribute("class","active");
+        }
+        a.addEventListener("click",function(event){
+            event.preventDefault();
+            console.log(this.innerHTML);
+            faqPages[index]=Number(this.innerHTML);
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));            
+        });
+            p.append(a);        
+        }
+    }
+    a = document.createElement("a");
+    a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
+    a.addEventListener("click",function(){
+        if(faqPages[index]<Math.ceil(totalFaqPages[index]/2)){
+            faqPages[index]++;
+            if(faqPages[index]%3==1){
+                faqGlobalPages[index]++    
+            }
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+        }
+        event.preventDefault();
+    });        
+    p.append(a);
+}
+
+/*
 function generatePaginationFaqPage(index,prefix,typeUse){
     if(typeUse==-1){
         $(".faq-fieldset .pagination-new-style").eq(0).html("");
@@ -424,6 +503,7 @@ function generatePaginationFaqPage(index,prefix,typeUse){
         $(".faq-fieldset .pagination-new-style").eq(index).html("");        
     }
     var p1 = document.createElement("div");
+    
     p1.setAttribute("class","pagination-1");
     var icon1 = document.createElement("i");
     icon1.setAttribute("class","fas fa-angle-double-left");
@@ -480,7 +560,7 @@ function generatePaginationFaqPage(index,prefix,typeUse){
 
     p1.appendChild(icon1);
     p1.appendChild(icon2);
-    p1.appendChild(spanG);
+    //p1.appendChild(spanG);
     p1.appendChild(icon3);
     p1.appendChild(icon4);
  
@@ -501,19 +581,21 @@ function generatePaginationFaqPage(index,prefix,typeUse){
     spanG.innerHTML +=" / ";
     spanG.appendChild(span3);
     p2.appendChild(spanG);
-
+    
     if(typeUse==-1){
         $(".faq-fieldset .pagination-new-style").eq(0).append(p1);
-        $(".faq-fieldset .pagination-new-style").eq(0).append(p2);    
+    //    $(".faq-fieldset .pagination-new-style").eq(0).append(p2);    
     }else{
         $(".faq-fieldset .pagination-new-style").eq(index).append(p1);
-        $(".faq-fieldset .pagination-new-style").eq(index).append(p2);
+    //    $(".faq-fieldset .pagination-new-style").eq(index).append(p2);
     }
 
-}
+}*/
 
 
 function getQsFaq(id,type){
+	$(".NFQ-load-img").show();
+	$(".NQF-vue-question").hide();
     $.ajax({
         type: "get",
         url: URL_SEARCH+"/faq_index/qr/" + id,
@@ -523,6 +605,16 @@ function getQsFaq(id,type){
         },
         success: function (result) {
             if(type==0){
+            	console.log(result);
+				//traitement rbihi
+
+				$(".NFQ-load-img").hide();
+				$(".NQF-vue-question").show();
+				//add header
+				// $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
+				$(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
+				$(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES | <span class="title-2x" style="color:#38a; ">` + result._source.QUESTIONS + `</span>`);
+
 				$(".NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
 				$(".NQF-prev-resp").html(result._source.REPONSES);
 				$(".NQF-categorie").val(result._source.type);
@@ -532,12 +624,11 @@ function getQsFaq(id,type){
 				$(".NQF-btn-alg").show();
 				let a = $(".NQF-categorie")
 				var pos = $(".pcd-header-NQF").offset().top;
-             	$('html,body').animate(
-                  {
-                      scrollTop: pos
-                  },
-				  'slow'); 
-				  $(".NQF-new-quest-btn").hide();
+				$('html,body').animate({
+						scrollTop: pos
+					},
+					'slow');
+				$(".NQF-new-quest-btn").hide();
 
             }else if(type==1){
                 console.log(result._source.type);
@@ -689,6 +780,9 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
                 
                 for(var i=0;i<result.responses.length;i++){
                     if(result.responses[i].hits.hits.length!=0){
+                        if(prefix!=""){
+                            $(".faq-vbox .faq-fieldset").eq(i).addClass("expanded");
+                        }
                         fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
                         k++;
                     }
@@ -714,6 +808,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
 
 
 function fullCreateFaqByType(results,type){
+
     $(".faq-fieldset").eq((Number(type)-1)).show();
     var a1 = document.querySelectorAll(".faq-fieldset .full-search-list")[(Number(type)-1)];
     a1.innerHTML="";
@@ -732,13 +827,14 @@ function fullCreateFaqByType(results,type){
         e.setAttribute("style","font-size:16px");
         e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
         var f = document.createElement("p");
-        f.innerHTML = text;
+        f.innerHTML = subLong(text.replace(/<[^>]*>?/gm, ''),300);
         f.setAttribute("style","font-size: 14px;text-align:left");
+        f.setAttribute("class","para-faq");
         d.appendChild(e);
         d.appendChild(f);
         var g = document.createElement("a");
         g.addEventListener("click",function(){
-        var id=$(this).children("input").val();
+            var id=$(this).children("input").val();
             ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
         });
         g.setAttribute("class","item-body-button");
@@ -748,6 +844,7 @@ function fullCreateFaqByType(results,type){
         b.appendChild(d);
         a1.appendChild(b);
     }
+
 }
 
 //Create list of results
