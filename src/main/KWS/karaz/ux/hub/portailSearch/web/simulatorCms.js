@@ -15,9 +15,9 @@ var simple_chart_config = {
                 "stroke": "#ccc",
                 "stroke-dasharray": "--", //"", "-", ".", "-.", "-..", ". ", "- ", "--", "- .", "--.", "--.."
                 "arrow-end": "classic-wide-long"
-        }}
+            }
+        }
     },
-
     nodeStructure: {
         text: {
             name: "Root",
@@ -28,6 +28,8 @@ var simple_chart_config = {
         children: []
     }
 };
+
+console.log(simple_chart_config);
 
 var nodeStructures = [];
 
@@ -990,6 +992,7 @@ function getTreeFromEs(type){
         },
         success: function (result) {
            if(type==0){
+                console.log(simple_chart_config);
                 simple_chart_config.nodeStructure = result._source.treeComp;
                 reduitAll();
                 startTreant();
@@ -1785,11 +1788,11 @@ function deletedCol(tree,array,newObj){
 function autoCompleteSim(inp,index,field){
     inp.addEventListener("input",function(){
         var req = inp.value;
-        restAutoComplete(inp,req,index,field);
+        restAutoComplete2(inp,req,index,field);
     });
 }
 
-function restAutoComplete(inp,req,index,field){
+function restAutoComplete2(inp,req,index,field){
     
     var obj = {"size":5,"query": 
     {
@@ -1911,4 +1914,27 @@ function closeAllListsSim() {
     for (var i = 0; i < x.length; i++) {
         x[i].parentNode.removeChild(x[i]);
     }
+}
+
+/* localite */
+
+function restGetAllLocalite(){
+    $.ajax({
+        type: "get",
+        url: "http://91.121.57.204:8080/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=100&sortInfo=id=ASC",
+        contentType: "application/json",
+        success: function (result) {
+            var data = result.data;
+            var listLocalite = [[],[]];
+            for(var i=0;i<data.length;i++){
+                listLocalite[0].push(data[i].stringIndex13);
+                listLocalite[0].push(data[i].stringIndex6);
+            }
+            console.log(data);
+
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
 }

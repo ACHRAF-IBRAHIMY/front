@@ -47,6 +47,7 @@
                 console.log(mail,tele,content);
             });
 
+
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -160,6 +161,7 @@
                                 if(pp==1){
                                     pp=0;
                                 }
+                                removeExpanded(2);
                                 intializeFaqPages();
                                 restFullSearchList(prefix,0,false,pp);
                                 root.query.parentP=0;
@@ -169,7 +171,7 @@
                     
 
                 <html>
-                    <div style="height: 70px;"> </div>
+                    <div style="height: 40px;"> </div>
                 </html>   
                 <html>
                     

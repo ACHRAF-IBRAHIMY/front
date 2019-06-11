@@ -43,7 +43,7 @@
         $(".header-div-toggle .dropdown-content").slideUp();
     }); 
             
-                        removeExpanded();
+                        removeExpanded(1);
 
 
         </script>

@@ -101,6 +101,9 @@
       <menu relId="NewfreqQuestion" label="Nouvelle faq" icone="search">
       	<resource type="search">karaz/ux/hub/portailsearch/search/NewfreqQuestion</resource>
       </menu>
+      <menu relId="NewRefJuridique" label="Nouveau reférentiel juridique" icone="search">
+      	<resource type="search">karaz/ux/hub/portailsearch/search/NewRefJuridique</resource>
+      </menu>
       
     </menu>
   </menu>

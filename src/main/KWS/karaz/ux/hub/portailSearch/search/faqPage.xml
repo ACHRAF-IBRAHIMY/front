@@ -47,6 +47,7 @@
                 console.log(mail,tele,content);
             });
 
+
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -160,6 +161,7 @@
                                 if(pp==1){
                                     pp=0;
                                 }
+                                removeExpanded(2);
                                 intializeFaqPages();
                                 restFullSearchList(prefix,0,false,pp);
                                 root.query.parentP=0;
@@ -169,7 +171,7 @@
                     
 
                 <html>
-                    <div style="height: 70px;"> </div>
+                    <div style="height: 40px;"> </div>
                 </html>   
                 <html>
                     
@@ -188,8 +190,8 @@
                             <div class="support-form">
                                 <div class="title-suport-faq">Contactez-nous</div>
                                 <div class="f f1"><input type="email" placeholder="Email" /></div>
-                                <div class="f f2"><input type="tel" placeholder="Tele"/></div>
-                                <div class="f f3"><textarea name="" id="" placeholder="Allez-y, on vous écoute" cols="30" rows="10"></textarea></div>
+                                <div class="f f2"><input type="tel" placeholder="Tele" /></div>
+                                <div class="f f3"><textarea name="" id="" placeholder="Allez-y, on vous écoute" cols="30" rows="10" /></div>
                                 <div class="f f4"><button>Envoyer</button></div>
                             </div>
                         </div>
