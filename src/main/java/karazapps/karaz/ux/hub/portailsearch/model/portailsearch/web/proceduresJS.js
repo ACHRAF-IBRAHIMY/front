@@ -302,10 +302,10 @@ function NQF_edit(type) {
 											<hr class="NQF-horizontal-line " />
 											
 											</div>`)
-		} else if (type == 2) {
+		} else if (type == 2 || type ==3) {
 			$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt">
 			<div class="vpanel-body-title " style="font-size: 14px;">
-				<span class = 'NFQ-click-btn' onclick='getQsFaq("${id}",0)' >` + quest + `</span>
+				<span class = 'NFQ-click-btn' onclick='javascript:ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject=${id}","search", "FaqDetail", {});' >` + quest + `</span>
 			</div>
 			<hr class="NQF-horizontal-line " />
 			
@@ -419,7 +419,8 @@ function NQF_edit(type) {
 			},
 			success: function (result) {
 				console.log(result);
-				for (var i = 0; i < result.responses.length; i++) {
+                if(type!=0){
+                for (var i = 0; i < result.responses.length; i++) {
 					if (result.responses[i].hits.hits.length != 0) {
 						// console.log(result.responses[i].hits.hits);
 						// console.log(result.responses[i].hits.hits.length);
@@ -432,13 +433,26 @@ function NQF_edit(type) {
 							NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls, atr)
 
 							// console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
-						}
-						$(cls).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Toutes les questions de la catégorie<span>`);
-
+                        }
+                        if(atr!=3){
+                            $(cls).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Toutes les questions de la catégorie<span>`);
+                        }
 						// fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
 						// k++;
 					}
-				}
+                }
+                }else{
+                    for(var i=0;i<result.responses.length;i++){
+                        for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
+                            console.log(result.responses[i].hits.hits[j]._id);
+                            // console.log(result.responses[i].hits.hits[j]._source.QUESTIONS);
+
+                            NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls[i], atr)
+
+                            // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
+                        }
+                    }
+                }
 
 			},
 			error: function (error) {

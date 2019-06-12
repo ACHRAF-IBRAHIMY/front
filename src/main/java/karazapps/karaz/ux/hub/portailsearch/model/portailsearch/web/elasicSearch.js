@@ -417,9 +417,16 @@ function intializeFaqPages(){
 
 
 function generatePaginationFaqPage(index,prefix,typeUse){
-    $(".faq-fieldset .pagination-new-style").eq(index).html("");
-    var p = $(".faq-fieldset .pagination-new-style").eq(index);
+    if(typeUse==-1){
+        $(".faq-fieldset .pagination-new-style").eq(0).html("");
+        var p = $(".faq-fieldset .pagination-new-style").eq(0);
+    }else{
+        $(".faq-fieldset .pagination-new-style").eq(index).html("");
+        var p = $(".faq-fieldset .pagination-new-style").eq(index);
+    }
+    console.log(index);
     var begin = (faqGlobalPages[index]-1)*3;
+    console.log(totalFaqPages[index]);
     var nbrPage = begin + Math.min(3,Math.ceil(totalFaqPages[index]/2)-(faqGlobalPages[index]-1)*3);
     console.log("begin :"+begin+" nbrPage :"+nbrPage);
     var a = document.createElement("a");
@@ -430,7 +437,7 @@ function generatePaginationFaqPage(index,prefix,typeUse){
                 if(faqPages[index]%3==0){
                     faqGlobalPages[index]--;    
                 }
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
             } 
             event.preventDefault();
         });
@@ -451,10 +458,10 @@ function generatePaginationFaqPage(index,prefix,typeUse){
             if(faqGlobalPages[index]>1){
                 faqGlobalPages[index]--;
                 faqPages[index]=(faqGlobalPages[index]-1)*3+1;
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
             }else{
                 faqPages[index]= 1;
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
             }
             event.preventDefault();
         });
@@ -475,7 +482,7 @@ function generatePaginationFaqPage(index,prefix,typeUse){
             event.preventDefault();
             console.log(this.innerHTML);
             faqPages[index]=Number(this.innerHTML);
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));            
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);            
         });
             p.append(a);        
         }
@@ -488,7 +495,7 @@ function generatePaginationFaqPage(index,prefix,typeUse){
             if(faqPages[index]%3==1){
                 faqGlobalPages[index]++    
             }
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
         }
         event.preventDefault();
     });        
@@ -594,8 +601,17 @@ function generatePaginationFaqPage(index,prefix,typeUse){
 
 
 function getQsFaq(id,type){
-	$(".NFQ-load-img").show();
-	$(".NQF-vue-question").hide();
+    if(type==0){
+        $(".NFQ-load-img").show();
+	    $(".NQF-vue-question").hide();
+        var pos = $(".pcd-header-NQF").offset().top;
+        $('html,body').animate({
+                scrollTop: pos
+            },
+            'fast');
+    }
+
+
     $.ajax({
         type: "get",
         url: URL_SEARCH+"/faq_index/qr/" + id,
@@ -623,15 +639,10 @@ function getQsFaq(id,type){
 				$(".NQF-edit-modif").hide();
 				$(".NQF-btn-alg").show();
 				let a = $(".NQF-categorie")
-				var pos = $(".pcd-header-NQF").offset().top;
-				$('html,body').animate({
-						scrollTop: pos
-					},
-					'slow');
+				
 				$(".NQF-new-quest-btn").hide();
 
             }else if(type==1){
-                console.log(result._source.type);
                 createDivQuestionFaq(result);
                 RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1);
                 //traitement youssef
@@ -774,10 +785,10 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
             $(".faq-fieldset .searchGif2").hide();        
             if(type!=0 && typeUse!=-1){
                 fullCreateFaqByType(result.responses[0].hits.hits,type);
-                generatePaginationFaqPage((type-1),prefix);
+                generatePaginationFaqPage((type-1),prefix,0);
             }else if(type==0 && typeUse!=-1){
                 var k = 0;
-                
+                console.log("ici");
                 for(var i=0;i<result.responses.length;i++){
                     if(result.responses[i].hits.hits.length!=0){
                         if(prefix!=""){
@@ -787,7 +798,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
                         k++;
                     }
                     totalFaqPages[i]=result.responses[i].hits.total;
-                    generatePaginationFaqPage(i,prefix);
+                    generatePaginationFaqPage(i,prefix,0);
                 }
 
                 if(k==0){
@@ -796,8 +807,9 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
             }else if(typeUse==-1){
                 console.log("hello");
                 fullCreateFaqByType(result.responses[0].hits.hits,1);
-                generatePaginationFaqPage((type-1),prefix,-1);
                 totalFaqPages[type-1]=result.responses[0].hits.total;
+                generatePaginationFaqPage((type-1),prefix,-1);
+                console.log(result.responses[0].hits.total);
             }
         },
         error: function (error) {
@@ -887,6 +899,7 @@ function searchList(results) {
 function autocompleteF(inp,arr,val,type){
     /*create a DIV element that will contain the items (values):*/
     a = document.createElement("DIV");
+    console.log(arr);
     a.setAttribute("id", "autocomplete-list");
     a.setAttribute("class", "autocomplete-items");
     /*append the DIV element as a child of the autocomplete container:*/

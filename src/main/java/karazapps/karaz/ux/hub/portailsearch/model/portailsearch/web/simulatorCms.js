@@ -1813,6 +1813,30 @@ function restAutoComplete2(inp,req,index,field){
     }
     }};
     
+    if(index=="faq_index"){
+        obj =   {"size":5,"query": 
+        {
+        "bool":{
+            "must":[{
+                "query_string": {
+                    "fields":[field+".completion"],
+                    "query":"*"+req+"*",
+                    "minimum_should_match": "100%" ,
+                    "analyzer": "rebuilt_french"
+                  
+                }
+            }],
+            "should":[{
+                "match_phrase_prefix":{
+                    "value":req
+                }
+            }]
+        }
+      }
+    };
+    }
+    console.log(JSON.stringify(obj));
+
     $.ajax({
         type: "post",
         url: URL_SEARCH+"/"+index+"/_search",
@@ -1823,8 +1847,12 @@ function restAutoComplete2(inp,req,index,field){
              xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
-            createListeRes(inp,result.hits.hits,req);
             console.log(result);
+            if(index=="faq_index"){
+                createListeRes(inp,result.hits.hits,req,0);
+            }else{
+                createListeRes(inp,result.hits.hits,req,1);
+            }
         },
         error: function (error) {
             console.log(error.responseText);
@@ -1854,7 +1882,7 @@ function getAllCmsQuestion(inp,index){
             console.log("test");
             console.log(result);
 
-            createListeRes(inp,result.hits.hits,"");
+            createListeRes(inp,result.hits.hits,"",1);
         },
         error: function (error) {
             console.log(error.responseText);
@@ -1862,7 +1890,8 @@ function getAllCmsQuestion(inp,index){
     }); 
 }
 
-function createListeRes(inp,arr,val){
+
+function createListeRes(inp,arr,val,type){
     closeAllListsSim();
     a = document.createElement("DIV");
     a.setAttribute("id", "autocomplete-list");
@@ -1877,21 +1906,27 @@ function createListeRes(inp,arr,val){
         /*create a DIV element for each matching element:*/
         var b = document.createElement("DIV");
         /*make the matching letters bold:*/
-        var str = arr[i]._source.question;
+        if(type!=0){
+            var str = arr[i]._source.question;
+        }else{
+            var str = arr[i]._source.QUESTIONS;
+        }
         b.setAttribute("title",str);
         if(val==""){
             b.innerHTML=str.toLowerCase();
         }else{
             b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
         }
+     
+        if(type!=0){
+            /*insert a input field that will hold the current array item's value:*/
+            var input = document.createElement("input");
+            input.setAttribute("type","hidden");
+            input.setAttribute("value",arr[i]._id);
+            b.appendChild(input);
+            /*execute a function when someone clicks on the item value (DIV element):*/
         
-        /*insert a input field that will hold the current array item's value:*/
-        var input = document.createElement("input");
-        input.setAttribute("type","hidden");
-        input.setAttribute("value",arr[i]._id);
-        b.appendChild(input);
-        /*execute a function when someone clicks on the item value (DIV element):*/
-        b.addEventListener("click", function(e) {
+            b.addEventListener("click", function(e) {
             /*insert the value for the autocomplete text field:*/
             inp.value = this.getElementsByTagName("input")[0].value;
             $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html(this.getAttribute("title"));    
@@ -1903,11 +1938,19 @@ function createListeRes(inp,arr,val){
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/
             closeAllListsSim();
-        });
+            });
+        }else{
+            b.addEventListener("click", function(e) {
+                /*insert the value for the autocomplete text field:*/
+                inp.value = this.getAttribute("title");
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllListsSim();
+            });
+        }
         a.appendChild(b);
     }
 }
-
 
 function closeAllListsSim() {
     var x = document.getElementsByClassName("autocomplete-items");
