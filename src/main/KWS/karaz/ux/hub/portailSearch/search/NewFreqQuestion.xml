@@ -64,12 +64,10 @@
                 PCD_headerfieldset_color(".pcd-ha-color");
 
                 $(".NQF-vue-question").hide();
-                RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",1)
-                RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",1)
-                RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",1)
-                RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",1)
-                RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",1)
-                RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",1)
+               RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
+               RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document1",".NFQ-quest-type-plat1",".NFQ-quest-type-general1",".NFQ-quest-type-esign1",".NFQ-quest-type-archit1",".NFQ-quest-type-adminis1"],2);
+ 
+                
 
                 // hide saisie info question
                 $(".NQF-edit-modif").hide()
@@ -229,9 +227,9 @@
                             <vbox columns="85% auto">
                                 <html>
                                     <h4 class="NQF-prev-quest">
-                                        <b></b>
+                                        <b />
                                     </h4>
-                                    <p class="NQF-prev-resp"></p>
+                                    <p class="NQF-prev-resp" />
                                     <p hidden="hidden" class="NQF-categorie" />
                                     <p hidden="hidden" class="NQF-id" />
 
@@ -258,62 +256,119 @@
                         <!-- start modification -->
                         <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
 
-                            <html> 
-                                <div class="NFQ-quest-type-esign NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html> 
+                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                                <html> 
+                                    <div class="NFQ-quest-type-esign NFQ-fieldset">
+                                       
+                                    </div>
+                                </html>
+                            </test> 
+                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                                <html> 
+                                    <div class="NFQ-quest-type-esign1 NFQ-fieldset">
+                                        <!-- Les questions s'affiche ici                                  -->
+                                    </div>
+                                </html>
+                            </test>
                                
                         </fieldset>
 
                         <fieldset header="Générale" className="NFQ-quest-title NFQ-type-general ">
 
-                            <html> 
-                                <div class="NFQ-quest-type-general NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html> 
+                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                                <html> 
+                                    <div class="NFQ-quest-type-general NFQ-fieldset">
+                                        <!-- Les questions s'affiche ici                                  -->
+                                    </div>
+                                </html> 
+                            </test> 
+
+                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                                <html> 
+                                    <div class="NFQ-quest-type-general1 NFQ-fieldset">
+                                        <!-- Les questions s'affiche ici                                  -->
+                                    </div>
+                                </html> 
+                            </test>
+
                                
                         </fieldset>
 
                         <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
 
-                            <html> 
-                                <div class="NFQ-quest-type-document NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html> 
-                               
+                                <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                                    <html> 
+                                        <div class="NFQ-quest-type-document NFQ-fieldset">
+                                            <!-- Les questions s'affiche ici                                  -->
+                                        </div>
+                                    </html>
+                                </test>
+
+                                <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                                    <html> 
+                                        <div class="NFQ-quest-type-document1 NFQ-fieldset">
+                                            <!-- Les questions s'affiche ici                                  -->
+                                        </div>
+                                    </html> 
+                               </test>
                         </fieldset> 
                         
                         <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
 
-                            <html> 
-                                <div class="NFQ-quest-type-plat NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html> 
+                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                                <html> 
+                                    <div class="NFQ-quest-type-plat NFQ-fieldset">
+                                        <!-- Les questions s'affiche ici                                  -->
+                                    </div>
+                                </html> 
+                            </test>
+
+                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                                <html> 
+                                    <div class="NFQ-quest-type-plat1 NFQ-fieldset">
+                                        <!-- Les questions s'affiche ici                                  -->
+                                    </div>
+                                </html>
+                            </test>
                                
                         </fieldset> 
 
                         <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
 
-                            <html> 
-                                <div class="NFQ-quest-type-archit NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html> 
-                               
+                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                                <html> 
+                                    <div class="NFQ-quest-type-archit NFQ-fieldset">
+                                        <!-- Les questions s'affiche ici                                  -->
+                                    </div>
+                                </html>
+                            </test>
+
+                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">                            
+                                <html> 
+                                    <div class="NFQ-quest-type-archit1 NFQ-fieldset">
+                                        <!-- Les questions s'affiche ici                                  -->
+                                    </div>
+                                </html>  
+                            </test>   
                         </fieldset>
 
                         <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
 
+                         <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                                <html> 
+                                    <div class="NFQ-quest-type-adminis NFQ-fieldset">
+                                        <!-- Les questions s'affiche ici                                  -->
+                                    </div>
+                                </html> 
+                          </test> 
+
+                          <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
                             <html> 
-                                <div class="NFQ-quest-type-adminis NFQ-fieldset">
+                                <div class="NFQ-quest-type-adminis1 NFQ-fieldset">
                                     <!-- Les questions s'affiche ici                                  -->
                                 </div>
-                            </html> 
-                               
+                            </html>
+                          </test>    
                         </fieldset>
 
                         <!-- end modification -->

@@ -31,10 +31,32 @@
 
                 intializeFaqPages();
                 loadPageBytype(2);
-                RestSearchFaqDet("",0,5,4);
-                //var id = root.query.idObject;
-                var id = "vBcI22oBLueSVKZn4Ob4";
+                var id = root.query.idObject;
+                //var id = "vBcI22oBLueSVKZn4Ob4";
                 getQsFaq(id,1);
+
+
+                PCD_headerfieldset_color(".NFQ-quest-title");
+	            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+                PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
+                PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
+               
+                PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
+                PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
+                PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
+                PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
+
+
+                
+                // header color
+                PCD_headerfieldset_color(".pcd-ha-color");
+
+                $(".NQF-vue-ref").hide();
+                RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],3);
+
+                // hide saisie info question
+                $(".NQF-edit-modif").hide()
+
             </script>
 
             <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -156,33 +178,85 @@
                         <div class="vpanel-body full-search-list">
 
                         </div>
-                        <div class="pagination-new-style" />
+                        <div class="searchGif2" style="display:none">
+                                    <img src="img/search-move.gif" />
+                        </div>
+                        <div class="pagination-new-style">
+                            <div class="pagination-1">
+                            
+                            </div>
+                        </div>
                     </html>
                     </vbox>    
                 </vbox>
 
-                <vbox className="hp-small left-box-fsb">
-                    <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color">
+                <vbox>
+                    <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
 
-                        
-                        <vbox className="PCD-hp-box ">
+                        <!-- start modification -->
+                        <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+
                             <html>
-                                <div class="vpanel-body-title PCD-parent-ann" style="margin-bottom: 1.5em;">
-                                    <i class="far fa-edit" /><span style="font-size: 14px;">Signature électronique</span> 
+                                <div class="NFQ-quest-type-esign NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
                                 </div>
-
-                                <div class="NFQ-quest-type">
-                                    
-                                </div>
-                                
                             </html>
-                        </vbox>
-                        <html>
-                        <div style="height: 50px;"> </div>
 
-                        </html>
-                    
-                    </fieldset>    
+                        </fieldset>
+
+                        <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
+
+                            <html>
+                                <div class="NFQ-quest-type-general NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+
+                            <html>
+                                <div class="NFQ-quest-type-document NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
+
+                            <html>
+                                <div class="NFQ-quest-type-plat NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
+
+                            <html>
+                                <div class="NFQ-quest-type-archit NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
+
+                            <html>
+                                <div class="NFQ-quest-type-adminis NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <!-- end modification -->
+
+                    </fieldset>
                 </vbox>
             </vbox>
             <html>
