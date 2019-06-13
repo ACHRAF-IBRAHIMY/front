@@ -88,6 +88,15 @@
                 }else{
                     $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-placeholder").hide();                
                 }
+            
+                if(type=="location"){
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2  .class-responses-q").hide();                
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-placeholder-q").hide();                
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q").show();                
+                }else{
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q").hide();                
+                }
+            
             });
 
              $(".simulator-cms .side-bar .body .div-2 .cms-form .class-type-question select").change(function(){
@@ -102,6 +111,14 @@
                     $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").show();
                 }else{
                     $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();                
+                }
+
+                if(type=="location"){
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form  .class-responses-q").hide();                
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();                
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").show();                
+                }else{
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").hide();                
                 }
             });
 
@@ -395,6 +412,7 @@
                                                 <option value="select">Select</option>
                                                 <option value="input">Input</option>
                                                 <option value="input-conditional">Input Conditionnel</option>
+                                                <option value="location">Localité</option>
                                             </select>
                                         </span>
                                     </div>
@@ -402,6 +420,20 @@
                                       <span>Reponse : </span>
                                        <div class="responses-sim-cms" />
                                         
+                                    </div>
+                                    <div class="class-location-q form-grid" style="display:none">
+                                       <span>Localité : </span>
+                                        <div class="responses-sim-cms" style="border:1px solid #eee">
+                                         <select name="" id="" style="margin:5.5px;width:96%">
+                                            <option value="tous" title="tous">Tous</option>
+                                            <option value="pays" title="pays">Pays</option>
+                                            <option value="préfecture/province" title="préfecture/province">Préfecture/province</option>
+                                            <option value="commune/arrondissement" title="commune/arrondissement">Commune/arrondissement</option>
+                                            <option value="region" title="region">Region</option>
+                                            <option value="ville" title="ville">Ville</option>
+                                            <option value="quartier" title="quartier">Quartier</option>
+                                       </select>
+                                       </div>
                                     </div>
                                     <div class="class-placeholder-q" style="display:none">
                                       <span>Placeholder : </span>
@@ -433,6 +465,7 @@
                                                 <option value="select">Select</option>
                                                 <option value="input">Input</option>
                                                 <option value="input-conditional">Input Conditionnel</option>
+                                                <option value="location">Localité</option>
                                             </select>
                                         </span>
                                     </div>
@@ -441,6 +474,20 @@
                                        <div class="responses-sim-cms">
                                          <input class="reponses" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                                        </div>
+                                    </div>
+                                    <div class="class-location-q form-grid" style="display:none">
+                                       <span>Localité :</span>
+                                       <div class="responses-sim-cms" style="border:1px solid #eee">
+                                         <select name="" id="" style="margin:5.5px;width:96%">
+                                         <option value="tous" title="tous">Tous</option>
+                                            <option value="pays" title="pays">Pays</option>
+                                            <option value="préfecture/province" title="préfecture/province">Préfecture/province</option>
+                                            <option value="commune/arrondissement" title="commune/arrondissement">Commune/arrondissement</option>
+                                            <option value="region" title="region">Region</option>
+                                            <option value="ville" title="ville">Ville</option>
+                                            <option value="quartier" title="quartier">Quartier</option>
+                                          </select>
+                                          </div>
                                     </div>
                                     <div class="class-placeholder" style="display:none;">
                                       <span>Placeholder : </span>
