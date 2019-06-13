@@ -271,7 +271,7 @@
                 <vbox>
                     <html>
                         <div style="height: 20px;" />                            
-                        <div class="hp-sbox-text">
+                        <div class="hp-sbox-text" onclick="javascript:ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');">
                             <a><i class="fas fa-user-times" /> Mot de passe oublié ?</a>
                         </div>
                         <div style="height: 26px;"> </div>                                                                  

@@ -109,9 +109,13 @@ function moveLeftNode(id){
     console.log("str");
     var nbrChild = eval("simple_chart_config.nodeStructure" + str + "[\"children\"].length");
     console.log(nbrChild);
-    if(node != 0 & nbrChild > 1 ){
+    if(node != 0 && nbrChild > 1 && id != ""){
         console.log(list);
-        var id2 = list.join("-")+"-"+(Number(node)-1); 
+        if(list.length==0){
+            var id2 = (Number(node)-1).toString();
+        }else{
+            var id2 = list.join("-")+"-"+(Number(node)-1); 
+        }
         var stockNode = getContentSubTree(id); 
         var stockNode2 = getContentSubTree(id2);    
         var str1 = getParentPath(id.split("-"));
@@ -121,8 +125,12 @@ function moveLeftNode(id){
         setIdTree([],simple_chart_config.nodeStructure.children);
         reduitAll();
         refrechTreant();
-    }else if( node ==0 & nbrChild > 1){
-        var id2 = list.join("-")+"-"+(Number(nbrChild)-1); 
+    }else if( node ==0 && nbrChild > 1 && id != ""){
+        if(list.length==0){
+            var id2 = (Number(nbrChild)-1).toString();
+        }else{
+            var id2 = list.join("-")+"-"+(Number(nbrChild)-1); 
+        }
         var stockNode = getContentSubTree(id); 
         var stockNode2 = getContentSubTree(id2);    
         var str1 = getParentPath(id.split("-"));
@@ -142,11 +150,18 @@ function moveRightNode(id){
     var node = list[list.length-1];
     list.pop();
     var str = getParentPath(list);
+    console.log(str);
     var nbrChild = eval("simple_chart_config.nodeStructure" + str + "[\"children\"].length");
     console.log(nbrChild);
-    if(node != nbrChild-1 & nbrChild > 1 ){
+    if(node != nbrChild-1 && nbrChild > 1 && id != ""){
         console.log(list);
-        var id2 = list.join("-")+"-"+(Number(node)+1); 
+        if(list.length==0){
+            var id2 = (Number(node)+1).toString();
+        }else{
+            var id2 = list.join("-")+"-"+(Number(node)+1); 
+        }
+        
+        console.log("*****replace "+id +" By"+id2);
         var stockNode = getContentSubTree(id); 
         var stockNode2 = getContentSubTree(id2);    
         var str1 = getParentPath(id.split("-"));
@@ -156,8 +171,12 @@ function moveRightNode(id){
         setIdTree([],simple_chart_config.nodeStructure.children);
         reduitAll();
         refrechTreant();
-    }else if( node ==nbrChild-1 & nbrChild > 1){
-        var id2 = list.join("-")+"-0"; 
+    }else if( node ==nbrChild-1 && nbrChild > 1 && id != ""){
+        if(list.length==0){
+            var id2 = "0"; 
+        }else{
+            var id2 = list.join("-")+"-0"; 
+        }
         var stockNode = getContentSubTree(id); 
         var stockNode2 = getContentSubTree(id2);    
         var str1 = getParentPath(id.split("-"));
@@ -181,6 +200,7 @@ function moveUpNode(id){
     console.log(id);
     if( id != "" && id.split("-").length > 1 ){
         console.log(list);
+        console.log(id);
         var stockNode = getContentSubTree(id); 
         var nb = id.split("-")[id.split("-").length-1];
         eval("simple_chart_config.nodeStructure" + str + "[\"children\"].push(stockNode)");
@@ -323,6 +343,8 @@ function findSubTreeById(id,type){
 
 function getParentPath(list) {
     var str = "";
+    if(list.length==0)return str;
+
     if(list[0]!=""){
         for (var i = 0; i < list.length; i++) {
             str += "[\"children\"][" + list[i] + "]";
@@ -553,12 +575,30 @@ function showQuestion(results){
         $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").show();
     }else{
         $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val("");
-        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();                
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide(); 
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").show();
+               
     }
 
-    $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("");
-    let str = results._source.response.content.join("//");
-    $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("<div><textarea style=\"width: 98%;border: 1px solid #eee;\">"+str+"</textarea></div>");
+    if(type=="location"){
+        $(".simulator-cms .side-bar .body .div-2 .cms-form  .class-responses-q").hide();                
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();
+        for(var j=0;j<$(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option").length;j++){
+            if($(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option").eq(j).val()==results._source.response.content){
+                $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option").eq(j).prop("selected",true); 
+            }
+        }                
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val("");
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").show();
+        $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("<div><textarea style=\"width: 98%;border: 1px solid #eee;\"></textarea></div>");
+
+    }else{
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").hide();
+        $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("");
+        let str = results._source.response.content.join("//");
+        $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("<div><textarea style=\"width: 98%;border: 1px solid #eee;\">"+str+"</textarea></div>");
+    }
+    
 
     $(".simulator-cms .side-bar .body .div-2").show();
     $(".simulator-cms .side-bar .body .div-3").hide();
@@ -627,6 +667,10 @@ function getQuestionDet(){
     
     content=$(".cms-form .body-cms-form .class-responses-q .responses-sim-cms div textarea").val().split("//");
     
+    if(type=="location"){
+        content = $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option:selected").val(); 
+     }
+
     obj["id"]=id;
     obj["question"]=question;
     obj["response"]={
@@ -638,6 +682,8 @@ function getQuestionDet(){
         var placeholder = $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val();
         obj["response"]["placeholder"]=placeholder;
     }
+    
+    
 
     console.log(obj);
     updateQuestionCms(id,obj);
@@ -646,8 +692,13 @@ function getQuestionDet(){
 
 function showAddQuestionForm(){
     $(".cms-form-2 .body-cms-form .class-question-q .link-sim-cms textarea").val("");
-    $(".cms-form-2 .body-cms-form .class-type-question select option").eq(0).select();
+    $(".cms-form-2 .body-cms-form .class-type-question select option").eq(0).prop("selected",true);
     $(".cms-form-2 .body-cms-form .class-responses-q .responses-sim-cms input").val("");
+    $(".cms-form-2 .body-cms-form .class-placeholder-q .responses-sim-cms input").val("");
+    $(".simulator-cms .side-bar .body .div-3 .cms-form-2  .class-responses-q").show();                
+    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-placeholder-q").hide();                
+    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q").hide();
+    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q select option").eq(0).prop("selected",true);
     $(".simulator-cms .side-bar .body .div-2").hide();
     $(".simulator-cms .side-bar .body .div-3").show();
 }
@@ -657,13 +708,17 @@ function addQuestionForm(){
     var question = $(".cms-form-2 .body-cms-form .class-question-q .link-sim-cms textarea").val();
     var type = $(".cms-form-2 .body-cms-form .class-type-question select option:selected").val();
     var content = [];
-    if(type != "input"){
+    
+    if(type != "input" && type != "location" ){
         var listt = $(".cms-form-2 .body-cms-form .class-responses-q .responses-sim-cms input").val();
         for(var i=0;i<listt.split("//").length;i++){
             content.push(listt.split("//")[i]);
         }
     }
 
+    if(type=="location"){
+        content = $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q select option:selected").val();
+    }
     
     obj["question"]=question;
     obj["response"]={
@@ -675,6 +730,8 @@ function addQuestionForm(){
         var placeholder = $(".cms-form-2 .body-cms-form .class-placeholder input.placeholder").val();
         obj["response"]["placeholder"]=placeholder;
     }
+
+    
     
 
     console.log(obj);
@@ -701,6 +758,8 @@ function addQuestionCms(objectUp){
         success: function (result) {
             objectUp["id"]=result.hits.hits.length;   
             updateQuestionCms(result.hits.hits.length,objectUp);
+            $(".simulator-cms .side-bar .body .div-3").hide();
+
             
         },
         error: function (error) {
@@ -1891,6 +1950,42 @@ function getAllCmsQuestion(inp,index){
 }
 
 
+function locationAutoComplete2(inp,arr,val,type){
+    closeAllListsSim(0);
+    a = document.createElement("DIV");
+    a.setAttribute("id", "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items2");
+    /*append the DIV element as a child of the autocomplete container:*/
+    inp.parentNode.appendChild(a);
+    for (i = 0; i < arr[0].length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        /*create a DIV element for each matching element:*/
+        var b = document.createElement("DIV");
+        /*make the matching letters bold:*/
+        var str = arr[0][i];
+        b.setAttribute("title",str);
+        if(val==""){
+            b.innerHTML=str.toLowerCase();
+        }else{
+            b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
+        }
+        var input = document.createElement("input");
+        input.setAttribute("type","hidden");
+        input.setAttribute("value",arr[1][i]);
+        b.appendChild(input);
+        b.addEventListener("click", function(e) {
+            /*insert the value for the autocomplete text field:*/
+            inp.value = this.getAttribute("title");
+            /*close the list of autocompleted values,
+            (or any other open lists of autocompleted values:*/
+            closeAllListsSim(0);
+        });
+        b.appendChild(input);
+        a.appendChild(b);
+
+    }   
+}
+
 function createListeRes(inp,arr,val,type){
     closeAllListsSim();
     a = document.createElement("DIV");
@@ -1937,7 +2032,7 @@ function createListeRes(inp,arr,val,type){
             $(".cms-form .body-cms-form .class-question .link-sim-cms .fa-plus").hide();
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/
-            closeAllListsSim();
+            closeAllListsSim(1);
             });
         }else{
             b.addEventListener("click", function(e) {
@@ -1945,35 +2040,59 @@ function createListeRes(inp,arr,val,type){
                 inp.value = this.getAttribute("title");
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
-                closeAllListsSim();
+                closeAllListsSim(1);
             });
         }
         a.appendChild(b);
     }
 }
 
-function closeAllListsSim() {
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
-        x[i].parentNode.removeChild(x[i]);
+function closeAllListsSim(type) {
+    if(type!=0){
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            x[i].parentNode.removeChild(x[i]);
+        }
+    }else{
+        var y = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < y.length; i++) {
+            y[i].parentNode.removeChild(y[i]);
+        }
     }
+    
 }
 
 /* localite */
+var localiteType = ["pays", "préfecture/province", "commune/arrondissement", "region", "ville", "quartier"];
+var localiteLib = [];
 
-function restGetAllLocalite(){
+function restGetAllLocalite(offset,limit,type){
     $.ajax({
         type: "get",
-        url: "http://91.121.57.204:8080/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=100&sortInfo=id=ASC",
+        url: "http://91.121.57.204:8080/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset="+offset+"&limit="+limit+"&sortInfo=id=ASC",
         contentType: "application/json",
         success: function (result) {
             var data = result.data;
-            var listLocalite = [[],[]];
-            for(var i=0;i<data.length;i++){
-                listLocalite[0].push(data[i].stringIndex13);
-                listLocalite[0].push(data[i].stringIndex6);
+            localiteLib = [];
+            if(type==0){
+                for(var i=0;i<localiteType.length;i++){
+                    localiteLib.push([]);   
+                }
             }
-            console.log(data);
+                        
+            
+            for(var i=0;i<data.length;i++){
+                var indexLocaliteType =  localitType.indexOf(data[i].stringIndex13);
+                if(indexLocaliteType != -1 ){
+                    localiteLib[indexLocaliteType].push(data[i].stringIndex1);
+                }else{
+                    localiteType.push(data[i].stringIndex13);    
+                    localiteLib.push([]);
+                    localiteLib[localiteLib.length-1].push(data[i].stringIndex1);
+                }
+                
+            }
+            console.log(localiteLib);
 
         },
         error: function (error) {
