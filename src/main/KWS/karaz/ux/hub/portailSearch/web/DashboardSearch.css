@@ -6,6 +6,11 @@
     text-align: left;   
 }
 
+.faq-fieldset-det .full-search-list .full-search-list-item .para-faq p{
+    font-size: 14px;
+    text-align: left;   
+}
+
 .text-align-left{
     text-align: left;
 }
@@ -218,6 +223,10 @@
     height: auto;
 }
 
+.faq-fieldset-det .full-search-list{
+    height: auto;
+}
+
 .pagination-new-style{
     padding: 10px 52px;
     color: #999;
@@ -243,6 +252,11 @@
 }
 
 .faq-fieldset .ow-pl-toolbar{
+ color: #999 !important;
+ text-align: left !important;
+}
+
+.faq-fieldset-det .ow-pl-toolbar{
  color: #999 !important;
  text-align: left !important;
 }
@@ -704,6 +718,12 @@
 }
 
 .faq-fieldset .searchGif2{
+    padding: 80px;
+    height: 350px;
+    display: none;
+}
+
+.faq-fieldset-det .searchGif2{
     padding: 80px;
     height: 350px;
     display: none;

@@ -30,11 +30,19 @@
 		        $(".header-div-toggle .dropdown-content").slideUp();
 		    }); 
 
-            document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
+            Array.from(document.querySelectorAll(".div-full-search-bar .ow-field-input")).forEach(function(elm){
+                elm.addEventListener("keydown", function (e) {
                     var x = document.getElementById("autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x,1);
-            }); 
+                })
+            });
+            
+            /* document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,1);
+            }); */ 
 
             $(".no-response-find .btn-show-support-form").click(function(){
                 $(".no-response-find .support-form-over").slideDown("fast");
@@ -56,8 +64,6 @@
                 PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
                 PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
 
-
-                
                 // header color
                 PCD_headerfieldset_color(".pcd-ha-color");
 
@@ -73,7 +79,10 @@
 
                 // hide saisie info question
                 $(".NQF-edit-modif").hide()
-                autoCompleteSim(document.querySelectorAll(".divSearchBar .hp-search_field input")[0],"faq_index","QUESTIONS");
+                
+                Array.from(document.querySelectorAll(".divSearchBar .hp-search_field input")).forEach(function(elm){
+                    autoCompleteSim(elm,"faq_index","QUESTIONS");
+                });
 
         </script>
         
@@ -224,35 +233,13 @@
                         </div>
                     </div>
                 </html>
-                        <fieldset label="PIECES REQUISES" className="faq-fieldset">
+                        <fieldset label="E-SIGN" className="faq-fieldset">
                             <html>
                                 <div class="faq-qr full-search-list" />
                                 <div class="searchGif2" style="display:none">
                                     <img src="img/search-move.gif" />
                                 </div>
                                   <div class="pagination-new-style">
-                                    <div class="pagination-1">
-                                        <i class="fas fa-angle-double-left" />
-                                        <i class="fas fa-angle-left" />
-                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
-                                        <i class="fas fa-angle-right" />
-                                        <i class="fas fa-angle-double-right" />
-                                        <i class="fas fa-sync-alt" />
-                                    </div>
-                                    
-                                    <div class="pagination-2">
-                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-                        <fieldset label="ACCES A LA PLATEFORME" className="faq-fieldset">
-                            <html>
-                                <div class="faq-qr full-search-list" />
-                                <div class="searchGif2" style="display:none">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                <div class="pagination-new-style">
                                     <div class="pagination-1">
                                         <i class="fas fa-angle-double-left" />
                                         <i class="fas fa-angle-left" />
@@ -290,7 +277,29 @@
                                 </div>
                             </html>
                         </fieldset>
-                        <fieldset label="E-SIGN" className="faq-fieldset">
+                        <fieldset label="DOCUMENTS" className="faq-fieldset">
+                            <html>
+                                <div class="faq-qr full-search-list" />
+                                <div class="searchGif2" style="display:none">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+                                        <i class="fas fa-angle-double-left" />
+                                        <i class="fas fa-angle-left" />
+                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
+                                        <i class="fas fa-angle-right" />
+                                        <i class="fas fa-angle-double-right" />
+                                        <i class="fas fa-sync-alt" />
+                                    </div>
+                                    
+                                    <div class="pagination-2">
+                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
+                                    </div>
+                                </div>
+                            </html>
+                        </fieldset>
+                        <fieldset label="ACCES A LA PLATEFORME" className="faq-fieldset">
                             <html>
                                 <div class="faq-qr full-search-list" />
                                 <div class="searchGif2" style="display:none">

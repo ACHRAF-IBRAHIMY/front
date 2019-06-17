@@ -980,7 +980,7 @@ function uploadTreeToES(){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: URL_SEARCH+"/simulator_index_tree/tree/3",
+        url: URL_SEARCH+"/simulator_index_tree/tree/2",
         datatype: "application/json",
         data:JSON.stringify(treeObject),
         contentType: "application/json",
@@ -1043,7 +1043,7 @@ function getTreeFromEs(type){
 
     $.ajax({
         type: "get",
-        url: URL_SEARCH+"/simulator_index_tree/tree/3",
+        url: URL_SEARCH+"/simulator_index_tree/tree/2",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -2070,7 +2070,7 @@ function restGetAllLocalite(offset,limit,type){
     $.ajax({
         type: "get",
         url: "http://91.121.57.204:8080/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset="+offset+"&limit="+limit+"&sortInfo=id=ASC",
-        contentType: "application/json",
+        datatype: "application/json",
         success: function (result) {
             var data = result.data;
             localiteLib = [];
@@ -2082,7 +2082,7 @@ function restGetAllLocalite(offset,limit,type){
                         
             
             for(var i=0;i<data.length;i++){
-                var indexLocaliteType =  localitType.indexOf(data[i].stringIndex13);
+                var indexLocaliteType =  localiteType.indexOf(data[i].stringIndex13);
                 if(indexLocaliteType != -1 ){
                     localiteLib[indexLocaliteType].push(data[i].stringIndex1);
                 }else{
@@ -2099,4 +2099,18 @@ function restGetAllLocalite(offset,limit,type){
             console.log(error.responseText);
         }
     });
+}
+
+function searching(val,i){
+    if(i==0){
+        return localiteLib.join(",").split(",").filter(result => {
+            const regex = new RegExp(val,'gi')
+            return result.match(regex) ;
+        });
+    }else{
+        return localiteLib[i].filter(result => {
+            const regex = new RegExp(val,'gi')
+            return result.match(regex) ;
+        });
+    }
 }

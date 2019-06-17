@@ -67,7 +67,7 @@ function NQF_edit(type) {
 			$('.ow-field-input-select[data-xpath="categ"]').text("Administration");
 		}
 
-		$('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').html(resp)
+		$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
 		$(".NQF-edit-modif").show();
 		$(".NQF-btn-alg").hide();
 	} else if(type == 2){
@@ -88,7 +88,7 @@ function NQF_edit(type) {
 		if(type == 1){
 			let question = $('.ow-field-input[data-xpath="question"]').val();
 			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-			let resp = $('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').html()
+			let resp = $('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
 			
 
 			if (question == "" && categ == "" && resp == "<p><br></p>") {
@@ -129,7 +129,7 @@ function NQF_edit(type) {
 
 		$('.ow-field-input[data-xpath="question"]').val("");
 		$('.ow-field-input-select[data-xpath="categ"]').text("");
-		$('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').text("")
+		$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').text("")
 		$(".NQF-id").val("");
 
 
@@ -167,9 +167,8 @@ function NQF_edit(type) {
 		if (type == 1) {
 			let question = $('.ow-field-input[data-xpath="question"]').val();
 			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-			let resp = $('.ow-field-htmleditor[data-xpath="NFQ-response"] .ql-editor').html()
+			let resp = $('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
 			let ID = $(".NQF-id").val();
-
 
 			$(".NQF-vue-question .NQF-prev-quest >b").text(question);
 			$(".NQF-prev-resp").html(resp);
@@ -451,7 +450,9 @@ function NQF_edit(type) {
 
                             // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
                         }
-                    }
+                        if(atr!=3){
+                            $(cls[i]).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Toutes les questions de la catégorie<span>`);
+                        }                    }
                 }
 
 			},
@@ -487,3 +488,51 @@ function NQF_edit(type) {
 		}
 
 	}
+	
+	function NQF_edit_av(type,dataroot,ctx) {
+		if(type == 1){
+			let question = $(".NQF-vue-question .NQF-prev-quest b").text();
+
+			let resp = $(".NQF-prev-resp").html();
+			let categ = $(".NQF-categorie").val();
+			let ID = $(".NQF-id").val();
+			dataroot.question=question;
+	       // dataroot.nfqresponse=resp;
+			dataroot.categ=categ;
+			ctx.formRender.notifyObservers("question");
+			ctx.formRender.notifyObservers("nfqresponse");
+			ctx.formRender.notifyObservers("categ");
+			/*let ID = $(".NQF-id").val();
+			console.log(ID);
+
+			$(".NQF-edit-float .ow-field-container.ow-field-text-container").addClass("focusedInput");
+			$('.ow-field-input[data-xpath="question"]').val(question);
+			if (categ == "E-SIGN") {
+				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+				$('.ow-field-input-select[data-xpath="categ"]').text("Signature électronique");
+			} else if (categ == "GENERAL") {
+				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+				$('.ow-field-input-select[data-xpath="categ"]').text("Général");
+			} else if (categ == "DOCUMENT") {
+				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+				$('.ow-field-input-select[data-xpath="categ"]').text("Document");
+			} else if (categ == "PLATEFORME") {
+				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+				$('.ow-field-input-select[data-xpath="categ"]').text("Plateforme");
+			} else if (categ == "ARCHITECTE") {
+				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+				$('.ow-field-input-select[data-xpath="categ"]').text("Architecte");
+			} else if (categ == "ADMINISTRATION") {
+				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+				$('.ow-field-input-select[data-xpath="categ"]').text("Administration");
+			}*/
+	$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
+			$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
+			$(".NQF-edit-modif").show();
+			$(".NQF-btn-alg").hide();
+		} else if(type == 2){
+			// add edit here
+
+		}
+		}
+
