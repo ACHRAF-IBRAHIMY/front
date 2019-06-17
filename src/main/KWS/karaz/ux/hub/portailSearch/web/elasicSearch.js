@@ -162,8 +162,8 @@ function restFullSearchList(prefix,from,prev,parent) {
             console.log("typePage :"+typePage);
 
             if(typePage!=1 && typePage !=2){
-                document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[0].innerHTML = res.hits.total;
-                document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("hp-sbox-text")[0].getElementsByTagName("span")[1].innerHTML = prefix;
+                $(".div-full-search-bar .hp-sbox-text span.total").html(res.hits.total);
+                $(".div-full-search-bar .hp-sbox-text span.prefix").html(prefix);
             }
 
             $(".searchGif").hide();
@@ -396,7 +396,7 @@ function restFullSearchList(prefix,from,prev,parent) {
 function generateRequestFaqSearch(prefix,type,from,size){
     
     if(prefix.trim()!=""){
-        var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"70%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+        var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"75%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
     }else{
         var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
     }
@@ -407,7 +407,7 @@ function generateRequestFaqSearch(prefix,type,from,size){
 var faqPages = [1,1,1,1,1,1];
 var faqGlobalPages = [1,1,1,1,1,1];
 var totalFaqPages = [0,0,0,0,0,0];
-var typesList = ["DOCUMENT","PLATEFORME","GENERAL","E-SIGN","ARCHITECTE","ADMINISTRATION"];
+var typesList = ["E-SIGN","GENERAL","DOCUMENT","PLATEFORME","ARCHITECTE","ADMINISTRATION"];
 
 function intializeFaqPages(){
     faqPages = [1,1,1,1,1,1];
@@ -418,11 +418,12 @@ function intializeFaqPages(){
 
 function generatePaginationFaqPage(index,prefix,typeUse){
     if(typeUse==-1){
-        $(".faq-fieldset .pagination-new-style").eq(0).html("");
-        var p = $(".faq-fieldset .pagination-new-style").eq(0);
+        $(".faq-fieldset-det .pagination-new-style").html("");
+        var p = $(".faq-fieldset-det .pagination-new-style");
     }else{
-        $(".faq-fieldset .pagination-new-style").eq(index).html("");
-        var p = $(".faq-fieldset .pagination-new-style").eq(index);
+        $(".faq-vbox").each(function(elm){
+            $(this).find(".faq-fieldset .pagination-new-style").eq(index).html("");
+        });
     }
     console.log(index);
     var begin = (faqGlobalPages[index]-1)*3;
@@ -441,65 +442,93 @@ function generatePaginationFaqPage(index,prefix,typeUse){
             } 
             event.preventDefault();
         });
-        p.append(a);
+        if(typeUse==-1){
+            p.append(a);
+        }else{
+            $(".faq-vbox").each(function(elm){
+                $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
+            })
+        }
+        
+        
 
     for(var i=begin;i<nbrPage;i++){
     
-    if(i==begin){
-        a = document.createElement("a");
-        a.innerHTML=begin+1;
-        console.log( (Number(faqPages[index])-1) + " = " + i);
-        if( i == (Number(faqPages[index])-1)){
-            a.setAttribute("class","active");
+        if(i==begin){
+            a = document.createElement("a");
+            a.innerHTML=begin+1;
+            console.log( (Number(faqPages[index])-1) + " = " + i);
+            if( i == (Number(faqPages[index])-1)){
+                a.setAttribute("class","active");
 
-        }
+            }
 
-        a.addEventListener("click",function(){
-            if(faqGlobalPages[index]>1){
-                faqGlobalPages[index]--;
-                faqPages[index]=(faqGlobalPages[index]-1)*3+1;
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
+            a.addEventListener("click",function(){
+                if(faqGlobalPages[index]>1){
+                    /*faqGlobalPages[index]--;
+                    faqPages[index]=(faqGlobalPages[index]-1)*3+1;
+                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
+                    */
+                    faqPages[index]=Number(this.innerHTML);
+                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);            
+           
+                }else{
+                    faqPages[index]= 1;
+                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
+                }
+                event.preventDefault();
+            });
+            if(typeUse==-1){
+                p.append(a);
             }else{
-                faqPages[index]= 1;
+                $(".faq-vbox").each(function(elm){
+                    $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
+                })
+            }
+        }else{
+            console.log( (Number(faqPages[index])-1) + " = " + i);
+            
+
+            a = document.createElement("a");
+            var j=i+1;
+            a.innerHTML=(i+1);
+            if( i == (Number(faqPages[index])-1)){
+                console.log(a.innerHTML+" notBeg");
+                a.setAttribute("class","active");
+            }
+            a.addEventListener("click",function(event){
+                event.preventDefault();
+                faqPages[index]=Number(this.innerHTML);
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);            
+            });
+            if(typeUse==-1){
+                p.append(a);
+            }else{
+                $(".faq-vbox").each(function(elm){
+                    $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
+                })
+            }            }
+        }
+        a = document.createElement("a");
+        a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
+        a.addEventListener("click",function(){
+            if(faqPages[index]<Math.ceil(totalFaqPages[index]/2)){
+                faqPages[index]++;
+                if(faqPages[index]%3==1){
+                    faqGlobalPages[index]++    
+                }
                 RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
             }
             event.preventDefault();
-        });
-
-        p.append(a);
-    }else{
-        console.log( (Number(faqPages[index])-1) + " = " + i);
+        });        
         
-
-        a = document.createElement("a");
-        var j=i+1;
-        a.innerHTML=(i+1);
-        if( i == (Number(faqPages[index])-1)){
-            console.log(a.innerHTML+" notBeg");
-            a.setAttribute("class","active");
+        if(typeUse==-1){
+            p.append(a);
+        }else{
+            $(".faq-vbox").each(function(elm){
+                $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
+            })
         }
-        a.addEventListener("click",function(event){
-            event.preventDefault();
-            console.log(this.innerHTML);
-            faqPages[index]=Number(this.innerHTML);
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);            
-        });
-            p.append(a);        
-        }
-    }
-    a = document.createElement("a");
-    a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
-    a.addEventListener("click",function(){
-        if(faqPages[index]<Math.ceil(totalFaqPages[index]/2)){
-            faqPages[index]++;
-            if(faqPages[index]%3==1){
-                faqGlobalPages[index]++    
-            }
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
-        }
-        event.preventDefault();
-    });        
-    p.append(a);
 }
 
 /*
@@ -742,20 +771,20 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
     
     if(type==0){
         $(".faq-fieldset").hide();
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
         str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size); 
         str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size); 
-        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
-        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
         str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size); 
         str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size);     
     }else if(type==1){
-        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size);
-    }else if(type==2){
-        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size);               
-    }else if(type==3){
-        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
-    }else if(type==4){
         str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
+    }else if(type==2){
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
+    }else if(type==3){
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size);
+    }else if(type==4){
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size);               
     }else if(type==5){
         str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size); 
     }else if(type==6){
@@ -766,8 +795,8 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
         $(".faq-fieldset .full-search-list").eq(type-1).html("");
         $(".faq-fieldset .searchGif2").eq(type-1).show();
     }else if(typeUse == -1){
-        $(".faq-fieldset .full-search-list").eq(0).html("");
-        $(".faq-fieldset .searchGif2").eq(0).show();
+        $(".faq-fieldset-det .full-search-list").html("");
+        $(".faq-fieldset-det .searchGif2").show();
     }
 
     $.ajax({
@@ -783,6 +812,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
             console.log(result);
             $(".searchGif").hide();
             $(".faq-fieldset .searchGif2").hide();        
+            $(".faq-fieldset-det .searchGif2").hide();        
             if(type!=0 && typeUse!=-1){
                 fullCreateFaqByType(result.responses[0].hits.hits,type);
                 generatePaginationFaqPage((type-1),prefix,0);
@@ -792,7 +822,9 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
                 for(var i=0;i<result.responses.length;i++){
                     if(result.responses[i].hits.hits.length!=0){
                         if(prefix!=""){
-                            $(".faq-vbox .faq-fieldset").eq(i).addClass("expanded");
+                            Array.from($(".faq-vbox")).forEach(function(e){
+                                $(".faq-fieldset").eq(i).addClass("expanded");
+                            })
                         }
                         fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
                         k++;
@@ -806,7 +838,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
                 }
             }else if(typeUse==-1){
                 console.log("hello");
-                fullCreateFaqByType(result.responses[0].hits.hits,1);
+                fullCreateFaqByType(result.responses[0].hits.hits,1,typeUse);
                 totalFaqPages[type-1]=result.responses[0].hits.total;
                 generatePaginationFaqPage((type-1),prefix,-1);
                 console.log(result.responses[0].hits.total);
@@ -819,44 +851,99 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
 }
 
 
-function fullCreateFaqByType(results,type){
+function fullCreateFaqByType(results,type,typeUse){
 
-    $(".faq-fieldset").eq((Number(type)-1)).show();
-    var a1 = document.querySelectorAll(".faq-fieldset .full-search-list")[(Number(type)-1)];
-    a1.innerHTML="";
-    for(i=0;i<results.length;i++){
-        var id = results[i]._id;
-        var titleTx = results[i]._source.QUESTIONS;
-        var text = results[i]._source.REPONSES;
-        var b = document.createElement("div");
-        b.setAttribute("class","hp-box full-search-list-item");
-        b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
-        var d = document.createElement("div");
-        d.setAttribute("class","item-body");
-        d.setAttribute("style","padding:0 18px");
-        var e = document.createElement("div");
-        e.setAttribute("class","item-body-title");
-        e.setAttribute("style","font-size:16px");
-        e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
-        var f = document.createElement("p");
-        f.innerHTML = subLong(text.replace(/<[^>]*>?/gm, ''),300);
-        f.setAttribute("style","font-size: 14px;text-align:left");
-        f.setAttribute("class","para-faq");
-        d.appendChild(e);
-        d.appendChild(f);
-        var g = document.createElement("a");
-        g.addEventListener("click",function(){
-            var id=$(this).children("input").val();
-            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
+    if(typeUse==-1){
+        $(".faq-vbox").each(function(elm){
+            $(this).find(".faq-fieldset-det").show();
         });
-        g.setAttribute("class","item-body-button");
-        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
-        g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
-        d.appendChild(g);
-        b.appendChild(d);
-        a1.appendChild(b);
-    }
+    
+        $(".faq-vbox").each(function(elm){
+            $(this).find(".faq-fieldset-det .full-search-list").html("");
+        });
+    
+        for(i=0;i<results.length;i++){
+            var id = results[i]._id;
+            var titleTx = results[i]._source.QUESTIONS;
+            var text = results[i]._source.REPONSES;
+            var b = document.createElement("div");
+            b.setAttribute("class","hp-box full-search-list-item");
+            b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+            var d = document.createElement("div");
+            d.setAttribute("class","item-body");
+            d.setAttribute("style","padding:0 18px");
+            var e = document.createElement("div");
+            e.setAttribute("class","item-body-title");
+            e.setAttribute("style","font-size:16px");
+            e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+            var f = document.createElement("p");
+            f.innerHTML = subLong(text.replace(/<[^>]*>?/gm, ''),300);
+            f.setAttribute("style","font-size: 14px;text-align:left");
+            f.setAttribute("class","para-faq");
+            d.appendChild(e);
+            d.appendChild(f);
+            var g = document.createElement("a");
+            g.addEventListener("click",function(){
+                var id=$(this).children("input").val();
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
+            });
+            g.setAttribute("class","item-body-button");
+            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+            g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
+            d.appendChild(g);
+            b.appendChild(d);
+    
+            
+            $(".faq-fieldset-det .full-search-list").append(b);                        
+        }
+        }else{
+    
+        $(".faq-vbox").each(function(elm){
+            $(this).find(".faq-fieldset").eq((Number(type)-1)).show();
+        });
 
+        $(".faq-vbox").each(function(elm){
+            $(this).find(".faq-fieldset .full-search-list").eq((Number(type)-1)).html("");
+        });
+    
+        for(i=0;i<results.length;i++){
+            var id = results[i]._id;
+            var titleTx = results[i]._source.QUESTIONS;
+            var text = results[i]._source.REPONSES;
+            var b = document.createElement("div");
+            b.setAttribute("class","hp-box full-search-list-item");
+            b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+            var d = document.createElement("div");
+            d.setAttribute("class","item-body");
+            d.setAttribute("style","padding:0 18px");
+            var e = document.createElement("div");
+            e.setAttribute("class","item-body-title");
+            e.setAttribute("style","font-size:16px");
+            e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+            var f = document.createElement("p");
+            f.innerHTML = subLong(text.replace(/<[^>]*>?/gm, ''),300);
+            f.setAttribute("style","font-size: 14px;text-align:left");
+            f.setAttribute("class","para-faq");
+            d.appendChild(e);
+            d.appendChild(f);
+            var g = document.createElement("a");
+            g.addEventListener("click",function(){
+                var id=$(this).children("input").val();
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
+            });
+            g.setAttribute("class","item-body-button");
+            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+            g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
+            d.appendChild(g);
+            b.appendChild(d);
+
+            
+            $(".faq-vbox").each(function(elm){
+                $(this).find(".faq-fieldset .full-search-list").eq((Number(type)-1)).append(b);
+            });
+                    
+        }
+    }
 }
 
 //Create list of results
@@ -1236,7 +1323,7 @@ function autocomplete(inp,arr) {
    } 
 
    function fullSearchList(results){
-       var a = document.querySelector(".full-search-list");
+       var a = $(".full-search-list");
        if(typePage== 1){
         for(i=0;i<results.length;i++){
             var id = results[i]._id;
@@ -1425,7 +1512,7 @@ function autocomplete(inp,arr) {
            icons.innerHTML="<i class=\"far fa-file-image\" /><i class=\""+setting.icon+"\" />";
            b.appendChild(icons);
            b.appendChild(d);
-           a.appendChild(b);
+           a.append(b);
        }
     }
    }
@@ -1607,7 +1694,7 @@ function noResults(){
     var a = document.createElement("div");
     a.setAttribute("style","text-align: left;width: 50;margin: auto;width: 60%;");
     a.innerHTML="Aucune activité ne correspond aux termes de recherche spécifiés.<br/><br/>Suggestions :<br/>- Vérifiez l’orthographe des termes de recherche.<br/>- Essayez d'autres mots.<br/>- Utilisez des mots clés plus généraux.";
-    document.getElementsByClassName("full-search-list")[0].appendChild(a);
+    $(".full-search-list").append(a);
 }
 
 

@@ -8,8 +8,12 @@
             <search />
             <idObject />
             <parentP />
+			
         </query>
         <collapsed>false</collapsed>
+		<nfqresponse />
+		<categ />
+		<question />
     </data>
     <view>
         <screen labelWidth="80" label="My Dashboard" noToolBar="true">
@@ -194,7 +198,10 @@
 
 
                             <fieldset label="DONNÉES RÉPONSE" className="NQF-shadow">
-                                <field widget="htmlEditor" xpath="NFQ-response" />
+                                <field noLabel="true" widget="htmlEditor" xpath="nfqresponse">
+								
+								</field>
+								
 
                             </fieldset>
                             <vbox columns="auto 45%" className="DC-box-btn-filtrer">
@@ -240,7 +247,9 @@
                                 <vbox />
                                 <button label="Editer " className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
                                     <postChange>
-                                        NQF_edit(1);
+									console.log("root================",root);
+									console.log("context================",context);
+                                        NQF_edit_av(1,root,context);
 
                                     </postChange>
                                 </button>

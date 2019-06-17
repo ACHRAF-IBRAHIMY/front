@@ -167,7 +167,7 @@
 
                         </vbox>
                     </vbox>
-                    <vbox className="hp-box hp-sec other-qst-faq faq-fieldset">
+                    <vbox className="hp-box hp-sec other-qst-faq faq-fieldset-det">
                      <html>
                         <div class="vpanel-title">
                             <div class="vpanel-title">
