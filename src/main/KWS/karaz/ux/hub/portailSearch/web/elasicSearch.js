@@ -74,65 +74,8 @@ function check(res,elm){
 }
 
 var typePage = 0;
-var articles = [{
-    "_source":{
-         "title":"DECRET N° 2-13-424 APPROUVANT LE REGLEMENT GENERAL DE CONSTRUCTION",
-         "type":"URBANISME",
-         "text":"Décret n° 2-13-424 du 13 rejeb 1434 (24 mai 2013) approuvant le règlement général de construction fixant la forme et les conditions de délivrance des autorisations et des pièces exigibles en application de la législation relative à l'urbanisme et aux lotissements, groupes d'habitations et morcellements ainsi que des textes pris pour leur application."
-    }         
-    },{
-    "_source":{
-         "title":"ARRETE N° 3214.13 FIXANT LES PIECES CONSTITUTIVES DES DOSSIERS D'AUTORISATIONS D’URBANISME",
-         "type":"URBANISME",
-         "text":"Arrêté conjoint du Ministre de l’Urbanisme et de l’Aménagement du Territoire et du Ministre de l’Intérieur n° 3214.13 du 10 moharram 1435 (14 novembre 2013) fixant les pièces constitutives des dossiers exigibles aux demandes d’autorisation en application de la législation relative à l’urbanisme et aux lotissements, groupes d’habitations et morcellements ainsi que des textes pris pour leur application."
-    }         
-    },{
-    "_source":{
-         "title":"DAHIR DU 25 AOUT 1914 PORTANT REGLEMENTATION DES ETABLISSEMENTS CLASSES",
-         "type":"ÉCONOMIQUE",
-         "text":"Dahir du 25 août 1914 (3 chaoual 1332) portant réglementation des établissements insalubres, incommodes ou dangereux, tel qu’il a été modifié et complété par les dahirs des 13 octobre 1933, 11 août 1937, 9 juin 1938, 9 novembre 1942 et 18 janvier 1950..."
-    }         
-    },{
-    "_source":{
-         "title":"LOI 47-18 PORTANT REFORME DES CENTRES REGIONAUX D’INVESTISSEMENT",
-         "type":"INVESTISSEMENT",
-         "text":"Loi 47-18 portant réforme des Centres Régionaux d’Investissement et création des commissions régionales unifiées d’investissement."
-    }         
-    },{
-    "_source":{
-         "title":"REGLEMENT DE SECURITE CONTRE LES RISQUES D'INCENDIE ET DE PANIQUE DANS LES CONSTRUCTIONS",
-         "type":"URBANISME",
-         "text":"Décret 2.14.499_Fr d'application du règlement fixant les règles de sécurité contre les risques d'incendie et de panique dans les constructions."
-    }         
-    }];
-
-var faqs = [
-    {
-        "type":"PIECES REQUISES",
-        "content":[
-            {
-                "question":"Quels sont les pièces requises pour l'obtention d'un permis de construire ?",
-                "response":"Le réglement général de construction publié sous forme de décret (N° 2-13-424), a fixé la liste des pièces requises pour le dépôt d'un permis de construire. Certains documents sont obligatoires au dépôt, d'autre peuvent être déposées après obtention de l'avis favorable de la commission. Les documents demandé ..."
-            },
-            {
-                "question":"Est ce que la feuille d'alignement est un document obligatoire pour le dépôt d'une demande ?",
-                "response":"Non, la feuille d'alignement n'est pas un document requis par la réglementation et ne doit aucunement bloquer ni la réception de la demande ni son instruction. Néanmoins, l'architecte et l'administration a souvent besoin de ce document afin de vérifier la conformité du plan à la réalité du terrain et à la ..."
-            }
-        ],
-    },{
-        "type":"ACCES A LA PLATEFORME",
-        "content":[
-            {
-                "question":"Je suis fonctionnaire et j'ai été muté d'une administration à une autre. Est ce que je garde mon compte ?",
-                "response":"Entant que fonctionnaire, votre droits d'accès rokhas sont intimement liés à l'administration dont vous faire partie. Vous pouvez néanmoins garder - si vous le souhaitez - votre nom utilisateur précédent en le demandant à l'équipe Support au même temps que vous indiquez vos nouvelles attributions au sein de ..."
-            },
-            {
-                "question":"Je ne me souviens plus de mon nom d'utilisateur, ni de mon mot de passe. Que faire ?",
-                "response":"Vous pouvez récupérez votre nom d'utilisateur et réinitialiser votre mot de passe, si vous avec accès à l'e-mail communiqué lors de la création de votre compte d'accès. Dans ce cas, il faut cliquez sur le lien \"J'ai oublié mon mot de passe\", puis saisir votre adresse e-mail. En accédant à votre boite e-mail, vous pou ..."
-            }
-        ]
-    }
-];
+var articles = [];
+var faqs = [];
 
 
 function removeFullListSearch(){
@@ -394,9 +337,8 @@ function restFullSearchList(prefix,from,prev,parent) {
 }
 
 function generateRequestFaqSearch(prefix,type,from,size){
-    
     if(prefix.trim()!=""){
-        var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"75%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+        var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
     }else{
         var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
     }
@@ -640,6 +582,7 @@ function getQsFaq(id,type){
             'fast');
     }
 
+    $(".NFQ-all-quest").hide();
 
     $.ajax({
         type: "get",
@@ -797,8 +740,13 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
     }else if(typeUse == -1){
         $(".faq-fieldset-det .full-search-list").html("");
         $(".faq-fieldset-det .searchGif2").show();
+        $(".NQF-edit-modif").hide();
+        $(".NFQ-all-quest").show();
     }
+    
 
+    
+    
     $.ajax({
         type: "post",
         url: URL_SEARCH+"/_msearch",
@@ -838,6 +786,8 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
                 }
             }else if(typeUse==-1){
                 console.log("hello");
+                
+                
                 fullCreateFaqByType(result.responses[0].hits.hits,1,typeUse);
                 totalFaqPages[type-1]=result.responses[0].hits.total;
                 generatePaginationFaqPage((type-1),prefix,-1);
@@ -883,10 +833,18 @@ function fullCreateFaqByType(results,type,typeUse){
             d.appendChild(e);
             d.appendChild(f);
             var g = document.createElement("a");
+            
+            
             g.addEventListener("click",function(){
                 var id=$(this).children("input").val();
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
-            });
+               if(typePage==2 || typePage==5){
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
+               }else{
+    			   getQsFaq(id,0);
+
+               }
+			});
+            
             g.setAttribute("class","item-body-button");
             g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
             g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";

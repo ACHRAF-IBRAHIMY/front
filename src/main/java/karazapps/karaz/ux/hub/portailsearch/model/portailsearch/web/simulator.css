@@ -41,6 +41,7 @@
 
 .simulator .simulator-qr .rep{
     margin-top: 13px;
+    position: relative;
 }
 
 .simulator .simulator-qr .rep-type-0,.simulator .simulator-qr .rep-type-1,.simulator .simulator-qr .rep-type-2{

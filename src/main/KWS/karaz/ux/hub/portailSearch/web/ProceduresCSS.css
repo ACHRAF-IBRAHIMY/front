@@ -131,6 +131,13 @@ ul {
     .ow-button.usage_r.DC-btn-filtrer-NQF{
         padding: 0 !important;
     }
+    
+    .NFQ-all-quest{
+    margin-top: 2em;
+    box-shadow: 3px 3px 3px rgba(102, 102, 102,0.34);
+    
+}
+    
     .NQF-vue-question{
         margin: 0em 0.5em;
         border: 1px solid #DDD;
