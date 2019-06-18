@@ -451,8 +451,9 @@ function NQF_edit(type) {
                             // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
                         }
                         if(atr!=3){
-                            $(cls[i]).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Toutes les questions de la catégorie<span>`);
-                        }                    }
+                        	$(cls[i]).append(`<span  class="NFQ-end" onclick="RestSearchFaq('',0,2,${typesList.indexOf(result.responses[i].hits.hits[0]._source.type)+1},-1)"> Toutes les questions de la catégorie<span>`);                        }else{
+                        }   
+                    }
                 }
 
 			},
@@ -490,7 +491,9 @@ function NQF_edit(type) {
 	}
 	
 	function NQF_edit_av(type,dataroot,ctx) {
+		
 		if(type == 1){
+			$(".NFQ-all-quest").hide();
 			let question = $(".NQF-vue-question .NQF-prev-quest b").text();
 
 			let resp = $(".NQF-prev-resp").html();

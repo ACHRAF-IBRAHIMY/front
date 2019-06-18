@@ -980,7 +980,7 @@ function uploadTreeToES(){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: URL_SEARCH+"/simulator_index_tree/tree/2",
+        url: URL_SEARCH+"/simulator_index_tree/tree/3",
         datatype: "application/json",
         data:JSON.stringify(treeObject),
         contentType: "application/json",
@@ -1036,14 +1036,15 @@ function sendRequestBulkMatrix(bulks){
 };
 
 function getTreeFromEs(type){
-    if(type==0){
+    
+	if(type==0){
         $(".container-sim-cms #tree-simple").html("<div class=\"gif-load-simulator-cms\"><img src=\"img/load-text.gif\" /></div>");
     }
     nodeStructures=[];
 
     $.ajax({
         type: "get",
-        url: URL_SEARCH+"/simulator_index_tree/tree/2",
+        url: URL_SEARCH+"/simulator_index_tree/tree/3",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -1059,6 +1060,7 @@ function getTreeFromEs(type){
            }else if(type==1){
                tree = result._source.treeSimp;
                 firstEsTreeCall();
+                restGetAllLocalite(0,100,0);
            }
         },
         error: function (error) {
@@ -1844,11 +1846,73 @@ function deletedCol(tree,array,newObj){
 }
 
 /* auto complete */
-function autoCompleteSim(inp,index,field){
-    inp.addEventListener("input",function(){
-        var req = inp.value;
-        restAutoComplete2(inp,req,index,field);
-    });
+function autoCompleteSim(inp,index,field,type){
+    if(type==0){
+        
+        inp.addEventListener("input",function(){
+            var val = this.value;
+            var arr = searching(val,index);
+            createListeResLoc(this,arr,val,2);
+        },false);
+        
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById("autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+    
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+            }
+        },false);
+    }else{
+
+        inp.addEventListener("input",function(){
+            var req = inp.value;
+            restAutoComplete2(inp,req,index,field);
+        });
+
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById("autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+    
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+            }
+        },false);
+    }
 }
 
 function restAutoComplete2(inp,req,index,field){
@@ -1880,9 +1944,7 @@ function restAutoComplete2(inp,req,index,field){
                 "query_string": {
                     "fields":[field+".completion"],
                     "query":"*"+req+"*",
-                    "minimum_should_match": "100%" ,
-                    "analyzer": "rebuilt_french"
-                  
+                    "minimum_should_match": "100%"                   
                 }
             }],
             "should":[{
@@ -2047,7 +2109,55 @@ function createListeRes(inp,arr,val,type){
     }
 }
 
+
+function createListeResLoc(inp,arr,val,type){
+    closeAllListsSim(1);
+    a = document.createElement("DIV");
+    a.setAttribute("id", "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    a.setAttribute("style","margin-top: auto;top:auto;position:absolute;width:46%;left: 12px;")
+    /*append the DIV element as a child of the autocomplete container:*/
+    inp.parentNode.appendChild(a);
+    
+    /*for each item in the array...*/
+    for (i = 0; i < 5; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        /*create a DIV element for each matching element:*/
+        var b = document.createElement("DIV");
+        /*make the matching letters bold:*/
+        var str = arr[i];
+
+        b.setAttribute("title",str);
+        
+        if(val==""){
+            b.innerHTML=str.toUpperCase();
+        }else{
+            b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
+        }
+        
+     
+        /*insert a input field that will hold the current array item's value:*/
+        var input = document.createElement("input");
+        input.setAttribute("type","hidden");
+        input.setAttribute("value",arr[i]);
+        b.appendChild(input);
+        /*execute a function when someone clicks on the item value (DIV element):*/
+    
+        b.addEventListener("click", function(e) {
+            inp.value = this.getElementsByTagName("input")[0].value;
+            inp.setAttribute("disabled","disabled");
+            inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
+            closeAllListsSim(1);
+        });
+        a.appendChild(b);
+    }
+
+    
+}
+
+
 function closeAllListsSim(type) {
+    currentFocus = -1;
     if(type!=0){
         var x = document.getElementsByClassName("autocomplete-items");
         for (var i = 0; i < x.length; i++) {
@@ -2074,12 +2184,14 @@ function restGetAllLocalite(offset,limit,type){
         success: function (result) {
             var data = result.data;
             localiteLib = [];
+            Array.from(document.querySelectorAll(".simulator-qr .rep img.loadGif")).forEach(function(elm){
+                elm.style.display = "none";
+            });
             if(type==0){
                 for(var i=0;i<localiteType.length;i++){
                     localiteLib.push([]);   
                 }
             }
-                        
             
             for(var i=0;i<data.length;i++){
                 var indexLocaliteType =  localiteType.indexOf(data[i].stringIndex13);
@@ -2090,19 +2202,19 @@ function restGetAllLocalite(offset,limit,type){
                     localiteLib.push([]);
                     localiteLib[localiteLib.length-1].push(data[i].stringIndex1);
                 }
-                
             }
             console.log(localiteLib);
 
         },
         error: function (error) {
             console.log(error.responseText);
+            alert("Error dans le chargement des localités..!");
         }
     });
 }
 
 function searching(val,i){
-    if(i==0){
+    if(i==-1){
         return localiteLib.join(",").split(",").filter(result => {
             const regex = new RegExp(val,'gi')
             return result.match(regex) ;

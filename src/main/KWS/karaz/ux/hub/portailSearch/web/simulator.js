@@ -100,7 +100,7 @@ function createQuestion(type,obj){
        });
 
        q2.appendChild(response);
-    }else if(type="input-conditional"){
+    }else if(type=="input-conditional"){
         var size = obj.response.content.length;
         var response = document.createElement("input");
         for(var i=0;i<size;i++){
@@ -119,6 +119,32 @@ function createQuestion(type,obj){
              }
            });
         q2.appendChild(response);
+    }else if(type == "location"){
+        var content = obj.response.content;
+        var response = document.createElement("input");
+        response.setAttribute("class","rep-pred rep-type-4");
+        response.setAttribute("placeholder","Localité");
+        response.addEventListener("input",function(){
+        if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
+            $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            removeExpanded(); 
+            }
+        });
+        response.setAttribute("style","vertical-align: top;margin-top:6px;");
+        var index = localiteType.indexOf(content);
+        autoCompleteSim(response,index,null,0);
+        q2.appendChild(response);
+        if(localiteLib.length==0){
+            q2.innerHTML += "<img src=\"img/loadgif3.gif\" style=\"width:50px;vertical-align: top;\" class=\"loadGif\"></img>";
+        }
+
+        var icon = document.createElement("i");
+        icon.setAttribute("class","fas fa-edit");
+        icon.setAttribute("style","display:none;font-size: 24px;padding-top: 7px;margin-left: 8px;cursor:pointer");
+        icon.addEventListener("click",function(){
+            this.parentElement.getElementsByTagName("input")[0].removeAttribute("disabled");    
+        });
+        q2.appendChild(icon);
     }
     
     q.appendChild(q1);
