@@ -11,6 +11,7 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
+        removeLastRootPage(userName)
         	 typeClassification = 0
              getAllNotesClass();
              getAllClusters(false,0);

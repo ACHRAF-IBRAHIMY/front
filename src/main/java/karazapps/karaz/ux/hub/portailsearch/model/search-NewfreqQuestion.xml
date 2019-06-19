@@ -18,7 +18,7 @@
     <view>
         <screen labelWidth="80" label="My Dashboard" noToolBar="true">
             <script postLoad="true">
-            
+            	removeLastRootPage(userName);
             	loadPageBytype(6);
                 $(".rokhas-home").click(function(){
                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
@@ -247,9 +247,18 @@
                                 </html>
                                 <vbox />
                             </vbox>
-                            <vbox columns="85% auto" className="NQF-btn-alg">
+                           <vbox columns="80% 10% auto" className="NQF-btn-alg">
+                            
                                 <vbox />
-                                <button label="Editer " className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
+                                <button label="supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
+                                    <postChange>
+                                        let id = $(".NQF-id").val();
+                                        removeQuestionNFQ(id);
+                                        $(".NQF-vue-question").hide();
+										NQF_remove_subtitle();
+                                    </postChange>
+                                </button>
+                                <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
                                     <postChange>
                                         console.log("root================",root);
                                         console.log("context================",context);

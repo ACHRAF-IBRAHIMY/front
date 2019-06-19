@@ -14,6 +14,15 @@ var URL_SEARCH = "https://cmdbserver.karaz.org:9200";
 //var URL_SEARCH = "https://localhost:9200";
 var AUTH = "Basic cmVhZGFsbDpyZWFkYWxs";
 
+function removeLastRootPage(userName){
+    var rootElms = $("#root-content-frame-manager .ow-cfm .ow-cfm-core > div.navigation-multiTab");
+    if(rootElms.length>1 && userName=="Guest"){
+        var elm = rootElms.eq(rootElms.length-2);
+        elm.remove();        
+    }else{
+
+    }
+}
 
 function restAutoComplete(inp,prefix,type){
     var result = [];
