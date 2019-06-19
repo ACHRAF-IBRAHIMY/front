@@ -1,6 +1,15 @@
 
 /*res*/
 
+.faq-fieldset-det .pagination-new-style{
+    text-align: center;
+}
+
+.faq-fieldset-det .searchGif2{
+    text-align: center;
+}
+
+
 .faq-fieldset .full-search-list .full-search-list-item .para-faq p{
     font-size: 14px;
     text-align: left;   

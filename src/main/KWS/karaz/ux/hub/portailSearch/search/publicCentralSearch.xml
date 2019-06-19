@@ -31,7 +31,7 @@
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
              var currentFocus;
-                
+                removeLastRootPage(userName);
       document.querySelector(".divSearchBar input").addEventListener("input", function () {
                     var a, b, i;
                     var inp = document.querySelector(".divSearchBar input");

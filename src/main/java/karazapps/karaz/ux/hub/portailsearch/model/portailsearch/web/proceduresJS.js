@@ -1,4 +1,8 @@
 /* start procedure  */
+function NQF_remove_subtitle() {
+    $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
+}
+
 function PCD_addtitle() {
 	$(".PCD-addtitle> .ow-pl-toolbar .ow-label-pl:not(:has(>i))").append(`<i class="fas fa-info-circle PCD-tooltip" title="Il s'agit d'indicateurs contextuels représentants la performances relatifs au processus, à l'entité ou à l'utilisateur concerné"/>`)
 }
@@ -202,7 +206,7 @@ function NQF_edit(type) {
 				console.log(req, ID);
 				updateQuestionNQF(ID, req);
 				// added recently
-
+				/*
 				if (req.type == "E-SIGN") {
 					$(".NFQ-quest-type-esign").empty();
 					RestSearchFaqSec("", 0, 5, 4, ".NFQ-quest-type-esign", 1)
@@ -221,7 +225,7 @@ function NQF_edit(type) {
 				} else if (req.type = "ADMINISTRATION") {
 					$(".NFQ-quest-type-adminis").empty();
 					RestSearchFaqSec("", 0, 5, 6, ".NFQ-quest-type-adminis", 1)
-				}
+				}*/
 				//
 				if ($(".ow-btn-container:has(> i)").length == 0) {
 					$(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
@@ -451,7 +455,7 @@ function NQF_edit(type) {
                             // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
                         }
                         if(atr!=3){
-                        	$(cls[i]).append(`<span  class="NFQ-end" onclick="RestSearchFaq('',0,2,${typesList.indexOf(result.responses[i].hits.hits[0]._source.type)+1},-1)"> Toutes les questions de la catégorie<span>`);                        }else{
+                        	$(cls[i]).append(`<span  class="NFQ-end" onclick="RestSearchFaqWithIntilize('',0,2,${typesList.indexOf(result.responses[i].hits.hits[0]._source.type)+1},-1)"> Toutes les questions de la catégorie<span>`);                        }else{
                         }   
                     }
                 }
@@ -465,7 +469,13 @@ function NQF_edit(type) {
 
 	}
 
+	function RestSearchFaqWithIntilize(var1,var2,var3,var4,var5){
+        intializeFaqPages();
+        RestSearchFaq(var1,var2,var3,var4,var5);
+    }
 
+	
+	
 	function removeQuestionNFQ(id) {
 
 		if (window.confirm("Do you really want to delete this question?")) {

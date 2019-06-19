@@ -18,6 +18,7 @@
       
     <screen id="retageHomePage" labelWidth="80" label="My Dashboard" noToolBar="true">      
        <script onLoad="true">
+       removeLastRootPage(userName);
 	   $(".app-footer").empty();
 	   </script>
         <vbox className="Header-signup" columns-smallx="auto">
