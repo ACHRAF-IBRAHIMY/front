@@ -253,7 +253,7 @@
                                 <button label="supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
                                     <postChange>
                                         let id = $(".NQF-id").val();
-                                        removeQuestionNFQ(id);
+                                        removeQuestionNFQ(id,"faq_index/qr");
                                         $(".NQF-vue-question").hide();
 										NQF_remove_subtitle();
                                     </postChange>

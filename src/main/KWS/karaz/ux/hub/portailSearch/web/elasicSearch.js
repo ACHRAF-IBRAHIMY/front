@@ -355,6 +355,78 @@ function generateRequestFaqSearch(prefix,type,from,size){
     return str;
 }
 
+
+/* Begin Ref juridique */
+
+
+function getRefJ(id,type){
+    $.ajax({
+        type: "get",
+        url: URL_SEARCH+"/reglementation_index/reglementatio/" + id,
+        datatype: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization",AUTH);
+        },
+        success: function (result) {
+            if(type==0){
+				//traitement mohamed
+
+            }else if(type==1){
+                //traitement youssef
+            } 
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function generateRequestRefSearch(prefix,type,from,size){
+    if(prefix.trim()!=""){
+        var str = "{ \"index\": \"reglementation_index\", \"type\": \"reglementation\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"desc\",\"title\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+    }else{
+        var str ="{ \"index\": \"reglementation_index\", \"type\": \"reglementation\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+    }
+
+    return str;
+}
+
+function RestSearchref(prefix,page,size,type,typeUse){
+    var str =""
+    
+    if(type==0){
+        str+=generateRequestRefSearch(prefix,"1",page,size); 
+        str+=generateRequestRefSearch(prefix,"2",page,size); 
+    }else if(type==1){
+        str+=generateRequestRefSearch(prefix,"1",page,size); 
+    }else if(type==2){
+        str+=generateRequestRefSearch(prefix,"2",page,size); 
+    }
+    
+
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH+"/_msearch",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data:str,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {    
+            console.log(result);            
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    })
+}
+
+
+
+/* End Ref juridique */
+
+
 var faqPages = [1,1,1,1,1,1];
 var faqGlobalPages = [1,1,1,1,1,1];
 var totalFaqPages = [0,0,0,0,0,0];
@@ -754,7 +826,6 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
     }
     
 
-    
     
     $.ajax({
         type: "post",
@@ -1292,7 +1363,9 @@ function autocomplete(inp,arr) {
    function fullSearchList(results){
        var a = $(".full-search-list");
        if(typePage== 1){
+        console.log(results)
         for(i=0;i<results.length;i++){
+            
             var id = results[i]._id;
             var titleTx = results[i]._source.title;
             var text = results[i]._source.desc;
@@ -1343,7 +1416,7 @@ function autocomplete(inp,arr) {
             title.innerHTML=subLong(type);
             b.appendChild(title);
             b.appendChild(d);
-            a.appendChild(b);
+            a.append(b);
         }
        }else if(typePage == 2){
            var a1 = document.querySelectorAll(".faq-fieldset .full-search-list")[0];
@@ -1575,22 +1648,27 @@ function autocomplete(inp,arr) {
 
     function addSpansHL(request,result){
         var hl="";
-        var posArray = highlights(request,result);
+        var requestSplit = request.replace(/'/g," ").replace(/"/g," ").replace(/`/g," ");
+        var posArray = highlights(requestSplit,result);
         var nbrPos = posArray[0].length;
         
-      
+        if(nbrPos!=0){
             hl+=result.substring(0,posArray[0][0]);
-      for(var i=0;i<nbrPos-1;i++){
-        	hl+="<span>";
-            hl+=result.substring(posArray[0][i],posArray[1][i]);
+            for(var i=0;i<nbrPos-1;i++){
+                    hl+="<span>";
+                    hl+=result.substring(posArray[0][i],posArray[1][i]);
+                    hl+="</span>";
+                    hl+=result.substring(posArray[1][i],posArray[0][i+1]);
+            }
+
+            hl+="<span>";
+            hl+=result.substring(posArray[0][nbrPos-1],posArray[1][nbrPos-1]);
             hl+="</span>";
-            hl+=result.substring(posArray[1][i],posArray[0][i+1]);
+            hl+=result.substring(posArray[1][nbrPos-1]);
+        }else{
+            hl= result;
         }
 
-        hl+="<span>";
-        hl+=result.substring(posArray[0][nbrPos-1],posArray[1][nbrPos-1]);
-        hl+="</span>";
-        hl+=result.substring(posArray[1][nbrPos-1]);
         return hl;
     }
     

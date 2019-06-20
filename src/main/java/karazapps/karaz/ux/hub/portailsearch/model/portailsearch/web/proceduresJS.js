@@ -1,4 +1,4 @@
-/* start procedure  */
+
 function NQF_remove_subtitle() {
     $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
 }
@@ -300,7 +300,7 @@ function NQF_edit(type) {
 			$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
 											<div class="vpanel-body-title NQF-quest-delete" style="font-size: 14px;">
 												<span class = 'NFQ-click-btn'  onclick='getQsFaq("${id}",0)' >` + quest + `</span>
-												<span class = 'far fa-times-circle NFQ-close-quest' onclick='removeQuestionNFQ("${id}")' />
+												<span class = 'far fa-times-circle NFQ-close-quest' onclick='removeQuestionNFQ("${id}","/faq_index/qr/")' />
 											</div>
 											<hr class="NQF-horizontal-line " />
 											
@@ -323,7 +323,6 @@ function NQF_edit(type) {
 
 	function updateQuestionNQF(id, obj) {
 
-
 		let newID = ""
 		if (id != "") {
 			newID = id;
@@ -339,8 +338,8 @@ function NQF_edit(type) {
 				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
 			},
 			success: function (result) {
-				console.log(result);
-
+                voidRestSearch("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
+                console.log(result);
 			},
 			error: function (error) {
 				console.log(error.responseText);
@@ -377,6 +376,53 @@ function NQF_edit(type) {
 
 	}
 
+    function voidRestSearch(prefix, page, size, type, cls, atr){
+        $(".faq-vbox .no-response-find").hide();
+        var str = "";
+		if (type == 0) {
+			$(".faq-fieldset").hide();
+			str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
+			str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
+			str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
+			str += generateRequestFaqSearch(prefix, "E-SIGN", page, size);
+			str += generateRequestFaqSearch(prefix, "ARCHITECTE", page, size);
+			str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page, size);
+		} else if (type == 1) {
+			str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
+		} else if (type == 2) {
+			str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
+		} else if (type == 3) {
+			str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
+		} else if (type == 4) {
+			str += generateRequestFaqSearch(prefix, "E-SIGN", page, size);
+		} else if (type == 5) {
+			str += generateRequestFaqSearch(prefix, "ARCHITECTE", page, size);
+		} else if (type == 6) {
+			str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page, size);
+		}
+
+        
+        $.ajax({
+			type: "post",
+			//url: "http://localhost:9200/_msearch",
+			url: URL_SEARCH + "/_msearch",
+			datatype: "application/json",
+			contentType: "application/x-ndjson",
+			data: str,
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("Authorization", AUTH);
+			},
+			success: function (result) {
+                console.log("go ...! "+result);
+                setTimeout(function () {
+                    RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
+                    RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document1",".NFQ-quest-type-plat1",".NFQ-quest-type-general1",".NFQ-quest-type-esign1",".NFQ-quest-type-archit1",".NFQ-quest-type-adminis1"],2);    
+				}, 1000);
+            },error: function (error) {
+				console.log(error);
+			}
+		})
+    }
 
 	function RestSearchFaqSec(prefix, page, size, type, cls, atr) {
 
@@ -413,7 +459,7 @@ function NQF_edit(type) {
 		$.ajax({
 			type: "post",
 			//url: "http://localhost:9200/_msearch",
-			url: URL_SEARCH + "/_msearch",
+			url: URL_SEARCH + "/_msearch?pretty",
 			datatype: "application/json",
 			contentType: "application/x-ndjson",
 			data: str,
@@ -430,7 +476,7 @@ function NQF_edit(type) {
 
 
 						for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
-							console.log(result.responses[i].hits.hits[j]._id);
+							//console.log(result.responses[i].hits.hits[j]._id);
 							// console.log(result.responses[i].hits.hits[j]._source.QUESTIONS);
 
 							NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls, atr)
@@ -446,8 +492,9 @@ function NQF_edit(type) {
                 }
                 }else{
                     for(var i=0;i<result.responses.length;i++){
+                        $(cls[i]).html("");
                         for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
-                            console.log(result.responses[i].hits.hits[j]._id);
+                           // console.log(result.responses[i].hits.hits[j]._id);
                             // console.log(result.responses[i].hits.hits[j]._source.QUESTIONS);
 
                             NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls[i], atr)
@@ -476,12 +523,12 @@ function NQF_edit(type) {
 
 	
 	
-	function removeQuestionNFQ(id) {
+	function removeQuestionNFQ(id,indexType) {
 
 		if (window.confirm("Do you really want to delete this question?")) {
 			$.ajax({
 				type: "delete",
-				url: URL_SEARCH + "/faq_index/qr/" + id,
+				url: URL_SEARCH + indexType + id,
 				//url: "http://localhost:9200/index_classification_cluster/avis/_search",
 				contentType: "application/json",
 				beforeSend: function (xhr) {
@@ -547,5 +594,4 @@ function NQF_edit(type) {
 			// add edit here
 
 		}
-		}
-
+}
