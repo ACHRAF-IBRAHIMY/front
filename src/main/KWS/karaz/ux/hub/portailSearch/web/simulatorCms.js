@@ -1886,32 +1886,24 @@ function autoCompleteSim(inp,index,field,type){
             var req = inp.value;
             restAutoComplete2(inp,req,index,field);
         });
-
+/*
         inp.addEventListener("keydown", function(e) {
             var x = document.getElementById("autocomplete-list");
             if (x) x = x.getElementsByTagName("div");
     
             if (e.keyCode == 40) {
-                /*If the arrow DOWN key is pressed,
-                increase the currentFocus variable:*/
                 currentFocus++;
-                /*and and make the current item more visible:*/
                 addActive(x);
             } else if (e.keyCode == 38) { //up
-                /*If the arrow UP key is pressed,
-                decrease the currentFocus variable:*/
                 currentFocus--;
-                /*and and make the current item more visible:*/
                 addActive(x);
             } else if (e.keyCode == 13) {
-                /*If the ENTER key is pressed, prevent the form from being submitted,*/
                 e.preventDefault();
                 if (currentFocus > -1) {
-                    /*and simulate a click on the "active" item:*/
                     if (x) x[currentFocus].click();
                 }
             }
-        },false);
+        },false);*/
     }
 }
 
