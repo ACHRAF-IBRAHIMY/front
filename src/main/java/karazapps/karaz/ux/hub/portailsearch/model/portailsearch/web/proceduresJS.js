@@ -10,22 +10,20 @@ function PCD_addtitle() {
 function PCD_headerfieldset_color(pcdClasstype) {
 	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl").css("color","#999999");
 }
+
 function PCD_add_header_style_action(pcdClasstype, pcdSecondheader){
 
 	PCD_headerfieldset_color(pcdClasstype);
-	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
+	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('karaz/ux/hub/portailsearch/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
 	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").append(` | <span class="title-2x" style="color:#38a; ">`+ pcdSecondheader + `</span>`);	
 
 }
 
 function PCD_add_header_style_action_eco(pcdClasstype, pcdSecondheader){
-
 	PCD_headerfieldset_color(pcdClasstype);
-	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresEconomique', 'search', 'procedures Economique', {});");
+	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('karaz/ux/hub/portailsearch/search/proceduresEconomique', 'search', 'procedures Economique', {});");
 	$(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").append(` | <span class="title-2x" style="color:#38a; ">`+ pcdSecondheader + `</span>`);	
-
 }
-
 
 /* start procedure  */
 
@@ -35,7 +33,6 @@ function PCD_header_style_quest_type(qtypeCls, fontAwsCls){
 	$(qtypeCls+"> .ow-pl-toolbar .ow-label-pl:not(:has(>i))").prepend('<i class="'+fontAwsCls+' NFQ-fa-style" />')
 	
 }
-
 
 
 
@@ -81,13 +78,6 @@ function NQF_edit(type) {
 	}
 
 
-
-
-
-
-
-
-
 	function NQF_preview_QR(type) {
 		if(type == 1){
 			let question = $('.ow-field-input[data-xpath="question"]').val();
@@ -105,9 +95,9 @@ function NQF_edit(type) {
 
 			}
 		} else if(type == 2){
-			let title = $('.ow-field-input[data-xpath="NQFtitle.ref"]').val();
-			let categ = $('.ow-field-input-select[data-xpath="NQFtype.ref"]').text();
-			let texte = $('.ow-field-htmleditor[data-xpath="NQFtext.ref"] .ql-editor').html()
+			let title = $('.ow-field-input[data-xpath="NQFtitle"]').val();
+			let categ = $('.ow-field-input-select[data-xpath="NQFtype"]').text();
+			let texte = $('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html()
 			let description = $('.NFQ-desc-refjuridique textarea').val(); 
 			
 			
@@ -119,6 +109,7 @@ function NQF_edit(type) {
 				$(".NQF-desc-ref").text(description);
 				$(".NQF-text-ref").html(texte);
 				$(".NQF-vue-ref").show();
+				$(".NQF-btn-alg").hide();
 
 			}
 		}
@@ -148,10 +139,10 @@ function NQF_edit(type) {
 		
 		
 
-		$('.ow-field-input[data-xpath="NQFtitle.ref"]').val("");
-		$('.ow-field-input-select[data-xpath="NQFtype.ref"]').text("");
+		$('.ow-field-input[data-xpath="NQFtitle"]').val("");
+		$('.ow-field-input-select[data-xpath="NQFtype"]').text("");
 		$('.NFQ-desc-refjuridique textarea').val("");
-		$('.ow-field-htmleditor[data-xpath="NQFtext.ref"] .ql-editor').html("")
+		$('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html("")
 		$(".NQF-id-ref").val("");
 
 
@@ -164,10 +155,9 @@ function NQF_edit(type) {
 		$(".NQF-vue-ref").hide();
 		}
 
-	}
-
-
-	function NQF_save_QR(type) {
+    }
+    
+    function NQF_save_QR(type) {
 		if (type == 1) {
 			let question = $('.ow-field-input[data-xpath="question"]').val();
 			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
@@ -176,11 +166,13 @@ function NQF_edit(type) {
 
 			$(".NQF-vue-question .NQF-prev-quest >b").text(question);
 			$(".NQF-prev-resp").html(resp);
-			var req = {
+            
+            var req = {
 				"QUESTIONS": "",
 				"REPONSES": "",
 				"type": ""
-			}
+            }
+            
 			req.QUESTIONS = question;
 			req.REPONSES = resp;
 			req.type = categ;
@@ -248,20 +240,20 @@ function NQF_edit(type) {
 		} else if(type == 2){
 			
 
-			let title = $('.ow-field-input[data-xpath="NQFtitle.ref"]').val();
-			let categ = $('.ow-field-input-select[data-xpath="NQFtype.ref"]').text();
-			let texte = $('.ow-field-htmleditor[data-xpath="NQFtext.ref"] .ql-editor').html()
+			let title = $('.ow-field-input[data-xpath="NQFtitle"]').val();
+			let categ = $('.ow-field-input-select[data-xpath="NQFtype"]').text();
+			let texte = $('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html()
 			let description = $('.NFQ-desc-refjuridique textarea').val(); 
 			
 			console.log(title, categ, texte, description)
-			let T;
+			
 			if(categ == "Urbanisme"){
 				T = 2; 
 			} else if(categ == "Economique"){
 				T = 1;
 			}
-			let ID = "";
-
+			let id = "";
+			id = $(".NQF-id-ref").val();
 			$(".NQF-title-ref").text(title);
 			$(".NQF-desc-ref").text(description);
 			$(".NQF-text-ref").html(texte);
@@ -273,10 +265,10 @@ function NQF_edit(type) {
 				"desc":""
 			}
 			req.title = title;
-			req.type = T;
+			req.type = T.toString();
 			req.content = texte;
 			req.desc = description;
-			console.log(req);
+			console.log(req, id);
 			
 			//
 			if ($(".ow-btn-container:has(> i)").length == 0) {
@@ -287,12 +279,13 @@ function NQF_edit(type) {
 				$(".NQF-edit-modif").hide()
 				$(".NQF-new-quest-btn").show();
 				$(".NQF-vue-ref").show();
+				$(".NQF-btn-alg").hide();
 			}, 2000);
 			
-			// updateReglementation(ID,req);
+			updateReglementation(id,req);
 		}
 	}
-
+	
 	function NQF_add_question(quest, id, cls, type) {
 
 		// console.log(id);
@@ -338,6 +331,7 @@ function NQF_edit(type) {
 				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
 			},
 			success: function (result) {
+                $(".NQF-id").val(result._id);
                 voidRestSearch("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
                 console.log(result);
 			},
@@ -366,8 +360,8 @@ function NQF_edit(type) {
 				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
 			},
 			success: function (result) {
-				console.log(result);
-
+                voidRestSearch("",0,7,0,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],0);
+                console.log(result);
 			},
 			error: function (error) {
 				console.log(error.responseText);
@@ -378,29 +372,43 @@ function NQF_edit(type) {
 
     function voidRestSearch(prefix, page, size, type, cls, atr){
         $(".faq-vbox .no-response-find").hide();
-        var str = "";
-		if (type == 0) {
-			$(".faq-fieldset").hide();
-			str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
-			str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
-			str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
-			str += generateRequestFaqSearch(prefix, "E-SIGN", page, size);
-			str += generateRequestFaqSearch(prefix, "ARCHITECTE", page, size);
-			str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page, size);
-		} else if (type == 1) {
-			str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
-		} else if (type == 2) {
-			str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
-		} else if (type == 3) {
-			str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
-		} else if (type == 4) {
-			str += generateRequestFaqSearch(prefix, "E-SIGN", page, size);
-		} else if (type == 5) {
-			str += generateRequestFaqSearch(prefix, "ARCHITECTE", page, size);
-		} else if (type == 6) {
-			str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page, size);
-		}
+        if(atr==0){
+                var str = ""
+            
+                if (type == 0) {
+                    str += generateRequestRefSearch(prefix, "1", page, size);
+                    str += generateRequestRefSearch(prefix, "2", page, size);
+                } else if (type == 1) {
+                    str += generateRequestRefSearch(prefix, "1", page, size);
+                } else if (type == 2) {
+                    str += generateRequestRefSearch(prefix, "2", page, size);
+                }
+            
+        }else{
 
+            var str = "";
+            if (type == 0) {
+                $(".faq-fieldset").hide();
+                str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
+                str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
+                str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
+                str += generateRequestFaqSearch(prefix, "E-SIGN", page, size);
+                str += generateRequestFaqSearch(prefix, "ARCHITECTE", page, size);
+                str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page, size);
+            } else if (type == 1) {
+                str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
+            } else if (type == 2) {
+                str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
+            } else if (type == 3) {
+                str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
+            } else if (type == 4) {
+                str += generateRequestFaqSearch(prefix, "E-SIGN", page, size);
+            } else if (type == 5) {
+                str += generateRequestFaqSearch(prefix, "ARCHITECTE", page, size);
+            } else if (type == 6) {
+                str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page, size);
+            }
+        }
         
         $.ajax({
 			type: "post",
@@ -414,10 +422,18 @@ function NQF_edit(type) {
 			},
 			success: function (result) {
                 console.log("go ...! "+result);
-                setTimeout(function () {
-                    RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
-                    RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document1",".NFQ-quest-type-plat1",".NFQ-quest-type-general1",".NFQ-quest-type-esign1",".NFQ-quest-type-archit1",".NFQ-quest-type-adminis1"],2);    
-				}, 1000);
+            
+                if(atr==0){
+                    setTimeout(function () {
+                        RestSearchref("",0,7,0,1,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"]);
+                        RestSearchref("",0,7,0,2,[".NFQ-quest-type-eco1",".NFQ-quest-type-urba1"]);
+                    }, 1000);
+                }else{
+                    setTimeout(function () {
+                        RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
+                        RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document1",".NFQ-quest-type-plat1",".NFQ-quest-type-general1",".NFQ-quest-type-esign1",".NFQ-quest-type-archit1",".NFQ-quest-type-adminis1"],2);    
+                    }, 1000);
+                }
             },error: function (error) {
 				console.log(error);
 			}
@@ -526,7 +542,8 @@ function NQF_edit(type) {
 	function removeQuestionNFQ(id,indexType) {
 
 		if (window.confirm("Do you really want to delete this question?")) {
-			$.ajax({
+            console.log(URL_SEARCH + indexType + id);
+            $.ajax({
 				type: "delete",
 				url: URL_SEARCH + indexType + id,
 				//url: "http://localhost:9200/index_classification_cluster/avis/_search",
@@ -547,7 +564,7 @@ function NQF_edit(type) {
 
 	}
 	
-	function NQF_edit_av(type,dataroot,ctx) {
+    function NQF_edit_av(type,dataroot,ctx) {
 		
 		if(type == 1){
 			$(".NFQ-all-quest").hide();
@@ -586,12 +603,32 @@ function NQF_edit(type) {
 				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
 				$('.ow-field-input-select[data-xpath="categ"]').text("Administration");
 			}*/
-	$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
+			$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
 			$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
 			$(".NQF-edit-modif").show();
 			$(".NQF-btn-alg").hide();
 		} else if(type == 2){
 			// add edit here
+			let title = $(".NQF-title-ref").text();
+			let desc  = $(".NQF-desc-ref").text();
+			let text  = $(".NQF-text-ref").html();
+			let type  = $(".NQF-type-ref").text();
+			console.log(title, desc, text, type);
+
+			dataroot.NQFtitle=title;
+
+			dataroot.NQFtype=type;
+			dataroot.NQFdesc=desc;
+			ctx.formRender.notifyObservers("NQFtitle");
+			ctx.formRender.notifyObservers("NQFtype");
+			ctx.formRender.notifyObservers("NQFdesc");
+
+			$('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
+			$('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html(text)
+			$(".NQF-edit-modif").show();
+			$(".NQF-btn-alg").hide();
 
 		}
 }
+    
+    

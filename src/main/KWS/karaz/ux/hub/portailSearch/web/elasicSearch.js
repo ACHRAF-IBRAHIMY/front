@@ -22,6 +22,7 @@ function removeLastRootPage(userName){
     }else{
 
     }
+    
 }
 
 function restAutoComplete(inp,prefix,type){
@@ -355,76 +356,157 @@ function generateRequestFaqSearch(prefix,type,from,size){
     return str;
 }
 
+function generateRequestRefSearch(prefix, type, from, size) {
+	if (prefix.trim() != "") {
+		var str = "{ \"index\": \"reglementation_index\", \"type\": \"reglementation\" }\n{\"from\":" + from + ",\"size\":" + size + ",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \"" + prefix + "\",\"fields\": [\"desc\",\"title\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \"" + type + "\"}}]}}}\n";
+	} else {
+		var str = "{ \"index\": \"reglementation_index\", \"type\": \"reglementation\" }\n{\"from\":" + from + ",\"size\":" + size + ",\"query\":{ \"match\":{ \"type\":\"" + type + "\" }}}\n";
+	}
 
-/* Begin Ref juridique */
-
-
-function getRefJ(id,type){
-    $.ajax({
-        type: "get",
-        url: URL_SEARCH+"/reglementation_index/reglementatio/" + id,
-        datatype: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization",AUTH);
-        },
-        success: function (result) {
-            if(type==0){
-				//traitement mohamed
-
-            }else if(type==1){
-                //traitement youssef
-            } 
-        },
-        error: function (error) {
-            console.log(error.responseText);
-        }
-    });
+	return str;
 }
 
-function generateRequestRefSearch(prefix,type,from,size){
-    if(prefix.trim()!=""){
-        var str = "{ \"index\": \"reglementation_index\", \"type\": \"reglementation\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"desc\",\"title\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
-    }else{
-        var str ="{ \"index\": \"reglementation_index\", \"type\": \"reglementation\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
-    }
+function RestSearchref(prefix, page, size, type, typeUse, cls) {
+	var str = ""
 
-    return str;
+	if (type == 0) {
+		str += generateRequestRefSearch(prefix, "1", page, size);
+		str += generateRequestRefSearch(prefix, "2", page, size);
+	} else if (type == 1) {
+		str += generateRequestRefSearch(prefix, "1", page, size);
+	} else if (type == 2) {
+		str += generateRequestRefSearch(prefix, "2", page, size);
+	}
+
+
+	$.ajax({
+		type: "post",
+		url: URL_SEARCH + "/_msearch",
+		datatype: "application/json",
+		contentType: "application/x-ndjson",
+		data: str,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Authorization", AUTH);
+		},
+		success: function (result) {
+			console.log(result);
+
+			for (var i = 0; i < result.responses.length; i++) {
+                
+                $(cls[i]).html("");
+                
+                for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
+					console.log(result.responses[i].hits.hits[j]._id);
+					// typeUse 1 for admin and 2for normal user
+
+					NQF_add_ref(result.responses[i].hits.hits[j]._source.title, result.responses[i].hits.hits[j]._id, cls[i], typeUse)
+
+					// console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
+					console.log(result.responses[i].hits.hits[j]._source.type);
+				}
+
+				// la page a affiché  
+
+				$(cls[i]).append(`<span  class="NFQ-end" onclick='javascript:ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefrentielJuridique","search", "Refrentiel Juridique", {});'>  ${NQFrefCAtegorie[i]}<span>`);
+
+			}
+		},
+		error: function (error) {
+			console.log(error.responseText);
+		}
+	})
 }
 
-function RestSearchref(prefix,page,size,type,typeUse){
-    var str =""
-    
-    if(type==0){
-        str+=generateRequestRefSearch(prefix,"1",page,size); 
-        str+=generateRequestRefSearch(prefix,"2",page,size); 
-    }else if(type==1){
-        str+=generateRequestRefSearch(prefix,"1",page,size); 
-    }else if(type==2){
-        str+=generateRequestRefSearch(prefix,"2",page,size); 
-    }
-    
+function NQF_add_ref(quest, id, cls, type) {
 
-    $.ajax({
-        type: "post",
-        url: URL_SEARCH+"/_msearch",
-        datatype: "application/json",
-        contentType: "application/x-ndjson",
-        data:str,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", AUTH);
-        },
-        success: function (result) {    
-            console.log(result);            
-        },
-        error: function (error) {
-            console.log(error.responseText);
-        }
-    })
+	// console.log(id);
+	if (type == 1) {
+		$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
+										<div class="vpanel-body-title NQF-quest-delete" style="font-size: 14px;">
+											<span class = 'NFQ-click-btn'  onclick='getRefJ("${id}",0)' >` + quest + `</span>
+											<span class = 'far fa-times-circle NFQ-close-quest' onclick='removerefNQF("${id}")' />
+										</div>
+										<hr class="NQF-horizontal-line " />
+										
+										</div>`)
+	} else if (type == 2) {
+		$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt">
+		<div class="vpanel-body-title " style="font-size: 14px;">
+			<span class = 'NFQ-click-btn' onclick='getRefJ("${id}",0)' >` + quest + `</span>
+		</div>
+		<hr class="NQF-horizontal-line " />
+		
+		</div>`)
+	}
+
+}
+
+function getRefJ(id, type) {
+	$(".NFQ-load-img").show();
+	var pos = $(".pcd-header-NQF").offset().top;
+        $('html,body').animate({
+                scrollTop: pos
+            },
+            'fast');
+	$.ajax({
+		type: "get",
+		url: URL_SEARCH + "/reglementation_index/reglementation/" + id,
+		datatype: "application/json",
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Authorization", AUTH);
+		},
+		success: function (result) {
+			if (type == 0) {
+				$(".NFQ-load-img").hide();
+				$(".NQF-btn-alg").show();
+				$(".NQF-vue-ref").show();
+				$(".NQF-vue-ref .NQF-prev-ref >b").text(result._source.title);
+				$(".NQF-text-ref").html(result._source.title);
+				$(".NQF-desc-ref").text(result._source.desc);
+				$(".NQF-type-ref").text(result._source.type);
+				$(".NQF-id-ref").val(id);
+				$(".NQF-edit-modif").hide();
+					
+
+			} else if (type == 1) {
+				//traitement youssef
+			}
+		},
+		error: function (error) {
+			console.log(error.responseText);
+		}
+	});
+}
+
+function removerefNQF(id) {
+
+	if (window.confirm("Voulez-vous vraiment supprimer cet référentiel?")) {
+		$.ajax({
+			type: "delete",
+			url: URL_SEARCH + "/reglementation_index/reglementation/" + id,
+			//url: "http://localhost:9200/index_classification_cluster/avis/_search",
+			contentType: "application/json",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+			},
+			success: function (result) {
+				console.log(result);
+				$("div[idd=" + id + "]").hide();
+
+			},
+			error: function (error) {
+				console.log(error);
+			}
+		});
+	}
+
 }
 
 
 
-/* End Ref juridique */
+var NQFrefCAtegorie = ["Tous les référentiels urbanistiques", "Tous les référentiels économiques"];
+
+/* end Ref juridique */
 
 
 var faqPages = [1,1,1,1,1,1];
