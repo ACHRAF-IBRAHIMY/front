@@ -1,4 +1,3 @@
-
 /*res*/
 
 .faq-fieldset-det .pagination-new-style{
@@ -120,6 +119,11 @@
 
 .back-end-menu .ow-vbox .ow-html{
     height: 100%;
+}
+
+box-card:hover{
+    background: #eee;
+    cursor: pointer;
 }
 
 .back-end-menu box-card{
@@ -388,7 +392,9 @@
 
 .relative-position{
     position: relative;
-    height: 295px !important;
+    height: 272px !important;
+    margin-top: 2rem;
+
 }
 
 .folder-feature .folder-feature-body .progressbar {
@@ -728,13 +734,13 @@
 
 .faq-fieldset .searchGif2{
     padding: 80px;
-    height: 350px;
+    height: 284px;
     display: none;
 }
 
 .faq-fieldset-det .searchGif2{
     padding: 80px;
-    height: 350px;
+    height: 284px;
     display: none;
 }
 
@@ -1005,13 +1011,30 @@
     font-size: 1.2vw;
     text-align: right;
     width: 95%;
+    margin-bottom: 5px;
+}
+
+.divSearch {
+    height: auto !important;
+}
+
+.faq-vbox .full-search-list-item .item-body p{
+    margin-bottom: 20px;    
 }
 
 .full-search-list-item .item-body .item-body-button{
     border: none;
     position: absolute;
-    right: 10px;
-    bottom: 8px;
+    margin-left: 0 !important;
+    margin-top:0 !important;
+    margin-right: 40px !important;
+}
+
+.faq-vbox .full-search-list-item .item-body .item-body-button{
+    border: none;
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
     margin-left: 0 !important;
     margin-top:0 !important;
     margin-right: 40px !important;
@@ -1242,7 +1265,6 @@
     margin-right: 7%;
     justify-content: space-around;
     font-size: 14px;
-    visibility: hidden;
 }
 
 .header-menu button{
@@ -1479,15 +1501,17 @@
 
 .main-icon-title-bx .title
 {
-    font-size: 1.6vw;
-    color: #666;
-    margin-left: 71px;    
-    
+    margin-left: 71px;
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: var(--fg0);
 }
 
 .main{
     height: 193px;
 }
+
+
 
 .main-btn{
     margin-top: 8px;
@@ -1550,7 +1574,6 @@
     font-size: 12px;
     display: block;
     position: relative;
-    bottom: -12px;
 }
 
 .support .support-html i{

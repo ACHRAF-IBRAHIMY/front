@@ -569,7 +569,7 @@ function countDoc(type,objSearchMatrix) {
     if (type == 0 || type == 2 || type == 20) {
         var url = "simulator_index_docs/docs/_count";
     } else if (type == 1) {
-        var url = "simulator_index_qr/qrs/_count";
+        var url = "simulator_index_steps/steps/_count";
     }
 
     $.ajax({
@@ -583,6 +583,7 @@ function countDoc(type,objSearchMatrix) {
             xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
+            console.log("result :" + JSON.stringify(result));
             console.log(objSearchMatrix);
             if(objSearchMatrix==null){
                 $(".simulator .simulator-qr .next-button img").hide();
@@ -594,6 +595,8 @@ function countDoc(type,objSearchMatrix) {
                 vector = completVec(result.count, vector);
                 var bulk = bulkRequest(vector, 0);
                 if (bulk != "") {
+                    console.log(bulk);
+
                     sendRequestBulk(bulkRequest(vector, 0), 0);
                 } else {
                     addDocs([], 0);
@@ -601,9 +604,11 @@ function countDoc(type,objSearchMatrix) {
             } else if (type == 1) {
                 var inte2 = objSearchMatrix.steps;
                 var vector2 = bin2vec(int2bin(inte2));
+                console.log("********: "+result.count);
                 vector2 = completVec(result.count, vector2);
                 var bulk2 = bulkRequest(vector2, 1);
                 if (bulk2 != "") {
+                    console.log(bulk2);
                     sendRequestBulk(bulkRequest(vector2, 1), 1);
                 } else {
                     addSteps([]);

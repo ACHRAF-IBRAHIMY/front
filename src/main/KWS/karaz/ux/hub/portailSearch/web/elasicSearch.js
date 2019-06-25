@@ -980,7 +980,7 @@ function fullCreateFaqByType(results,type,typeUse){
             var text = results[i]._source.REPONSES;
             var b = document.createElement("div");
             b.setAttribute("class","hp-box full-search-list-item");
-            b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+            b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: 1px solid #ddd;padding: 6px;height: 127px;background: #fcfcfc;/* margin-bottom:25px; */");
             var d = document.createElement("div");
             d.setAttribute("class","item-body");
             d.setAttribute("style","padding:0 18px");
@@ -995,7 +995,6 @@ function fullCreateFaqByType(results,type,typeUse){
             d.appendChild(e);
             d.appendChild(f);
             var g = document.createElement("a");
-            
             
             g.addEventListener("click",function(){
                 var id=$(this).children("input").val();
@@ -1012,9 +1011,17 @@ function fullCreateFaqByType(results,type,typeUse){
             g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
             d.appendChild(g);
             b.appendChild(d);
-    
             
-            $(".faq-fieldset-det .full-search-list").append(b);                        
+            
+            
+            $(".faq-fieldset-det .full-search-list").append(b);
+
+            var hr = document.createElement("hr");
+            hr.setAttribute("style","background: #eee;border: 1px solid #eee;height: 0px;width: 88%;");
+            /*if(i!=results.length-1){
+                $(".faq-fieldset-det .full-search-list").append(hr);                        
+            }*/
+
         }
         }else{
     
@@ -1032,7 +1039,7 @@ function fullCreateFaqByType(results,type,typeUse){
             var text = results[i]._source.REPONSES;
             var b = document.createElement("div");
             b.setAttribute("class","hp-box full-search-list-item");
-            b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+            b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: 1px solid #ddd;padding: 6px;height: 127px;background: #fcfcfc;/* margin-bottom:25px; */");
             var d = document.createElement("div");
             d.setAttribute("class","item-body");
             d.setAttribute("style","padding:0 18px");
@@ -1057,9 +1064,15 @@ function fullCreateFaqByType(results,type,typeUse){
             d.appendChild(g);
             b.appendChild(d);
 
+            var hr = document.createElement("hr");
+            hr.setAttribute("style","background: #eee;border: 1px solid #eee;height: 0px;width: 88%;");
             
+
             $(".faq-vbox").each(function(elm){
                 $(this).find(".faq-fieldset .full-search-list").eq((Number(type)-1)).append(b);
+                /* if(i!=results.length-1){
+                    $(this).find(".faq-fieldset .full-search-list").eq((Number(type)-1)).append(hr);                        
+                }*/
             });
                     
         }
@@ -1605,18 +1618,20 @@ function autocomplete(inp,arr) {
            e.innerHTML+="<span class=\"complete-text\">"+intituleFr+"</span>";
            var f = document.createElement("p");
            //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
-           f.innerHTML = intituleAr;
+           f.innerHTML = subLongAr(intituleAr,75);
+           f.setAttribute("title",intituleAr);
            d.appendChild(c);
            d.appendChild(e);
            d.appendChild(f);
            var g = document.createElement("button");
-           g.setAttribute("style","display:none;")
            g.addEventListener("click",function(){
                var id=$(this).children("input").val();
-               ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
-           });
+               //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimpleDeclaration", "search", "Simple Decleration", {});
+            });
            g.setAttribute("class","item-body-button hp-sbox-btn");
-           g.innerHTML="Détails<input type=\"hidden\" value=\""+id+"\" > ";
+           g.innerHTML="Voire procédure<input type=\"hidden\" value=\""+id+"\" > ";
+           g.setAttribute("style","display: inline-block;color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
            d.appendChild(g);
            var title = document.createElement("div");
            title.setAttribute("class","item-title");
@@ -1643,6 +1658,13 @@ function autocomplete(inp,arr) {
     function subLong(text,max){
         if(text.length>max){
             return text.substring(0,max-6)+"<span class=\"dot-3\">...</span>";
+        }
+        return text;
+    }
+
+    function subLongAr(text,max){
+        if(text.length>max){
+            return "<span class=\"dot-3\">...</span>"+text.substring(0,max-6);
         }
         return text;
     }

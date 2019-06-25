@@ -154,7 +154,7 @@
                                 <vbox className="PDC-btn-container-right"> 
                                     <button label="Moteur de recherche d'activités" icon="fas fa-search" className="PCD-moteur-search">
                                         <postChange>
-
+                              				  ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=", "search", "All Karazuxresults", {});
                                         </postChange>
                                     </button>
                                 </vbox> 

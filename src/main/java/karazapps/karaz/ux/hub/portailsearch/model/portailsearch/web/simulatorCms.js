@@ -1154,8 +1154,35 @@ function addDocItemToDocAdded(index){
     var divGlo = document.querySelector(".simulator-cms .side-bar .body1 .docs-in .docs-added");
     var docItem = document.createElement("div");
     docItem.setAttribute("class","doc-item");
+    docItem.setAttribute("style","grid-template-columns: 8% 68% 8% 8% 8%;");
     var i1 = document.createElement("i");
     i1.setAttribute("class","fas fa-file");
+    var i11 = document.createElement("i");
+    var i12 = document.createElement("i");
+    i11.setAttribute("class","fas fa-caret-up");
+    i12.setAttribute("class","fas fa-caret-down");
+    i11.addEventListener("click",function(){
+        var index = Array.from(document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")).indexOf(this.parentNode);
+        if(index != 0){
+            var indexRep = this.parentNode.querySelector("input").value;
+            var textRep = this.parentNode.querySelector("span").innerHTML;
+            this.parentNode.querySelector("input").value = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("input").value;
+            this.parentNode.querySelector("span").innerHTML = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("span").innerHTML;
+            document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("input").value = indexRep;
+            document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("span").innerHTML = textRep;
+        }
+    });
+    i12.addEventListener("click",function(){
+        var index = Array.from(document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")).indexOf(this.parentNode);
+        if(index < document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item").length-1){
+            var indexRep = this.parentNode.querySelector("input").value;
+            var textRep = this.parentNode.querySelector("span").innerHTML;
+            this.parentNode.querySelector("input").value = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("input").value;
+            this.parentNode.querySelector("span").innerHTML = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("span").innerHTML;
+            document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("input").value = indexRep;
+            document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("span").innerHTML = textRep;
+        }
+    });
     var i2 = document.createElement("i");
     i2.setAttribute("class","fas fa-close");
     i2.addEventListener("click",function(){
@@ -1171,6 +1198,8 @@ function addDocItemToDocAdded(index){
     docItem.appendChild(i1);
     docItem.appendChild(span);
     docItem.appendChild(input);
+    docItem.appendChild(i11);
+    docItem.appendChild(i12);
     docItem.appendChild(i2);
     divGlo.appendChild(docItem);
 }
