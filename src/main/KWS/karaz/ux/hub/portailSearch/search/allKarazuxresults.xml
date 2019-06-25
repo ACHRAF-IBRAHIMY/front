@@ -76,6 +76,27 @@
 		        $(".header-div-toggle .dropdown-content").slideUp();
 		    }); 
 		            
+                PCD_headerfieldset_color(".NFQ-quest-title");
+	            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+                PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
+                PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
+               
+                PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
+                PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
+                PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
+                PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
+
+                // header color
+                PCD_headerfieldset_color(".pcd-ha-color");
+
+            RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",2)
+            RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",2)
+            RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
+            RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",2)
+            RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
+            RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)
+
+
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -175,7 +196,7 @@
                        </div>
                     </div>
                     <div class="hp-sbox-text">
-                        <span style="color:#f93;">0</span> résultats pour votre recherche <span style="color:#f93;" />. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
+                        <span class="total" style="color:#f93;">0</span> résultats pour votre recherche <span class="prefix" style="color:#f93;" />. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
                     </div>
                     <div style="height: 50px;" />
                 </html>    
@@ -215,41 +236,73 @@
                         </vbox>    
         </vbox> 
         
-        <vbox className="hp-box hp-small left-box-fsb">
-               <html>
-                   <div class="vpanel-title">
-                       <span>ANNONCES</span>
-                        <hr class="header-create-account-horizontal-line hr-hub" />
-                   </div>
-               </html>
-                <vbox className="hp-box">
-                    <html>
-                        <div class="vpanel-body-title"><i class="fas fa-chart-line" /><span>Etudes de marchés</span></div>
-                        <div class="vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-                    </html>    
-                </vbox>
-                <html>
-                    <div style="height: 50px;"> </div>
-                </html> 
-                   <vbox className="hp-box">
-                   <html>
-                        <div class="vpanel-body-title"><i class="far fa-edit" /><span>votre e-parapheur</span></div>
-                        <div class="vpanel-body-icon"><i class="far fa-edit" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-                    </html>     
-                </vbox>
-                <html>
-                    <div style="height: 50px;"> </div>
-                </html> 
-                   <vbox className="hp-box">
-                    <html>
-                        <div class="vpanel-body-title"><i class="fas fa-cog" /><span>Transformation digitale</span></div>
-                        <div class="vpanel-body-icon"><i class="fas fa-cogs" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-                    </html>     
-                </vbox>    
-            </vbox>      
+        <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+
+                        <!-- start modification -->
+                        <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+
+                            <html>
+                                <div class="NFQ-quest-type-esign NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
+
+                            <html>
+                                <div class="NFQ-quest-type-general NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+
+                            <html>
+                                <div class="NFQ-quest-type-document NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
+
+                            <html>
+                                <div class="NFQ-quest-type-plat NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
+
+                            <html>
+                                <div class="NFQ-quest-type-archit NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
+
+                            <html>
+                                <div class="NFQ-quest-type-adminis NFQ-fieldset">
+                                    <!-- Les questions s'affiche ici                                  -->
+                                </div>
+                            </html>
+
+                        </fieldset>
+
+                        <!-- end modification -->
+
+                    </fieldset>
+              
         </vbox>
             
         
