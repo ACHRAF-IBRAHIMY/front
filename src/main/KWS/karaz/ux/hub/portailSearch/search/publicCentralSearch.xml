@@ -16,8 +16,12 @@
             <userLogin />
             <userPassword />
             <demandeId />
-            <CIN />            
+            <CIN />       
+            
+                 
 		</query>
+		<newUser>false</newUser>
+			<forgetPass>false</forgetPass>
 	</data>
     
     
@@ -29,6 +33,13 @@
       
       
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
+    <script onLoad="true">
+	if(root.newUser=="true"){
+	   ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
+	}else if(root.forgetPass=="true"){
+	   ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');
+	}
+	</script>
         <script postLoad="true">
              var currentFocus;
                 removeLastRootPage(userName);
@@ -164,6 +175,7 @@
 
 
         </script>
+        <vbox usage="embedded:N">
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
                 <html className="Header-signup-glo">
@@ -613,7 +625,7 @@
           </vbox>
       <html> <div style="height: 30px;"> </div> </html>            
 
-        
+        </vbox>
         
     </screen>
         
