@@ -157,6 +157,12 @@
         prevGeneratedDiv();    
     });
 
+    getCountCommune();
+
+    scrollChiffreFunction();
+
+
+
         </script>
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
             <vbox className="Header-signup-logo">
@@ -567,7 +573,7 @@
              <html>                
                 <box-card class="card-bx">
                     <box-icon class="fas fa-university"> </box-icon>
-                    <box-big-title>121</box-big-title>
+                    <box-big-title>0</box-big-title>
                     <box-small-title>Commune</box-small-title>
                     <box-h-sep> </box-h-sep>
                     <box-text><a>Couverture géographique <i class="fas fa-external-link-alt" /></a></box-text>                    
@@ -577,7 +583,7 @@
              <html>                
                 <box-card class="card-bx">
                     <box-icon class="fas fa-folder"> </box-icon>  
-                    <box-big-title>+300</box-big-title>
+                    <box-big-title>0</box-big-title>
                     <box-small-title>Dossier traité / jour</box-small-title>
                     <box-h-sep> </box-h-sep>
                     <box-text><a>Performance par commune <i class="fas fa-external-link-alt" /></a></box-text>                      
@@ -587,17 +593,17 @@
              <html>                
                 <box-card class="card-bx">
                     <box-icon class="fas fa-user-tie"> </box-icon>  
-                    <box-big-title>+900</box-big-title>
+                    <box-big-title>0</box-big-title>
                     <box-small-title>Fonctionnaire</box-small-title>
                     <box-h-sep> </box-h-sep>
-                    <box-text><a>Accèder à l'espace d'échange <i class="fas fa-external-link-alt" /></a></box-text>                      
+                    <box-text><a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">Rokhas Machine Learning <i class="fas fa-external-link-alt" /></a></box-text>                      
                 </box-card>
              </html>
             
              <html>                
                 <box-card class="card-bx">
                     <box-icon class="fas fa-users"> </box-icon>  
-                    <box-big-title>+10000</box-big-title>
+                    <box-big-title>0</box-big-title>
                     <box-small-title>Utilisateur</box-small-title>
                     <box-h-sep> </box-h-sep>
                     <box-text><a>Question fréquentes <i class="fas fa-external-link-alt" /></a></box-text>                       

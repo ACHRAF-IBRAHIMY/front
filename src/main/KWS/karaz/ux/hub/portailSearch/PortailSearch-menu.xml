@@ -47,6 +47,8 @@
       <menu relId="AllTaskGlobalModelSearch" label="All Global Model Search(Task)" icone="search" xcstt="x">
         <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch]]></resource>
       </menu>
+      
+      <menu relId="search" label="procedures">
       <menu relId="proceduresUrbanisme" label="procedures Urbanisme" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/proceduresUrbanisme</resource>
       </menu>
@@ -83,6 +85,7 @@
       <menu relId="AutorisationRegularisation" label="Autorisation de régularisation" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationRegularisation</resource>
       </menu>
+      </menu>
       <menu relId="OpendataFrame" label="Open data page" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/OpendataFrame</resource>
       </menu>
@@ -101,8 +104,14 @@
       <menu relId="NewfreqQuestion" label="Nouvelle faq" icone="search">
       	<resource type="search">karaz/ux/hub/portailsearch/search/NewfreqQuestion</resource>
       </menu>
-      <menu relId="NewRefJuridique" label="Nouveau reférentiel juridique" icone="search">
-      	<resource type="search">karaz/ux/hub/portailsearch/search/NewRefJuridique</resource>
+      <menu relId="ReportRanking" label="Report Ranking" icone="search">
+      	<resource type="search">karaz/ux/hub/portailsearch/search/ReportRanking</resource>
+      </menu>
+      <menu relId="UserSearchOLAP" label="User Search OLAP" icone="search">
+      	<resource type="search">karaz/ux/hub/portailsearch/search/UserSearchOLAP</resource>
+      </menu>
+      <menu relId="GuideVideoConsultation" label="Guide Video Consultation" icone="search">
+      	<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoConsultation</resource>
       </menu>
       
     </menu>

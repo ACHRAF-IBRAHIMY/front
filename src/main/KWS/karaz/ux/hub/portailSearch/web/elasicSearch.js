@@ -2280,3 +2280,57 @@ function getColIcon(typeAut){
         type:inde
     }
 }
+
+var chiffres = [1500,900,800,300];
+var chiffresIni = [1500,900,800,300];
+
+var URL_COMMUNE = "http://91.121.57.204:8080/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
+
+function getCountCommune(){
+    $.ajax({
+        type: "get",
+        url: URL_COMMUNE,
+      datatype: "application/json",
+        //contentType: "application/json",
+        success: function (result) {    
+            chiffres[0]=result.totalLength;
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function scrollChiffreFunction(){
+    $(window).scroll(function() {
+        console.log($(this).scrollTop());
+        if($(this).scrollTop() > $("cms-topictitle").eq(0).offset().top+200 ){
+            counterNumber($("box-card box-big-title").eq(4),chiffres[0],1)
+            counterNumber($("box-card box-big-title").eq(5),chiffres[1],1)
+            counterNumber($("box-card box-big-title").eq(6),chiffres[2],1)
+            counterNumber($("box-card box-big-title").eq(7),chiffres[3],1)
+        }
+    });
+}
+
+function counterNumber(counter,number,type){
+    
+    if(type==0){
+        var duration = 5000;
+    }else if(type==1){
+        //counter.stop();
+        var duration = 1500;
+    }
+
+    counter.animate({ countNum: number  }, {
+        duration: duration,
+        easing: 'linear',
+        step: function () {
+        counter.html("+"+Math.floor(this.countNum));
+        },
+        complete: function () {
+        //$("box-card box-big-title").eq(4).html(this.countNum + "+");
+        //alert('finished');
+        }
+    });
+}
