@@ -1,256 +1,282 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="GuideVideoEdit" label="Guide Video Edit">
 
-	<query>
-	</query>
-	<data>
-		<query>
-			<search />
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
             <idObject />
             <parentP />
-		</query>
-		<collapsed>false</collapsed>
-	</data>
-	<view>
-		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-        <script postLoad="true">
-        
-          removeLastRootPage(userName);
-          loadPageBytype(0);
-          
-           $(".searchbuttun").click();
-           
-           $(".div-full-search-bar .full-search-list .full-search-list-item .p").click(function(){
-               currentPage=0;
-               $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
-                if($(this).attr("class").split(' ')[1]==="p1"){
-                    alert($(this).attr("class").split(' ')[1]);
-                   restFullSearchList($(this).html(),0,false,1);
-                }else if($(this).attr("class").split(' ')[1]==="p2"){
-                    restFullSearchList($(this).html(),0,false,2);
-                }else if($(this).attr("class").split(' ')[1]==="p3"){
-                    restFullSearchList($(this).html(),0,false,3);
-                }else{
-                   restFullSearchList($(this).html(),0,false,1);
-                }
-           });
-           
-          
 
-        </script>
-        
-        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
-                </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
-            </vbox>
-            
-            <vbox columns="60% 25% 15%" className="header-div-toggle">
- <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
+        </query>
+        <collapsed>false</collapsed>
+        <nfqresponse />
+        <categ />
+        <question />
+    </data>
+    <view>
+        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+            <script postLoad="true">
+            	removeLastRootPage(userName);
+            	loadPageBytype(7);
+                $(".rokhas-home").click(function(){
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                });
 
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a>Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
 
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
+                $(".tags a").click(function(){
+                console.log("href:"+$(this).attr("href"));
+                var pos = $("."+$(this).attr("href").substr(1)).offset().top;
+                $('html,body').animate(
+                {
+                scrollTop: pos
+                },
+                'slow');
+                });
 
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
 
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-                 
-            </vbox>
-        </vbox>
-        <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-        <vbox columns="70% 30%">
-            
-            
-        <vbox className="hp-box hp-small divSearch">
-            <vbox className="hp-box divSearchBar div-full-search-bar">
-                <html>
-                    <div class="vpanel-title">
-                        <div class="vpanel-title">
-                           <span>RECHERCHE ACTIVITÉS</span>
-                           <hr class="header-create-account-horizontal-line hr-hub" />
-                       </div>
-                    </div>
-                    <div class="hp-sbox-text">
-                        <span class="total" style="color:#f93;">0</span> résultats pour votre recherche <span class="prefix" style="color:#f93;" />. Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
-                    </div>
-                    <div style="height: 50px;" />
-                </html>    
-                <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                        <postChange>
-                                var prefix = $(".div-full-search-bar .hp-search_field input").val();
-                                currentPage=0;
-                                var pp=root.query.parentP;
-                                if(pp==1){
-                                    pp=0;
-                                }
-                                console.log(pp);
-                                restFullSearchList(prefix,0,false,pp);
-                                root.query.parentP=0;
-                         </postChange>
-                    </button>
-                </vbox>
-                    
+                $(".scroll-top-sp").click(function(){
+                $('html,body').animate(
+                {
+                scrollTop: $("body").offset().top
+                },
+                'slow');
+                });
 
-                <html>
-                    <div style="height: 70px;"> </div>
-                </html>   
-                <html>
-                    <div class="searchGif">
-                        <img src="img/search-move.gif" />
-                    </div>
-                    <div class="full-search-list">
-                        
-                    </div>
-                    <div class="pagination pagination-second">
-                        
-                    </div>
-                </html>     
                 
-                        </vbox>    
-        </vbox> 
-        
-        <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
 
-                        <!-- start modification -->
-                        <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+                // add style to question type header
+                // hide saisie info question
+                $(".NQF-edit-modif").hide()
+                // hide imge
+                $(".NFQ-load-img").hide();
+                getAllplayLists(1);
+            </script>
+            <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
+                <vbox className="Header-signup-logo">
+                    <html className="Header-signup-glo">
+                        <div class="rokhas-home" style="margin-left: 50px;">
+                            <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
+                        </div>
+                    </html>
+                    <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
+                        <html className="menu-bar-img">
+                            <img src="web/css/img/LogoSquare.svg" alt="" />
+                        </html>
+                        <html />
+                        <html className="menu-bar-icon">
+                            <i class="fas fa-bars" />
+                        </html>
+                    </vbox>
+                </vbox>
 
+                <vbox columns="60% 25% 15%" className="header-div-toggle">
+                    <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
+                        <button label="Actualités">
+                            <postChange>
+
+                            </postChange>
+                        </button>
+                        <button label="Simulateur">
+                            <postChange>
+                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
+                            </postChange>
+                        </button>
+                        <button label="Open data">
+                            <postChange>
+                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+                            </postChange>
+                        </button>
+                        <button label="Solutions">
+                            <postChange>
+
+                            </postChange>
+                        </button>
+                        <button label="Ressources">
+                            <postChange>
+
+                            </postChange>
+                        </button>
+                        <button icon="far fa-question-circle">
+                            <postChange />
+                        </button>
+
+
+                    </vbox>
+
+                    <vbox className="vbox-button-signup-header" columns="50% 50%">
+                        <button label="Inscription" className="button-signup-header button-left">
+                            <postChange>
+                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
+                            </postChange>
+                        </button>
+                        <button label="Connexion" className="button-signup-header">
+                            <postChange>
+                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
+                            </postChange>
+                        </button>
+                    </vbox>
+                    <vbox className="vbox-button-signup-header" columns="50% 50%">
+                        <button label="FR" className="button-signup-header-cliked button-left">
+                        </button>
+                        <button label="ع" className="button-signup-header">
+                        </button>
+                    </vbox>
+                </vbox>
+            </vbox>
+
+            <html id="hSeparator">
+                <div style="height: 30px;" />
+
+            </html>
+            <vbox columns="70% 30%">
+                <vbox>
+
+                    <fieldset label="GUIDE VIDÉO" collapsible="false" className="pcd-header-NQF NQF-titre-quest div-det-acc PDC-hov-title ">
+
+                        <html className="NFQ-load-img">
+                            <img src="img/load-text.gif" />
+                        </html>
+                        <vbox className="NQF-new-quest-btn">
+                            <button label="Nouvelle vidéo" style="" className="NQF-btn-new">
+                                <postChange>
+                                    $(".NQF-new-quest-btn").hide();
+                                    $(".NQF-edit-modif").show();
+                                    //NQF_new_QR(1);
+                                </postChange>
+                            </button>
+                        </vbox>
+
+                        <vbox className="NQF-edit-modif">
+                            <fieldset label="DONNÉES VIDÉO" className="NQF-shadow">
+                                <vbox className="DC-Customized-fields-NQF NQF-edit-float">
+                                    <field label="Titre" widget="text" labelAlign="float" xpath="title"></field>
+                                    <vbox contentAlign="center" columns="40% 60%" className="NQF-edit-select-float">
+                                        <field widget="select" label="Plateforme d’hébergement" labelAlign="float" xpath="categ">
+                                            <option value="vimeo" label="Vimeo" />
+                                            <option value="youtube" label="Youtube" />
+                                            <option value="autre" label="Autre" />
+                                        </field>
+                                        <vbox>
+                                            <field label="URL" widget="text" labelAlign="float" xpath="url"></field>
+                                        </vbox>
+                                        <vbox>
+                                            <field widget="select" label="Playlist" labelAlign="float" xpath="playlist">
+                                                <option value="g" label="Général" />
+                                                <option value="p1" label="Playlist1" />
+                                                <option value="p2" label="Playlist2" />
+                                            </field>
+                                        </vbox>
+                                        <vbox>
+                                            <field label="Description" widget="textArea" labelAlign="float" xpath="description"></field>
+                                        </vbox>    
+                                        
+                                    </vbox>
+                                </vbox>
+                            </fieldset>
+
+                            <vbox columns="auto 45%" className="DC-box-btn-filtrer">
+                                <hx />
+                                <vbox columns="33% 33% auto" style="margin-right: 2em;">
+
+                                    <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
+                                        <postChange>
+                                            NQF_preview_QR(3);
+                                        </postChange>
+                                    </button>
+                                    <button label="nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
+                                        <postChange>
+                                            //NQF_new_QR(1);
+                                        </postChange>
+                                    </button>
+                                    <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
+                                        <postChange>
+                                            NQF_save_QR(3);
+                                        </postChange>
+                                    </button>
+                                </vbox>
+
+                            </vbox>
+                        </vbox>
+
+                        <vbox className="NQF-vue-video NQF-vue-question">
+                            <vbox columns="50% 50%">
+                                <html className="vue-video-frame">
+                                    <iframe src="https://player.vimeo.com/video/241206308?rel=0" width="100%" height="100%" frameborder="0" />
+                                </html>
+                                <html className="vue-video">
+                                    <h4 class="vue-video-title">
+                                        <b>1-title1title1title1title1</b>
+                                    </h4>
+                                    <p class="vue-video-description">descriptionde scr iption descrip tiond escript iondescripti ondes cri ption de scription description description description</p>
+                                    <p hidden="hidden" class="NQF-categorie" />
+                                    <p hidden="hidden" class="NQF-id" />
+                                </html>
+                                <vbox />
+                            </vbox>
+                           <vbox columns="80% 10% auto" className="NQF-btn-alg">
+                            
+                                <vbox />
+                                <button label="supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
+                                    <postChange>
+                                        let id = $(".NQF-id").val();
+                                        //removeQuestionNFQ(id,"/faq_index/qr/");
+                                        $(".NQF-vue-question").hide();
+										//NQF_remove_subtitle();
+                                    </postChange>
+                                </button>
+                                <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
+                                    <postChange>
+                                        console.log("root================",root);
+                                        console.log("context================",context);
+                                        //NQF_edit_av(1,root,context);
+                                    </postChange>
+                                </button>
+                            </vbox>
+                        </vbox>
+                        <fieldset header="AUTRES VIDÉOS DE PLAYLIST" className="faq-fieldset-det NFQ-all-quest">
                             <html>
-                                <div class="NFQ-quest-type-esign NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
+                             
+                                <div class="vpanel-body full-search-list">
+
+                                </div>
+                                <div class="searchGif2" style="display:none">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+
+                                    </div>
                                 </div>
                             </html>
-
                         </fieldset>
 
-                        <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
-
-                            <html>
-                                <div class="NFQ-quest-type-general NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-
-                            <html>
-                                <div class="NFQ-quest-type-document NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-
-                            <html>
-                                <div class="NFQ-quest-type-plat NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-
-                            <html>
-                                <div class="NFQ-quest-type-archit NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-
-                            <html>
-                                <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <!-- end modification -->
 
                     </fieldset>
-              
-        </vbox>
-            
-        
-        <html> <div style="height: 30px;"> </div> </html>            
-        
-    </screen>
+                </vbox>
+                <vbox>
+                    <fieldset header="LISTE DE VIDÉOS" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
 
-	</view>
+                    </fieldset>
+                </vbox>
+            </vbox>
+
+
+            <html>
+                <div style="height: 30px;" />
+            </html>
+
+            
+
+
+        </screen>
+      <script onLoad="true">
+
+          
+        </script>
+
+    </view>
 
 
 </search>

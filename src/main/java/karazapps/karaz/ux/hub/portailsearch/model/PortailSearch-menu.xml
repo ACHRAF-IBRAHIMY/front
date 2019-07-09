@@ -110,9 +110,15 @@
       <menu relId="UserSearchOLAP" label="User Search OLAP" icone="search">
       	<resource type="search">karaz/ux/hub/portailsearch/search/UserSearchOLAP</resource>
       </menu>
-      <menu relId="GuideVideoConsultation" label="Guide Video Consultation" icone="search">
-      	<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoConsultation</resource>
+      <menu relId="ModuleGuideVidéo" label="Module Guide Vidéo">
+      	<menu relId="GuideVideoConsultation" label="Guide Video Consultation" icone="search">
+      		<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoConsultation</resource>
+      	</menu>
+      	<menu relId="GuideVideoEdit" label="Guide Video Edit" icone="search">
+      		<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoEdit</resource>
+      	</menu>
       </menu>
+      
       
     </menu>
   </menu>

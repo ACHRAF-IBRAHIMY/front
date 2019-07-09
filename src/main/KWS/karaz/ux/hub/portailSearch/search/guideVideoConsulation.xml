@@ -16,6 +16,7 @@
         <script postLoad="true">
         
           removeLastRootPage(userName);
+          getAllplayLists(2);
           
         </script>
         
@@ -155,7 +156,7 @@
                         1-Création de couche -Layer V19072018
                     </span>
                     <div class="video-iframe">
-                        <iframe src="https://player.vimeo.com/video/241206308?rel=0" width="100%" height="100%" frameborder="0"></iframe>
+                        <iframe src="https://player.vimeo.com/video/241206308?rel=0" width="100%" height="100%" frameborder="0" />
                     </div>
                     <div class="video-description">
                         Vidéo didactique montrant le déroulement pas à pas de la création d'une couche -Layer. Opération primordiale dans le processus de partage des fichiers de données spatiales dans des cartes.
@@ -164,72 +165,9 @@
             </vbox>    
         </vbox> 
         
-        <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+      <fieldset header="LISTE DE VIDÉOS" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
 
-                        <!-- start modification -->
-                        <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-
-                            <html>
-                                <div class="NFQ-quest-type-esign NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
-
-                            <html>
-                                <div class="NFQ-quest-type-general NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-
-                            <html>
-                                <div class="NFQ-quest-type-document NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-
-                            <html>
-                                <div class="NFQ-quest-type-plat NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-
-                            <html>
-                                <div class="NFQ-quest-type-archit NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-
-                            <html>
-                                <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <!-- end modification -->
-
-                    </fieldset>
+     </fieldset>
               
         </vbox>
             
