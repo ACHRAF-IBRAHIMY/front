@@ -186,7 +186,13 @@ ul {
 	.NQF-shadow {
 	    box-shadow: 3px 3px 3px rgba(102, 102, 102,0.34) !important;
 	    margin: 1em 0 !important;
-	}
+    }
+    
+    .NQF-edit-playlist,.NFQ-all-quest,.NQF-vue-question{
+        display: none;
+    }
+
+
 /* start left field */	
 .NFQ-fieldset{
     display: block;
@@ -220,8 +226,13 @@ ul {
     overflow: auto;
 }
 /*added */
+.NQF-new-quest-btn{
+    text-align: center !important ;
+}
+
 .NQF-new-quest-btn .ow-vl-inner .ow-btn-container{
     text-align: center !important ;
+    display: inline-block;
 }
 .NQF-new-quest-btn .ow-button {
     background: var(--form-button-hover-bg) !important;

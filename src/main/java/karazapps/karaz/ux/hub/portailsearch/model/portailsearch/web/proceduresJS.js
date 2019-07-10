@@ -127,7 +127,8 @@ function NQF_edit(type) {
 				$(".NQF-vue-question .vue-video-title b").html(title);
 				$(".NQF-vue-question .vue-video-description").html(description);
 				$(".NQF-vue-ref").show();
-				$(".NQF-btn-alg").hide();
+                $(".NQF-btn-alg").hide();
+                $(".NQF-vue-question").show();
 			}
         }
 	}
@@ -349,6 +350,10 @@ function NQF_edit(type) {
                         $(".NQF-new-quest-btn").show();
                         $(".NQF-vue-ref").show();
                         $(".NQF-btn-alg").hide();
+                        $(".NQF-vue-question").show();
+                        
+                        getAllplayLists(1);
+
                     }, 2000);
                     
                     updateVideo(req.video_id,req);
@@ -376,6 +381,17 @@ function NQF_edit(type) {
 			updateReglementation(id,req);
 */
 
+        }else if(type==4){
+            let title = $('.ow-field-input[data-xpath="titlePlaylist"]').val();
+            let id = "";
+            id = $(".NQF-id-playlist").html();
+            updatePlaylist(id,title);
+            setTimeout(function () {
+                $(".ow-btn-container i.fa-check").remove()
+                $(".NQF-edit-playlist").hide()
+                $(".NQF-new-quest-btn").show();
+                $(".NQF-btn-alg").hide();
+            }, 2000);
         }
 	}
 	
@@ -472,6 +488,36 @@ function NQF_edit(type) {
 			type: "post",
 
 			url: URL_SEARCH + "/videos_index/video/" + newID,
+			datatype: "application/json",
+			data: JSON.stringify(obj),
+			contentType: "application/json",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+			},
+			success: function (result) {
+                //voidRestSearch("",0,7,0,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],0);
+                console.log(result);
+			},
+			error: function (error) {
+				console.log(error.responseText);
+			}
+		});
+
+    }
+    
+    function updatePlaylist(id, title) {
+		let newID = ""
+		if (id != "") {
+			newID = id;
+        }
+        
+        var obj = {
+            "title":title
+        }
+
+		$.ajax({
+			type: "POST",
+			url: URL_SEARCH + "/playlist_index/playlist/" + newID,
 			datatype: "application/json",
 			data: JSON.stringify(obj),
 			contentType: "application/json",
