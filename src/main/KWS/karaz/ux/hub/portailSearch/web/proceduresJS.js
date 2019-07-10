@@ -1,4 +1,3 @@
-
 function NQF_remove_subtitle() {
     $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
 }
@@ -112,7 +111,25 @@ function NQF_edit(type) {
 				$(".NQF-btn-alg").hide();
 
 			}
-		}
+		} else if(type==3){
+            let title = $('.ow-field-input[data-xpath="title"]').val();
+			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
+            let urlV = $('.ow-field-input[data-xpath="url"]').val();
+            let description = $('.ow-field-input-line textarea[data-xpath="description"]').val(); 
+            let playlist = $('.ow-field-input-select[data-xpath="playlist"]').text();
+            if (title == "" && categ == "" && urlV == "" && description == "" && playlist=="") {
+				alert("rien à prévisualiser")
+
+			} else {
+                var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
+                console.log(urlemb);
+				$(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+				$(".NQF-vue-question .vue-video-title b").html(title);
+				$(".NQF-vue-question .vue-video-description").html(description);
+				$(".NQF-vue-ref").show();
+				$(".NQF-btn-alg").hide();
+			}
+        }
 	}
 
 	function NQF_new_QR(type) {
@@ -283,7 +300,83 @@ function NQF_edit(type) {
 			}, 2000);
 			
 			updateReglementation(id,req);
-		}
+		}else if(type==3){
+            let title = $('.ow-field-input[data-xpath="title"]').val();
+			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
+            let urlV = $('.ow-field-input[data-xpath="url"]').val();
+            let description = $('.ow-field-input-line textarea[data-xpath="description"]').val(); 
+			let playlist = $('.ow-field-input-select[data-xpath="playlist"]').text();
+            
+            let video_id = urlV.match(/\/\d+/)[0].replace(/\//g,""); 
+			console.log(title, categ, description,urlV,playlist,video_id);
+            
+            var req = {
+				"title": title,
+				"plateforme": categ,
+                "url": urlV,
+                "playlist":playlist,
+                "description":description,
+                "video_id":video_id,
+                "img_url":""
+			}
+
+            let id = "";
+            id = $(".NQF-id-ref").val();
+            
+            $.ajax({
+                type:'GET',
+                url: 'http://vimeo.com/api/v2/video/' + video_id + '.json',
+                jsonp: 'callback',
+                dataType: 'jsonp',
+                success: function(data){
+                    var thumbnail_src = data[0].thumbnail_large;
+                    req.img_url = thumbnail_src;
+                    
+                    if ($(".ow-btn-container:has(> i)").length == 0) {
+                        $(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+                    }
+
+                    
+                    var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
+                    console.log(urlemb);
+				    $(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+				    $(".NQF-vue-question .vue-video-title b").html(title);
+				    $(".NQF-vue-question .vue-video-description").html(description);
+                    
+                    setTimeout(function () {
+                        $(".ow-btn-container i.fa-check").remove()
+                        $(".NQF-edit-modif").hide()
+                        $(".NQF-new-quest-btn").show();
+                        $(".NQF-vue-ref").show();
+                        $(".NQF-btn-alg").hide();
+                    }, 2000);
+                    
+                    updateVideo(req.video_id,req);
+                }
+            });
+			
+/*
+            $(".NQF-title-ref").text(title);
+			$(".NQF-desc-ref").text(description);
+
+			
+			
+			//
+			if ($(".ow-btn-container:has(> i)").length == 0) {
+				$(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+			}
+			setTimeout(function () {
+				$(".ow-btn-container i.fa-check").remove()
+				$(".NQF-edit-modif").hide()
+				$(".NQF-new-quest-btn").show();
+				$(".NQF-vue-ref").show();
+				$(".NQF-btn-alg").hide();
+			}, 2000);
+			
+			updateReglementation(id,req);
+*/
+
+        }
 	}
 	
 	function NQF_add_question(quest, id, cls, type) {
@@ -361,6 +454,32 @@ function NQF_edit(type) {
 			},
 			success: function (result) {
                 voidRestSearch("",0,7,0,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],0);
+                console.log(result);
+			},
+			error: function (error) {
+				console.log(error.responseText);
+			}
+		});
+
+    }
+    
+    function updateVideo(id, obj) {
+		let newID = ""
+		if (id != "") {
+			newID = id;
+		}
+		$.ajax({
+			type: "post",
+
+			url: URL_SEARCH + "/videos_index/video/" + newID,
+			datatype: "application/json",
+			data: JSON.stringify(obj),
+			contentType: "application/json",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+			},
+			success: function (result) {
+                //voidRestSearch("",0,7,0,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],0);
                 console.log(result);
 			},
 			error: function (error) {
@@ -630,5 +749,3 @@ function NQF_edit(type) {
 
 		}
 }
-    
-    

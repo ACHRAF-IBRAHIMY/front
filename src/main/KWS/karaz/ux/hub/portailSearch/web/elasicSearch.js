@@ -366,6 +366,57 @@ function generateRequestRefSearch(prefix, type, from, size) {
 	return str;
 }
 
+function generateRequestVideoSearch(prefix,type,from,size){
+    
+    if(prefix.trim()!=""){
+        var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+    }else{
+        var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"playlist\":\""+type+"\" }}}\n";
+    }
+
+    return str;
+}
+
+function getAllplayLists(type){
+        
+        var obj = {
+            "aggs" : {
+                "genres" : {
+                    "terms" : { "field" : "playlist.keyword" } 
+                }
+            }
+        };
+
+        $.ajax({
+            type: "post",
+            url: URL_SEARCH + "/videos_index/video/_search",
+            datatype: "application/json",
+            contentType: "application/json",
+            data: JSON.stringify(obj),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", AUTH);
+            },
+            success: function (result) {
+                console.log(result);
+                var tab = result.aggregations.genres.buckets;
+                var playlists = [];
+                var playlistsClass = [];
+                console.log(tab.length);
+                for(var i=0;i<tab.length;i++){
+                    var fieldset = '<div class="ow-pl ow-tabpanel-flex NFQ-quest-title NFQ-type-document expanded class-playlist'+i+'"> <div class="ow-pl-toolbar"><div class="ow-label-pl">'+tab[i].key+'</div> <span class="expand-collapse"> </span> <span class="actions"> </span>  </div><div class="ow-pl-inner"><div class="ow-html"> <div class="NFQ-quest-type-document det NFQ-fieldset" style="padding:0.25rem;"></div></div><div style="clear:both"> </div></div></div>';
+                    document.querySelector(".NQF-freq-quest .ow-pl-inner").innerHTML += fieldset;
+                    playlists.push(tab[i].key);
+                    playlistsClass.push(".class-playlist"+i);
+                }
+                RestSearchVideo("",0,5,playlists,type,playlistsClass)
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+}
+
+
 function RestSearchref(prefix, page, size, type, typeUse, cls) {
 	var str = ""
 
@@ -417,6 +468,56 @@ function RestSearchref(prefix, page, size, type, typeUse, cls) {
 	})
 }
 
+
+function RestSearchVideo(prefix, page, size, type, typeUse, cls) {
+	var str = ""
+
+    for(var i=0;i<type.length;i++){
+        str += generateRequestVideoSearch(prefix,type[i], page, size);
+    }
+
+    console.log(str);
+
+	$.ajax({
+		type: "post",
+		url: URL_SEARCH + "/_msearch",
+		datatype: "application/json",
+		contentType: "application/x-ndjson",
+		data: str,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Authorization", AUTH);
+		},
+		success: function (result) {
+			console.log(result);
+
+			for (var i = 0; i < result.responses.length; i++) {
+                
+                $(cls[i]+" .det").html("");
+                
+                for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
+					console.log(result.responses[i].hits.hits[j]._id);
+					// typeUse 1 for admin and 2for normal user
+
+					NQF_add_video(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.img_url, result.responses[i].hits.hits[j]._id, cls[i], typeUse)
+
+					// console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
+					console.log(result.responses[i].hits.hits[j]._source.type);
+				}
+
+				// la page a affiché  
+
+//				$(cls[i]).append(`<span  class="NFQ-end" onclick='javascript:ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefrentielJuridique","search", "Refrentiel Juridique", {});'>  ${NQFrefCAtegorie[i]}<span>`);
+
+			}
+		},
+		error: function (error) {
+			console.log(error.responseText);
+		}
+	})
+}
+
+
+
 function NQF_add_ref(quest, id, cls, type) {
 
 	// console.log(id);
@@ -437,6 +538,33 @@ function NQF_add_ref(quest, id, cls, type) {
 		<hr class="NQF-horizontal-line " />
 		
 		</div>`)
+	}
+
+}
+
+function NQF_add_video(quest,desc,imgUrl, id, cls, type) {
+
+	// console.log(id);
+	if (type == 1) {
+		$(cls + " .det").append(`<div onclick="getVideo(${id},0)" idd=`+id+` class="video-list-item" style="display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer">
+        <div class="video-img" style="padding: 3px 7px 1px 1px;">
+            <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
+        </div>
+        <div>
+            <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+            <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
+        </div>
+    </div>`);
+	} else if (type == 2) {
+		$(cls + " .det").append(`<div onclick="getVideo(${id},1)" idd=`+id+` class="video-list-item" style="display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer">
+        <div class="video-img" style="padding: 3px 7px 1px 1px;">
+            <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
+        </div>
+        <div>
+            <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+            <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
+        </div>
+        </div>`);
 	}
 
 }
@@ -789,6 +917,76 @@ function getQsFaq(id,type){
     });
 }
 
+function getVideo(id,type){
+    if(type==0){
+        $(".NQF-new-quest-btn").hide();
+        $(".NFQ-load-img").show();
+	    $(".NQF-vue-question").hide();
+        var pos = $(".pcd-header-NQF").offset().top;
+        $('html,body').animate({
+                scrollTop: pos
+            },
+            'fast');
+    }
+
+    $(".NFQ-all-quest").hide();
+
+    $.ajax({
+        type: "get",
+        url: URL_SEARCH+"/videos_index/video/" + id,
+        datatype: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization",AUTH);
+        },
+        success: function (result) {
+            if(type==0){
+            	console.log(result);
+				//traitement rbihi
+
+				$(".NFQ-load-img").hide();
+				$(".NQF-vue-question").show();
+				//add header
+				// $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
+				$(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
+
+                /*
+				$(".NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
+				$(".NQF-prev-resp").html(result._source.REPONSES);
+				$(".NQF-categorie").val(result._source.type);
+                */
+
+               var urlemb = "https://player.vimeo.com/video/"+result._source.video_id;
+               console.log(urlemb);
+               $(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+               $(".NQF-vue-question .vue-video-title b").html(result._source.title);
+               $(".NQF-vue-question .vue-video-description").html(result._source.description);
+               
+                $(".NQF-id").val(id);
+                $(".NQF-vue-question").show();
+				$(".NQF-edit-modif").hide();
+				$(".NQF-btn-alg").show();
+               
+                let a = $(".NQF-categorie")
+				
+                $(".NQF-new-quest-btn").show();
+
+            }else if(type==1){
+                  createDivVideo(result);
+               // RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1);
+                //traitement youssef
+            } 
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function createDivVideo(result){
+    $(".consultation-video .consultation-video-title").html(result._source.title);
+    $(".consultation-video .video-iframe iframe").attr("src","https://player.vimeo.com/video/"+result._source.video_id+"?rel=0");
+    $(".consultation-video .video-description").html(result._source.description);
+}
 
 function createDivQuestionFaq(result){
     $(".qst-faq .vpanel-title .blue-small").html(subLong(result._source.QUESTIONS,110));
@@ -2279,4 +2477,58 @@ function getColIcon(typeAut){
         icon:icon,
         type:inde
     }
+}
+
+var chiffres = [1500,900,800,300];
+var chiffresIni = [1500,900,800,300];
+
+var URL_COMMUNE = "http://91.121.57.204:8080/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
+
+function getCountCommune(){
+    $.ajax({
+        type: "get",
+        url: URL_COMMUNE,
+      datatype: "application/json",
+        //contentType: "application/json",
+        success: function (result) {    
+            chiffres[0]=result.totalLength;
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function scrollChiffreFunction(){
+    $(window).scroll(function() {
+        console.log($(this).scrollTop());
+        if($(this).scrollTop() > $("cms-topictitle").eq(0).offset().top+200 ){
+            counterNumber($("box-card box-big-title").eq(4),chiffres[0],1)
+            counterNumber($("box-card box-big-title").eq(5),chiffres[1],1)
+            counterNumber($("box-card box-big-title").eq(6),chiffres[2],1)
+            counterNumber($("box-card box-big-title").eq(7),chiffres[3],1)
+        }
+    });
+}
+
+function counterNumber(counter,number,type){
+    
+    if(type==0){
+        var duration = 5000;
+    }else if(type==1){
+        //counter.stop();
+        var duration = 1500;
+    }
+
+    counter.animate({ countNum: number  }, {
+        duration: duration,
+        easing: 'linear',
+        step: function () {
+        counter.html("+"+Math.floor(this.countNum));
+        },
+        complete: function () {
+        //$("box-card box-big-title").eq(4).html(this.countNum + "+");
+        //alert('finished');
+        }
+    });
 }
