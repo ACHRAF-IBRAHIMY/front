@@ -14,7 +14,7 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-        
+          loadPageBytype(7);
           removeLastRootPage(userName);
           getAllplayLists(2);
           
@@ -39,7 +39,7 @@
             </vbox>
             
             <vbox columns="60% 25% 15%" className="header-div-toggle">
- <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
+                <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
                    <button label="Actualités">
                         <postChange>
 
@@ -117,26 +117,20 @@
                        </div>
                     </div>
                 </html>    
-                <!--
+               
                     <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+                    <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Recherche" />
                     <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                         <postChange>
-                         /*
-                                var prefix = $(".div-full-search-bar .hp-search_field input").val();
+                         
+                                var prefix = $(".div-full-search-bar .search-video-input input").val();
                                 currentPage=0;
-                                var pp=root.query.parentP;
-                                if(pp==1){
-                                    pp=0;
-                                }
-                                console.log(pp);
-                                restFullSearchList(prefix,0,false,pp);
-                                root.query.parentP=0;
-                        */
+                              //  restFullSearchList(prefix,0,false,0);
+                        
                          </postChange>
                     </button>
                 </vbox>
-               -->                    
+                                  
                 <html>
                     <div style="height: 30px;"> </div>
                 </html>   
@@ -149,6 +143,11 @@
                     </div>
                     <div class="pagination pagination-second">
                         
+                    </div>
+                </html>
+                <html class="loadGifVid">
+                    <div class="searchGif2">
+                        <img src="img/load-text.gif" />
                     </div>
                 </html>
                 <html className="consultation-video">

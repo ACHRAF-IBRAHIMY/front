@@ -10,7 +10,7 @@ var diff = 0;
 var p=0;
 
 //var AUTH = "Basic cm9raGFzX3VzZXI6YWRtaW4x";
-var URL_SEARCH = "https://cmdbserver.karaz.org:9200";
+var URL_SEARCH = "https://elasticdata.karaz.org:9200";
 //var URL_SEARCH = "https://localhost:9200";
 var AUTH = "Basic cmVhZGFsbDpyZWFkYWxs";
 
@@ -341,6 +341,8 @@ function restFullSearchList(prefix,from,prev,parent) {
     }
     }else if(typePage==2){
         RestSearchFaq(prefix,0,2,0);
+    }else if(typePage==7){
+        RestSearchVideo(prefix,0,5,null,3,null);
     }
 
     return result;
@@ -377,6 +379,38 @@ function generateRequestVideoSearch(prefix,type,from,size){
     return str;
 }
 
+
+
+function getAllplayLists2(type){
+        
+    var obj = {"size":1000,"query":{"match_all":{}}};
+
+
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH + "/playlist_index/playlist/_search",
+        datatype: "application/json",
+        contentType: "application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            console.log(result);
+            for(var i=0;i<result.hits.hits.length;i++){
+                var div = '<div class="ow-option"> <span class="ow-option-label p'+(i+1)+'"> '+result.hits.hits[i]._source.title+' </span></div>'
+                console.log(div);
+                $('.playlist-list .ow-field-assistance .ow-field-assistance-inner').append(div);
+            }
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+}
+
+
 function getAllplayLists(type){
         
         var obj = {
@@ -386,6 +420,8 @@ function getAllplayLists(type){
                 }
             }
         };
+
+        $(".NQF-freq-quest .ow-pl-inner").html("");
 
         $.ajax({
             type: "post",
@@ -472,48 +508,135 @@ function RestSearchref(prefix, page, size, type, typeUse, cls) {
 function RestSearchVideo(prefix, page, size, type, typeUse, cls) {
 	var str = ""
 
-    for(var i=0;i<type.length;i++){
-        str += generateRequestVideoSearch(prefix,type[i], page, size);
+    if(type==null){
+
+        var obj = {"size":5,"query":{"match_all":{}}};
+        var a = $(".full-search-list");
+
+        $.ajax({
+            type: "post",
+            url: URL_SEARCH + "/videos_index/video/_search",
+            datatype: "application/json",
+            contentType: "application/json",
+            data: JSON.stringify(obj),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", AUTH);
+            },
+            success: function (result) {
+                console.log(result);
+                $("").html("");
+                var results = result.hits.hits;
+                for(i=0;i<results.length;i++){
+                    console.log(results[i]);
+                    var id = results[i]._id;
+                    var title = results[i]._source.title;
+                    var description = results[i]._source.description;
+                    var imgUrl= results[i]._source.img_url;
+                    var playlist = results[i]._source.playlist;
+                    var b = document.createElement("div");
+                    b.setAttribute("class","hp-box full-search-list-item");
+                    b.setAttribute("style","height: 173px;");
+                    var c = document.createElement("div");
+                    c.setAttribute("class","c-path");
+                   // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
+                    var s = document.createElement("span");
+                    s.setAttribute("class","cl-orange");
+                    c.appendChild(addEventSpan("p1",playlist));
+                    c.appendChild(s);
+                    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+                    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+                    var d = document.createElement("div");
+                    d.setAttribute("class","item-body");
+                    var e = document.createElement("div");
+                    e.setAttribute("class","item-body-title");
+                    e.innerHTML="<span title=\""+title+"\">"+subLong(title,60)+"</span>";
+                    var f = document.createElement("p");
+                    //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
+                    f.innerHTML = subLongAr(description,150);
+                    f.setAttribute("title",description);
+                    d.appendChild(c);
+                    d.appendChild(e);
+                    d.appendChild(f);
+                    var g = document.createElement("button");
+                    g.addEventListener("click",function(){
+                        var id=$(this).children("input").val();
+                        //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                     });
+                    g.setAttribute("class","item-body-button hp-sbox-btn");
+                    g.innerHTML="Voire procédure<input type=\"hidden\" value=\""+id+"\" > ";
+                    g.setAttribute("style","display: inline-block;color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
+                    d.appendChild(g);
+                    var title = document.createElement("div");
+                    title.setAttribute("class","item-title");
+                    title.setAttribute("title",playlist);
+                    title.innerHTML=subLong(playlist);
+                    title.addEventListener("click",function(){
+                        /*currentPage=0;
+                            $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
+                            restFullSearchList($(this).html(),0,false,4);
+                        */
+                    }); 
+                    b.appendChild(title);
+                    var icons = document.createElement("div");
+                    icons.setAttribute("class","item-icon");
+                    icons.innerHTML="<i class=\"far fa-file-image\" />";
+                    b.appendChild(icons);
+                    b.appendChild(d);
+                    a.append(b);
+                }
+            },
+            error: function (error) {
+                console.log(error.responseText);
+            }
+        })
+    }else if(type==-1){
+
+    }else{
+        for(var i=0;i<type.length;i++){
+            str += generateRequestVideoSearch(prefix,type[i], page, size);
+        }
+    
+        console.log(str);
+    
+        $.ajax({
+            type: "post",
+            url: URL_SEARCH + "/_msearch",
+            datatype: "application/json",
+            contentType: "application/x-ndjson",
+            data: str,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", AUTH);
+            },
+            success: function (result) {
+                console.log(result);
+    
+                for (var i = 0; i < result.responses.length; i++) {
+                    
+                    $(cls[i]+" .det").html("");
+                    
+                    for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
+                        console.log(result.responses[i].hits.hits[j]._id);
+                        // typeUse 1 for admin and 2for normal user
+    
+                        NQF_add_video(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.img_url, result.responses[i].hits.hits[j]._id, cls[i], typeUse)
+    
+                        // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
+                        console.log(result.responses[i].hits.hits[j]._source.type);
+                    }
+    
+                    // la page a affiché  
+    
+    //				$(cls[i]).append(`<span  class="NFQ-end" onclick='javascript:ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefrentielJuridique","search", "Refrentiel Juridique", {});'>  ${NQFrefCAtegorie[i]}<span>`);
+    
+                }
+            },
+            error: function (error) {
+                console.log(error.responseText);
+            }
+        })
     }
 
-    console.log(str);
-
-	$.ajax({
-		type: "post",
-		url: URL_SEARCH + "/_msearch",
-		datatype: "application/json",
-		contentType: "application/x-ndjson",
-		data: str,
-		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", AUTH);
-		},
-		success: function (result) {
-			console.log(result);
-
-			for (var i = 0; i < result.responses.length; i++) {
-                
-                $(cls[i]+" .det").html("");
-                
-                for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
-					console.log(result.responses[i].hits.hits[j]._id);
-					// typeUse 1 for admin and 2for normal user
-
-					NQF_add_video(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.img_url, result.responses[i].hits.hits[j]._id, cls[i], typeUse)
-
-					// console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
-					console.log(result.responses[i].hits.hits[j]._source.type);
-				}
-
-				// la page a affiché  
-
-//				$(cls[i]).append(`<span  class="NFQ-end" onclick='javascript:ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefrentielJuridique","search", "Refrentiel Juridique", {});'>  ${NQFrefCAtegorie[i]}<span>`);
-
-			}
-		},
-		error: function (error) {
-			console.log(error.responseText);
-		}
-	})
+    
 }
 
 
@@ -605,6 +728,8 @@ function getRefJ(id, type) {
 		}
 	});
 }
+
+
 
 function removerefNQF(id) {
 
@@ -927,7 +1052,14 @@ function getVideo(id,type){
                 scrollTop: pos
             },
             'fast');
+    }else if(type==1){
+        $(".search-video").hide();
+        $(".consultation-video").hide();
+        $(".consultation-video .video-iframe iframe").attr("src","");
+        $(".searchGif2").show();
     }
+
+    
 
     $(".NFQ-all-quest").hide();
 
@@ -972,6 +1104,9 @@ function getVideo(id,type){
 
             }else if(type==1){
                   createDivVideo(result);
+                  $(".searchGif2").hide();
+                  $(".consultation-video").show();
+
                // RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1);
                 //traitement youssef
             } 

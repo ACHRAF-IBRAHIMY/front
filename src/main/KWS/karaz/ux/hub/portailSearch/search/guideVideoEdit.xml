@@ -71,7 +71,7 @@
                     </vbox>
                 </vbox>
 
-                <vbox columns="60% 25% 15%" className="header-div-toggle">
+                <vbox columns="75% 25%" className="header-div-toggle">
                     <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
                         <button label="Actualités">
                             <postChange>
@@ -117,12 +117,7 @@
                             </postChange>
                         </button>
                     </vbox>
-                    <vbox className="vbox-button-signup-header" columns="50% 50%">
-                        <button label="FR" className="button-signup-header-cliked button-left">
-                        </button>
-                        <button label="ع" className="button-signup-header">
-                        </button>
-                    </vbox>
+                    
                 </vbox>
             </vbox>
 
@@ -142,7 +137,24 @@
                             <button label="Nouvelle vidéo" style="" className="NQF-btn-new">
                                 <postChange>
                                     $(".NQF-new-quest-btn").hide();
+                                    let title = $('.ow-field-input[data-xpath="title"]').val("");
+			                        $('.ow-field-input-select[data-xpath="categ"]').text("");
+                                    $('.ow-field-input[data-xpath="url"]').val("");
+                                    $('.ow-field-input-line textarea[data-xpath="description"]').val(""); 
+			                        $('.ow-field-input-select[data-xpath="playlist"]').text("");
+                                    $(".NQF-vue-question").hide();
                                     $(".NQF-edit-modif").show();
+                                    //NQF_new_QR(1);
+
+                                </postChange>
+                            </button>
+                            <button label="Nouvelle playlist" style="" className="NQF-btn-new">
+                                <postChange>
+                                    $(".NQF-new-quest-btn").hide();
+                                    $(".NQF-edit-modif").hide();
+                                    $(".NQF-edit-playlist").show();
+                                    $(".NQF-vue-question").hide();
+
                                     //NQF_new_QR(1);
                                 </postChange>
                             </button>
@@ -151,7 +163,7 @@
                         <vbox className="NQF-edit-modif">
                             <fieldset label="DONNÉES VIDÉO" className="NQF-shadow">
                                 <vbox className="DC-Customized-fields-NQF NQF-edit-float">
-                                    <field label="Titre" widget="text" labelAlign="float" xpath="title"></field>
+                                    <field label="Titre" widget="text" labelAlign="float" xpath="title" />
                                     <vbox contentAlign="center" columns="40% 60%" className="NQF-edit-select-float">
                                         <field widget="select" label="Plateforme d’hébergement" labelAlign="float" xpath="categ">
                                             <option value="vimeo" label="Vimeo" />
@@ -159,17 +171,18 @@
                                             <option value="autre" label="Autre" />
                                         </field>
                                         <vbox>
-                                            <field label="URL" widget="text" labelAlign="float" xpath="url"></field>
+                                            <field label="URL" widget="text" labelAlign="float" xpath="url" />
                                         </vbox>
                                         <vbox>
-                                            <field widget="select" label="Playlist" labelAlign="float" xpath="playlist">
+                                            <field widget="select" label="Playlist" labelAlign="float" xpath="playlist" className="playlist-list">
                                                 <option value="g" label="Général" />
-                                                <option value="p1" label="Playlist1" />
-                                                <option value="p2" label="Playlist2" />
+                                                <option value="p1" label="ROKHAS" />
+                                                <option value="p2" label="CASAURBA" />
+                                                <option value="p3" label="Karaz GIS" />
                                             </field>
                                         </vbox>
                                         <vbox>
-                                            <field label="Description" widget="textArea" labelAlign="float" xpath="description"></field>
+                                            <field label="Description" widget="textArea" labelAlign="float" xpath="description" />
                                         </vbox>    
                                         
                                     </vbox>
@@ -199,6 +212,9 @@
 
                             </vbox>
                         </vbox>
+
+                        
+
 
                         <vbox className="NQF-vue-video NQF-vue-question">
                             <vbox columns="50% 50%">
@@ -251,6 +267,31 @@
                                 </div>
                             </html>
                         </fieldset>
+
+                        <vbox className="NQF-edit-playlist">
+                            <fieldset label="DONNÉES PLAYLIST" className="NQF-shadow">
+                                
+                                <html>
+                                    <p hidden="hidden" class="NQF-id-playlist" />
+                                </html>
+                                <vbox className="DC-Customized-fields-NQF NQF-edit-float">
+                                    <field label="Titre" widget="text" labelAlign="float" xpath="titlePlaylist" />
+                                </vbox>
+                                <vbox columns="auto 45%" className="DC-box-btn-filtrer">
+                                <hx />
+                                <vbox columns="33% 33% auto" style="margin-right: 2em;">
+                                    <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
+                                        <postChange>
+                                            NQF_save_QR(4);
+                                        </postChange>
+                                    </button>
+                                </vbox>
+
+                            </vbox>
+                            </fieldset>
+
+                            
+                        </vbox>
 
 
                     </fieldset>

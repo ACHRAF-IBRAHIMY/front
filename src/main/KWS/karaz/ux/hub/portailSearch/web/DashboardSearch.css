@@ -613,7 +613,7 @@ box-card:hover{
 }
 
 
-.searchGif{
+.searchGif,.searchGif2{
     text-align: center;
     display: none;
     line-height: 50;
@@ -2565,7 +2565,7 @@ box-card:hover{
 
 /* from css file guideVideo.css */
 
-.search-video{
+.consultation-video{
     display: none;
 }
 
@@ -2574,11 +2574,11 @@ box-card:hover{
     width: 100%;
     height: 500px;
     background:#fff;
-    margin: 14px 0 14px 0;
+    margin: 2px 0 2px 0;
 }
 
  .consultation-video-title{
-    font-size: 22px;
+    font-size: 25px;
     color: #444;
     display: block;
     text-align: left;
