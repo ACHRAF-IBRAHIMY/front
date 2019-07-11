@@ -115,14 +115,14 @@ function restFullSearchList(prefix,from,prev,parent) {
             console.log("typePage :"+typePage);
 
             if(typePage!=1 && typePage !=2){
-                $(".div-full-search-bar .hp-sbox-text span.total").html(res.hits.total);
+                $(".div-full-search-bar .hp-sbox-text span.total").html(res.hits.total.value);
                 $(".div-full-search-bar .hp-sbox-text span.prefix").html(prefix);
             }
 
             $(".searchGif").hide();
      
             if(currentPage==0){
-                totalPage = Math.ceil(res.hits.total/4);
+                totalPage = Math.ceil(res.hits.total.value/4);
                 createPaginationBar(Math.min(totalPage,10),0,prefix,1,false);
                 if(totalPage!=0){
                     currentPage=1;
@@ -1272,7 +1272,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
                         fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
                         k++;
                     }
-                    totalFaqPages[i]=result.responses[i].hits.total;
+                    totalFaqPages[i]=result.responses[i].hits.total.value;
                     generatePaginationFaqPage(i,prefix,0);
                 }
 
@@ -1284,9 +1284,9 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
                 
                 
                 fullCreateFaqByType(result.responses[0].hits.hits,1,typeUse);
-                totalFaqPages[type-1]=result.responses[0].hits.total;
+                totalFaqPages[type-1]=result.responses[0].hits.total.value;
                 generatePaginationFaqPage((type-1),prefix,-1);
-                console.log(result.responses[0].hits.total);
+                console.log(result.responses[0].hits.total.value);
             }
         },
         error: function (error) {
@@ -1320,9 +1320,9 @@ function fullCreateFaqByType(results,type,typeUse){
             var e = document.createElement("div");
             e.setAttribute("class","item-body-title");
             e.setAttribute("style","font-size:16px");
-            e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+            e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,80)+"</span>";
             var f = document.createElement("p");
-            f.innerHTML = subLong(text.replace(/<[^>]*>?/gm, ''),300);
+            f.innerHTML = subLong(text.replace(/<[^>]*>?/gm, ''),250);
             f.setAttribute("style","font-size: 14px;text-align:left");
             f.setAttribute("class","para-faq");
             d.appendChild(e);
@@ -1340,7 +1340,7 @@ function fullCreateFaqByType(results,type,typeUse){
 			});
             
             g.setAttribute("class","item-body-button");
-            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;bottom: 5px;right: 0px;");
             g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
             d.appendChild(g);
             b.appendChild(d);
@@ -1379,9 +1379,9 @@ function fullCreateFaqByType(results,type,typeUse){
             var e = document.createElement("div");
             e.setAttribute("class","item-body-title");
             e.setAttribute("style","font-size:16px");
-            e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+            e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,80)+"</span>";
             var f = document.createElement("p");
-            f.innerHTML = subLong(text.replace(/<[^>]*>?/gm, ''),300);
+            f.innerHTML = subLong(text.replace(/<[^>]*>?/gm, ''),250);
             f.setAttribute("style","font-size: 14px;text-align:left");
             f.setAttribute("class","para-faq");
             d.appendChild(e);
@@ -1392,7 +1392,7 @@ function fullCreateFaqByType(results,type,typeUse){
                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
             });
             g.setAttribute("class","item-body-button");
-            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;bottom: 5px;right: 0px;");
             g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
             d.appendChild(g);
             b.appendChild(d);

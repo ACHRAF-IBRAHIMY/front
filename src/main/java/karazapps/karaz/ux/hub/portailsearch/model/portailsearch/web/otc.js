@@ -234,4 +234,3 @@ function doColorCluster(val,active){
              colorClusterFunc("bl");
          }
 }
-

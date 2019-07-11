@@ -358,7 +358,7 @@ function loadDiv(div, key, membre) {
         case 2:
             $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("MOT | <span class=\"cl-orange\" style=\"text-transform: capitalize;\">"+key.word+"</span>");
             getDetWordKey(key.result, key.word, membre);
-            createPagintionOtm(key.result.hits.total, 5, key.word, membre, activePage,0);
+            createPagintionOtm(key.result.hits.total.value, 5, key.word, membre, activePage,0);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .word-list-det").show();
             break;
@@ -371,7 +371,7 @@ function loadDiv(div, key, membre) {
         case 4:
             $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("RESULTATS");
             searchMLTDiv(key,membre);
-            createPagintionOtm(key.hits.total, 5, membre, null, activePage,1);
+            createPagintionOtm(key.hits.total.value, 5, membre, null, activePage,1);
             $(".dashbord-right .d2 .word-list-load-gif").hide();
             $(".dashbord-right .d2 .mlt-search").show();
             break;
@@ -753,7 +753,7 @@ function getMembers() {
         success: function (result) {
             var array = new Array();
             var size = result.aggregations.membres.buckets.length;
-            var nbrAvis = result.hits.total;
+            var nbrAvis = result.hits.total.value;
             for (var i = 0; i < size; i++) {
                 array.push(result.aggregations.membres.buckets[i].key);
             }
@@ -1015,7 +1015,7 @@ function searchMLT(word) {
 
 
 function searchMLTDiv(result,word){
-    var total = result.hits.total;
+    var total = result.hits.total.value;
     $(".stat-dashbord .dashbord-right .d2 .mlt-search .total-hits span").html(total);
     $(".stat-dashbord .dashbord-right .d2 .mlt-search .word").html(word);
     console.log(result.hits.hits.length);

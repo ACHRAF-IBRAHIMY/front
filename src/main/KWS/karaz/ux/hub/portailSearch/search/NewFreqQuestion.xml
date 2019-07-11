@@ -273,7 +273,7 @@
                                 <div class="vpanel-body full-search-list">
 
                                 </div>
-                                <div class="searchGif2" style="display:none">
+                                <div class="searchGif2" style="display:none;line-height: 0;">
                                     <img src="img/search-move.gif" />
                                 </div>
                                 <div class="pagination-new-style">

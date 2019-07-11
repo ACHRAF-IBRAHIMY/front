@@ -732,9 +732,12 @@ box-card:hover{
     height: 100%;
 }
 
+
+
 .faq-fieldset .searchGif2{
     padding: 80px;
     height: 284px;
+    line-height: 0;
     display: none;
 }
 
