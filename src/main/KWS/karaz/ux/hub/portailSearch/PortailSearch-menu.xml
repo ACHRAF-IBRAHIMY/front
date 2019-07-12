@@ -89,27 +89,46 @@
       <menu relId="OpendataFrame" label="Open data page" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/OpendataFrame</resource>
       </menu>
-      <menu relId="RefrentielJuridique" label="Refrentiel Juridique" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/RefrentielJuridique</resource>
-      </menu>
-      <menu relId="FaqPage" label="Faq Page" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/FaqPage</resource>
-      </menu>
+      
+      
       <menu relId="BackEndPage" label="Back End Page" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/BackEndPage</resource>
       </menu>
-      <menu relId="FaqDetail" label="Faq Detail" icone="search">
-      	<resource type="search">karaz/ux/hub/portailsearch/search/FaqDetail</resource>
-      </menu>
-      <menu relId="NewfreqQuestion" label="Nouvelle faq" icone="search">
-      	<resource type="search">karaz/ux/hub/portailsearch/search/NewfreqQuestion</resource>
-      </menu>
+      
+      
       <menu relId="ReportRanking" label="Report Ranking" icone="search">
       	<resource type="search">karaz/ux/hub/portailsearch/search/ReportRanking</resource>
       </menu>
       <menu relId="UserSearchOLAP" label="User Search OLAP" icone="search">
       	<resource type="search">karaz/ux/hub/portailsearch/search/UserSearchOLAP</resource>
       </menu>
+      
+      
+      
+      <menu relId="ModuleFAQ" label="Module FAQ">
+      	<menu relId="NewfreqQuestion" label="Nouvelle faq" icone="search">
+      	<resource type="search">karaz/ux/hub/portailsearch/search/NewfreqQuestion</resource>
+      	</menu>
+      	<menu relId="GuideVideoEdit" label="Guide Video Edit" icone="search">
+      		<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoEdit</resource>
+      	</menu>
+      	<menu relId="FaqPage" label="Faq Page" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/FaqPage</resource>
+      	</menu>
+      	<menu relId="FaqDetail" label="Faq Detail" icone="search">
+      	<resource type="search">karaz/ux/hub/portailsearch/search/FaqDetail</resource>
+      	</menu>
+      </menu>
+      
+      <menu relId="ModuleRef" label="Module Referentiel">
+      	<menu relId="NewRefJuridique" label="Nouveau Référentiel Juridique" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/NewRefJuridique</resource>
+      	</menu>
+      	<menu relId="RefrentielJuridique" label="Refrentiel Juridique" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/RefrentielJuridique</resource>
+      	</menu>
+      </menu>
+      
       <menu relId="ModuleGuideVidéo" label="Module Guide Vidéo">
       	<menu relId="GuideVideoConsultation" label="Guide Video Consultation" icone="search">
       		<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoConsultation</resource>

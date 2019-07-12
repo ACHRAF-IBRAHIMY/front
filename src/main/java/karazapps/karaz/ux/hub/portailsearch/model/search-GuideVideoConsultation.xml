@@ -14,10 +14,35 @@
 	<view>
 		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
         <script postLoad="true">
-          loadPageBytype(7);
-          removeLastRootPage(userName);
-          getAllplayLists(2);
-          
+            loadPageBytype(7);
+            removeLastRootPage(userName);
+            getAllplayLists(2);
+            $(".searchbuttun").click();
+
+            $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+		        $(".header-div-toggle").slideToggle(); 
+		    });         
+		   
+		    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
+		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
+		    });
+		
+		    $(".header-div-toggle .dropdown").mouseenter(function(){
+		        $(".header-div-toggle .dropdown-content").slideDown();
+		    }).mouseleave(function(){
+		        $(".header-div-toggle .dropdown-content").slideUp();
+		    }); 
+
+            Array.from(document.querySelectorAll(".divSearchBar .hp-search_field input")).forEach(function(elm){
+                autoCompleteSim(elm,"videos_index","title");
+                Array.from(document.querySelectorAll(".div-full-search-bar .ow-field-input")).forEach(function(elm){
+                elm.addEventListener("keydown", function (e) {
+                    var x = document.getElementById("autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,1);
+                })
+                });
+            });
         </script>
         
         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
@@ -125,7 +150,9 @@
                          
                                 var prefix = $(".div-full-search-bar .search-video-input input").val();
                                 currentPage=0;
-                              //  restFullSearchList(prefix,0,false,0);
+                                $(".consultation-video").hide();
+                                $(".search-video").show();
+                                restFullSearchList(prefix,0,false,0);
                         
                          </postChange>
                     </button>
@@ -160,7 +187,12 @@
                     <div class="video-description">
                         Vidéo didactique montrant le déroulement pas à pas de la création d'une couche -Layer. Opération primordiale dans le processus de partage des fichiers de données spatiales dans des cartes.
                     </div>
-                </html>     
+                <div class="next-prev" columns="50% 50%">
+                    <div class="prev-video" style=""><i class="fas fa-chevron-left" /><span class=""> vidéo précedente</span></div>
+                    <div class="next-video" style=""><span class="">vidéo suivante </span><i class="fas fa-chevron-right" /></div>
+                </div> 
+                </html>
+                    
             </vbox>    
         </vbox> 
         

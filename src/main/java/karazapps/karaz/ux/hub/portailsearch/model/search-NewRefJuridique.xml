@@ -67,7 +67,6 @@
 
                 $(".NQF-vue-ref").hide();
                 RestSearchref("",0,7,0,1,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"]);
-                RestSearchref("",0,7,0,2,[".NFQ-quest-type-eco1",".NFQ-quest-type-urba1"]);
                 // hide saisie info question
                 $(".NQF-edit-modif").hide()
                 //img loding ref
@@ -154,19 +153,21 @@
                 <vbox>
 
                     <fieldset label="NOUVEAU RÉFÉRENTIEL JURIDIQUE" collapsible="false" className="pcd-header-NQF NQF-titre-ref div-det-acc PDC-hov-title ">
-						<html className="NFQ-load-img">
-                            <img src="img/load-text.gif" />
-                        </html>
+						
 						<vbox className="NQF-new-quest-btn"> 
                             <button label="Nouveau Référentiel Juridique" style="" className="NQF-btn-new">
                                 <postChange>
-                                    $(".NQF-new-quest-btn").hide();
+                                    $(".NFQ-all-quest").hide();
                                     $(".NQF-edit-modif").show();
                                     NQF_new_QR(2);
                                 </postChange>
                             </button>
                         </vbox>
-						
+
+						<html className="NFQ-load-img">
+                            <img src="img/load-text.gif" />
+                        </html>
+
                         <vbox className="NQF-edit-modif">
                             <fieldset label="DONNÉES RÉFÉRENTIEL JURIDIQUE" className="NQF-shadow">
                                 <vbox className="DC-Customized-fields-NQF NQF-edit-float">
@@ -245,12 +246,28 @@
                                         console.log("root================",root);
                                         console.log("context================",context);
                                         NQF_edit_av(2,root,context);
+                                        $(".NFQ-all-quest").hide();
 
                                     </postChange>
                                 </button>
                             </vbox>
                         </vbox>
+                        <fieldset header="AUTRES RÉFÉRENTIELS JURIDIQUES" className="faq-fieldset-det NFQ-all-quest">
+                            <html>
+                             
+                                <div class="vpanel-body full-search-list">
 
+                                </div>
+                                <div class="searchGif2" style="display:none;line-height: 0;">
+                                    <img src="img/search-move.gif" />
+                                </div>
+                                <div class="pagination-new-style">
+                                    <div class="pagination-1">
+
+                                    </div>
+                                </div>
+                            </html>
+                        </fieldset>
 
                     </fieldset>
                 </vbox>

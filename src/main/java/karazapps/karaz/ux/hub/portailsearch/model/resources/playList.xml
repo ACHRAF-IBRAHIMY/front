@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<tns:liste xmlns:tns="http://www.example.org/Liste-model"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/Liste-model Liste-model.xsd ">
+
+
+	<name>resources/prtailSearch/playList</name>
+	<description>liste des play liste </description>
+	<modelQN>PortailSearch</modelQN>
+	<sequence></sequence>
+	<status>active</status>
+	<entityName>/</entityName>
+	<dateUpdateFromFile></dateUpdateFromFile>
+	<sourceFileLocation></sourceFileLocation>
+	<entries>
+  
+                    <option value="g" label="Général"/>
+  
+                    <option value="p1" label="ROKHAS"/>
+  
+                    <option value="p2" label="CASAURBA"/>
+  
+                    <option value="p3" label="Karaz GIS"/>
+ 					 
+			    
+	</entries>
+</tns:liste>
+ 

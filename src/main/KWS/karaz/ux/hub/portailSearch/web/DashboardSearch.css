@@ -1,5 +1,29 @@
-/*res*/
 
+/* video consultation style*/
+.search-video .full-search-list-item .item-body p {
+    font-size: 0.965vw;
+    text-align: left;
+    width: 95%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.search-video .full-search-list{
+    margin-bottom: 35px;
+    height: 730px;
+}
+
+.search-video .full-search-list-item {
+    grid-template-columns: 0% 40% 55%;
+    grid-column-gap: 15px;
+}
+
+.search-video .full-search-list-item img{
+    height: 100%;
+    width: 100%;
+}
+
+/*res*/
 .faq-fieldset-det .pagination-new-style{
     text-align: center;
 }
@@ -58,9 +82,27 @@
     height: auto !important;
 }
 
+.height-auto-vbox-first{
+    height: 100% !important;
+}
+
+.height-auto-vbox-first .ow-vl-inner{
+    height: 100% !important;
+}
+
+.height-auto-vbox-first .div1f{
+    height: calc( (100% - 36px) * 0.53 );
+}
+
+.height-auto-vbox-first .div2f{
+    height: calc( (100% - 36px) * 0.53 );
+}
+
+/*
 .height-auto-vbox-first > .ow-vl-inner {
     height: auto !important;
 }
+*/
 
 .last-log-info{
     line-height: 1.3;
@@ -392,9 +434,8 @@ box-card:hover{
 
 .relative-position{
     position: relative;
-    height: 272px !important;
+    height: calc( (100% - 36px) * 0.46 ) !important;
     margin-top: 2rem;
-
 }
 
 .folder-feature .folder-feature-body .progressbar {
@@ -1561,7 +1602,7 @@ box-card:hover{
 }
 
 .support{
-    width: 85%;
+    width: 89%;
     margin: auto;
     margin-top: 48px;
 }
