@@ -262,7 +262,7 @@
            
         <vbox columns="30% 70%" className="global-div-temp">
            <vbox className="height-auto-vbox-first">
-            <vbox className="hp-box last-log hp-small">
+            <vbox className="hp-box last-log hp-small div1f">
                 <vbox columns="20% 80%">
                     <html>
                         <div class="hp-box-icon fas fa-user" />
@@ -382,7 +382,7 @@
         <vbox className="hp-box hp-small divSearch height-986">
                 <vbox className="hp-box divSearchBar">
                     <html>
-                        <div class="hp-sbox-big-title">
+                        <div class="hp-sbox-big-title" style="color: var(--fg0);">
                             Pont de confiance Usager / Administration
                         </div>
                         <div class="hp-sbox-text">

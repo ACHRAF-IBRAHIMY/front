@@ -121,8 +121,20 @@ function NQF_edit(type) {
 				alert("rien à prévisualiser")
 
 			} else {
-                var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
-                console.log(urlemb);
+                if(categ=="Vimeo"){
+                    var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
+                    console.log(urlemb);
+                }else if(categ=="Youtube"){
+                    var urlemb = "https://www.youtube.com/embed/"+urlV.match(/v=\w+[&]*/)[0].replace("v=",'');;
+                    console.log(urlemb);
+                }else if(categ=="Autre"){
+                    var urlemb = urlV;
+                    console.log(urlemb);
+                }else{
+                    alert("veuillez choisir la plateforme d'hébergement");
+                    return ;
+                }
+                
 				$(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
 				$(".NQF-vue-question .vue-video-title b").html(title);
 				$(".NQF-vue-question .vue-video-description").html(description);
@@ -308,8 +320,14 @@ function NQF_edit(type) {
             let description = $('.ow-field-input-line textarea[data-xpath="description"]').val(); 
 			let playlist = $('.ow-field-input-select[data-xpath="playlist"]').text();
             
-            let video_id = urlV.match(/\/\d+/)[0].replace(/\//g,""); 
-			console.log(title, categ, description,urlV,playlist,video_id);
+            if(categ=="Vimeo"){
+                var video_id = urlV.match(/\/\d+/)[0].replace(/\//g,""); 
+                console.log(title, categ, description,urlV,playlist,video_id);
+            }else if(categ=="Youtube"){
+                var video_id = urlV.match(/v=\w+[&]*/)[0].replace("v=",'');; 
+                console.log(title, categ, description,urlV,playlist,video_id);
+            }
+            
             
             var req = {
 				"title": title,
@@ -323,42 +341,74 @@ function NQF_edit(type) {
 
             let id = "";
             id = $(".NQF-id-ref").val();
-            
-            $.ajax({
-                type:'GET',
-                url: 'http://vimeo.com/api/v2/video/' + video_id + '.json',
-                jsonp: 'callback',
-                dataType: 'jsonp',
-                success: function(data){
-                    var thumbnail_src = data[0].thumbnail_large;
-                    req.img_url = thumbnail_src;
-                    
-                    if ($(".ow-btn-container:has(> i)").length == 0) {
-                        $(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
-                    }
-
-                    
-                    var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
-                    console.log(urlemb);
-				    $(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-				    $(".NQF-vue-question .vue-video-title b").html(title);
-				    $(".NQF-vue-question .vue-video-description").html(description);
-                    
-                    setTimeout(function () {
-                        $(".ow-btn-container i.fa-check").remove()
-                        $(".NQF-edit-modif").hide()
-                        $(".NQF-new-quest-btn").show();
-                        $(".NQF-vue-ref").show();
-                        $(".NQF-btn-alg").hide();
-                        $(".NQF-vue-question").show();
+            if(categ=="Vimeo"){
+                $.ajax({
+                    type:'GET',
+                    url: 'http://vimeo.com/api/v2/video/' + video_id + '.json',
+                    jsonp: 'callback',
+                    dataType: 'jsonp',
+                    success: function(data){
+                        var thumbnail_src = data[0].thumbnail_large;
+                        req.img_url = thumbnail_src;
+                        alert(JSON.stringify(req)+" "+thumbnail_src);
+                        if ($(".ow-btn-container:has(> i)").length == 0) {
+                            $(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+                        }
+    
                         
-                        getAllplayLists(1);
+                        var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
+                        console.log(urlemb);
+                        $(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                        $(".NQF-vue-question .vue-video-title b").html(title);
+                        $(".NQF-vue-question .vue-video-description").html(description);
+                        
+                        setTimeout(function () {
+                            $(".ow-btn-container i.fa-check").remove()
+                            $(".NQF-edit-modif").hide()
+                            $(".NQF-new-quest-btn").show();
+                            $(".NQF-vue-ref").show();
+                            $(".NQF-btn-alg").hide();
+                            $(".NQF-vue-question").show();
+                            
+                            getAllplayLists(1);
+    
+                        }, 2000);
+                        
+                        updateVideo(req.video_id,req);
+                    }
+                });
 
-                    }, 2000);
-                    
-                    updateVideo(req.video_id,req);
-                }
-            });
+            }else if(categ=="Youtube"){
+                
+                
+                        req.img_url = "https://img.youtube.com/vi/"+req.video_id+"/0.jpg";
+                        
+                        if ($(".ow-btn-container:has(> i)").length == 0) {
+                            $(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+                        }
+    
+                        
+                        var urlemb = "https://www.youtube.com/embed/"+req.video_id;
+                        console.log(urlemb);
+                        $(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                        $(".NQF-vue-question .vue-video-title b").html(title);
+                        $(".NQF-vue-question .vue-video-description").html(description);
+                        
+                        setTimeout(function () {
+                            $(".ow-btn-container i.fa-check").remove()
+                            $(".NQF-edit-modif").hide()
+                            $(".NQF-new-quest-btn").show();
+                            $(".NQF-vue-ref").show();
+                            $(".NQF-btn-alg").hide();
+                            $(".NQF-vue-question").show();
+                            
+                            getAllplayLists(1);
+    
+                        }, 2000);
+                        
+                        updateVideo(req.video_id,req);
+            }
+            
 			
 /*
             $(".NQF-title-ref").text(title);
@@ -702,11 +752,20 @@ function NQF_edit(type) {
         RestSearchFaq(var1,var2,var3,var4,var5);
     }
 
+
+    function RestSearchRefWithIntilize(var1,var2,var3,var4,var5){
+        intializeFaqPages();
+        RestSearchref(var1,var2,var3,var4,var5);
+    }
+
+    
+
 	
 	
 	function removeQuestionNFQ(id,indexType) {
 
-		if (window.confirm("Do you really want to delete this question?")) {
+        var str = "Do you really want to delete this element ?";
+		if (window.confirm(str)) {
             console.log(URL_SEARCH + indexType + id);
             $.ajax({
 				type: "delete",
@@ -793,5 +852,21 @@ function NQF_edit(type) {
 			$(".NQF-edit-modif").show();
 			$(".NQF-btn-alg").hide();
 
-		}
+		}else if(type==3){
+			
+			dataroot.title = videoObject.title;
+			dataroot.url = videoObject.url;
+            dataroot.playlist = videoObject.playlist;
+            dataroot.categ = videoObject.plateforme;
+            dataroot.description = videoObject.description;
+
+			ctx.formRender.notifyObservers("title");
+			ctx.formRender.notifyObservers("url");
+			ctx.formRender.notifyObservers("playlist");
+			ctx.formRender.notifyObservers("categ");
+			ctx.formRender.notifyObservers("description");
+
+			$(".NQF-edit-modif").show();
+			$(".NQF-btn-alg").hide();
+        }
 }

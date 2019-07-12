@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:dynamiclists xmlns:tns="http://www.example.org/dynamiclists-struct">
+  <dynamiclist name="resources/prtailSearch/playList" description="liste des play liste " >
+   <option value="g" label="Général" />
+   <option value="p1" label="ROKHAS" />
+    <option value="p2" label="CASAURBA" />
+    <option value="p3" label="Karaz GIS" />
+  </dynamiclist>
+</tns:dynamiclists>
+
