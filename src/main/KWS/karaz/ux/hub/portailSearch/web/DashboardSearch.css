@@ -1,4 +1,5 @@
 
+
 /* video consultation style*/
 .search-video .full-search-list-item .item-body p {
     font-size: 0.965vw;
@@ -6,11 +7,12 @@
     width: 95%;
     margin-bottom: 5px;
     margin-top: 5px;
+    height: 45%;
 }
 
 .search-video .full-search-list{
     margin-bottom: 35px;
-    height: 730px;
+    height: 780px;
 }
 
 .search-video .full-search-list-item {
@@ -21,6 +23,25 @@
 .search-video .full-search-list-item img{
     height: 100%;
     width: 100%;
+}
+
+.next-prev{
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.next-prev .prev-video{
+    text-align: left;
+}
+
+.next-prev .next-video{
+    text-align: right;
+}
+
+.next-prev .active-video{
+    color: #38a;
+    cursor: pointer;
 }
 
 /*res*/
