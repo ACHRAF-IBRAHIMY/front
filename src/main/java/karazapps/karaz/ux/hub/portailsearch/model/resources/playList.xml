@@ -5,8 +5,8 @@
 	xsi:schemaLocation="http://www.example.org/Liste-model Liste-model.xsd ">
 
 
-	<name>resources/prtailSearch/playList</name>
-	<description>liste des play liste </description>
+	<name>frontal/uxhub/portailSearch/playList</name>
+	<description>liste des playlistes </description>
 	<modelQN>PortailSearch</modelQN>
 	<sequence></sequence>
 	<status>active</status>

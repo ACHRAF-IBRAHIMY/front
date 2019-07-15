@@ -187,6 +187,33 @@ function NQF_edit(type) {
 
     }
     
+
+    function verifieVideo(){
+        var vr = true; 
+        let title = $('.ow-field-input[data-xpath="title"]').val();
+        let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
+        let urlV = $('.ow-field-input[data-xpath="url"]').val();
+        let description = $('.ow-field-input-line textarea[data-xpath="description"]').val(); 
+        let playlist = $('.ow-field-input-select[data-xpath="playlist"]').text();
+
+        if(title.trim()==""){
+            alert("Veuillez saisir le titre de vidéo");
+            return false;
+        }
+        
+        if(categ.trim()==""){
+            alert("Veuillez selectionner la plateforme d'hébergement de vidéo !");
+            return false;
+        }
+
+        if(urlV.trim()==""){
+            alert("Veuillez saisir le lien de vidéo !");
+            return false;
+        }
+
+        return vr;
+    }
+
     function NQF_save_QR(type) {
 		if (type == 1) {
 			let question = $('.ow-field-input[data-xpath="question"]').val();
@@ -272,7 +299,7 @@ function NQF_edit(type) {
 
 			let title = $('.ow-field-input[data-xpath="NQFtitle"]').val();
 			let categ = $('.ow-field-input-select[data-xpath="NQFtype"]').text();
-			let texte = $('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html()
+			let texte = $('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
 			let description = $('.NFQ-desc-refjuridique textarea').val(); 
 			
 			console.log(title, categ, texte, description)
@@ -316,19 +343,32 @@ function NQF_edit(type) {
 		}else if(type==3){
             let title = $('.ow-field-input[data-xpath="title"]').val();
 			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-            let urlV = $('.ow-field-input[data-xpath="url"]').val();
+            let urlV  = $('.ow-field-input[data-xpath="url"]').val();
             let description = $('.ow-field-input-line textarea[data-xpath="description"]').val(); 
 			let playlist = $('.ow-field-input-select[data-xpath="playlist"]').text();
             
             if(categ=="Vimeo"){
                 var video_id = urlV.match(/\/\d+/)[0].replace(/\//g,""); 
-                console.log(title, categ, description,urlV,playlist,video_id);
             }else if(categ=="Youtube"){
                 var video_id = urlV.match(/v=\w+[&]*/)[0].replace("v=",'');; 
-                console.log(title, categ, description,urlV,playlist,video_id);
             }
             
+            if(playlist.trim()==""){
+                playlist = "Général";
+            }
+
+            var current_datetime = new Date();
             
+            var dateYear = current_datetime.getFullYear();
+            var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
+            var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
+
+            var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
+            var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
+            var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
+            
+            var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
+
             var req = {
 				"title": title,
 				"plateforme": categ,
@@ -336,8 +376,10 @@ function NQF_edit(type) {
                 "playlist":playlist,
                 "description":description,
                 "video_id":video_id,
-                "img_url":""
-			}
+                "img_url":"",
+                "date": formatted_date,
+			};
+
 
             let id = "";
             id = $(".NQF-id-ref").val();
@@ -350,7 +392,6 @@ function NQF_edit(type) {
                     success: function(data){
                         var thumbnail_src = data[0].thumbnail_large;
                         req.img_url = thumbnail_src;
-                        alert(JSON.stringify(req)+" "+thumbnail_src);
                         if ($(".ow-btn-container:has(> i)").length == 0) {
                             $(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
                         }
@@ -370,7 +411,7 @@ function NQF_edit(type) {
                             $(".NQF-btn-alg").hide();
                             $(".NQF-vue-question").show();
                             
-                            getAllplayLists(1);
+                            getAllplayLists(1,100);
     
                         }, 2000);
                         
@@ -402,7 +443,7 @@ function NQF_edit(type) {
                             $(".NQF-btn-alg").hide();
                             $(".NQF-vue-question").show();
                             
-                            getAllplayLists(1);
+                            getAllplayLists(1,100);
     
                         }, 2000);
                         
@@ -547,9 +588,11 @@ function NQF_edit(type) {
 			success: function (result) {
                 //voidRestSearch("",0,7,0,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],0);
                 console.log(result);
+                
 			},
 			error: function (error) {
-				console.log(error.responseText);
+                console.log(error.responseText);
+                $("div.erreur").html(error.responseText);
 			}
 		});
 

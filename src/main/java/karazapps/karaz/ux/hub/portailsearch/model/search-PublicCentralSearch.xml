@@ -217,7 +217,7 @@
                                 <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
                                     Référentiel juridique</a>
                                 <hr />
-                                <a>Guides vidéos</a><hr />
+                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">Guides vidéos</a><hr />
                                 <a>Utilitaires</a>
                             </div>
                         </html>
@@ -544,7 +544,7 @@
 
         <vbox columns="25% 25% 25% 25%">
              <html>                
-                <box-card style="height:178px;cursor:pointer" class="video-card">
+                <box-card style="height:178px;cursor:pointer" class="video-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
                     <box-icon class="fas fa-video h-icon"> </box-icon>
                     <box-big-title>Guides vidéos</box-big-title>
                 </box-card>

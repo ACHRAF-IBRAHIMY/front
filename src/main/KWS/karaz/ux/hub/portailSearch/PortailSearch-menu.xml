@@ -109,9 +109,6 @@
       	<menu relId="NewfreqQuestion" label="Nouvelle faq" icone="search">
       	<resource type="search">karaz/ux/hub/portailsearch/search/NewfreqQuestion</resource>
       	</menu>
-      	<menu relId="GuideVideoEdit" label="Guide Video Edit" icone="search">
-      		<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoEdit</resource>
-      	</menu>
       	<menu relId="FaqPage" label="Faq Page" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/FaqPage</resource>
       	</menu>

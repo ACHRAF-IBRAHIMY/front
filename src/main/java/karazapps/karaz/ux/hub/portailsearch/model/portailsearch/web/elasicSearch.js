@@ -1,3 +1,5 @@
+
+
 var currentPage = 0;
 var currentLPage =0;
 var totalPage = 0;
@@ -369,13 +371,19 @@ function generateRequestRefSearch(prefix, type, from, size) {
 	return str;
 }
 
-function generateRequestVideoSearch(prefix,type,from,size){
+function generateRequestVideoSearch(prefix,type,from,size,typeUse){
     
-    if(prefix.trim()!=""){
-        var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+    if(typeUse==0){
+        var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"date\" : {\"order\" : \"desc\"}}],\"query\":{ \"match\":{ \"playlist\":\""+type+"\" }}}\n";
+
     }else{
-        var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"playlist\":\""+type+"\" }}}\n";
+        if(prefix.trim()!=""){
+            var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+        }else{
+            var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"playlist\":\""+type+"\" }}}\n";
+        }
     }
+    
 
     return str;
 }
@@ -412,7 +420,7 @@ function getAllplayLists2(type){
 }
 
 
-function getAllplayLists(type){
+function getAllplayLists(type,size){
         
         var obj = {
             "aggs" : {
@@ -422,7 +430,7 @@ function getAllplayLists(type){
             }
         };
 
-        $(".NQF-freq-quest .ow-pl-inner").html("");
+        $(".NQF-freq-quest > .ow-pl-inner").html("");
 
         $.ajax({
             type: "post",
@@ -441,11 +449,11 @@ function getAllplayLists(type){
                 console.log(tab.length);
                 for(var i=0;i<tab.length;i++){
                     var fieldset = '<div class="ow-pl ow-tabpanel-flex NFQ-quest-title NFQ-type-document expanded class-playlist'+i+'"> <div class="ow-pl-toolbar"><div class="ow-label-pl">'+tab[i].key+'</div> <span class="expand-collapse"> </span> <span class="actions"> </span>  </div><div class="ow-pl-inner"><div class="ow-html"> <div class="NFQ-quest-type-document det NFQ-fieldset" style="padding:0.25rem;"></div></div><div style="clear:both"> </div></div></div>';
-                    document.querySelector(".NQF-freq-quest .ow-pl-inner").innerHTML += fieldset;
+                    $(".NQF-freq-quest > .ow-pl-inner").append(fieldset);
                     playlists.push(tab[i].key);
                     playlistsClass.push(".class-playlist"+i);
                 }
-                RestSearchVideo("",0,5,playlists,type,playlistsClass)
+                RestSearchVideo("",0,size,playlists,type,playlistsClass)
             },
             error: function (error) {
                 console.log(error);
@@ -525,8 +533,8 @@ function RestSearchref(prefix, page, size, type, typeUse, cls) {
 var playlist_videos = [];
 
 function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
-	var str = ""
-
+    var str = ""
+        
     if(type==null){
 
         if(prefix.trim()!=""){
@@ -557,7 +565,9 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
              };
 
         }else{
+
             var obj = {"size":size,"from":page,"query":{"match_all":{}}};
+                        
         }
 
         var a = $(".full-search-list");
@@ -599,7 +609,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                     var playlist = results[i]._source.playlist;
                     var b = document.createElement("div");
                     b.setAttribute("class","hp-box full-search-list-item");
-                    b.setAttribute("style","height: 173px;");
+                    b.setAttribute("style","height: 190px;");
                     var c = document.createElement("div");
                     c.setAttribute("class","c-path");
                    // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
@@ -613,7 +623,8 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                     d.setAttribute("class","item-body");
                     var e = document.createElement("div");
                     e.setAttribute("class","item-body-title");
-                    e.innerHTML="<span title=\""+title+"\">"+subLong(title,60)+"</span>";
+                    d.setAttribute("style","height: height: 150px;");
+                    e.innerHTML="<span title=\""+title+"\">"+subLong(title,35)+"</span>";
                     var f = document.createElement("p");
                     //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
                     f.innerHTML = subLong(description,150);
@@ -630,11 +641,12 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                      });
                     g.setAttribute("class","item-body-button hp-sbox-btn");
                     g.innerHTML="Lire vidéo<input type=\"hidden\" value=\""+id+"\" > ";
-                    g.setAttribute("style","display: inline-block;color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
+                    g.setAttribute("style","display: inline-block;float:right;position: relative; color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
                     d.appendChild(g);
                     var title = document.createElement("div");
                     title.setAttribute("class","item-title");
                     title.setAttribute("title",playlist);
+                    title.setAttribute("style","width:190px;top: 63px;right: 104px;");
                     title.innerHTML=subLong(playlist);
                     title.addEventListener("click",function(){
                         /*currentPage=0;
@@ -645,6 +657,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                     b.appendChild(title);
                     var icons = document.createElement("div");
                     icons.setAttribute("class","item-icon");
+                    icons.setAttribute("style","height: 150px;");
                     icons.innerHTML="<img class=\"\" src=\""+imgUrl+"\" />";
                     b.appendChild(icons);
                     b.appendChild(d);
@@ -661,7 +674,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
 
     }else{
         for(var i=0;i<type.length;i++){
-            str += generateRequestVideoSearch(prefix,type[i], page, size);
+            str += generateRequestVideoSearch(prefix,type[i], page, size,typeUse-2);
         }
     
         console.log(str);
@@ -752,7 +765,9 @@ function NQF_add_video(quest,desc,imgUrl, id, cls, type) {
     div.setAttribute("class","video-list-item");
     div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
 
-    $(cls + " .det").append(div);
+    $(".v-edit " + cls + " .det").append(div);
+    
+    console.log(".v-edit" + cls + " .det");
         
 	} else if (type == 2) {
         var div = document.createElement("div");
@@ -771,8 +786,9 @@ function NQF_add_video(quest,desc,imgUrl, id, cls, type) {
         div.setAttribute("class","video-list-item");
         div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
 
-        $(cls + " .det").append(div);
-        }
+        $(".v-consultation " + cls + " .det").append(div);
+
+    }
 
 }
 
@@ -1336,9 +1352,13 @@ function getVideo(id,type){
 function getVideoIndex(id,playlist){
     var playlist_index = 0;
     for(var i=0;i<playlist_videos.length;i++){
-        if(playlist==playlist_videos[i][0].playlist){
-            playlist_index = i;
-            break;
+        if(playlist_videos[i][0]!=undefined){
+            if(playlist==playlist_videos[i][0].playlist){
+                playlist_index = i;
+                break;
+            }
+        }else{
+            continue;
         }
     }
 
@@ -1366,19 +1386,45 @@ function createDivVideo(result,type,obj){
         $(".consultation-video .video-iframe iframe").removeClass("vimeo-video-iframe");
     }
     $(".consultation-video .video-description").html(result._source.description);
-    if(obj.index==0){
-
-    }else if(obj.total ==1){
-
-    }else if(obj.index==obj.total-1){
-
+    
+    
+    if(obj.total ==1){
+        $(".consultation-video .next-prev .next-video").attr("onClick","");
+        $(".consultation-video .next-prev .prev-video").attr("onClick","");
+        $(".consultation-video .next-prev .prev-video").removeClass("active-video");
+        $(".consultation-video .next-prev .next-video").removeClass("active-video");
     }else{
-        //var idN = playlist_videos[obj.index_playlist][obj.index+1].video_id;
-        //var idP = playlist_videos[obj.index_playlist][obj.index-1].video_id;
+        if(obj.index==0){
+            var idN = playlist_videos[obj.playlist_index][obj.index+1].video_id;
 
-        //$(".consultation-video .next-prev .next-video span").attr("onClick","getVideo("+idN+")");
-        //$(".consultation-video .next-prev .prev-video span").attr("onClick","getVideo("+idP+")");
+            $(".consultation-video .next-prev .prev-video").attr("onClick","getVideo(\""+idN.toString()+"\",1)");
+            $(".consultation-video .next-prev .next-video").removeClass("active-video");
+            $(".consultation-video .next-prev .next-video").attr("onClick","");
+            $(".consultation-video .next-prev .prev-video").addClass("active-video");
+        }else if(obj.index==obj.total-1){
+            var idP = playlist_videos[obj.playlist_index][obj.index-1].video_id;
+
+            $(".consultation-video .next-prev .prev-video").attr("onClick","");
+            $(".consultation-video .next-prev .prev-video").removeClass("active-video");
+            $(".consultation-video .next-prev .next-video").attr("onClick","getVideo(\""+idP.toString()+"\",1)");
+            $(".consultation-video .next-prev .next-video").addClass("active-video");
+        }else{
+           
+            
+            var idN = playlist_videos[obj.playlist_index][obj.index+1].video_id;
+            var idP = playlist_videos[obj.playlist_index][obj.index-1].video_id;
+           
+            $(".consultation-video .next-prev .prev-video").attr("onClick","getVideo(\""+idN.toString()+"\",1)");
+            $(".consultation-video .next-prev .prev-video").addClass("active-video");
+            $(".consultation-video .next-prev .next-video").attr("onClick","getVideo(\""+idP.toString()+"\",1)");
+            $(".consultation-video .next-prev .next-video").addClass("active-video");
+
+            //$(".consultation-video .next-prev .next-video span").attr("onClick","getVideo("+idN+")");
+            //$(".consultation-video .next-prev .prev-video span").attr("onClick","getVideo("+idP+")");
+        }
     }
+    
+    
     
 
 }

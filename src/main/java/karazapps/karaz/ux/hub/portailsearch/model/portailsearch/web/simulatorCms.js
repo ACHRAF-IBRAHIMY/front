@@ -1,3 +1,4 @@
+
 var simple_chart_config = {
     chart: {
         container: "#tree-simple",
@@ -1911,10 +1912,14 @@ function autoCompleteSim(inp,index,field,type){
         },false);
     }else{
 
-        inp.addEventListener("input",function(){
-            var req = inp.value;
-            restAutoComplete2(inp,req,index,field);
-        });
+       
+            inp.addEventListener("input",function(){
+                var req = inp.value;
+                restAutoComplete2(inp,req,index,field);
+            });
+            
+        
+        
 /*
         inp.addEventListener("keydown", function(e) {
             var x = document.getElementById("autocomplete-list");
@@ -1992,6 +1997,8 @@ function restAutoComplete2(inp,req,index,field){
             console.log(result);
             if(index=="faq_index"){
                 createListeRes(inp,result.hits.hits,req,0);
+            }else if(index=="videos_index"){
+                createListeResVideo(inp,result.hits.hits,req,1);
             }else{
                 createListeRes(inp,result.hits.hits,req,1);
             }
@@ -2126,6 +2133,44 @@ function createListeRes(inp,arr,val,type){
                 closeAllListsSim(1);
             });
         }
+        a.appendChild(b);
+    }
+}
+
+function createListeResVideo(inp,arr,val,type){
+    closeAllListsSim();
+    a = document.createElement("DIV");
+    a.setAttribute("id", "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    /*append the DIV element as a child of the autocomplete container:*/
+    inp.parentNode.appendChild(a);
+   
+    
+    /*for each item in the array...*/
+    for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        /*create a DIV element for each matching element:*/
+        var b = document.createElement("DIV");
+        /*make the matching letters bold:*/
+        
+        var str = arr[i]._source.title;
+       
+        b.setAttribute("title",str);
+        if(val==""){
+            b.innerHTML=str.toLowerCase();
+        }else{
+            b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
+        }
+     
+        
+            b.addEventListener("click", function(e) {
+                /*insert the value for the autocomplete text field:*/
+                inp.value = this.getAttribute("title");
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllListsSim(1);
+            });
+        
         a.appendChild(b);
     }
 }

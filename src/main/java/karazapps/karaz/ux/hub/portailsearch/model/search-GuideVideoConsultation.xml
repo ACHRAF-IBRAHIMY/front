@@ -16,7 +16,7 @@
         <script postLoad="true">
             loadPageBytype(7);
             removeLastRootPage(userName);
-            getAllplayLists(2);
+            getAllplayLists(2,4);
             $(".searchbuttun").click();
 
             $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
@@ -86,7 +86,7 @@
                                 <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
                                     Référentiel juridique</a>
                                 <hr />
-                                <a>Guides vidéos</a><hr />
+                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">Guides vidéos</a><hr />
                                 <a>Utilitaires</a>
                             </div>
                         </html>
@@ -137,7 +137,7 @@
                 <html>
                     <div class="vpanel-title">
                         <div class="vpanel-title">
-                           <span>GUIDE VIDÉO</span>
+                           <span>VIDÉO DIDACTIQUES</span>
                            <hr class="header-create-account-horizontal-line hr-hub" />
                        </div>
                     </div>
@@ -196,7 +196,7 @@
             </vbox>    
         </vbox> 
         
-      <fieldset header="LISTE DE VIDÉOS" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+      <fieldset header="VIDÉO DIDACTIQUES RÉCENTS" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation">
 
      </fieldset>
               
