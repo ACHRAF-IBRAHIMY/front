@@ -1,51 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="PublicCentralSearch" label="PublicCentralSearch">
-<query> 
-</query> 
-<data>
-		<query> 
-			<keys />
-			<model />
-			<from />
-			<to />  
-			<task>true</task>  
-			<object>true</object>  
-			<document>true</document>  
-			<annotation>true</annotation>  
-			<others>true</others>
-            <userLogin />
-            <userPassword />
-            <demandeId />
-            <CIN />       
-
-
-		</query>
-		<newUser>false</newUser>
-			<forgetPass>false</forgetPass>
-	</data>
-    
-    
+  <query />
+  <data>
+    <query>
+      <keys />
+      <model />
+      <from />
+      <to />
+      <task>true</task>
+      <object>true</object>
+      <document>true</document>
+      <annotation>true</annotation>
+      <others>true</others>
+      <userLogin />
+      <userPassword />
+      <demandeId />
+      <CIN />
+    </query>
+    <newUser>false</newUser>
+    <forgetPass>false</forgetPass>
+  </data>
   <view>
-        
     /********************************************************/
     /*      START :: #MFB :: grid Rokhas 3.0 Home page      */
     /********************************************************/
-      
-      
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-    <script onLoad="true">
-	if(root.newUser=="true"){
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script onLoad="true">if(root.newUser=="true"){
 	   ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
 	}else if(root.forgetPass=="true"){
 	   ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');
-	}
-	</script>
-        <script postLoad="true">
-             var currentFocus;
+	}</script>
+      <script postLoad="true">var currentFocus;
                 removeLastRootPage(userName);
-      document.querySelector(".divSearchBar input").addEventListener("input", function () {
+                    document.querySelector(".classSearch-home .divSearchBar input").addEventListener("input", function () {
                     var a, b, i;
-                    var inp = document.querySelector(".divSearchBar input");
+                    var inp = document.querySelector(".classSearch-home .divSearchBar input");
                     var val = inp.value.toLowerCase();
                     if (!val) {
                         closeAllLists();
@@ -60,31 +49,14 @@
                 
                 
       document.querySelector(".divSearchBar input").addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
+                    var x = document.querySelector(".classSearch-home #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,0);
+                    moveKey(e,x,0,"classSearch-home");
       });
                 
-      document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("input", function () {
-                    var a, b, i;
-                    var inp = this;
-                    var val = inp.value.toLowerCase();
-                    if (!val) {
-                        closeAllLists();
-                        return false;
-                    }
-                    currentFocus = -1;
-                    //close any already open lists of autocompleted values
-                    closeAllLists();
-                    restAutoComplete(inp,val,false);
-      });
+           
                 
-                
-    document.getElementsByClassName("second-search-bar")[0].getElementsByTagName("input")[0].addEventListener("keydown", function (e) {
-        var x = document.getElementById("autocomplete-list");
-     if (x) x = x.getElementsByTagName("div");
-        moveKey(e,x);
-    });
+    
                 
     document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
           document.getElementsByClassName("ow-field-input")[2].value=""; 
@@ -170,166 +142,83 @@
 
     getCountCommune();
 
-    scrollChiffreFunction();
-
-
-
-        </script>
-        <vbox usage="embedded:N">
-        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
-                </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
-            </vbox>
-            
-            <vbox columns="75% 25%" className="header-div-toggle">
-               <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
-
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-            </vbox>
-        </vbox>
-
+    scrollChiffreFunction();</script>
+      <vbox usage="embedded:N" xcstt="x">
         <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-        <vbox columns="30% 70%" className="global-div-temp">
-           <vbox className="height-auto-vbox-first">
+          <div style="height: 30px;" />
+        </html>
+        <vbox columns="30% 70%" className="global-div-temp classSearch-home">
+          <vbox className="height-auto-vbox-first">
             <vbox className="hp-box last-log hp-small div1f">
-                <vbox columns="20% 80%">
-                    <html>
-                        <div class="hp-box-icon fas fa-user" />
-                    </html>
-                    <html>
-                        <div class="hp-box-small-title" style="font-size:1.3rem">Espace privé</div>       
-                    </html>    
-                </vbox>
+              <vbox columns="20% 80%">
                 <html>
-                    <div style="height: 10px;"> </div>
-                </html>                
-                <vbox>
-                    <html>
-                        <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');">
-                            <i class="fas fa-unlock" />
-                            <span>Se Connecter</span>
-                        </div>
-                        <div class="yb-btn-home" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">
-                            <i class="fas fa-user-plus" />
-                            <span>S'enregistrer</span>
-                        </div>
-                    </html>
-                </vbox>
-                <vbox>
-                    <html>
-                        <div style="height: 20px;" />                            
-                        <div class="hp-sbox-text" onclick="javascript:ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');">
-                            <a><i class="fas fa-user-times" /> Mot de passe oublié ?</a>
-                        </div>
-                        <div style="height: 26px;"> </div>                                                                  
-                    </html>
-                </vbox>
-                
+                  <div class="hp-box-icon fas fa-user" />
+                </html>
+                <html>
+                  <div class="hp-box-small-title" style="font-size:1.3rem">Espace privé</div>
+                </html>
+              </vbox>
+              <html>
+                <div style="height: 10px;" />
+              </html>
+              <vbox>
+                <html>
+                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');">
+                    <i class="fas fa-unlock" />
+                    <span>Se Connecter</span>
+                  </div>
+                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">
+                    <i class="fas fa-user-plus" />
+                    <span>S'enregistrer</span>
+                  </div>
+                </html>
+              </vbox>
+              <vbox>
+                <html>
+                  <div style="height: 20px;" />
+                  <div class="hp-sbox-text" onclick="javascript:ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');">
+                    <a>
+                      <i class="fas fa-user-times" />
+                      Mot de passe oublié ?
+                    </a>
+                  </div>
+                  <div style="height: 26px;" />
+                </html>
+              </vbox>
             </vbox>
             <vbox className="relative-position">
-            <vbox className="hp-box last-log  hp-small">
+              <vbox className="hp-box last-log  hp-small">
                 <vbox columns="20% 65% 15%">
-                    <html>
-                        <div class="hp-box-icon fas fa-folder" />
-                    </html>
-                    <html>
-                        <div class="hp-box-small-title" style="font-size:1.3rem"> Etat dossier</div>       
-                    </html>
-                    <html>
-                        <div style="height:50px">
-                            <img src="img/loadgif3.gif" style="width:50px;display:none;" class="loadGif" />
-                        </div>
-                    </html>    
+                  <html>
+                    <div class="hp-box-icon fas fa-folder" />
+                  </html>
+                  <html>
+                    <div class="hp-box-small-title" style="font-size:1.3rem">Etat dossier</div>
+                  </html>
+                  <html>
+                    <div style="height:50px">
+                      <img src="img/loadgif3.gif" style="width:50px;display:none;" class="loadGif" />
+                    </div>
+                  </html>
                 </vbox>
                 <html>
-                    <div style="height: 10px;"> </div>
-                </html>                
+                  <div style="height: 10px;" />
+                </html>
                 <vbox>
-                    <field widget="text" className="hp-text-input" xpath="demandeId" emptyText="Votre référence dossier" noLabel="true" width="80%">
-                        <bag position="leading" className="hp-bag-input fas fa-folder-open" />
-                        <validation type="required" errorMessage="Veuillez saisir votre référence dossier !" />
-                    </field>
-                    <html>
-                        <div class="last-log-info">
-                            <span>Saisissez la référence du dossier recherché telle qu'elle figure sur la demande soumise.<span class="">Exemple : PCT-PANF-MRF-456/2020</span></span>
-                        </div>
-                    </html>
-
-                    <button className="hp-box-btn HomePageLoginButton2 buttonLog check-ref" label="Vérifier">
-                        <postChange>  
-                        
-                        let ref = root.demandeId;
+                  <field widget="text" className="hp-text-input" xpath="demandeId" emptyText="Votre référence dossier" noLabel="true" width="80%">
+                    <bag position="leading" className="hp-bag-input fas fa-folder-open" />
+                    <validation type="required" errorMessage="Veuillez saisir votre référence dossier !" />
+                  </field>
+                  <html>
+                    <div class="last-log-info">
+                      <span>
+                        Saisissez la référence du dossier recherché telle qu'elle figure sur la demande soumise.
+                        <span class="">Exemple : PCT-PANF-MRF-456/2020</span>
+                      </span>
+                    </div>
+                  </html>
+                  <button className="hp-box-btn HomePageLoginButton2 buttonLog check-ref" label="Vérifier">
+                    <postChange>let ref = root.demandeId;
 
                         
 
@@ -348,290 +237,292 @@
                             $(".folder-feature").find("div").show("fast");
                             $(".folder-feature").slideDown();
                         }
-                        */
-                        
-                        
-                        </postChange>                                  
-                    </button>
-                    
+                        */</postChange>
+                  </button>
                 </vbox>
-            </vbox>
-            <vbox className="folder-feature ">
+              </vbox>
+              <vbox className="folder-feature ">
                 <html>
-                    <div class="folder-feature-header">
-                        <div><span /><i class="fas fa-close" /></div>
-                        <hr />
+                  <div class="folder-feature-header">
+                    <div>
+                      <span />
+                      <i class="fas fa-close" />
                     </div>
-                    <div class="folder-feature-body">    
-                        <div><i class="fas fa-caret-left" /></div>
-                        <div class="folder-steps">
-                            <ul class="progressbar">
-                            </ul>
-                            <div class="no-response">
-                            La référence du dossier <span class="ref" style="font-weight: 700;" /> n’existe pas. Veuillez renseigner la référence du dossier telle qu’elle figure sur la demande soumise.</div>
-                        </div>
-                        <div><i class="fas fa-caret-right" /></div>
+                    <hr />
+                  </div>
+                  <div class="folder-feature-body">
+                    <div>
+                      <i class="fas fa-caret-left" />
                     </div>
+                    <div class="folder-steps">
+                      <ul class="progressbar" />
+                      <div class="no-response">
+                        La référence du dossier
+                        <span class="ref" style="font-weight: 700;" />
+                        n’existe pas. Veuillez renseigner la référence du dossier telle qu’elle figure sur la demande soumise.
+                      </div>
+                    </div>
+                    <div>
+                      <i class="fas fa-caret-right" />
+                    </div>
+                  </div>
                 </html>
+              </vbox>
             </vbox>
-            </vbox>
-            
-            
-            </vbox>
-            
-        <vbox className="hp-box hp-small divSearch height-986">
-                <vbox className="hp-box divSearchBar">
-                    <html>
-                        <div class="hp-sbox-big-title" style="color: var(--fg0);">
-                            Pont de confiance Usager / Administration
-                        </div>
-                        <div class="hp-sbox-text">
-                            Un parcours d'autorisation 100% digital, 100% traçable avec Zéro papier déposé et Zéro papier délivré.
-                        </div>
-                        <div style="height: 50px;" />
-                    </html>    
-                    <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-                        <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ...">
-                        </field>
-                        <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
-                            <postChange>
-                                prefix= $(".hp-search_field input").val();
-                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
-                            </postChange>
-                        </button>
-                    </vbox>
-                    <html className="link-div-ref" style="visibility:hidden">
-                        <a>Référentiel des activités</a>
-                    </html>
-
-                    <html>
-                        <div style="height: 70px;"> </div>
-                    </html>        
-
-                        <vbox columns="66% 34%" className="div-main-icons">
-                           <html>
-                               <div class="main-icon-title-bx t1">
-                                   <div class="title">
-                                       Quelle demande déposer ?
-                                   </div>
-                                <div class="par full-grid-small">
-                                    <i class="fas fa-map-signs" />     
-                                   <span>Répondez à quelques questions pour être mieux orienté.</span>
-                                </div>
-                                <div style="text-align:right;">
-                                    <button class="main-icon-button to-simulator">
-                                       DÉMARRER SIMULATION
-                                   </button>
-                                </div>
-                                   
-                               </div>
-                           </html>
-                           <vbox>
-                           <html className="res-div-height">
-                               <div class="main-icon-title t3">
-                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
-                                        <i class="fas fa-map-marker-alt" />
-                                       <span>Autorisations urbanistiques</span>
-                                    </div>
-                               </div>
-                           </html>
-                           <html className="res-sep-height">
-                               <div style="height:25px" />
-                           </html>
-                           <html className="res-div-height">
-                               <div class="main-icon-title t4">
-                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
-                                        <i class="fas fa-cog" />
-                                        <span>Autorisations économiques</span>
-                                    </div>
-                               </div>
-                           </html>
-                           </vbox>
-                        </vbox>
-                        <vbox columns="40% 0% 40% 13%" className="support"> 
-                            <html className="support-html full-grid-small">
-                                <i class="fas fa-paper-plane" />
-                                <span>Support@rokhas.ma</span>
-                            </html>
-                            <html>
-                                
-                            </html>
-                            <html className="support-html full-grid-small">
-                                <i class="fas fa-phone" />
-                                <span>+212 (0) 5 22 23 23 44</span>
-                            </html>
-                            <html className="support-time">
-                                <span style="font-size:12px;">Lundi au Vendredi de 08:30 à 18:30</span>
-                            </html>
-                        </vbox>
-                    </vbox>
-
+          </vbox>
+          <vbox className="hp-box hp-small divSearch height-986">
+            <vbox className="hp-box divSearchBar">
+              <html>
+                <div class="hp-sbox-big-title" style="color: var(--fg0);">Pont de confiance Usager / Administration</div>
+                <div class="hp-sbox-text">Un parcours d'autorisation 100% digital, 100% traçable avec Zéro papier déposé et Zéro papier délivré.</div>
+                <div style="height: 50px;" />
+              </html>
+              <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+                <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ..." />
+                <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
+                  <postChange>prefix= $(".hp-search_field input").val();
+                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});</postChange>
+                </button>
+              </vbox>
+              <html className="link-div-ref" style="visibility:hidden">
+                <a>Référentiel des activités</a>
+              </html>
+              <html>
+                <div style="height: 70px;" />
+              </html>
+              <vbox columns="66% 34%" className="div-main-icons">
                 <html>
-                    <div class="searchList">
-                       <div class="second-search-bar">
-                           <span class="back-span"><i class="fas fa-chevron-left" /> Retour</span>
-                           <input type="text" /><i class="fas fa-eraser" /><i class="fas fa-search" />
-                       </div>
-                        <p class="nbrRes">Environs <span>0</span> résultats (<span>0.21</span> second)</p>
-                        <div class="searchListD">
-                            <div class="searchGif">
-                                <img src="img/search-move.gif" />
-                            </div>
-                        </div>
-                        <div class="pagination">
-
-                        </div>
+                  <div class="main-icon-title-bx t1">
+                    <div class="title">Quelle demande déposer ?</div>
+                    <div class="par full-grid-small">
+                      <i class="fas fa-map-signs" />
+                      <span>Répondez à quelques questions pour être mieux orienté.</span>
                     </div>
-                </html>    
-            </vbox>    
+                    <div style="text-align:right;">
+                      <button class="main-icon-button to-simulator">DÉMARRER SIMULATION</button>
+                    </div>
+                  </div>
+                </html>
+                <vbox>
+                  <html className="res-div-height">
+                    <div class="main-icon-title t3">
+                      <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
+                        <i class="fas fa-map-marker-alt" />
+                        <span>Autorisations urbanistiques</span>
+                      </div>
+                    </div>
+                  </html>
+                  <html className="res-sep-height">
+                    <div style="height:25px" />
+                  </html>
+                  <html className="res-div-height">
+                    <div class="main-icon-title t4">
+                      <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
+                        <i class="fas fa-cog" />
+                        <span>Autorisations économiques</span>
+                      </div>
+                    </div>
+                  </html>
+                </vbox>
+              </vbox>
+              <vbox columns="40% 0% 40% 13%" className="support">
+                <html className="support-html full-grid-small">
+                  <i class="fas fa-paper-plane" />
+                  <span>Support@rokhas.ma</span>
+                </html>
+                <html />
+                <html className="support-html full-grid-small">
+                  <i class="fas fa-phone" />
+                  <span>+212 (0) 5 22 23 23 44</span>
+                </html>
+                <html className="support-time">
+                  <span style="font-size:12px;">Lundi au Vendredi de 08:30 à 18:30</span>
+                </html>
+              </vbox>
+            </vbox>
+            <html>
+              <div class="searchList">
+                <div class="second-search-bar">
+                  <span class="back-span">
+                    <i class="fas fa-chevron-left" />
+                    Retour
+                  </span>
+                  <input type="text" />
+                  <i class="fas fa-eraser" />
+                  <i class="fas fa-search" />
+                </div>
+                <p class="nbrRes">
+                  Environs
+                  <span>0</span>
+                  résultats (
+                  <span>0.21</span>
+                  second)
+                </p>
+                <div class="searchListD">
+                  <div class="searchGif">
+                    <img src="img/search-move.gif" />
+                  </div>
+                </div>
+                <div class="pagination" />
+              </div>
+            </html>
+          </vbox>
         </vbox>
-            
-		<html> <div style="height: 30px;"> </div> </html>                
-        
         <html>
-            <cms-topicTitle>COMMENT CA MARCHE ?</cms-topicTitle>
-            <cms-topicSeparator />
+          <div style="height: 30px;" />
         </html>
-        
-
+        <html>
+          <cms-topicTitle>COMMENT CA MARCHE ?</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
         <vbox columns="20% 20% 20% 20% 20%">
-             <html>                
-                <box-card style="    height: 210px !important;padding: 15px;">
-                    <html><span class="main-number">1</span></html>
-                    <box-small-title>Créer votre espace privé sur rokhas.ma</box-small-title>
-                    <button class="main-btn" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
-                </box-card>
-             </html>                
-
-             <html>                
-                <box-card style="    height: 210px !important;padding: 15px;">
-                   <html><span class="main-number">2</span></html>
-                    <box-small-title>Saisissez votre demande en ligne</box-small-title>
-                </box-card>
-             </html>
-            
-             <html>                
-                <box-card style="    height: 210px !important;padding: 15px;">
-                    <html><span class="main-number">3</span></html>
-                    <box-small-title>Attachez vos pièces justificatives</box-small-title>
-                </box-card>
-             </html>
-            
-             <html>                
-                <box-card style="    height: 210px !important;padding: 15px;">
-                    <html><span class="main-number">4</span></html>
-                    <box-small-title>Suivez le traitement du dossier en ligne
-                    </box-small-title>
-                              
-                </box-card>
-             </html> 
-             <html>                
-                <box-card style="    height: 210px !important;padding: 15px;">
-                    <html><span class="main-number">5</span></html>
-                    <box-small-title>Recevez votre document e-signé</box-small-title>
-                </box-card>
-             </html>            
-            
-          </vbox>
-          
-          <html> <div style="height: 30px;"> </div> </html>                
-        
-        <html>
-            <cms-topicTitle>RESSOURCES PRATIQUES</cms-topicTitle>
-            <cms-topicSeparator />
-        </html>
-        
-
-        <vbox columns="25% 25% 25% 25%">
-             <html>                
-                <box-card style="height:178px;cursor:pointer" class="video-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
-                    <box-icon class="fas fa-video h-icon"> </box-icon>
-                    <box-big-title>Guides vidéos</box-big-title>
-                </box-card>
-             </html>                
-
-             <html>                
-                <box-card style="height:178px;cursor:pointer" class="faq-card">
-                    <box-icon class="fas fa-question-circle h-icon"> </box-icon>  
-                    <box-big-title>Questions fréquentes</box-big-title>
-                </box-card>
-             </html>
-            
-             <html>                
-                <box-card style="height:178px;cursor:pointer" class="reglementation-card">
-                    <box-icon class="fas fa-gavel h-icon"> </box-icon>  
-                    <box-big-title>Réglementation</box-big-title>                      
-                </box-card>
-             </html>
-            
-             <html>                
-                <box-card style="height:178px;cursor:pointer" class="download-card">
-                    <box-icon class="fas fa-download h-icon"> </box-icon>  
-                    <box-big-title>Téléchargements</box-big-title>
-                </box-card>
-             </html>            
-            
-          </vbox>
-        
-		  <html> <div style="height: 30px;"> </div> </html>            
-        
-        <html>
-            <cms-topicTitle>Chiffres clés</cms-topicTitle>
-            <cms-topicSeparator />
-        </html>
-        
-
-        <vbox columns="25% 25% 25% 25%">
-             <html>                
-                <box-card class="card-bx">
-                    <box-icon class="fas fa-university"> </box-icon>
-                    <box-big-title>0</box-big-title>
-                    <box-small-title>Commune</box-small-title>
-                    <box-h-sep> </box-h-sep>
-                    <box-text><a>Couverture géographique <i class="fas fa-external-link-alt" /></a></box-text>                    
-                </box-card>
-             </html>                
-
-             <html>                
-                <box-card class="card-bx">
-                    <box-icon class="fas fa-folder"> </box-icon>  
-                    <box-big-title>0</box-big-title>
-                    <box-small-title>Dossier traité / jour</box-small-title>
-                    <box-h-sep> </box-h-sep>
-                    <box-text><a>Performance par commune <i class="fas fa-external-link-alt" /></a></box-text>                      
-                </box-card>
-             </html>
-            
-             <html>                
-                <box-card class="card-bx">
-                    <box-icon class="fas fa-user-tie"> </box-icon>  
-                    <box-big-title>0</box-big-title>
-                    <box-small-title>Fonctionnaire</box-small-title>
-                    <box-h-sep> </box-h-sep>
-                    <box-text><a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">Rokhas Machine Learning <i class="fas fa-external-link-alt" /></a></box-text>                      
-                </box-card>
-             </html>
-            
-             <html>                
-                <box-card class="card-bx">
-                    <box-icon class="fas fa-users"> </box-icon>  
-                    <box-big-title>0</box-big-title>
-                    <box-small-title>Utilisateur</box-small-title>
-                    <box-h-sep> </box-h-sep>
-                    <box-text><a>Question fréquentes <i class="fas fa-external-link-alt" /></a></box-text>                       
-                </box-card>
-             </html>            
-            
-          </vbox>
-      <html> <div style="height: 30px;"> </div> </html>            
-
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">1</span>
+              </html>
+              <box-small-title>Créer votre espace privé sur rokhas.ma</box-small-title>
+              <button class="main-btn" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">2</span>
+              </html>
+              <box-small-title>Saisissez votre demande en ligne</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">3</span>
+              </html>
+              <box-small-title>Attachez vos pièces justificatives</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">4</span>
+              </html>
+              <box-small-title>Suivez le traitement du dossier en ligne</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">5</span>
+              </html>
+              <box-small-title>Recevez votre document e-signé</box-small-title>
+            </box-card>
+          </html>
         </vbox>
-        
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle>RESSOURCES PRATIQUES</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="video-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
+              <box-icon class="fas fa-video h-icon" />
+              <box-big-title>Guides vidéos</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="faq-card">
+              <box-icon class="fas fa-question-circle h-icon" />
+              <box-big-title>Questions fréquentes</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="reglementation-card">
+              <box-icon class="fas fa-gavel h-icon" />
+              <box-big-title>Réglementation</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="download-card">
+              <box-icon class="fas fa-download h-icon" />
+              <box-big-title>Téléchargements</box-big-title>
+            </box-card>
+          </html>
+        </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle>Chiffres clés</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-university" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Commune</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Couverture géographique
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-folder" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Dossier traité / jour</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Performance par commune
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-user-tie" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Fonctionnaire</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
+                  Rokhas Machine Learning
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-users" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Utilisateur</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Question fréquentes
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+        </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+      </vbox>
     </screen>
-        
     /********************************************************/
     /*      END :: #MFB :: grid Rokhas 3.0 Home page        */
-    /********************************************************/ 
-   
+    /********************************************************/
   </view>
 </search>

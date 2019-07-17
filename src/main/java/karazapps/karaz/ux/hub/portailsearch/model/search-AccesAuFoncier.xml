@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="AccesAuFoncier" label="Acces Au Foncier">
-
+  <query />
+  <data>
     <query>
+      <search />
+      <idObject />
+      <parentP />
     </query>
-    <data>
-        <query>
-            <search />
-            <idObject />
-            <parentP />
-        </query>
-        <collapsed>false</collapsed>
-    </data>
-    <view>
-        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-            <script postLoad="true">
-            
-           removeLastRootPage(userName);
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">removeLastRootPage(userName);
             
             
             $(".rokhas-home").click(function() {
@@ -46,390 +42,250 @@
         $(".header-div-toggle .dropdown-content").slideDown();
     }).mouseleave(function(){
         $(".header-div-toggle .dropdown-content").slideUp();
-    });
-            
-            </script>
-
-            <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
-                </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
-            </vbox>
-            
-            <vbox columns="60% 25% 15%" className="header-div-toggle">
- <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a>Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
-
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-                 
-            </vbox>
-        </vbox>
-
-            <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-
-            </html>
-
-            <vbox columns="70% 30%">
-
-
-                <vbox className="hp-box hp-small div-det-acc">
-                    <vbox>
-                        <html>
-                        <div class="vpanel-title">
-                            <div class="vpanel-title">
-                                <span>ACCES AU FONCIER</span>
-                                <hr class="header-create-account-horizontal-line hr-hub" />
-                            </div>
-                        </div>
-
-                        </html>
-                        <vbox className="vpanel-body accp">
-
-                            <vbox className="desc">
-                                <html>
-                                <p>Jalon incontournable dans le processus de montage d'un projet d'investissement sur un terrain non encore acquis ou loué par le porteur du projet,  cette phase regroupe un ensemble de procédures permettant à l'investisseur d'accéder à l'assiette foncière nécessaire à son projet.
-                                <br />8 types de procédures sont alors applicables dépendamment de l'activité prévue et la nature du terrain cible.
-                                </p>
-                                
-
-                                </html>
-                            </vbox>
-                            <vbox className="acc-titles">
-
-                                <vbox columns="10% 90%">
-                                    <html>
-									<i class="fab fa-font-awesome-flag" />
-                                    </html>
-                                    <vbox>
-                                        <html>
-                                        <span class="acc-title">Autorisation de cession ou location de terrains domaniaux</span>
-                                        <p>Cette procédure consiste à étudier l'opportunité de céder ou louer un terrain appartenant au domaine privé de l'état (situé dans une zone couverte ou non par un document d’urbanisme) pour la réalisation d’un projet d’investissement. Cette procédure inclut également le calcul de la valeur vénale.                                        </p>
-
-                                        </html>
-                                        <button className="det-but" label="Détail">
-                                        <postChange>
-                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});
-                                            </postChange>
-                                        </button>
-                                    </vbox>
-                                </vbox>
-                                <html>
-                                <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
-
-                                </html>
-                                <vbox columns="10% 90%">
-                                    <html>
-                                    <i class="fas fa-leaf" />
-
-                                    </html>
-                                    <vbox>
-                                        <html>
-                                        <span class="acc-title">Attestation de vocation non agricole (VNA)</span>
-                                        <p>
-                                            Cette procédure concerne l’acquisition de propriétés agricoles ou à vocation agricole situées, en totalité ou en partie, à l'extérieur du périmètre urbain, par des personnes physiques étrangères, des sociétés par actions ou des sociétés dont le capital est détenu en totalité ou en partie par des personnes étrangères, destinées à la réalisation de projets d'investissement autres qu'agricoles. (Page 66)
-                                        </p>
-
-                                        </html>
-                                        <button className="det-but" label="Détail">
-                                        <postChange>
-                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});
-                                         </postChange>
-                                        </button>
-                                    </vbox>
-                                </vbox>
-                                <html>
-                                <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
-
-                                </html>
-                                <vbox columns="10% 90%">
-                                    <html>
-                                        <i class="fas fa-tree" />
-                                    </html>
-                                    <vbox>
-                                        <html>
-                                        <span class="acc-title">Autorisation d’occupation temporaire du domaine forestier et fixation de la redevance</span>
-                                        <p>
-                                            Cette procédure permet à tout requérant (personne physique ou morale) projetant de réaliser un investissement d’obtenir l’autorisation d’occupation temporaire du domaine forestier. La procédure inclut également la fixation de la redevance. (Page 14)
-                                        </p>
-
-                                        </html>
-                                        <button className="det-but" label="Détail">
-                                            <postChange>
-                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});
-                                            </postChange>
-                                        </button>
-                                    </vbox>
-                                </vbox>
-                                  <html>
-                                <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
-
-                                </html>
-                                   <vbox columns="10% 90%">
-                                    <html>
-                                    <i class="fas fa-recycle" />
-
-                                    </html>
-                                    <vbox>
-                                        <html>
-                                        <span class="acc-title">Autorisation d’échange immobilier pour le remembrement du domaine forestier</span>
-                                        <p>
-                                          Cette procédure est appliquée à des terrains présentant un intérêt imminent pour le domaine forestier et répondant aux critères d’éligibilité à l’échange à savoir : être attenant au domaine forestier; être titré et exempt de toutes charges foncières ou de droit réel et avoir une vocation forestière. (Page 28)
-                                        </p>
-
-                                        </html>
-                                        <button className="det-but" label="Détail">
-                                            <postChange>
-                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});
-                                            </postChange>
-                                        </button>
-                                    </vbox>
-                                </vbox>
-                                <html>
-                                <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
-
-                                </html>
-                                <vbox columns="10% 90%">
-                                    <html>
-                                        <i class="fas fa-university" />
-                                   </html>
-                                    <vbox>
-                                        <html>
-                                        <span class="acc-title">Autorisation d’occupation temporaire du domaine public</span>
-                                        <p>
-                                          Cette procédure permet à tout requérant (personne physique ou morale) projetant de réaliser un investissement, d’obtenir l’autorisation d’occupation temporaire du domaine public maritime. La procédure inclut également la fixation de la redevance. (Page 33) </p>
-
-                                        </html>
-                                        <button className="det-but" label="Détail">
-                                            <postChange>
-                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});
-                                            </postChange>
-                                        </button>
-                                    </vbox>
-                                </vbox>
-                                <html>
-                                <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
-
-                                </html>
-                                <vbox columns="10% 90%">
-                                    <html>
-                                        <i class="fas fa-cog" />
-                                    </html>
-                                    <vbox>
-                                        <html>
-                                        <span class="acc-title">Attribution des lots dans des zones dédiées à l’activité économique</span>
-                                        <p>
-                                          Cette procédure permet d'attribuer à tout requérant (personne physique ou morale) projetant de réaliser un investissement, un lot dans les zones industrielles et les zones d’activités économiques dans les conditions et modalités fixées dans les conventions d’aménagement et de développement desdites zones. (Page 40)</p>
-
-                                        </html>
-                                        <button className="det-but" label="Détail">
-                                            <postChange>
-                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});
-                                            </postChange>
-                                        </button>
-                                    </vbox>
-                                </vbox>
-                                <html>
-                                <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
-
-                                </html>
-                                <vbox columns="10% 90%">
-                                    <html>
-                                        <i class="fas fa-info-circle" />
-                                    </html>
-                                    <vbox>
-                                        <html>
-                                        <span class="acc-title">Investissement en zone littorale ou zone sensisble</span>
-                                        <p>
-                                          Cette procédure permet à tout requérant (personne physique ou morale) projetant de réaliser un investissement dans une zone littoral ou sensible (parcs nationaux, SIB, zones dunaires, …) d'obtenir l'autorisation nécessaires à la réalisation de sont projet en respectant les principes et règles fondamentaux d'une gestion intégrée durable en vue de sa protection, de sa mise en valeur et de sa conservation. (Page 45)
-                                          </p>
-
-                                        </html>
-                                        
-                                        <button className="det-but" label="Détail">
-                                            <postChange>
-                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});
-                                            </postChange>
-                                        </button>
-                                    </vbox>
-                                </vbox>
-                                <html>
-                                <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
-
-                                </html>
-                                <vbox columns="10% 90%">
-                                    <html>
-                                        <i class="far fa-clone" />
-                                    </html>
-                                    <vbox>
-                                        <html>
-                                        <span class="acc-title">Autorisation de lotir ou/et morceler dans une zone irriguée ou couverte par un programme de mise en valeur en bour</span>
-                                        <p>
-                                          Cette procédure concerne le cas d’instruction d’une autorisation lotir ou de morceler d’une zone irriguée ou couverte par un programme de mise en valeur en bour et où l’autorisation est une attribution du wali.
-                                        </p>
-
-                                        </html>
-                                        <button className="det-but" label="Détail">
-                                            <postChange>
-                                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});
-                                            </postChange>
-                                        </button>
-                                    </vbox>
-                                </vbox>
-
-                            </vbox>
-                            <vbox className="consult-acc">
-                                <html>
-                                <p>Vous pouvez consulter les autres catégories d'autorisations et actes administratifs y afférents</p>
-
-                                </html>
-                                <vbox columns="33% 33% 33%">
-                                    <html>
-                           <div class="main-icon-title t1">
-                                <i class="fas fa-check-square" />
-                                <span>Acceptabilité projets</span>
-                           </div>
-                       </html>
-                                    <html>
-                                    <div class="main-icon-title t3">
-                                        <i class="far fa-building" />
-                                        <span>Autorisations urbanistiques</span>
-                                    </div>
-
-                                    </html>
-                                    <html>
-                                    <div class="main-icon-title t4">
-                                        <i class="fas fa-cog" />
-                                        <span>Autorisations économiques</span>
-                                    </div>
-
-                                    </html>
-                                </vbox>
-                            </vbox>
-
-                        </vbox>
-                    </vbox>
-                </vbox>
-                <vbox className="height-auto-vbox">    
-                <vbox className="hp-box hp-small left-box-fsb">
-                    <html>
-                    <div class="vpanel-title">
-                        <span>ANNONCES</span>
-                        <hr class="header-create-account-horizontal-line hr-hub" />
-                    </div>
-
-                    </html>
-                    <vbox className="hp-box">
-                        <html>
-                        <div class="vpanel-body-title"><i class="fas fa-chart-line" /><span>Etudes de marchés</span></div>
-                        <div class="vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-
-                        </html>
-                    </vbox>
-                    <html>
-                    <div style="height: 50px;"> </div>
-
-                    </html>
-                    <vbox className="hp-box">
-                        <html>
-                        <div class="vpanel-body-title"><i class="far fa-edit" /><span>votre e-parapheur</span></div>
-                        <div class="vpanel-body-icon"><i class="far fa-edit" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-
-                        </html>
-                    </vbox>
-                    <html>
-                    <div style="height: 50px;"> </div>
-
-                    </html>
-                    <vbox className="hp-box">
-                        <html>
-                        <div class="vpanel-body-title"><i class="fas fa-cog" /><span>Transformation digitale</span></div>
-                        <div class="vpanel-body-icon"><i class="fas fa-cogs" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-
-                        </html>
-                    </vbox>
-                </vbox>
-            </vbox>
-            </vbox>
-
-
+    });</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="70% 30%">
+        <vbox className="hp-box hp-small div-det-acc">
+          <vbox>
             <html>
-            <div style="height: 30px;"> </div>
-
+              <div class="vpanel-title">
+                <div class="vpanel-title">
+                  <span>ACCES AU FONCIER</span>
+                  <hr class="header-create-account-horizontal-line hr-hub" />
+                </div>
+              </div>
             </html>
-
-        </screen>
-
-    </view>
-
-
+            <vbox className="vpanel-body accp">
+              <vbox className="desc">
+                <html>
+                  <p>
+                    Jalon incontournable dans le processus de montage d'un projet d'investissement sur un terrain non encore acquis ou loué par le porteur du projet,  cette phase regroupe un ensemble de procédures permettant à l'investisseur d'accéder à l'assiette foncière nécessaire à son projet.
+                    <br />
+                    8 types de procédures sont alors applicables dépendamment de l'activité prévue et la nature du terrain cible.
+                  </p>
+                </html>
+              </vbox>
+              <vbox className="acc-titles">
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fab fa-font-awesome-flag" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">Autorisation de cession ou location de terrains domaniaux</span>
+                      <p>Cette procédure consiste à étudier l'opportunité de céder ou louer un terrain appartenant au domaine privé de l'état (situé dans une zone couverte ou non par un document d’urbanisme) pour la réalisation d’un projet d’investissement. Cette procédure inclut également le calcul de la valeur vénale.</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-leaf" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">Attestation de vocation non agricole (VNA)</span>
+                      <p>Cette procédure concerne l’acquisition de propriétés agricoles ou à vocation agricole situées, en totalité ou en partie, à l'extérieur du périmètre urbain, par des personnes physiques étrangères, des sociétés par actions ou des sociétés dont le capital est détenu en totalité ou en partie par des personnes étrangères, destinées à la réalisation de projets d'investissement autres qu'agricoles. (Page 66)</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-tree" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">Autorisation d’occupation temporaire du domaine forestier et fixation de la redevance</span>
+                      <p>Cette procédure permet à tout requérant (personne physique ou morale) projetant de réaliser un investissement d’obtenir l’autorisation d’occupation temporaire du domaine forestier. La procédure inclut également la fixation de la redevance. (Page 14)</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-recycle" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">Autorisation d’échange immobilier pour le remembrement du domaine forestier</span>
+                      <p>Cette procédure est appliquée à des terrains présentant un intérêt imminent pour le domaine forestier et répondant aux critères d’éligibilité à l’échange à savoir : être attenant au domaine forestier; être titré et exempt de toutes charges foncières ou de droit réel et avoir une vocation forestière. (Page 28)</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-university" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">Autorisation d’occupation temporaire du domaine public</span>
+                      <p>Cette procédure permet à tout requérant (personne physique ou morale) projetant de réaliser un investissement, d’obtenir l’autorisation d’occupation temporaire du domaine public maritime. La procédure inclut également la fixation de la redevance. (Page 33)</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-cog" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">Attribution des lots dans des zones dédiées à l’activité économique</span>
+                      <p>Cette procédure permet d'attribuer à tout requérant (personne physique ou morale) projetant de réaliser un investissement, un lot dans les zones industrielles et les zones d’activités économiques dans les conditions et modalités fixées dans les conventions d’aménagement et de développement desdites zones. (Page 40)</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-info-circle" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">Investissement en zone littorale ou zone sensisble</span>
+                      <p>Cette procédure permet à tout requérant (personne physique ou morale) projetant de réaliser un investissement dans une zone littoral ou sensible (parcs nationaux, SIB, zones dunaires, …) d'obtenir l'autorisation nécessaires à la réalisation de sont projet en respectant les principes et règles fondamentaux d'une gestion intégrée durable en vue de sa protection, de sa mise en valeur et de sa conservation. (Page 45)</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line hr-hub hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="far fa-clone" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">Autorisation de lotir ou/et morceler dans une zone irriguée ou couverte par un programme de mise en valeur en bour</span>
+                      <p>Cette procédure concerne le cas d’instruction d’une autorisation lotir ou de morceler d’une zone irriguée ou couverte par un programme de mise en valeur en bour et où l’autorisation est une attribution du wali.</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+              </vbox>
+              <vbox className="consult-acc">
+                <html>
+                  <p>Vous pouvez consulter les autres catégories d'autorisations et actes administratifs y afférents</p>
+                </html>
+                <vbox columns="33% 33% 33%">
+                  <html>
+                    <div class="main-icon-title t1">
+                      <i class="fas fa-check-square" />
+                      <span>Acceptabilité projets</span>
+                    </div>
+                  </html>
+                  <html>
+                    <div class="main-icon-title t3">
+                      <i class="far fa-building" />
+                      <span>Autorisations urbanistiques</span>
+                    </div>
+                  </html>
+                  <html>
+                    <div class="main-icon-title t4">
+                      <i class="fas fa-cog" />
+                      <span>Autorisations économiques</span>
+                    </div>
+                  </html>
+                </vbox>
+              </vbox>
+            </vbox>
+          </vbox>
+        </vbox>
+        <vbox className="height-auto-vbox">
+          <vbox className="hp-box hp-small left-box-fsb">
+            <html>
+              <div class="vpanel-title">
+                <span>ANNONCES</span>
+                <hr class="header-create-account-horizontal-line hr-hub" />
+              </div>
+            </html>
+            <vbox className="hp-box">
+              <html>
+                <div class="vpanel-body-title">
+                  <i class="fas fa-chart-line" />
+                  <span>Etudes de marchés</span>
+                </div>
+                <div class="vpanel-body-icon">
+                  <i class="fas fa-shopping-cart" />
+                </div>
+                <div class="hp-sbox-btn">Détails</div>
+              </html>
+            </vbox>
+            <html>
+              <div style="height: 50px;" />
+            </html>
+            <vbox className="hp-box">
+              <html>
+                <div class="vpanel-body-title">
+                  <i class="far fa-edit" />
+                  <span>votre e-parapheur</span>
+                </div>
+                <div class="vpanel-body-icon">
+                  <i class="far fa-edit" />
+                </div>
+                <div class="hp-sbox-btn">Détails</div>
+              </html>
+            </vbox>
+            <html>
+              <div style="height: 50px;" />
+            </html>
+            <vbox className="hp-box">
+              <html>
+                <div class="vpanel-body-title">
+                  <i class="fas fa-cog" />
+                  <span>Transformation digitale</span>
+                </div>
+                <div class="vpanel-body-icon">
+                  <i class="fas fa-cogs" />
+                </div>
+                <div class="hp-sbox-btn">Détails</div>
+              </html>
+            </vbox>
+          </vbox>
+        </vbox>
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
+    </screen>
+  </view>
 </search>

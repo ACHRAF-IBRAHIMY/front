@@ -1,3 +1,4 @@
+
 function removeExpanded(type){
     if(type==1){
         $(".simulator .docs-qr div.ow-pl").removeClass("expanded");

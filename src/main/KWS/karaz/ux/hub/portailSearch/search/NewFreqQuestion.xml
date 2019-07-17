@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="NewfreqQuestion" label="Nouvelle Question Fréquente">
-
+  <query />
+  <data>
     <query>
+      <search />
+      <idObject />
+      <parentP />
     </query>
-    <data>
-        <query>
-            <search />
-            <idObject />
-            <parentP />
-
-        </query>
-        <collapsed>false</collapsed>
-        <nfqresponse />
-        <categ />
-        <question />
-    </data>
-    <view>
-        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-            <script postLoad="true">
-            	removeLastRootPage(userName);
-            	loadPageBytype(6);
+    <collapsed>false</collapsed>
+    <nfqresponse />
+    <categ />
+    <question />
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">
+        removeLastRootPage(userName);
                 $(".rokhas-home").click(function(){
                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
                 });
@@ -53,23 +49,23 @@
 
 
                 // add style to question type header
-                <!-- PCD_add_header_style_action(".pcd-header-NQF", "Quels sont les pièces requises pour l'obtention d'un permis de construire ?"); -->
-                PCD_headerfieldset_color(".NFQ-quest-title");
-                $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
-                PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
-                PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
+        <!-- PCD_add_header_style_action(".pcd-header-NQF", "Quels sont les pièces requises pour l'obtention d'un permis de construire ?"); -->
+        PCD_headerfieldset_color(".classSearch-5 .NFQ-quest-title");
+                $(".classSearch-5 .NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+                PCD_header_style_quest_type(".classSearch-5 .NFQ-type-esign" , "far fa-edit")
+                PCD_header_style_quest_type(".classSearch-5 .NFQ-type-general" , "far fa-question-circle")
 
-                PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
-                PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
-                PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
-                PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
+                PCD_header_style_quest_type(".classSearch-5 .NFQ-type-document" , "far fa-file-pdf")
+                PCD_header_style_quest_type(".classSearch-5 .NFQ-type-plat" , "fab fa-simplybuilt")
+                PCD_header_style_quest_type(".classSearch-5 .NFQ-type-archit" , "fas fa-user")
+                PCD_header_style_quest_type(".classSearch-5 .NFQ-type-adminis" , "fas fa-users-cog")
 
 
 
                 // header color
-                PCD_headerfieldset_color(".pcd-ha-color");
+                PCD_headerfieldset_color(".classSearch-5 .pcd-ha-color");
                 //all question
-                $(".NFQ-all-quest").hide() 
+                $(".classSearch-5 .NFQ-all-quest").hide() 
 
                 $(".NQF-vue-question").hide();
                 RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
@@ -78,354 +74,206 @@
 
 
                 // hide saisie info question
-                $(".NQF-edit-modif").hide()
+                $(".classSearch-5 .NQF-edit-modif").hide()
                 // hide imge
-                $(".NFQ-load-img").hide();
-            </script>
-            <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-                <vbox className="Header-signup-logo">
-                    <html className="Header-signup-glo">
-                        <div class="rokhas-home" style="margin-left: 50px;">
-                            <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                        </div>
-                    </html>
-                    <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                        <html className="menu-bar-img">
-                            <img src="web/css/img/LogoSquare.svg" alt="" />
-                        </html>
-                        <html />
-                        <html className="menu-bar-icon">
-                            <i class="fas fa-bars" />
-                        </html>
-                    </vbox>
-                </vbox>
-
-                <vbox columns="60% 25% 15%" className="header-div-toggle">
-                    <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
-                        <button label="Actualités">
-                            <postChange>
-
-                            </postChange>
-                        </button>
-                        <button label="Simulateur">
-                            <postChange>
-                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                            </postChange>
-                        </button>
-                        <button label="Open data">
-                            <postChange>
-                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-                            </postChange>
-                        </button>
-                        <button label="Solutions">
-                            <postChange>
-
-                            </postChange>
-                        </button>
-                        <button label="Ressources">
-                            <postChange>
-
-                            </postChange>
-                        </button>
-                        <button icon="far fa-question-circle">
-                            <postChange />
-                        </button>
-
-
-                    </vbox>
-
-                    <vbox className="vbox-button-signup-header" columns="50% 50%">
-                        <button label="Inscription" className="button-signup-header button-left">
-                            <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                            </postChange>
-                        </button>
-                        <button label="Connexion" className="button-signup-header">
-                            <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                            </postChange>
-                        </button>
-                    </vbox>
-                    <vbox className="vbox-button-signup-header" columns="50% 50%">
-                        <button label="FR" className="button-signup-header-cliked button-left">
-                        </button>
-                        <button label="ع" className="button-signup-header">
-                        </button>
-                    </vbox>
-                </vbox>
+                $(".classSearch-5 .NFQ-load-img").hide();
+      </script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="70% 30%" className="classSearch-5">
+        <vbox>
+          <fieldset label="QUESTION FRÉQUENTE" collapsible="false" className="pcd-header-NQF NQF-titre-quest div-det-acc PDC-hov-title ">
+            <vbox className="NQF-new-quest-btn">
+              <button label="Nouvelle Question" style="" className="NQF-btn-new">
+                <postChange>$(".classSearch-5 .NQF-edit-modif").show();
+                                    NQF_new_QR(1,"classSearch-5");</postChange>
+              </button>
             </vbox>
-
-            <html id="hSeparator">
-                <div style="height: 30px;" />
-
+            <html className="NFQ-load-img">
+              <img src="img/load-text.gif" />
             </html>
-            <vbox columns="70% 30%">
-                <vbox>
-
-                    <fieldset label="QUESTION FRÉQUENTE" collapsible="false" className="pcd-header-NQF NQF-titre-quest div-det-acc PDC-hov-title ">
-
-                        
-                        <vbox className="NQF-new-quest-btn">
-                            <button label="Nouvelle Question" style="" className="NQF-btn-new">
-                                <postChange>
-                                    $(".NQF-edit-modif").show();
-                                    NQF_new_QR(1);
-                                </postChange>
-                            </button>
-                        </vbox>
-                        <html className="NFQ-load-img">
-                            <img src="img/load-text.gif" />
-                        </html>
-                        <vbox className="NQF-edit-modif">
-                            <fieldset label="DONNÉES QUESTION" className="NQF-shadow">
-                                <vbox className="DC-Customized-fields-NQF NQF-edit-float">
-                                    <field label="Question" widget="text" labelAlign="float" xpath="question">
-                                    </field>
-                                    <vbox contentAlign="center" columns="40% 60%" className="NQF-edit-select-float">
-                                        <field widget="select" label="Catégorie" labelAlign="float" xpath="categ">
-                                            <option value="GENERAL" label="Général" />
-                                            <option value="E-SIGN" label="Signature électronique" />
-                                            <option value="ARCHITECTE" label="Architecte" />
-                                            <option value="DOCUMENT" label="Document" />
-                                            <option value="PLATEFORME" label="Platforme" />
-                                            <option value="ADMINISTRATION" label="Administration" />
-
-                                        </field>
-                                        <vbox />
-                                    </vbox>
-                                </vbox>
-
-
-                            </fieldset>
-
-
-
-                            <fieldset label="DONNÉES RÉPONSE" className="NQF-shadow">
-                                <field noLabel="true" widget="htmlEditor" xpath="nfqresponse">
-
-                                </field>
-
-
-                            </fieldset>
-                            <vbox columns="auto 45%" className="DC-box-btn-filtrer">
-                                <hx />
-                                <vbox columns="33% 33% auto" style="margin-right: 2em;">
-
-                                    <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
-                                        <postChange>
-                                            NQF_preview_QR(1);
-                                        </postChange>
-                                    </button>
-                                    <button label="nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
-                                        <postChange>
-                                            NQF_new_QR(1);
-                                        </postChange>
-                                    </button>
-                                    <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
-                                        <postChange>
-                                            NQF_save_QR(1);
-                                        </postChange>
-                                    </button>
-
-
-                                </vbox>
-
-                            </vbox>
-                        </vbox>
-
-                        <vbox className="NQF-vue-question">
-                            <vbox columns="85% auto">
-                                <html>
-                                    <h4 class="NQF-prev-quest">
-                                        <b />
-                                    </h4>
-                                    <p class="NQF-prev-resp" />
-                                    <p hidden="hidden" class="NQF-categorie" />
-                                    <p hidden="hidden" class="NQF-id" />
-                                </html>
-                                <vbox />
-                            </vbox>
-                           <vbox columns="80% 10% auto" className="NQF-btn-alg">
-                            
-                                <vbox />
-                                <button label="supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
-                                    <postChange>
-                                        let id = $(".NQF-id").val();
+            <vbox className="NQF-edit-modif">
+              <fieldset label="DONNÉES QUESTION" className="NQF-shadow">
+                <vbox className="DC-Customized-fields-NQF NQF-edit-float">
+                  <field label="Question" widget="text" labelAlign="float" xpath="question" />
+                  <vbox contentAlign="center" columns="40% 60%" className="NQF-edit-select-float">
+                    <field widget="select" label="Catégorie" labelAlign="float" xpath="categ">
+                      <option value="GENERAL" label="Général" />
+                      <option value="E-SIGN" label="Signature électronique" />
+                      <option value="ARCHITECTE" label="Architecte" />
+                      <option value="DOCUMENT" label="Document" />
+                      <option value="PLATEFORME" label="Platforme" />
+                      <option value="ADMINISTRATION" label="Administration" />
+                    </field>
+                    <vbox />
+                  </vbox>
+                </vbox>
+              </fieldset>
+              <fieldset label="DONNÉES RÉPONSE" className="NQF-shadow">
+                <field noLabel="true" widget="htmlEditor" xpath="nfqresponse" />
+              </fieldset>
+              <vbox columns="auto 45%" className="DC-box-btn-filtrer">
+                <hx />
+                <vbox columns="33% 33% auto" style="margin-right: 2em;">
+                  <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
+                    <postChange>NQF_preview_QR(1,"classSearch-5");</postChange>
+                  </button>
+                  <button label="Nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
+                    <postChange>NQF_new_QR(1,"classSearch-5");</postChange>
+                  </button>
+                  <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
+                    <postChange>NQF_save_QR(1);</postChange>
+                  </button>
+                </vbox>
+              </vbox>
+            </vbox>
+            <vbox className="NQF-vue-question">
+              <vbox columns="85% auto">
+                <html>
+                  <h4 class="NQF-prev-quest">
+                    <b />
+                  </h4>
+                  <p class="NQF-prev-resp" />
+                  <p hidden="hidden" class="NQF-categorie" />
+                  <p hidden="hidden" class="NQF-id" />
+                </html>
+                <vbox />
+              </vbox>
+              <vbox columns="80% 10% auto" className="NQF-btn-alg">
+                <vbox />
+                <button label="Supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
+                  <postChange>let id = $(".classSearch-5 .NQF-id").val();
                                         removeQuestionNFQ(id,"/faq_index/qr/");
-                                        $(".NQF-vue-question").hide();
-										NQF_remove_subtitle();
-                                    </postChange>
-                                </button>
-                                <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
-                                    <postChange>
-                                        console.log("root================",root);
+                                        $(".classSearch-5 .NQF-vue-question").hide();
+										NQF_remove_subtitle();</postChange>
+                </button>
+                <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
+                  <postChange>console.log("root================",root);
                                         console.log("context================",context);
-                                        NQF_edit_av(1,root,context);
-
-                                    </postChange>
-                                </button>
-                            </vbox>
-                        </vbox>
-                        <fieldset header="AUTRES QUESTIONS FRÉQUENTES DE LA CATÉGORIE " className="faq-fieldset-det NFQ-all-quest">
-                            <html>
-                             
-                                <div class="vpanel-body full-search-list">
-
-                                </div>
-                                <div class="searchGif2" style="display:none;line-height: 0;">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                <div class="pagination-new-style">
-                                    <div class="pagination-1">
-
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-
-
-                    </fieldset>
-                </vbox>
-                <vbox>
-                    <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
-
-                        <!-- start modification -->
-                        <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-esign NFQ-fieldset">
-
-                                    </div>
-                                </html>
-                            </test>
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-esign1 NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                        </fieldset>
-
-                        <fieldset header="Générale" className="NFQ-quest-title NFQ-type-general ">
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-general NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-general1 NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-
-                        </fieldset>
-
-                        <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-document NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-document1 NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-                        </fieldset>
-
-                        <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-plat NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-plat1 NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                        </fieldset>
-
-                        <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-archit NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-archit1 NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-                        </fieldset>
-
-                        <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-adminis1 NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-                        </fieldset>
-
-                        <!-- end modification -->
-
-                    </fieldset>
-                </vbox>
+                                        NQF_edit_av(1,root,context,"classSearch-5");</postChange>
+                </button>
+              </vbox>
             </vbox>
-
-
-            <html>
-                <div style="height: 30px;" />
-            </html>
-
-
-        </screen>
-        <script onLoad="true">
-
-
-        </script>
-
-    </view>
-
-
+            <fieldset header="AUTRES QUESTIONS FRÉQUENTES DE LA CATÉGORIE " className="faq-fieldset-det NFQ-all-quest">
+              <html>
+                <div class="vpanel-body full-search-list" />
+                <div class="searchGif2" style="display:none;line-height: 0;">
+                  <img src="img/search-move.gif" />
+                </div>
+                <div class="pagination-new-style">
+                  <div class="pagination-1" />
+                </div>
+              </html>
+            </fieldset>
+          </fieldset>
+        </vbox>
+        <vbox>
+          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+            <!-- start modification -->
+            <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-esign NFQ-fieldset" />
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-esign1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <fieldset header="Générale" className="NFQ-quest-title NFQ-type-general ">
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-general NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-general1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-document NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-document1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-plat NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-plat1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-archit NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-archit1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-adminis NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-adminis1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <!-- end modification -->
+          </fieldset>
+        </vbox>
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
+    </screen>
+    <script onLoad="true" />
+  </view>
 </search>
+

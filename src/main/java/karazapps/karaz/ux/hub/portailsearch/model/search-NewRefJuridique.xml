@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="NewRefJuridique" label="Nouvelle Référentiel Juridique">
-
+  <query />
+  <data>
     <query>
+      <search />
+      <idObject />
+      <parentP />
     </query>
-    <data>
-        <query>
-            <search />
-            <idObject />
-            <parentP />
-        </query>
-        <collapsed>false</collapsed>
-        <NQFtitle />
-        <NQFtype />  
-        <NQFdesc />
-        
-
-    </data>
-    <view>
-        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-            <script postLoad="true">
-                removeLastRootPage(userName);
+    <collapsed>false</collapsed>
+    <NQFtitle />
+    <NQFtype />
+    <NQFdesc />
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">
+        removeLastRootPage(userName);
                 $(".rokhas-home").click(function(){
                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
                 });
@@ -46,17 +42,17 @@
 
 
                 $(".back-to-acc").click(function(){
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets","search", "Acceptabilite Projets", {});
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets","search", "Acceptabilite Projets", {});
                 });
 
 
 
                 // add style to question type header
-                <!-- PCD_add_header_style_action(".pcd-header-NQF", "Quels sont les pièces requises pour l'obtention d'un permis de construire ?"); -->
-                PCD_headerfieldset_color(".NFQ-quest-title");
-	            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
-                PCD_header_style_quest_type(".NFQ-type-urba" , "far fa-building")
-                PCD_header_style_quest_type(".NFQ-type-eco" , "fas fa-cog")
+        <!-- PCD_add_header_style_action(".pcd-header-NQF", "Quels sont les pièces requises pour l'obtention d'un permis de construire ?"); -->
+        PCD_headerfieldset_color(".classSearch-3 .NFQ-quest-title");
+	            $(".classSearch-3 .NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+                PCD_header_style_quest_type(".classSearch-3 .NFQ-type-urba" , "far fa-building")
+                PCD_header_style_quest_type(".classSearch-3 .NFQ-type-eco" , "fas fa-cog")
                
                 
 
@@ -66,277 +62,144 @@
                 PCD_headerfieldset_color(".pcd-ha-color");
 
                 $(".NQF-vue-ref").hide();
-                RestSearchref("",0,7,0,1,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"]);
+                RestSearchref("",0,7,0,1,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],"classSearch-3");
                 // hide saisie info question
-                $(".NQF-edit-modif").hide()
+                $(".classSearch-3 .NQF-edit-modif").hide()
                 //img loding ref
-                $(".NFQ-load-img").hide();
-            </script>
-            <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-                <vbox className="Header-signup-logo">
-                    <html className="Header-signup-glo">
-                        <div class="rokhas-home" style="margin-left: 50px;">
-                            <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                        </div>
-                    </html>
-                    <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                        <html className="menu-bar-img">
-                            <img src="web/css/img/LogoSquare.svg" alt="" />
-                        </html>
-                        <html />
-                        <html className="menu-bar-icon">
-                            <i class="fas fa-bars" />
-                        </html>
-                    </vbox>
-                </vbox>
-
-                <vbox columns="60% 25% 15%" className="header-div-toggle">
-                    <vbox className="header-menu" columns="20% 19% 19% 19% 19% 8%">
-                        <button label="Actualités">
-                            <postChange>
-
-                            </postChange>
-                        </button>
-                        <button label="Simulateur">
-                            <postChange>
-                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                            </postChange>
-                        </button>
-                        <button label="Open data">
-                            <postChange>
-                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-                            </postChange>
-                        </button>
-                        <button label="Solutions">
-                            <postChange>
-
-                            </postChange>
-                        </button>
-                        <button label="Ressources">
-                            <postChange>
-
-                            </postChange>
-                        </button>
-                        <button icon="far fa-question-circle">
-                            <postChange />
-                        </button>
-
-
-                    </vbox>
-
-                    <vbox className="vbox-button-signup-header" columns="50% 50%">
-                        <button label="Inscription" className="button-signup-header button-left">
-                            <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                            </postChange>
-                        </button>
-                        <button label="Connexion" className="button-signup-header">
-                            <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                            </postChange>
-                        </button>
-                    </vbox>
-                    <vbox className="vbox-button-signup-header" columns="50% 50%">
-                        <button label="FR" className="button-signup-header-cliked button-left">
-                        </button>
-                        <button label="ع" className="button-signup-header">
-                        </button>
-                    </vbox>
-                </vbox>
+                $(".classSearch-3 .NFQ-load-img").hide();
+      </script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="70% 30%" className="classSearch-3">
+        <vbox>
+          <fieldset label="NOUVEAU RÉFÉRENTIEL JURIDIQUE" collapsible="false" className="pcd-header-NQF NQF-titre-ref div-det-acc PDC-hov-title ">
+            <vbox className="NQF-new-quest-btn">
+              <button label="Nouveau Référentiel Juridique" style="" className="NQF-btn-new">
+                <postChange>$(".classSearch-3 .NFQ-all-quest").hide();
+                                    $(".classSearch-3 .NQF-edit-modif").show();
+                                    NQF_new_QR(2,".classSearch-3");</postChange>
+              </button>
             </vbox>
-
-            <html id="hSeparator">
-                <div style="height: 30px;" />
-
+            <html className="NFQ-load-img">
+              <img src="img/load-text.gif" />
             </html>
-            <vbox columns="70% 30%">
-                <vbox>
-
-                    <fieldset label="NOUVEAU RÉFÉRENTIEL JURIDIQUE" collapsible="false" className="pcd-header-NQF NQF-titre-ref div-det-acc PDC-hov-title ">
-						
-						<vbox className="NQF-new-quest-btn"> 
-                            <button label="Nouveau Référentiel Juridique" style="" className="NQF-btn-new">
-                                <postChange>
-                                    $(".NFQ-all-quest").hide();
-                                    $(".NQF-edit-modif").show();
-                                    NQF_new_QR(2);
-                                </postChange>
-                            </button>
-                        </vbox>
-
-						<html className="NFQ-load-img">
-                            <img src="img/load-text.gif" />
-                        </html>
-
-                        <vbox className="NQF-edit-modif">
-                            <fieldset label="DONNÉES RÉFÉRENTIEL JURIDIQUE" className="NQF-shadow">
-                                <vbox className="DC-Customized-fields-NQF NQF-edit-float">
-                                    <field label="Intitulé texte juridique" widget="text" labelAlign="float" xpath="NQFtitle">
-                                    </field>
-                                    <vbox contentAlign="center" columns="40% 60%" className="NQF-edit-select-float">
-                                        <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
-                                            <option value="2" label="Urbanisme" />
-                                            <option value="1" label="Economique" />
-
-                                        </field>
-                                        <vbox />
-                                    </vbox>
-                                    <field widget="textArea" xpath="NQFdesc" label="description" labelAlign="float" className="NFQ-desc-refjuridique" />
-                                </vbox>
-
-
-                            </fieldset>
-
-
-
-                            <fieldset label="TEXTE JURIDIQUE" className="NQF-shadow">
-                                <field widget="htmlEditor" xpath="NQFtext" />
-
-                            </fieldset>
-                            <vbox columns="auto 45%" className="DC-box-btn-filtrer">
-                                <hx />
-                                <vbox columns="33% 33% auto" style="margin-right: 2em;">
-
-                                    <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
-                                        <postChange>
-                                            NQF_preview_QR(2);
-                                        </postChange>
-                                    </button>
-                                    <button label="nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
-                                        <postChange>
-                                            NQF_new_QR(2);
-                                        </postChange>
-                                    </button>
-                                    <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
-                                        <postChange>
-                                            NQF_save_QR(2);
-                                        </postChange>
-                                    </button>
-
-
-                                </vbox>
-
-                            </vbox>
-                        </vbox>
-
-                        <vbox className="NQF-vue-ref">
-                            <vbox columns="85% auto">
-                                <html>
-                                    <h4 class="NQF-prev-ref">
-                                        <b class="NQF-title-ref">Quels sont les pièces requises pour l'obtention d'un permis de construire ?</b>
-                                        <div class="NQF-desc-ref">description description description description description</div>
-                                    </h4>
-                                    <p class="NQF-text-ref ">Signature électronique des plans architecturaux par l'architecte et dans certains cas par les co-concepteurs du projet (Architecte en groupement, géomètre topographe, ...) ainsi que le cahier des charges associé au projet de lotissement.</p>
-                                    <p hidden="hidden" class="NQF-type-ref" />
-                                    <p hidden="hidden" class="NQF-id-ref" />
-                                </html>
-                                <vbox />
-                            </vbox>
-                            <vbox columns="80% 10% auto" className="NQF-btn-alg">                            
-                                <vbox />
-                                <button label="supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
-                                    <postChange>
-                                        let id = $(".NQF-id-ref").val();
+            <vbox className="NQF-edit-modif">
+              <fieldset label="DONNÉES RÉFÉRENTIEL JURIDIQUE" className="NQF-shadow">
+                <vbox className="DC-Customized-fields-NQF NQF-edit-float">
+                  <field label="Intitulé texte juridique" widget="text" labelAlign="float" xpath="NQFtitle" />
+                  <vbox contentAlign="center" columns="40% 60%" className="NQF-edit-select-float">
+                    <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
+                      <option value="2" label="Urbanisme" />
+                      <option value="1" label="Economique" />
+                    </field>
+                    <vbox />
+                  </vbox>
+                  <field widget="textArea" xpath="NQFdesc" label="description" labelAlign="float" className="NFQ-desc-refjuridique" />
+                </vbox>
+              </fieldset>
+              <fieldset label="TEXTE JURIDIQUE" className="NQF-shadow">
+                <field widget="htmlEditor" xpath="NQFtext" />
+              </fieldset>
+              <vbox columns="auto 45%" className="DC-box-btn-filtrer">
+                <hx />
+                <vbox columns="33% 33% auto" style="margin-right: 2em;">
+                  <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
+                    <postChange>NQF_preview_QR(2,"classSearch-3");</postChange>
+                  </button>
+                  <button label="Nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
+                    <postChange>NQF_new_QR(2,"classSearch-3");</postChange>
+                  </button>
+                  <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
+                    <postChange>NQF_save_QR(2);</postChange>
+                  </button>
+                </vbox>
+              </vbox>
+            </vbox>
+            <vbox className="NQF-vue-ref">
+              <vbox columns="85% auto">
+                <html>
+                  <h4 class="NQF-prev-ref">
+                    <b class="NQF-title-ref">Quels sont les pièces requises pour l'obtention d'un permis de construire ?</b>
+                    <div class="NQF-desc-ref">description description description description description</div>
+                  </h4>
+                  <p class="NQF-text-ref ">Signature électronique des plans architecturaux par l'architecte et dans certains cas par les co-concepteurs du projet (Architecte en groupement, géomètre topographe, ...) ainsi que le cahier des charges associé au projet de lotissement.</p>
+                  <p hidden="hidden" class="NQF-type-ref" />
+                  <p hidden="hidden" class="NQF-id-ref" />
+                </html>
+                <vbox />
+              </vbox>
+              <vbox columns="80% 10% auto" className="NQF-btn-alg">
+                <vbox />
+                <button label="Supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
+                  <postChange>let id = $(".classSearch-3 .NQF-id-ref").val();
                                         removerefNQF(id);
-                                        $(".NQF-vue-ref").hide();
-                                    </postChange>
-                                </button>
-                                <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
-                                    <postChange>
-                                        console.log("root================",root);
+                                        $(".classSearch-3 .NQF-vue-ref").hide();</postChange>
+                </button>
+                <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
+                  <postChange>console.log("root================",root);
                                         console.log("context================",context);
-                                        NQF_edit_av(2,root,context);
-                                        $(".NFQ-all-quest").hide();
-
-                                    </postChange>
-                                </button>
-                            </vbox>
-                        </vbox>
-                        <fieldset header="AUTRES RÉFÉRENTIELS JURIDIQUES" className="faq-fieldset-det NFQ-all-quest">
-                            <html>
-                             
-                                <div class="vpanel-body full-search-list">
-
-                                </div>
-                                <div class="searchGif2" style="display:none;line-height: 0;">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                <div class="pagination-new-style">
-                                    <div class="pagination-1">
-
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-
-                    </fieldset>
-                </vbox>
-<vbox>
-                    <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
-
-                        <!-- start modification -->
-                        <fieldset header="Référentiels Urbanistiques" className="NFQ-quest-title NFQ-type-urba ">
-                              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-urba NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                              </test>
-
-                              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-urba1 NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                             </test>
-
-                        </fieldset>
-
-                        <fieldset header="Référentiels économiques" className="NFQ-quest-title NFQ-type-eco ">
-
-                             <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-eco NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                            <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
-                                <html>
-                                    <div class="NFQ-quest-type-eco1 NFQ-fieldset">
-                                        <!-- Les questions s'affiche ici                                  -->
-                                    </div>
-                                </html>
-                            </test>
-
-                        </fieldset>
-
-                        
-
-                        
-
-                        <!-- end modification -->
-
-                    </fieldset>
-                </vbox>
+                                        NQF_edit_av(2,root,context,"classSearch-3");
+                                        $(".classSearch-3 .NFQ-all-quest").hide();</postChange>
+                </button>
+              </vbox>
             </vbox>
-
-
-            <html>
-                <div style="height: 30px;" />
-            </html>
-
-
-        </screen>
-        <script onLoad="true">
-
-
-        </script>
-
-    </view>
-
-
+            <fieldset header="AUTRES RÉFÉRENTIELS JURIDIQUES" className="faq-fieldset-det NFQ-all-quest">
+              <html>
+                <div class="vpanel-body full-search-list" />
+                <div class="searchGif2" style="display:none;line-height: 0;">
+                  <img src="img/search-move.gif" />
+                </div>
+                <div class="pagination-new-style">
+                  <div class="pagination-1" />
+                </div>
+              </html>
+            </fieldset>
+          </fieldset>
+        </vbox>
+        <vbox>
+          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+            <!-- start modification -->
+            <fieldset header="Référentiels Urbanistiques" className="NFQ-quest-title NFQ-type-urba ">
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-urba NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-urba1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <fieldset header="Référentiels économiques" className="NFQ-quest-title NFQ-type-eco ">
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-eco NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-eco1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <!-- end modification -->
+          </fieldset>
+        </vbox>
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
+    </screen>
+    <script onLoad="true" />
+  </view>
 </search>

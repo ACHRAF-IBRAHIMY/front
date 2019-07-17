@@ -1,6 +1,27 @@
 
 
 /* video consultation style*/
+
+.vue-video-frame{
+    text-align: center
+}
+
+.attachement-vue-glo {
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.attachement-vue-glo .ow-field-fileUpload-container{
+    display: none;
+}
+
+.attachement-vue-glo .att-icons i{
+    cursor: pointer;
+}
+.attachement-vue-glo .att-icons .fa-link{
+    display: none;
+}
+
 .search-video .full-search-list-item .item-body p {
     font-size: 0.965vw;
     text-align: left;

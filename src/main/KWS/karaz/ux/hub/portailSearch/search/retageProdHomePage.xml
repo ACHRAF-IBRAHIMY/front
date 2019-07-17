@@ -1,221 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="RetageProdHomePage" label="Acceptabilite Projets">
-
-<query> 
-</query> 
-<data>
-		<query> 
-			<lang>fr</lang>
-		</query>
-      
-	</data>
+  <query />
+  <data>
+    <query>
+      <lang>fr</lang>
+    </query>
+  </data>
   <view>
-        
     /********************************************************/
     /*      START :: #NT :: grid Rokhas 3.0 Home page      */
     /********************************************************/
-      
-      
-    <screen id="retageHomePage" labelWidth="80" label="My Dashboard" noToolBar="true">      
-       <script onLoad="true">
-       removeLastRootPage(userName);
-	   $(".app-footer").empty();
-	   </script>
-        <vbox className="Header-signup" columns-smallx="auto">
-            <vbox className="header_logo">
-                <html> 
-                    <div onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/RetageProdHomePage&quot;, &quot;search&quot;, &quot;Public central search&quot;, {});">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height: 60px;margin-top: 16px;margin-bottom: 25px;" />
+    <screen id="retageHomePage" labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script onLoad="true">removeLastRootPage(userName);
+	   $(".app-footer").empty();</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="15% 70% 15%" className="global-div-temp" visible="{query.lang},=,fr">
+        <vbox />
+        <vbox className="hp-box hp-small divSearch height-986">
+          <vbox className="hp-box divSearchBar">
+            <html>
+              <div class="hp-sbox-big-title">Unification des marques Casaurba et Rokhas</div>
+              <div style="height: 10px;" />
+              <div class="hp-sbox-text">
+                Dans le cadre de la généralisation et l'unification des procédures de délivrance des autorisations à l'échelle nationale, votre plateforme de gestion des autorisations d'urbanisme (anciennement Casaurba) et celle dédiée aux autorisations  économiques (Rokhas) porteront désormais une seule et unique marque :
+                <b>ROKHAS</b>
+              </div>
+              <div style="height: 10px;" />
+              <div class="hp-sbox-text">
+                Cliquez sur le bouton correspondant à la nature de votre compte utilisateur pour accéder à votre espace de travail. Notez que celui-ci
+                <u>ne subira aucun changement</u>
+                et ce jusqu'au passage de la plateforme Rokhas unifiée à sa
+                <u>3ème version</u>
+                .
+              </div>
+            </html>
+            <html>
+              <div style="height: 50px;" />
+            </html>
+            <vbox columns="5% 40% 10% 40%" className="btn-link-prod">
+              <vbox />
+              <vbox>
+                <html className="res-div-height">
+                  <div class="main-icon-title t3" style="width:80%">
+                    <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
+                      <i class="fas fa-map-marker-alt" />
+                      <span>Autorisations urbanistiques</span>
                     </div>
+                  </div>
                 </html>
-                
+              </vbox>
+              <vbox />
+              <vbox>
+                <html className="res-div-height">
+                  <div class="main-icon-title t4" style="width:80%">
+                    <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
+                      <i class="fas fa-cog" />
+                      <span>Autorisations économiques</span>
+                    </div>
+                  </div>
+                </html>
+              </vbox>
             </vbox>
-            <vbox columns="52% auto" className="header_lang_btn">
-            <button className="hp-search_btn  search_buttonAR_{query.lang}" label="العربية" separator="!!">
-                            <postChange>
-                                root.query.lang="ar";
-								context.formRender.notifyObservers("query.lang");
-                            </postChange>
-							
-                        </button>
-			<button className="hp-search_btn  search_buttonFR_{query.lang}" label="Français" separator="!!">
-                            <postChange>
-                                root.query.lang="fr";
-								context.formRender.notifyObservers("query.lang");
-                            </postChange>
-            </button>
-               </vbox>
-               </vbox>
-
-        <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-        <vbox columns="15% 70% 15%" className="global-div-temp" visible="{query.lang},=,fr">
-          
-         <vbox />   
+            <vbox />
+            <html>
+              <div style="height: 20px;" />
+            </html>
+            <vbox columns="7% 40% 0% 46%" className="support">
+              <html className="support-time">
+                <!--span style="font-size:12px;">08:30 à 18:30</span-->
+              </html>
+              <html className="support-html full-grid-small">
+                <i class="fas fa-paper-plane" />
+                <span>support@rokhas.ma</span>
+              </html>
+              <html />
+              <html className="support-html full-grid-small">
+                <i class="fas fa-phone" />
+                <span>+212 (0) 5 22 23 23 44</span>
+                <div style="margin-top: -13px;">
+                  <span style="font-size:12px;color: var(--fg1);font-weight: normal">08:30 à 18:30</span>
+                </div>
+              </html>
+            </vbox>
+          </vbox>
+        </vbox>
+        <vbox />
+      </vbox>
+      <vbox id="retageHomePage-ar" columns="15% 70% 15%" className="global-div-temp" visible="{query.lang},=,ar">
+        <vbox />
         <vbox className="hp-box hp-small divSearch height-986">
-                <vbox className="hp-box divSearchBar">
-                    <html>
-                        <div class="hp-sbox-big-title">
-                            Unification des marques Casaurba et Rokhas
-                        </div>
-						 <div style="height: 10px;" />
-                        <div class="hp-sbox-text">
-                            Dans le cadre de la généralisation et l'unification des procédures de délivrance des autorisations à l'échelle nationale, votre plateforme de gestion des autorisations d'urbanisme (anciennement Casaurba) et celle dédiée aux autorisations  économiques (Rokhas) porteront désormais une seule et unique marque : <b>ROKHAS</b>
-                        </div>
-                        <div style="height: 10px;" />
-						<div class="hp-sbox-text">
-                           Cliquez sur le bouton correspondant à la nature de votre compte utilisateur pour accéder à votre espace de travail. Notez que celui-ci <u>ne subira aucun changement</u> et ce jusqu'au passage de la plateforme Rokhas unifiée à sa <u>3ème version</u>.
-                        </div>
-						
-                    </html>    
-                    
-                    <html>
-                        <div style="height: 50px;"> </div>
-                    </html>        
-                     <vbox columns="5% 40% 10% 40%" className="btn-link-prod">
-					 <vbox />
-					 <vbox>
-                           <html className="res-div-height">
-                               <div class="main-icon-title t3" style="width:80%">
-                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
-                                        <i class="fas fa-map-marker-alt" />
-                                       <span>Autorisations urbanistiques</span>
-                                    </div>
-                               </div>
-                           </html>
-						   </vbox>
-						    <vbox />
-						   <vbox>
-                           
-                           <html className="res-div-height">
-                               <div class="main-icon-title t4" style="width:80%">
-                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
-                                        <i class="fas fa-cog" />
-                                        <span>Autorisations économiques</span>
-                                    </div>
-                               </div>
-                           </html>
-						   </vbox>
-                           </vbox>
-						   <vbox />
-						   <html>
-                           <div style="height: 20px;"> </div>
-                          </html>  
-                          <vbox columns="7% 40% 0% 46%" className="support"> 
-						  <html className="support-time">
-                                <!--span style="font-size:12px;">08:30 à 18:30</span-->
-                            </html>
-                            <html className="support-html full-grid-small">
-                                <i class="fas fa-paper-plane" />
-                                <span>support@rokhas.ma</span>
-                            </html>
-                            <html>
-                                
-                            </html>
-                            <html className="support-html full-grid-small">
-                                <i class="fas fa-phone" />
-                                <span>+212 (0) 5 22 23 23 44</span><div style="margin-top: -13px;">
-								<span style="font-size:12px;color: var(--fg1);font-weight: normal">08:30 à 18:30</span></div>
-                            </html>
-                            
-                        </vbox>
-                    </vbox>
-
-                  
-            </vbox>    
-        
-		<vbox />  
-		</vbox>
-        <vbox id="retageHomePage-ar" columns="15% 70% 15%" className="global-div-temp" visible="{query.lang},=,ar">
-          
-         <vbox />   
-        <vbox className="hp-box hp-small divSearch height-986">
-                <vbox className="hp-box divSearchBar">
-                    <html>
-                        <div class="hp-sbox-big-title-ar">
-                            توحيد علامتي كازا إربا و رخص
-                        </div>
-						 <div style="height: 10px;" />
-                        <div class="hp-sbox-text-ar">
-                            
-في إطار تعميم و توحيد المساطر الخاصة بتدبير الرخص على الصعيد الوطني، فإن منصتكم الخاصة بتدبير الرخص ذات الطابع العمراني (كازا إربا) و تلك الخاصة بتدبير الرخص ذات الطابع الإقتصادي ستحملان من الآن فصاعدا هوية وحيدة و موحدة : <b>رخص</b>
-                        </div>
-                        <div style="height: 10px;" />
-						<div class="hp-sbox-text-ar">
-						
-                           اضغطوا على الزر الموافق لطبيعة حسابكم من أجل الولوج إلى فضاء عملكم الخاص. المرجو الإنتباه إلى أنه <u>لن يطرأ على فضاء عملكم الخاص أي تغيير قبل المرور إلى النسخة الثالثة</u> من منصة رخص الموحدة
-                        </div>
-						
-                    </html>    
-                    
-                    <html>
-                        <div style="height: 50px;"> </div>
-                    </html>        
-                     <vbox columns="5% 40%  5% 40%" className="btn-link-prod">
-					 <vbox />
-					 <vbox>
-                           
-                           <html className="res-div-height-ar">
-                               <div class="main-icon-title t3" style="width:80%">
-                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 94%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
-                                        <i class="fas fa-cog" />
-                                        <span style="font-size: 1.3rem;">الرخص الإقتصادية</span>
-                                    </div>
-                               </div>
-                           </html>
-						   </vbox>
-						   <vbox />
-					 <vbox>
-                           <html className="res-div-height-ar">
-                               <div class="main-icon-title t4" style="width:80%">
-                                   <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
-                                        <i class="fas fa-map-marker-alt" />
-                                       <span style="font-size: 1.3rem;">رخص التعمير</span>
-                                    </div>
-                               </div>
-                           </html>
-						   </vbox>
-						    
-						   
-                           </vbox>
-						  <html>
-                           <div style="height: 20px;"> </div>
-                          </html>
-                          <vbox columns="1% 46% 0% 46%" className="support"> 
-						   <vbox />
-                            <html className="support-html full-grid-small">
-                                <i class="fas fa-paper-plane" />
-                                <span style="font-size: 22px;">support@rokhas.ma</span>
-                            </html>
-                            <html>
-                                
-                            </html>
-                            <html className="support-html full-grid-small">
-                                <i class="fas fa-phone" />
-                                <span style="font-size: 20px;">+212 (0) 5 22 23 23 44</span>
-								<div style="margin-top: -13px;">
-								<span style="font-size:12px;color: var(--fg1);font-weight: normal">08:30 à 18:30</span></div>
-                            </html>
-                            
-                        </vbox>
-                    </vbox>
-
-                  
-            </vbox>    
-        
-		<vbox />  
-		</vbox>
-		
+          <vbox className="hp-box divSearchBar">
+            <html>
+              <div class="hp-sbox-big-title-ar">توحيد علامتي كازا إربا و رخص</div>
+              <div style="height: 10px;" />
+              <div class="hp-sbox-text-ar">
+                في إطار تعميم و توحيد المساطر الخاصة بتدبير الرخص على الصعيد الوطني، فإن منصتكم الخاصة بتدبير الرخص ذات الطابع العمراني (كازا إربا) و تلك الخاصة بتدبير الرخص ذات الطابع الإقتصادي ستحملان من الآن فصاعدا هوية وحيدة و موحدة :
+                <b>رخص</b>
+              </div>
+              <div style="height: 10px;" />
+              <div class="hp-sbox-text-ar">
+                اضغطوا على الزر الموافق لطبيعة حسابكم من أجل الولوج إلى فضاء عملكم الخاص. المرجو الإنتباه إلى أنه
+                <u>لن يطرأ على فضاء عملكم الخاص أي تغيير قبل المرور إلى النسخة الثالثة</u>
+                من منصة رخص الموحدة
+              </div>
+            </html>
+            <html>
+              <div style="height: 50px;" />
+            </html>
+            <vbox columns="5% 40%  5% 40%" className="btn-link-prod">
+              <vbox />
+              <vbox>
+                <html className="res-div-height-ar">
+                  <div class="main-icon-title t3" style="width:80%">
+                    <div class="full-grid-small" style="display:grid;grid-template-columns:20% 94%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
+                      <i class="fas fa-cog" />
+                      <span style="font-size: 1.3rem;">الرخص الإقتصادية</span>
+                    </div>
+                  </div>
+                </html>
+              </vbox>
+              <vbox />
+              <vbox>
+                <html className="res-div-height-ar">
+                  <div class="main-icon-title t4" style="width:80%">
+                    <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%" onclick=" ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
+                      <i class="fas fa-map-marker-alt" />
+                      <span style="font-size: 1.3rem;">رخص التعمير</span>
+                    </div>
+                  </div>
+                </html>
+              </vbox>
+            </vbox>
+            <html>
+              <div style="height: 20px;" />
+            </html>
+            <vbox columns="1% 46% 0% 46%" className="support">
+              <vbox />
+              <html className="support-html full-grid-small">
+                <i class="fas fa-paper-plane" />
+                <span style="font-size: 22px;">support@rokhas.ma</span>
+              </html>
+              <html />
+              <html className="support-html full-grid-small">
+                <i class="fas fa-phone" />
+                <span style="font-size: 20px;">+212 (0) 5 22 23 23 44</span>
+                <div style="margin-top: -13px;">
+                  <span style="font-size:12px;color: var(--fg1);font-weight: normal">08:30 à 18:30</span>
+                </div>
+              </html>
+            </vbox>
+          </vbox>
+        </vbox>
+        <vbox />
+      </vbox>
     </screen>
-        
     /********************************************************/
     /*      END :: #NT :: grid Rokhas 3.0 Home page        */
-    /********************************************************/ 
-   
+    /********************************************************/
   </view>
+</search>
 
-    
-    
- </search>

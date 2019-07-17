@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="GuideVideoConsultation" label="Guide Video Consultation">
-
-	<query>
-	</query>
-	<data>
-		<query>
-			<search />
-            <idObject />
-            <parentP />
-		</query>
-		<collapsed>false</collapsed>
-	</data>
-	<view>
-		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-        <script postLoad="true">
-            loadPageBytype(7);
-            removeLastRootPage(userName);
-            getAllplayLists(2,4);
-            $(".searchbuttun").click();
+  <query />
+  <data>
+    <query>
+      <search />
+      <idObject />
+      <parentP />
+    </query>
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">removeLastRootPage(userName);
+            getAllplayLists(2,4,"classSearch-7");
+            $(".classSearch-7 .searchbuttun").click();
 
             $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
 		        $(".header-div-toggle").slideToggle(); 
@@ -33,181 +29,79 @@
 		        $(".header-div-toggle .dropdown-content").slideUp();
 		    }); 
 
-            Array.from(document.querySelectorAll(".divSearchBar .hp-search_field input")).forEach(function(elm){
+            Array.from(document.querySelectorAll(".classSearch-7 .divSearchBar .hp-search_field input")).forEach(function(elm){
                 autoCompleteSim(elm,"videos_index","title");
-                Array.from(document.querySelectorAll(".div-full-search-bar .ow-field-input")).forEach(function(elm){
+                Array.from(document.querySelectorAll(".classSearch-7 .div-full-search-bar .ow-field-input")).forEach(function(elm){
                 elm.addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
+                    var x = document.querySelector(".classSearch-7 #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,1);
+                    moveKey(e,x,1,"classSearch-7");
                 })
                 });
-            });
-        </script>
-        
-        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
-                </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
-            </vbox>
-            
-            <vbox columns="60% 25% 15%" className="header-div-toggle">
-                <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
-
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-                 
-            </vbox>
-        </vbox>
-        <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-        <vbox columns="70% 30%">
-            
-            
+            });</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="70% 30%" className="classSearch-7">
         <vbox className="hp-box hp-small divSearch">
-            <vbox className="hp-box divSearchBar div-full-search-bar">
-                <html>
-                    <div class="vpanel-title">
-                        <div class="vpanel-title">
-                           <span>VIDÉO DIDACTIQUES</span>
-                           <hr class="header-create-account-horizontal-line hr-hub" />
-                       </div>
-                    </div>
-                </html>    
-               
-                    <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-                    <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Recherche" />
-                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                        <postChange>
-                         
-                                var prefix = $(".div-full-search-bar .search-video-input input").val();
+          <vbox className="hp-box divSearchBar div-full-search-bar">
+            <html>
+              <div class="vpanel-title">
+                <div class="vpanel-title">
+                  <span>VIDÉOS DIDACTIQUES</span>
+                  <hr class="header-create-account-horizontal-line hr-hub" />
+                </div>
+              </div>
+            </html>
+            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+              <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Recherche" />
+              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                <postChange>var prefix = $(".classSearch-7 .div-full-search-bar .search-video-input input").val();
                                 currentPage=0;
-                                $(".consultation-video").hide();
-                                $(".search-video").show();
-                                restFullSearchList(prefix,0,false,0);
-                        
-                         </postChange>
-                    </button>
-                </vbox>
-                                  
-                <html>
-                    <div style="height: 30px;"> </div>
-                </html>   
-                <html className="search-video">
-                    <div class="searchGif">
-                        <img src="img/search-move.gif" />
-                    </div>
-                    <div class="full-search-list">
-                        
-                    </div>
-                    <div class="pagination pagination-second">
-                        
-                    </div>
-                </html>
-                <html class="loadGifVid">
-                    <div class="searchGif2">
-                        <img src="img/load-text.gif" />
-                    </div>
-                </html>
-                <html className="consultation-video">
-                    <span class="consultation-video-title">
-                        1-Création de couche -Layer V19072018
-                    </span>
-                    <div class="video-iframe">
-                        <iframe src="https://player.vimeo.com/video/241206308?rel=0" width="100%" height="100%" frameborder="0" />
-                    </div>
-                    <div class="video-description">
-                        Vidéo didactique montrant le déroulement pas à pas de la création d'une couche -Layer. Opération primordiale dans le processus de partage des fichiers de données spatiales dans des cartes.
-                    </div>
-                <div class="next-prev" columns="50% 50%">
-                    <div class="prev-video" style=""><i class="fas fa-chevron-left" /><span class=""> vidéo précedente</span></div>
-                    <div class="next-video" style=""><span class="">vidéo suivante </span><i class="fas fa-chevron-right" /></div>
-                </div> 
-                </html>
-                    
-            </vbox>    
-        </vbox> 
-        
-      <fieldset header="VIDÉO DIDACTIQUES RÉCENTS" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation">
-
-     </fieldset>
-              
+                                $(".classSearch-7 .consultation-video").hide();
+                                $(".classSearch-7 .search-video").show();
+                                restFullSearchList(prefix,0,false,0,"classSearch-7");</postChange>
+              </button>
+            </vbox>
+            <html>
+              <div style="height: 30px;" />
+            </html>
+            <html className="search-video">
+              <div class="searchGif">
+                <img src="img/search-move.gif" />
+              </div>
+              <div class="full-search-list" />
+              <div class="pagination pagination-second" />
+            </html>
+            <html class="loadGifVid">
+              <div class="searchGif2">
+                <img src="img/load-text.gif" />
+              </div>
+            </html>
+            <html className="consultation-video">
+              <span class="consultation-video-title">1-Création de couche -Layer V19072018</span>
+              <div class="video-iframe">
+                <iframe src="https://player.vimeo.com/video/241206308?rel=0" width="100%" height="100%" frameborder="0" />
+              </div>
+              <div class="video-description">Vidéo didactique montrant le déroulement pas à pas de la création d'une couche -Layer. Opération primordiale dans le processus de partage des fichiers de données spatiales dans des cartes.</div>
+              <div class="next-prev" columns="50% 50%">
+                <div class="prev-video" style="">
+                  <i class="fas fa-chevron-left" />
+                  <span class="">vidéo précedente</span>
+                </div>
+                <div class="next-video" style="">
+                  <span class="">vidéo suivante</span>
+                  <i class="fas fa-chevron-right" />
+                </div>
+              </div>
+            </html>
+          </vbox>
         </vbox>
-            
-        
-        <html> <div style="height: 30px;"> </div> </html>            
-        
+        <fieldset header="VIDÉOS DIDACTIQUES RÉCENTS" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation" />
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
     </screen>
-
-	</view>
-
-
+  </view>
 </search>
