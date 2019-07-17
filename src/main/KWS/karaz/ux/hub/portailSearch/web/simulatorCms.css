@@ -13,7 +13,7 @@
     left: 0;
     font-size: 15px;
     right: 0;
-    height: 475px;
+    max-height: 475px;
     overflow: auto;
 }
 

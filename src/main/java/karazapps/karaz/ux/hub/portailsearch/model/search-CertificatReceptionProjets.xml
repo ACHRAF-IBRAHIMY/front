@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="CertificatReceptionProjets" label="Certificat de réception de projets">
-
+  <query />
+  <data>
     <query>
+      <search />
+      <idObject />
+      <parentP />
     </query>
-    <data>
-        <query>
-            <search />
-            <idObject />
-            <parentP />
-        </query>
-        <collapsed>false</collapsed>
-    </data>
-    <view>
-        <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-                 <script postLoad="true">
-                 removeLastRootPage(userName);
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">removeLastRootPage(userName);
           $(".rokhas-home").click(function(){
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });      
@@ -66,652 +63,510 @@
         $(".header-div-toggle .dropdown-content").slideDown();
     }).mouseleave(function(){
         $(".header-div-toggle .dropdown-content").slideUp();
-    });
-          
-         </script>
-         <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
-                </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
-            </vbox>
-            
-            <vbox columns="60% 25% 15%" className="header-div-toggle">
- <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a>Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
-
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-                 
-            </vbox>
-        </vbox>
-            <html id="hSeparator">
-                <div style="height: 30px;" />
-
+    });</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="70% 30%">
+        <fieldset label="AUTORISATIONS URBANISTIQUES" collapsible="false" className="pcd-header-CRP div-det-acc PDC-hov-title">
+          <vbox className="accp">
+            <html>
+              <span style="text-align:left;color:#333;" class="title-4x b-title">
+                <i class="fa fa-check-square-o" style="margin-right:10px" />
+                Certificat de réception provisoire et définitive
+              </span>
             </html>
-
-            <vbox columns="70% 30%">
-
-                <fieldset label="AUTORISATIONS URBANISTIQUES" collapsible="false" className="pcd-header-CRP div-det-acc PDC-hov-title">   
-               
-                    <vbox className="accp">
-                        <html>
-                            <span style="text-align:left;color:#333;" class="title-4x b-title">
-                                <i class="fa fa-check-square-o" style="margin-right:10px" />
-                                Certificat de réception provisoire et définitive
-                            </span>
-                        </html>
-                        <vbox className="desc">
-                            <html>
-                                <p>
-                                    Est concerné par la procédure de réception tout projet de type lotissement ou groupements d'habitation et de façon général tout projet contenant des voies, 
+            <vbox className="desc">
+              <html>
+                <p>Est concerné par la procédure de réception tout projet de type lotissement ou groupements d'habitation et de façon général tout projet contenant des voies, 
                                     réseaux ou équipement à céder à la commune. Une fois le projet réalisé, sa réception par la commission constituée à cet effet permet à l'administration communale de s'assurer que les travaux d'aménagement, 
-                                    de viabilité et d'assainissement exécutés, sont conformes à ceux prévus au projet autorisé.
-                                </p>
-                            </html>
-                        </vbox>
-                        <vbox className="note-danger cl-orange PCD-gap-ic" columns="5% 95%">
-                            <html style="align-self: center;">
-                                <i class="fas fa-exclamation-triangle" />
-                            </html>
-                            <html>
-                                <p>
-                                    Notez que les démarches, documents requis et toute autre information indiqués par la plateforme Rokhas.ma sont à titre strictement indicatif. Il reste de la responsabilité du demandeur, de
-                                    <span style="text-decoration: underline;">se renseigner auprès des administrations compétentes</span>
-                                     sur toute modification réglementaire ou procédurale survenue.
-                                </p>
-                            </html>
-                        </vbox>
-                        <vbox>
-                            <html className="tags">
-                                <a href="#fs1">Étapes clés</a>
-                                |
-                                <a href="#fs2">Documents requis</a>
-                                |
-                                <a href="#fs3">Membres commission</a>
-                                |
-                                <a href="#fs4">Résultat</a>
-                                |
-                                <a href="#fs5">Référentiel juridique</a>
-                                |
-                                <a href="#fs6">Informations complémentaires</a>
-                            </html>
-                        </vbox>
-                        <vbox className="fieldSets">
-                            <fieldSet header="Étapes clés" className="fs1">
-                                <html className="hr-fieldset">
-                                    <hr />
-                                </html>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">1</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Saisie de la demande</span>
-                                        </html>
-                                        <button className="but-orange" label="Demandeur " />
-                                        <html>
-                                            <p>Saisie en ligne de la demande en fournissant le données relatives au projet et au maitre d'ouvrage.</p>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">2</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Attachement des documents requis</span>
-                                        </html>
-                                        <button className="but-orange" label="Demandeur " />
-                                        <html>
-                                            <p>Numérisation et attachement des documents requis et optionnellement des documents complémentaires apportant une information utile à l'instruction du dossier.</p>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">3</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Vérification du dossier numérique</span>
-                                        </html>
-
-                                        <button className="but-blue" label="Commune" />
-                                        
-                                        <html>
-                                            <p>Vérification de la complétude sur le plan administratif des documents numériques et déclenchement de la commission mixte.</p>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">4</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>
-                                                Instruction du dossier par les membres commission
-                                            </span>
-                                        </html>
-                                        <button className="but-blue" label="Membres commission" />
-                                        <html>
-                                            <p>Instruction du dossier sous format numérique et émission d'avis après visite sur site le cas échéant.</p>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">5</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Tenue commission</span>
-                                        </html>
-                                        <button className="but-blue" label="Secrétaire commission" />
-                                        <button className="but-blue" label="Membres commission" />
-                                        <html>
-                                            <p>A l'issue de la réunion de la commission, il est dressé, suivant le cas, soit un procès-verbal de réception provisoire des travaux, soit un constat mentionnant un défaut de conformité entre les travaux effectués et les documents approuvés.</p>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">6</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Paiement des taxes</span>
-                                        </html>
-                                        <button className="but-orange" label="Demandeur " />
-                                        <button className="but-blue" label="Régisseur" />
-                                        <html>
-                                            <p>Encaissement des montants des taxes de construction et taxes d'occupation du domaine public avant génération du numéro d'autorisation.</p>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">7</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Contrôle des documents avant e-signature</span>
-                                        </html>
-                                        <button className="but-blue" label="Secrétariat" />
-                                        <html>
-                                            <p>Vérification finale de documents à délivrer avant soumission au président de la commune pour signature électronique.</p>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">8</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>e-Signature des documents à délivrer</span>
-                                        </html>
-                                        <button className="but-blue" label="Président commune" />
-                                        <html>
-                                            <p>Signature des documents d'autorisation du projet (Voire section <u>Documents délivrés</u>).</p>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-
-                                <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
-                                    <html>
-                                        <i class="fas fa-exclamation-triangle" />
-                                    </html>
-                                    <html>
-                                        <p>La procédure de réception définitive est déclenchée 12 mois après la réception provisoire et suit les mêmes étapes de la réception provisoire avec comme objectif cette fois-ci de vérifier que la voirie et les réseaux divers ne présentent aucune malfaçon.</p>
-                                    </html>
-                                </vbox>  
-
-                                <vbox className="scroll-top">
-                                    <html columns="100%">
-                                        <span class="scroll-top-sp">
-                                            <i class="fas fa-angle-double-left" />
-                                            <span>Haut</span>
-                                        </span>
-                                    </html>
-                                </vbox>
-                            </fieldSet>
-
-                            <fieldSet header="Documents requis au dépôt" className="fs2">
-                                <html className="hr-fieldset">
-                                    <hr />
-                                </html>
-                                <!-- <vbox className="title-principale">
+                                    de viabilité et d'assainissement exécutés, sont conformes à ceux prévus au projet autorisé.</p>
+              </html>
+            </vbox>
+            <vbox className="note-danger cl-orange PCD-gap-ic" columns="5% 95%">
+              <html style="align-self: center;">
+                <i class="fas fa-exclamation-triangle" />
+              </html>
+              <html>
+                <p>
+                  Notez que les démarches, documents requis et toute autre information indiqués par la plateforme Rokhas.ma sont à titre strictement indicatif. Il reste de la responsabilité du demandeur, de
+                  <span style="text-decoration: underline;">se renseigner auprès des administrations compétentes</span>
+                  sur toute modification réglementaire ou procédurale survenue.
+                </p>
+              </html>
+            </vbox>
+            <vbox>
+              <html className="tags">
+                <a href="#fs1">Étapes clés</a>
+                |
+                <a href="#fs2">Documents requis</a>
+                |
+                <a href="#fs3">Membres commission</a>
+                |
+                <a href="#fs4">Résultat</a>
+                |
+                <a href="#fs5">Référentiel juridique</a>
+                |
+                <a href="#fs6">Informations complémentaires</a>
+              </html>
+            </vbox>
+            <vbox className="fieldSets">
+              <fieldSet header="Étapes clés" className="fs1">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">1</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Saisie de la demande</span>
+                    </html>
+                    <button className="but-orange" label="Demandeur " />
+                    <html>
+                      <p>Saisie en ligne de la demande en fournissant le données relatives au projet et au maitre d'ouvrage.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">2</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Attachement des documents requis</span>
+                    </html>
+                    <button className="but-orange" label="Demandeur " />
+                    <html>
+                      <p>Numérisation et attachement des documents requis et optionnellement des documents complémentaires apportant une information utile à l'instruction du dossier.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">3</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Vérification du dossier numérique</span>
+                    </html>
+                    <button className="but-blue" label="Commune" />
+                    <html>
+                      <p>Vérification de la complétude sur le plan administratif des documents numériques et déclenchement de la commission mixte.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">4</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Instruction du dossier par les membres commission</span>
+                    </html>
+                    <button className="but-blue" label="Membres commission" />
+                    <html>
+                      <p>Instruction du dossier sous format numérique et émission d'avis après visite sur site le cas échéant.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">5</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Tenue commission</span>
+                    </html>
+                    <button className="but-blue" label="Secrétaire commission" />
+                    <button className="but-blue" label="Membres commission" />
+                    <html>
+                      <p>A l'issue de la réunion de la commission, il est dressé, suivant le cas, soit un procès-verbal de réception provisoire des travaux, soit un constat mentionnant un défaut de conformité entre les travaux effectués et les documents approuvés.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">6</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Paiement des taxes</span>
+                    </html>
+                    <button className="but-orange" label="Demandeur " />
+                    <button className="but-blue" label="Régisseur" />
+                    <html>
+                      <p>Encaissement des montants des taxes de construction et taxes d'occupation du domaine public avant génération du numéro d'autorisation.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">7</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Contrôle des documents avant e-signature</span>
+                    </html>
+                    <button className="but-blue" label="Secrétariat" />
+                    <html>
+                      <p>Vérification finale de documents à délivrer avant soumission au président de la commune pour signature électronique.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">8</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>e-Signature des documents à délivrer</span>
+                    </html>
+                    <button className="but-blue" label="Président commune" />
+                    <html>
+                      <p>
+                        Signature des documents d'autorisation du projet (Voire section
+                        <u>Documents délivrés</u>
+                        ).
+                      </p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
+                  <html>
+                    <i class="fas fa-exclamation-triangle" />
+                  </html>
+                  <html>
+                    <p>La procédure de réception définitive est déclenchée 12 mois après la réception provisoire et suit les mêmes étapes de la réception provisoire avec comme objectif cette fois-ci de vérifier que la voirie et les réseaux divers ne présentent aucune malfaçon.</p>
+                  </html>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+              <fieldSet header="Documents requis au dépôt" className="fs2">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <!-- <vbox className="title-principale">
                                     <html>
                                         <span>Liste des pièces à fournir d’Etude d’Impact sur l’Environnement</span>
                                     </html>
                                 </vbox> -->
-                                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">1</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Demande de certificat de réception  provisoire ou définitive</span>
-                                        </html>
-                                        <html>
-                                            <p>Demande adressée par le pétitionnaire au président du conseil communal portant déclaration d'achèvement des travaux</p>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                            <i class="far fa-file-code" style="color:orange;" />
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">2</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Attestation de conformité en matière de télécommunication</span>
-                                        </html>
-                                        <html>
-                                            <p>Attestation de conformité des travaux délivrée par les services compétents en matière de télécommunications.</p>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                            <i class="far fa-file-alt" />
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                                    <html className="gen-num-html">
-                                        <span class="gen-num">3</span>
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Attestation de conformité délivrée par l'architecte</span>
-                                        </html>
-                                        <html>
-                                            <p>Attestation signée par l'architecte concepteur du projet attestant de la conformité des travaux réalisés aux plans autorisés ainsi qu'aux données mentionnées sur la décision d'autorisation de construction.</p>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                            <i class="far fa-file-code" style="color:orange;" />
-                                        </html>
-                                    </vbox>
-
-                                </vbox>
-
-                                <vbox style="margin-left: 7vw;">
-                                    <html columns="100%">
-                                        <i class="far fa-file-code" style="color:orange;" />
-                                        <span style="font-size:8px; color:#999999;">Document généré par Rokhas</span>
-                                    </html>
-                                    <html columns="100%">
-                                        <i class="far fa-file-alt" style="color:#666666;" />
-                                        <span style="font-size:8px; color:#999999;">Document à numériser et attacher</span>
-                                    </html>
-                                </vbox>
-
-                                
-                                <vbox className="scroll-top">
-                                    <html columns="100%">
-                                        <span class="scroll-top-sp">
-                                            <i class="fas fa-angle-double-left" />
-                                            <span>Haut</span>
-                                        </span>
-                                    </html>
-                                </vbox>
-                            </fieldSet>
-
-                            
-
-                            <fieldSet header="MEMBRES DE COMMISSION" className="fs3">
-                                <html className="hr-fieldset">
-                                    <hr />
-                                </html>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="fas fa-user-circle" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Commune</span>
-                                        </html>
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="fas fa-user-circle" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Préfecture ou de la province</span>
-                                        </html>
-                                       
-                                    </vbox>
-                                </vbox>
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="fas fa-user-circle" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Agence urbaine</span>
-                                        </html>
-
-                                    </vbox>
-                                </vbox>
-
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="fas fa-user-circle" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Services de la conservation foncière et des travaux topographiques</span>
-                                        </html>
-
-                                    </vbox>
-                                </vbox>
-
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="fas fa-user-circle" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Services chargés de la distribution d'eau et d'électricité</span>
-                                        </html>
-
-                                    </vbox>
-                                </vbox>
-
-                                <vbox className="p-list-but" columns="10% 90%">
-                                    <html className="gen-num-html">
-                                        <span class="fas fa-user-circle" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Opérateur en charge des télécommunications</span>
-                                        </html>
-
-                                    </vbox>
-                                </vbox>
-                                
-                                <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
-                                    <html>
-                                        <i class="fas fa-exclamation-triangle" />
-                                    </html>
-                                    <html>
-                                        <p>D'autres membres non permanents peuvent être convoqués dépendamment de la nature du projet</p>
-                                    </html>
-                                </vbox>    
-
-                                <vbox className="scroll-top">
-                                    <html columns="100%">
-                                        <span class="scroll-top-sp">
-                                            <i class="fas fa-angle-double-left" />
-                                            <span>Haut</span>
-                                        </span>
-                                    </html>
-                                </vbox>
-                            </fieldSet>
-
-                            <fieldSet label="DOCUMENTS DÉLIVRÉS" className="fs4">
-                                <html className="hr-fieldset">
-                                    <hr />
-                                </html>
-                                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                                    <html className="gen-num-html">
-                                        <span class="far fa-check-circle" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Certificat de réception provisoire ou définitive signé par le président de la commune</span>
-                                        </html>
-                                        <html>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon cl-orange">
-                                        <html>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                            <i class="far fa-file-alt" />
-                                        </html>
-                                    </vbox>
-
-                                </vbox>
-                                
-                    
-                             
-
-                            
-
-                                <vbox className="scroll-top">
-                                    <html columns="100%">
-                                        <span class="scroll-top-sp">
-                                            <i class="fas fa-angle-double-left" />
-                                            <span>Haut</span>
-                                        </span>
-                                    </html>
-                                </vbox>
-                            </fieldSet>
-
-                            <fieldSet label="RÉFÉRENTIEL JURIDIQUE" className="fs5">
-                                <html className="hr-fieldset">
-                                    <hr />
-                                </html>
-          
-                                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                                    <html className="gen-num-html">
-                                        <span class="fas fa-gavel" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Dahir n° 1-92-7 du 15 hija 1412 (17 juin 1992) portant promulgation de la loi n° 25-90 relative aux lotissements, groupes d'habitations et morcellements</span>
-                                        </html>
-                                        
-                                    </vbox>
-                                    <vbox className="doc-icon cl-orange">
-                                        <html>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                            <i class="far fa-file-alt" />
-                                        </html>
-                                    </vbox>
-
-                                </vbox>
-                               
-                                
-                                
-                                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                                    <html className="gen-num-html">
-                                        <span class="fas fa-gavel" />
-                                    </html>
-                                    <vbox>
-                                        <html className="inline-html">
-                                            <span>Décret n° 2-92-833 du 25 Rabii 2 1414 (12 Octobre 1933) pris pour l'application de la loi n° 25.90 relative aux lotissements, groupes d'habitations et morcellements</span>
-                                        </html>
-
-                                    </vbox>
-                                    <vbox className="doc-icon cl-orange">
-                                        <html>
-                                        </html>
-                                    </vbox>
-                                    <vbox className="doc-icon">
-                                        <html>
-                                            <i class="far fa-file-alt" />
-                                        </html>
-                                    </vbox>
-
-                                </vbox>
-                                <vbox className="scroll-top">
-                                    <html columns="100%">
-                                        <span class="scroll-top-sp">
-                                            <i class="fas fa-angle-double-left" />
-                                            <span>Haut</span>
-                                        </span>
-                                    </html>
-                                </vbox>
-                            </fieldSet>
-
-                        </vbox>
-
-                    </vbox>
-                
-                </fieldset>
-                <vbox>
-                <fieldset header="ANNONCES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color">
-                <!-- <i class="fas fa-info-circle PCD-tooltip" title="Il s'agit d'indicateurs contextuels représentants la performances relatifs au processus, à l'entité ou à l'utilisateur concerné"/> -->
-                    <html>
-                        <div class="vpanel-body-title PCD-filtre-scf">
-                            <i class="fas fa-filter" style="font-size:13px;" /><span>Filtres</span>
-                            
-                        </div>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">1</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Demande de certificat de réception  provisoire ou définitive</span>
                     </html>
-                    
-                    <vbox className="PCD-hp-box ">
-                        <html>
-                        <div class="vpanel-body-title PCD-parent-ann">
-                            <i class="fas fa-chart-line" /><span>Etudes de marchés</span> 
-                            <i class="fas fa-info-circle PCD-tooltip" title="Représente le délai moyen (en jour) que je mets pour valider mon avis à compter du jour de la tenue commission" />
-                        </div>
-                        <div class="PCD-vpanel-body-icon"><i class="fas fa-shopping-cart" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-
-                        </html>
-                    </vbox>
                     <html>
-                    <div style="height: 50px;"> </div>
-
+                      <p>Demande adressée par le pétitionnaire au président du conseil communal portant déclaration d'achèvement des travaux</p>
                     </html>
-                    <vbox className="PCD-hp-box ">
-                        <html>
-                        <div class="vpanel-body-title PCD-parent-ann">
-                            <i class="far fa-edit" /><span>votre e-parapheur</span>
-                            <i class="fas fa-info-circle PCD-tooltip" title="Représente l'évolution des délais d'emission des PV commission" />
-                        </div>
-                        <div class="PCD-vpanel-body-icon"><i class="far fa-edit" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-
-                        </html>
-                    </vbox>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
                     <html>
-                    <div style="height: 50px;"> </div>
-
+                      <i class="far fa-file-code" style="color:orange;" />
                     </html>
-                    <vbox className="PCD-hp-box ">
-                        <html>
-                        <div class="vpanel-body-title PCD-parent-ann">
-                            <i class="fas fa-cog" /><span>Transformation digitale</span>
-                            <i class="fas fa-info-circle PCD-tooltip" title="Représente l'évolution des délais d'emission des PV commission" />                        
-                        </div>
-                        <div class="PCD-vpanel-body-icon"><i class="fas fa-cogs" /></div>
-                        <div class="hp-sbox-btn">Détails</div>
-
-                        </html>
-                    </vbox>    
-                  
-                  
-                </fieldset>
+                  </vbox>
                 </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">2</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Attestation de conformité en matière de télécommunication</span>
+                    </html>
+                    <html>
+                      <p>Attestation de conformité des travaux délivrée par les services compétents en matière de télécommunications.</p>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">3</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Attestation de conformité délivrée par l'architecte</span>
+                    </html>
+                    <html>
+                      <p>Attestation signée par l'architecte concepteur du projet attestant de la conformité des travaux réalisés aux plans autorisés ainsi qu'aux données mentionnées sur la décision d'autorisation de construction.</p>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-code" style="color:orange;" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox style="margin-left: 7vw;">
+                  <html columns="100%">
+                    <i class="far fa-file-code" style="color:orange;" />
+                    <span style="font-size:8px; color:#999999;">Document généré par Rokhas</span>
+                  </html>
+                  <html columns="100%">
+                    <i class="far fa-file-alt" style="color:#666666;" />
+                    <span style="font-size:8px; color:#999999;">Document à numériser et attacher</span>
+                  </html>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+              <fieldSet header="MEMBRES DE COMMISSION" className="fs3">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Commune</span>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Préfecture ou de la province</span>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Agence urbaine</span>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Services de la conservation foncière et des travaux topographiques</span>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Services chargés de la distribution d'eau et d'électricité</span>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Opérateur en charge des télécommunications</span>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
+                  <html>
+                    <i class="fas fa-exclamation-triangle" />
+                  </html>
+                  <html>
+                    <p>D'autres membres non permanents peuvent être convoqués dépendamment de la nature du projet</p>
+                  </html>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+              <fieldSet label="DOCUMENTS DÉLIVRÉS" className="fs4">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="far fa-check-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Certificat de réception provisoire ou définitive signé par le président de la commune</span>
+                    </html>
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+              <fieldSet label="RÉFÉRENTIEL JURIDIQUE" className="fs5">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-gavel" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Dahir n° 1-92-7 du 15 hija 1412 (17 juin 1992) portant promulgation de la loi n° 25-90 relative aux lotissements, groupes d'habitations et morcellements</span>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-gavel" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Décret n° 2-92-833 du 25 Rabii 2 1414 (12 Octobre 1933) pris pour l'application de la loi n° 25.90 relative aux lotissements, groupes d'habitations et morcellements</span>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
             </vbox>
-
+          </vbox>
+        </fieldset>
+        <vbox>
+          <fieldset header="ANNONCES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color">
+            <!-- <i class="fas fa-info-circle PCD-tooltip" title="Il s'agit d'indicateurs contextuels représentants la performances relatifs au processus, à l'entité ou à l'utilisateur concerné"/> -->
             <html>
-                <div style="height: 30px;" />
+              <div class="vpanel-body-title PCD-filtre-scf">
+                <i class="fas fa-filter" style="font-size:13px;" />
+                <span>Filtres</span>
+              </div>
             </html>
-            
-
-        </screen>
-        <script onLoad="true">
-                
-        </script>
-        
-    </view>
-
-
+            <vbox className="PCD-hp-box ">
+              <html>
+                <div class="vpanel-body-title PCD-parent-ann">
+                  <i class="fas fa-chart-line" />
+                  <span>Etudes de marchés</span>
+                  <i class="fas fa-info-circle PCD-tooltip" title="Représente le délai moyen (en jour) que je mets pour valider mon avis à compter du jour de la tenue commission" />
+                </div>
+                <div class="PCD-vpanel-body-icon">
+                  <i class="fas fa-shopping-cart" />
+                </div>
+                <div class="hp-sbox-btn">Détails</div>
+              </html>
+            </vbox>
+            <html>
+              <div style="height: 50px;" />
+            </html>
+            <vbox className="PCD-hp-box ">
+              <html>
+                <div class="vpanel-body-title PCD-parent-ann">
+                  <i class="far fa-edit" />
+                  <span>votre e-parapheur</span>
+                  <i class="fas fa-info-circle PCD-tooltip" title="Représente l'évolution des délais d'emission des PV commission" />
+                </div>
+                <div class="PCD-vpanel-body-icon">
+                  <i class="far fa-edit" />
+                </div>
+                <div class="hp-sbox-btn">Détails</div>
+              </html>
+            </vbox>
+            <html>
+              <div style="height: 50px;" />
+            </html>
+            <vbox className="PCD-hp-box ">
+              <html>
+                <div class="vpanel-body-title PCD-parent-ann">
+                  <i class="fas fa-cog" />
+                  <span>Transformation digitale</span>
+                  <i class="fas fa-info-circle PCD-tooltip" title="Représente l'évolution des délais d'emission des PV commission" />
+                </div>
+                <div class="PCD-vpanel-body-icon">
+                  <i class="fas fa-cogs" />
+                </div>
+                <div class="hp-sbox-btn">Détails</div>
+              </html>
+            </vbox>
+          </fieldset>
+        </vbox>
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
+    </screen>
+    <script onLoad="true" />
+  </view>
 </search>

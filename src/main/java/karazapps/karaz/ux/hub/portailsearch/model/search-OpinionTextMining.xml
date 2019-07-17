@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="OpinionTextMining" label="Opinion TextMining">
-
-	<query>
-	</query>
-	<data>
-		<query>
-		</query>
-		<collapsed>false</collapsed>
-	</data>
-	<view>
-		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-        <script postLoad="true">
-            removeLastRootPage(userName);
+  <query />
+  <data>
+    <query />
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">removeLastRootPage(userName);
                 loadPageBytype(1);
                 $(".searchbuttun").click();
                 $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
@@ -139,263 +135,174 @@
                 });
                 paginationReset();
                 getMembers();
-                ESCall(12,null);
-        </script>
-        
-        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
-                </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
-            </vbox>
-            
-            <vbox columns="75% 25%" className="header-div-toggle">
-               <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a>Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
-
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-            </vbox>
-        </vbox>
-
-        <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-        <vbox columns="100%" className="stat-dashbord">
-            <vbox columns="100%">
-                <!--
+                ESCall(12,null);</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="100%" className="stat-dashbord">
+        <vbox columns="100%">
+          <!--
                    <vbox className="dashbord-left hp-box" columns="100%">
                     
                 </vbox>
                 -->
-                <vbox columns="100%">
-                    <vbox columns="33% 34% 33%" className="stat-div">
-                        <html>
-                            <div class="stat ow-vbox hp-box">
-                                <i class="fas fa-file-alt" />
-                                <div>
-                                    <span>0</span>
-                                    <span>Remarques</span>
-                                </div>
-                            </div>
-                        </html>
-                        <html>
-                            <div class="stat ow-vbox hp-box">
-                                <i class="fas fa-comment-alt" />
-                                <div>
-                                    <span>0</span>
-                                    <span>Avis</span>
-                                </div>
-                            </div>
-                        </html>
-                        <html>
-                            <div class="stat ow-vbox hp-box">
-                                <i class="fas fa-users" />
-                                <div>
-                                    <span>0</span>
-                                    <span>Membres</span>
-                                </div>
-                            </div>
-                        </html>
-                    </vbox>
-                    <vbox columns="50% 50%" className="dashbord-right fieldSets">
-                      <vbox>
-                         <fieldset header="OCCURRENCE DES MOTS DANS L'INDEX" className="d1">
-                             <html>
-                                 <div class="content">
-                                   <div class="config-bar">
-                                       <span class="sp sp1 fas fa-sort-numeric-up" />
-                                       <select class="s1">
-                                           <option value="12">12</option>
-                                           <option value="20">20</option>
-                                           <option value="40">40</option>
-                                           <option value="60">60</option>
-                                       </select>
-                                       <span class="separate-span" />
-                                       <span class="sp sp2 fas fa-users" />
-                                       <select class="s2">
-                                           <option value="null">TOUS LES MEMBRES</option>
-                                       </select>
-                                       <span class="separate-span" />
-                                       <span class="chart-type sp sp3 fas fa-chart-bar sp-active" />
-                                       <span class="chart-type sp sp4 fas fa-chart-pie" />
-                                       <span class="sp sp5 fas fa-redo-alt" />
-                                   </div>
-                                   <div class="chart-container" style="position: relative;width:95%;height: 619px;">
-                                    <canvas id="myChart" width="400" height="400" />
-                                    </div>
-                                </div>
-                             </html>
-                         </fieldset>
-                    </vbox>
-                        <vbox>
-                          <fieldSet header="RECHERCHE DANS LES AVIS" className="search-box">
-                            <html>
-                               <div class="input-bar content">
-                                    <input type="text" />
-                                    <button class="b b1 active">KEY</button>
-                                    <button class="b b2">MLT</button>
-                                    <button class="fas fa-search" />
-                                </div>
-                            </html>
-                            </fieldSet>
-                            
-                           <fieldSet header="LISTE DES MOTS EXISTES" className="d2">
-                               <html className="word-list-div word-list">
-                                <div class="content">
-                                    <div class="div">
-                                    <table class="exist-word-list tab">
-                                        
-                                    </table>
-                                    </div>
-                                    
-                                </div>
-                                <div class="pagination-word-list" style="margin-top: 30px;">
-                                        
-                                </div>    
-                                
-                            </html>
-                            <html className="word-list-div word-list-det">
-                                    
-                                <div class="back-div">
-                                        <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
-                                </div>
-                                 <div class="content">
-                                <div class="div">
-                                    <div class="div-d1">
-                                        <h4>Les mots dérivés :</h4>
-                                        <div class="div-d1-det" />
-                                    </div>
-                                    <div class="div-d2">
-                                        <h4>Remarques :</h4>
-                                        <table class="note-div-items tab">
-                                            
-                                        </table>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="pagination-otm">
-                                    
-                                </div>
-                            </html>
-                            <html className="word-list-div word-list-load-gif">
-                                <img src="img/load-text.gif" alt="" />
-                            </html>
-                            <html className="word-list-div word-list-text-avis">
-                               <div class="content">
-                                  <div class="avis-det-full">
-                                   <span class="back-span"><i class="fas fa-angle-double-left" /> Retour</span>
-                                   <div class="avis-det-membre">
-                                       MEMBRE : <span />
-                                   </div>
-                                   <div class="avis-det-avis">
-                                       AVIS : <p />
-                                   </div>
-                                   <button class="extract-notes-button">Extraire les remarques</button>
-                                   <div class="extract-notes" style="display:none">
-                                       
-                                   </div>
-                               </div>
-                               </div>
-                            </html>
-                            <html className="word-list-div mlt-search">
-                                <div class="back-div">
-                                        <span><i class="fas fa-angle-double-left" /> Retour à la liste des mots</span>
-                                </div>
-                                <div class="search-info">
-                                    <div class="word"><span /></div><div class="total-hits"><span /> Avis Similaires</div>
-                                </div>
-                                <div class="content">
-                                    <div style="margin:auto;color:#333;width:85%;margin-bottom:10px;font-size: 18px;">
-                                        <span>AVIS : </span>
-                                    </div>
-                                    <table class="note-div-items tab">
-                                        
-                                    </table>
-                                </div>
-                                <div class="pagination-otm-search">
-                                    
-                                </div>
-                            </html>
-                           </fieldSet>
-                        </vbox>         
-                        
-                    </vbox>
-                </vbox>
+          <vbox columns="100%">
+            <vbox columns="33% 34% 33%" className="stat-div">
+              <html>
+                <div class="stat ow-vbox hp-box">
+                  <i class="fas fa-file-alt" />
+                  <div>
+                    <span>0</span>
+                    <span>Remarques</span>
+                  </div>
+                </div>
+              </html>
+              <html>
+                <div class="stat ow-vbox hp-box">
+                  <i class="fas fa-comment-alt" />
+                  <div>
+                    <span>0</span>
+                    <span>Avis</span>
+                  </div>
+                </div>
+              </html>
+              <html>
+                <div class="stat ow-vbox hp-box">
+                  <i class="fas fa-users" />
+                  <div>
+                    <span>0</span>
+                    <span>Membres</span>
+                  </div>
+                </div>
+              </html>
             </vbox>
+            <vbox columns="50% 50%" className="dashbord-right fieldSets">
+              <vbox>
+                <fieldset header="OCCURRENCE DES MOTS DANS L'INDEX" className="d1">
+                  <html>
+                    <div class="content">
+                      <div class="config-bar">
+                        <span class="sp sp1 fas fa-sort-numeric-up" />
+                        <select class="s1">
+                          <option value="12">12</option>
+                          <option value="20">20</option>
+                          <option value="40">40</option>
+                          <option value="60">60</option>
+                        </select>
+                        <span class="separate-span" />
+                        <span class="sp sp2 fas fa-users" />
+                        <select class="s2">
+                          <option value="null">TOUS LES MEMBRES</option>
+                        </select>
+                        <span class="separate-span" />
+                        <span class="chart-type sp sp3 fas fa-chart-bar sp-active" />
+                        <span class="chart-type sp sp4 fas fa-chart-pie" />
+                        <span class="sp sp5 fas fa-redo-alt" />
+                      </div>
+                      <div class="chart-container" style="position: relative;width:95%;height: 619px;">
+                        <canvas id="myChart" width="400" height="400" />
+                      </div>
+                    </div>
+                  </html>
+                </fieldset>
+              </vbox>
+              <vbox>
+                <fieldSet header="RECHERCHE DANS LES AVIS" className="search-box">
+                  <html>
+                    <div class="input-bar content">
+                      <input type="text" />
+                      <button class="b b1 active">KEY</button>
+                      <button class="b b2">MLT</button>
+                      <button class="fas fa-search" />
+                    </div>
+                  </html>
+                </fieldSet>
+                <fieldSet header="LISTE DES MOTS EXISTES" className="d2">
+                  <html className="word-list-div word-list">
+                    <div class="content">
+                      <div class="div">
+                        <table class="exist-word-list tab" />
+                      </div>
+                    </div>
+                    <div class="pagination-word-list" style="margin-top: 30px;" />
+                  </html>
+                  <html className="word-list-div word-list-det">
+                    <div class="back-div">
+                      <span>
+                        <i class="fas fa-angle-double-left" />
+                        Retour à la liste des mots
+                      </span>
+                    </div>
+                    <div class="content">
+                      <div class="div">
+                        <div class="div-d1">
+                          <h4>Les mots dérivés :</h4>
+                          <div class="div-d1-det" />
+                        </div>
+                        <div class="div-d2">
+                          <h4>Remarques :</h4>
+                          <table class="note-div-items tab" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pagination-otm" />
+                  </html>
+                  <html className="word-list-div word-list-load-gif">
+                    <img src="img/load-text.gif" alt="" />
+                  </html>
+                  <html className="word-list-div word-list-text-avis">
+                    <div class="content">
+                      <div class="avis-det-full">
+                        <span class="back-span">
+                          <i class="fas fa-angle-double-left" />
+                          Retour
+                        </span>
+                        <div class="avis-det-membre">
+                          MEMBRE :
+                          <span />
+                        </div>
+                        <div class="avis-det-avis">
+                          AVIS :
+                          <p />
+                        </div>
+                        <button class="extract-notes-button">Extraire les remarques</button>
+                        <div class="extract-notes" style="display:none" />
+                      </div>
+                    </div>
+                  </html>
+                  <html className="word-list-div mlt-search">
+                    <div class="back-div">
+                      <span>
+                        <i class="fas fa-angle-double-left" />
+                        Retour à la liste des mots
+                      </span>
+                    </div>
+                    <div class="search-info">
+                      <div class="word">
+                        <span />
+                      </div>
+                      <div class="total-hits">
+                        <span />
+                        Avis Similaires
+                      </div>
+                    </div>
+                    <div class="content">
+                      <div style="margin:auto;color:#333;width:85%;margin-bottom:10px;font-size: 18px;">
+                        <span>AVIS :</span>
+                      </div>
+                      <table class="note-div-items tab" />
+                    </div>
+                    <div class="pagination-otm-search" />
+                  </html>
+                </fieldSet>
+              </vbox>
+            </vbox>
+          </vbox>
         </vbox>
-            
-        
-        <html> <div style="height: 30px;"> </div> </html>            
-        
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
     </screen>
-
-	</view>
-
-
+  </view>
 </search>

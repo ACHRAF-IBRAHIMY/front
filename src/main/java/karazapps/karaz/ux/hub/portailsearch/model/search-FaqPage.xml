@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="FaqPage" label="Faq Page">
-
-	<query>
-	</query>
-	<data>
-		<query>
-			<search />
-            <idObject />
-            <parentP />
-		</query>
-		<collapsed>false</collapsed>
-	</data>
-	<view>
-		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-        <script postLoad="true">
-     		    removeLastRootPage(userName);
+  <query />
+  <data>
+    <query>
+      <search />
+      <idObject />
+      <parentP />
+    </query>
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">removeLastRootPage(userName);
                 loadPageBytype(2);
                 $(".searchbuttun").click();
                 $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
@@ -31,18 +28,18 @@
 		        $(".header-div-toggle .dropdown-content").slideUp();
 		    }); 
 
-            Array.from(document.querySelectorAll(".div-full-search-bar .ow-field-input")).forEach(function(elm){
+            Array.from(document.querySelectorAll(".classSearch-2 .div-full-search-bar .ow-field-input")).forEach(function(elm){
                 elm.addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
+                    var x =  document.querySelector(".classSearch-2 #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x,1);
                 })
             });
             
             /* document.getElementsByClassName("div-full-search-bar")[0].getElementsByClassName("ow-field-input")[0].addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
+                    var x =  document.querySelector(".classSearch-2 #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,1);
+                    moveKey(e,x,1,"classSearch-2");
             }); */ 
 
             $(".no-response-find .btn-show-support-form").click(function(){
@@ -83,116 +80,27 @@
                 
                 Array.from(document.querySelectorAll(".divSearchBar .hp-search_field input")).forEach(function(elm){
                     autoCompleteSim(elm,"faq_index","QUESTIONS");
-                });
-
-        </script>
-        
-        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
-                </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
-            </vbox>
-            
-            <vbox columns="60% 25% 15%" className="header-div-toggle">
- <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a>Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
-
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-                 
-            </vbox>
-        </vbox>
-        <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-        <vbox columns="70% 30%">
-            
-            
+                });</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="70% 30%" className="classSearch-2">
         <vbox className="hp-box hp-small divSearch">
-            <vbox className="hp-box divSearchBar div-full-search-bar">
-                <html>
-                    <div class="vpanel-title">
-                        <div class="vpanel-title">
-                           <span>QUESTIONS FREQUENTES</span>
-                           <hr class="header-create-account-horizontal-line hr-hub" />
-                       </div>
-                    </div>
-                    <div class="hp-sbox-text">
-                        Vous trouverez ici des réponses complètes aux questions les plus fréquemment posées par les usagers et par les fonctionnaires. Vous pouvez y accéder soit en consultant les rubriques questions/réponses, soit en saisissant vos mots clés dans la zone de recherche ci-dessous.                    
-                    </div>
-                    <div style="height: 50px;" />
-                </html>    
-                <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Posez votre question ici ..." />
-                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                        <postChange>
-                                var prefix = $(".div-full-search-bar .hp-search_field input").val();
+          <vbox className="hp-box divSearchBar div-full-search-bar">
+            <html>
+              <div class="vpanel-title">
+                <div class="vpanel-title">
+                  <span>QUESTIONS FREQUENTES</span>
+                  <hr class="header-create-account-horizontal-line hr-hub" />
+                </div>
+              </div>
+              <div class="hp-sbox-text">Vous trouverez ici des réponses complètes aux questions les plus fréquemment posées par les usagers et par les fonctionnaires. Vous pouvez y accéder soit en consultant les rubriques questions/réponses, soit en saisissant vos mots clés dans la zone de recherche ci-dessous.</div>
+              <div style="height: 50px;" />
+            </html>
+            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+              <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Posez votre question ici ..." />
+              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                <postChange>var prefix = $(".classSearch-2 .div-full-search-bar .hp-search_field input").val();
                                 currentPage=0;
                                 var pp=root.query.parentP;
                                 if(pp==1){
@@ -200,252 +108,298 @@
                                 }
                                 removeExpanded(2);
                                 intializeFaqPages();
-                                restFullSearchList(prefix,0,false,pp);
-                                root.query.parentP=0;
-                         </postChange>
-                    </button>
-                </vbox>
-                    
-
-                <html>
-                    <div style="height: 40px;"> </div>
-                </html>   
-                <html>
-                    
-                </html>    
-                <vbox className="faq-vbox">
-                <html>
-                    <div class="searchGif">
-                                <img src="img/search-move.gif" />
+                                restFullSearchList(prefix,0,false,pp,"classSearch-2");
+                                root.query.parentP=0;</postChange>
+              </button>
+            </vbox>
+            <html>
+              <div style="height: 40px;" />
+            </html>
+            <html />
+            <vbox className="faq-vbox">
+              <html>
+                <div class="searchGif">
+                  <img src="img/search-move.gif" />
+                </div>
+              </html>
+              <html>
+                <div class="no-response-find" style="display:none;">
+                  <span class="">Aucune question ne correspond aux termes de recherche spécifiés.</span>
+                  <div>
+                    <button class="btn-show-support-form">Envoyer votre question à notre support</button>
+                  </div>
+                  <div class="support-form-over">
+                    <div class="support-form">
+                      <div class="title-suport-faq">Contactez-nous</div>
+                      <div class="f f1">
+                        <input type="email" placeholder="Email" />
+                      </div>
+                      <div class="f f2">
+                        <input type="tel" placeholder="Tele" />
+                      </div>
+                      <div class="f f3">
+                        <textarea name="" id="" placeholder="Allez-y, on vous écoute" cols="30" rows="10" />
+                      </div>
+                      <div class="f f4">
+                        <button>Envoyer</button>
+                      </div>
                     </div>
-                </html>
+                  </div>
+                </div>
+              </html>
+              <fieldset label="E-SIGN" className="faq-fieldset">
                 <html>
-                    <div class="no-response-find" style="display:none;">
-                        <span class="">Aucune question ne correspond aux termes de recherche spécifiés.</span>
-                        <div><button class="btn-show-support-form">Envoyer votre question à notre support</button></div>
-                        <div class="support-form-over">         
-                            <div class="support-form">
-                                <div class="title-suport-faq">Contactez-nous</div>
-                                <div class="f f1"><input type="email" placeholder="Email" /></div>
-                                <div class="f f2"><input type="tel" placeholder="Tele" /></div>
-                                <div class="f f3"><textarea name="" id="" placeholder="Allez-y, on vous écoute" cols="30" rows="10" /></div>
-                                <div class="f f4"><button>Envoyer</button></div>
-                            </div>
-                        </div>
+                  <div class="faq-qr full-search-list" />
+                  <div class="searchGif2" style="display:none">
+                    <img src="img/search-move.gif" />
+                  </div>
+                  <div class="pagination-new-style">
+                    <div class="pagination-1">
+                      <i class="fas fa-angle-double-left" />
+                      <i class="fas fa-angle-left" />
+                      <span>
+                        Page
+                        <span class="num-span">1</span>
+                        Sur
+                        <span>20</span>
+                      </span>
+                      <i class="fas fa-angle-right" />
+                      <i class="fas fa-angle-double-right" />
+                      <i class="fas fa-sync-alt" />
                     </div>
+                    <div class="pagination-2">
+                      <span>
+                        Page
+                        <span>1</span>
+                        -
+                        <span>10</span>
+                        /
+                        <span>43</span>
+                      </span>
+                    </div>
+                  </div>
                 </html>
-                        <fieldset label="E-SIGN" className="faq-fieldset">
-                            <html>
-                                <div class="faq-qr full-search-list" />
-                                <div class="searchGif2" style="display:none">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                  <div class="pagination-new-style">
-                                    <div class="pagination-1">
-                                        <i class="fas fa-angle-double-left" />
-                                        <i class="fas fa-angle-left" />
-                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
-                                        <i class="fas fa-angle-right" />
-                                        <i class="fas fa-angle-double-right" />
-                                        <i class="fas fa-sync-alt" />
-                                    </div>
-                                    
-                                    <div class="pagination-2">
-                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-                        <fieldset label="GENERAL" className="faq-fieldset">
-                            <html>
-                                <div class="faq-qr full-search-list" />
-                                <div class="searchGif2" style="display:none">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                <div class="pagination-new-style">
-                                    <div class="pagination-1">
-                                        <i class="fas fa-angle-double-left" />
-                                        <i class="fas fa-angle-left" />
-                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
-                                        <i class="fas fa-angle-right" />
-                                        <i class="fas fa-angle-double-right" />
-                                        <i class="fas fa-sync-alt" />
-                                    </div>
-                                    
-                                    <div class="pagination-2">
-                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-                        <fieldset label="DOCUMENTS" className="faq-fieldset">
-                            <html>
-                                <div class="faq-qr full-search-list" />
-                                <div class="searchGif2" style="display:none">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                <div class="pagination-new-style">
-                                    <div class="pagination-1">
-                                        <i class="fas fa-angle-double-left" />
-                                        <i class="fas fa-angle-left" />
-                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
-                                        <i class="fas fa-angle-right" />
-                                        <i class="fas fa-angle-double-right" />
-                                        <i class="fas fa-sync-alt" />
-                                    </div>
-                                    
-                                    <div class="pagination-2">
-                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-                        <fieldset label="ACCES A LA PLATEFORME" className="faq-fieldset">
-                            <html>
-                                <div class="faq-qr full-search-list" />
-                                <div class="searchGif2" style="display:none">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                <div class="pagination-new-style">
-                                    <div class="pagination-1">
-                                        <i class="fas fa-angle-double-left" />
-                                        <i class="fas fa-angle-left" />
-                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
-                                        <i class="fas fa-angle-right" />
-                                        <i class="fas fa-angle-double-right" />
-                                        <i class="fas fa-sync-alt" />
-                                    </div>
-                                    
-                                    <div class="pagination-2">
-                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-                        <fieldset label="ARCHITECTE" className="faq-fieldset">
-                            <html>
-                                <div class="faq-qr full-search-list" />
-                                <div class="searchGif2" style="display:none">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                <div class="pagination-new-style">
-                                    <div class="pagination-1">
-                                        <i class="fas fa-angle-double-left" />
-                                        <i class="fas fa-angle-left" />
-                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
-                                        <i class="fas fa-angle-right" />
-                                        <i class="fas fa-angle-double-right" />
-                                        <i class="fas fa-sync-alt" />
-                                    </div>
-                                    
-                                    <div class="pagination-2">
-                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-                        <fieldset label="ADMINISTRATION" className="faq-fieldset">
-                            <html>
-                                <div class="faq-qr full-search-list" />
-                                <div class="searchGif2" style="display:none">
-                                    <img src="img/search-move.gif" />
-                                </div>
-                                <div class="pagination-new-style">
-                                    <div class="pagination-1">
-                                        <i class="fas fa-angle-double-left" />
-                                        <i class="fas fa-angle-left" />
-                                        <span>Page <span class="num-span">1</span> Sur <span>20</span></span>
-                                        <i class="fas fa-angle-right" />
-                                        <i class="fas fa-angle-double-right" />
-                                        <i class="fas fa-sync-alt" />
-                                    </div>
-                                    
-                                    <div class="pagination-2">
-                                        <span>Page <span>1</span>-<span>10</span>/<span>43</span></span>
-                                    </div>
-                                </div>
-                            </html>
-                        </fieldset>
-                    </vbox>     
-                </vbox>    
-        </vbox> 
-        <vbox>
-                    <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
-
-                        <!-- start modification -->
-                        <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-
-                            <html>
-                                <div class="NFQ-quest-type-esign NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
-
-                            <html>
-                                <div class="NFQ-quest-type-general NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-
-                            <html>
-                                <div class="NFQ-quest-type-document NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-
-                            <html>
-                                <div class="NFQ-quest-type-plat NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-
-                            <html>
-                                <div class="NFQ-quest-type-archit NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-
-                            <html>
-                                <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <!-- end modification -->
-
-                    </fieldset>
-                </vbox>
-              
+              </fieldset>
+              <fieldset label="GENERAL" className="faq-fieldset">
+                <html>
+                  <div class="faq-qr full-search-list" />
+                  <div class="searchGif2" style="display:none">
+                    <img src="img/search-move.gif" />
+                  </div>
+                  <div class="pagination-new-style">
+                    <div class="pagination-1">
+                      <i class="fas fa-angle-double-left" />
+                      <i class="fas fa-angle-left" />
+                      <span>
+                        Page
+                        <span class="num-span">1</span>
+                        Sur
+                        <span>20</span>
+                      </span>
+                      <i class="fas fa-angle-right" />
+                      <i class="fas fa-angle-double-right" />
+                      <i class="fas fa-sync-alt" />
+                    </div>
+                    <div class="pagination-2">
+                      <span>
+                        Page
+                        <span>1</span>
+                        -
+                        <span>10</span>
+                        /
+                        <span>43</span>
+                      </span>
+                    </div>
+                  </div>
+                </html>
+              </fieldset>
+              <fieldset label="DOCUMENTS" className="faq-fieldset">
+                <html>
+                  <div class="faq-qr full-search-list" />
+                  <div class="searchGif2" style="display:none">
+                    <img src="img/search-move.gif" />
+                  </div>
+                  <div class="pagination-new-style">
+                    <div class="pagination-1">
+                      <i class="fas fa-angle-double-left" />
+                      <i class="fas fa-angle-left" />
+                      <span>
+                        Page
+                        <span class="num-span">1</span>
+                        Sur
+                        <span>20</span>
+                      </span>
+                      <i class="fas fa-angle-right" />
+                      <i class="fas fa-angle-double-right" />
+                      <i class="fas fa-sync-alt" />
+                    </div>
+                    <div class="pagination-2">
+                      <span>
+                        Page
+                        <span>1</span>
+                        -
+                        <span>10</span>
+                        /
+                        <span>43</span>
+                      </span>
+                    </div>
+                  </div>
+                </html>
+              </fieldset>
+              <fieldset label="ACCES A LA PLATEFORME" className="faq-fieldset">
+                <html>
+                  <div class="faq-qr full-search-list" />
+                  <div class="searchGif2" style="display:none">
+                    <img src="img/search-move.gif" />
+                  </div>
+                  <div class="pagination-new-style">
+                    <div class="pagination-1">
+                      <i class="fas fa-angle-double-left" />
+                      <i class="fas fa-angle-left" />
+                      <span>
+                        Page
+                        <span class="num-span">1</span>
+                        Sur
+                        <span>20</span>
+                      </span>
+                      <i class="fas fa-angle-right" />
+                      <i class="fas fa-angle-double-right" />
+                      <i class="fas fa-sync-alt" />
+                    </div>
+                    <div class="pagination-2">
+                      <span>
+                        Page
+                        <span>1</span>
+                        -
+                        <span>10</span>
+                        /
+                        <span>43</span>
+                      </span>
+                    </div>
+                  </div>
+                </html>
+              </fieldset>
+              <fieldset label="ARCHITECTE" className="faq-fieldset">
+                <html>
+                  <div class="faq-qr full-search-list" />
+                  <div class="searchGif2" style="display:none">
+                    <img src="img/search-move.gif" />
+                  </div>
+                  <div class="pagination-new-style">
+                    <div class="pagination-1">
+                      <i class="fas fa-angle-double-left" />
+                      <i class="fas fa-angle-left" />
+                      <span>
+                        Page
+                        <span class="num-span">1</span>
+                        Sur
+                        <span>20</span>
+                      </span>
+                      <i class="fas fa-angle-right" />
+                      <i class="fas fa-angle-double-right" />
+                      <i class="fas fa-sync-alt" />
+                    </div>
+                    <div class="pagination-2">
+                      <span>
+                        Page
+                        <span>1</span>
+                        -
+                        <span>10</span>
+                        /
+                        <span>43</span>
+                      </span>
+                    </div>
+                  </div>
+                </html>
+              </fieldset>
+              <fieldset label="ADMINISTRATION" className="faq-fieldset">
+                <html>
+                  <div class="faq-qr full-search-list" />
+                  <div class="searchGif2" style="display:none">
+                    <img src="img/search-move.gif" />
+                  </div>
+                  <div class="pagination-new-style">
+                    <div class="pagination-1">
+                      <i class="fas fa-angle-double-left" />
+                      <i class="fas fa-angle-left" />
+                      <span>
+                        Page
+                        <span class="num-span">1</span>
+                        Sur
+                        <span>20</span>
+                      </span>
+                      <i class="fas fa-angle-right" />
+                      <i class="fas fa-angle-double-right" />
+                      <i class="fas fa-sync-alt" />
+                    </div>
+                    <div class="pagination-2">
+                      <span>
+                        Page
+                        <span>1</span>
+                        -
+                        <span>10</span>
+                        /
+                        <span>43</span>
+                      </span>
+                    </div>
+                  </div>
+                </html>
+              </fieldset>
+            </vbox>
+          </vbox>
         </vbox>
-            
-        
-        <html> <div style="height: 30px;"> </div> </html>            
-        
+        <vbox>
+          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+            <!-- start modification -->
+            <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+              <html>
+                <div class="NFQ-quest-type-esign NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
+              <html>
+                <div class="NFQ-quest-type-general NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+              <html>
+                <div class="NFQ-quest-type-document NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
+              <html>
+                <div class="NFQ-quest-type-plat NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
+              <html>
+                <div class="NFQ-quest-type-archit NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
+              <html>
+                <div class="NFQ-quest-type-adminis NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <!-- end modification -->
+          </fieldset>
+        </vbox>
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
     </screen>
-
-	</view>
-
-
+  </view>
 </search>

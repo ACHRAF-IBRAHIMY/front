@@ -1,4 +1,3 @@
-
 var simple_chart_config = {
     chart: {
         container: "#tree-simple",
@@ -1875,72 +1874,95 @@ function deletedCol(tree,array,newObj){
     return str;
 }
 
-/* auto complete */
-function autoCompleteSim(inp,index,field,type){
-    if(type==0){
-        
-        inp.addEventListener("input",function(){
-            var val = this.value;
-            var arr = searching(val,index);
-            createListeResLoc(this,arr,val,2);
-        },false);
-        
-        inp.addEventListener("keydown", function(e) {
-            var x = document.getElementById("autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
-    
-            if (e.keyCode == 40) {
-                /*If the arrow DOWN key is pressed,
-                increase the currentFocus variable:*/
-                currentFocus++;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 38) { //up
-                /*If the arrow UP key is pressed,
-                decrease the currentFocus variable:*/
-                currentFocus--;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 13) {
-                /*If the ENTER key is pressed, prevent the form from being submitted,*/
-                e.preventDefault();
-                if (currentFocus > -1) {
-                    /*and simulate a click on the "active" item:*/
-                    if (x) x[currentFocus].click();
-                }
-            }
-        },false);
-    }else{
-
-       
-            inp.addEventListener("input",function(){
-                var req = inp.value;
-                restAutoComplete2(inp,req,index,field);
-            });
-            
-        
-        
-/*
-        inp.addEventListener("keydown", function(e) {
-            var x = document.getElementById("autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
-    
-            if (e.keyCode == 40) {
-                currentFocus++;
-                addActive(x);
-            } else if (e.keyCode == 38) { //up
-                currentFocus--;
-                addActive(x);
-            } else if (e.keyCode == 13) {
-                e.preventDefault();
-                if (currentFocus > -1) {
-                    if (x) x[currentFocus].click();
-                }
-            }
-        },false);*/
-    }
-}
-
+  /* auto complete */
+  function autoCompleteSim(inp,index,field,type){
+      if(type==0){
+          
+          inp.addEventListener("input",function(){
+              var val = this.value;
+              var arr = searching(val,index);
+              createListeResLoc(this,arr,val,2);
+          },false);
+          
+          inp.addEventListener("keydown", function(e) {
+              var x = document.getElementById("autocomplete-list");
+              if (x) x = x.getElementsByTagName("div");
+      
+              if (e.keyCode == 40) {
+                  /*If the arrow DOWN key is pressed,
+                  increase the currentFocus variable:*/
+                  currentFocus++;
+                  /*and and make the current item more visible:*/
+                  addActive(x);
+              } else if (e.keyCode == 38) { //up
+                  /*If the arrow UP key is pressed,
+                  decrease the currentFocus variable:*/
+                  currentFocus--;
+                  /*and and make the current item more visible:*/
+                  addActive(x);
+              } else if (e.keyCode == 13) {
+                  /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                  e.preventDefault();
+                  if (currentFocus > -1) {
+                      /*and simulate a click on the "active" item:*/
+                      if (x) x[currentFocus].click();
+                  }
+              }
+          },false);
+      }else{
+              inp.addEventListener("input",function(){
+                  var req = inp.value;
+                  restAutoComplete2(inp,req,index,field);
+              });
+              
+          if(index=="simulator_index_qr"){
+              inp.addEventListener("keydown", function(e) {
+                  var x = document.getElementById("autocomplete-list");
+                  if (x) x = x.getElementsByTagName("div");
+          
+                  if (e.keyCode == 40) {
+                      /*If the arrow DOWN key is pressed,
+                      increase the currentFocus variable:*/
+                      currentFocus++;
+                      /*and and make the current item more visible:*/
+                      addActive(x);
+                  } else if (e.keyCode == 38) { //up
+                      /*If the arrow UP key is pressed,
+                      decrease the currentFocus variable:*/
+                      currentFocus--;
+                      /*and and make the current item more visible:*/
+                      addActive(x);
+                  } else if (e.keyCode == 13) {
+                      /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                      e.preventDefault();
+                      if (currentFocus > -1) {
+                          /*and simulate a click on the "active" item:*/
+                          if (x) x[currentFocus].click();
+                      }
+                  }
+              },false);
+          }
+          
+  /*
+          inp.addEventListener("keydown", function(e) {
+              var x = document.getElementById("autocomplete-list");
+              if (x) x = x.getElementsByTagName("div");
+      
+              if (e.keyCode == 40) {
+                  currentFocus++;
+                  addActive(x);
+              } else if (e.keyCode == 38) { //up
+                  currentFocus--;
+                  addActive(x);
+              } else if (e.keyCode == 13) {
+                  e.preventDefault();
+                  if (currentFocus > -1) {
+                      if (x) x[currentFocus].click();
+                  }
+              }
+          },false);*/
+      }
+  }
 function restAutoComplete2(inp,req,index,field){
     
     var obj = {"size":5,"query": 

@@ -1,5 +1,4 @@
 
-
 var currentPage = 0;
 var currentLPage =0;
 var totalPage = 0;
@@ -90,8 +89,8 @@ var articles = [];
 var faqs = [];
 
 
-function removeFullListSearch(){
-    $(".full-search-list").html("");
+function removeFullListSearch(cls){
+    $("."+cls+" .full-search-list").html("");
 }
 
 function testWidth(width,nbr){
@@ -99,16 +98,18 @@ function testWidth(width,nbr){
 }
 
 //Search results and redirect to activity model
-function restFullSearchList(prefix,from,prev,parent) {
+function restFullSearchList(prefix,from,prev,parent,cls) {
     var result = [];
     var xhttp = new XMLHttpRequest();
-    removeFullListSearch();
-    $(".searchGif").show();
+    removeFullListSearch(cls);
+    $("."+cls+" .searchGif").show();
+
+    typePage = Number(cls.split("-")[1]);
     
 
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            removeFullListSearch();
+            removeFullListSearch(cls);
             var res = JSON.parse(this.responseText);
             for(var i=0;i<res.hits.hits.length;i++){
                 result.push(res.hits.hits[i]);
@@ -121,11 +122,10 @@ function restFullSearchList(prefix,from,prev,parent) {
                 $(".div-full-search-bar .hp-sbox-text span.prefix").html(prefix);
             }
 
-            $(".searchGif").hide();
-     
+            $("."+cls+" .searchGif").hide();
             if(currentPage==0){
                 totalPage = Math.ceil(res.hits.total.value/4);
-                createPaginationBar(Math.min(totalPage,10),0,prefix,1,false);
+                createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,cls);
                 if(totalPage!=0){
                     currentPage=1;
                     currentLPage=1;
@@ -133,20 +133,20 @@ function restFullSearchList(prefix,from,prev,parent) {
             }else if(currentPage%10==0){
                 currentLPage = (currentPage/10)+1;
                 console.log("begin: "+currentPage+"lpage: "+currentLPage);
-                createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false);
+                createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,cls);
             }else if(prev==true){
-                createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true);
+                createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,cls);
             }
             
             
             if (totalPage == 0 && typePage ==0) {
-                noResults();
+                noResults(cls);
             }else if( typePage==1){
-                fullSearchList(result);
+                fullSearchList(result,cls);
             }else if( typePage==2){
-                fullSearchList(faqs);
+                fullSearchList(faqs,cls);
             }else{
-                fullSearchList(result);
+                fullSearchList(result,cls);
             }            
         }
     };
@@ -156,12 +156,10 @@ function restFullSearchList(prefix,from,prev,parent) {
         xhttp.open("POST",URL_SEARCH+"/activite_economique/activite/_search");
         xhttp.setRequestHeader("Authorization",AUTH);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        
     }else if(typePage==1){
         xhttp.open("POST",URL_SEARCH+"/reglementation_index/reglementation/_search");
         xhttp.setRequestHeader("Authorization",AUTH);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        
     }
 
     
@@ -333,19 +331,20 @@ function restFullSearchList(prefix,from,prev,parent) {
                                     "match": {
                                         "title": prefix
                                     }
-                                }
-                            ]
+                                    }
+                                ]
+                            }
                         }
                     }
-                }
-            ));
+                ));
+            }
         }
-    }
     }else if(typePage==2){
-        RestSearchFaq(prefix,0,2,0);
+        //$("."+cls+" .full-search-list").hide();
+        RestSearchFaq(prefix,0,2,0,null,cls);
     }else if(typePage==7){
-        $(".full-search-list").hide();
-        RestSearchVideo(prefix,from,4,null,3,null,prev);
+        $("."+cls+" .full-search-list").hide();
+        RestSearchVideo(prefix,from,4,null,3,null,prev,cls);
     }
 
     return result;
@@ -420,7 +419,7 @@ function getAllplayLists2(type){
 }
 
 
-function getAllplayLists(type,size){
+function getAllplayLists(type,size,clas){
         
         var obj = {
             "aggs" : {
@@ -430,7 +429,7 @@ function getAllplayLists(type,size){
             }
         };
 
-        $(".NQF-freq-quest > .ow-pl-inner").html("");
+        $("."+clas+" .NQF-freq-quest > .ow-pl-inner").html("");
 
         $.ajax({
             type: "post",
@@ -449,11 +448,11 @@ function getAllplayLists(type,size){
                 console.log(tab.length);
                 for(var i=0;i<tab.length;i++){
                     var fieldset = '<div class="ow-pl ow-tabpanel-flex NFQ-quest-title NFQ-type-document expanded class-playlist'+i+'"> <div class="ow-pl-toolbar"><div class="ow-label-pl">'+tab[i].key+'</div> <span class="expand-collapse"> </span> <span class="actions"> </span>  </div><div class="ow-pl-inner"><div class="ow-html"> <div class="NFQ-quest-type-document det NFQ-fieldset" style="padding:0.25rem;"></div></div><div style="clear:both"> </div></div></div>';
-                    $(".NQF-freq-quest > .ow-pl-inner").append(fieldset);
+                    $("."+clas+" .NQF-freq-quest > .ow-pl-inner").append(fieldset);
                     playlists.push(tab[i].key);
                     playlistsClass.push(".class-playlist"+i);
                 }
-                RestSearchVideo("",0,size,playlists,type,playlistsClass)
+                RestSearchVideo("",0,size,playlists,type,playlistsClass,null,clas);
             },
             error: function (error) {
                 console.log(error);
@@ -462,7 +461,7 @@ function getAllplayLists(type,size){
 }
 
 
-function RestSearchref(prefix, page, size, type, typeUse, cls) {
+function RestSearchref(prefix, page, size, type, typeUse, cls,clas) {
 	var str = ""
 
 	if (type == 0) {
@@ -475,10 +474,10 @@ function RestSearchref(prefix, page, size, type, typeUse, cls) {
 	}
 
     if(typeUse == -1){
-        $(".faq-fieldset-det .full-search-list").html("");
-        $(".faq-fieldset-det .searchGif2").show();
-        $(".NQF-edit-modif").hide();
-        $(".NFQ-all-quest").show();
+        $("."+clas+" .faq-fieldset-det .full-search-list").html("");
+        $("."+clas+" .faq-fieldset-det .searchGif2").show();
+        $("."+clas+" .NQF-edit-modif").hide();
+        $("."+clas+" .NFQ-all-quest").show();
     }
 
 	$.ajax({
@@ -501,7 +500,7 @@ function RestSearchref(prefix, page, size, type, typeUse, cls) {
 					console.log(result.responses[i].hits.hits[j]._id);
 					// typeUse 1 for admin and 2for normal user
 
-					NQF_add_ref(result.responses[i].hits.hits[j]._source.title, result.responses[i].hits.hits[j]._id, cls[i], typeUse)
+					NQF_add_ref(result.responses[i].hits.hits[j]._source.title, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
 
 					// console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
 					console.log(result.responses[i].hits.hits[j]._source.type);
@@ -518,7 +517,7 @@ function RestSearchref(prefix, page, size, type, typeUse, cls) {
             fullCreateRefByType(result.responses[0].hits.hits,1,typeUse);
             totalFaqPages[type-1]=result.responses[0].hits.total.value;
             generatePaginationRefPage((type-1),prefix,-1);
-            $(".faq-fieldset-det .searchGif2").hide();
+            $("."+clas+" .faq-fieldset-det .searchGif2").hide();
             console.log(result.responses[0].hits.total.value);
 
         }
@@ -532,7 +531,7 @@ function RestSearchref(prefix, page, size, type, typeUse, cls) {
 
 var playlist_videos = [];
 
-function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
+function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
     var str = ""
         
     if(type==null){
@@ -570,7 +569,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                         
         }
 
-        var a = $(".full-search-list");
+        var a = $("."+clas+" .full-search-list");
 
         $.ajax({
             type: "post",
@@ -584,7 +583,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
             success: function (result) {
                 if(currentPage==0){
                     totalPage = Math.ceil(result.hits.total.value/4);
-                    createPaginationBar(Math.min(totalPage,10),0,prefix,1,false);
+                    createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,clas);
                     if(totalPage!=0){
                         currentPage=1;
                         currentLPage=1;
@@ -592,9 +591,9 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                 }else if(currentPage%10==0){
                     currentLPage = (currentPage/10)+1;
                     console.log("begin: "+currentPage+"lpage: "+currentLPage);
-                    createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false);
+                    createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,clas);
                 }else if(prev==true){
-                    createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true);
+                    createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,clas);
                 }
 
                 console.log(result);
@@ -615,7 +614,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                    // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
                     var s = document.createElement("span");
                     s.setAttribute("class","cl-orange");
-                    c.appendChild(addEventSpan("p1",playlist));
+                    c.appendChild(addEventSpan("p1",playlist,clas));
                     c.appendChild(s);
                     // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
                     // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
@@ -635,8 +634,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                     var g = document.createElement("button");
                     g.addEventListener("click",function(){
                         var id=$(this).children("input").val();
-                        
-                        getVideo(id,1);
+                        getVideo(id,1,clas);
                         //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
                      });
                     g.setAttribute("class","item-body-button hp-sbox-btn");
@@ -663,15 +661,15 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                     b.appendChild(d);
                     a.append(b);
                 }
-                $(".search-video .searchGif").hide();
-                $(".full-search-list").show();
+                $("."+clas+" .search-video .searchGif").hide();
+                $("."+clas+" .full-search-list").show();
             },
             error: function (error) {
                 console.log(error.responseText);
             }
         })
-    }else if(type==-1){
 
+    }else if(type==-1){
     }else{
         for(var i=0;i<type.length;i++){
             str += generateRequestVideoSearch(prefix,type[i], page, size,typeUse-2);
@@ -701,8 +699,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
                         playlist_videos[i].push(result.responses[i].hits.hits[j]._source);
                         console.log(result.responses[i].hits.hits[j]._id);
                         // typeUse 1 for admin and 2for normal user
-    
-                        NQF_add_video(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.img_url, result.responses[i].hits.hits[j]._id, cls[i], typeUse)
+                        NQF_add_video(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.img_url, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
     
                         // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
                         console.log(result.responses[i].hits.hits[j]._source.type);
@@ -721,13 +718,13 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev) {
     }   
 }
 
-function NQF_add_ref(quest, id, cls, type) {
+function NQF_add_ref(quest, id, cls, type,clas) {
 
 	// console.log(id);
 	if (type == 1) {
 		$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
 										<div class="vpanel-body-title NQF-quest-delete" style="font-size: 14px;">
-											<span class = 'NFQ-click-btn'  onclick='getRefJ("${id}",0)' >` + quest + `</span>
+											<span class = 'NFQ-click-btn'  onclick='getRefJ("${id}",0,"${clas}")' >` + quest + `</span>
 											<span class = 'far fa-times-circle NFQ-close-quest' onclick='removerefNQF("${id}")' />
 										</div>
 										<hr class="NQF-horizontal-line " />
@@ -736,7 +733,7 @@ function NQF_add_ref(quest, id, cls, type) {
 	} else if (type == 2) {
 		$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt">
 		<div class="vpanel-body-title " style="font-size: 14px;">
-			<span class = 'NFQ-click-btn' onclick='getRefJ("${id}",0)' >` + quest + `</span>
+			<span class = 'NFQ-click-btn' onclick='getRefJ("${id}",0,"${clas}")' >` + quest + `</span>
 		</div>
 		<hr class="NQF-horizontal-line " />
 		
@@ -745,8 +742,7 @@ function NQF_add_ref(quest, id, cls, type) {
 
 }
 
-function NQF_add_video(quest,desc,imgUrl, id, cls, type) {
-
+function NQF_add_video(quest,desc,imgUrl, id, cls, type,clas) {
 	// console.log(id);
 	if (type == 1) {
         var div = document.createElement("div");
@@ -758,14 +754,14 @@ function NQF_add_video(quest,desc,imgUrl, id, cls, type) {
         <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
     </div>`;
     div.addEventListener("click",function(){
-        getVideo(id,0);
+        getVideo(id,0,clas);
     });
 
     div.setAttribute("idd",id);
     div.setAttribute("class","video-list-item");
     div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
 
-    $(".v-edit " + cls + " .det").append(div);
+    $("."+clas+" .v-edit " + cls + " .det").append(div);
     
     console.log(".v-edit" + cls + " .det");
         
@@ -779,7 +775,8 @@ function NQF_add_video(quest,desc,imgUrl, id, cls, type) {
             <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
         </div>`;
         div.addEventListener("click",function(){
-            getVideo(id,1);
+            
+            getVideo(id,1,clas);
         });
 
         div.setAttribute("idd",id);
@@ -792,11 +789,11 @@ function NQF_add_video(quest,desc,imgUrl, id, cls, type) {
 
 }
 
-function getRefJ(id, type) {
-    $(".NFQ-load-img").show();
-    $(".NFQ-all-quest").hide();
-    $(".NQF-vue-ref").hide();
-    $(".NQF-edit-modif").hide();
+function getRefJ(id, type,clas) {
+    $("."+clas+" .NFQ-load-img").show();
+    $("."+clas+" .NFQ-all-quest").hide();
+    $("."+clas+" .NQF-vue-ref").hide();
+    $("."+clas+" .NQF-edit-modif").hide();
 
 	var pos = $(".pcd-header-NQF").offset().top;
         $('html,body').animate({
@@ -812,14 +809,14 @@ function getRefJ(id, type) {
 		},
 		success: function (result) {
 			if (type == 0) {
-				$(".NFQ-load-img").hide();
-				$(".NQF-btn-alg").show();
-				$(".NQF-vue-ref").show();
-				$(".NQF-vue-ref .NQF-prev-ref >b").text(result._source.title);
-				$(".NQF-text-ref").html(result._source.title);
-				$(".NQF-desc-ref").text(result._source.desc);
-				$(".NQF-type-ref").text(result._source.type);
-				$(".NQF-id-ref").val(id);
+				$("."+clas+" .NFQ-load-img").hide();
+				$("."+clas+" .NQF-btn-alg").show();
+				$("."+clas+" .NQF-vue-ref").show();
+				$("."+clas+" .NQF-vue-ref .NQF-prev-ref >b").text(result._source.title);
+				$("."+clas+" .NQF-text-ref").html(result._source.title);
+				$("."+clas+" .NQF-desc-ref").text(result._source.desc);
+				$("."+clas+" .NQF-type-ref").text(result._source.type);
+				$("."+clas+" .NQF-id-ref").val(id);
 				
             
             } else if (type == 1) {
@@ -877,12 +874,12 @@ function intializeFaqPages(){
 }
 
 
-function generatePaginationFaqPage(index,prefix,typeUse){
+function generatePaginationFaqPage(index,prefix,typeUse,cls){
     if(typeUse==-1){
-        $(".faq-fieldset-det .pagination-new-style").html("");
-        var p = $(".faq-fieldset-det .pagination-new-style");
+        $("."+cls+" .faq-fieldset-det .pagination-new-style").html("");
+        var p = $("."+cls+" .faq-fieldset-det .pagination-new-style");
     }else{
-        $(".faq-vbox").each(function(elm){
+        $("."+cls+" .faq-vbox").each(function(elm){
             $(this).find(".faq-fieldset .pagination-new-style").eq(index).html("");
         });
     }
@@ -899,14 +896,14 @@ function generatePaginationFaqPage(index,prefix,typeUse){
                 if(faqPages[index]%3==0){
                     faqGlobalPages[index]--;    
                 }
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);
             } 
             event.preventDefault();
         });
         if(typeUse==-1){
             p.append(a);
         }else{
-            $(".faq-vbox").each(function(elm){
+            $("."+cls+" .faq-vbox").each(function(elm){
                 $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
             })
         }
@@ -931,18 +928,18 @@ function generatePaginationFaqPage(index,prefix,typeUse){
                     RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
                     */
                     faqPages[index]=Number(this.innerHTML);
-                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);            
+                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);            
            
                 }else{
                     faqPages[index]= 1;
-                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
+                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);
                 }
                 event.preventDefault();
             });
             if(typeUse==-1){
                 p.append(a);
             }else{
-                $(".faq-vbox").each(function(elm){
+                $("."+cls+" .faq-vbox").each(function(elm){
                     $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
                 })
             }
@@ -960,12 +957,12 @@ function generatePaginationFaqPage(index,prefix,typeUse){
             a.addEventListener("click",function(event){
                 event.preventDefault();
                 faqPages[index]=Number(this.innerHTML);
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);            
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);            
             });
             if(typeUse==-1){
                 p.append(a);
             }else{
-                $(".faq-vbox").each(function(elm){
+                $("."+cls+" .faq-vbox").each(function(elm){
                     $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
                 })
             }            }
@@ -978,7 +975,7 @@ function generatePaginationFaqPage(index,prefix,typeUse){
                 if(faqPages[index]%3==1){
                     faqGlobalPages[index]++    
                 }
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);
             }
             event.preventDefault();
         });        
@@ -986,18 +983,18 @@ function generatePaginationFaqPage(index,prefix,typeUse){
         if(typeUse==-1){
             p.append(a);
         }else{
-            $(".faq-vbox").each(function(elm){
+            $("."+cls+" .faq-vbox").each(function(elm){
                 $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
             })
         }
 }
 
-function generatePaginationRefPage(index,prefix,typeUse){
+function generatePaginationRefPage(index,prefix,typeUse,cls){
     if(typeUse==-1){
-        $(".faq-fieldset-det .pagination-new-style").html("");
+        $("."+cls+" .faq-fieldset-det .pagination-new-style").html("");
         var p = $(".faq-fieldset-det .pagination-new-style");
     }else{
-        $(".faq-vbox").each(function(elm){
+        $("."+cls+" .faq-vbox").each(function(elm){
             $(this).find(".faq-fieldset .pagination-new-style").eq(index).html("");
         });
     }
@@ -1021,7 +1018,7 @@ function generatePaginationRefPage(index,prefix,typeUse){
         if(typeUse==-1){
             p.append(a);
         }else{
-            $(".faq-vbox").each(function(elm){
+            $("."+cls+" .faq-vbox").each(function(elm){
                 $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
             })
         }
@@ -1046,18 +1043,18 @@ function generatePaginationRefPage(index,prefix,typeUse){
                     RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
                     */
                     faqPages[index]=Number(this.innerHTML);
-                    RestSearchref(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);            
+                    RestSearchref(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);            
            
                 }else{
                     faqPages[index]= 1;
-                    RestSearchref(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
+                    RestSearchref(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);
                 }
                 event.preventDefault();
             });
             if(typeUse==-1){
                 p.append(a);
             }else{
-                $(".faq-vbox").each(function(elm){
+                $("."+cls+" .faq-vbox").each(function(elm){
                     $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
                 })
             }
@@ -1075,12 +1072,12 @@ function generatePaginationRefPage(index,prefix,typeUse){
             a.addEventListener("click",function(event){
                 event.preventDefault();
                 faqPages[index]=Number(this.innerHTML);
-                RestSearchref(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);            
+                RestSearchref(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);            
             });
             if(typeUse==-1){
                 p.append(a);
             }else{
-                $(".faq-vbox").each(function(elm){
+                $("."+cls+" .faq-vbox").each(function(elm){
                     $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
                 })
             }            }
@@ -1093,7 +1090,7 @@ function generatePaginationRefPage(index,prefix,typeUse){
                 if(faqPages[index]%3==1){
                     faqGlobalPages[index]++    
                 }
-                RestSearchref(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
+                RestSearchref(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);
             }
             event.preventDefault();
         });        
@@ -1101,7 +1098,7 @@ function generatePaginationRefPage(index,prefix,typeUse){
         if(typeUse==-1){
             p.append(a);
         }else{
-            $(".faq-vbox").each(function(elm){
+            $("."+cls+" .faq-vbox").each(function(elm){
                 $(this).find(".faq-fieldset .pagination-new-style").eq(index).append(a);
             })
         }
@@ -1205,19 +1202,19 @@ function generatePaginationFaqPage(index,prefix,typeUse){
 }*/
 
 
-function getQsFaq(id,type){
+function getQsFaq(id,type,cls){
     if(type==0){
-        $(".NFQ-load-img").show();
-	    $(".NQF-vue-question").hide();
-        var pos = $(".pcd-header-NQF").offset().top;
+        $("."+cls+" .NFQ-load-img").show();
+	    $("."+cls+" .NQF-vue-question").hide();
+        var pos = $("."+cls+" .pcd-header-NQF").offset().top;
         $('html,body').animate({
                 scrollTop: pos
             },
             'fast');
     }
 
-    $(".NFQ-all-quest").hide();
-    $(".NQF-edit-modif").hide();
+    $("."+cls+" .NFQ-all-quest").hide();
+    $("."+cls+" .NQF-edit-modif").hide();
 
     $.ajax({
         type: "get",
@@ -1231,27 +1228,27 @@ function getQsFaq(id,type){
             	console.log(result);
 				//traitement rbihi
 
-				$(".NFQ-load-img").hide();
-				$(".NQF-vue-question").show();
+				$("."+cls+" .NFQ-load-img").hide();
+				$("."+cls+" .NQF-vue-question").show();
 				//add header
 				// $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
-				$(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
-				$(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES | <span class="title-2x" style="color:#38a; ">` + result._source.QUESTIONS + `</span>`);
+				$("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
+				$("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES | <span class="title-2x" style="color:#38a; ">` + result._source.QUESTIONS + `</span>`);
 
-				$(".NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
-				$(".NQF-prev-resp").html(result._source.REPONSES);
-				$(".NQF-categorie").val(result._source.type);
-				$(".NQF-id").val(id);
-				$(".NQF-vue-question").show();
+				$("."+cls+" .NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
+				$("."+cls+" .NQF-prev-resp").html(result._source.REPONSES);
+				$("."+cls+" .NQF-categorie").val(result._source.type);
+				$("."+cls+" .NQF-id").val(id);
+				$("."+cls+" .NQF-vue-question").show();
 				
-				$(".NQF-btn-alg").show();
-				let a = $(".NQF-categorie")
+				$("."+cls+" .NQF-btn-alg").show();
+				let a = $("."+cls+" .NQF-categorie")
 				
-				$(".NQF-new-quest-btn").show();
+				$("."+cls+" .NQF-new-quest-btn").show();
 
             }else if(type==1){
                 createDivQuestionFaq(result);
-                RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1);
+                RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1,cls);
                 //traitement youssef
             } 
         },
@@ -1263,27 +1260,24 @@ function getQsFaq(id,type){
 
 var videoObject = null;
 
-function getVideo(id,type){
+function getVideo(id,type,cls){
     if(type==0){
-        $(".NQF-new-quest-btn").show();
-        $(".NFQ-load-img").show();
-	    $(".NQF-vue-question").hide();
+        $("."+cls+" .NQF-new-quest-btn").show();
+        $("."+cls+" .NFQ-load-img").show();
+	    $("."+cls+" .NQF-vue-question").hide();
         var pos = $(".pcd-header-NQF").offset().top;
         $('html,body').animate({
                 scrollTop: pos
             },
             'fast');
     }else if(type==1){
-        $(".search-video").hide();
-        $(".consultation-video").hide();
-        $(".consultation-video .video-iframe iframe").attr("src","");
-        $(".searchGif2").show();
+        $("."+cls+" .search-video").hide();
+        $("."+cls+" .consultation-video").hide();
+        $("."+cls+" .consultation-video .video-iframe iframe").attr("src","");
+        $("."+cls+" .searchGif2").show();
     }
 
-    
-    
-
-    $(".NFQ-all-quest").hide();
+    $("."+cls+" .NFQ-all-quest").hide();
 
     $.ajax({
         type: "get",
@@ -1297,11 +1291,11 @@ function getVideo(id,type){
             	console.log(result);
 				//traitement rbihi
 
-				$(".NFQ-load-img").hide();
-				$(".NQF-vue-question").show();
+				$("."+cls+" .NFQ-load-img").hide();
+				$("."+cls+" .NQF-vue-question").show();
 				//add header
 				// $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
-				$(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
+				$("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
 
                 /*
 				$(".NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
@@ -1316,18 +1310,18 @@ function getVideo(id,type){
                }
 
                console.log(urlemb);
-               $(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-               $(".NQF-vue-question .vue-video-title b").html(result._source.title);
-               $(".NQF-vue-question .vue-video-description").html(result._source.description);
+               $("."+cls+" .NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+               $("."+cls+" .NQF-vue-question .vue-video-title b").html(result._source.title);
+               $("."+cls+" .NQF-vue-question .vue-video-description").html(result._source.description);
                
-                $(".NQF-id").val(id);
-                $(".NQF-vue-question").show();
-				$(".NQF-edit-modif").hide();
-				$(".NQF-btn-alg").show();
+                $("."+cls+" .NQF-id").val(id);
+                $("."+cls+" .NQF-vue-question").show();
+				$("."+cls+" .NQF-edit-modif").hide();
+				$("."+cls+" .NQF-btn-alg").show();
                
-                let a = $(".NQF-categorie")
+                let a = $("."+cls+" .NQF-categorie")
 				
-                $(".NQF-new-quest-btn").show();
+                $("."+cls+" .NQF-new-quest-btn").show();
 
             }else if(type==1){
                 if(result._source.plateforme=="Vimeo"){
@@ -1336,8 +1330,8 @@ function getVideo(id,type){
                     createDivVideo(result,1,getVideoIndex(result._source.video_id,result._source.playlist));
                 }
                   
-                  $(".searchGif2").hide();
-                  $(".consultation-video").show();
+                  $("."+cls+" .searchGif2").hide();
+                  $("."+cls+" .consultation-video").show();
 
                // RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1);
                 //traitement youssef
@@ -1397,7 +1391,7 @@ function createDivVideo(result,type,obj){
         if(obj.index==0){
             var idN = playlist_videos[obj.playlist_index][obj.index+1].video_id;
 
-            $(".consultation-video .next-prev .prev-video").attr("onClick","getVideo(\""+idN.toString()+"\",1)");
+            $(".consultation-video .next-prev .prev-video").attr("onClick","getVideo(\""+idN.toString()+"\",1,\"classSearch-7\")");
             $(".consultation-video .next-prev .next-video").removeClass("active-video");
             $(".consultation-video .next-prev .next-video").attr("onClick","");
             $(".consultation-video .next-prev .prev-video").addClass("active-video");
@@ -1406,7 +1400,7 @@ function createDivVideo(result,type,obj){
 
             $(".consultation-video .next-prev .prev-video").attr("onClick","");
             $(".consultation-video .next-prev .prev-video").removeClass("active-video");
-            $(".consultation-video .next-prev .next-video").attr("onClick","getVideo(\""+idP.toString()+"\",1)");
+            $(".consultation-video .next-prev .next-video").attr("onClick","getVideo(\""+idP.toString()+"\",1,\"classSearch-7\")");
             $(".consultation-video .next-prev .next-video").addClass("active-video");
         }else{
            
@@ -1414,9 +1408,9 @@ function createDivVideo(result,type,obj){
             var idN = playlist_videos[obj.playlist_index][obj.index+1].video_id;
             var idP = playlist_videos[obj.playlist_index][obj.index-1].video_id;
            
-            $(".consultation-video .next-prev .prev-video").attr("onClick","getVideo(\""+idN.toString()+"\",1)");
+            $(".consultation-video .next-prev .prev-video").attr("onClick","getVideo(\""+idN.toString()+"\",1,\"classSearch-7\")");
             $(".consultation-video .next-prev .prev-video").addClass("active-video");
-            $(".consultation-video .next-prev .next-video").attr("onClick","getVideo(\""+idP.toString()+"\",1)");
+            $(".consultation-video .next-prev .next-video").attr("onClick","getVideo(\""+idP.toString()+"\",1,\"classSearch-7\")");
             $(".consultation-video .next-prev .next-video").addClass("active-video");
 
             //$(".consultation-video .next-prev .next-video span").attr("onClick","getVideo("+idN+")");
@@ -1510,12 +1504,11 @@ function RestSearchFaqDet(prefix,page,size,type){
 }
 
 
-function RestSearchFaq(prefix,page,size,type,typeUse){
+function RestSearchFaq(prefix,page,size,type,typeUse,cls){
     var str =""
-    $(".faq-vbox .no-response-find").hide();
-    
+    $("."+cls+" .faq-vbox .no-response-find").hide();
     if(type==0){
-        $(".faq-fieldset").hide();
+        $("."+cls+" .faq-fieldset").hide();
         str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
         str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
         str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size); 
@@ -1537,13 +1530,13 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
     }
 
     if(type!=0 && typeUse != -1){
-        $(".faq-fieldset .full-search-list").eq(type-1).html("");
-        $(".faq-fieldset .searchGif2").eq(type-1).show();
+        $("."+cls+" .faq-fieldset .full-search-list").eq(type-1).html("");
+        $("."+cls+" .faq-fieldset .searchGif2").eq(type-1).show();
     }else if(typeUse == -1){
-        $(".faq-fieldset-det .full-search-list").html("");
-        $(".faq-fieldset-det .searchGif2").show();
-        $(".NQF-edit-modif").hide();
-        $(".NFQ-all-quest").show();
+        $("."+cls+" .faq-fieldset-det .full-search-list").html("");
+        $("."+cls+" .faq-fieldset-det .searchGif2").show();
+        $("."+cls+" .NQF-edit-modif").hide();
+        $("."+cls+" .NFQ-all-quest").show();
     }
     
 
@@ -1559,39 +1552,39 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
         },
         success: function (result) {    
             console.log(result);
-            $(".searchGif").hide();
-            $(".faq-fieldset .searchGif2").hide();        
-            $(".faq-fieldset-det .searchGif2").hide();        
+            $("."+cls+" .searchGif").hide();
+            $("."+cls+" .faq-fieldset .searchGif2").hide();        
+            $("."+cls+" .faq-fieldset-det .searchGif2").hide();        
             if(type!=0 && typeUse!=-1){
-                fullCreateFaqByType(result.responses[0].hits.hits,type);
-                generatePaginationFaqPage((type-1),prefix,0);
+                fullCreateFaqByType(result.responses[0].hits.hits,type,undefined,cls);
+                generatePaginationFaqPage((type-1),prefix,0,cls);
             }else if(type==0 && typeUse!=-1){
                 var k = 0;
                 console.log("ici");
                 for(var i=0;i<result.responses.length;i++){
                     if(result.responses[i].hits.hits.length!=0){
                         if(prefix!=""){
-                            Array.from($(".faq-vbox")).forEach(function(e){
-                                $(".faq-fieldset").eq(i).addClass("expanded");
+                            Array.from($("."+cls+" .faq-vbox")).forEach(function(e){
+                                $("."+cls+" .faq-fieldset").eq(i).addClass("expanded");
                             })
                         }
-                        fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
+                        fullCreateFaqByType(result.responses[i].hits.hits,(i+1),undefined,cls);
                         k++;
                     }
                     totalFaqPages[i]=result.responses[i].hits.total.value;
-                    generatePaginationFaqPage(i,prefix,0);
+                    generatePaginationFaqPage(i,prefix,0,cls);
                 }
 
                 if(k==0){
-                    $(".faq-vbox .no-response-find").show();
+                    $("."+cls+" .faq-vbox .no-response-find").show();
                 }
             }else if(typeUse==-1){
                 console.log("hello");
                 
                 
-                fullCreateFaqByType(result.responses[0].hits.hits,1,typeUse);
+                fullCreateFaqByType(result.responses[0].hits.hits,1,typeUse,cls);
                 totalFaqPages[type-1]=result.responses[0].hits.total.value;
-                generatePaginationFaqPage((type-1),prefix,-1);
+                generatePaginationFaqPage((type-1),prefix,-1,cls);
                 console.log(result.responses[0].hits.total.value);
             }
         },
@@ -1602,14 +1595,14 @@ function RestSearchFaq(prefix,page,size,type,typeUse){
 }
 
 
-function fullCreateFaqByType(results,type,typeUse){
+function fullCreateFaqByType(results,type,typeUse,cls){
 
     if(typeUse==-1){
-        $(".faq-vbox").each(function(elm){
+        $("."+cls+" .faq-vbox").each(function(elm){
             $(this).find(".faq-fieldset-det").show();
         });
     
-        $(".faq-vbox").each(function(elm){
+        $("."+cls+" .faq-vbox").each(function(elm){
             $(this).find(".faq-fieldset-det .full-search-list").html("");
         });
     
@@ -1640,7 +1633,7 @@ function fullCreateFaqByType(results,type,typeUse){
                if(typePage==2 || typePage==5){
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
                }else{
-    			   getQsFaq(id,0);
+    			   getQsFaq(id,0,cls);
 
                }
 			});
@@ -1653,7 +1646,7 @@ function fullCreateFaqByType(results,type,typeUse){
             
             
             
-            $(".faq-fieldset-det .full-search-list").append(b);
+            $("."+cls+" .faq-fieldset-det .full-search-list").append(b);
 
             var hr = document.createElement("hr");
             hr.setAttribute("style","background: #eee;border: 1px solid #eee;height: 0px;width: 88%;");
@@ -1664,11 +1657,11 @@ function fullCreateFaqByType(results,type,typeUse){
         }
         }else{
     
-        $(".faq-vbox").each(function(elm){
+        $("."+cls+" .faq-vbox").each(function(elm){
             $(this).find(".faq-fieldset").eq((Number(type)-1)).show();
         });
 
-        $(".faq-vbox").each(function(elm){
+        $("."+cls+" .faq-vbox").each(function(elm){
             $(this).find(".faq-fieldset .full-search-list").eq((Number(type)-1)).html("");
         });
     
@@ -1707,7 +1700,7 @@ function fullCreateFaqByType(results,type,typeUse){
             hr.setAttribute("style","background: #eee;border: 1px solid #eee;height: 0px;width: 88%;");
             
 
-            $(".faq-vbox").each(function(elm){
+            $("."+cls+" .faq-vbox").each(function(elm){
                 $(this).find(".faq-fieldset .full-search-list").eq((Number(type)-1)).append(b);
                 /* if(i!=results.length-1){
                     $(this).find(".faq-fieldset .full-search-list").eq((Number(type)-1)).append(hr);                        
@@ -2005,7 +1998,7 @@ function autocomplete(inp,arr) {
         }
     }
 
-    function moveKey(e,x,type){
+    function moveKey(e,x,type,cls){
         if (e.keyCode == 40) {
             /*If the arrow DOWN key is pressed,
             increase the currentFocus variable:*/
@@ -2027,9 +2020,9 @@ function autocomplete(inp,arr) {
             }else{
                 console.log(currentFocus);
                 if(type==0){
-                    $(".divSearchBar .search_button").click();    
+                    $("."+cls+" .divSearchBar .search_button").click();    
                 }else{
-                    $(".div-full-search-bar .search_button").click();                        
+                    $("."+cls+" .div-full-search-bar .search_button").click();                        
                 }
                 
             }
@@ -2059,14 +2052,14 @@ function autocomplete(inp,arr) {
                     modal.style.display = "block";
     });
 
-    function createPaginationBar(nbrPage,begin,prefix,type,prev){
-        var p = $(".pagination");
+    function createPaginationBar(nbrPage,begin,prefix,type,prev,cls){
+        var p = $("."+cls+" .pagination");
         p.html(" ");
         var a = document.createElement("a");
                 a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
                 a.addEventListener("click",function(){
                     console.log("!next");
-                    previousPage(prefix,type);
+                    previousPage(prefix,type,cls);
                     event.preventDefault();
                 });
                 p.append(a);
@@ -2081,7 +2074,7 @@ function autocomplete(inp,arr) {
                 a.addEventListener("click",function(){
                     event.preventDefault();
                     console.log("1");
-                    getPage(begin+1,prefix,type,false);
+                    getPage(begin+1,prefix,type,false,cls);
                 });
         
                 p.append(a);
@@ -2095,7 +2088,7 @@ function autocomplete(inp,arr) {
                 a.addEventListener("click",function(event){
                     event.preventDefault();
                     console.log(this.innerHTML+" "+prefix+" "+type);
-                    getPage(this.innerHTML,prefix,type,false);
+                    getPage(this.innerHTML,prefix,type,false,cls);
                 });
                 p.append(a);        
             }
@@ -2105,40 +2098,40 @@ function autocomplete(inp,arr) {
        a.addEventListener("click",function(){
            event.preventDefault();
             console.log("next");
-            nextPage(prefix,type);
+            nextPage(prefix,type,cls);
        });        
         p.append(a);
     }
 
 
-    function nextPage(prefix,type){
+    function nextPage(prefix,type,cls){
         if(currentPage<totalPage){
             currentPage++;
-            getPage(currentPage,prefix,type,false);
+            getPage(currentPage,prefix,type,false,cls);
         }
     }
 
-    function previousPage(prefix,type){
+    function previousPage(prefix,type,cls){
         if(1<currentPage){
             currentPage--;
             if(currentPage<((currentLPage-1)*10)){
-                getPage(currentPage,prefix,type,true);
+                getPage(currentPage,prefix,type,true,cls);
             }else{
-                getPage(currentPage,prefix,type,false); 
+                getPage(currentPage,prefix,type,false,cls); 
             }
         }
         
     }
 
-    function getPage(page,prefix,type,prev){
+    function getPage(page,prefix,type,prev,cls){
         currentPage=page;
         closeSearchList();
         if(type==0){
             restSearchList(prefix,(page-1)*4,prev); 
             var elm = $(".searchList .pagination a");
         }else{
-            restFullSearchList(prefix,(page-1)*4,prev,p);
-            var elm = $(".pagination-second a");
+            restFullSearchList(prefix,(page-1)*4,prev,p,cls);
+            var elm = $("."+cls+" .pagination-second a");
         }
         if(prev==true){
             currentLPage--;
@@ -2208,8 +2201,8 @@ function autocomplete(inp,arr) {
        typePage = type;
    } 
 
-   function fullSearchList(results){
-       var a = $(".full-search-list");
+   function fullSearchList(results,cls){
+       var a = $("."+cls+" .full-search-list");
        if(typePage== 1){
         console.log(results)
         for(i=0;i<results.length;i++){
@@ -2267,8 +2260,8 @@ function autocomplete(inp,arr) {
             a.append(b);
         }
        }else if(typePage == 2){
-           var a1 = document.querySelectorAll(".faq-fieldset .full-search-list")[0];
-           var a2 = document.querySelectorAll(".faq-fieldset .full-search-list")[1];
+           var a1 = document.querySelectorAll("."+cls+" .faq-fieldset .full-search-list")[0];
+           var a2 = document.querySelectorAll("."+cls+" .faq-fieldset .full-search-list")[1];
             for(i=0;i<results[0].content.length;i++){
                 var id = results[0].content[i]._id;
                 var titleTx = results[0].content[i].question;
@@ -2353,16 +2346,16 @@ function autocomplete(inp,arr) {
            var s = document.createElement("span");
            s.setAttribute("class","cl-orange");
            s.innerHTML=" > ";
-           c.appendChild(addEventSpan("p1",typeAt));
+           c.appendChild(addEventSpan("p1",typeAt,cls));
            c.appendChild(s);
            // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-           c.appendChild(addEventSpan("p2",typeAc));
+           c.appendChild(addEventSpan("p2",typeAc,cls));
            s = document.createElement("span");
            s.setAttribute("class","cl-orange");
            s.innerHTML=" > ";
            c.appendChild(s);
            // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-           c.appendChild(addEventSpan("p3",nature));
+           c.appendChild(addEventSpan("p3",nature,cls));
            var d = document.createElement("div");
            d.setAttribute("class","item-body");
            var e = document.createElement("div");
@@ -2394,7 +2387,7 @@ function autocomplete(inp,arr) {
            title.addEventListener("click",function(){
                currentPage=0;
                $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
-               restFullSearchList($(this).html(),0,false,4);
+               restFullSearchList($(this).html(),0,false,4,cls);
            });
            b.appendChild(title);
            var icons = document.createElement("div");
@@ -2422,20 +2415,20 @@ function autocomplete(inp,arr) {
         return text;
     }
 
-    function addEventSpan(spanClass,text){
+    function addEventSpan(spanClass,text,cls){
         var span = document.createElement("span");
         span.setAttribute("class","p "+spanClass);
         span.addEventListener("click",function(){
             currentPage=0;
-           $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
+           $("."+cls+" .div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
                 if($(this).attr("class").split(' ')[1]==="p1"){
-                    restFullSearchList($(this).html(),0,false,1);
+                    restFullSearchList($(this).html(),0,false,1,cls);
                 }else if($(this).attr("class").split(' ')[1]==="p2"){
-                    restFullSearchList($(this).html(),0,false,2);
+                    restFullSearchList($(this).html(),0,false,2,cls);
                 }else if($(this).attr("class").split(' ')[1]==="p3"){
-                    restFullSearchList($(this).html(),0,false,3);
+                    restFullSearchList($(this).html(),0,false,3,cls);
                 }else{
-                   restFullSearchList($(this).html(),0,false,1);
+                   restFullSearchList($(this).html(),0,false,1,cls);
                 } 
         });
         span.innerHTML=text;
@@ -2592,11 +2585,11 @@ function rempl(results){
         $(".div-fsb-details .fsb-container .c-path .p3").html(nature);
 }
 
-function noResults(){
+function noResults(cls){
     var a = document.createElement("div");
     a.setAttribute("style","text-align: left;width: 50;margin: auto;width: 60%;");
     a.innerHTML="Aucune activité ne correspond aux termes de recherche spécifiés.<br/><br/>Suggestions :<br/>- Vérifiez l’orthographe des termes de recherche.<br/>- Essayez d'autres mots.<br/>- Utilisez des mots clés plus généraux.";
-    $(".full-search-list").append(a);
+    $("."+cls+" .full-search-list").append(a);
 }
 
 

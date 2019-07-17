@@ -1,3 +1,5 @@
+
+
 function NQF_remove_subtitle() {
     $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
 }
@@ -36,40 +38,40 @@ function PCD_header_style_quest_type(qtypeCls, fontAwsCls){
 
 
 
-function NQF_edit(type) {
+function NQF_edit(type,clas) {
 	if(type == 1){
-		let question = $(".NQF-vue-question .NQF-prev-quest b").text();
+		let question = $("."+clas+" .NQF-vue-question .NQF-prev-quest b").text();
 
-		let resp = $(".NQF-prev-resp").html();
-		let categ = $(".NQF-categorie").val();
-		let ID = $(".NQF-id").val();
+		let resp = $("."+clas+" .NQF-prev-resp").html();
+		let categ = $("."+clas+" .NQF-categorie").val();
+		let ID = $("."+clas+" .NQF-id").val();
 		console.log(ID)
 
 		$(".NQF-edit-float .ow-field-container.ow-field-text-container").addClass("focusedInput");
 		$('.ow-field-input[data-xpath="question"]').val(question);
 		if (categ == "E-SIGN") {
-			$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-			$('.ow-field-input-select[data-xpath="categ"]').text("Signature électronique");
+			$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+			$("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("Signature électronique");
 		} else if (categ == "GENERAL") {
-			$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-			$('.ow-field-input-select[data-xpath="categ"]').text("Général");
+			$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+			$("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("Général");
 		} else if (categ == "DOCUMENT") {
-			$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-			$('.ow-field-input-select[data-xpath="categ"]').text("Document");
+			$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+			$("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("Document");
 		} else if (categ == "PLATEFORME") {
-			$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-			$('.ow-field-input-select[data-xpath="categ"]').text("Plateforme");
+			$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+			$("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("Plateforme");
 		} else if (categ == "ARCHITECTE") {
-			$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-			$('.ow-field-input-select[data-xpath="categ"]').text("Architecte");
+			$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+			$("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("Architecte");
 		} else if (categ == "ADMINISTRATION") {
-			$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-			$('.ow-field-input-select[data-xpath="categ"]').text("Administration");
+			$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
+			$("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("Administration");
 		}
 
-		$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
-		$(".NQF-edit-modif").show();
-		$(".NQF-btn-alg").hide();
+		$("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
+		$("."+clas+" .NQF-edit-modif").show();
+		$("."+clas+" .NQF-btn-alg").hide();
 	} else if(type == 2){
 		// add edit here
 
@@ -77,46 +79,46 @@ function NQF_edit(type) {
 	}
 
 
-	function NQF_preview_QR(type) {
+	function NQF_preview_QR(type,clas) {
 		if(type == 1){
-			let question = $('.ow-field-input[data-xpath="question"]').val();
-			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-			let resp = $('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
+			let question = $("."+clas+' .ow-field-input[data-xpath="question"]').val();
+			let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+			let resp = $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
 			
 
 			if (question == "" && categ == "" && resp == "<p><br></p>") {
 				alert("rien à prévisualiser")
 
 			} else {
-				$(".NQF-vue-question .NQF-prev-quest >b").text(question);
-				$(".NQF-prev-resp").html(resp);
-				$(".NQF-vue-question").show();
+				$("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
+				$("."+clas+" .NQF-prev-resp").html(resp);
+				$("."+clas+" .NQF-vue-question").show();
 
 			}
 		} else if(type == 2){
-			let title = $('.ow-field-input[data-xpath="NQFtitle"]').val();
-			let categ = $('.ow-field-input-select[data-xpath="NQFtype"]').text();
-			let texte = $('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html()
-			let description = $('.NFQ-desc-refjuridique textarea').val(); 
+			let title = $("."+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
+			let categ = $("."+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
+			let texte = $("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html()
+			let description = $("."+clas+' .NFQ-desc-refjuridique textarea').val(); 
 			
 			
 			if (title == "" && categ == "" && texte == "<p><br></p>" && description == "") {
 				alert("rien à prévisualiser")
 
 			} else {
-				$(".NQF-title-ref").text(title);
-				$(".NQF-desc-ref").text(description);
-				$(".NQF-text-ref").html(texte);
-				$(".NQF-vue-ref").show();
-				$(".NQF-btn-alg").hide();
+				$("."+clas+" .NQF-title-ref").text(title);
+				$("."+clas+" .NQF-desc-ref").text(description);
+				$("."+clas+" .NQF-text-ref").html(texte);
+				$("."+clas+" .NQF-vue-ref").show();
+				$("."+clas+" .NQF-btn-alg").hide();
 
 			}
 		} else if(type==3){
-            let title = $('.ow-field-input[data-xpath="title"]').val();
-			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-            let urlV = $('.ow-field-input[data-xpath="url"]').val();
-            let description = $('.ow-field-input-line textarea[data-xpath="description"]').val(); 
-            let playlist = $('.ow-field-input-select[data-xpath="playlist"]').text();
+            let title = $("."+clas+' .ow-field-input[data-xpath="title"]').val();
+			let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+            let urlV = $("."+clas+' .ow-field-input[data-xpath="url"]').val();
+            let description = $("."+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
+            let playlist = $("."+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
             if (title == "" && categ == "" && urlV == "" && description == "" && playlist=="") {
 				alert("rien à prévisualiser")
 
@@ -135,66 +137,94 @@ function NQF_edit(type) {
                     return ;
                 }
                 
-				$(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-				$(".NQF-vue-question .vue-video-title b").html(title);
-				$(".NQF-vue-question .vue-video-description").html(description);
-				$(".NQF-vue-ref").show();
-                $(".NQF-btn-alg").hide();
-                $(".NQF-vue-question").show();
+				$("."+clas+" .NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+				$("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+				$("."+clas+" .NQF-vue-question .vue-video-description").html(description);
+				$("."+clas+" .NQF-vue-ref").show();
+                $("."+clas+" .NQF-btn-alg").hide();
+                $("."+clas+" .NQF-vue-question").show();
+			}
+        } else if(type==4){
+            let title = $("."+clas+' .ow-field-input[data-xpath="title"]').val();
+			let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+            let urlV = $("."+clas+' .ow-field-input[data-xpath="url"]').val();
+            let description = $("."+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
+            let playlist = $("."+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
+            let imgUrl = $("."+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
+            
+            if (title == "" && categ == "" && urlV == "" && description == "" && playlist=="") {
+				alert("rien à prévisualiser")
+
+			} else {
+                if(imgUrl.trim()!=""){
+                    $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                }else{
+                    if(categ=="DOC"){
+                        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                    }else if(categ=="INSTALL"){
+                        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                    }
+                }
+                
+				$("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+				$("."+clas+" .NQF-vue-question .vue-video-description").html(description);
+				$("."+clas+" .NQF-vue-ref").show();
+                $("."+clas+" .NQF-btn-alg").hide();
+                $("."+clas+" .NQF-vue-question").show();
 			}
         }
 	}
 
-	function NQF_new_QR(type) {
+	function NQF_new_QR(type,clas) {
 
 		if(type == 1){
 		//add header
 		// $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
-		$(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`NOUVELLE QUESTIONS FREQUENTES `);
+		$("."+clas+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`NOUVELLE QUESTIONS FREQUENTES `);
 
-		$('.ow-field-input[data-xpath="question"]').val("");
-		$('.ow-field-input-select[data-xpath="categ"]').text("");
-		$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').text("")
-		$(".NQF-id").val("");
-
-
-		$(".NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput");
-		$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
+		$("."+clas+' .ow-field-input[data-xpath="question"]').val("");
+		$("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("");
+		$("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').text("")
+		$("."+clas+" .NQF-id").val("");
 
 
-		$(".NQF-vue-question").hide();
+		$("."+clas+" .NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput");
+		$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
+
+
+		$("."+clas+" .NQF-vue-question").hide();
 		} else if(type == 2){
-		$(".NQF-titre-ref > .ow-pl-toolbar .ow-label-pl").html(`NOUVEAU RÉFÉRENTIEL JURIDIQUE`);
+		$("."+clas+" .NQF-titre-ref > .ow-pl-toolbar .ow-label-pl").html(`NOUVEAU RÉFÉRENTIEL JURIDIQUE`);
 
 		
 		
 
-		$('.ow-field-input[data-xpath="NQFtitle"]').val("");
-		$('.ow-field-input-select[data-xpath="NQFtype"]').text("");
-		$('.NFQ-desc-refjuridique textarea').val("");
-		$('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html("")
-		$(".NQF-id-ref").val("");
+		$("."+clas+' .ow-field-input[data-xpath="NQFtitle"]').val("");
+		$("."+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text("");
+		$("."+clas+' .NFQ-desc-refjuridique textarea').val("");
+		$("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html("")
+		$("."+clas+" .NQF-id-ref").val("");
 
 
-		$(".NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput filledInput");
-		$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
-		$(".ow-field-textArea-container:has(.NFQ-desc-refjuridique)").removeClass("filledInput")
+		$("."+clas+" .NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput filledInput");
+		$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
+		$("."+clas+" .ow-field-textArea-container:has(.NFQ-desc-refjuridique)").removeClass("filledInput")
 		
 		 
 
-		$(".NQF-vue-ref").hide();
+		$("."+clas+" .NQF-vue-ref").hide();
 		}
 
     }
     
 
-    function verifieVideo(){
+    function verifieVideo(clas){
         var vr = true; 
-        let title = $('.ow-field-input[data-xpath="title"]').val();
-        let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-        let urlV = $('.ow-field-input[data-xpath="url"]').val();
-        let description = $('.ow-field-input-line textarea[data-xpath="description"]').val(); 
-        let playlist = $('.ow-field-input-select[data-xpath="playlist"]').text();
+        let title = $("."+clas+' .ow-field-input[data-xpath="title"]').val();
+        let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+        let urlV = $("."+clas+' .ow-field-input[data-xpath="url"]').val();
+        let description = $("."+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
+        let playlist = $("."+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
 
         if(title.trim()==""){
             alert("Veuillez saisir le titre de vidéo");
@@ -214,15 +244,43 @@ function NQF_edit(type) {
         return vr;
     }
 
+    function verifieDownload(clas){
+        var vr = true; 
+        let title = $("."+clas+' .ow-field-input[data-xpath="title"]').val();
+        let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+        let urlV = $("."+clas+' .ow-field-input[data-xpath="url"]').val();
+        let description = $("."+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
+        let playlist = $("."+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
+
+        if(title.trim()==""){
+            alert("Veuillez saisir le titre de vidéo");
+            return false;
+        }
+        
+        if(categ.trim()==""){
+            alert("Veuillez selectionner le type d'attachement !");
+            return false;
+        }
+
+        if(urlV.trim()==""){
+            alert("Veuillez saisir le lien de l'attachement !");
+            return false;
+        }
+
+        return vr;
+    }
+
     function NQF_save_QR(type) {
 		if (type == 1) {
-			let question = $('.ow-field-input[data-xpath="question"]').val();
-			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-			let resp = $('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
-			let ID = $(".NQF-id").val();
+            var clas = "classSearch-5";
 
-			$(".NQF-vue-question .NQF-prev-quest >b").text(question);
-			$(".NQF-prev-resp").html(resp);
+			let question = $("."+clas+' .ow-field-input[data-xpath="question"]').val();
+			let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+			let resp = $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
+			let ID = $("."+clas+" .NQF-id").val();
+
+			$("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
+			$("."+clas+" .NQF-prev-resp").html(resp);
             
             var req = {
 				"QUESTIONS": "",
@@ -252,6 +310,7 @@ function NQF_edit(type) {
 			//
 			console.log(req, ID);
 			if (req.QUESTIONS != "" && req.REPONSES != "" && req.type != "") {
+
 				console.log(req, ID);
 				updateQuestionNQF(ID, req);
 				// added recently
@@ -276,31 +335,33 @@ function NQF_edit(type) {
 					RestSearchFaqSec("", 0, 5, 6, ".NFQ-quest-type-adminis", 1)
 				}*/
 				//
-				if ($(".ow-btn-container:has(> i)").length == 0) {
-					$(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
-				}
+				if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+					$("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+                }
+                
 				setTimeout(function () {
-					$(".ow-btn-container i.fa-check").remove()
-					$(".NQF-edit-modif").hide()
-					$(".NQF-new-quest-btn").show();
-					$(".NQF-vue-question").show();
+					$("."+clas+" .ow-btn-container i.fa-check").remove()
+					$("."+clas+" .NQF-edit-modif").hide()
+					$("."+clas+" .NQF-new-quest-btn").show();
+					$("."+clas+" .NQF-vue-question").show();
 				}, 2000);
 				
 				
 			} else {
 				alert("verifier que tout les champs sont bien remplis");
-				$(".NQF-vue-question").hide();
+				$("."+clas+" .NQF-vue-question").hide();
 			}
 			// $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput")
 			// $(".NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput");
 			
 		} else if(type == 2){
 			
+            var clas = "classSearch-3";
 
-			let title = $('.ow-field-input[data-xpath="NQFtitle"]').val();
-			let categ = $('.ow-field-input-select[data-xpath="NQFtype"]').text();
-			let texte = $('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
-			let description = $('.NFQ-desc-refjuridique textarea').val(); 
+			let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
+			let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
+			let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
+			let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
 			
 			console.log(title, categ, texte, description)
 			
@@ -310,10 +371,10 @@ function NQF_edit(type) {
 				T = 1;
 			}
 			let id = "";
-			id = $(".NQF-id-ref").val();
-			$(".NQF-title-ref").text(title);
-			$(".NQF-desc-ref").text(description);
-			$(".NQF-text-ref").html(texte);
+			id = $("."+clas+".NQF-id-ref").val();
+			$("."+clas+".NQF-title-ref").text(title);
+			$("."+clas+".NQF-desc-ref").text(description);
+			$("."+clas+".NQF-text-ref").html(texte);
 
 			var req = {
 				"title": "",
@@ -328,24 +389,25 @@ function NQF_edit(type) {
 			console.log(req, id);
 			
 			//
-			if ($(".ow-btn-container:has(> i)").length == 0) {
-				$(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+			if ($("."+clas+".ow-btn-container:has(> i)").length == 0) {
+				$("."+clas+".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
 			}
 			setTimeout(function () {
-				$(".ow-btn-container i.fa-check").remove()
-				$(".NQF-edit-modif").hide()
-				$(".NQF-new-quest-btn").show();
-				$(".NQF-vue-ref").show();
-				$(".NQF-btn-alg").hide();
+				$("."+clas+".ow-btn-container i.fa-check").remove()
+				$("."+clas+".NQF-edit-modif").hide()
+				$("."+clas+".NQF-new-quest-btn").show();
+				$("."+clas+".NQF-vue-ref").show();
+				$("."+clas+".NQF-btn-alg").hide();
 			}, 2000);
 			
 			updateReglementation(id,req);
 		}else if(type==3){
-            let title = $('.ow-field-input[data-xpath="title"]').val();
-			let categ = $('.ow-field-input-select[data-xpath="categ"]').text();
-            let urlV  = $('.ow-field-input[data-xpath="url"]').val();
-            let description = $('.ow-field-input-line textarea[data-xpath="description"]').val(); 
-			let playlist = $('.ow-field-input-select[data-xpath="playlist"]').text();
+            var clas = "classSearch-7";
+            let title = $('.'+clas+' .ow-field-input[data-xpath="title"]').val();
+			let categ = $('.'+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+            let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
+            let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
+			let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
             
             if(categ=="Vimeo"){
                 var video_id = urlV.match(/\/\d+/)[0].replace(/\//g,""); 
@@ -392,26 +454,26 @@ function NQF_edit(type) {
                     success: function(data){
                         var thumbnail_src = data[0].thumbnail_large;
                         req.img_url = thumbnail_src;
-                        if ($(".ow-btn-container:has(> i)").length == 0) {
-                            $(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+                        if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+                            $("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
                         }
     
                         
                         var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
                         console.log(urlemb);
-                        $(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-                        $(".NQF-vue-question .vue-video-title b").html(title);
-                        $(".NQF-vue-question .vue-video-description").html(description);
+                        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                        $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+                        $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
                         
                         setTimeout(function () {
-                            $(".ow-btn-container i.fa-check").remove()
-                            $(".NQF-edit-modif").hide()
-                            $(".NQF-new-quest-btn").show();
-                            $(".NQF-vue-ref").show();
-                            $(".NQF-btn-alg").hide();
-                            $(".NQF-vue-question").show();
+                            $("."+clas+" .ow-btn-container i.fa-check").remove()
+                            $("."+clas+" .NQF-edit-modif").hide()
+                            $("."+clas+" .NQF-new-quest-btn").show();
+                            $("."+clas+" .NQF-vue-ref").show();
+                            $("."+clas+" .NQF-btn-alg").hide();
+                            $("."+clas+" .NQF-vue-question").show();
                             
-                            getAllplayLists(1,100);
+                            getAllplayLists(1,100,clas);
     
                         }, 2000);
                         
@@ -424,26 +486,26 @@ function NQF_edit(type) {
                 
                         req.img_url = "https://img.youtube.com/vi/"+req.video_id+"/0.jpg";
                         
-                        if ($(".ow-btn-container:has(> i)").length == 0) {
-                            $(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+                        if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+                            $("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
                         }
     
                         
                         var urlemb = "https://www.youtube.com/embed/"+req.video_id;
                         console.log(urlemb);
-                        $(".NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-                        $(".NQF-vue-question .vue-video-title b").html(title);
-                        $(".NQF-vue-question .vue-video-description").html(description);
+                        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                        $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+                        $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
                         
                         setTimeout(function () {
-                            $(".ow-btn-container i.fa-check").remove()
-                            $(".NQF-edit-modif").hide()
-                            $(".NQF-new-quest-btn").show();
-                            $(".NQF-vue-ref").show();
-                            $(".NQF-btn-alg").hide();
-                            $(".NQF-vue-question").show();
+                            $("."+clas+" .ow-btn-container i.fa-check").remove()
+                            $("."+clas+" .NQF-edit-modif").hide()
+                            $("."+clas+" .NQF-new-quest-btn").show();
+                            $("."+clas+" .NQF-vue-ref").show();
+                            $("."+clas+" .NQF-btn-alg").hide();
+                            $("."+clas+" .NQF-vue-question").show();
                             
-                            getAllplayLists(1,100);
+                            getAllplayLists(1,100,clas);
     
                         }, 2000);
                         
@@ -451,48 +513,81 @@ function NQF_edit(type) {
             }
             
 			
-/*
-            $(".NQF-title-ref").text(title);
-			$(".NQF-desc-ref").text(description);
-
-			
-			
-			//
-			if ($(".ow-btn-container:has(> i)").length == 0) {
-				$(".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
-			}
-			setTimeout(function () {
-				$(".ow-btn-container i.fa-check").remove()
-				$(".NQF-edit-modif").hide()
-				$(".NQF-new-quest-btn").show();
-				$(".NQF-vue-ref").show();
-				$(".NQF-btn-alg").hide();
-			}, 2000);
-			
-			updateReglementation(id,req);
-*/
-
         }else if(type==4){
-            let title = $('.ow-field-input[data-xpath="titlePlaylist"]').val();
-            let id = "";
-            id = $(".NQF-id-playlist").html();
-            updatePlaylist(id,title);
+            var clas = "classSearch-11";
+            let title = $('.'+clas+' .ow-field-input[data-xpath="title"]').val();
+			let categ = $('.'+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+            let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
+            let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
+			let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
+            let text = $('.'+clas+' ').html();
+            let imgUrl = $('.'+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
+
+
+            if(playlist.trim()==""){
+                playlist = "Général";
+            }
+
+
+            var current_datetime = new Date();
+            
+            var dateYear = current_datetime.getFullYear();
+            var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
+            var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
+
+            var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
+            var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
+            var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
+            
+            var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
+
+            var req = {
+				"title": title,
+				"plateforme": categ,
+                "url": urlV,
+                "playlist":playlist,
+                "description":description,
+                "img_url":imgUrl,
+                "date": formatted_date,
+                "text":text
+			};
+
+
+            if(imgUrl.trim()!=""){
+                $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+            }else{
+                if(categ=="DOC"){
+                    $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                }else if(categ=="INSTALL"){
+                    $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                }
+            }
+            
+            $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+            $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
             setTimeout(function () {
-                $(".ow-btn-container i.fa-check").remove()
-                $(".NQF-edit-playlist").hide()
-                $(".NQF-new-quest-btn").show();
-                $(".NQF-btn-alg").hide();
+                $("."+clas+" .ow-btn-container i.fa-check").remove()
+                $("."+clas+" .NQF-edit-modif").hide()
+                $("."+clas+" .NQF-new-quest-btn").show();
+                $("."+clas+" .NQF-vue-ref").show();
+                $("."+clas+" .NQF-btn-alg").hide();
+                $("."+clas+" .NQF-vue-question").show();
+                
+                //getAllplayListsD(1,100,clas);
+
             }, 2000);
+            updatePlaylist(id,req);
+            
         }
 	}
 	
 	function NQF_add_question(quest, id, cls, type) {
-
+        var clas = "classSearch-5";
 		// console.log(id);
 		if (type == 1) {
 			$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
 											<div class="vpanel-body-title NQF-quest-delete" style="font-size: 14px;">
-												<span class = 'NFQ-click-btn'  onclick='getQsFaq("${id}",0)' >` + quest + `</span>
+												<span class = 'NFQ-click-btn'  onclick='getQsFaq("${id}",0,"${clas}")' >` + quest + `</span>
 												<span class = 'far fa-times-circle NFQ-close-quest' onclick='removeQuestionNFQ("${id}","/faq_index/qr/")' />
 											</div>
 											<hr class="NQF-horizontal-line " />
@@ -592,25 +687,20 @@ function NQF_edit(type) {
 			},
 			error: function (error) {
                 console.log(error.responseText);
-                $("div.erreur").html(error.responseText);
 			}
 		});
 
     }
     
-    function updatePlaylist(id, title) {
+    function updatePlaylist(id, obj) {
 		let newID = ""
 		if (id != "") {
 			newID = id;
         }
-        
-        var obj = {
-            "title":title
-        }
 
 		$.ajax({
 			type: "POST",
-			url: URL_SEARCH + "/playlist_index/playlist/" + newID,
+			url: URL_SEARCH + "/attachements_index/attachement/" + newID,
 			datatype: "application/json",
 			data: JSON.stringify(obj),
 			contentType: "application/json",
@@ -831,15 +921,15 @@ function NQF_edit(type) {
 
 	}
 	
-    function NQF_edit_av(type,dataroot,ctx) {
+    function NQF_edit_av(type,dataroot,ctx,clas) {
 		
 		if(type == 1){
-			$(".NFQ-all-quest").hide();
-			let question = $(".NQF-vue-question .NQF-prev-quest b").text();
+			$("."+clas+" .NFQ-all-quest").hide();
+			let question = $("."+clas+" .NQF-vue-question .NQF-prev-quest b").text();
 
-			let resp = $(".NQF-prev-resp").html();
-			let categ = $(".NQF-categorie").val();
-			let ID = $(".NQF-id").val();
+			let resp = $("."+clas+" .NQF-prev-resp").html();
+			let categ = $("."+clas+" .NQF-categorie").val();
+			let ID = $("."+clas+" .NQF-id").val();
 			dataroot.question=question;
 	       // dataroot.nfqresponse=resp;
 			dataroot.categ=categ;
@@ -870,16 +960,16 @@ function NQF_edit(type) {
 				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
 				$('.ow-field-input-select[data-xpath="categ"]').text("Administration");
 			}*/
-			$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
-			$('.ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
-			$(".NQF-edit-modif").show();
-			$(".NQF-btn-alg").hide();
+			$("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
+			$("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
+			$("."+clas+" .NQF-edit-modif").show();
+			$("."+clas+" .NQF-btn-alg").hide();
 		} else if(type == 2){
 			// add edit here
-			let title = $(".NQF-title-ref").text();
-			let desc  = $(".NQF-desc-ref").text();
-			let text  = $(".NQF-text-ref").html();
-			let type  = $(".NQF-type-ref").text();
+			let title = $("."+clas+" .NQF-title-ref").text();
+			let desc  = $("."+clas+" .NQF-desc-ref").text();
+			let text  = $("."+clas+" .NQF-text-ref").html();
+			let type  = $("."+clas+" .NQF-type-ref").text();
 			console.log(title, desc, text, type);
 
 			dataroot.NQFtitle=title;
@@ -890,10 +980,10 @@ function NQF_edit(type) {
 			ctx.formRender.notifyObservers("NQFtype");
 			ctx.formRender.notifyObservers("NQFdesc");
 
-			$('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
-			$('.ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html(text)
-			$(".NQF-edit-modif").show();
-			$(".NQF-btn-alg").hide();
+			$("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
+			$("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html(text)
+			$("."+clas+" .NQF-edit-modif").show();
+			$("."+clas+" .NQF-btn-alg").hide();
 
 		}else if(type==3){
 			
@@ -909,7 +999,7 @@ function NQF_edit(type) {
 			ctx.formRender.notifyObservers("categ");
 			ctx.formRender.notifyObservers("description");
 
-			$(".NQF-edit-modif").show();
-			$(".NQF-btn-alg").hide();
+			$("."+clas+" .NQF-edit-modif").show();
+			$("."+clas+" .NQF-btn-alg").hide();
         }
 }

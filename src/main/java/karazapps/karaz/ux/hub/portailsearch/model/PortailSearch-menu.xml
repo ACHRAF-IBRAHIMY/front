@@ -116,7 +116,6 @@
       	<resource type="search">karaz/ux/hub/portailsearch/search/FaqDetail</resource>
       	</menu>
       </menu>
-      
       <menu relId="ModuleRef" label="Module Referentiel">
       	<menu relId="NewRefJuridique" label="Nouveau Référentiel Juridique" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/NewRefJuridique</resource>
@@ -125,7 +124,6 @@
         <resource type="search">karaz/ux/hub/portailsearch/search/RefrentielJuridique</resource>
       	</menu>
       </menu>
-      
       <menu relId="ModuleGuideVidéo" label="Module Guide Vidéo">
       	<menu relId="GuideVideoConsultation" label="Guide Video Consultation" icone="search">
       		<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoConsultation</resource>
@@ -134,8 +132,14 @@
       		<resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoEdit</resource>
       	</menu>
       </menu>
-      
-      
+      <menu relId="ModuleDownload" label="Module Attachement">
+      	<menu relId="DownLoadConsultation" label="Attachement Consultation" icone="search">
+      		<resource type="search">karaz/ux/hub/portailsearch/search/DownloadConsultation</resource>
+      	</menu>
+      	<menu relId="DownloadEdit" label="Attachement Edit" icone="search">
+      		<resource type="search">karaz/ux/hub/portailsearch/search/DownloadEdit</resource>
+      	</menu>
+      </menu>
     </menu>
   </menu>
 </menus>

@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="SimulatorRokhas" label="Simulator Rokhas">
-
-	<query>
-	</query>
-	<data>
-		<query>
-			<search />
-            <idObject />
-            <parentP />
-		</query>
-		<collapsed>false</collapsed>
-	</data>
-	<view>
-		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-        <script postLoad="true">
-        removeLastRootPage(userName);
+  <query />
+  <data>
+    <query>
+      <search />
+      <idObject />
+      <parentP />
+    </query>
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">removeLastRootPage(userName);
                     arrayVect = [[],[],[]];
 
             $(".simulator .simulator-qr .check-ent").click(function(){
@@ -46,187 +43,90 @@
         $(".header-div-toggle .dropdown-content").slideUp();
     }); 
             
-                        removeExpanded(1);
-
-
-        </script>
-        
-        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
+                        removeExpanded(1);</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox className="hp-small simulator">
+        <vbox className="hp-box simulator-sub">
+          <html>
+            <div class="vpanel-title">
+              <div class="vpanel-title">
+                <span>SIMULATEUR DE PROCÉDURES</span>
+                <hr class="header-create-account-horizontal-line hr-hub" />
+              </div>
+            </div>
+            <div class="hp-sbox-text">
+              Vos réponses aux question posées vous permettront d'obtenir des informations sur les documents requis
+              <span style="color:#f93;">*</span>
+              , les principales étapes de la procédures, les délais moyens nécessaires pour leurs accomplissement ainsi que les documents qui vous seront délivrés à la fin de la procédure.
+            </div>
+            <div style="height: 50px;" />
+          </html>
+          <vbox columns="60% 40%">
+            <vbox className="hp-box simulator-qr">
+              <html>
+                <div class="vpanel-title">
+                  <div class="vpanel-title">
+                    <span>QUESTIONS / RÈPONSES</span>
+                    <hr class="header-create-account-horizontal-line hr-hub" />
+                  </div>
+                </div>
+              </html>
+              <html>
+                <div class="qr">
+                  <img src="img/load-text.gif" style="margin: auto;display: block;height: 100px;" alt="" />
+                </div>
+                <div class="next-button">
+                  <button class="back-rq stopped">Précédent</button>
+                  <button class="next-rq">Suivant</button>
+                  <img src="img/loadgif3.gif" style="width: 49px;display: inline-block;vertical-align: middle;display:none;" />
+                </div>
+              </html>
+            </vbox>
+            <vbox className="docs-qr">
+              <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div">
+                <html>
+                  <div class="docs-container" />
                 </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
+              </fieldSet>
+              <fieldSet header="ÉTAPES CLÉS">
+                <html>
+                  <div class="steps-container" />
+                </html>
+              </fieldSet>
+              <fieldSet header="DOCUMENTS DÉLIVRÉS" />
+              <fieldSet header="DOCUMENTS COMPLEMENTAIRES">
+                <html>
+                  <div class="docs-comp-container" />
+                </html>
+              </fieldSet>
             </vbox>
-            
-            <vbox columns="60% 25% 15%" className="header-div-toggle">
- <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a>Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
-
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-                 
-            </vbox>
+          </vbox>
+          <html>
+            <div style="height: 70px;" />
+          </html>
+          <vbox className="danger-text" columns="5% 95%">
+            <html>
+              <i class="fas fa-exclamation-triangle" />
+            </html>
+            <html>
+              <span>
+                Des variations peuvent être constatées entre les informations fournies par le simulateur Rokhas.ma et le déroulement réel de la procédure lors du dépôt de la demande sur la plateforme.
+                <br />
+                Ces potentielles variations dépendent généralement de la nature particulière de certains dossiers, de l'évaluation de l'administration compétente et de la localisation du projet concerné
+              </span>
+            </html>
+          </vbox>
+          <html>
+            <div style="height: 70px;" />
+          </html>
         </vbox>
-
-        <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-            
-            
-        <vbox className="hp-small simulator">
-            <vbox className="hp-box simulator-sub">
-                <html>
-                    <div class="vpanel-title">
-                        <div class="vpanel-title">
-                           <span>SIMULATEUR DE PROCÉDURES</span>
-                           <hr class="header-create-account-horizontal-line hr-hub" />
-                       </div>
-                    </div>
-                    <div class="hp-sbox-text">
-                        Vos réponses aux question posées vous permettront d'obtenir des informations sur les documents requis<span style="color:#f93;">*</span>, les principales étapes de la procédures, les délais moyens nécessaires pour leurs accomplissement ainsi que les documents qui vous seront délivrés à la fin de la procédure. 
-                    </div>
-                    <div style="height: 50px;" />
-                </html>    
-                <vbox columns="60% 40%">
-                    <vbox className="hp-box simulator-qr">
-                    <html>
-                    <div class="vpanel-title">
-                        <div class="vpanel-title">
-                           <span>QUESTIONS / RÈPONSES</span>
-                           <hr class="header-create-account-horizontal-line hr-hub" />
-                       </div>
-                    </div>
-                    </html>
-                    <html>
-                        <div class="qr">
-                            <img src="img/load-text.gif" style="margin: auto;display: block;height: 100px;" alt="" />
-                        </div>
-                        <div class="next-button">
-                            <button class="back-rq stopped">Précédent</button>
-                            <button class="next-rq">Suivant</button>    
-                            <img src="img/loadgif3.gif" style="width: 49px;display: inline-block;vertical-align: middle;display:none;" />
-                        </div>
-                    </html>
-                    </vbox>
-                    <vbox className="docs-qr">
-                        <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div">
-                            <html>
-                                <div class="docs-container" />
-                            </html>
-                        </fieldSet>
-                        <fieldSet header="ÉTAPES CLÉS">
-                            <html>
-                                <div class="steps-container">
-                                    
-                                </div>
-                            </html>
-                        </fieldSet>
-                        <fieldSet header="DOCUMENTS DÉLIVRÉS" />
-                        <fieldSet header="COÛT ÉSTIMATIF" />
-                        <fieldSet header="DOCUMENTS COMPLEMENTAIRES">
-                            <html>
-                                <div class="docs-comp-container">
-                                    
-                                </div>
-                            </html>
-                        </fieldSet>
-                    </vbox> 
-                       
-                </vbox>
-                <html>
-                    <div style="height: 70px;"> </div>
-                </html>
-                       
-               <vbox className="danger-text" columns="5% 95%">
-                    <html>
-                        <i class="fas fa-exclamation-triangle" />
-                   </html>    
-                    <html>
-                        <span>Des variations peuvent être constatées entre les informations fournies par le simulateur Rokhas.ma et le déroulement réel de la procédure lors du dépôt de la demande sur la plateforme.<br />Ces potentielles variations dépendent généralement de la nature particulière de certains dossiers, de l'évaluation de l'administration compétente et de la localisation du projet concerné
-                        </span>
-                    </html>    
-                </vbox>
-
-                <html>
-                    <div style="height: 70px;"> </div>
-                </html>   
-                     
-                
-            </vbox>    
-        </vbox> 
-        
-        
-            
-        
-        <html> <div style="height: 30px;"> </div> </html>            
-        
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
     </screen>
-
-	</view>
-
+  </view>
 </search>
+

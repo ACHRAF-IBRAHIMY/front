@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="RefrentielJuridique" label="Refrentiel Juridique">
-
-	<query>
-	</query>
-	<data>
-		<query>
-			<search />
-            <idObject />
-            <parentP />
-		</query>
-		<collapsed>false</collapsed>
-	</data>
-	<view>
-		 <screen labelWidth="80" label="My Dashboard" noToolBar="true">      
-        <script postLoad="true">
-        removeLastRootPage(userName);
-                loadPageBytype(1);
-                $(".searchbuttun").click();
-                $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+  <query />
+  <data>
+    <query>
+      <search />
+      <idObject />
+      <parentP />
+    </query>
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">removeLastRootPage(userName);
+            $(".classSearch-1 .searchbuttun").click();
+            $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
 		        $(".header-div-toggle").slideToggle(); 
 		    });         
 		   
@@ -31,13 +27,13 @@
 		        $(".header-div-toggle .dropdown-content").slideUp();
 		    }); 
           
-            document.querySelector(".div-full-search-bar .ow-field-input").addEventListener("keydown", function (e) {
-                    var x = document.getElementById("autocomplete-list");
+            document.querySelector(".classSearch-1 .div-full-search-bar .ow-field-input").addEventListener("keydown", function (e) {
+                    var x =  document.querySelector(".classSearch-1 #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,1);
+                    moveKey(e,x,1,"classSearch-1");
             }); 
           
-            document.querySelector(".div-full-search-bar .ow-field-input").addEventListener("input", function () {
+            document.querySelector(".classSearch-1 .div-full-search-bar .ow-field-input").addEventListener("input", function () {
                     var a, b, i;
                     var inp = this;
                     var val = inp.value.toLowerCase();
@@ -50,7 +46,7 @@
                     //close any already open lists of autocompleted values
                     closeAllLists();
                     restAutoComplete(inp,val,true);
-              });
+            });
 
             PCD_headerfieldset_color(".NFQ-quest-title");
             $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
@@ -70,220 +66,99 @@
             RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
             RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",2)
             RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
-            RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)
-
-        </script>
-        
-        <vbox columns="20% 80%" className="Header-signup" columns-small="auto">
-            <vbox className="Header-signup-logo">
-                <html className="Header-signup-glo">
-                    <div class="rokhas-home" style="margin-left: 50px;">
-                        <img src="./img/rokhasRectBlueArFr.svg" style="height:45px;" />
-                    </div>
-                </html>
-                <vbox className="Header-signup-min" columns="20% 60% 20%" columns-small="20% 60% 20%">
-                    <html className="menu-bar-img">
-                        <img src="web/css/img/LogoSquare.svg" alt="" />
-                    </html>
-                    <html />
-                    <html className="menu-bar-icon">
-                        <i class="fas fa-bars" />
-                    </html>    
-                </vbox>
-            </vbox>
-            
-            <vbox columns="60% 25% 15%" className="header-div-toggle">
- <vbox className="header-menu" columns="20% 19% 22% 19% 19% 6%">
-                   <button label="Actualités">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Simulateur">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-                        </postChange>
-                   </button>
-                    <button label="Open data">
-                        <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/OpendataFrame", "search", "Open data iframe", {});
-                        </postChange>
-                   </button>
-                   <button label="Ressources" className="dropdown">
-                        <html>
-                            <div class="dropdown-content">
-                                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{});">
-                                    Référentiel juridique</a>
-                                <hr />
-                                <a>Guides vidéos</a><hr />
-                                <a>Utilitaires</a>
-                            </div>
-                        </html>
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   <button label="Solutions">
-                        <postChange>
-
-                        </postChange>
-                   </button>
-                   
-                   <button icon="far fa-question-circle">
-                       <postChange>
-                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage", "search", "Faq", {}); 
-                       </postChange>
-                   </button>
-                    
-            
-                </vbox>
-
-                <vbox className="vbox-button-signup-header" columns="50% 50%">
-                    <button label="Inscription" className="button-signup-header button-left">	
-                        <postChange>
-                                ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?step=step2','search','search',{});
-                        </postChange>						
-                    </button>
-                    <button label="Connexion" className="button-signup-header">	
-                        <postChange>
-                                //ApplicationManager.run('karaz/signup/gestioncompte/search/FormSignupSearch?','search','search',{});
-                                ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');
-                        </postChange>					
-                    </button>
-                </vbox>
-                 
-            </vbox>
-        </vbox>
-        <html id="hSeparator">
-            <div style="height: 30px;"> </div>
-        </html>        
-           
-        <vbox columns="70% 30%">
-            
-            
+            RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="70% 30%" className="classSearch-1">
         <vbox className="hp-box hp-small divSearch">
-            <vbox className="hp-box divSearchBar div-full-search-bar">
-                <html>
-                    <div class="vpanel-title">
-                        <div class="vpanel-title">
-                           <span>RÉFÉRENTIEL JURIDIQUE</span>
-                           <hr class="header-create-account-horizontal-line hr-hub" />
-                       </div>
-                    </div>
-                    <div class="hp-sbox-text">
-                        Vous trouverez ici les textes de loi et réglementation encadrant les procédures administratives gérées par la plateforme Rokhas. Saisissez un mot clé pour accéder directement à l'article recherché ou bien afficher le texte intégral de la référence juridique.
-                    </div>
-                    <div style="height: 50px;" />
-                </html>    
-                <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-                    <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
-                    <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                        <postChange>
-                                var prefix = $(".div-full-search-bar .hp-search_field input").val();
+          <vbox className="hp-box divSearchBar div-full-search-bar">
+            <html>
+              <div class="vpanel-title">
+                <div class="vpanel-title">
+                  <span>RÉFÉRENTIEL JURIDIQUE</span>
+                  <hr class="header-create-account-horizontal-line hr-hub" />
+                </div>
+              </div>
+              <div class="hp-sbox-text">Vous trouverez ici les textes de loi et réglementation encadrant les procédures administratives gérées par la plateforme Rokhas. Saisissez un mot clé pour accéder directement à l'article recherché ou bien afficher le texte intégral de la référence juridique.</div>
+              <div style="height: 50px;" />
+            </html>
+            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+              <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
+              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                <postChange>var prefix = $(".classSearch-1 .div-full-search-bar .hp-search_field input").val();
                                 currentPage=0;
                                 var pp=root.query.parentP;
                                 if(pp==1){
                                     pp=0;
                                 }
-                                restFullSearchList(prefix,0,false,pp);
-                                root.query.parentP=0;
-                         </postChange>
-                    </button>
-                </vbox>
-                    
-
-                <html>
-                    <div style="height: 70px;"> </div>
-                </html>   
-                <html>
-                    <div class="searchGif">
-                        <img src="img/search-move.gif" />
-                    </div>
-                    <div class="full-search-list">
-                        
-                    </div>
-                    <div class="pagination pagination-second">
-                        
-                    </div>
-                </html>     
-                
-                        </vbox>    
-        </vbox> 
-        
-        <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
-
-                        <!-- start modification -->
-                        <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-
-                            <html>
-                                <div class="NFQ-quest-type-esign NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
-
-                            <html>
-                                <div class="NFQ-quest-type-general NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-
-                            <html>
-                                <div class="NFQ-quest-type-document NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-
-                            <html>
-                                <div class="NFQ-quest-type-plat NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-
-                            <html>
-                                <div class="NFQ-quest-type-archit NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-
-                            <html>
-                                <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                                    <!-- Les questions s'affiche ici                                  -->
-                                </div>
-                            </html>
-
-                        </fieldset>
-
-                        <!-- end modification -->
-
-                    </fieldset>     
+                                restFullSearchList(prefix,0,false,pp,"classSearch-1");
+                                root.query.parentP=0;</postChange>
+              </button>
+            </vbox>
+            <html>
+              <div style="height: 70px;" />
+            </html>
+            <html>
+              <div class="searchGif">
+                <img src="img/search-move.gif" />
+              </div>
+              <div class="full-search-list" />
+              <div class="pagination pagination-second" />
+            </html>
+          </vbox>
         </vbox>
-            
-        
-        <html> <div style="height: 30px;"> </div> </html>            
-        
+        <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+          <!-- start modification -->
+          <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+            <html>
+              <div class="NFQ-quest-type-esign NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
+            <html>
+              <div class="NFQ-quest-type-general NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+            <html>
+              <div class="NFQ-quest-type-document NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
+            <html>
+              <div class="NFQ-quest-type-plat NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
+            <html>
+              <div class="NFQ-quest-type-archit NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
+            <html>
+              <div class="NFQ-quest-type-adminis NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <!-- end modification -->
+        </fieldset>
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
     </screen>
-
-	</view>
-
-
+  </view>
 </search>
+
