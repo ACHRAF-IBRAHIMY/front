@@ -1,5 +1,4 @@
 
-
 function NQF_remove_subtitle() {
     $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
 }
@@ -79,7 +78,7 @@ function NQF_edit(type,clas) {
 	}
 
 
-	function NQF_preview_QR(type,clas) {
+	function NQF_preview_QR(type,clas,dataroot) {
 		if(type == 1){
 			let question = $("."+clas+' .ow-field-input[data-xpath="question"]').val();
 			let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
@@ -151,20 +150,27 @@ function NQF_edit(type,clas) {
             let description = $("."+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
             let playlist = $("."+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
             let imgUrl = $("."+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
-            
+            let attachement = dataroot.attachement;
+
             if (title == "" && categ == "" && urlV == "" && description == "" && playlist=="") {
 				alert("rien à prévisualiser")
 
 			} else {
-                if(imgUrl.trim()!=""){
-                    $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-                }else{
-                    if(categ=="DOC"){
-                        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
-                    }else if(categ=="INSTALL"){
-                        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+
+                if(attachement.gedId==""){
+                    if(imgUrl.trim()!=""){
+                        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                    }else{
+                        if(categ=="DOC"){
+                            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                        }else if(categ=="INSTALL"){
+                            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                        }
                     }
+                }else{
+                    $("."+clas+" .NQF-vue-question .vue-video-frame").html('<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>');
                 }
+                
                 
 				$("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
 				$("."+clas+" .NQF-vue-question .vue-video-description").html(description);
@@ -244,7 +250,7 @@ function NQF_edit(type,clas) {
         return vr;
     }
 
-    function verifieDownload(clas){
+    function verifieDownload(clas,root){
         var vr = true; 
         let title = $("."+clas+' .ow-field-input[data-xpath="title"]').val();
         let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
@@ -262,15 +268,15 @@ function NQF_edit(type,clas) {
             return false;
         }
 
-        if(urlV.trim()==""){
-            alert("Veuillez saisir le lien de l'attachement !");
+        if(urlV.trim()=="" && root.attachement.gedId==""){
+            alert("Veuillez saisir le lien de l'attachement ou attacher un fichier !");
             return false;
         }
 
         return vr;
     }
 
-    function NQF_save_QR(type) {
+    function NQF_save_QR(type,root) {
 		if (type == 1) {
             var clas = "classSearch-5";
 
@@ -520,9 +526,9 @@ function NQF_edit(type,clas) {
             let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
             let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
 			let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
-            let text = $('.'+clas+' ').html();
+            let text = $('.'+clas+' .ql-editor').html();
             let imgUrl = $('.'+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
-
+            var attachement = root.attachement;
 
             if(playlist.trim()==""){
                 playlist = "Général";
@@ -549,20 +555,27 @@ function NQF_edit(type,clas) {
                 "description":description,
                 "img_url":imgUrl,
                 "date": formatted_date,
+                "attachement":attachement,
                 "text":text
 			};
 
-
-            if(imgUrl.trim()!=""){
-                $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-            }else{
-                if(categ=="DOC"){
-                    $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
-                }else if(categ=="INSTALL"){
-                    $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+            if(attachement.gedId==""){    
+                if(imgUrl.trim()!=""){
+                    $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                }else{
+                    if(categ=="DOC"){
+                        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                    }else if(categ=="INSTALL"){
+                            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                    }
                 }
+            }else{
+                var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
             }
-            
+
+            let id = "";
+            id = $("."+clas+" .NQF-id").val();
+
             $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
             $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
             setTimeout(function () {
@@ -573,9 +586,10 @@ function NQF_edit(type,clas) {
                 $("."+clas+" .NQF-btn-alg").hide();
                 $("."+clas+" .NQF-vue-question").show();
                 
-                //getAllplayListsD(1,100,clas);
+                getAllplayListsD(1,100,clas);
 
             }, 2000);
+
             updatePlaylist(id,req);
             
         }
@@ -936,30 +950,7 @@ function NQF_edit(type,clas) {
 			ctx.formRender.notifyObservers("question");
 			ctx.formRender.notifyObservers("nfqresponse");
 			ctx.formRender.notifyObservers("categ");
-			/*let ID = $(".NQF-id").val();
-			console.log(ID);
-
-			$(".NQF-edit-float .ow-field-container.ow-field-text-container").addClass("focusedInput");
-			$('.ow-field-input[data-xpath="question"]').val(question);
-			if (categ == "E-SIGN") {
-				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-				$('.ow-field-input-select[data-xpath="categ"]').text("Signature électronique");
-			} else if (categ == "GENERAL") {
-				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-				$('.ow-field-input-select[data-xpath="categ"]').text("Général");
-			} else if (categ == "DOCUMENT") {
-				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-				$('.ow-field-input-select[data-xpath="categ"]').text("Document");
-			} else if (categ == "PLATEFORME") {
-				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-				$('.ow-field-input-select[data-xpath="categ"]').text("Plateforme");
-			} else if (categ == "ARCHITECTE") {
-				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-				$('.ow-field-input-select[data-xpath="categ"]').text("Architecte");
-			} else if (categ == "ADMINISTRATION") {
-				$(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").addClass("filledInput")
-				$('.ow-field-input-select[data-xpath="categ"]').text("Administration");
-			}*/
+			
 			$("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
 			$("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
 			$("."+clas+" .NQF-edit-modif").show();
@@ -999,6 +990,29 @@ function NQF_edit(type,clas) {
 			ctx.formRender.notifyObservers("categ");
 			ctx.formRender.notifyObservers("description");
 
+			$("."+clas+" .NQF-edit-modif").show();
+			$("."+clas+" .NQF-btn-alg").hide();
+        }else if(type==4){
+            dataroot.title = attachementObject.title;
+			dataroot.url = attachementObject.url;
+            dataroot.playlist = attachementObject.playlist;
+            dataroot.categ = attachementObject.plateforme;
+            dataroot.description = attachementObject.description;
+            dataroot.imgUrl = attachementObject.img_url;
+            dataroot.attachement = attachementObject.attachement;
+
+            let text = attachementObject.text;
+
+			ctx.formRender.notifyObservers("title");
+			ctx.formRender.notifyObservers("url");
+			ctx.formRender.notifyObservers("playlist");
+			ctx.formRender.notifyObservers("categ");
+			ctx.formRender.notifyObservers("description");
+			ctx.formRender.notifyObservers("imgUrl");
+
+            $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
+            $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(text);
+            
 			$("."+clas+" .NQF-edit-modif").show();
 			$("."+clas+" .NQF-btn-alg").hide();
         }

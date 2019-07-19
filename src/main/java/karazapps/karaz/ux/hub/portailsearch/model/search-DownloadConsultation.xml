@@ -7,122 +7,113 @@
       <idObject />
       <parentP />
     </query>
+    <attachement />
+
     <collapsed>false</collapsed>
+
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">removeLastRootPage(userName);
-          loadPageBytype(0);
-          
-           $(".searchbuttun").click();
-           
-           $(".div-full-search-bar .full-search-list .full-search-list-item .p").click(function(){
-               currentPage=0;
-               $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
-                if($(this).attr("class").split(' ')[1]==="p1"){
-                    alert($(this).attr("class").split(' ')[1]);
-                   restFullSearchList($(this).html(),0,false,1);
-                }else if($(this).attr("class").split(' ')[1]==="p2"){
-                    restFullSearchList($(this).html(),0,false,2);
-                }else if($(this).attr("class").split(' ')[1]==="p3"){
-                    restFullSearchList($(this).html(),0,false,3);
-                }else{
-                   restFullSearchList($(this).html(),0,false,1);
-                }
-           });</script>
+      <script postLoad="true">
+        removeLastRootPage(userName);
+        getAllplayListsD(2,4,"classSearch-12");
+        $(".classSearch-12 .searchbuttun").click();
+
+        $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+		        $(".header-div-toggle").slideToggle(); 
+		    });         
+		   
+		    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
+		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
+		    });
+		
+		    $(".header-div-toggle .dropdown").mouseenter(function(){
+		        $(".header-div-toggle .dropdown-content").slideDown();
+		    }).mouseleave(function(){
+		        $(".header-div-toggle .dropdown-content").slideUp();
+		    }); 
+
+        Array.from(document.querySelectorAll(".classSearch-12 .divSearchBar .hp-search_field input")).forEach(function(elm){
+          autoCompleteSim(elm,"attachements_index","title");
+          Array.from(document.querySelectorAll(".classSearch-12 .div-full-search-bar .ow-field-input")).forEach(function(elm){
+            elm.addEventListener("keydown", function (e) {
+            var x = document.querySelector(".classSearch-12 #autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+              moveKey(e,x,1,"classSearch-12");
+            })
+          });
+        });
+
+      </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
-      <vbox columns="70% 30%">
+      <vbox columns="70% 30%" className="classSearch-12">
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
             <html>
               <div class="vpanel-title">
                 <div class="vpanel-title">
-                  <span>RECHERCHE ACTIVITÉS</span>
+                  <span>ATTACHEMENTS ET UTILITAIRES</span>
                   <hr class="header-create-account-horizontal-line hr-hub" />
                 </div>
               </div>
-              <div class="hp-sbox-text">
-                <span class="total" style="color:#f93;">0</span>
-                résultats pour votre recherche
-                <span class="prefix" style="color:#f93;" />
-                . Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
-              </div>
-              <div style="height: 50px;" />
             </html>
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-              <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+              <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Rechercher un attachement" />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                <postChange>var prefix = $(".div-full-search-bar .hp-search_field input").val();
-                                currentPage=0;
-                                var pp=root.query.parentP;
-                                if(pp==1){
-                                    pp=0;
-                                }
-                                console.log(pp);
-                                restFullSearchList(prefix,0,false,pp);
-                                root.query.parentP=0;</postChange>
+                      <postChange>
+                          var prefix = $(".classSearch-12 .div-full-search-bar .search-video-input input").val();
+                          currentPage=0;
+                          $(".classSearch-12 .consultation-video").hide();
+                          $(".classSearch-12 .search-video").show();
+                          restFullSearchList(prefix,0,false,0,"classSearch-12");
+                      </postChange>
               </button>
             </vbox>
             <html>
-              <div style="height: 70px;" />
+              <div style="height: 30px;" />
             </html>
-            <html>
+            <html className="search-video">
               <div class="searchGif">
                 <img src="img/search-move.gif" />
               </div>
               <div class="full-search-list" />
               <div class="pagination pagination-second" />
             </html>
+            <html class="loadGifVid">
+              <div class="searchGif2">
+                <img src="img/load-text.gif" />
+              </div>
+            </html>
+            <html className="consultation-video">
+              <span class="consultation-video-title" style="text-align:center">1-Création de couche -Layer V19072018</span>
+              <div class="video-iframe" style="margin-top: 43px;margin-bottom: 43px;display:grid;grid-template-columns: 45% 55%;height:auto;">
+                <div class="thumbnail">
+                
+                
+                </div>
+                <div class="description" style="text-align:justify;padding-top:0px;font-size:15px;">
+                  <p>
+                   
+                  </p>
+                </div>
+              </div>
+              <div class="video-description">
+              
+              </div>
+              <button class="button-visual-down button-visual-down-1" onclick="window.open();">
+                   <i class="fas fa-download" /> Télecharger
+              </button>
+              <button class="button-visual-down button-visual-down-2">
+                   <i class="fas fa-eye" /> Visualiser
+              </button>
+              
+            </html>
+            
           </vbox>
         </vbox>
-        <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
-          <!-- start modification -->
-          <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-            <html>
-              <div class="NFQ-quest-type-esign NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
-            <html>
-              <div class="NFQ-quest-type-general NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-            <html>
-              <div class="NFQ-quest-type-document NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-            <html>
-              <div class="NFQ-quest-type-plat NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-            <html>
-              <div class="NFQ-quest-type-archit NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-            <html>
-              <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <!-- end modification -->
-        </fieldset>
+        <fieldset header="ATTACHEMENTS RÉCENTS" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation" />
       </vbox>
       <html>
         <div style="height: 30px;" />

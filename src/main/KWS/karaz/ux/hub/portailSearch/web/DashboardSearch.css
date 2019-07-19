@@ -1,6 +1,26 @@
-
-
 /* video consultation style*/
+.consultation-video {
+    padding: 18px;
+    border: 1px solid rgb(238, 238, 238);
+}
+
+.button-visual-down:hover{
+    border: 1px solid #eee;
+    border-radius: 2px;
+    background: #eee;
+    font-size: 15px;
+    padding: 4px 10px;
+    color: #38A;
+}
+
+.button-visual-down{
+    border: 1px solid #38A;
+    border-radius: 2px;
+    background: #38A;
+    font-size: 15px;
+    padding: 4px 10px;
+    color: #EEE;
+}
 
 .vue-video-frame{
     text-align: center
@@ -11,14 +31,38 @@
     grid-template-columns: 90% 10%;
 }
 
-.attachement-vue-glo .ow-field-fileUpload-container{
+.attachement-vue-img {
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.attachement-vue-glo .ow-field-fileUpload-container .ow-field-input-side{
     display: none;
+}
+
+.attachement-vue-img .ow-field-fileUpload-container .ow-field-input-side{
+    display: none;
+}
+
+.attachement-vue-glo .att-icons{
+    padding-top: 35%;
 }
 
 .attachement-vue-glo .att-icons i{
     cursor: pointer;
 }
 .attachement-vue-glo .att-icons .fa-link{
+    display: none;
+}
+
+.attachement-vue-img .att-icons{
+    padding-top: 35%;
+}
+
+.attachement-vue-img .att-icons i{
+    cursor: pointer;
+}
+.attachement-vue-img .att-icons .fa-link{
     display: none;
 }
 
@@ -44,6 +88,11 @@
 .search-video .full-search-list-item img{
     height: 100%;
     width: 100%;
+}
+
+.search-video .full-search-list-item .docthumbnail img{
+    width: auto;
+    height: auto;
 }
 
 .next-prev{

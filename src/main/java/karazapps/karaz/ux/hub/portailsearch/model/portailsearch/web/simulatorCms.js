@@ -1,3 +1,4 @@
+
 var simple_chart_config = {
     chart: {
         container: "#tree-simple",

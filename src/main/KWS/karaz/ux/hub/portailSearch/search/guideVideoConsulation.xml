@@ -54,7 +54,7 @@
               </div>
             </html>
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-              <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Recherche" />
+              <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Rechercher une vidéo" />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                 <postChange>var prefix = $(".classSearch-7 .div-full-search-bar .search-video-input input").val();
                                 currentPage=0;
@@ -87,17 +87,17 @@
               <div class="next-prev" columns="50% 50%">
                 <div class="prev-video" style="">
                   <i class="fas fa-chevron-left" />
-                  <span class="">vidéo précedente</span>
+                  <span class="">Vidéo précedente</span>
                 </div>
                 <div class="next-video" style="">
-                  <span class="">vidéo suivante</span>
+                  <span class="">Vidéo suivante</span>
                   <i class="fas fa-chevron-right" />
                 </div>
               </div>
             </html>
           </vbox>
         </vbox>
-        <fieldset header="VIDÉOS DIDACTIQUES RÉCENTS" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation" />
+        <fieldset header="VIDÉOS DIDACTIQUES RÉCENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation" />
       </vbox>
       <html>
         <div style="height: 30px;" />
@@ -105,4 +105,3 @@
     </screen>
   </view>
 </search>
-

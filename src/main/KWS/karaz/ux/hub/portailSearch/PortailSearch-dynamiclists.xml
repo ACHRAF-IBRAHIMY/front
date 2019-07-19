@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tns:dynamiclists xmlns:tns="http://www.example.org/dynamiclists-struct">
   <dynamiclist name="frontal/uxhub/portailSearch/playList" description="liste des playlistes " >
-   <option value="g" label="Général" />
-   <option value="p1" label="ROKHAS" />
+   	<option value="g" label="Général" />
+   	<option value="p1" label="ROKHAS" />
+    <option value="p2" label="CASAURBA" />
+    <option value="p3" label="Karaz GIS" />
+  </dynamiclist>
+  <dynamiclist name="frontal/uxhub/portailSearch/playListAttachement" description="liste des playlistes des attachements " >
+   	<option value="g" label="Général" />
+   	<option value="p1" label="ROKHAS" />
     <option value="p2" label="CASAURBA" />
     <option value="p3" label="Karaz GIS" />
   </dynamiclist>
 </tns:dynamiclists>
-

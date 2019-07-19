@@ -46,18 +46,13 @@
                     closeAllLists();
                     restAutoComplete(inp,val,true);
       });
-                
-                
+        
       document.querySelector(".divSearchBar input").addEventListener("keydown", function (e) {
                     var x = document.querySelector(".classSearch-home #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x,0,"classSearch-home");
       });
-                
-           
-                
-    
-                
+                          
     document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
           document.getElementsByClassName("ow-field-input")[2].value=""; 
           $(".divSearchBar").show();
@@ -75,8 +70,7 @@
        restSearchList($(".searchList .second-search-bar input").val(),0); 
     });
        
-       
-    $(".divSearch .divSearchBar .t3").click(function(){
+   $(".divSearch .divSearchBar .t3").click(function(){
        ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresUrbanisme", "search", "Procedures Urbanisme", {});
     });
         
@@ -218,7 +212,9 @@
                     </div>
                   </html>
                   <button className="hp-box-btn HomePageLoginButton2 buttonLog check-ref" label="Vérifier">
-                    <postChange>let ref = root.demandeId;
+                    <postChange>
+                    
+                        let ref = root.demandeId;
 
                         
 
