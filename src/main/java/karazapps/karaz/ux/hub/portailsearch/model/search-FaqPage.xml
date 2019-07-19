@@ -32,7 +32,7 @@
                 elm.addEventListener("keydown", function (e) {
                     var x =  document.querySelector(".classSearch-2 #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,1);
+                    moveKey(e,x,1,"classSearch-2");
                 })
             });
             

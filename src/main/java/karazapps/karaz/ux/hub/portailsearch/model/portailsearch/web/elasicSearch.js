@@ -345,6 +345,9 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
     }else if(typePage==7){
         $("."+cls+" .full-search-list").hide();
         RestSearchVideo(prefix,from,4,null,3,null,prev,cls);
+    }else if(typePage==12){
+        $("."+cls+" .full-search-list").hide();
+        RestSearchDownload(prefix,from,4,null,3,null,prev,cls);
     }
 
     return result;
@@ -387,6 +390,21 @@ function generateRequestVideoSearch(prefix,type,from,size,typeUse){
     return str;
 }
 
+function generateRequestAttachementSearch(prefix,type,from,size,typeUse){
+    
+    if(typeUse==0){
+        var str = "{ \"index\": \"attachements_index\", \"type\": \"attachement\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"date\" : {\"order\" : \"desc\"}}],\"query\":{ \"match\":{ \"playlist\":\""+type+"\" }}}\n";
+
+    }else{
+        if(prefix.trim()!=""){
+            var str = "{ \"index\": \"attachements_index\", \"type\": \"attachement\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+        }else{
+            var str = "{ \"index\": \"attachements_index\", \"type\": \"attachement\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"playlist\":\""+type+"\" }}}\n";
+        }
+    }
+
+    return str;
+}
 
 
 function getAllplayLists2(type){
@@ -460,6 +478,46 @@ function getAllplayLists(type,size,clas){
         })
 }
 
+function getAllplayListsD(type,size,clas){
+        
+    var obj = {
+        "aggs" : {
+            "genres" : {
+                "terms" : { "field" : "playlist.keyword" } 
+            }
+        }
+    };
+
+    $("."+clas+" .NQF-freq-quest > .ow-pl-inner").html("");
+
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH + "/attachements_index/attachement/_search",
+        datatype: "application/json",
+        contentType: "application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            console.log(result);
+            var tab = result.aggregations.genres.buckets;
+            var playlists = [];
+            var playlistsClass = [];
+            console.log(tab.length);
+            for(var i=0;i<tab.length;i++){
+                var fieldset = '<div class="ow-pl ow-tabpanel-flex NFQ-quest-title NFQ-type-document expanded class-playlist'+i+'"> <div class="ow-pl-toolbar"><div class="ow-label-pl">'+tab[i].key+'</div> <span class="expand-collapse"> </span> <span class="actions"> </span>  </div><div class="ow-pl-inner"><div class="ow-html"> <div class="NFQ-quest-type-document det NFQ-fieldset" style="padding:0.25rem;"></div></div><div style="clear:both"> </div></div></div>';
+                $("."+clas+" .NQF-freq-quest > .ow-pl-inner").append(fieldset);
+                playlists.push(tab[i].key);
+                playlistsClass.push(".class-playlist"+i);
+            }
+            RestSearchDownload("",0,size,playlists,type,playlistsClass,null,clas);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+}
 
 function RestSearchref(prefix, page, size, type, typeUse, cls,clas) {
 	var str = ""
@@ -530,6 +588,7 @@ function RestSearchref(prefix, page, size, type, typeUse, cls,clas) {
 }
 
 var playlist_videos = [];
+var playlist_attachement = [];
 
 function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
     var str = ""
@@ -718,6 +777,202 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
     }   
 }
 
+function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
+    var str = ""
+        
+    if(type==null){
+
+        if(prefix.trim()!=""){
+            var obj = {  
+                "from":page,
+                "size":size,
+                "query":{  
+                   "bool":{  
+                      "must":[  
+                         {  
+                            "multi_match":{  
+                               "query":prefix,
+                               "fields":[  
+                                  "title.keywordsString","description"
+                               ],
+                               "analyzer":"rebuilt_french",
+                               "fuzziness":"auto",
+                               "minimum_should_match":"60%"
+                            }
+                         }
+                      ],"should":[{
+                        "match_phrase_prefix":{
+                            "title":prefix
+                        }
+                    }]
+                   }
+                }
+             };
+
+        }else{
+
+            var obj = {"size":size,"from":page,"query":{"match_all":{}}};
+                        
+        }
+
+        var a = $("."+clas+" .full-search-list");
+
+        $.ajax({
+            type: "post",
+            url: URL_SEARCH + "/attachements_index/attachement/_search",
+            datatype: "application/json",
+            contentType: "application/json",
+            data: JSON.stringify(obj),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", AUTH);
+            },
+            success: function (result) {
+                if(currentPage==0){
+                    totalPage = Math.ceil(result.hits.total.value/4);
+                    createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,clas);
+                    if(totalPage!=0){
+                        currentPage=1;
+                        currentLPage=1;
+                    }
+                }else if(currentPage%10==0){
+                    currentLPage = (currentPage/10)+1;
+                    console.log("begin: "+currentPage+"lpage: "+currentLPage);
+                    createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,clas);
+                }else if(prev==true){
+                    createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,clas);
+                }
+
+                console.log("result** "+result);
+                $("").html("");
+                var results = result.hits.hits;
+                for(i=0;i<results.length;i++){
+                    console.log(results[i]);
+                    var id = results[i]._id;
+                    var title = results[i]._source.title;
+                    var description = results[i]._source.description;
+                    var imgUrl= results[i]._source.img_url;
+                    var playlist = results[i]._source.playlist;
+                    var text = results[i]._source.text;
+                    var plateforme = results[i]._source.plateforme;
+                    var attachement = results[i]._source.attachement;
+                    
+                    if(attachement.fileId==""){
+                        if(imgUrl.trim()==""){
+                            if(plateforme=="DOC"){
+                                var str = "<i class=\"fas fa-file-download\" style=\"font-size: 9VW;color: #38A;\"></i>";
+                            }else{
+                                var str = "<i class=\"fas fa-download\" style=\"font-size: 9VW;color: #38A;\"></i>";
+                            }
+                        }else{
+                            var str = '<img style="width:100%;height: 68px;" src='+imgUrl+' alt="">';
+                        }    
+                    }else{
+                        var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+                    }
+                    
+                    
+
+                    var b = document.createElement("div");
+                    b.setAttribute("class","hp-box full-search-list-item");
+                    b.setAttribute("style","height: 190px;");
+                    var c = document.createElement("div");
+                    c.setAttribute("class","c-path");
+                   // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
+                    var s = document.createElement("span");
+                    s.setAttribute("class","cl-orange");
+                    c.appendChild(addEventSpan("p1",playlist,clas));
+                    c.appendChild(s);
+                    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+                    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+                    var d = document.createElement("div");
+                    d.setAttribute("class","item-body");
+                    var e = document.createElement("div");
+                    e.setAttribute("class","item-body-title");
+                    d.setAttribute("style","height: height: 150px;");
+                    e.innerHTML="<span title=\""+title+"\">"+subLong(title,35)+"</span>";
+                    var f = document.createElement("p");
+                    //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
+                    f.innerHTML = subLong(description,150);
+                    f.setAttribute("title",description);
+                    d.appendChild(c);
+                    d.appendChild(e);
+                    d.appendChild(f);
+                    var g = document.createElement("button");
+                    g.addEventListener("click",function(){
+                        var id=$(this).children("input").val();
+                        getAttachement(id,1,clas);
+                        //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                     });
+                    g.setAttribute("class","item-body-button hp-sbox-btn");
+                    g.innerHTML="Détails<input type=\"hidden\" value=\""+id+"\" > ";
+                    g.setAttribute("style","display: inline-block;float:right;position: relative; color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
+                    d.appendChild(g);
+                    var title = document.createElement("div");
+                    title.setAttribute("class","item-title");
+                    title.setAttribute("title",playlist);
+                    title.setAttribute("style","width:190px;top: 63px;right: 104px;");
+                    title.innerHTML=subLong(playlist);
+                    title.addEventListener("click",function(){
+                        /*currentPage=0;
+                            $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
+                            restFullSearchList($(this).html(),0,false,4);
+                        */
+                    }); 
+                    b.appendChild(title);
+                    var icons = document.createElement("div");
+                    icons.setAttribute("class","item-icon");
+                    icons.setAttribute("style","height: 150px;");
+                    icons.innerHTML=str;
+                    b.appendChild(icons);
+                    b.appendChild(d);
+                    a.append(b);
+                }
+                $("."+clas+" .search-video .searchGif").hide();
+                $("."+clas+" .full-search-list").show();
+            },
+            error: function (error) {
+                console.log(error.responseText);
+            }
+        })
+
+    }else if(type==-1){
+    }else{
+        for(var i=0;i<type.length;i++){
+            str += generateRequestAttachementSearch(prefix,type[i], page, size,typeUse-2);
+        }
+
+        $.ajax({
+            type: "post",
+            url: URL_SEARCH + "/_msearch",
+            datatype: "application/json",
+            contentType: "application/x-ndjson",
+            data: str,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", AUTH);
+            },
+            success: function (result) {
+                playlist_attachement = [];
+
+                for (var i = 0; i < result.responses.length; i++) {
+                    playlist_attachement.push(new Array());
+
+                    $(cls[i]+" .det").html("");
+                    
+                    for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
+                        playlist_attachement[i].push(result.responses[i].hits.hits[j]._source);
+                        console.log(result.responses[i].hits.hits[j]._id);
+                        NQF_add_attachement(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.attachement,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.img_url,result.responses[i].hits.hits[j]._source.plateforme,result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)    
+                        console.log(result.responses[i].hits.hits[j]._source.type);
+                    }
+             }
+            },
+            error: function (error) {
+                console.log(error.responseText);
+            }
+        })
+    }   
+}
+
 function NQF_add_ref(quest, id, cls, type,clas) {
 
 	// console.log(id);
@@ -789,6 +1044,88 @@ function NQF_add_video(quest,desc,imgUrl, id, cls, type,clas) {
 
 }
 
+function NQF_add_attachement(quest,attachement,desc,imgUrl,categ,id, cls, type,clas) {
+	// console.log(id);
+    console.log("create "+ type);
+
+    if (type == 1) {
+
+        if(attachement.gedId==""){
+            if(imgUrl.trim()==""){
+                    if(categ=="DOC"){
+                        var str = "<i class=\"fas fa-file-download\" style=\"font-size: 4VW;color: #38A;\"></i>";
+                    }else{
+                        var str = "<i class=\"fas fa-download\" style=\"font-size: 4VW;color: #38A;\"></i>";
+                    }
+            }else{
+                var str = '<img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">';
+            }
+        }else{
+            var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+        }
+
+        var div = document.createElement("div");
+        div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
+        `+str+`
+    </div>
+    <div>
+        <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+        <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
+    </div>`;
+
+    div.addEventListener("click",function(){
+        getAttachement(id,0,clas);
+    });
+
+    div.setAttribute("idd",id);
+    div.setAttribute("class","video-list-item");
+    div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
+
+    $("."+clas+" .v-edit " + cls + " .det").append(div);
+    
+    console.log(".v-edit" + cls + " .det");
+        
+	} else if (type == 2) {
+        console.log("create 2");
+        var div = document.createElement("div");
+        
+           
+            if(attachement.gedId==""){
+                if(imgUrl.trim()==""){
+                
+                        if(categ=="DOC"){
+                            var str = "<i class=\"fas fa-file-download\" style=\"font-size: 4VW;color: #38A;\"></i>";
+                        }else{
+                            var str = "<i class=\"fas fa-download\" style=\"font-size: 4VW;color: #38A;\"></i>";
+                        }
+                }else{
+                    var str = '<img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">';
+                }
+            }else{
+                var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+            }
+
+    var div = document.createElement("div");
+    div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
+    `+str+`
+</div>
+<div>
+    <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+    <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
+</div>`;
+
+        div.addEventListener("click",function(){
+            getAttachement(id,1,clas);
+        });
+
+        div.setAttribute("idd",id);
+        div.setAttribute("class","video-list-item");
+        div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
+        $(".v-consultation " + cls + " .det").append(div);
+
+    }
+}
+
 function getRefJ(id, type,clas) {
     $("."+clas+" .NFQ-load-img").show();
     $("."+clas+" .NFQ-all-quest").hide();
@@ -817,8 +1154,7 @@ function getRefJ(id, type,clas) {
 				$("."+clas+" .NQF-desc-ref").text(result._source.desc);
 				$("."+clas+" .NQF-type-ref").text(result._source.type);
 				$("."+clas+" .NQF-id-ref").val(id);
-				
-            
+                
             } else if (type == 1) {
 				 
 			}
@@ -1259,6 +1595,7 @@ function getQsFaq(id,type,cls){
 }
 
 var videoObject = null;
+var attachementObject = null;
 
 function getVideo(id,type,cls){
     if(type==0){
@@ -1343,6 +1680,87 @@ function getVideo(id,type,cls){
     });
 }
 
+function getAttachement(id,type,cls){
+    if(type==0){
+        $("."+cls+" .NQF-new-quest-btn").show();
+        $("."+cls+" .NFQ-load-img").show();
+	    $("."+cls+" .NQF-vue-question").hide();
+        var pos = $(".pcd-header-NQF").offset().top;
+        $('html,body').animate({
+                scrollTop: pos
+            },
+            'fast');
+    }else if(type==1){
+        $("."+cls+" .search-video").hide();
+        $("."+cls+" .consultation-video").hide();
+        $("."+cls+" .searchGif2").show();
+    }
+
+    $("."+cls+" .NFQ-all-quest").hide();
+
+    $.ajax({
+        type: "get",
+        url: URL_SEARCH+"/attachements_index/attachement/" + id,
+        datatype: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization",AUTH);
+        },
+        success: function (result) {
+            if(type==0){
+            	console.log(result);
+                attachementObject = result._source;
+
+
+				$("."+cls+" .NFQ-load-img").hide();
+				$("."+cls+" .NQF-vue-question").show();
+				//add header
+				// $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
+				$("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
+
+                let plateforme = result._source.plateforme;
+                let imgUrl = result._source.img_url;
+                let attachement = result._source.attachement;
+
+               $("."+cls+" .NQF-vue-question .vue-video-title b").html(result._source.title);
+               $("."+cls+" .NQF-vue-question .vue-video-description").html(result._source.description);
+
+             if(attachement.gedId==""){
+                   if(imgUrl.trim()!=""){
+                    $("."+cls+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                }else{
+                    if(plateforme=="DOC"){
+                        $("."+cls+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                    }else if(plateforme=="INSTALL"){
+                        $("."+cls+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+                    }
+                }
+            }else{
+                $("."+cls+" .NQF-vue-question .vue-video-frame").html('<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>');
+            }
+
+                $("."+cls+" .NQF-id").val(id);
+                $("."+cls+" .NQF-vue-question").show();
+				$("."+cls+" .NQF-edit-modif").hide();
+				$("."+cls+" .NQF-btn-alg").show();
+               
+                let a = $("."+cls+" .NQF-categorie")
+				
+                $("."+cls+" .NQF-new-quest-btn").show();
+
+            }else if(type==1){
+                
+                createDivAtt(result,0,null);
+                $("."+cls+" .searchGif2").hide();
+                $("."+cls+" .consultation-video").show();
+
+            } 
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
 function getVideoIndex(id,playlist){
     var playlist_index = 0;
     for(var i=0;i<playlist_videos.length;i++){
@@ -1380,8 +1798,7 @@ function createDivVideo(result,type,obj){
         $(".consultation-video .video-iframe iframe").removeClass("vimeo-video-iframe");
     }
     $(".consultation-video .video-description").html(result._source.description);
-    
-    
+
     if(obj.total ==1){
         $(".consultation-video .next-prev .next-video").attr("onClick","");
         $(".consultation-video .next-prev .prev-video").attr("onClick","");
@@ -1403,7 +1820,6 @@ function createDivVideo(result,type,obj){
             $(".consultation-video .next-prev .next-video").attr("onClick","getVideo(\""+idP.toString()+"\",1,\"classSearch-7\")");
             $(".consultation-video .next-prev .next-video").addClass("active-video");
         }else{
-           
             
             var idN = playlist_videos[obj.playlist_index][obj.index+1].video_id;
             var idP = playlist_videos[obj.playlist_index][obj.index-1].video_id;
@@ -1413,15 +1829,52 @@ function createDivVideo(result,type,obj){
             $(".consultation-video .next-prev .next-video").attr("onClick","getVideo(\""+idP.toString()+"\",1,\"classSearch-7\")");
             $(".consultation-video .next-prev .next-video").addClass("active-video");
 
-            //$(".consultation-video .next-prev .next-video span").attr("onClick","getVideo("+idN+")");
-            //$(".consultation-video .next-prev .prev-video span").attr("onClick","getVideo("+idP+")");
         }
     }
-    
-    
-    
-
 }
+
+
+function createDivAtt(result,type,obj){
+
+    var plateforme = result._source.plateforme;
+    var imgUrl = result._source.img_url;
+    var attachementFileId = result._source.attachement.gedId;
+    var attachement = result._source.attachement;
+        
+    if(attachementFileId==""){
+        $(".button-visual-down-1").attr("onclick","window.open(\""+result._source.url+"\")");
+        $(".button-visual-down-1").show();
+        $(".button-visual-down-2").hide();
+    }else{
+        $(".button-visual-down-2").attr("onclick","window.open(\""+contextPath+"/DownloadFile?gedId="+attachementFileId+"\")")
+        $(".button-visual-down-1").hide();
+        $(".button-visual-down-2").show();
+    }
+
+    if(attachementFileId==""){
+        if(imgUrl.trim()==""){
+            
+            if(plateforme=="DOC"){
+                var str = "<i class=\"fas fa-file-download\" style=\"font-size: 9VW;color: #38A;\"></i>";
+            }else{
+                var str = "<i class=\"fas fa-download\" style=\"font-size: 9VW;color: #38A;\"></i>";
+            }
+        }else{
+            var str = '<img style="width:100%;height: 68px;" src='+imgUrl+' alt="">';
+        }
+    }else{
+        var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+    }
+
+    $(".consultation-video .consultation-video-title").html(result._source.title);
+    $(".consultation-video .video-iframe .thumbnail").html(str);
+    $(".consultation-video .video-iframe .description").html(result._source.description);
+    $(".consultation-video .video-description").html(result._source.text);
+    
+}
+
+
+
 
 function createDivQuestionFaq(result){
     $(".qst-faq .vpanel-title .blue-small").html(subLong(result._source.QUESTIONS,110));
