@@ -226,7 +226,7 @@ function getQuestion(id,type){
             console.log(error.responseText);
         }
     });
-}
+};
 
 var tree = [{
     "0": [{
@@ -254,8 +254,25 @@ var tree = [{
     
 }]}];
 
+var tree2 = [{}];
 
 var arrayVect = [new Array(),new Array(),new Array()];
+
+function getQstFromTree(list){
+    if(list.length==1){
+        return tree2.text;
+    }else{
+        var list2 = [];
+        for(var i=0;i<list.length-1;i++){
+            list2.push((Number(list[i])-1).toString());
+        }
+        var str = getParentPath(list2);
+        console.log(str);
+        var subTree = eval("tree2" + str );    
+    }
+    
+    return subTree.text;
+}
 
 function addToArrayVect(key,value,type){
     var index = arrayVect[0].indexOf(key);

@@ -1,4 +1,5 @@
 
+
 var simple_chart_config = {
     chart: {
         container: "#tree-simple",
@@ -65,7 +66,6 @@ function addChild(id) {
 function reduitNode(id,type){
     var list = id.split("-");
     var str = getParentPath(list);
-    
     var subTree = eval("simple_chart_config.nodeStructure" + str + "[\"children\"]"); 
     var subTreeStr = JSON.parse(JSON.stringify(subTree));
 
@@ -344,9 +344,11 @@ function findSubTreeById(id,type){
 
 function getParentPath(list) {
     var str = "";
+    console.log("list***"+list);
     if(list.length==0)return str;
 
     if(list[0]!=""){
+        console.log("list***"+list[0]);
         for (var i = 0; i < list.length; i++) {
             str += "[\"children\"][" + list[i] + "]";
         }
@@ -1071,7 +1073,8 @@ function getTreeFromEs(type){
                 startTreant();
                 loadQuestionsFromEs();
            }else if(type==1){
-               tree = result._source.treeSimp;
+                tree = result._source.treeSimp;
+                tree2 = result._source.treeComp;
                 firstEsTreeCall();
                 restGetAllLocalite(0,100,0);
            }
