@@ -78,6 +78,6 @@
     display: none;
 }
 
-.Treant.Treant-loaded .node .node-id,.Treant.Treant-loaded .node .node-columns_id,.Treant.Treant-loaded .node .node-status,.Treant.Treant-loaded .node .node-rep_size{
+.Treant.Treant-loaded .node .node-id,.Treant.Treant-loaded .node .node-columns_id,.Treant.Treant-loaded .node .node-status,.Treant.Treant-loaded .node .node-rep_size,.Treant.Treant-loaded .node .node-type_aff{
     display: none;
 }

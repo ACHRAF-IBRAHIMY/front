@@ -307,6 +307,16 @@
                       <span>Etat</span>
                       <span class="classee">Non Classé</span>
                     </div>
+                    <div class="class-type-aff form-grid">
+                      <span>Type d'affichage</span>
+                      <span>
+                        <select>
+                          <option value="NR">Normal</option>
+                          <option value="SQH">Sous-question hidden</option>
+                          <option value="SQS">Sous-question showen</option>
+                        </select>
+                      </span>
+                    </div>
                     <div class="class-question form-grid">
                       <span>Question</span>
                       <span class="link-sim-cms" style="display: grid;grid-template-columns: 85% 14%;">

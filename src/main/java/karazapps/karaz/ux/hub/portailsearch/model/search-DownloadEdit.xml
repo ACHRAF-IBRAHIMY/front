@@ -11,6 +11,8 @@
     <nfqresponse />
     <categ />
     <question />
+    <url />
+    <imgUrl />
     <attachement>
           <fileId />
           <fileName />
@@ -19,7 +21,14 @@
           <fileTime />
           <gedId />
     </attachement>
-    
+    <attachementImg>
+          <fileId />
+          <fileName />
+          <fileSize />
+          <fileSignature />
+          <fileTime />
+          <gedId />
+    </attachementImg>
     <krn />
   </data>
   <view>
@@ -75,6 +84,17 @@
                 $(".attachement-vue-img button.upload").click();
             });
 
+            $(".attachement-vue-glo .fa-close-1").click(function(){
+                
+                viderUrl(0,root,context);
+            });
+
+            $(".attachement-vue-img .fa-close-2").click(function(){
+                
+                viderUrl(1,root,context);
+            });
+            
+
             </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
@@ -118,6 +138,7 @@
                       <field xpath="attachement" krn="3d284095-58d7-4eea-b021-89f18d5d2b6a" label="attacher" widget="fileUpload" />
                       <html className="att-icons">
                         <i class="fas fa-upload fa-upload-1" title="Attacher un fichier (moins de 15 mb)" style="color:#38A;font-size=13px" />
+                        <i class="fas fa-close fa-close-1" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;" />
                       </html>
                     </vbox>
                     <vbox>
@@ -126,9 +147,10 @@
                   </vbox>
                   <vbox className="attachement-vue-img" columns="85% 1% 14%">
                         <field label="URL Thumbnail" widget="text" labelAlign="float" xpath="imgUrl" />
-                        <field xpath="attachement" krn="3d284095-58d7-4eea-b021-89f18d5d2b6a" label="attacher" widget="fileUpload" />
+                        <field xpath="attachementImg" krn="3d284095-58d7-4eea-b021-89f18d5d2b6a" label="attacher" widget="fileUpload" />
                         <html className="att-icons">
                           <i class="fas fa-upload fa-upload-2" title="Attacher une image (moins de 15 mb)" style="color:#38A;font-size=13px" />
+                          <i class="fas fa-close fa-close-2" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;" />
                         </html>
                       </vbox>
                     </vbox>
@@ -147,13 +169,14 @@
                     <postChange>NQF_preview_QR(4,"classSearch-11",root);</postChange>
                   </button>
                   <button label="Nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
-                    <postChange>//NQF_new_QR(1);
-                                            $('.classSearch-11 .ow-field-input[data-xpath="title"]').val("");
-                                            $('.classSearch-11 .ow-field-input-select[data-xpath="categ"]').text("");
-                                            $('.classSearch-11 .ow-field-input[data-xpath="url"]').val("");
-                                            $('.classSearch-11 .ow-field-input-line textarea[data-xpath="description"]').val(""); 
-                                            $('.classSearch-11 .ow-field-input-select[data-xpath="playlist"]').text("");
-                                            $(".classSearch-11 .NQF-vue-question").hide();</postChange>
+                    <postChange>
+                              //NQF_new_QR(1);
+                              $('.classSearch-11 .ow-field-input[data-xpath="title"]').val("");
+                              $('.classSearch-11 .ow-field-input-select[data-xpath="categ"]').text("");
+                              $('.classSearch-11 .ow-field-input[data-xpath="url"]').val("");
+                              $('.classSearch-11 .ow-field-input-line textarea[data-xpath="description"]').val(""); 
+                              $('.classSearch-11 .ow-field-input-select[data-xpath="playlist"]').text("");
+                              $(".classSearch-11 .NQF-vue-question").hide();</postChange>
                   </button>
                   <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
                     <postChange>
@@ -188,15 +211,17 @@
               <vbox columns="80% 10% auto" className="NQF-btn-alg">
                 <vbox />
                 <button label="Supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
-                  <postChange>let id = $(".classSearch-11 .NQF-id").val();
-                              removeQuestionNFQ(id,"/attachements_index/attachement/");
-                              $(".NQF-vue-question").hide();
-										//NQF_remove_subtitle();</postChange>
+                  <postChange>
+                            let id = $(".classSearch-11 .NQF-id").val();
+                            removeQuestionNFQ(id,"/attachements_index/attachement/");
+                            $(".NQF-vue-question").hide();
+                            //NQF_remove_subtitle();</postChange>
                 </button>
                 <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
-                  <postChange>console.log("root================",root);
-                                        console.log("context================",context);
-                                        NQF_edit_av(4,root,context,"classSearch-11");</postChange>
+                  <postChange>
+                            console.log("root================",root);
+                            console.log("context================",context);
+                            NQF_edit_av(4,root,context,"classSearch-11");</postChange>
                 </button>
               </vbox>
             </vbox>

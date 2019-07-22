@@ -378,7 +378,16 @@ function showUpdate(id){
     $(".cms-form  input.class-id").val(obj.text.id);
     $(".cms-form .body-cms-form .class-title span").eq(1).children("input").val(obj.text.name);
     $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html(obj.text.question);    
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",obj.text.question_id);    
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",obj.text.question_id);
+
+    if(obj.text.type_aff=="NR" || obj.text.type_aff==undefined){
+        $(".cms-form .body-cms-form .class-type-aff select option").eq(0).prop("selected",true)
+    }else if(obj.text.type_aff=="SQH"){
+        $(".cms-form .body-cms-form .class-type-aff select option").eq(1).prop("selected",true)
+    }else if(obj.text.type_aff=="SQS"){
+        $(".cms-form .body-cms-form .class-type-aff select option").eq(2).prop("selected",true)
+    }
+    
     $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html("");
     
     if(obj.text.status == 0){
@@ -491,9 +500,12 @@ function updateNode(id){
     var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title");
     var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html();
     var repSize = qstList[indexOfQst(questionId,qstList)].rep.length;
+    var typeAff = $(".cms-form .body-cms-form .class-type-aff select option:selected").val();
+
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"rep_size\"]=repSize");
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"type_aff\"]=typeAff");
     
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title");
     

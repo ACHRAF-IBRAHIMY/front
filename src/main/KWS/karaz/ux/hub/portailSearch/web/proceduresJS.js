@@ -149,8 +149,13 @@ function NQF_edit(type,clas) {
             let urlV = $("."+clas+' .ow-field-input[data-xpath="url"]').val();
             let description = $("."+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
             let playlist = $("."+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
-            let imgUrl = $("."+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
+            var imgUrl = $("."+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
             let attachement = dataroot.attachement;
+            let attachementImg = dataroot.attachementImg;
+
+            if(attachementImg.gedId!=""){
+                 imgUrl = "/karazal/DownloadFile?gedId="+attachementImg.gedId+"&thumbnail=small&krn="+attachementImg.gedId.split("/")[0]+"&or=img/no-file.svg";
+            }
 
             if (title == "" && categ == "" && urlV == "" && description == "" && playlist=="") {
 				alert("rien à prévisualiser")
@@ -527,8 +532,14 @@ function NQF_edit(type,clas) {
             let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
 			let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
             let text = $('.'+clas+' .ql-editor').html();
-            let imgUrl = $('.'+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
+            var imgUrl = $('.'+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
+            console.log("root.attachement== "+root.attachement);
             var attachement = root.attachement;
+            var attachementImg = root.attachementImg;
+
+            if(attachementImg.gedId!=""){
+                imgUrl = "/karazal/DownloadFile?gedId="+attachementImg.gedId+"&thumbnail=small&krn="+attachementImg.gedId.split("/")[0]+"&or=img/no-file.svg"
+            }
 
             if(playlist.trim()==""){
                 playlist = "Général";
@@ -556,6 +567,7 @@ function NQF_edit(type,clas) {
                 "img_url":imgUrl,
                 "date": formatted_date,
                 "attachement":attachement,
+                "attachementImg": attachementImg,
                 "text":text
 			};
 
@@ -620,6 +632,21 @@ function NQF_edit(type,clas) {
 	}
 
 
+    function viderUrl(type,root,context){
+        if(type==0){
+            console.log(root.attachement);
+            root.attachement.fileId = "";
+            root.attachement.gedId = "";
+            console.log(root.attachement);
+            root.url = "";
+            context.formRender.notifyObservers("url");
+        }else if(type==1){
+            root.attachementImg.fileId = "";
+            root.attachementImg.gedId = "";
+             root.imgUrl = "";
+             context.formRender.notifyObservers("imgUrl");
+        }
+    }
 
 
 
@@ -1000,6 +1027,11 @@ function NQF_edit(type,clas) {
             dataroot.description = attachementObject.description;
             dataroot.imgUrl = attachementObject.img_url;
             dataroot.attachement = attachementObject.attachement;
+            dataroot.attachementImg = attachementObject.attachementImg;
+            
+            if(attachementObject.attachement.gedId!=""){
+                dataroot.url = contextPath+"/DownloadFile?gedId="+attachementObject.attachement.gedId;
+            }
 
             let text = attachementObject.text;
 
@@ -1008,7 +1040,9 @@ function NQF_edit(type,clas) {
 			ctx.formRender.notifyObservers("playlist");
 			ctx.formRender.notifyObservers("categ");
 			ctx.formRender.notifyObservers("description");
-			ctx.formRender.notifyObservers("imgUrl");
+            ctx.formRender.notifyObservers("imgUrl");
+            ctx.formRender.notifyObservers("attachement");
+            ctx.formRender.notifyObservers("attachementImg");
 
             $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
             $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(text);

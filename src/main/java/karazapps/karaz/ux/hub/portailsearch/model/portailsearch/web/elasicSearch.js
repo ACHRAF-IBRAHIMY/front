@@ -629,6 +629,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
         }
 
         var a = $("."+clas+" .full-search-list");
+        $("."+clas+" .search-video .no-result-v").hide();
 
         $.ajax({
             type: "post",
@@ -658,6 +659,9 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
                 console.log(result);
                 $("").html("");
                 var results = result.hits.hits;
+
+                
+
                 for(i=0;i<results.length;i++){
                     console.log(results[i]);
                     var id = results[i]._id;
@@ -721,7 +725,11 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
                     a.append(b);
                 }
                 $("."+clas+" .search-video .searchGif").hide();
-                $("."+clas+" .full-search-list").show();
+                if(result.hits.hits.length==0){
+                    $("."+clas+" .search-video .no-result-v").show();
+                }else{
+                    $("."+clas+" .full-search-list").show();
+                }
             },
             error: function (error) {
                 console.log(error.responseText);
@@ -816,6 +824,7 @@ function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
         }
 
         var a = $("."+clas+" .full-search-list");
+        $("."+clas+" .search-video .no-result-v").hide();
 
         $.ajax({
             type: "post",
@@ -864,7 +873,7 @@ function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
                                 var str = "<i class=\"fas fa-download\" style=\"font-size: 9VW;color: #38A;\"></i>";
                             }
                         }else{
-                            var str = '<img style="width:100%;height: 68px;" src='+imgUrl+' alt="">';
+                            var str = "<img style=\"width:100%;height: 100%;\" src="+imgUrl+">";
                         }    
                     }else{
                         var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
@@ -928,7 +937,13 @@ function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
                     a.append(b);
                 }
                 $("."+clas+" .search-video .searchGif").hide();
-                $("."+clas+" .full-search-list").show();
+
+                if(result.hits.hits.length==0){
+                    $("."+clas+" .search-video .no-result-v").show();
+                }else{
+                    $("."+clas+" .full-search-list").show();
+                }
+                
             },
             error: function (error) {
                 console.log(error.responseText);
@@ -1058,7 +1073,7 @@ function NQF_add_attachement(quest,attachement,desc,imgUrl,categ,id, cls, type,c
                         var str = "<i class=\"fas fa-download\" style=\"font-size: 4VW;color: #38A;\"></i>";
                     }
             }else{
-                var str = '<img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">';
+                var str = '<img style="width:100%;height: 80px;" src='+imgUrl+' alt="">';
             }
         }else{
             var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
@@ -1099,7 +1114,7 @@ function NQF_add_attachement(quest,attachement,desc,imgUrl,categ,id, cls, type,c
                             var str = "<i class=\"fas fa-download\" style=\"font-size: 4VW;color: #38A;\"></i>";
                         }
                 }else{
-                    var str = '<img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">';
+                    var str = '<img style="width:100%;height: 80px;" src='+imgUrl+' alt="">';
                 }
             }else{
                 var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
@@ -1726,7 +1741,7 @@ function getAttachement(id,type,cls){
 
              if(attachement.gedId==""){
                    if(imgUrl.trim()!=""){
-                    $("."+cls+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+                    $("."+cls+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"90%\" height=\"100%\" frameborder=\"0\" >");
                 }else{
                     if(plateforme=="DOC"){
                         $("."+cls+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
@@ -1860,7 +1875,7 @@ function createDivAtt(result,type,obj){
                 var str = "<i class=\"fas fa-download\" style=\"font-size: 9VW;color: #38A;\"></i>";
             }
         }else{
-            var str = '<img style="width:100%;height: 68px;" src='+imgUrl+' alt="">';
+            var str = '<img style="width:90%;height: auto;" src='+imgUrl+' alt="">';
         }
     }else{
         var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
