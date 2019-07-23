@@ -261,10 +261,11 @@ var arrayVect = [new Array(),new Array(),new Array(),new Array()];
 var qstArray = [new Array(),new Array()];
 var qstId = [new Array(),new Array()];
 
+
 /* Parcourir tree2*/ 
 function getQstFromTree(list){
     if(list.length==1){
-        return tree2.text;
+        return tree2;
     }else{
         var list2 = [];
         for(var i=0;i<list.length-1;i++){
@@ -274,23 +275,29 @@ function getQstFromTree(list){
         console.log(str);
         var subTree = eval("tree2" + str );    
     }
-    return subTree.text;
+    return subTree;
 }
 
 function getQstId(idVect){
+    var idVectLoc = new Array();
+    idVectLoc=idVectLoc.concat(idVect)
     var qstVect = [new Array(), new Array()];
     var qstTree = getQstFromTree(idVect);
+    console.log(qstTree.text)
     if(qstTree.children.length!=1 || qstTree.children.length==0){
-        return [qstTree.text.question_id];
+        return [qstTree.text.question_id,qstTree.text.type_aff];
     }else if(qstTree.children.length==1){
-        if(qstTree.text.type_aff == "NR"){
-            return [qstTree.text.question_id];
+        if(qstTree.text.type_aff == "NR" || qstTree.text.type_aff == undefined ){
+            return [qstTree.text.question_id,qstTree.text.type_aff];
         }else{
-            idVect.push("1");
+            console.log(idVectLoc);
+            idVectLoc[idVectLoc.length-1]="1";
+            idVectLoc.push("0");
+            console.log(idVectLoc);
             qstVect[0].push(qstTree.text.question_id);
             qstVect[1].push(qstTree.text.type_aff);
-            qstVect[0].push(getQstId(idVect)[0]);
-            qstVect[1].push(getQstId(idVect)[1]);
+            qstVect[0]=qstVect[0].concat(getQstId(idVectLoc)[0]);
+            qstVect[1]=qstVect[1].concat(getQstId(idVectLoc)[1]);
             return qstVect;
         }
     }
