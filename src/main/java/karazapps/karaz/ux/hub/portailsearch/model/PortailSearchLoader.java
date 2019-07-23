@@ -179,6 +179,7 @@ public class PortailSearchLoader {
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otc.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otm.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/proceduresJS.js");
+    			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/reportRanking.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulator.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulatorCms.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/Treant.js");

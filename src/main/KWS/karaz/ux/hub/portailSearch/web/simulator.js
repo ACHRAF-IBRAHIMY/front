@@ -1,4 +1,5 @@
 
+
 function removeExpanded(type){
     if(type==1){
         $(".simulator .docs-qr div.ow-pl").removeClass("expanded");
@@ -256,8 +257,11 @@ var tree = [{
 
 var tree2 = [{}];
 
-var arrayVect = [new Array(),new Array(),new Array()];
+var arrayVect = [new Array(),new Array(),new Array(),new Array()];
+var qstArray = [new Array(),new Array()];
+var qstId = [new Array(),new Array()];
 
+/* Parcourir tree2*/ 
 function getQstFromTree(list){
     if(list.length==1){
         return tree2.text;
@@ -270,8 +274,49 @@ function getQstFromTree(list){
         console.log(str);
         var subTree = eval("tree2" + str );    
     }
-    
     return subTree.text;
+}
+
+function getQstId(idVect){
+    var qstVect = [new Array(), new Array()];
+    var qstTree = getQstFromTree(idVect);
+    if(qstTree.children.length!=1 || qstTree.children.length==0){
+        return [qstTree.text.question_id];
+    }else if(qstTree.children.length==1){
+        if(qstTree.text.type_aff == "NR"){
+            return [qstTree.text.question_id];
+        }else{
+            idVect.push("1");
+            qstVect[0].push(qstTree.text.question_id);
+            qstVect[1].push(qstTree.text.type_aff);
+            qstVect[0].push(getQstId(idVect)[0]);
+            qstVect[1].push(getQstId(idVect)[1]);
+            return qstVect;
+        }
+    }
+}
+
+function uploadQuestions(id,cId,qstArray,type){
+    loadQuestion();
+    $.ajax({
+        type: "get",
+        //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+        url: URL_SEARCH+"/simulator_index_qr/qrs/"+id,
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {    
+            if(type==0){
+                    qstArray[0].push(result);
+                    uploadQuestions(result._source,type);
+            }
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
 }
 
 function addToArrayVect(key,value,type){
