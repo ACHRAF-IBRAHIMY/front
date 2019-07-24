@@ -88,7 +88,14 @@
             RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
             RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",2)
             RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
-            RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)</script>
+            RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)
+            
+            var clcc = document.querySelector("button.fa-keyboard");
+            var inpp = document.querySelectorAll(".hp-search_field input");
+            VKI_buildKeyboardInputs(inpp,clcc);
+            
+            
+            </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
@@ -110,20 +117,25 @@
               </div>
               <div style="height: 50px;" />
             </html>
-            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+            <vbox columns="80% 8% 8%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+              <button className="hp-search_field_icon fas fa-keyboard" label="" title="clavier Arabic" postProcessing="search()" separator="!!">
+                <postChange></postChange>
+              </button>
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                <postChange>var prefix = $(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
-                                currentPage=0;
-                                var pp=root.query.parentP;
-                                if(pp==1){
-                                    pp=0;
-                                }
-                                console.log(pp);
-                                restFullSearchList(prefix,0,false,pp,"classSearch-0");
-                                root.query.parentP=0;</postChange>
+                <postChange>
+                          var prefix = $(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
+                          currentPage=0;
+                          var pp=root.query.parentP;
+                          if(pp==1){
+                            pp=0;
+                          }
+                          console.log(pp);
+                          restFullSearchList(prefix,0,false,pp,"classSearch-0");
+                          root.query.parentP=0;</postChange>
               </button>
             </vbox>
+            
             <html>
               <div style="height: 70px;" />
             </html>

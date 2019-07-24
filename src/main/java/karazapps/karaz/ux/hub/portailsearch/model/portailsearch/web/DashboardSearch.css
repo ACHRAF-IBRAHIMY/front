@@ -1,4 +1,32 @@
-/* video consultation style*/
+
+.vbox-danger-msg{
+    width: 90%;
+    margin: auto;
+}
+
+.vbox-danger-msg i{
+    color: rgb(255, 153, 0);
+    font-size: 44px;
+    padding-top: 5px;
+}
+
+.ranking-fieldset{
+    text-align: left !important;
+}
+
+.ranking-fieldset .ow-btn-container{
+    display: inherit;
+    height: 36px;
+    width: 30px;
+    margin-top: 12px;
+    text-align: left;
+}
+
+.ranking-fieldset .ow-btn-container button{
+    border: 1.5px solid #666;
+    color: #666;
+}
+
 .consultation-video {
     padding: 18px;
     border: 1px solid rgb(238, 238, 238);
@@ -2720,5 +2748,7 @@ box-card:hover{
 }
 
  .video-description{
-    text-align: left;
+    text-align: justify;
+    width: 95%;
+    margin: auto;
 }

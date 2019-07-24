@@ -1,4 +1,5 @@
 
+
 function removeExpanded(type){
     if(type==1){
         $(".simulator .docs-qr div.ow-pl").removeClass("expanded");
@@ -226,7 +227,7 @@ function getQuestion(id,type){
             console.log(error.responseText);
         }
     });
-}
+};
 
 var tree = [{
     "0": [{
@@ -254,8 +255,76 @@ var tree = [{
     
 }]}];
 
+var tree2 = [{}];
 
-var arrayVect = [new Array(),new Array(),new Array()];
+var arrayVect = [new Array(),new Array(),new Array(),new Array()];
+var qstArray = [new Array(),new Array()];
+var qstId = [new Array(),new Array()];
+
+
+/* Parcourir tree2*/ 
+function getQstFromTree(list){
+    if(list.length==1){
+        return tree2;
+    }else{
+        var list2 = [];
+        for(var i=0;i<list.length-1;i++){
+            list2.push((Number(list[i])-1).toString());
+        }
+        var str = getParentPath(list2);
+        console.log(str);
+        var subTree = eval("tree2" + str );    
+    }
+    return subTree;
+}
+
+function getQstId(idVect){
+    var idVectLoc = new Array();
+    idVectLoc=idVectLoc.concat(idVect)
+    var qstVect = [new Array(), new Array()];
+    var qstTree = getQstFromTree(idVect);
+    console.log(qstTree.text)
+    if(qstTree.children.length!=1 || qstTree.children.length==0){
+        return [qstTree.text.question_id,qstTree.text.type_aff];
+    }else if(qstTree.children.length==1){
+        if(qstTree.text.type_aff == "NR" || qstTree.text.type_aff == undefined ){
+            return [qstTree.text.question_id,qstTree.text.type_aff];
+        }else{
+            console.log(idVectLoc);
+            idVectLoc[idVectLoc.length-1]="1";
+            idVectLoc.push("0");
+            console.log(idVectLoc);
+            qstVect[0].push(qstTree.text.question_id);
+            qstVect[1].push(qstTree.text.type_aff);
+            qstVect[0]=qstVect[0].concat(getQstId(idVectLoc)[0]);
+            qstVect[1]=qstVect[1].concat(getQstId(idVectLoc)[1]);
+            return qstVect;
+        }
+    }
+}
+
+function uploadQuestions(id,cId,qstArray,type){
+    loadQuestion();
+    $.ajax({
+        type: "get",
+        //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+        url: URL_SEARCH+"/simulator_index_qr/qrs/"+id,
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {    
+            if(type==0){
+                    qstArray[0].push(result);
+                    uploadQuestions(result._source,type);
+            }
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
 
 function addToArrayVect(key,value,type){
     var index = arrayVect[0].indexOf(key);

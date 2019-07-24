@@ -11,77 +11,102 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">removeLastRootPage(userName);
+      <script postLoad="true">
+          removeLastRootPage(userName);
           loadPageBytype(0);
-          
-           $(".searchbuttun").click();
-           
-           $(".div-full-search-bar .full-search-list .full-search-list-item .p").click(function(){
-               currentPage=0;
-               $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
-                if($(this).attr("class").split(' ')[1]==="p1"){
-                    alert($(this).attr("class").split(' ')[1]);
-                   restFullSearchList($(this).html(),0,false,1);
-                }else if($(this).attr("class").split(' ')[1]==="p2"){
-                    restFullSearchList($(this).html(),0,false,2);
-                }else if($(this).attr("class").split(' ')[1]==="p3"){
-                    restFullSearchList($(this).html(),0,false,3);
-                }else{
-                   restFullSearchList($(this).html(),0,false,1);
-                }
-           });</script>
+      </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
-      <vbox columns="100%">
-        <vbox className="hp-box hp-small divSearch">
-          <vbox className="hp-box divSearchBar div-full-search-bar">
-            <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span>RECHERCHE ACTIVITÉS</span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                </div>
-              </div>
-              <div class="hp-sbox-text">
-                <span class="total" style="color:#f93;">0</span>
-                résultats pour votre recherche
-                <span class="prefix" style="color:#f93;" />
-                . Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
-              </div>
-              <div style="height: 50px;" />
-            </html>
-            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-              <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                <postChange>var prefix = $(".div-full-search-bar .hp-search_field input").val();
-                                currentPage=0;
-                                var pp=root.query.parentP;
-                                if(pp==1){
-                                    pp=0;
-                                }
-                                console.log(pp);
-                                restFullSearchList(prefix,0,false,pp);
-                                root.query.parentP=0;</postChange>
-              </button>
-            </vbox>
-            <html>
-              <div style="height: 70px;" />
-            </html>
-            <html>
-              <div class="searchGif">
-                <img src="img/search-move.gif" />
-              </div>
-              <div class="full-search-list" />
-              <div class="pagination pagination-second" />
-            </html>
-          </vbox>
+      <vbox columns="20% 80%" className="hp-box">
+        <vbox>
+          <html>
+            <img style="width: 140px;" src="img/logo_rokhas_ranking_u1286.png" alt=""/>
+          </html>
         </vbox>
+        <vbox>
+          <html>
+            <div><h3 style="text-align: left;color: #666;font-weight: 650;">Indicateur Rokhas</h3></div>
+            <div><p style="text-align: left;color: #666;margin-bottom:0">Classement national de la performance des collectivités territoriales en matière de délivrance d'autorisations.</p></div>
+            <div><p style="text-align: left;font-size: 14.5px;color: #666;">L’indicateur Rokhas classe les collectivités territoriales marocaines sur la base de leurs performance en matière de délivrance des autorisations. Il s’agit d’un classement totalement automatisé issu des données collectées en temps réel à travers la plateforme Rokhas.ma. L'indicateur Rokhas est calculé à partir de l’évaluation de 5 sous-indicateurs dans les 2 domaines d’autorisations clés, à savoir l’activité urbanistique et l’activité économique : <b>Délai, Attractivité, Digital, Ecosystème, Fiscalité</b></p></div>
+            <div style="text-align: right;font-size: 15px;padding: 0 29px;"><a  href="">Détail de la méthodologie</a></div>
+          </html>
+        </vbox>            
       </vbox>
+      <fieldSet className="hp-box ranking-fieldset" label="CLASSEMENT TRIMESTRIEL GLOBAL">
+        <html> 
+          <div style="padding-left: 23px;">
+                 Classement global des collectivités territoriales à base de leur score dans chacun 
+                 des 5 sous-indicateurs clés.
+          </div>
+        </html>
+        <vbox columns="20% 14% 26% 20% 20%">
+            <field label="Période" widget="select" labelAlign="float" xpath="period" />
+            <vbox></vbox>
+            <vbox columns="80% 15%">
+              <field label="Rechercher collectivité" widget="text" labelAlign="float" xpath="searchColl" />
+              <button className="fa fa-search"></button>          
+            </vbox>
+            <field label="Par région" widget="select" labelAlign="float" xpath="period" />
+            <field label="Par préfecture/province" widget="select" labelAlign="float" xpath="prefecture" />
+        </vbox>
+      </fieldSet>
+      <fieldSet className="hp-box ranking-fieldset" label="CHAMPIONS DES SOUS -INDICATEURS">
+        <html> 
+          <div style="padding-left: 23px;">
+                 Les 3 champions dans chacun des 5 sous-indicateurs considérés.
+          </div>
+        </html>
+        <vbox columns="33% 33% 33%">
+          <fieldSet label="Délai de délivrance"></fieldSet>
+          <fieldSet label="Attractivité"></fieldSet>
+          <fieldSet label="Digital"></fieldSet>
+          <fieldSet label="Ecosystème"></fieldSet>
+          <fieldSet label="Fiscalité"></fieldSet>
+        </vbox>
+      </fieldSet>
+      <fieldSet className="hp-box ranking-fieldset" label="TOP 10 PAR DOMAINE">
+        <html> 
+          <div style="padding-left: 23px;">
+                 Les 10 Meilleurs classement dans les deux domaines d'autorisations.
+          </div>
+        </html>
+        <vbox columns="50% 50%">
+          <fieldSet label="Autorisations d'urbanisme"></fieldSet>
+          <fieldSet label="Autorisations économiques"></fieldSet>
+        </vbox>
+      </fieldSet>
+      <fieldSet className="hp-box ranking-fieldset" label="RADAR DES REGIONS">
+        <html> 
+          <div style="padding-left: 23px;">
+                 Comparatif de la performance des 12 régions au regard des 5 sous indicateurs clés.
+          </div>
+        </html>
+        <vbox columns="50% 50%">
+          <vbox></vbox>
+          <vbox></vbox>
+        </vbox>
+      </fieldSet>
+      
+      <vbox columns="7% 93%" className="vbox-danger-msg">  
+        <html>
+          <i class="fas fa-exclamation-triangle"></i>
+        </html>
+        <html>
+          <div style="font-size: 13px;color: #666;">
+            Les guichets uniques communaux d'urbanisme relevant des communes régies par le système 
+            d'unicité de la ville (Casablanca, Rabat, Tanger, Salé, Marrakech, Fes, ... ), traitent 
+            exclusivement les dossiers d'urbanisme relevant de la catégorie "Grand projets". 
+            Ne profitant pas de l'effet favorable des "Petits projet" sur les délais moyens 
+            de traitement, leur score dus sous-indicateur "Délais" sera majoré automatiquement 
+            de 5 points.
+          </div>
+        </html>    
+      </vbox>
+
       <html>
         <div style="height: 30px;" />
       </html>
     </screen>
   </view>
 </search>
-

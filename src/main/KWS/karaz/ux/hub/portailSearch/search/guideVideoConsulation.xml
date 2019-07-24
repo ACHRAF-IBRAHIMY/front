@@ -71,6 +71,10 @@
                 <img src="img/search-move.gif" />
               </div>
               <div class="full-search-list" />
+              <div class="no-result-v" style="display:none;height: 500px;">
+                    Aucun résultat trouvé. 
+                    Essayez d'autres mots clés
+              </div>
               <div class="pagination pagination-second" />
             </html>
             <html class="loadGifVid">

@@ -65,7 +65,52 @@ context.formRender.notifyObservers("query.tos");
                          			</framedPanel>
 
 					<framedPanel label="Indicateurs de performance" collapsible="false">
-
+						<vbox columns="33% 33% 33%">
+							<vbox className="hp-box hp-IND">
+								<html className="indicator-div">
+									<div class="indicator-div-title">
+										<span><i class="fas fa-chart-area fat"></i> Délai moyen d'autorisation</span>
+										<span style="text-align:right"><i title="Représente le délai moyen (en jour) que je mets pour vallider mon avis à compter du jour de la tenue commission." class="fas fa-question-circle"></i></span>
+									</div>
+									<div style="height: 250px;">
+									
+									</div>
+									<div class="ind-det-but">
+										<button>Détails</button>
+									</div>
+								</html>
+							</vbox>
+							<vbox className="hp-box hp-IND">
+								<html className="indicator-div">
+									<div class="indicator-div-title">
+										<span><i class="fas fa-chart-bar fat"></i> Evolution nombre dossiers</span>
+										<span style="text-align:right"><i title="Représente l'évolution des délais d'émission des PV commission" class="fas fa-question-circle"></i></span>
+									</div>
+									<div style="height: 250px;">
+									
+									</div>
+									<div class="ind-det-but">
+										<button>Détails</button>
+									</div>
+								</html>
+							</vbox>
+							<vbox className="hp-box hp-IND">
+								<html className="indicator-div">
+									<div class="indicator-div-title">
+										<span><i title="Représente l'évolution des délais d'émission des PV commission" class="fas fa-chart-pie fat"></i> Taux itération dossiers</span>
+										<span style="text-align:right"><i class="fas fa-question-circle"></i></span>
+									</div>
+									<div style="height: 250px;">
+									
+									</div>
+									<div class="ind-det-but">
+										<button>Détails</button>
+									</div>
+								</html>
+							</vbox>
+							
+						</vbox>
+												
 					</framedPanel>
 					<framedPanel label="Astuces, conseils et et nouvelles fonctionnalités" collapsible="false">
 

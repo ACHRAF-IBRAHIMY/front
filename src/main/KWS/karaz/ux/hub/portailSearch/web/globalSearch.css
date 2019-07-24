@@ -1,4 +1,42 @@
 
+
+.hp-IND{
+    margin: 3px 9px !important;
+}
+
+.indicator-div-title{
+    text-align: left;
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.indicator-div-title .fat{
+    font-size: 23px;
+    margin-right: 6px
+}
+
+.indicator-div-title i.fa-question-circle{
+    color: #38A;
+}
+
+.ind-det-but{
+    text-align: right;
+}
+
+.ind-det-but button{
+    border: 1.4px solid #38A;
+    background: #eee;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #38A;
+    padding: 3px 9px;
+}
+
+.ind-det-but button:hover{
+    background: #38A;
+    color: #EEE;
+}
+
 .notif_info_header{
     grid-template-columns:10% 40% 50%;
     display: grid;
