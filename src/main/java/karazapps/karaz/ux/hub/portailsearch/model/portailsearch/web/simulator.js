@@ -11,14 +11,27 @@ function removeExpanded(type){
 
 function addQuestion(qst){ 
     $(".simulator .simulator-qr .qr").html("");
-    createQuestion(qst.response.type,qst);
+    console.log(qst);
+    for(var i = 0;i<qst[0].length;i++){
+        if(qst[1][i]=="NR" || qst[1][i]=="SQS" || qst[1][i]==undefined ){
+            createQuestion(qst[0][i].response.type,qst[0][i],false);
+        }else{
+            createQuestion(qst[0][i].response.type,qst[0][i],true);
+        }
+    }
+    
 }
 
-function createQuestion(type,obj){
+function createQuestion(type,obj,hide){
     
     var gldiv = document.getElementsByClassName("simulator")[0].getElementsByClassName("qr")[0];
     var q = document.createElement("div");
     q.setAttribute("class","ques-rep");
+    
+    if(hide==true){
+        q.setAttribute("style","display:none");
+    };
+
     var q1 = document.createElement("div");
     q1.setAttribute("class","ques");
     q1.innerHTML= obj.question;
@@ -229,6 +242,36 @@ function getQuestion(id,type){
     });
 };
 
+function getQuestions(qstts,type,iter){
+    loadQuestion();
+    $.ajax({
+        type: "get",
+        //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+        url: URL_SEARCH+"/simulator_index_qr/qrs/"+qstts[iter],
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            console.log(iter);
+            qstArray[0].push(result._source);
+            qstArray[1].push(type[iter]);
+            if(qstts.length-1==iter || qstts[iter+1]==-1 ){
+                console.log("***** End Qst Load *****");
+                addQuestion(qstArray);
+            }else{
+                getQuestions(qstts,type,iter+1);
+            }    
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+};
+
+
+
 var tree = [{
     "0": [{
         "1": [{
@@ -285,10 +328,10 @@ function getQstId(idVect){
     var qstTree = getQstFromTree(idVect);
     console.log(qstTree.text)
     if(qstTree.children.length!=1 || qstTree.children.length==0){
-        return [qstTree.text.question_id,qstTree.text.type_aff];
+        return [[qstTree.text.question_id],["NR"]];
     }else if(qstTree.children.length==1){
         if(qstTree.text.type_aff == "NR" || qstTree.text.type_aff == undefined ){
-            return [qstTree.text.question_id,qstTree.text.type_aff];
+            return [[qstTree.text.question_id],["NR"]];
         }else{
             console.log(idVectLoc);
             idVectLoc[idVectLoc.length-1]="1";
@@ -303,28 +346,6 @@ function getQstId(idVect){
     }
 }
 
-function uploadQuestions(id,cId,qstArray,type){
-    loadQuestion();
-    $.ajax({
-        type: "get",
-        //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: URL_SEARCH+"/simulator_index_qr/qrs/"+id,
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", AUTH);
-        },
-        success: function (result) {    
-            if(type==0){
-                    qstArray[0].push(result);
-                    uploadQuestions(result._source,type);
-            }
-        },
-        error: function (error) {
-            console.log(error.responseText);
-        }
-    });
-}
 
 function addToArrayVect(key,value,type){
     var index = arrayVect[0].indexOf(key);
@@ -355,8 +376,18 @@ function intializeVectArray(){
     arrayVect[2].push(0);
 }
 
-function nextClick(){
-        var type = $(".simulator .simulator-qr .rep-pred");
+function allNextClick(){
+    var qrs = document.querySelectorAll(".simulator .ques-rep");
+    for(var i=0;i<qrs.length;i++){
+        console.log(qrs[i],i);
+        nextClick(qrs[i],i);
+    }
+}
+
+function nextClick(qr,iter){
+        console.log(qr);
+        var type = $(qr.querySelector(".simulator-qr .rep-pred"));
+
         if(type.hasClass("rep-type-0")){
             type=0
         }else if(type.hasClass("rep-type-1")){
@@ -370,34 +401,33 @@ function nextClick(){
         switch(type){
             
             case 0:
-                var val = $(".simulator .simulator-qr .rep-pred .check .active-check").parent().parent().children("input").val();
-                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
+                var val = $(qr.querySelector(".simulator-qr .rep-pred .check .active-check")).parent().parent().children("input").val();
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val);                 
                 startButton(1);  
-                var str = getTreeHier(tree,arrayVect); 
+                var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
+                console.log(str);
                 var treeLocal = eval("tree"+str);
-                traitementResponse(treeLocal,val-1)
+                traitementResponse(treeLocal,val-1,iter)
                 break;
             case 1:
-                var val = $(".simulator .simulator-qr .rep-pred option:selected").val();
+                var val = $(qr.querySelector(".simulator-qr .rep-pred option:checked")).val();
                 startButton(1);
-                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
-                var str = getTreeHier(tree,arrayVect); 
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val);                 
+                var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 var treeLocal = eval("tree"+str);
-                traitementResponse(treeLocal,val-1)
+                traitementResponse(treeLocal,val-1,iter)
                 break;
             case 2:
-                var val = $(".simulator .simulator-qr .rep-pred").val();
-                console.log(val);
-                console.log(Object.keys(arrayVect)[Object.keys(arrayVect).length-1]);
-                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
+                var val = $(qr.querySelector(".simulator-qr .rep-pred")).val();
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val);                 
                 startButton(1);
-                var str = getTreeHier(tree,arrayVect); 
+                var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 var treeLocal = eval("tree"+str);
-                traitementResponse(treeLocal,0);       
+                traitementResponse(treeLocal,0,iter);       
                 break;
             case 3:
-                var val = $(".simulator .simulator-qr .rep-pred").val();
-                var inputs = $(".simulator .simulator-qr .hidden-conditional");
+                var val = $(qr.querySelector(".simulator-qr .rep-pred")).val();
+                var inputs = qr.querySelector(".simulator-qr .hidden-conditional");
                 for(var i =0;i<inputs.length;i++){
                     if(eval("val"+inputs.eq(i).val())){
                         val = (i+1).toString();
@@ -406,37 +436,54 @@ function nextClick(){
                 }
                 
                 console.log(Object.keys(arrayVect)[Object.keys(arrayVect).length-1]);
-                addToArrayVect(arrayVect[0][arrayVect [0].length-1],val,val);                 
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val);                 
                 startButton(1);
-                var str = getTreeHier(tree,arrayVect); 
+                var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 var treeLocal = eval("tree"+str);
                 console.log(str);
                 console.log(treeLocal);
-                traitementResponse(treeLocal,val-1);       
+                traitementResponse(treeLocal,val-1,iter);       
                 break;
         }
-
 } 
 
 
 
-function traitementResponse(treeLocal,val){
-    if(existBody(treeLocal)){
+function traitementResponse(treeLocal,val,iter){
+    console.log("%%%% ",treeLocal);
+    if(existBody2(treeLocal)){
       if(treeLocal.length == 1){
         var id = Object.keys(treeLocal[0])[0];
-        addToArrayVect(arrayVect[0][arrayVect [0].length-1],val+1,1);
+        addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val+1,1);
       }else{
         var id = Object.keys(treeLocal[val])[0];   
       }  
-        console.log(id);
-        getQuestion(id,0);    
-        addToArrayVect(id,0,0);
+        console.log(id,qstArray[0].length,iter);
+        
+        if(qstArray[0].length-1==iter){
+            addToArrayVect(id,0,0);
+            var qstss = getQstId(arrayVect[1]);
+            console.log("iter====="+qstss);
+            for(var i=0;i<qstss[0].length;i++){
+                if(qstss[0][i]!="-1")addToArrayVect(qstss[0][i],0,0);
+            }
+            console.log(arrayVect);
+            qstArray = [[],[]];
+            getQuestions(qstss[0],qstss[1],0);    
+        }
     }else{
       console.log("end");
       endFunctionSend();
     }
 }
 
+function existBody2(treeGl){
+    if(Object.keys(treeGl).length==0 || treeGl.question_id=="-1"){
+        return false;
+    }else{
+        return true;
+    }
+}
 
 function endFunctionSend(){
     reps = [];
@@ -616,10 +663,15 @@ function firstEsTreeCall(){
             }
 
 
-            for(key in Object.keys(tree)){
+            /*for(key in Object.keys(tree)){
                 getQuestion(key,0);
-            }
+            }*/
+
             intializeVectArray();
+            var qstss = getQstId(arrayVect[1]);
+            qstArray = [[],[]];
+            console.log(qstss);
+            getQuestions(qstss[0],qstss[1],0);    
         },
         error: function (error) {
             console.log(error.responseText);
