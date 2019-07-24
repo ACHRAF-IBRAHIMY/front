@@ -1,5 +1,4 @@
 
-
 function removeExpanded(type){
     if(type==1){
         $(".simulator .docs-qr div.ow-pl").removeClass("expanded");
@@ -13,11 +12,9 @@ function addQuestion(qst){
     $(".simulator .simulator-qr .qr").html("");
     console.log(qst);
     for(var i = 0;i<qst[0].length;i++){
-        if(qst[1][i]=="NR" || qst[1][i]=="SQS" || qst[1][i]==undefined ){
-            createQuestion(qst[0][i].response.type,qst[0][i],false);
-        }else{
-            createQuestion(qst[0][i].response.type,qst[0][i],true);
-        }
+        
+        createQuestion(qst[0][i].response.type,qst[0][i],qst[1][i]);
+        
     }
     
 }
@@ -27,8 +24,9 @@ function createQuestion(type,obj,hide){
     var gldiv = document.getElementsByClassName("simulator")[0].getElementsByClassName("qr")[0];
     var q = document.createElement("div");
     q.setAttribute("class","ques-rep");
+    q.setAttribute("typpe",hide)
     
-    if(hide==true){
+    if(hide=="SQH"){
         q.setAttribute("style","display:none");
     };
 
@@ -347,22 +345,32 @@ function getQstId(idVect){
 }
 
 
-function addToArrayVect(key,value,type){
+function addToArrayVect(key,value,type,typpe){
     var index = arrayVect[0].indexOf(key);
     if(index==-1){
         arrayVect[0].push(key);
         arrayVect[1].push(value);
         arrayVect[2].push(type);
+        arrayVect[3].push(typpe);
     }else{
         arrayVect[1][index]= value;
         arrayVect[2][index]=type;
+        arrayVect[3][index]=typpe;
     }
 }
 
-function popArrayVect(){
-    arrayVect[0].pop();
-    arrayVect[1].pop();
-    arrayVect[2].pop();
+function popArrayVect(i){
+    if(i==undefined){
+        arrayVect[0].pop();
+        arrayVect[1].pop();
+        arrayVect[2].pop();
+        arrayVect[3].pop();
+    }else{
+        arrayVect[0].splice(i,i+1);
+        arrayVect[1].splice(i,i+1);
+        arrayVect[2].splice(i,i+1);
+        arrayVect[3].splice(i,i+1);
+    }
 }
 
 function loadQuestion(){
@@ -402,7 +410,8 @@ function nextClick(qr,iter){
             
             case 0:
                 var val = $(qr.querySelector(".simulator-qr .rep-pred .check .active-check")).parent().parent().children("input").val();
-                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val);                 
+                var typpe = qr.getAttribute("typpe");
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val,typpe);                 
                 startButton(1);  
                 var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 console.log(str);
@@ -411,15 +420,17 @@ function nextClick(qr,iter){
                 break;
             case 1:
                 var val = $(qr.querySelector(".simulator-qr .rep-pred option:checked")).val();
+                var typpe = qr.getAttribute("typpe");
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val,typpe);  
                 startButton(1);
-                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val);                 
                 var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 var treeLocal = eval("tree"+str);
                 traitementResponse(treeLocal,val-1,iter)
                 break;
             case 2:
                 var val = $(qr.querySelector(".simulator-qr .rep-pred")).val();
-                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val);                 
+                var typpe = qr.getAttribute("typpe");
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val,typpe);  
                 startButton(1);
                 var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 var treeLocal = eval("tree"+str);
@@ -427,6 +438,8 @@ function nextClick(qr,iter){
                 break;
             case 3:
                 var val = $(qr.querySelector(".simulator-qr .rep-pred")).val();
+                var typpe = qr.getAttribute("typpe");
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val,typpe);  
                 var inputs = qr.querySelector(".simulator-qr .hidden-conditional");
                 for(var i =0;i<inputs.length;i++){
                     if(eval("val"+inputs.eq(i).val())){
@@ -434,9 +447,7 @@ function nextClick(qr,iter){
                         break;
                     }
                 }
-                
                 console.log(Object.keys(arrayVect)[Object.keys(arrayVect).length-1]);
-                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val);                 
                 startButton(1);
                 var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 var treeLocal = eval("tree"+str);
@@ -454,18 +465,18 @@ function traitementResponse(treeLocal,val,iter){
     if(existBody2(treeLocal)){
       if(treeLocal.length == 1){
         var id = Object.keys(treeLocal[0])[0];
-        addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val+1,1);
+        addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val+1,1,0);
       }else{
         var id = Object.keys(treeLocal[val])[0];   
       }  
         console.log(id,qstArray[0].length,iter);
         
         if(qstArray[0].length-1==iter){
-            addToArrayVect(id,0,0);
+            addToArrayVect(id,0,0,0);
             var qstss = getQstId(arrayVect[1]);
             console.log("iter====="+qstss);
             for(var i=0;i<qstss[0].length;i++){
-                if(qstss[0][i]!="-1")addToArrayVect(qstss[0][i],0,0);
+                if(qstss[0][i]!="-1")addToArrayVect(qstss[0][i],0,0,0);
             }
             console.log(arrayVect);
             qstArray = [[],[]];
@@ -760,13 +771,49 @@ function countDoc(type,objSearchMatrix) {
 }
 
 function backClick(){
-    popArrayVect();
+    var emptySize = 0;
+    for(var i=0;i<arrayVect[1].length;i++) {
+        if(arrayVect[1][i]==0 || arrayVect[1][i]=="0"){
+            emptySize++;
+            popArrayVect(i);
+        }
+    }
+    console.log("######"+arrayVect);
+
+    backQst();
+    backQst();
+    console.log("######"+arrayVect);
+
+    
+
     var id = arrayVect[0][arrayVect[0].length-1];
+    addToArrayVect(id,0,0,0);
     startButton(0);
+
     if(arrayVect[0].length==1){
         stopedButton(1);
     }
-    getQuestion(id,0);
+
+    var qstss = getQstId(arrayVect[1]);
+    qstArray = [[],[]];
+    console.log(qstss);
+    getQuestions(qstss[0],qstss[1],0); 
+}
+
+function backQst(){
+    if(arrayVect[3][arrayVect[3].length-1]=="NR" ){
+        popArrayVect(undefined);
+    }else{
+        for(var i=arrayVect[1].length-1;i==0;i--){
+            if(arrayVect[3][i]=="NR" && arrayVect[3][i-1]=="NR" ){
+                break;
+            }else{
+                popArrayVect(i);
+            }
+    
+        }
+    }
+    
 }
 
 function addDocs(result,type){
