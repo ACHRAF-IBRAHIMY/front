@@ -875,7 +875,8 @@ function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
                             var str = "<img style=\"width:100%;height: 100%;\" src="+imgUrl+">";
                         }    
                     }else{
-                        var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+                        var krn = attachement.gedId.split("/")[0];
+                        var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
                     }
                     
                     
@@ -1749,7 +1750,8 @@ function getAttachement(id,type,cls){
                     }
                 }
             }else{
-                $("."+cls+" .NQF-vue-question .vue-video-frame").html('<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>');
+                var krn = attachement.gedId.split("/")[0];
+                $("."+cls+" .NQF-vue-question .vue-video-frame").html('<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>');
             }
 
                 $("."+cls+" .NQF-id").val(id);
@@ -1877,7 +1879,8 @@ function createDivAtt(result,type,obj){
             var str = '<img style="width:90%;height: auto;" src='+imgUrl+' alt="">';
         }
     }else{
-        var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+        var krn = attachement.gedId.split("/")[0];
+        var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
     }
 
     $(".consultation-video .consultation-video-title").html(result._source.title);
