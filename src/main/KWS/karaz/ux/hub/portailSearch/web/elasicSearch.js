@@ -1076,7 +1076,8 @@ function NQF_add_attachement(quest,attachement,desc,imgUrl,categ,id, cls, type,c
                 var str = '<img style="width:100%;height: 80px;" src='+imgUrl+' alt="">';
             }
         }else{
-            var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+            var krn = attachement.gedId.split("/")[0];
+            var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
         }
 
         var div = document.createElement("div");
@@ -1117,7 +1118,8 @@ function NQF_add_attachement(quest,attachement,desc,imgUrl,categ,id, cls, type,c
                     var str = '<img style="width:100%;height: 80px;" src='+imgUrl+' alt="">';
                 }
             }else{
-                var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn=3d284095-58d7-4eea-b021-89f18d5d2b6a&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+                var krn = attachement.gedId.split("/")[0];           
+                var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
             }
 
     var div = document.createElement("div");

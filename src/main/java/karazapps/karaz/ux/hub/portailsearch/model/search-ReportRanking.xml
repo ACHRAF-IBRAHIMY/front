@@ -14,6 +14,119 @@
       <script postLoad="true">
           removeLastRootPage(userName);
           loadPageBytype(0);
+          
+          var tabInd = ["1-2019"];
+
+          restGetAllCommue([["trim"],["1-2019"]],"indecators.score","desc",10,0,0);
+          restGetAllCommue([["trim"],["1-2019"]],"indecators.delai","desc",3,0,1);
+          restGetAllCommue([["trim"],["1-2019"]],"indecators.attractivite","desc",3,0,2);
+          restGetAllCommue([["trim"],["1-2019"]],"indecators.digital","desc",3,0,3);
+          restGetAllCommue([["trim"],["1-2019"]],"indecators.ecosystem","desc",3,0,4);
+          restGetAllCommue([["trim"],["1-2019"]],"indecators.fiscalite","desc",3,0,5);
+          restGetAllCommue([["trim"],["1-2019"]],"indecators.scoreU","desc",10,0,6);
+          restGetAllCommue([["trim"],["1-2019"]],"indecators.scoreE","desc",10,0,7);
+
+          getAllByAggs("trim.keyword",100,null,"",0);
+          getAllByAggs("région.keyword",100,null,"",1);
+          getAllByAggs("préfecture.keyword",100,null,"",2);
+
+          $("#ranking-table .fa-sort-down").click(function(){
+            
+            var classe = $(this).parent().attr("class");
+            
+            $(this).parent().find(".fa-sort-up").show();
+            $("#ranking-table .fa-sort-down,#ranking-table .fa-sort-up").removeClass("blue-icon");
+            $(this).parent().find(".fa-sort-up").addClass("blue-icon");
+            
+            $(this).hide();
+
+            if(classe=="rank-dl"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","asc",10,0,0)
+            }else if(classe=="rank-dg"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.digital","asc",10,0,0)
+            }else if(classe=="rank-at"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.attractivite","asc",10,0,0)
+            }else if(classe=="rank-es"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.ecosystem","asc",10,0,0)
+            }else if(classe=="rank-fs"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.fiscalite","asc",10,0,0)
+            }else if(classe=="sp-td"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.score","asc",10,0,0)
+            }
+          });
+
+          $("#ranking-table .fa-sort-up").click(function(){
+            
+            var classe = $(this).parent().attr("class");
+            
+            $(this).parent().find(".fa-sort-down").show();
+            $("#ranking-table .fa-sort-down,#ranking-table .fa-sort-up").removeClass("blue-icon");
+            $(this).parent().find(".fa-sort-down").addClass("blue-icon");
+            
+            $(this).hide();
+
+            if(classe=="rank-dl"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","desc",10,0,0)
+            }else if(classe=="rank-dg"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.digital","desc",10,0,0)
+            }else if(classe=="rank-at"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.attractivite","desc",10,0,0)
+            }else if(classe=="rank-es"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.ecosystem","desc",10,0,0)
+            }else if(classe=="rank-fs"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.fiscalite","desc",10,0,0)
+            }else if(classe=="sp-td"){
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.score","desc",10,0,0)
+            }
+          });
+          
+          $(".ranking-fieldset #region").change(function(){
+              var region = $(".ranking-fieldset #region option:selected").val();
+              if(region=="default"){
+                  getAllByAggs("préfecture.keyword",100,null,"",2);
+              }else{
+                  getAllByAggs("préfecture.keyword",100,"région.keyword",region,2);
+              }
+          });
+
+          $(".ranking-fieldset #period,.ranking-fieldset #region,.ranking-fieldset #prefecture").change(function(){
+              var trim = $(".ranking-fieldset #period option:selected").val();
+              var region = $(".ranking-fieldset #region option:selected").val();
+              var prefecture = $(".ranking-fieldset #prefecture option:selected").val();
+
+              var filters = [];
+              var filtersBy = [];
+
+              if(trim=="default"){
+                filters.push("trim.keyword");
+                filtersBy.push("1-2019");
+              }else{
+                filters.push("trim.keyword");
+                filtersBy.push(trim);
+              }
+
+              if(region!="default"){
+                filters.push("région.keyword");
+                filtersBy.push(region);
+              }
+
+              if(prefecture!="default"){
+                filters.push("préfecture.keyword");
+                filtersBy.push(prefecture);
+              }
+              
+              tabInd = [];
+              tabInd.push(trim);
+              tabInd.push(region);
+              tabInd.push(prefecture);
+
+              restGetAllCommue([filters,filtersBy],"indecators.score","desc",10,0,0);
+
+
+          });
+
+        drawRadarRegion();
+
       </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
@@ -41,14 +154,53 @@
           </div>
         </html>
         <vbox columns="20% 14% 26% 20% 20%">
-            <field label="Période" widget="select" labelAlign="float" xpath="period" />
+            <vbox>
+              <html>
+                <select name="period" id="period">
+                  <option value="default">Période</option>
+                </select>
+              </html>
+            </vbox>
+
             <vbox />
+            
             <vbox columns="80% 15%">
               <field label="Rechercher collectivité" widget="text" labelAlign="float" xpath="searchColl" />
               <button className="fa fa-search" />          
             </vbox>
-            <field label="Par région" widget="select" labelAlign="float" xpath="period" />
-            <field label="Par préfecture/province" widget="select" labelAlign="float" xpath="prefecture" />
+
+            <vbox>
+              <html>
+                <select name="region" id="region">
+                  <option value="default">Par région</option>
+                </select>
+              </html>
+            </vbox>
+
+            <vbox>
+              <html>
+                <select name="prefecture" id="prefecture">
+                  <option value="default">Par préfecture/province</option>
+                </select>
+              </html>
+            </vbox>
+
+        </vbox>
+        <vbox>
+          <html>
+            <table id="ranking-table">
+              <tr class="first-tr">
+                <td style="visibility:hidden;width: 335px;" />
+                <td class="sp-td">Rang  </td>
+                <td class="sp-td">Score <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-dl">Délai <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-at">Attractivité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-dg">Digital <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-es">Ecosystème <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-fs">Fiscalité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              </tr>  
+            </table>
+          </html>
         </vbox>
       </fieldSet>
       <fieldSet className="hp-box ranking-fieldset" label="CHAMPIONS DES SOUS -INDICATEURS">
@@ -58,11 +210,56 @@
           </div>
         </html>
         <vbox columns="33% 33% 33%">
-          <fieldSet label="Délai de délivrance" />
-          <fieldSet label="Attractivité" />
-          <fieldSet label="Digital" />
-          <fieldSet label="Ecosystème" />
-          <fieldSet label="Fiscalité" />
+          <fieldSet label="Délai de délivrance" className="ranking-bar3-dl">
+            <html>
+                  <div class="div-bar-1">   
+                      <div class="bar1 bar"><div class="bottom-div" /></div>
+                      <div class="bar2 bar"><div class="bottom-div" /></div>
+                      <div class="bar3 bar"><div class="bottom-div" /></div>
+                  </div>
+                  <div class="div-bar-2" />
+            </html>
+          </fieldSet>
+          <fieldSet label="Attractivité" className="ranking-bar3-at">
+          <html>
+                  <div class="div-bar-1">   
+                      <div class="bar1 bar"><div class="bottom-div" /></div>
+                      <div class="bar2 bar"><div class="bottom-div" /></div>
+                      <div class="bar3 bar"><div class="bottom-div" /></div>
+                  </div>
+                  <div class="div-bar-2" />
+            </html>
+          </fieldSet>
+          <fieldSet label="Digital" className="ranking-bar3-dg">
+          <html>
+                  <div class="div-bar-1">   
+                      <div class="bar1 bar"><div class="bottom-div" /></div>
+                      <div class="bar2 bar"><div class="bottom-div" /></div>
+                      <div class="bar3 bar"><div class="bottom-div" /></div>
+                  </div>
+                  <div class="div-bar-2" />
+            </html>
+          </fieldSet>
+          <fieldSet label="Ecosystème" className="ranking-bar3-es"> 
+          <html>
+                  <div class="div-bar-1">   
+                      <div class="bar1 bar"><div class="bottom-div" /></div>
+                      <div class="bar2 bar"><div class="bottom-div" /></div>
+                      <div class="bar3 bar"><div class="bottom-div" /></div>
+                  </div>
+                  <div class="div-bar-2" />
+            </html>
+          </fieldSet>
+          <fieldSet label="Fiscalité" className="ranking-bar3-fs">
+          <html>
+                  <div class="div-bar-1">   
+                      <div class="bar1 bar"><div class="bottom-div" /></div>
+                      <div class="bar2 bar"><div class="bottom-div" /></div>
+                      <div class="bar3 bar"><div class="bottom-div" /></div>
+                  </div>
+                  <div class="div-bar-2" />
+            </html>
+          </fieldSet>
         </vbox>
       </fieldSet>
       <fieldSet className="hp-box ranking-fieldset" label="TOP 10 PAR DOMAINE">
@@ -72,8 +269,36 @@
           </div>
         </html>
         <vbox columns="50% 50%">
-          <fieldSet label="Autorisations d'urbanisme" />
-          <fieldSet label="Autorisations économiques" />
+          <fieldSet label="Autorisations d'urbanisme" className="ranking-bar10-U">
+            <html>
+              <div style="display:grid;grid-template-columns: 48% 4% 48%;">
+                <div class="div-1-top10">
+                  
+                </div>
+                <div class="div-2-top10">
+                  <div />
+                </div>
+                <div class="div-3-top10">
+                 
+                </div>
+              </div>
+            </html>
+          </fieldSet>
+          <fieldSet label="Autorisations économiques" className="ranking-bar10-E">
+          <html>
+              <div style="display:grid;grid-template-columns: 48% 4% 48%;">
+                <div class="div-1-top10">
+                  
+                </div>
+                <div class="div-2-top10">
+                  <div />
+                </div>
+                <div class="div-3-top10">
+                 
+                </div>
+              </div>
+            </html>
+          </fieldSet>
         </vbox>
       </fieldSet>
       <fieldSet className="hp-box ranking-fieldset" label="RADAR DES REGIONS">
@@ -83,7 +308,19 @@
           </div>
         </html>
         <vbox columns="50% 50%">
-          <vbox />
+          <vbox className="radar-div">
+            <html>
+              <canvas id="radarCanvas" width="300" height="300" />
+              
+            </html>
+          </vbox>
+          <vbox className="legend-region">
+            <html>
+              <div class="lg" style="display:grid;grid-template-columns:33% 34% 33%;">
+                
+              </div>
+            </html>
+          </vbox>
           <vbox />
         </vbox>
       </fieldSet>
