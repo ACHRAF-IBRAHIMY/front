@@ -81,19 +81,21 @@
             });
 
             $(".attachement-vue-img .fa-upload-2").click(function(){
+            
                 $(".attachement-vue-img button.upload").click();
             });
 
             $(".attachement-vue-glo .fa-close-1").click(function(){
-                
-                viderUrl(0,root,context);
+                $(".close1").click();
             });
 
             $(".attachement-vue-img .fa-close-2").click(function(){
-                
-                viderUrl(1,root,context);
+                $(".close2").click();
             });
             
+            $(".NQF-edit-modif .uploadBtn").click(function(){
+                $(".button111").click();
+            });
 
             </script>
       <html id="hSeparator">
@@ -133,9 +135,21 @@
                       <option value="DOC" label="DOC" />
                       <option value="INSTALL" label="INSTALL" />
                     </field>
-                    <vbox className="attachement-vue-glo" columns="85% 1% 14%">
+                    <vbox className="attachement-vue-glo" columns="85% 1% 1% 14%">
                       <field label="URL Attachement" widget="text" labelAlign="float" className="url-vue" xpath="url" />
                       <field xpath="attachement" krn="3d284095-58d7-4eea-b021-89f18d5d2b6a" label="attacher" widget="fileUpload" />
+                      <button className="k-btn-transparent hidden close1" icon="fas fa-close" usage="visualisation=R">
+                       <postChange>
+                        var attachement = root.attachement;
+                        console.log("Emptyyyyyyyyyyy:"+JSON.stringify(attachement));
+                        root.attachement.fileId = "";
+                        root.attachement.gedId = "";
+                        root.url = "";
+                        context.formRender.notifyObservers("url");
+                        attachement = root.attachement;
+                        console.log(attachement);
+                       </postChange>
+                      </button>
                       <html className="att-icons">
                         <i class="fas fa-upload fa-upload-1" title="Attacher un fichier (moins de 15 mb)" style="color:#38A;font-size=13px" />
                         <i class="fas fa-close fa-close-1" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;" />
@@ -145,9 +159,21 @@
                       <field widget="select" label="Playlist" labelAlign="float" xpath="playlist" searchQN="frontal/uxhub/portailSearch/playListAttachement" className="playlist-list">
                       </field>
                   </vbox>
-                  <vbox className="attachement-vue-img" columns="85% 1% 14%">
+                  <vbox className="attachement-vue-img" columns="85% 1% 1% 14%">
                         <field label="URL Thumbnail" widget="text" labelAlign="float" xpath="imgUrl" />
                         <field xpath="attachementImg" krn="3d284095-58d7-4eea-b021-89f18d5d2b6a" label="attacher" widget="fileUpload" />
+                        <button className="k-btn-transparent hidden close2" icon="fas fa-close" usage="visualisation=R">
+                       <postChange>
+                          var attachement = root.attachementImg;
+                          console.log(attachement);
+                          root.attachementImg.fileId = "";
+                          root.attachementImg.gedId = "";
+                          root.imgUrl = "";
+                          context.formRender.notifyObservers("imgUrl");
+                          attachement = root.attachement;
+                          console.log(attachementImg);
+                       </postChange>
+                      </button>
                         <html className="att-icons">
                           <i class="fas fa-upload fa-upload-2" title="Attacher une image (moins de 15 mb)" style="color:#38A;font-size=13px" />
                           <i class="fas fa-close fa-close-2" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;" />
@@ -245,6 +271,17 @@
       <html>
         <div style="height: 30px;" />
       </html>
+      <button className="k-btn-transparent hidden button111" icon="fas fa-close" usage="visualisation=R">
+                       <postChange>
+                        setTimeout(function(){
+                          root.url = "/karazal/DownloadFile?gedId="+root.attachement.gedId ;
+                          root.imgUrl = "/karazal/DownloadFile?gedId="+root.attachementImg.gedId ;
+                          context.formRender.notifyObservers("imgUrl");
+                          context.formRender.notifyObservers("url");
+                        },1000);
+                          
+                       </postChange>
+                      </button>
     </screen>
     <script onLoad="true" />
   </view>

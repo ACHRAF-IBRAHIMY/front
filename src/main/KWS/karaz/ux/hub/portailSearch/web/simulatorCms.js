@@ -1,5 +1,4 @@
 
-
 var simple_chart_config = {
     chart: {
         container: "#tree-simple",
@@ -66,6 +65,7 @@ function addChild(id) {
 function reduitNode(id,type){
     var list = id.split("-");
     var str = getParentPath(list);
+    
     var subTree = eval("simple_chart_config.nodeStructure" + str + "[\"children\"]"); 
     var subTreeStr = JSON.parse(JSON.stringify(subTree));
 
@@ -344,11 +344,9 @@ function findSubTreeById(id,type){
 
 function getParentPath(list) {
     var str = "";
-    console.log("list***"+list);
     if(list.length==0)return str;
 
     if(list[0]!=""){
-        console.log("list***"+list[0]);
         for (var i = 0; i < list.length; i++) {
             str += "[\"children\"][" + list[i] + "]";
         }
@@ -380,16 +378,7 @@ function showUpdate(id){
     $(".cms-form  input.class-id").val(obj.text.id);
     $(".cms-form .body-cms-form .class-title span").eq(1).children("input").val(obj.text.name);
     $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html(obj.text.question);    
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",obj.text.question_id);
-
-    if(obj.text.type_aff=="NR" || obj.text.type_aff==undefined){
-        $(".cms-form .body-cms-form .class-type-aff select option").eq(0).prop("selected",true)
-    }else if(obj.text.type_aff=="SQH"){
-        $(".cms-form .body-cms-form .class-type-aff select option").eq(1).prop("selected",true)
-    }else if(obj.text.type_aff=="SQS"){
-        $(".cms-form .body-cms-form .class-type-aff select option").eq(2).prop("selected",true)
-    }
-    
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",obj.text.question_id);    
     $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html("");
     
     if(obj.text.status == 0){
@@ -502,12 +491,9 @@ function updateNode(id){
     var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title");
     var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html();
     var repSize = qstList[indexOfQst(questionId,qstList)].rep.length;
-    var typeAff = $(".cms-form .body-cms-form .class-type-aff select option:selected").val();
-
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"rep_size\"]=repSize");
-    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"type_aff\"]=typeAff");
     
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title");
     
@@ -1073,8 +1059,7 @@ function getTreeFromEs(type){
                 startTreant();
                 loadQuestionsFromEs();
            }else if(type==1){
-                tree = result._source.treeSimp;
-                tree2 = result._source.treeComp;
+               tree = result._source.treeSimp;
                 firstEsTreeCall();
                 restGetAllLocalite(0,100,0);
            }

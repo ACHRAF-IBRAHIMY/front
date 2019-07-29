@@ -36,9 +36,8 @@ public class PortailActionsBeans implements KarazRemoteAction {
 				e.printStackTrace();
 				return xml;
 			} 
-			 
-			 
 		}
+		
 		
 		
 		return xml;

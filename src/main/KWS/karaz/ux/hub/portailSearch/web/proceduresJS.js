@@ -1,4 +1,5 @@
 
+
 function NQF_remove_subtitle() {
     $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
 }
@@ -537,6 +538,7 @@ function NQF_edit(type,clas) {
             console.log("root.attachement== "+root.attachement);
             var attachement = root.attachement;
             var attachementImg = root.attachementImg;
+            console.log("saveeeeeeeeee : "+attachement);
 
             if(attachementImg.gedId!=""){
                 imgUrl = "/karazal/DownloadFile?gedId="+attachementImg.gedId+"&thumbnail=small&krn="+attachementImg.gedId.split("/")[0]+"&or=img/no-file.svg"
@@ -636,17 +638,24 @@ function NQF_edit(type,clas) {
 
     function viderUrl(type,root,context){
         if(type==0){
-            console.log(root.attachement);
+            var attachement = root.attachement;
+            console.log("Emptyyyyyyyyyyy:"+JSON.stringify(attachement));
             root.attachement.fileId = "";
             root.attachement.gedId = "";
-            console.log(root.attachement);
             root.url = "";
-            context.formRender.notifyObservers("url");
+            context.formRender.notifyObservers("attachement");
+            attachement = root.attachement;
+            console.log(attachement);
+
         }else if(type==1){
+            var attachement = root.attachementImg;
+            console.log(attachement);
             root.attachementImg.fileId = "";
             root.attachementImg.gedId = "";
-             root.imgUrl = "";
-             context.formRender.notifyObservers("imgUrl");
+            root.imgUrl = "";
+            context.formRender.notifyObservers("attachementImg");
+            attachement = root.attachement;
+            console.log(attachementImg);
         }
     }
 
