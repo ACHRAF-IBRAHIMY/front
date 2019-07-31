@@ -10,36 +10,29 @@
             <parentP />
         </query>
         <collapsed>false</collapsed>
+
+        <numDossier />
+        <numCommission />
+        <login />
+        <visulaizer>0</visulaizer>
     </data>
     <view>
         <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
-            <script postLoad="true">
-            removeLastRootPage(userName);
-    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").toggle("fast"); 
-    });
-
-        $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").slideToggle(); 
-    });         
-   
-    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
-    });
-
-    $(".header-div-toggle .dropdown").mouseenter(function(){
-        $(".header-div-toggle .dropdown-content").slideDown();
-    }).mouseleave(function(){
-        $(".header-div-toggle .dropdown-content").slideUp();
-    });
-
+            <script onLoad="true">
+            // root.login=userQN;
+             //context.formRender.notifyObservers("login");
             </script>
-    <html>
-        <iframe src="https://dataurba.ma?noHF=true" class="openUrlIframe" onload="if(typeof openUrlIFrameOnload !== 'undefined') {openUrlIFrameOnload(this);} " style="height: 100vh;width: 100%;" />
-    </html>
+            
+            <vbox test="{visulaizer},=,0" separator=",">
+                <html>
+                    <iframe id="visio" src="https://localhost:30081/conference/${numDossier}/${numCommission}?login=${login}" style="height: 100vh;width: 100%;" allow="microphone; camera" />
+                </html>
+            </vbox>
+            <vbox test="{visulaizer},=,1" separator=",">
+                <html>
+                    <iframe id="visio" src="https://localhost:30081/conference/${numDossier}/${numCommission}/visualizer" style="height: 100vh;width: 100%;" allow="microphone; camera" />
+                </html>
+            </vbox>
         </screen>
-
     </view>
-
-
 </search>
