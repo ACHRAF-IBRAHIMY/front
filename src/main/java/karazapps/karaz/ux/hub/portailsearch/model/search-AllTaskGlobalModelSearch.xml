@@ -29,10 +29,11 @@
   <view>
   <screen id="dashboardMain" noToolBar="true">
 <script onLoad="true">
-console.log("root********onLoad",root);
-root.searchId=new Date().getTime();
-context.formRender.notifyObservers("searchId");
-
+	console.log("root********onLoad",root);
+	root.searchId=new Date().getTime();
+	context.formRender.notifyObservers("searchId");
+	
+	
 </script>
     <vbox id="gobalTaskModelSearch">
 <test expression="{query.returnMode},=,manualTask" separator=",">
@@ -67,12 +68,13 @@ context.formRender.notifyObservers("searchId");
                               }
                              }, 1000);
              
+
                
               </postChange>
                   </button>
                   </vbox>
                <vbox columns="auto" contentJustify="center">
-                <html>
+                <html xpath="searchId">
                    <div id="loadiing_task${searchId}"><img src="img/load-text.gif" alt="" />
                    </div>
                </html> 
@@ -150,8 +152,7 @@ context.formRender.notifyObservers("searchId");
 														</span>
 														<span class="ow-thumbnail-action  fas fa-user-cog" onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )" style="display: unset;margin-right: 0px;margin-right: 0px;">
 														</span>
-
-														<div class="affectation ${task[$i].owt_state}" title="${task[$i].owt_state_message|translate} ${task[$i].Lockedby}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message|translate} ${task[$i].Lockedby} </div>
+														<div class="affectation ${task[$i].owt_state} subLong" title="${task[$i].owt_state_message|translate} ${task[$i].Lockedby}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message|translate} ${task[$i].Lockedby} </div>
 													</div>
 												</div>
 												<div style="clear:both">
@@ -189,12 +190,16 @@ setProgressSearch("gobalTaskModelSearch"+root.searchId,"listObject","loadiing_ob
 
 </script>      
 <script postLoad="true" delay="6000">
-                                 
+                                                          
 
-                                      if(!root.listTask[0]){
+				hideLoadingElement("loadiing_task"+root.searchId); 
+
+
+				console.log(root.task);
+                                if(!root.task[0]){
 									   //alert("task root********onLoad"+root.listTask[0]);
                                       hideLoadingElement("loadiing_task"+root.searchId); 
-                                       }
+                                }
 
 </script>   
           

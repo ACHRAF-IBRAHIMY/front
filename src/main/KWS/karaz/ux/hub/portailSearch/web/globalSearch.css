@@ -1,13 +1,39 @@
 
-
 .hp-IND{
     margin: 3px 9px !important;
 }
 
+.graph-ind{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.graph2,.graph3{
+    display: none;
+}
+
+.dash-menu-graph{
+    display: grid;
+    grid-template-columns: 33% 34% 33%;
+    text-align: center;
+    width: 97.5%;
+    margin: auto;
+}
+
 .indicator-div-title{
-    text-align: left;
     display: grid;
     grid-template-columns: 90% 10%;
+    padding: 5px 4px;
+    background: #eee;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    color: #888;
+}
+
+.indicator-div-title.active{
+    border-bottom: 1px solid #fff;
+    background: #fff;
 }
 
 .indicator-div-title .fat{
@@ -162,5 +188,7 @@ grid-template-columns: 10% auto 10%;
     padding-bottom: 5px;
 }
 #gobalModelSearch .main_search{
-font-family: 'Roboto Regular', 'Roboto';
+    font-family: 'Roboto Regular', 'Roboto';
+        width: 100%;
+        min-height: 350px;
 }
