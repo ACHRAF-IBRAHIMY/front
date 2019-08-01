@@ -14,7 +14,7 @@
         <numDossier />
         <numCommission />
         <login />
-        <visulaizer>0</visulaizer>
+        <visualizer>0</visualizer>
     </data>
     <view>
         <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
@@ -23,12 +23,12 @@
              //context.formRender.notifyObservers("login");
             </script>
             
-            <vbox test="{visulaizer},=,0" separator=",">
+            <vbox test="{visualizer},=,0" separator=",">
                 <html>
                     <iframe id="visio" src="https://91.121.57.204:30081/conference/${numDossier}/${numCommission}?login=${login}" style="height: 100vh;width: 100%;" allow="microphone; camera" />
                 </html>
             </vbox>
-            <vbox test="{visulaizer},=,1" separator=",">
+            <vbox test="{visualizer},=,1" separator=",">
                 <html>
                     <iframe id="visio" src="https://91.121.57.204:30081/conference/${numDossier}/${numCommission}/visualizer" style="height: 100vh;width: 100%;" allow="microphone; camera" />
                 </html>
