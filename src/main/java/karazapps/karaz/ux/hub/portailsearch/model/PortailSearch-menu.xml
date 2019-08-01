@@ -2,6 +2,9 @@
 <menus>
   <menu absId="karaz/ux/hub/portailsearch" label="KRAZ UX HUB" icone="DashboardSearch_icon">
     <menu relId="search" label="Recherche">
+    <menu relId="VisioConferenceFrame" label="Visio Conférence" icone="search">
+      		<resource type="search">karaz/ux/hub/portailsearch/search/VisioConferenceFrame</resource>
+    </menu>
     <menu relId="RetageProdHomePage" label="Rotage Home PAGE" icone="search">
       	<resource type="search">karaz/ux/hub/portailsearch/search/RetageProdHomePage</resource>
       </menu>
