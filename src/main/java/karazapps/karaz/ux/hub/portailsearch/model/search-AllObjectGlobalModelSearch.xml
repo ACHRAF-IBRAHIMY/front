@@ -142,7 +142,7 @@ context.formRender.notifyObservers("query.unifiedCriteria");
                <vbox> 
               <html>
                                       
-										<div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold main_search">
+										<div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold main_search field-class-width">
 											<div class="ow-pl-toolbar inforow_0">
 												<div class="fas fa-building icon_pc" />
 												<div>${listObject[$i].reference}</div>

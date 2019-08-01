@@ -51,6 +51,7 @@ function addChild(id) {
             question:"Quel est votre question ?",
             status:0,
             id: newId,
+            columns_idB : {},
             rep_size:0
         },
         children: []
@@ -65,7 +66,6 @@ function addChild(id) {
 function reduitNode(id,type){
     var list = id.split("-");
     var str = getParentPath(list);
-    
     var subTree = eval("simple_chart_config.nodeStructure" + str + "[\"children\"]"); 
     var subTreeStr = JSON.parse(JSON.stringify(subTree));
 
@@ -344,9 +344,11 @@ function findSubTreeById(id,type){
 
 function getParentPath(list) {
     var str = "";
+    console.log("list***"+list);
     if(list.length==0)return str;
 
     if(list[0]!=""){
+        console.log("list***"+list[0]);
         for (var i = 0; i < list.length; i++) {
             str += "[\"children\"][" + list[i] + "]";
         }
@@ -378,7 +380,16 @@ function showUpdate(id){
     $(".cms-form  input.class-id").val(obj.text.id);
     $(".cms-form .body-cms-form .class-title span").eq(1).children("input").val(obj.text.name);
     $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html(obj.text.question);    
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",obj.text.question_id);    
+    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",obj.text.question_id);
+
+    if(obj.text.type_aff=="NR" || obj.text.type_aff==undefined){
+        $(".cms-form .body-cms-form .class-type-aff select option").eq(0).prop("selected",true)
+    }else if(obj.text.type_aff=="SQH"){
+        $(".cms-form .body-cms-form .class-type-aff select option").eq(1).prop("selected",true)
+    }else if(obj.text.type_aff=="SQS"){
+        $(".cms-form .body-cms-form .class-type-aff select option").eq(2).prop("selected",true)
+    }
+    
     $(".cms-form .body-cms-form .class-responses .responses-sim-cms").html("");
     
     if(obj.text.status == 0){
@@ -479,28 +490,30 @@ function updateNode(id){
     var title = $(".cms-form .body-cms-form .class-title input").val();
     var list = id.split("-");
     var str  = getParentPath(list);
-    /*if($(".cms-form .body-cms-form .class-question .link-sim-cms span select").html()!=undefined){
-        var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").val();
-        var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms select option:selected").html();   
-        var repSize = qstList[indexOfQst(questionId,qstList)].rep.length;
-        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
-        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
-        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"rep_size\"]=repSize");
-    }*/
 
     var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title");
     var question =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html();
     var repSize = qstList[indexOfQst(questionId,qstList)].rep.length;
+    var typeAff = $(".cms-form .body-cms-form .class-type-aff select option:selected").val();
+
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"rep_size\"]=repSize");
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"type_aff\"]=typeAff");
     
     eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title");
     
     if(removeMtrixCLass == true){
-        deleted.push(eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]"));
+        var clms = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]");
+
+        alert("hello");
+
+        for(var i = 0; i < Object.keys(clms).length;i++){
+            deleted.push(clms[Object.keys(clms)[i]]);
+        }
+
         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
-        eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]");
+        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]={}");
         eval("delete simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]");
     }
 
@@ -865,14 +878,14 @@ function conevertTo(tree,array,newObj){
             var list = tree.children[i].text.id.split("-");
             var obj = simple_chart_config.nodeStructure;    
             var culumns = getMatrixColumns(list,obj);
-            console.log(tree.children[i].text.columns_id+"*/*/*/*/*/*/*"+tree.children[i].text.id);
             var matrixColumn = getMatrixColumns(list,obj);
             var reps = [];
             for(var j=0;j<list.length;j++){
                 reps.push(Number(list[j])+1);
             }
+
             var bulk = {
-                "id":tree.children[i].text.columns_id,
+                "id":tree.children[i].text.columns_idB,
                 "list":matrixColumn,
                 "list_rep": parcourirTreeReps(tree.children[i].text.id)
             }
@@ -981,7 +994,7 @@ function uploadTreeToES(){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-        url: URL_SEARCH+"/simulator_index_tree/tree/3",
+        url: URL_SEARCH+"/simulator_index_tree/tree/2",
         datatype: "application/json",
         data:JSON.stringify(treeObject),
         contentType: "application/json",
@@ -1045,7 +1058,7 @@ function getTreeFromEs(type){
 
     $.ajax({
         type: "get",
-        url: URL_SEARCH+"/simulator_index_tree/tree/3",
+        url: URL_SEARCH+"/simulator_index_tree/tree/2",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -1058,8 +1071,10 @@ function getTreeFromEs(type){
                 reduitAll();
                 startTreant();
                 loadQuestionsFromEs();
+                deleted = [];
            }else if(type==1){
-               tree = result._source.treeSimp;
+                tree = result._source.treeSimp;
+                tree2 = result._source.treeComp;
                 firstEsTreeCall();
                 restGetAllLocalite(0,100,0);
            }
@@ -1231,15 +1246,84 @@ function transformDivTotab(){
 
 var objectJsonMatrixColumns = {};
 
+function afterChildClass(idChild){
+    var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();                
+    objectJsonMatrixColumns = {};
+    beginStepsMatrixColumns(id,idChild);
+    $(".simulator-cms .side-bar .body1 .docs-in").attr("ident",idChild);
+    $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
+    $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
+    $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
+    $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-requis").addClass("active");
+    $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).hide();
+    $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();
+    $(".simulator-cms .side-bar .body1 input.tree-pos").val();
+    $(".simulator-cms .side-bar .body1 .top-header-doc").hide();
+    $(".simulator-cms .side-bar .body1 .docs-in").show();
+
+}
+
+function createChildClasses(){
+    var questionId =  $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title");
+    var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val(); 
+    var list = id.split("-");               
+    var str = getParentPath(list);
+    var clms = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]");
+    
+
+    var childs = qstList[indexOfQst(questionId,qstList)].rep;
+    console.log(childs);
+    $(".simulator-cms .side-bar .body1 .top-header-doc").html("");
+    for(var i=0;i<childs.length;i++){
+        var span = document.createElement("span");
+        span.setAttribute("index",i);
+
+        var span1 = document.createElement("span");
+        span1.innerHTML=childs[i];
+        span1.addEventListener("click",function(){
+            afterChildClass(this.parentNode.getAttribute("index"));
+        });
+
+        span.append(span1);
+
+        if( eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]")!=undefined){
+        if( Object.keys(clms).indexOf(i.toString()) !=-1 ){
+            var ic = document.createElement("i");
+            ic.setAttribute("class","fas fa-close");
+            ic.setAttribute("index",i);
+            ic.addEventListener("click",function(){
+                if(confirm("SUPPRIMER !!")){
+                    deleted.push(clms[this.getAttribute("index").toString()]);
+                    this.style.display = "none";
+                    eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]["+this.getAttribute("index").toString()+"]");
+                    
+                    if(Object.keys(eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]")).length==0){
+                        alert("do it");
+                        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
+                        eval("delete simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]");
+                    }
+
+                }
+            });
+            span.append(ic);
+
+        }}
+
+        
+        $(".simulator-cms .side-bar .body1 .top-header-doc").append(span);
+    }
+}
+
 function nextStepDocsIn(type,id){
+    var ident = $(".simulator-cms .side-bar .body1 .docs-in").attr("ident");
+    console.log(id)
     if(type==0){
         console.log(objectJsonMatrixColumns+" "+Object.keys(objectJsonMatrixColumns).length);
         if(Object.keys(objectJsonMatrixColumns).length==0){
-            objectJsonMatrixColumns = makeMatrixClass(id);
+            objectJsonMatrixColumns = makeMatrixClass(id,ident);
             getAllCms(0,createAllCms,[]);
         }else{
-            console.log(makeMatrixClass(id)["docs_requis"]);
-            objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id)["docs_requis"];
+            objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id,ident)["docs_requis"];
             console.log("else :"+JSON.stringify(objectJsonMatrixColumns));
             getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
         }
@@ -1268,18 +1352,16 @@ function nextStepDocsIn(type,id){
         $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-requis").addClass("active");
         $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).hide();
         $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();
-        console.log(objectJsonMatrixColumns);
-        addMatrixElement(objectJsonMatrixColumns,id);
+        console.log("objectJson::::::",objectJsonMatrixColumns);
+        var ident = $(".simulator-cms .side-bar .body1 .docs-in").attr("ident");
+        addMatrixElement(objectJsonMatrixColumns,id,ident);
     }
-        
-    
-
 }
 
-function makeMatrixClass(id){
+function makeMatrixClass(id,ident){
     var list = id.split("-");
     var obj = simple_chart_config.nodeStructure;    
-    getMatrixColumns(list,obj);
+    getMatrixColumns(list,obj,ident);
     getListDocsAdded();
     console.log(list);
     var reps = [];
@@ -1289,23 +1371,29 @@ function makeMatrixClass(id){
 
     var objectJson = {
         id:"0",
-        list:getMatrixColumns(list,obj),
-        list_rep:reps,
+        list:getMatrixColumns(list,obj,ident),
+        list_rep:[].concat(reps,Number(ident)+1),
         docs_requis:getListDocsAdded()
     }
 
+    console.log("ùùùùùùù",objectJson.list);
     return objectJson;
 
 }
 
-function beginStepsMatrixColumns(id){
+function beginStepsMatrixColumns(id,childId){
     var list = id.split("-");
     var str = getParentPath(list);
     var objStatus = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]");
-    var columns_id = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]");
     
     if(objStatus!=0){
-        readMatrixCms(columns_id);
+        var columns_idB = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]");
+            if(Object.keys(columns_idB).indexOf(childId.toString())==-1){
+                getAllCms(0,createAllCms,[]);    
+            }else{
+                console.log(columns_idB);
+                readMatrixCms(columns_idB[childId.toString()]);
+            }
     }else{
         getAllCms(0,createAllCms,[]);    
     }
@@ -1344,7 +1432,7 @@ function getIndexOfBin(vectorBin){
 }
 
 
-function addMatrixElement(objectJson,id){
+function addMatrixElement(objectJson,id,ident){
 
     var idObject = objectJson.id;
     if(idObject==0){
@@ -1370,7 +1458,7 @@ function addMatrixElement(objectJson,id){
                 var list = id.split("-");
                 var str  = getParentPath(list);
                 eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=1");
-                eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id\"]=result._id");
+                eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"][\""+ident+"\"]=result._id");
                 eval("simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]=\"classe-evo\"");
                 showUpdate(id);
                 refrechTreant();             
@@ -1382,13 +1470,14 @@ function addMatrixElement(objectJson,id){
 }
 
 
-function getMatrixColumns(list,obj){
+function getMatrixColumns(list,obj,idChild){
     var array = [];
     var str = "";
     array.push(eval("obj"+str+"[\"text\"][\"question_id\"]"))
     if(list[0]!=""){
-        for (var i = 0; i < list.length-1; i++) {
+        for (var i = 0; i < list.length; i++) {
             str += "[\"children\"][" + list[i] + "]";
+            console.log("srrrrrrrrr",str);
             array.push(eval("obj"+str+"[\"text\"][\"question_id\"]"));
         }
     }
@@ -1398,7 +1487,6 @@ function getMatrixColumns(list,obj){
 
 var vector = [];
 
-    
 function intilizeVector(size){
     vector = [];
     for(var i=0;i<size;i++){
@@ -1834,23 +1922,28 @@ function getIdDeletedColumns(tree){
     var obj = {};
     obj[tree.text.question_id]=[];
     var array = [[],[]]; 
-    if(tree.text.question_id==-1){
         if(tree.text.status==1){
-            deleted.push(tree.text.columns_id);
-        }
-    }    return deletedCol(tree,array,newObj);
+            var clms = tree.text.columns_idB;
+                for(var i = 0; i < Object.keys(clms).length;i++){
+                    deleted.push(clms[Object.keys(clms)[i]]);
+                }
+            
+        
+    }  
+      return deletedCol(tree,array,newObj);
 }
   
 var deleted = [];
 
 function deletedCol(tree,array,newObj){
     for(var i=0;i<tree.children.length;i++){
-      if(tree.children[i].text.question_id==-1){
           if(tree.children[i].text.status==1){
-              deleted.push(tree.children[i].text.columns_id);
-              console.log(tree.children[i].text.columns_id);
+              var clms = tree.text.columns_idB;
+                for(var j = 0; j < Object.keys(clms).length;j++){
+                    deleted.push(clms[Object.keys(clms)[j]]);
+                }
           }
-      }
+      
       var obj = {};
       var sousTree = tree.children[i];
       obj[tree.children[i].text.question_id]=[];

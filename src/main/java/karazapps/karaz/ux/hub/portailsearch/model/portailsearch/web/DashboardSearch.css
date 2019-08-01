@@ -2932,3 +2932,8 @@ box-card:hover{
     width: 95%;
     margin: auto;
 }
+
+.edit-width{
+    width: 300px;
+    height: 300px;
+}

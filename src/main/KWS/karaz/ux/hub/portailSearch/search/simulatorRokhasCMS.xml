@@ -125,6 +125,7 @@
 
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button.reset").click(function(){
                 if(confirm("Veuillez vous réinitialiser ?")){
+                    
                     getTreeFromEs(0);
                 }
                     
@@ -134,21 +135,16 @@
                 if(removeMtrixCLass==true){
                    alert("Vous avez annulé la classification de ce noeud, Veuillez d'abord annuler ou sauvegarder vos modifications."); 
                 }else{
+                    createChildClasses();
                     $(".simulator-cms .side-bar .body").hide();
-                    var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
-                    objectJsonMatrixColumns = {};
-                    beginStepsMatrixColumns(id);
-                    $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
-                    $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
-                    $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
-                    $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-requis").addClass("active");
-                    $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).hide();
-                    $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();
-                    $(".simulator-cms .side-bar .body1 input.tree-pos").val();
+                    $(".simulator-cms .side-bar .body1 .docs-in").hide();
+                    $(".simulator-cms .side-bar .body1 .top-header-doc").show();
                     $(".simulator-cms .side-bar .body1").show();
                     step = 0;
                 }
             });
+
+            
 
 
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-update-button button.reset").click(function(){
@@ -584,6 +580,16 @@
             </vbox>
           </vbox>
           <vbox className="body1">
+            <vbox>
+              <html>
+                <div class="top-header-doc">
+                    <span>Reponse 1</span>
+                    <span>Reponse 2</span>
+                    <span>Reponse 3</span>
+                  </div>
+              </html>
+
+            </vbox>
             <vbox className="docs-in">
               <html>
                 <div class="header-doc">

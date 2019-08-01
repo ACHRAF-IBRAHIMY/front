@@ -1,3 +1,18 @@
+
+.top-header-doc{
+    display: grid;
+    padding: 9px;
+}
+
+.top-header-doc span{
+    background: #eee;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 4px 0;
+    font-size: 17px;
+}
+
 .simulator-cms .autocomplete-items{
     width: 111%;
     border-top: 1px solid #38a;
