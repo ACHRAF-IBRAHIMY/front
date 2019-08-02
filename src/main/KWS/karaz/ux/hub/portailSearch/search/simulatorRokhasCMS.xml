@@ -94,6 +94,12 @@
                     $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q").hide();                
                 }
             
+                if(type=="activite"){
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2  .class-responses-q").hide();                
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-placeholder-q").hide(); 
+                    $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q").hide();                
+               
+                }
             });
 
              $(".simulator-cms .side-bar .body .div-2 .cms-form .class-type-question select").change(function(){
@@ -115,6 +121,12 @@
                     $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();                
                     $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").show();                
                 }else{
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").hide();                
+                }
+
+                if(type=="activite"){
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form  .class-responses-q").hide();                
+                    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();                
                     $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").hide();                
                 }
             });
@@ -366,6 +378,7 @@
                           <option value="input">Input</option>
                           <option value="input-conditional">Input Conditionnel</option>
                           <option value="location">Localité</option>
+                          <option value="activite">Activité</option>
                         </select>
                       </span>
                     </div>
@@ -422,6 +435,7 @@
                           <option value="input">Input</option>
                           <option value="input-conditional">Input Conditionnel</option>
                           <option value="location">Localité</option>
+                          <option value="activite">Activité</option>
                         </select>
                       </span>
                     </div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<tns:liste xmlns:tns="http://www.example.org/Liste-model"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/Liste-model Liste-model.xsd ">
+
+
+	<name>frontal/uxhub/portailSearch/tag</name>
+	<description>tag pour appeler une vidéo</description>
+	<modelQN>PortailSearch</modelQN>
+	<sequence></sequence>
+	<status>active</status>
+	<entityName>/</entityName>
+	<dateUpdateFromFile></dateUpdateFromFile>
+	<sourceFileLocation></sourceFileLocation>
+	<entries>
+  
+                    <option value="$val" label="$lab"/>
+  
+                    <option value="$val" label="$lab"/>
+ 					 
+			    
+	</entries>
+</tns:liste>
+ 

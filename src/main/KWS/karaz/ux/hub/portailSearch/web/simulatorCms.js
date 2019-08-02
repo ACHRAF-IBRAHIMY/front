@@ -612,6 +612,15 @@ function showQuestion(results){
         let str = results._source.response.content.join("//");
         $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("<div><textarea style=\"width: 98%;border: 1px solid #eee;\">"+str+"</textarea></div>");
     }
+
+    if(type=="activite"){
+        $(".simulator-cms .side-bar .body .div-2 .cms-form  .class-responses-q").hide();                
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();                
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val("");
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").hide();
+        $(".cms-form .body-cms-form .class-responses-q .responses-sim-cms").html("<div><textarea style=\"width: 98%;border: 1px solid #eee;\"></textarea></div>");
+    }
+
     
 
     $(".simulator-cms .side-bar .body .div-2").show();
@@ -685,6 +694,10 @@ function getQuestionDet(){
         content = $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option:selected").val(); 
      }
 
+     if(type=="activite"){
+        content = ""
+     }
+
     obj["id"]=id;
     obj["question"]=question;
     obj["response"]={
@@ -732,6 +745,10 @@ function addQuestionForm(){
 
     if(type=="location"){
         content = $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q select option:selected").val();
+    }
+
+    if(type=="activite"){
+        content = "";
     }
     
     obj["question"]=question;
@@ -1971,7 +1988,6 @@ function deletedCol(tree,array,newObj){
   /* auto complete */
   function autoCompleteSim(inp,index,field,type){
       if(type==0){
-          
           inp.addEventListener("input",function(){
               var val = this.value;
               var arr = searching(val,index);
@@ -2003,6 +2019,38 @@ function deletedCol(tree,array,newObj){
                   }
               }
           },false);
+      }else if(type==5){
+        inp.addEventListener("input",function(){
+            var val = this.value;
+            restAutoComplete3(inp,val,"activite_economique","intituleFr");
+        },false);
+        
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById("autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+    
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+            }
+        },false);
+
       }else{
               inp.addEventListener("input",function(){
                   var req = inp.value;
@@ -2057,6 +2105,7 @@ function deletedCol(tree,array,newObj){
           },false);*/
       }
   }
+
 function restAutoComplete2(inp,req,index,field){
     
     var obj = {"size":5,"query": 
@@ -2124,6 +2173,69 @@ function restAutoComplete2(inp,req,index,field){
         }
     });    
 }
+
+
+function restAutoComplete3(inp,req,index,field){
+    
+    var obj = {"size":5,"query": 
+    {
+    "bool":{
+        "must":[{
+            "query_string": {
+                "fields":["content.intituleFr"],
+                "query":"*"+req+"*",
+                "minimum_should_match": "100%"                   
+            }
+        },{
+                "term": {
+                    "content.categorie.keyword": {
+                        "value": "Intitulé Activité"
+                    }
+                }
+            
+        }]
+    }
+  }
+};
+    
+    console.log(JSON.stringify(obj));
+
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH+"/"+index+"/_search",
+        contentType: "application/json",
+        datatype:"application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            console.log(req);
+            console.log(result);
+            var arr = [];
+            var arrObj = [];
+            var arrTypeAut = [];
+            var arrTypeAct = [];
+            for(var i=0;i<result.hits.hits.length;i++){
+                arr.push(result.hits.hits[i]._source.content.intituleFr);
+                arrObj.push(result.hits.hits[i]._id);
+                arrTypeAut.push(result.hits.hits[i]._source.parents.TypeAutorisation);
+                arrTypeAct.push(result.hits.hits[i]._source.parents.TypeActivite);
+            };
+
+            for(var i=0;i<result.hits.hits.length;i++){
+                
+            };
+
+            createListeResAc(inp,[arr,arrObj,arrTypeAct,arrTypeAut],req,2);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });    
+}
+
+
 
 function getAllCmsQuestion(inp,index){
     var obj = {
@@ -2327,6 +2439,62 @@ function createListeResLoc(inp,arr,val,type){
     
         b.addEventListener("click", function(e) {
             inp.value = this.getElementsByTagName("input")[0].value;
+            inp.setAttribute("disabled","disabled");
+            inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
+            closeAllListsSim(1);
+        });
+        a.appendChild(b);
+    }
+
+    
+}
+
+var autoEconom = ["Simple Déclaration","Établissement classé"];
+var autoUrba = ["Autorisations urbanisme"];
+
+var autorisation = false;
+
+function createListeResAc(inp,arr,val,type){
+    closeAllListsSim(1);
+    a = document.createElement("DIV");
+    a.setAttribute("id", "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    a.setAttribute("style","margin-top: auto;top:auto;position:absolute;width:46%;left: 12px;")
+    /*append the DIV element as a child of the autocomplete container:*/
+    inp.parentNode.appendChild(a);
+    
+    /*for each item in the array...*/
+    for (i = 0; i < 5; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        /*create a DIV element for each matching element:*/
+        var b = document.createElement("DIV");
+        /*make the matching letters bold:*/
+        var str = arr[0][i];
+
+        b.setAttribute("title",str);
+        
+        if(val==""){
+            b.innerHTML=str.toUpperCase();
+        }else{
+            b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
+        }
+        
+     
+        /*insert a input field that will hold the current array item's value:*/
+        var input = document.createElement("input");
+        input.setAttribute("type","hidden");
+        input.setAttribute("value",arr[0][i]);
+        b.appendChild(input);
+        b.setAttribute("idd",arr[1][i]);
+        b.setAttribute("typeAct",arr[2][i]);
+        b.setAttribute("typeAut",arr[3][i]);
+        /*execute a function when someone clicks on the item value (DIV element):*/
+    
+        b.addEventListener("click", function(e) {
+            inp.value = this.getElementsByTagName("input")[0].value;
+            inp.setAttribute("idd",this.getAttribute("idd"));
+            inp.setAttribute("typeAct",this.getAttribute("typeAct"));
+            inp.setAttribute("typeAut",this.getAttribute("typeAut"));
             inp.setAttribute("disabled","disabled");
             inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
             closeAllListsSim(1);

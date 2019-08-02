@@ -1,12 +1,12 @@
 <menus> 
- <menu relId="Importation_visio-conference-integ-search" label="visio-conference-integ-search" icone="process"   ignoreIfExist="true"   parent_id="backend/admin/importation/process" />
+ <menu relId="Importation_karaz_ux_hub" label="karaz_ux_hub" icone="process"   ignoreIfExist="true"   parent_id="backend/admin/importation/process" />
       <menu relId="Importation_PortailSearch" label="PortailSearch " icone="process" 
-      parent_id="backend/admin/importation/process/Importation_visio-conference-integ-search">
+      parent_id="backend/admin/importation/process/Importation_karaz_ux_hub">
         <resource type="launchProcess">backend/admin/importation/process/GestionImportProcess?modelQN=karazapps.karaz.ux.hub.portailsearch.model.PortailSearch</resource>
       </menu> 
-   <menu relId="AllImportation_visio-conference-integ-search" label="visio-conference-integ-search" icone="search"    ignoreIfExist="true"     parent_id="backend/admin/importation/search" />     
+   <menu relId="AllImportation_karaz_ux_hub" label="karaz_ux_hub" icone="search"    ignoreIfExist="true"     parent_id="backend/admin/importation/search" />     
          <menu relId="AllImportation_PortailSearch" label="PortailSearch" icone="search" 
-       parent_id="backend/admin/importation/search/AllImportation_visio-conference-integ-search" >
+       parent_id="backend/admin/importation/search/AllImportation_karaz_ux_hub" >
         <resource type="search">backend/admin/importation/search/AllImportation?query.modelQN=karazapps.karaz.ux.hub.portailsearch.model.PortailSearch&amp;targetScreen=karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-importation&amp;use=modelQN</resource>
       </menu> 
 </menus>

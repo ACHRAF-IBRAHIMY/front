@@ -12,4 +12,8 @@
     <option value="p2" label="CASAURBA" />
     <option value="p3" label="Karaz GIS" />
   </dynamiclist>
+  <dynamiclist name="frontal/uxhub/portailSearch/tag" description="tag pour appeler une vidéo" >
+   	<option>Without_tag</option>
+   	<option>tag 1</option>
+  </dynamiclist>
 </tns:dynamiclists>

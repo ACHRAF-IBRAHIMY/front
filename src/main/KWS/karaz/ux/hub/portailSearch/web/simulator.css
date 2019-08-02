@@ -1,3 +1,31 @@
+
+.type-demande i{
+    font-size: 50px;
+}
+.type-demande span{
+    margin-top: 7px;
+    display: block;
+}
+
+.simulator .simulator-qr .next-button {
+    display: none;
+}
+
+.type-demande{
+    width: 140px;
+    height: 126px;
+    background: #eee;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px 3px;
+    cursor: pointer;
+}
+
+.type-demande:hover{
+    background: #ddd;
+}
+
 .simulator .simulator-sub{
     padding: 20px 34px;    
 }
@@ -20,7 +48,6 @@
 .simulator .simulator-qr{
     margin-left: 10px !important;
     position: relative;
-    height: 300px;
 }
 
 .simulator .simulator-qr .qr{
