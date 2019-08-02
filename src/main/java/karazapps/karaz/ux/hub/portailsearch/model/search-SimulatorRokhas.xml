@@ -11,21 +11,22 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">$(".simulator .simulator-qr .check-ent").click(function(){
-                $(this).toggleClass("active-check");
-            });       
-            getTreeFromEs(1);
-            
-           $(".simulator .simulator-qr .next-button button.next-rq").click(function(){           
-               if(!$(this).hasClass("stopped"))allNextClick();
-           });            
-            
-           $(".simulator .simulator-qr .next-button button.back-rq").click(function(){           
-               if(!$(this).hasClass("stopped"))backClick();
-           });            
-            
-           $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").slideToggle(); 
+      <script postLoad="true">
+    $(".simulator .simulator-qr .check-ent").click(function(){
+      $(this).toggleClass("active-check");
+    });       
+      getTreeFromEs(1);
+      
+      $(".simulator .simulator-qr .next-button button.next-rq").click(function(){           
+      if(!$(this).hasClass("stopped"))allNextClick();
+      });            
+      
+      $(".simulator .simulator-qr .next-button button.back-rq").click(function(){           
+      if(!$(this).hasClass("stopped"))backClick();
+      });            
+      
+    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+      $(".header-div-toggle").slideToggle(); 
     });         
    
     $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){

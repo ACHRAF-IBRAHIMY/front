@@ -11,20 +11,96 @@ function removeExpanded(type){
 function addQuestion(qst){ 
     $(".simulator .simulator-qr .qr").html("");
     console.log(qst);
-    for(var i = 0;i<qst[0].length;i++){
-        
-        createQuestion(qst[0][i].response.type,qst[0][i],qst[1][i]);
-        
+
+    if(arrayVect[0].length==1){
+            createSpecialQst(qst[0][0]);
+    }else{
+        for(var i = 0;i<qst[0].length;i++){
+            createQuestion(qst[0][i].response.type,qst[0][i],qst[1][i],qst[2][i]);   
+        }
     }
-    
 }
 
-function createQuestion(type,obj,hide){
+
+function createSpecialQst(obj){
+    $(".simulator .simulator-qr .next-button").hide();
+    var gldiv = document.getElementsByClassName("simulator")[0].getElementsByClassName("qr")[0];
+    var q = document.createElement("div");
+    q.setAttribute("class","ques-rep");
+
+    var q1 = document.createElement("div");
+    q1.setAttribute("class","ques");
+    q1.innerHTML= obj.question;
+    var q2 = document.createElement("div");
+    q2.setAttribute("class","rep");
+
+    var icons = ["fas fa-building","fas fa-cogs","fas fa-search"]
+    var size = obj.response.content.length;
+        var response = document.createElement("div");
+        response.setAttribute("class","rep-pred rep-type-0");
+        
+        if(size==3){
+            response.setAttribute("style","display: grid;grid-template-columns: 33% 33% 33%;")
+        }else{
+            response.setAttribute("style","display: grid;grid-template-columns: 50% 50%;")            
+        }
+        
+        for(var i=0;i<size;i++){
+            var resDiv = document.createElement("div");
+            resDiv.setAttribute("class","type-demande");
+            resDiv.setAttribute("idd",i+1);
+            var input = document.createElement("input");
+            input.setAttribute("type","hidden");
+            input.setAttribute("value",i+1);
+            var res = document.createElement("span");
+            res.setAttribute("class","");
+            res.innerHTML = obj.response.content[i];   
+            var check = document.createElement("i");
+            check.setAttribute("class",icons[i]);
+            
+
+            resDiv.appendChild(check);
+            resDiv.appendChild(res);
+            resDiv.appendChild(input);
+            resDiv.addEventListener("click",function(){
+                var val = this.getAttribute("idd");
+                addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length],val,val,"NR");                 
+                startButton(1);  
+                var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length +1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length +1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length +1)]); 
+                console.log(str);
+                var treeLocal = eval("tree"+str);
+                console.log("*********tree :"+tree);
+                traitementResponse(treeLocal,val-1,0,"NR",false,false)
+                if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
+                   $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                   removeExpanded(); 
+                }
+
+            });
+            response.appendChild(resDiv);
+        }
+        
+        q2.appendChild(response);
+        q.appendChild(q1);
+        q.appendChild(q2);
+        gldiv.appendChild(q);
+}
+
+function createQuestion(type,obj,hide,clmm){
+    $(".simulator .simulator-qr .next-button").show();
     
     var gldiv = document.getElementsByClassName("simulator")[0].getElementsByClassName("qr")[0];
     var q = document.createElement("div");
     q.setAttribute("class","ques-rep");
     q.setAttribute("typpe",hide)
+    
+    console.log("clmm"+clmm);
+
+    if(Object.keys(clmm).length!=0){
+        q.setAttribute("clmm","classed");
+    }else{
+        q.setAttribute("clmm","notClassed");
+    }
     
     if(hide=="SQH"){
         q.setAttribute("style","display:none");
@@ -158,6 +234,33 @@ function createQuestion(type,obj,hide){
             this.parentElement.getElementsByTagName("input")[0].removeAttribute("disabled");    
         });
         q2.appendChild(icon);
+    }else if(type=="activite"){
+        autorisation = true;
+        var content = obj.response.content;
+        var response = document.createElement("input");
+        response.setAttribute("class","rep-pred rep-type-5");
+        response.setAttribute("placeholder","Activité");
+        response.addEventListener("input",function(){
+        if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
+            $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            removeExpanded(); 
+            }
+        });
+        response.setAttribute("style","vertical-align: top;margin-top:6px;");
+        var index = localiteType.indexOf(content);
+        autoCompleteSim(response,index,null,5);
+        q2.appendChild(response);
+        if(localiteLib.length==0){
+            q2.innerHTML += "<img src=\"img/loadgif3.gif\" style=\"width:50px;vertical-align: top;\" class=\"loadGif\"></img>";
+        }
+
+        var icon = document.createElement("i");
+        icon.setAttribute("class","fas fa-edit");
+        icon.setAttribute("style","display:none;font-size: 24px;padding-top: 7px;margin-left: 8px;cursor:pointer");
+        icon.addEventListener("click",function(){
+            this.parentElement.getElementsByTagName("input")[0].removeAttribute("disabled");    
+        });
+        q2.appendChild(icon);
     }
     
     q.appendChild(q1);
@@ -240,7 +343,7 @@ function getQuestion(id,type){
     });
 };
 
-function getQuestions(qstts,type,iter){
+function getQuestions(qstts,type,clmm,iter){
     loadQuestion();
     $.ajax({
         type: "get",
@@ -253,13 +356,15 @@ function getQuestions(qstts,type,iter){
         },
         success: function (result) {
             console.log(iter);
+            console.log(clmm);
             qstArray[0].push(result._source);
             qstArray[1].push(type[iter]);
+            qstArray[2].push(clmm[iter]);
             if(qstts.length-1==iter || qstts[iter+1]==-1 ){
                 console.log("***** End Qst Load *****");
                 addQuestion(qstArray);
             }else{
-                getQuestions(qstts,type,iter+1);
+                getQuestions(qstts,type,clmm,iter+1);
             }    
         },
         error: function (error) {
@@ -299,7 +404,7 @@ var tree = [{
 var tree2 = [{}];
 
 var arrayVect = [new Array(),new Array(),new Array(),new Array()];
-var qstArray = [new Array(),new Array()];
+var qstArray = [new Array(),new Array(),new Array()];
 var qstId = [new Array(),new Array()];
 
 
@@ -322,23 +427,28 @@ function getQstFromTree(list){
 function getQstId(idVect){
     var idVectLoc = new Array();
     idVectLoc=idVectLoc.concat(idVect)
-    var qstVect = [new Array(), new Array()];
+    var qstVect = [new Array(), new Array(),new Array()];
     var qstTree = getQstFromTree(idVect);
     console.log(qstTree.text)
     if(qstTree.children.length!=1 || qstTree.children.length==0){
-        return [[qstTree.text.question_id],["NR"]];
+        return [[qstTree.text.question_id],["NR"],[qstTree.text.columns_idB]];
     }else if(qstTree.children.length==1){
         if(qstTree.text.type_aff == "NR" || qstTree.text.type_aff == undefined ){
-            return [[qstTree.text.question_id],["NR"]];
+            return [[qstTree.text.question_id],["NR"],[qstTree.text.columns_idB]];
         }else{
             console.log(idVectLoc);
             idVectLoc[idVectLoc.length-1]="1";
             idVectLoc.push("0");
             console.log(idVectLoc);
+
             qstVect[0].push(qstTree.text.question_id);
             qstVect[1].push(qstTree.text.type_aff);
+            qstVect[2].push(qstTree.text.columns_idB);
+
             qstVect[0]=qstVect[0].concat(getQstId(idVectLoc)[0]);
             qstVect[1]=qstVect[1].concat(getQstId(idVectLoc)[1]);
+            qstVect[2]=qstVect[2].concat(getQstId(idVectLoc)[2]);
+
             return qstVect;
         }
     }
@@ -346,6 +456,7 @@ function getQstId(idVect){
 
 
 function addToArrayVect(key,value,type,typpe){
+    console.log("add To arrayVect :"+key+value);
     var index = arrayVect[0].indexOf(key);
     if(index==-1){
         arrayVect[0].push(key);
@@ -387,11 +498,11 @@ function intializeVectArray(){
 }
 
 function allNextClick(){
-    var qrs = document.querySelectorAll(".simulator .ques-rep");
-    for(var i=0;i<qrs.length;i++){
-        console.log(qrs[i],i);
-        nextClick(qrs[i],i);
-    }
+        var qrs = document.querySelectorAll(".simulator .ques-rep");
+        for(var i=0;i<qrs.length;i++){
+            console.log(qrs[i],i);
+            nextClick(qrs[i],i);
+        } 
 }
 
 function nextClick(qr,iter){
@@ -404,6 +515,8 @@ function nextClick(qr,iter){
             type=1
         }else if(type.hasClass("rep-type-3")){
             type=3
+        }else if(type.hasClass("rep-type-5")){
+            type=5;
         }else{
             type=2
         }
@@ -413,6 +526,13 @@ function nextClick(qr,iter){
             case 0:
                 var val = $(qr.querySelector(".simulator-qr .rep-pred .check .active-check")).parent().parent().children("input").val();
                 var typpe = qr.getAttribute("typpe");
+                var clmm = qr.getAttribute("clmm");
+                var classed = false;
+
+                if(clmm="classed"){
+                    classed = true;
+                }
+
                 console.log(typpe);
                 addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val,typpe);                 
                 startButton(1);  
@@ -420,18 +540,25 @@ function nextClick(qr,iter){
                 console.log(str);
                 var treeLocal = eval("tree"+str);
                 console.log("*********tree :"+tree);
-                traitementResponse(treeLocal,val-1,iter,typpe)
+                traitementResponse(treeLocal,val-1,iter,typpe,classed,false)
                 break;
             case 1:
                 var val = $(qr.querySelector(".simulator-qr .rep-pred option:checked")).val();
                 var typpe = qr.getAttribute("typpe");
+                var clmm = qr.getAttribute("clmm");
+                var classed = false;
+
+                if(clmm="classed"){
+                    classed = true;
+                }
+
                 console.log(typpe);
                 addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val,val,typpe);  
                 startButton(1);
                 var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 var treeLocal = eval("tree"+str);
                 console.log("*********tree :"+tree);
-                traitementResponse(treeLocal,val-1,iter,typpe)
+                traitementResponse(treeLocal,val-1,iter,typpe,classed,false)
                 break;
             case 2:
                 var val = $(qr.querySelector(".simulator-qr .rep-pred")).val();
@@ -442,7 +569,7 @@ function nextClick(qr,iter){
                 var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length - qstArray[0].length + iter+1),arrayVect[1].slice(0,arrayVect [1].length - qstArray[0].length + iter+1),arrayVect[2].slice(0,arrayVect [2].length - qstArray[0].length + iter+1)]); 
                 var treeLocal = eval("tree"+str);
                 console.log(tree);
-                traitementResponse(treeLocal,0,iter,typpe);       
+                traitementResponse(treeLocal,0,iter,typpe,false,false)
                 break;
             case 3:
                 var val = $(qr.querySelector(".simulator-qr .rep-pred")).val();
@@ -462,15 +589,51 @@ function nextClick(qr,iter){
                 var treeLocal = eval("tree"+str);
                 console.log(str);
                 console.log(treeLocal);
-                traitementResponse(treeLocal,val-1,iter,typpe);       
+                traitementResponse(treeLocal,val-1,iter,typpe,false,false)
                 break;
+            case 5:
+                var inputAut = document.querySelector("input.rep-type-5");
+                var val = inputAut.value;
+                var typeAct= inputAut.getAttribute("typeAct");
+                var typeAut= inputAut.getAttribute("typeAut");
+                var typeAutt = null;
+                var typeActt = null;
+
+                if(typeAut!="" && typeAct!=""){
+                    
+                    if(autoUrba.indexOf(typeAut)!=-1){
+                        typeAutt = 1;
+                        typeActt = autoUrba.indexOf(typeAct);
+                    };
+                    
+                    if(autoEconom.indexOf(typeAut)!=-1){
+                        typeAutt = 2;
+                        typeActt = autoEconom.indexOf(typeAut);
+                    };
+            
+                    
+                }
+
+                popArrayVect();
+                addToArrayVect(arrayVect[0][arrayVect [0].length - 1],typeAutt,typeAutt,"NR");  
+                startButton(1);
+                var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length),arrayVect[1].slice(0,arrayVect [1].length),arrayVect[2].slice(0,arrayVect [2].length)]); 
+                var treeLocal = eval("tree"+str);
+                traitementResponse(treeLocal,typeAutt-1,0,"NR",false,true);
+                addToArrayVect(arrayVect[0][arrayVect [0].length - 1],typeActt+1,typeActt+1,"NR");  
+                startButton(1);
+                var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length),arrayVect[1].slice(0,arrayVect [1].length),arrayVect[2].slice(0,arrayVect [2].length)]); 
+                var treeLocal = eval("tree"+str);
+                traitementResponse(treeLocal,typeActt,-1,"NR",true,false);
+                break;    
         }
 } 
 
 
 
-function traitementResponse(treeLocal,val,iter,typpe,classed){
+function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
     console.log("%%%% ",treeLocal);
+    console.log("traitement "+val);
 
     if(classed==true){
         endFunctionSend();
@@ -479,28 +642,32 @@ function traitementResponse(treeLocal,val,iter,typpe,classed){
     if(existBody2(treeLocal)){
       if(treeLocal.length == 1){
         var id = Object.keys(treeLocal[0])[0];
+        console.log(arrayVect [0].length - qstArray[0].length + iter);
         addToArrayVect(arrayVect[0][arrayVect [0].length - qstArray[0].length + iter],val+1,1,typpe);
-        alert(arrayVect[2]);
-
+        console.log("treeLocal.length1");
       }else{
-        var id = Object.keys(treeLocal[val])[0];   
+        var id = Object.keys(treeLocal[val])[0];
+        console.log("treeLocal.length!1");   
       }  
         console.log(id,qstArray[0].length,iter);
         
         if(qstArray[0].length-1==iter){
-            addToArrayVect(id,0,0,0);
+            console.log("qstArray.length0");   
+            addToArrayVect(id.toString(),0,0,0);
             var qstss = getQstId(arrayVect[2]);
             console.log("iter====="+qstss);
             for(var i=0;i<qstss[0].length;i++){
-                if(qstss[0][i]!="-1")addToArrayVect(qstss[0][i],0,0,0);
+                if(qstss[0][i]!="-1")addToArrayVect(qstss[0][i].toString(),0,0,0);
             }
             console.log(arrayVect);
-            qstArray = [[],[]];
-            getQuestions(qstss[0],qstss[1],0);    
+            qstArray = [[],[],[]];
+            if(dontShow!=true){
+                getQuestions(qstss[0],qstss[1],qstss[2],0);    
+            }
         }
     }else{
       console.log("end");
-      endFunctionSend();
+      stopedButton(0);
     }
 }
 
@@ -516,7 +683,7 @@ var DocsGlobal = [];
 
 function endFunctionSend(){
     reps = [];
-    stopedButton(0);
+    
     
     var search = makeResponse(arrayVect);
     console.log("search :"+search);
@@ -593,7 +760,7 @@ function searchInMatrix2(matrix,listKey){
     if(index!=-1){
         return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index]};
      }else{
-         alert("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
+         console.log("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
          return null;
      }
 }
@@ -698,9 +865,9 @@ function firstEsTreeCall(){
 
             intializeVectArray();
             var qstss = getQstId(arrayVect[2]);
-            qstArray = [[],[]];
+            qstArray = [[],[],[]];
             console.log(qstss);
-            getQuestions(qstss[0],qstss[1],0);    
+            getQuestions(qstss[0],qstss[1],qstss[2],0);    
         },
         error: function (error) {
             console.log(error.responseText);
@@ -809,7 +976,7 @@ function backClick(){
     
 
     var qstss = getQstId([].concat(arrayVect[2],-1));
-    qstArray = [[],[]];
+    qstArray = [[],[],[]];
     console.log(qstss);    
     console.log("iter====="+qstss);
     for(var i=0;i<qstss[0].length;i++){
@@ -820,7 +987,7 @@ function backClick(){
     }
 
     console.log(arrayVect);
-    getQuestions(qstss[0],qstss[1],0);
+    getQuestions(qstss[0],qstss[1],qstss[2],0);
 }
 
 function backQst(){

@@ -421,7 +421,8 @@ function NQF_edit(type,clas) {
             let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
             let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
 			let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
-            
+            let tag = $('.'+clas+' .ow-field-input-select[data-xpath="tag"]').text();
+
             if(categ=="Vimeo"){
                 var video_id = urlV.match(/\/\d+/)[0].replace(/\//g,""); 
             }else if(categ=="Youtube"){
@@ -430,6 +431,10 @@ function NQF_edit(type,clas) {
             
             if(playlist.trim()==""){
                 playlist = "Général";
+            }
+
+            if(tag.trim()==""){
+                tag = "without_tag";
             }
 
             var current_datetime = new Date();
@@ -452,9 +457,9 @@ function NQF_edit(type,clas) {
                 "description":description,
                 "video_id":video_id,
                 "img_url":"",
+                "tag":tag,
                 "date": formatted_date,
 			};
-
 
             let id = "";
             id = $(".NQF-id-ref").val();
@@ -1021,6 +1026,7 @@ function NQF_edit(type,clas) {
             dataroot.playlist = videoObject.playlist;
             dataroot.categ = videoObject.plateforme;
             dataroot.description = videoObject.description;
+            dataroot.tag = videoObject.tag;
 
 			ctx.formRender.notifyObservers("title");
 			ctx.formRender.notifyObservers("url");

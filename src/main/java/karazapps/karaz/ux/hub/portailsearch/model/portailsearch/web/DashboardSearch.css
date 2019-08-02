@@ -1,3 +1,13 @@
+.e-sign-div button{
+    float: right;
+    color: #eee;
+    background: #38A;
+    margin-top: 9px;
+}
+
+.hp-li-margin{
+    margin: 10px 1rem !important;
+}
 
 .vbox-danger-msg{
     width: 90%;

@@ -92,6 +92,13 @@
                     <vbox>
                       <field label="Description" widget="textArea" labelAlign="float" xpath="description" />
                     </vbox>
+                     <vbox>
+                      <field widget="select" label="Tag" labelAlign="float" xpath="tag" searchQN="frontal/uxhub/portailSearch/tag" className="tag-list">
+                        <help>
+                          ( PARAMETRAGES &gt; Liste &gt; Recherche &gt; Liste des valeurs ), DynamicList : frontal/uxhub/portailSearch/tag .
+                        </help>
+                      </field>
+                    </vbox>
                   </vbox>
                 </vbox>
               </fieldset>
@@ -108,12 +115,15 @@
                                             $('.classSearch-6 .ow-field-input[data-xpath="url"]').val("");
                                             $('.classSearch-6 .ow-field-input-line textarea[data-xpath="description"]').val(""); 
                                             $('.classSearch-6 .ow-field-input-select[data-xpath="playlist"]').text("");
+                                            $('.classSearch-6 .ow-field-input-select[data-xpath="tag"]').text("");
                                             $(".classSearch-6 .NQF-vue-question").hide();</postChange>
                   </button>
                   <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
-                    <postChange>if(verifieVideo("classSearch-6")==true){
-                                                NQF_save_QR(3);
-                                            }</postChange>
+                    <postChange>
+                      if(verifieVideo("classSearch-6")==true){
+                          NQF_save_QR(3);
+                      }
+                                            </postChange>
                   </button>
                 </vbox>
               </vbox>
