@@ -890,7 +890,6 @@ var matrixBulk = [];
 function conevertTo(tree,array,newObj){
   for(var i=0;i<tree.children.length;i++){
 
-    if(tree.children[i].text.question_id==-1){
         if(tree.children[i].text.status==1){
             var list = tree.children[i].text.id.split("-");
             var obj = simple_chart_config.nodeStructure;    
@@ -901,16 +900,20 @@ function conevertTo(tree,array,newObj){
                 reps.push(Number(list[j])+1);
             }
 
-            var bulk = {
-                "id":tree.children[i].text.columns_idB,
-                "list":matrixColumn,
-                "list_rep": parcourirTreeReps(tree.children[i].text.id)
+            var column = Object.keys(tree.children[i].text.columns_idB);
+            console.log("======"+column);
+            for(var j = 0;j<column.length;j++){
+                var bulk = {
+                    "id":tree.children[i].text.columns_idB[column[j]],
+                    "list":matrixColumn,
+                    "list_rep": parcourirTreeReps(tree.children[i].text.id,Number(column[j]))
+                }
             }
+            
             
             matrixBulk.push(bulk);
         }
-        continue;
-    }
+    
     
     var obj = {};
     var sousTree = tree.children[i];
@@ -965,24 +968,29 @@ function getContentSubTree(id){
 }
 
 
-function parcourirTreeReps(id){
+function parcourirTreeReps(id,add){
     var list = id.split("-");
+    if(add!=null)list.push(add);
     var newList = [];
     var sample_tree = simple_chart_config.nodeStructure;
     console.log(sample_tree.text.rep_size)
     var repSize = sample_tree.text.rep_size;
-    for(var i=0;i<list.length;i++){
+    for(var i=0;i<list.length-1;i++){
       console.log(sample_tree);
-      
-      if(sample_tree.children.length==1 && repSize != 1){
+      if(sample_tree.children.length==1 && repSize!=1){
         newList.push(-1);
       }else{
         newList.push(Number(list[i])+1);
       }
       console.log(list[i]);
       sample_tree = sample_tree.children[list[i]];
-      console.log(newList);
       repSize = sample_tree.text.rep_size;
+      
+      if(i==list.length-2){
+        newList.push(Number(list[i+1])+1);
+      }
+
+      console.log(newList);
     }
     return newList;
 }
@@ -1102,7 +1110,7 @@ function getTreeFromEs(type){
     });
 }
 
-function getAllCms(type,callback,hiddenList){
+function getAllCms(type,callback,hiddenList,sortList){
     var obj = {"size":1000,"query":{"match_all":{}}};
     if(type==0 || type==2){
         var url = "simulator_index_docs/docs/_search";
@@ -1123,7 +1131,7 @@ function getAllCms(type,callback,hiddenList){
         data: JSON.stringify(obj),
         success: function (result) {
             console.log(hiddenList);
-            callback(result['hits']['hits'],0,hiddenList);
+            callback(result['hits']['hits'],0,hiddenList,sortList);
         },
         error: function (error) {
             console.log(error.responseText);
@@ -1131,7 +1139,7 @@ function getAllCms(type,callback,hiddenList){
     });
 }
 
-function createAllCms(response,type,hiddenList){
+function createAllCms(response,type,hiddenList,sortList){
     if(type==0){
         intilizeVector(response.length);
         var divGlo = document.querySelector(".simulator-cms .side-bar .body1 .docs-in .docs-list");
@@ -1172,12 +1180,19 @@ function createAllCms(response,type,hiddenList){
 
     arrayOfdivTabs = transformDivTotab();
     hiddenList = getIndexOfBin(completVec(response.length,hiddenList));
-    
-    for(var j=0;j<hiddenList.length;j++){
-        var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((hiddenList[j]+1).toString())];
-        addDocItemToDocAdded(index);
-    }
 
+    if(sortList != undefined){
+        for(var j=0;j<sortList.length;j++){
+            var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((sortList[j]).toString())];
+            addDocItemToDocAdded(index);
+        }
+    }else{
+        for(var j=0;j<hiddenList.length;j++){
+            var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((hiddenList[j]+1).toString())];
+            addDocItemToDocAdded(index);
+        }
+    }
+    
 }
 
 function addDocItemToDocAdded(index){
@@ -1352,8 +1367,13 @@ function nextStepDocsIn(type,id){
     }else if(type==1){
         objectJsonMatrixColumns["docs_comp"] = getListDocsAdded();
         var list = [];
-        if(objectJsonMatrixColumns["steps"]!=undefined) list = bin2vec(int2bin(objectJsonMatrixColumns["steps"]));
-        getAllCms(1,createAllCms,list);        
+        var sortedList = [];
+        if(objectJsonMatrixColumns["steps"]!=undefined){
+            list = bin2vec(int2bin(objectJsonMatrixColumns["steps"]));
+            alert(objectJsonMatrixColumns["stepSort"]);
+            sortedList = objectJsonMatrixColumns["stepSort"];
+        } 
+        getAllCms(1,createAllCms,list,sortedList);        
         $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
@@ -1363,6 +1383,8 @@ function nextStepDocsIn(type,id){
         
     }else if(type==2){
         objectJsonMatrixColumns["steps"] = getListDocsAdded();
+        objectJsonMatrixColumns["stepSort"] = getListStepsAdded();
+
         $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
@@ -1519,6 +1541,16 @@ function getListDocsAdded(){
     }
     console.log(vector.join('')+"**"+bin2int(vector.join('')));
     return bin2int(vector.join(''));
+}
+
+function getListStepsAdded(){
+    var vector2 = [];
+    var listChecked = $(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item");
+    for(var i=0;i<listChecked.length;i++){
+        var id = listChecked.eq(i).children("input").val();
+        vector2.push(id);
+    }
+    return vector2;
 }
 
 function setIdTree(list,childs){
@@ -1988,6 +2020,7 @@ function deletedCol(tree,array,newObj){
   /* auto complete */
   function autoCompleteSim(inp,index,field,type){
       if(type==0){
+          
           inp.addEventListener("input",function(){
               var val = this.value;
               var arr = searching(val,index);
@@ -2019,38 +2052,6 @@ function deletedCol(tree,array,newObj){
                   }
               }
           },false);
-      }else if(type==5){
-        inp.addEventListener("input",function(){
-            var val = this.value;
-            restAutoComplete3(inp,val,"activite_economique","intituleFr");
-        },false);
-        
-        inp.addEventListener("keydown", function(e) {
-            var x = document.getElementById("autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
-    
-            if (e.keyCode == 40) {
-                /*If the arrow DOWN key is pressed,
-                increase the currentFocus variable:*/
-                currentFocus++;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 38) { //up
-                /*If the arrow UP key is pressed,
-                decrease the currentFocus variable:*/
-                currentFocus--;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 13) {
-                /*If the ENTER key is pressed, prevent the form from being submitted,*/
-                e.preventDefault();
-                if (currentFocus > -1) {
-                    /*and simulate a click on the "active" item:*/
-                    if (x) x[currentFocus].click();
-                }
-            }
-        },false);
-
       }else{
               inp.addEventListener("input",function(){
                   var req = inp.value;
@@ -2105,7 +2106,6 @@ function deletedCol(tree,array,newObj){
           },false);*/
       }
   }
-
 function restAutoComplete2(inp,req,index,field){
     
     var obj = {"size":5,"query": 
@@ -2173,69 +2173,6 @@ function restAutoComplete2(inp,req,index,field){
         }
     });    
 }
-
-
-function restAutoComplete3(inp,req,index,field){
-    
-    var obj = {"size":5,"query": 
-    {
-    "bool":{
-        "must":[{
-            "query_string": {
-                "fields":["content.intituleFr"],
-                "query":"*"+req+"*",
-                "minimum_should_match": "100%"                   
-            }
-        },{
-                "term": {
-                    "content.categorie.keyword": {
-                        "value": "Intitulé Activité"
-                    }
-                }
-            
-        }]
-    }
-  }
-};
-    
-    console.log(JSON.stringify(obj));
-
-    $.ajax({
-        type: "post",
-        url: URL_SEARCH+"/"+index+"/_search",
-        contentType: "application/json",
-        datatype:"application/json",
-        data: JSON.stringify(obj),
-        beforeSend: function (xhr) {
-             xhr.setRequestHeader("Authorization", AUTH);
-        },
-        success: function (result) {
-            console.log(req);
-            console.log(result);
-            var arr = [];
-            var arrObj = [];
-            var arrTypeAut = [];
-            var arrTypeAct = [];
-            for(var i=0;i<result.hits.hits.length;i++){
-                arr.push(result.hits.hits[i]._source.content.intituleFr);
-                arrObj.push(result.hits.hits[i]._id);
-                arrTypeAut.push(result.hits.hits[i]._source.parents.TypeAutorisation);
-                arrTypeAct.push(result.hits.hits[i]._source.parents.TypeActivite);
-            };
-
-            for(var i=0;i<result.hits.hits.length;i++){
-                
-            };
-
-            createListeResAc(inp,[arr,arrObj,arrTypeAct,arrTypeAut],req,2);
-        },
-        error: function (error) {
-            console.log(error.responseText);
-        }
-    });    
-}
-
-
 
 function getAllCmsQuestion(inp,index){
     var obj = {
@@ -2439,62 +2376,6 @@ function createListeResLoc(inp,arr,val,type){
     
         b.addEventListener("click", function(e) {
             inp.value = this.getElementsByTagName("input")[0].value;
-            inp.setAttribute("disabled","disabled");
-            inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
-            closeAllListsSim(1);
-        });
-        a.appendChild(b);
-    }
-
-    
-}
-
-var autoEconom = ["Simple Déclaration","Établissement classé"];
-var autoUrba = ["Autorisations urbanisme"];
-
-var autorisation = false;
-
-function createListeResAc(inp,arr,val,type){
-    closeAllListsSim(1);
-    a = document.createElement("DIV");
-    a.setAttribute("id", "autocomplete-list");
-    a.setAttribute("class", "autocomplete-items");
-    a.setAttribute("style","margin-top: auto;top:auto;position:absolute;width:46%;left: 12px;")
-    /*append the DIV element as a child of the autocomplete container:*/
-    inp.parentNode.appendChild(a);
-    
-    /*for each item in the array...*/
-    for (i = 0; i < 5; i++) {
-        /*check if the item starts with the same letters as the text field value:*/
-        /*create a DIV element for each matching element:*/
-        var b = document.createElement("DIV");
-        /*make the matching letters bold:*/
-        var str = arr[0][i];
-
-        b.setAttribute("title",str);
-        
-        if(val==""){
-            b.innerHTML=str.toUpperCase();
-        }else{
-            b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
-        }
-        
-     
-        /*insert a input field that will hold the current array item's value:*/
-        var input = document.createElement("input");
-        input.setAttribute("type","hidden");
-        input.setAttribute("value",arr[0][i]);
-        b.appendChild(input);
-        b.setAttribute("idd",arr[1][i]);
-        b.setAttribute("typeAct",arr[2][i]);
-        b.setAttribute("typeAut",arr[3][i]);
-        /*execute a function when someone clicks on the item value (DIV element):*/
-    
-        b.addEventListener("click", function(e) {
-            inp.value = this.getElementsByTagName("input")[0].value;
-            inp.setAttribute("idd",this.getAttribute("idd"));
-            inp.setAttribute("typeAct",this.getAttribute("typeAct"));
-            inp.setAttribute("typeAut",this.getAttribute("typeAut"));
             inp.setAttribute("disabled","disabled");
             inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
             closeAllListsSim(1);

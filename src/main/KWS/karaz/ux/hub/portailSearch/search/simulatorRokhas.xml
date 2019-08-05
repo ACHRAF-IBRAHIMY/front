@@ -88,6 +88,7 @@
                   <div class="steps-container" />
                 </html>
               </fieldSet>
+              <!--
               <fieldSet header="DOCUMENTS DÉLIVRÉS" />
               <fieldSet header="COÛT ÉSTIMATIF" />
               <fieldSet header="DOCUMENTS COMPLEMENTAIRES">
@@ -95,6 +96,7 @@
                   <div class="docs-comp-container" />
                 </html>
               </fieldSet>
+              -->
             </vbox>
           </vbox>
           <html>

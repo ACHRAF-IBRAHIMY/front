@@ -1,5 +1,6 @@
 
 
+
 function NQF_remove_subtitle() {
     $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
 }
@@ -290,7 +291,8 @@ function NQF_edit(type,clas) {
 			let question = $("."+clas+' .ow-field-input[data-xpath="question"]').val();
 			let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
 			let resp = $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
-			let ID = $("."+clas+" .NQF-id").val();
+            let ID = $("."+clas+" .NQF-id").val();
+            let visibility = root.visibility;
 
 			$("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
 			$("."+clas+" .NQF-prev-resp").html(resp);
@@ -298,12 +300,14 @@ function NQF_edit(type,clas) {
             var req = {
 				"QUESTIONS": "",
 				"REPONSES": "",
-				"type": ""
+                "type": "",
+                "visibility":""
             }
             
 			req.QUESTIONS = question;
 			req.REPONSES = resp;
-			req.type = categ;
+            req.type = categ;
+            req.visibility = visibility;
 
 			// type
 			if (categ == "Signature électronique") {
@@ -326,28 +330,7 @@ function NQF_edit(type,clas) {
 
 				console.log(req, ID);
 				updateQuestionNQF(ID, req);
-				// added recently
-				/*
-				if (req.type == "E-SIGN") {
-					$(".NFQ-quest-type-esign").empty();
-					RestSearchFaqSec("", 0, 5, 4, ".NFQ-quest-type-esign", 1)
-				} else if (req.type == "GENERAL") {
-					$(".NFQ-quest-type-general").empty();
-					RestSearchFaqSec("", 0, 5, 3, ".NFQ-quest-type-general", 1)
-				} else if (req.type == "DOCUMENT") {
-					$(".NFQ-quest-type-document").empty();
-					RestSearchFaqSec("", 0, 5, 1, ".NFQ-quest-type-document", 1)
-				} else if (req.type = "PLATEFORME") {
-					$(".NFQ-quest-type-plat").empty();
-					RestSearchFaqSec("", 0, 5, 2, ".NFQ-quest-type-plat", 1)
-				} else if (req.type = "ARCHITECTE") {
-					$(".NFQ-quest-type-archit").empty();
-					RestSearchFaqSec("", 0, 5, 5, ".NFQ-quest-type-archit", 1)
-				} else if (req.type = "ADMINISTRATION") {
-					$(".NFQ-quest-type-adminis").empty();
-					RestSearchFaqSec("", 0, 5, 6, ".NFQ-quest-type-adminis", 1)
-				}*/
-				//
+				
 				if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
 					$("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
                 }
@@ -364,8 +347,6 @@ function NQF_edit(type,clas) {
 				alert("verifier que tout les champs sont bien remplis");
 				$("."+clas+" .NQF-vue-question").hide();
 			}
-			// $(".NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput")
-			// $(".NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput");
 			
 		} else if(type == 2){
 			
@@ -415,7 +396,7 @@ function NQF_edit(type,clas) {
 			
 			updateReglementation(id,req);
 		}else if(type==3){
-            var clas = "classSearch-7";
+            var clas = "classSearch-6";
             let title = $('.'+clas+' .ow-field-input[data-xpath="title"]').val();
 			let categ = $('.'+clas+' .ow-field-input-select[data-xpath="categ"]').text();
             let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
@@ -845,97 +826,89 @@ function NQF_edit(type,clas) {
 		})
     }
 
-	function RestSearchFaqSec(prefix, page, size, type, cls, atr) {
+function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee) {
 
-		var str = ""
-		$(".faq-vbox .no-response-find").hide();
+    var str = ""
+    $(".faq-vbox .no-response-find").hide();
 
-		if (type == 0) {
-			$(".faq-fieldset").hide();
-			str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
-			str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
-			str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
-			str += generateRequestFaqSearch(prefix, "E-SIGN", page, size);
-			str += generateRequestFaqSearch(prefix, "ARCHITECTE", page, size);
-			str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page, size);
-		} else if (type == 1) {
-			str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
-		} else if (type == 2) {
-			str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
-		} else if (type == 3) {
-			str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
-		} else if (type == 4) {
-			str += generateRequestFaqSearch(prefix, "E-SIGN", page, size);
-		} else if (type == 5) {
-			str += generateRequestFaqSearch(prefix, "ARCHITECTE", page, size);
-		} else if (type == 6) {
-			str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page, size);
-		}
+    if (type == 0) {
+        $(".faq-fieldset").hide();
+        str += generateRequestFaqSearch(prefix, "DOCUMENT", page,size,typee);
+        str += generateRequestFaqSearch(prefix, "PLATEFORME", page,size,typee);
+        str += generateRequestFaqSearch(prefix, "GENERAL", page,size,typee);
+        str += generateRequestFaqSearch(prefix, "E-SIGN", page,size,typee);
+        str += generateRequestFaqSearch(prefix, "ARCHITECTE", page,size,typee);
+        str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page,size,typee);
+    } else if (type == 1) {
+        str += generateRequestFaqSearch(prefix, "DOCUMENT", page,size,typee);
+    } else if (type == 2) {
+        str += generateRequestFaqSearch(prefix, "PLATEFORME", page,size,typee);
+    } else if (type == 3) {
+        str += generateRequestFaqSearch(prefix, "GENERAL", page,size,typee);
+    } else if (type == 4) {
+        str += generateRequestFaqSearch(prefix, "E-SIGN", page,size,typee);
+    } else if (type == 5) {
+        str += generateRequestFaqSearch(prefix, "ARCHITECTE", page,size,typee);
+    } else if (type == 6) {
+        str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page,size,typee);
+    }
 
-		if (type != 0) {
-			$(".faq-fieldset .full-search-list").eq(type - 1).html("");
-			$(".faq-fieldset .searchGif2").eq(type - 1).show();
-		}
+    if (type != 0) {
+        $(".faq-fieldset .full-search-list").eq(type - 1).html("");
+        $(".faq-fieldset .searchGif2").eq(type - 1).show();
+    }
 
-		$.ajax({
-			type: "post",
-			//url: "http://localhost:9200/_msearch",
-			url: URL_SEARCH + "/_msearch?pretty",
-			datatype: "application/json",
-			contentType: "application/x-ndjson",
-			data: str,
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader("Authorization", AUTH);
-			},
-			success: function (result) {
-				console.log(result);
-                if(type!=0){
-                for (var i = 0; i < result.responses.length; i++) {
-					if (result.responses[i].hits.hits.length != 0) {
-						// console.log(result.responses[i].hits.hits);
-						// console.log(result.responses[i].hits.hits.length);
+    $.ajax({
+        type: "post",
+        //url: "http://localhost:9200/_msearch",
+        url: URL_SEARCH + "/_msearch?pretty",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data: str,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            console.log(result);
+            if(type!=0){
+            for (var i = 0; i < result.responses.length; i++) {
+                if (result.responses[i].hits.hits.length != 0) {
+                
 
+                    for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
+                
+                        NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls, atr)
 
-						for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
-							//console.log(result.responses[i].hits.hits[j]._id);
-							// console.log(result.responses[i].hits.hits[j]._source.QUESTIONS);
-
-							NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls, atr)
-
-							// console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
-                        }
-                        if(atr!=3){
-                            $(cls).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Toutes les questions de la catégorie<span>`);
-                        }
-						// fullCreateFaqByType(result.responses[i].hits.hits,(i+1));
-						// k++;
-					}
-                }
-                }else{
-                    for(var i=0;i<result.responses.length;i++){
-                        $(cls[i]).html("");
-                        for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
-                           // console.log(result.responses[i].hits.hits[j]._id);
-                            // console.log(result.responses[i].hits.hits[j]._source.QUESTIONS);
-
-                            NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls[i], atr)
-
-                            // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
-                        }
-                        if(atr!=3){
-                        	$(cls[i]).append(`<span  class="NFQ-end" onclick="RestSearchFaqWithIntilize('',0,2,${typesList.indexOf(result.responses[i].hits.hits[0]._source.type)+1},-1)"> Toutes les questions de la catégorie<span>`);                        }else{
-                        }   
                     }
+                    if(atr!=3 && result.responses[i].hits.hits != 0){
+                        $(cls).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Toutes les questions de la catégorie<span>`);
+                    }
+                    
                 }
+            }
+            }else{
+                for(var i=0;i<result.responses.length;i++){
+                    $(cls[i]).html("");
+                    for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
+                        
+                        NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls[i], atr)
 
-			},
-			error: function (error) {
-				console.log(error.responseText);
-			}
-		})
+                    }
+                    if(atr!=3 && result.responses[i].hits.hits != 0){
+                        console.log(result.responses[i].hits);
+                        $(cls[i]).append(`<span  class="NFQ-end" onclick="RestSearchFaqWithIntilize('',0,2,${typesList.indexOf(result.responses[i].hits.hits[0]._source.type)+1},-1)"> Toutes les questions de la catégorie<span>`);                        }else{
+                    }   
+                }
+            }
+
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    })
 
 
-	}
+}
 
 	function RestSearchFaqWithIntilize(var1,var2,var3,var4,var5){
         intializeFaqPages();
@@ -982,17 +955,17 @@ function NQF_edit(type,clas) {
 		
 		if(type == 1){
 			$("."+clas+" .NFQ-all-quest").hide();
-			let question = $("."+clas+" .NQF-vue-question .NQF-prev-quest b").text();
 
 			let resp = $("."+clas+" .NQF-prev-resp").html();
-			let categ = $("."+clas+" .NQF-categorie").val();
 			let ID = $("."+clas+" .NQF-id").val();
-			dataroot.question=question;
+			dataroot.question= faqObject.QUESTIONS;
 	       // dataroot.nfqresponse=resp;
-			dataroot.categ=categ;
+            dataroot.categ= faqObject.type;
+            dataroot.visibility = faqObject.visibility;
 			ctx.formRender.notifyObservers("question");
 			ctx.formRender.notifyObservers("nfqresponse");
-			ctx.formRender.notifyObservers("categ");
+            ctx.formRender.notifyObservers("categ");
+            ctx.formRender.notifyObservers("visibility");
 			
 			$("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
 			$("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)

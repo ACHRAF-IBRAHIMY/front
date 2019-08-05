@@ -1,4 +1,8 @@
 /* start procedure  */
+.NQF-edit-float .ow-field-boolean-container .ow-field-core{
+    margin-top : 18px;
+}
+
 button.ow-button.PCD-button-signup-header{
     background-color: #F0F0F0;
     color: var(--edit-button);

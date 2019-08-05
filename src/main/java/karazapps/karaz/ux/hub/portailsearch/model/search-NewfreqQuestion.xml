@@ -11,25 +11,26 @@
     <nfqresponse />
     <categ />
     <question />
+    <visibility>false</visibility>
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
         removeLastRootPage(userName);
-                $(".rokhas-home").click(function(){
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-                });
+        $(".rokhas-home").click(function(){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+        });
 
 
-                $(".tags a").click(function(){
-                console.log("href:"+$(this).attr("href"));
-                var pos = $("."+$(this).attr("href").substr(1)).offset().top;
-                $('html,body').animate(
-                {
-                scrollTop: pos
-                },
-                'slow');
-                });
+        $(".tags a").click(function(){
+        console.log("href:"+$(this).attr("href"));
+        var pos = $("."+$(this).attr("href").substr(1)).offset().top;
+        $('html,body').animate(
+        {
+        scrollTop: pos
+        },
+        'slow');
+        });
 
 
                 $(".scroll-top-sp").click(function(){
@@ -103,9 +104,10 @@
                       <option value="E-SIGN" label="Signature électronique" />
                       <option value="ARCHITECTE" label="Architecte" />
                       <option value="DOCUMENT" label="Document" />
-                      <option value="PLATEFORME" label="Platforme" />
+                      <option value="PLATEFORME" label="Plateforme" />
                       <option value="ADMINISTRATION" label="Administration" />
                     </field>
+                    <field label="Visibilité" widget="boolean" xpath="visibility" />
                     <vbox />
                   </vbox>
                 </vbox>
@@ -123,7 +125,7 @@
                     <postChange>NQF_new_QR(1,"classSearch-5");</postChange>
                   </button>
                   <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
-                    <postChange>NQF_save_QR(1);</postChange>
+                    <postChange>NQF_save_QR(1,root);</postChange>
                   </button>
                 </vbox>
               </vbox>
