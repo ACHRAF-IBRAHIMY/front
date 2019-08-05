@@ -352,12 +352,22 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
     return result;
 }
 
-function generateRequestFaqSearch(prefix,type,from,size){
-    if(prefix.trim()!=""){
-        var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+function generateRequestFaqSearch(prefix,type,from,size,visi){
+ 
+    if(visi!=undefined)   {
+        if(prefix.trim()!=""){
+            var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}},{\"match_phrase\": {\"visibility\": true}]}}}\n";
+        }else{
+            var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }},{\"match\":{ \"visibility\":true }}]}}}\n";    
+        }
     }else{
-        var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+        if(prefix.trim()!=""){
+            var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+        }else{
+            var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+        }
     }
+
 
     return str;
 }
@@ -565,7 +575,7 @@ function RestSearchref(prefix, page, size, type, typeUse, cls,clas) {
 
 				// la page a affiché  
                 console.log("***************"+NQFrefCAtegorie[i]);
-				$(cls[i]).append(`<span  class="NFQ-end" onclick='RestSearchRefWithIntilize("",0,2,${i+1},-1,null)'>  ${NQFrefCAtegorie[i]}<span>`);
+				$(cls[i]).append(`<span  class="NFQ-end" onclick='RestSearchRefWithIntilize("",0,2,${i+1},-1,null,${clas})'>  ${NQFrefCAtegorie[i]}<span>`);
 
             }
         }else if(typeUse==-1){
@@ -1218,7 +1228,7 @@ var NQFrefCAtegorie = ["Tous les référentiels économiques","Tous les référe
 var faqPages = [1,1,1,1,1,1];
 var faqGlobalPages = [1,1,1,1,1,1];
 var totalFaqPages = [0,0,0,0,0,0];
-var typesList = ["E-SIGN","GENERAL","DOCUMENT","PLATEFORME","ARCHITECTE","ADMINISTRATION"];
+var typesList = ["E-SIGN","GENERAL","DOCUMENT","Platforme","ARCHITECTE","ADMINISTRATION"];
 
 function intializeFaqPages(){
     faqPages = [1,1,1,1,1,1];
@@ -1457,103 +1467,6 @@ function generatePaginationRefPage(index,prefix,typeUse,cls){
         }
 }
 
-/*
-function generatePaginationFaqPage(index,prefix,typeUse){
-    if(typeUse==-1){
-        $(".faq-fieldset .pagination-new-style").eq(0).html("");
-    }else{
-        $(".faq-fieldset .pagination-new-style").eq(index).html("");        
-    }
-    var p1 = document.createElement("div");
-    
-    p1.setAttribute("class","pagination-1");
-    var icon1 = document.createElement("i");
-    icon1.setAttribute("class","fas fa-angle-double-left");
-    icon1.addEventListener("click",function(){
-        if(faqGlobalPages[index]>1){
-            faqGlobalPages[index]--;
-            faqPages[index]=(faqGlobalPages[index]-1)*3+1;
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
-        }
-    });
-    var icon2 = document.createElement("i");
-    icon2.setAttribute("class","fas fa-angle-left");
-    icon2.addEventListener("click",function(){
-        if(faqPages[index]>1){
-            faqPages[index]--;
-            if(faqPages[index]%3==0){
-                faqGlobalPages[index]--;    
-            }
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
-        }
-    });
-    var icon3 = document.createElement("i");
-    icon3.setAttribute("class","fas fa-angle-right");
-    icon3.addEventListener("click",function(){
-        if(faqPages[index]<Math.ceil(totalFaqPages[index]/2)){
-            faqPages[index]++;
-            if(faqPages[index]%3==1){
-                faqGlobalPages[index]++    
-            }
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
-        }
-    });
-    var icon4 = document.createElement("i");
-    icon4.setAttribute("class","fas fa-angle-double-right");
-    icon4.addEventListener("click",function(){
-        if(faqGlobalPages[index]<Math.ceil(Math.ceil(totalFaqPages[index]/2)/3)){
-            faqGlobalPages[index]++;
-            faqPages[index]=(faqGlobalPages[index]-1)*3+1;
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1));
-        }
-    });
-
-    var spanG = document.createElement("span");
-    var span1 = document.createElement("span");
-    span1.setAttribute("class","num-span");
-    span1.innerHTML = faqPages[index];
-    var span2 = document.createElement("span");
-    span2.innerHTML = Math.ceil(totalFaqPages[index]/2);
-
-    spanG.innerHTML+="Page ";
-    spanG.appendChild(span1);
-    spanG.innerHTML+=" Sur ";
-    spanG.appendChild(span2);
-
-    p1.appendChild(icon1);
-    p1.appendChild(icon2);
-    //p1.appendChild(spanG);
-    p1.appendChild(icon3);
-    p1.appendChild(icon4);
- 
-    var p2 = document.createElement("div");
-    p2.setAttribute("class","pagination-2");
-    spanG = document.createElement("span");
-    span1 = document.createElement("span");
-    span1.setAttribute("class","num-span");
-    span1.innerHTML = faqPages[index];
-    span2 = document.createElement("span");
-    span2.innerHTML = Math.min(2*faqPages[index],totalFaqPages[index]);
-    var span3 = document.createElement("span");
-    span3.innerHTML = totalFaqPages[index];
-    spanG.innerHTML= "Page ";
-    spanG.appendChild(span1);
-    spanG.innerHTML += " - ";
-    spanG.appendChild(span2);
-    spanG.innerHTML +=" / ";
-    spanG.appendChild(span3);
-    p2.appendChild(spanG);
-    
-    if(typeUse==-1){
-        $(".faq-fieldset .pagination-new-style").eq(0).append(p1);
-    //    $(".faq-fieldset .pagination-new-style").eq(0).append(p2);    
-    }else{
-        $(".faq-fieldset .pagination-new-style").eq(index).append(p1);
-    //    $(".faq-fieldset .pagination-new-style").eq(index).append(p2);
-    }
-
-}*/
-
 
 function getQsFaq(id,type,cls){
     if(type==0){
@@ -1580,7 +1493,7 @@ function getQsFaq(id,type,cls){
             if(type==0){
             	console.log(result);
 				//traitement rbihi
-
+                faqObject = result._source;
 				$("."+cls+" .NFQ-load-img").hide();
 				$("."+cls+" .NQF-vue-question").show();
 				//add header
@@ -1613,6 +1526,7 @@ function getQsFaq(id,type,cls){
 
 var videoObject = null;
 var attachementObject = null;
+var faqObject = null;
 
 function getVideo(id,type,cls){
     if(type==0){
@@ -1687,8 +1601,7 @@ function getVideo(id,type,cls){
                   $("."+cls+" .searchGif2").hide();
                   $("."+cls+" .consultation-video").show();
 
-               // RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1);
-                //traitement youssef
+              
             } 
         },
         error: function (error) {
@@ -1945,6 +1858,7 @@ function RestSearchFaqDet(prefix,page,size,type){
         $(".faq-fieldset .searchGif2").eq(type-1).show();
     }
 
+
     $.ajax({
         type: "post",
         url: URL_SEARCH+"/_msearch",
@@ -1977,29 +1891,34 @@ function RestSearchFaqDet(prefix,page,size,type){
 
 
 function RestSearchFaq(prefix,page,size,type,typeUse,cls){
-    var str =""
+    var str ="";
+    if(cls==undefined){
+        cls = "ow-view";
+    }
     $("."+cls+" .faq-vbox .no-response-find").hide();
     if(type==0){
         $("."+cls+" .faq-fieldset").hide();
-        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
-        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
-        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size); 
-        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size); 
-        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size); 
-        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size);     
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,type);     
     }else if(type==1){
-        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size); 
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size,type); 
     }else if(type==2){
-        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size); 
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size,type); 
     }else if(type==3){
-        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size);
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size,type);
     }else if(type==4){
-        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size);               
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size,type);               
     }else if(type==5){
-        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size); 
+        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size,type); 
     }else if(type==6){
-        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size); 
+        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,type); 
     }
+
+    console.log(str);
 
     if(type!=0 && typeUse != -1){
         $("."+cls+" .faq-fieldset .full-search-list").eq(type-1).html("");

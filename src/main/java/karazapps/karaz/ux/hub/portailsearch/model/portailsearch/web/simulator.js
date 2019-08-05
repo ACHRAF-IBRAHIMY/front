@@ -635,9 +635,7 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
     console.log("%%%% ",treeLocal);
     console.log("traitement "+val);
 
-    if(classed==true){
-        endFunctionSend();
-    }
+    
 
     if(existBody2(treeLocal)){
       if(treeLocal.length == 1){
@@ -669,6 +667,11 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
       console.log("end");
       stopedButton(0);
     }
+
+
+    if(classed==true){
+        endFunctionSendAdv();
+    }
 }
 
 function existBody2(treeGl){
@@ -694,6 +697,27 @@ function endFunctionSend(){
     countDoc(2,objSearchMatrix);
     
     
+}
+
+function endFunctionSendAdv(){
+    var list = [[],[],[],[]];
+    var vector = [];
+    for(var i=0;i<arrayVect[0].length;i++){
+        list[0] = arrayVect[0].slice(0,i);
+        list[1] = arrayVect[1].slice(0,i);
+        list[2] = arrayVect[2].slice(0,i);
+        list[3] = arrayVect[3].slice(0,i);
+        var search = makeResponse(list);
+        var objSearchMatrix = searchInMatrix2(matrix,search);
+        if(objSearchMatrix!=null){
+            console.log("objSearchMatrix :"+JSON.stringify(objSearchMatrix));
+            vector.push(objSearchMatrix);
+        }
+    };
+
+    countDocAdv(1,vector);
+    countDoc(1,objSearchMatrix);
+
 }
 
 function getTreeHier(treeGl,array) {
@@ -730,7 +754,7 @@ function makeResponse(array){
     return reps;
 }               
 
-var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000]];
+var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[]];
 
 function searchInMatrix(matrix,key){
      var index = matrix[0].indexOf(key);
@@ -758,7 +782,7 @@ function searchInMatrix2(matrix,listKey){
     }
     
     if(index!=-1){
-        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index]};
+        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index]};
      }else{
          console.log("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
          return null;
@@ -787,7 +811,14 @@ function bulkRequest(vector,type){
     return request;
 }
 
-
+function bulkRequestByVect(vector) {
+    var request = "";
+    for(var i=0;i<vector.length;i++){
+        request += "{ \"index\": \"simulator_index_steps\", \"type\": \"steps\" }\n";
+        request += "{ \"query\": { \"match\": { \"id\":"+vector[i]+"}}}\n";
+    }
+    return request;
+}
 
 function sendRequestBulk(bulk,type){
     $.ajax({
@@ -835,7 +866,7 @@ function firstEsTreeCall(){
             var sizeQuestions = result.responses[0].hits.hits.length;
             var columns = result.responses[1].hits.hits;
             console.log("matrix length :" + columns.length);
-            matrix = [[],[],[],[]];
+            matrix = [[],[],[],[],[]];
             qsts =[];
             for(var i=0;i<result.responses[0].hits.hits.length;i++){
                 qsts.push(result.responses[0].hits.hits[i]._source.id.toString());
@@ -854,6 +885,7 @@ function firstEsTreeCall(){
                 matrix[1].push(columns[i]._source.docs_requis);
                 matrix[2].push(columns[i]._source.steps);
                 matrix[3].push(columns[i]._source.docs_comp);
+                matrix[4].push(columns[i]._source.stepSort);
 
                 console.log(completeArrayMatrix(ar1,ar2,sizeQuestions));
             }
@@ -875,6 +907,64 @@ function firstEsTreeCall(){
     })
 }
 
+function countDocAdv(type,objSearchMatrixArr){
+    $(".simulator .simulator-qr .next-button img").show();
+    var obj = {
+        "query": {
+            "match_all": {}
+        }
+    };
+    var url = "simulator_index_docs/docs/_count";
+    $.ajax({
+        type: "post",
+      //  url: "http://localhost:9200/" + url,
+        url: URL_SEARCH+"/"+url,
+        datatype: "application/json",
+        contentType: "application/json",
+        data: obj,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            var vectorGlo = completVec(result.count,[]);
+            for(var i=0;i<objSearchMatrixArr.length;i++){
+                var inte = objSearchMatrixArr[i].docs;
+                var vector = bin2vec(int2bin(inte));
+                vector = completVec(result.count, vector);
+                console.log(vector);
+                vectorGlo = sumAB(vectorGlo,vector);
+            };
+            console.log(vectorGlo);
+            var bulk = bulkRequest(vectorGlo,0);
+            console.log(bulk);
+            if (bulk != "") {
+                console.log(bulk);
+                sendRequestBulk(bulkRequest(vectorGlo, 0), 0);
+            } else {
+                addDocs([], 0);
+            }
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+function sumAB(a,b){
+    var s = [];
+    
+    for(var i=0;i<a.length;i++){
+      var somme = Number(a[i])+Number(b[i]);
+      
+        if(somme==2){
+          somme = 1;
+        }
+      
+      s.push(somme.toString());
+    };
+    
+    return s;
+  };
 
 function countDoc(type,objSearchMatrix) {
     $(".simulator .simulator-qr .next-button img").show();
@@ -922,14 +1012,18 @@ function countDoc(type,objSearchMatrix) {
             } else if (type == 1) {
                 var inte2 = objSearchMatrix.steps;
                 var vector2 = bin2vec(int2bin(inte2));
-                console.log("********: "+result.count);
+                var vectortest = objSearchMatrix.stepSort;
+                console.log("********: "+vector2);
+                console.log("********: "+vectortest);
                 vector2 = completVec(result.count, vector2);
-                var bulk2 = bulkRequest(vector2, 1);
+                //var bulk2 = bulkRequest(vector2, 1);
+                var bulk2 = bulkRequestByVect(vectortest);
+                console.log(bulk2);
                 if (bulk2 != "") {
                     console.log(bulk2);
-                    sendRequestBulk(bulkRequest(vector2, 1), 1);
+                    sendRequestBulk(bulkRequestByVect(vectortest), 1);
                 } else {
-                    addSteps([]);
+                   // addSteps([]);
                 }
             } else if (type == 2) {
                 var inte3 = objSearchMatrix.docsComp;
@@ -965,11 +1059,9 @@ function backClick(){
             break;
         }
     }
-    console.log("######2"+arrayVect[0]);
-
+    
     backQst();
-    console.log("######3",arrayVect);
-    console.log("######4"+arrayVect[0]);
+    
 
     startButton(0);
 
@@ -986,7 +1078,8 @@ function backClick(){
         stopedButton(1);
     }
 
-    console.log(arrayVect);
+    endFunctionSendAdv();
+
     getQuestions(qstss[0],qstss[1],qstss[2],0);
 }
 
@@ -1016,7 +1109,7 @@ function backQst(){
 
 function addDocs(result,type){
     if(result.length==0){
-        
+        document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0].innerHTML="";
     }else{
         if(type==0){
             $(".simulator .docs-qr div.ow-pl").eq(0).addClass("expanded");
