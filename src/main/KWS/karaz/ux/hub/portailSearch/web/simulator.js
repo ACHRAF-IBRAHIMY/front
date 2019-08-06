@@ -630,7 +630,6 @@ function nextClick(qr,iter){
                         }
                     };
 
-                    alert(typeAutG+" "+typeAutt+" "+typeActt);
                     
                 }
 
