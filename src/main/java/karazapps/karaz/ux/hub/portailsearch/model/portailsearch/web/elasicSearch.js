@@ -340,7 +340,7 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
         }
     }else if(typePage==2){
         //$("."+cls+" .full-search-list").hide();
-        RestSearchFaq(prefix,0,2,0,null,cls);
+        RestSearchFaq(prefix,0,2,0,null,cls,"USER");
     }else if(typePage==7){
         $("."+cls+" .full-search-list").hide();
         RestSearchVideo(prefix,from,4,null,3,null,prev,cls);
@@ -358,7 +358,7 @@ function generateRequestFaqSearch(prefix,type,from,size,visi){
         if(prefix.trim()!=""){
             var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}},{\"match_phrase\": {\"visibility\": true}]}}}\n";
         }else{
-            var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }},{\"match\":{ \"visibility\":true }}]}}}\n";    
+            var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }},{\"match\":{ \"visibility\":\""+visi+"\" }}]}}}\n";    
         }
     }else{
         if(prefix.trim()!=""){
@@ -1228,7 +1228,7 @@ var NQFrefCAtegorie = ["Tous les référentiels économiques","Tous les référe
 var faqPages = [1,1,1,1,1,1];
 var faqGlobalPages = [1,1,1,1,1,1];
 var totalFaqPages = [0,0,0,0,0,0];
-var typesList = ["E-SIGN","GENERAL","DOCUMENT","Platforme","ARCHITECTE","ADMINISTRATION"];
+var typesList = ["E-SIGN","GENERAL","DOCUMENT","PLATEFORME","ARCHITECTE","ADMINISTRATION"];
 
 function intializeFaqPages(){
     faqPages = [1,1,1,1,1,1];
@@ -1237,7 +1237,7 @@ function intializeFaqPages(){
 }
 
 
-function generatePaginationFaqPage(index,prefix,typeUse,cls){
+function generatePaginationFaqPage(index,prefix,typeUse,cls,typee){
     if(typeUse==-1){
         $("."+cls+" .faq-fieldset-det .pagination-new-style").html("");
         var p = $("."+cls+" .faq-fieldset-det .pagination-new-style");
@@ -1259,7 +1259,7 @@ function generatePaginationFaqPage(index,prefix,typeUse,cls){
                 if(faqPages[index]%3==0){
                     faqGlobalPages[index]--;    
                 }
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);
             } 
             event.preventDefault();
         });
@@ -1291,11 +1291,11 @@ function generatePaginationFaqPage(index,prefix,typeUse,cls){
                     RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
                     */
                     faqPages[index]=Number(this.innerHTML);
-                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);            
+                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);            
            
                 }else{
                     faqPages[index]= 1;
-                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);
+                    RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);
                 }
                 event.preventDefault();
             });
@@ -1320,7 +1320,7 @@ function generatePaginationFaqPage(index,prefix,typeUse,cls){
             a.addEventListener("click",function(event){
                 event.preventDefault();
                 faqPages[index]=Number(this.innerHTML);
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);            
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);            
             });
             if(typeUse==-1){
                 p.append(a);
@@ -1338,7 +1338,7 @@ function generatePaginationFaqPage(index,prefix,typeUse,cls){
                 if(faqPages[index]%3==1){
                     faqGlobalPages[index]++    
                 }
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls);
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);
             }
             event.preventDefault();
         });        
@@ -1514,7 +1514,7 @@ function getQsFaq(id,type,cls){
 
             }else if(type==1){
                 createDivQuestionFaq(result);
-                RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1,cls);
+                RestSearchFaq("",0,2,typesList.indexOf(result._source.type)+1,-1,cls,"USER");
                 //traitement youssef
             } 
         },
@@ -1890,7 +1890,7 @@ function RestSearchFaqDet(prefix,page,size,type){
 }
 
 
-function RestSearchFaq(prefix,page,size,type,typeUse,cls){
+function RestSearchFaq(prefix,page,size,type,typeUse,cls,typee){
     var str ="";
     if(cls==undefined){
         cls = "ow-view";
@@ -1898,24 +1898,24 @@ function RestSearchFaq(prefix,page,size,type,typeUse,cls){
     $("."+cls+" .faq-vbox .no-response-find").hide();
     if(type==0){
         $("."+cls+" .faq-fieldset").hide();
-        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size,type); 
-        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size,type); 
-        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size,type); 
-        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size,type); 
-        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size,type); 
-        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,type);     
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size,typee); 
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size,typee); 
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size,typee); 
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size,typee); 
+        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size,typee); 
+        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,typee);     
     }else if(type==1){
-        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size,typee); 
     }else if(type==2){
-        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"GENERAL",page,size,typee); 
     }else if(type==3){
-        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size,type);
+        str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size,typee);
     }else if(type==4){
-        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size,type);               
+        str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size,typee);               
     }else if(type==5){
-        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size,typee); 
     }else if(type==6){
-        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,type); 
+        str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,typee); 
     }
 
     console.log(str);
@@ -1948,7 +1948,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse,cls){
             $("."+cls+" .faq-fieldset-det .searchGif2").hide();        
             if(type!=0 && typeUse!=-1){
                 fullCreateFaqByType(result.responses[0].hits.hits,type,undefined,cls);
-                generatePaginationFaqPage((type-1),prefix,0,cls);
+                generatePaginationFaqPage((type-1),prefix,0,cls,typee);
             }else if(type==0 && typeUse!=-1){
                 var k = 0;
                 console.log("ici");
@@ -1963,7 +1963,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse,cls){
                         k++;
                     }
                     totalFaqPages[i]=result.responses[i].hits.total.value;
-                    generatePaginationFaqPage(i,prefix,0,cls);
+                    generatePaginationFaqPage(i,prefix,0,cls,typee);
                 }
 
                 if(k==0){
@@ -1975,7 +1975,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse,cls){
                 
                 fullCreateFaqByType(result.responses[0].hits.hits,1,typeUse,cls);
                 totalFaqPages[type-1]=result.responses[0].hits.total.value;
-                generatePaginationFaqPage((type-1),prefix,-1,cls);
+                generatePaginationFaqPage((type-1),prefix,-1,cls,typee);
                 console.log(result.responses[0].hits.total.value);
             }
         },

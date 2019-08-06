@@ -35,7 +35,7 @@
 
 
                 PCD_headerfieldset_color(".NFQ-quest-title");
-	            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+	              $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
                 PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
                 PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
                
@@ -50,7 +50,7 @@
                 PCD_headerfieldset_color(".pcd-ha-color");
 
                 $(".NQF-vue-ref").hide();
-                RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],3,true);
+                RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],3,"USER");
 
                 // hide saisie info question
                 $(".NQF-edit-modif").hide()</script>

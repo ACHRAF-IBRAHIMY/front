@@ -1101,7 +1101,7 @@ function getTreeFromEs(type){
                 tree = result._source.treeSimp;
                 tree2 = result._source.treeComp;
                 firstEsTreeCall();
-                restGetAllLocalite(0,100,0);
+                //restGetAllLocalite(0,100,0);
            }
         },
         error: function (error) {
@@ -2017,10 +2017,63 @@ function deletedCol(tree,array,newObj){
     return str;
 }
 
+function restAutoComplete3(inp,req,index,field){
+
+    var obj = {"size":5,"query": 
+    {
+    "bool":{
+        "must":[{
+            "query_string": {
+                "fields":["content.intituleFr"],
+                "query":"*"+req+"*",
+                "minimum_should_match": "100%"                   
+            }
+        },{
+                "term": {
+                    "content.categorie.keyword": {
+                        "value": "Intitulé Activité"
+                    }
+                }
+            
+        }]
+    }
+  }
+};
+    
+    console.log(JSON.stringify(obj));
+
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH+"/"+index+"/_search",
+        contentType: "application/json",
+        datatype:"application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+             xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            var arr = [];
+            var arrObj = [];
+            for(var i=0;i<result.hits.hits.length;i++){
+                arr.push(result.hits.hits[i]._source);
+            };
+
+            for(var i=0;i<result.hits.hits.length;i++){
+                arrObj.push(result.hits.hits[i]._id);
+            };
+
+            createListeResAc(inp,arr,arrObj,req,2);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });    
+}
+
+
   /* auto complete */
   function autoCompleteSim(inp,index,field,type){
-      if(type==0){
-          
+      if(type==0){      
           inp.addEventListener("input",function(){
               var val = this.value;
               var arr = searching(val,index);
@@ -2052,6 +2105,41 @@ function deletedCol(tree,array,newObj){
                   }
               }
           },false);
+      }else if(type==5){
+        
+
+        inp.addEventListener("input",function(){
+            var val = this.value;
+            restAutoComplete3(inp,val,"activite_economique","intituleFr");
+        });
+
+
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById("autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+    
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+
       }else{
               inp.addEventListener("input",function(){
                   var req = inp.value;
@@ -2085,27 +2173,65 @@ function deletedCol(tree,array,newObj){
                   }
               },false);
           }
-          
-  /*
-          inp.addEventListener("keydown", function(e) {
-              var x = document.getElementById("autocomplete-list");
-              if (x) x = x.getElementsByTagName("div");
-      
-              if (e.keyCode == 40) {
-                  currentFocus++;
-                  addActive(x);
-              } else if (e.keyCode == 38) { //up
-                  currentFocus--;
-                  addActive(x);
-              } else if (e.keyCode == 13) {
-                  e.preventDefault();
-                  if (currentFocus > -1) {
-                      if (x) x[currentFocus].click();
-                  }
-              }
-          },false);*/
       }
   }
+
+
+  function createListeResAc(inp,arr,arrObj,val,type){
+    closeAllListsSim(1);
+    a = document.createElement("DIV");
+    a.setAttribute("id", "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    a.setAttribute("style","margin-top: auto;top:auto;position:absolute;width:46%;left: 12px;")
+    /*append the DIV element as a child of the autocomplete container:*/
+    inp.parentNode.appendChild(a);
+    
+    /*for each item in the array...*/
+    for (i = 0; i < 5; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        /*create a DIV element for each matching element:*/
+        var b = document.createElement("DIV");
+        /*make the matching letters bold:*/
+        var str = arr[i].content.intituleFr;
+
+        b.setAttribute("title",str);
+        
+        if(val==""){
+            b.innerHTML=str.toUpperCase();
+        }else{
+            b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
+        }
+        
+     
+        /*insert a input field that will hold the current array item's value:*/
+        var input = document.createElement("input");
+        input.setAttribute("type","hidden");
+        input.setAttribute("value",arr[i].content.intituleFr);
+        b.appendChild(input);
+        b.setAttribute("idd",arrObj[i]);
+        b.setAttribute("typeAct",arr[i].parents.TypeActivite);
+        b.setAttribute("typeAut",arr[i].parents.TypeAutorisation);
+        b.setAttribute("natureAct",arr[i].parents.NatureActivite);
+
+
+        /*execute a function when someone clicks on the item value (DIV element):*/
+    
+        b.addEventListener("click", function(e) {
+            inp.value = this.getElementsByTagName("input")[0].value;
+            inp.setAttribute("idd",this.getAttribute("idd"));
+            inp.setAttribute("typeAct",this.getAttribute("typeAct"));
+            inp.setAttribute("typeAut",this.getAttribute("typeAut"));
+            inp.setAttribute("natureAct",this.getAttribute("natureAct"));
+            inp.setAttribute("disabled","disabled");
+            inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
+            closeAllListsSim(1);
+        });
+        a.appendChild(b);
+    }
+
+    
+}
+
 function restAutoComplete2(inp,req,index,field){
     
     var obj = {"size":5,"query": 

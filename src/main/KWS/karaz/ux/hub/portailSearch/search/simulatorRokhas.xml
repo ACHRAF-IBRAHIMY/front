@@ -78,6 +78,11 @@
               </html>
             </vbox>
             <vbox className="docs-qr">
+            <fieldSet header="DONNÉES AUTORISATION" className="info-container-div">
+                <html>
+                  <div class="info-container" />
+                </html>
+             </fieldSet>   
               <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div">
                 <html>
                   <div class="docs-container" />

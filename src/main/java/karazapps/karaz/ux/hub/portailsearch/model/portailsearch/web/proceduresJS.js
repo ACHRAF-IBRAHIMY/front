@@ -294,6 +294,11 @@ function NQF_edit(type,clas) {
             let ID = $("."+clas+" .NQF-id").val();
             let visibility = root.visibility;
 
+            if(visibility.trim()==""){
+                visibility = "ADMIN";
+            }
+            
+
 			$("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
 			$("."+clas+" .NQF-prev-resp").html(resp);
             
@@ -912,7 +917,7 @@ function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee) {
 
 	function RestSearchFaqWithIntilize(var1,var2,var3,var4,var5){
         intializeFaqPages();
-        RestSearchFaq(var1,var2,var3,var4,var5);
+        RestSearchFaq(var1,var2,var3,var4,var5,undefined,undefined);
     }
 
 
