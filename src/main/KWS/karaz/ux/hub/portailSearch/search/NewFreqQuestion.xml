@@ -107,7 +107,9 @@
                       <option value="PLATEFORME" label="Plateforme" />
                       <option value="ADMINISTRATION" label="Administration" />
                     </field>
-                    <field label="Visibilité" widget="boolean" xpath="visibility"></field>
+                    <field label="Visibilité" widget="select" labelAlign="float" searchQN="frontal/uxhub/portailSearch/visibility" xpath="visibility" >
+                      
+                    </field>
                     <vbox />
                   </vbox>
                 </vbox>

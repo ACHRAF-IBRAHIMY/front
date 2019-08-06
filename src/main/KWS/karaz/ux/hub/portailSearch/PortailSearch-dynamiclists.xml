@@ -16,4 +16,9 @@
    	<option>Without_tag</option>
    	<option>tag 1</option>
   </dynamiclist>
+    <dynamiclist name="frontal/uxhub/portailSearch/visibility" description="Visibilité de QR de Module FAQ" >
+        <option>ADMIN</option>
+   		<option>USER</option>
+   		<option>SUPPORT</option>
+     </dynamiclist>
 </tns:dynamiclists>

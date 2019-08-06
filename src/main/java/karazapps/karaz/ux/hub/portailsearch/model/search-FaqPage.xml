@@ -73,7 +73,7 @@
                 RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
                 RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)
               */
-                RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],3,true);
+                RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],3,"USER");
 
                 // hide saisie info question
                 $(".NQF-edit-modif").hide()

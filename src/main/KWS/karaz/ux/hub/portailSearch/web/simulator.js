@@ -248,8 +248,9 @@ function createQuestion(type,obj,hide,clmm){
         });
         response.setAttribute("style","vertical-align: top;margin-top:6px;");
         var index = localiteType.indexOf(content);
-        autoCompleteSim(response,index,null,5);
         q2.appendChild(response);
+        
+
         if(localiteLib.length==0){
             q2.innerHTML += "<img src=\"img/loadgif3.gif\" style=\"width:50px;vertical-align: top;\" class=\"loadGif\"></img>";
         }
@@ -261,6 +262,8 @@ function createQuestion(type,obj,hide,clmm){
             this.parentElement.getElementsByTagName("input")[0].removeAttribute("disabled");    
         });
         q2.appendChild(icon);
+        autoCompleteSim(q2.getElementsByClassName("rep-type-5")[0],index,null,5);
+
     }
     
     q.appendChild(q1);
@@ -505,6 +508,10 @@ function allNextClick(){
         } 
 }
 
+var autoEconom = ["Simple Déclaration","Établissement classé","Occupation Domaine Public",]
+var autoUrba = [["Projet de construction d'institution à caractère industriel","Projet de construction à usage mixte","Equipements commerciaux","Projet de construction d'équipement à usage commercial","Projet de construction d'équipement à usage public"],["Modifications de constructions existantes"],["Projet de morcellement"],["Projet de construction à usage d'habitation"],["Projet de lotissement"]];
+var autoodp = ["Activité Normale","Télécom","Travaux Publics","Affichage Publicitaire","Stationnement Réservé"]
+
 function nextClick(qr,iter){
         console.log(qr);
         var type = $(qr.querySelector(".simulator-qr .rep-pred"));
@@ -594,42 +601,118 @@ function nextClick(qr,iter){
             case 5:
                 var inputAut = document.querySelector("input.rep-type-5");
                 var val = inputAut.value;
+                var typeAutG= null;
                 var typeAct= inputAut.getAttribute("typeAct");
                 var typeAut= inputAut.getAttribute("typeAut");
+                var natureAct = inputAut.getAttribute("natureAct");
                 var typeAutt = null;
                 var typeActt = null;
 
                 if(typeAut!="" && typeAct!=""){
-                    
-                    if(autoUrba.indexOf(typeAut)!=-1){
-                        typeAutt = 1;
-                        typeActt = autoUrba.indexOf(typeAct);
-                    };
-                    
+
                     if(autoEconom.indexOf(typeAut)!=-1){
-                        typeAutt = 2;
-                        typeActt = autoEconom.indexOf(typeAut);
+                        typeAutG = 2;
+                        typeAutt = autoEconom.indexOf(typeAut);
+                        console.log("typeAutt",typeAutt);
+                        if(typeAutt==2){
+                            typeAutt = typeAutt+autoodp.indexOf(typeAct);
+                        }
                     };
-            
+
+                    if(typeAut=="Autorisations urbanisme"){ 
+                        typeAutG = 1;
+                        for(var i=0;i<autoUrba.length;i++){
+                            if(autoUrba[i].indexOf(natureAct)!=-1){
+                                typeAutt = 0;
+                                typeActt = i;
+                                break;
+                            }
+                        }
+                    };
+
+                    alert(typeAutG+" "+typeAutt+" "+typeActt);
                     
                 }
 
                 popArrayVect();
-                addToArrayVect(arrayVect[0][arrayVect [0].length - 1],typeAutt,typeAutt,"NR");  
+                addToArrayVect(arrayVect[0][arrayVect [0].length - 1],typeAutG,typeAutG,"NR");  
                 startButton(1);
                 var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length),arrayVect[1].slice(0,arrayVect [1].length),arrayVect[2].slice(0,arrayVect [2].length)]); 
                 var treeLocal = eval("tree"+str);
-                traitementResponse(treeLocal,typeAutt-1,0,"NR",false,true);
-                addToArrayVect(arrayVect[0][arrayVect [0].length - 1],typeActt+1,typeActt+1,"NR");  
+                traitementResponse(treeLocal,typeAutG-1,0,"NR",false,true);
+                addToArrayVect(arrayVect[0][arrayVect [0].length - 1],typeAutt+1,typeAutt+1,"NR");  
+                console.log("array1 :"+arrayVect);
                 startButton(1);
                 var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length),arrayVect[1].slice(0,arrayVect [1].length),arrayVect[2].slice(0,arrayVect [2].length)]); 
                 var treeLocal = eval("tree"+str);
-                traitementResponse(treeLocal,typeActt,-1,"NR",true,false);
+
+               if(typeActt!=null){
+                    traitementResponse(treeLocal,typeAutt,-1,"NR",false,true);
+                    addToArrayVect(arrayVect[0][arrayVect [0].length - 1],typeActt+1,typeActt+1,"NR");  
+                    console.log("array1 :"+arrayVect);
+                    startButton(1);
+                    var str = getTreeHier(tree,[arrayVect[0].slice(0,arrayVect [0].length),arrayVect[1].slice(0,arrayVect [1].length),arrayVect[2].slice(0,arrayVect [2].length)]); 
+                    var treeLocal = eval("tree"+str);
+                    traitementResponse(treeLocal,typeActt,-1,"NR",true,false);
+               }else{
+                    traitementResponse(treeLocal,typeAutt,-1,"NR",true,false);
+               }
+
+
                 break;    
         }
 } 
 
+function infoAutorisationSim(){
+    var bulk = createBulkRequestFromArrayVect();
+    console.log(bulk);
+    sendBulkRequestFromArrayVect(bulk);
 
+};
+
+function createBulkRequestFromArrayVect(){
+    var request = "";
+    for(var i=0;i<arrayVect[0].length;i++){
+        request += "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n";
+        request += "{ \"query\": { \"match\": { \"id\":\""+arrayVect[0][i]+"\"}}}\n";
+    };
+    return request;
+};
+
+function sendBulkRequestFromArrayVect(bulk){
+    $.ajax({
+        type: "post",
+        //url: "http://localhost:9200/_msearch",
+        url: URL_SEARCH+"/_msearch",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data:bulk,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            $(".simulator .info-container").html("") ;
+            for(var i=0;i<result.responses.length;i++){
+                var qstio = result.responses[i].hits.hits[0]._source;
+                if( (qstio.response.type=="select" || qstio.response.type=="check") && Number(arrayVect[1][i]) != 0 ){
+                    var doc = document.createElement("div");
+                    doc.setAttribute("class","ctr");
+                    doc.innerHTML = "<div style=\"padding: 3px 15px;/* text-align:left; */font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 15px;color: #38A;\">"+qstio.response.content[Number(arrayVect[1][i])-1]+"</div>"
+                    $(".simulator .info-container").append(doc) ;
+                }else{
+                    continue;
+                }
+            };
+               
+            console.log(result);
+            
+        },
+        error: function (error) {
+            console.log(error.responseText);
+
+        }
+    })
+};
 
 function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
     console.log("%%%% ",treeLocal);
@@ -660,11 +743,13 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
             console.log(arrayVect);
             qstArray = [[],[],[]];
             if(dontShow!=true){
+                infoAutorisationSim();
                 getQuestions(qstss[0],qstss[1],qstss[2],0);    
             }
         }
     }else{
       console.log("end");
+      infoAutorisationSim();
       stopedButton(0);
     }
 
@@ -1079,6 +1164,7 @@ function backClick(){
     }
 
     endFunctionSendAdv();
+    infoAutorisationSim();
 
     getQuestions(qstss[0],qstss[1],qstss[2],0);
 }
