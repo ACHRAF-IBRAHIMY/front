@@ -786,13 +786,15 @@ function endFunctionSend(){
 function endFunctionSendAdv(){
     var list = [[],[],[],[]];
     var vector = [];
-    for(var i=0;i<arrayVect[0].length;i++){
+    for(var i=0;i<arrayVect[0].length+1;i++){
         list[0] = arrayVect[0].slice(0,i);
         list[1] = arrayVect[1].slice(0,i);
         list[2] = arrayVect[2].slice(0,i);
         list[3] = arrayVect[3].slice(0,i);
         var search = makeResponse(list);
         var objSearchMatrix = searchInMatrix2(matrix,search);
+        console.log(search);
+        console.log(objSearchMatrix);
         if(objSearchMatrix!=null){
             console.log("objSearchMatrix :"+JSON.stringify(objSearchMatrix));
             vector.push(objSearchMatrix);
@@ -802,6 +804,21 @@ function endFunctionSendAdv(){
     countDocAdv(1,vector);
     countDoc(1,objSearchMatrix);
 
+}
+
+function concatIfExist(vectorG,vector){
+    if(vector!=null){
+        for(var i=0;i<vector.length;i++){
+            if(vectorG.indexOf(vector[i])==-1){
+                vectorG.push(vector[i]);
+            }else{
+                continue;
+            }
+        }
+        return vectorG;
+    }else{
+        return vectorG;
+    }
 }
 
 function getTreeHier(treeGl,array) {
@@ -838,7 +855,7 @@ function makeResponse(array){
     return reps;
 }               
 
-var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[]];
+var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[],[]];
 
 function searchInMatrix(matrix,key){
      var index = matrix[0].indexOf(key);
@@ -866,7 +883,7 @@ function searchInMatrix2(matrix,listKey){
     }
     
     if(index!=-1){
-        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index]};
+        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index],docSort :matrix[5][index] };
      }else{
          console.log("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
          return null;
@@ -899,6 +916,15 @@ function bulkRequestByVect(vector) {
     var request = "";
     for(var i=0;i<vector.length;i++){
         request += "{ \"index\": \"simulator_index_steps\", \"type\": \"steps\" }\n";
+        request += "{ \"query\": { \"match\": { \"id\":"+vector[i]+"}}}\n";
+    }
+    return request;
+}
+
+function bulkRequestByVect2(vector) {
+    var request = "";
+    for(var i=0;i<vector.length;i++){
+        request += "{ \"index\": \"simulator_index_docs\", \"type\": \"docs\" }\n";
         request += "{ \"query\": { \"match\": { \"id\":"+vector[i]+"}}}\n";
     }
     return request;
@@ -950,7 +976,7 @@ function firstEsTreeCall(){
             var sizeQuestions = result.responses[0].hits.hits.length;
             var columns = result.responses[1].hits.hits;
             console.log("matrix length :" + columns.length);
-            matrix = [[],[],[],[],[]];
+            matrix = [[],[],[],[],[],[]];
             qsts =[];
             for(var i=0;i<result.responses[0].hits.hits.length;i++){
                 qsts.push(result.responses[0].hits.hits[i]._source.id.toString());
@@ -970,6 +996,7 @@ function firstEsTreeCall(){
                 matrix[2].push(columns[i]._source.steps);
                 matrix[3].push(columns[i]._source.docs_comp);
                 matrix[4].push(columns[i]._source.stepSort);
+                matrix[5].push(columns[i]._source.docSort);
 
                 console.log(completeArrayMatrix(ar1,ar2,sizeQuestions));
             }
@@ -1010,20 +1037,19 @@ function countDocAdv(type,objSearchMatrixArr){
             xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
-            var vectorGlo = completVec(result.count,[]);
+            var vectorGlo = [];
+            console.log(objSearchMatrixArr);
             for(var i=0;i<objSearchMatrixArr.length;i++){
-                var inte = objSearchMatrixArr[i].docs;
-                var vector = bin2vec(int2bin(inte));
-                vector = completVec(result.count, vector);
-                console.log(vector);
-                vectorGlo = sumAB(vectorGlo,vector);
+                var inte = objSearchMatrixArr[i].docSort;
+                console.log(inte);
+                vectorGlo = concatIfExist(vectorGlo,inte);
             };
             console.log(vectorGlo);
-            var bulk = bulkRequest(vectorGlo,0);
+            var bulk = bulkRequestByVect2(vectorGlo);
             console.log(bulk);
             if (bulk != "") {
                 console.log(bulk);
-                sendRequestBulk(bulkRequest(vectorGlo, 0), 0);
+                sendRequestBulk(bulk,0);
             } else {
                 addDocs([], 0);
             }
@@ -1084,15 +1110,17 @@ function countDoc(type,objSearchMatrix) {
             if (type == 0) {
                 var inte = objSearchMatrix.docs;
                 var vector = bin2vec(int2bin(inte));
+                var vectortest = objSearchMatrix.docSort;
                 vector = completVec(result.count, vector);
-                var bulk = bulkRequest(vector, 0);
+                var bulk = bulkRequestByVect2(vectortest);
+                
                 if (bulk != "") {
                     console.log(bulk);
-
-                    sendRequestBulk(bulkRequest(vector, 0), 0);
+                    sendRequestBulk(bulkRequestByVect2(vectortest), 0);
                 } else {
                     addDocs([], 0);
                 }
+
             } else if (type == 1) {
                 var inte2 = objSearchMatrix.steps;
                 var vector2 = bin2vec(int2bin(inte2));
@@ -1109,6 +1137,7 @@ function countDoc(type,objSearchMatrix) {
                 } else {
                    // addSteps([]);
                 }
+
             } else if (type == 2) {
                 var inte3 = objSearchMatrix.docsComp;
                 var vector3 = bin2vec(int2bin(inte3));

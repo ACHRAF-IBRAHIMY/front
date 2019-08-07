@@ -58,6 +58,7 @@
             <div style="height: 50px;" />
           </html>
           <vbox columns="60% 40%">
+          <vbox>
             <vbox className="hp-box simulator-qr">
               <html>
                 <div class="vpanel-title">
@@ -77,6 +78,11 @@
                 </div>
               </html>
             </vbox>
+                      <vbox>
+          </vbox>
+
+            </vbox>
+
             <vbox className="docs-qr">
             <fieldSet header="DONNÉES AUTORISATION" className="info-container-div">
                 <html>
