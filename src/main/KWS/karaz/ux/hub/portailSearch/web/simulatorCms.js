@@ -506,7 +506,6 @@ function updateNode(id){
     if(removeMtrixCLass == true){
         var clms = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]");
 
-        alert("hello");
 
         for(var i = 0; i < Object.keys(clms).length;i++){
             deleted.push(clms[Object.keys(clms)[i]]);
@@ -1117,7 +1116,6 @@ function getAllCms(type,callback,hiddenList,sortList){
     }else if(type==1){
         var url = "simulator_index_steps/steps/_search";
     }
-     
 
     $.ajax({
         type: "post",
@@ -1179,7 +1177,8 @@ function createAllCms(response,type,hiddenList,sortList){
     }
 
     arrayOfdivTabs = transformDivTotab();
-    hiddenList = getIndexOfBin(completVec(response.length,hiddenList));
+    hiddenList = getIndexOfBin(completVec(42,hiddenList));
+    console.log(JSON.stringify(hiddenList));
 
     if(sortList != undefined){
         for(var j=0;j<sortList.length;j++){
@@ -1189,6 +1188,7 @@ function createAllCms(response,type,hiddenList,sortList){
     }else{
         for(var j=0;j<hiddenList.length;j++){
             var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((hiddenList[j]+1).toString())];
+            console.log(index);
             addDocItemToDocAdded(index);
         }
     }
@@ -1330,7 +1330,6 @@ function createChildClasses(){
                     eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]["+this.getAttribute("index").toString()+"]");
                     
                     if(Object.keys(eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]")).length==0){
-                        alert("do it");
                         eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
                         eval("delete simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]");
                     }
@@ -1352,10 +1351,14 @@ function nextStepDocsIn(type,id){
     if(type==0){
         console.log(objectJsonMatrixColumns+" "+Object.keys(objectJsonMatrixColumns).length);
         if(Object.keys(objectJsonMatrixColumns).length==0){
+            
             objectJsonMatrixColumns = makeMatrixClass(id,ident);
             getAllCms(0,createAllCms,[]);
         }else{
+            
             objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id,ident)["docs_requis"];
+            objectJsonMatrixColumns["docSort"] = getListStepsAdded();
+            
             console.log("else :"+JSON.stringify(objectJsonMatrixColumns));
             getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
         }
@@ -1370,7 +1373,6 @@ function nextStepDocsIn(type,id){
         var sortedList = [];
         if(objectJsonMatrixColumns["steps"]!=undefined){
             list = bin2vec(int2bin(objectJsonMatrixColumns["steps"]));
-            alert(objectJsonMatrixColumns["stepSort"]);
             sortedList = objectJsonMatrixColumns["stepSort"];
         } 
         getAllCms(1,createAllCms,list,sortedList);        
@@ -1400,8 +1402,6 @@ function nextStepDocsIn(type,id){
 function makeMatrixClass(id,ident){
     var list = id.split("-");
     var obj = simple_chart_config.nodeStructure;    
-    getMatrixColumns(list,obj,ident);
-    getListDocsAdded();
     console.log(list);
     var reps = [];
     for(var i=0;i<list.length;i++){
@@ -1412,9 +1412,10 @@ function makeMatrixClass(id,ident){
         id:"0",
         list:getMatrixColumns(list,obj,ident),
         list_rep:[].concat(reps,Number(ident)+1),
-        docs_requis:getListDocsAdded()
+        docs_requis:getListDocsAdded(),
+        docSort:getListStepsAdded()
     }
-
+    console.log(objectJson);
     console.log("ùùùùùùù",objectJson.list);
     return objectJson;
 
@@ -1451,8 +1452,14 @@ function readMatrixCms(id){
         },
         success: function (result) {
             objectJsonMatrixColumns = result._source;
-            objectJsonMatrixColumns["id"] = result._id;    
-            getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns.docs_requis)));
+            objectJsonMatrixColumns["id"] = result._id;
+            var list = [];
+            var sortedList = [];
+            if(objectJsonMatrixColumns["docs_requis"]!=undefined){
+                list = bin2vec(int2bin(objectJsonMatrixColumns["docs_requis"]));
+                sortedList = objectJsonMatrixColumns["docSort"];
+            }     
+            getAllCms(0,createAllCms,list,sortedList);
         },
         error: function (error) {
             console.log(error.responseText);
@@ -1537,10 +1544,11 @@ function getListDocsAdded(){
     var listChecked = $(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item");
     for(var i=0;i<listChecked.length;i++){
         var id = listChecked.eq(i).children("input").val();
+        console.log(id);
         vector[id-1] = 1;
     }
     console.log(vector.join('')+"**"+bin2int(vector.join('')));
-    return bin2int(vector.join(''));
+    return 555;
 }
 
 function getListStepsAdded(){
