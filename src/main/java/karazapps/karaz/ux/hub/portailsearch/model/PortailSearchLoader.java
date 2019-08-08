@@ -199,6 +199,7 @@ public class PortailSearchLoader {
 		try {	BackEndEJBContext.getLVLookUp().addLV( getFile("karazapps/karaz/ux/hub/portailsearch/model/resources/visibility.xml") );} catch (Exception e) {  e.printStackTrace(); }
 
 	try { BackEndEJBContext.getAPLookUp().addAP(  getFile("karazapps/karaz/ux/hub/portailsearch/model/affectationProfiles/GestionDashboardSearch-assignation.properties")  ); } catch (Exception e) { e.printStackTrace(); }
+	try { BackEndEJBContext.getAPLookUp().addAP(  getFile("karazapps/karaz/ux/hub/portailsearch/model/affectationProfiles/GestionDashboardSearchFaq-assignation.properties")  ); } catch (Exception e) { e.printStackTrace(); }
     	BackEndEJBContext.getSequenceService().createSeqGenIfNotExist("karazapps.karaz.ux.hub.portailsearch.model.PortailSearch", "DashboardSearch-{BI}/{Year}");
     	
 
