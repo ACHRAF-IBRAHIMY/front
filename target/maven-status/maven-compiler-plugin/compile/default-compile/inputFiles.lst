@@ -18,6 +18,7 @@ C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\p
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\backejbs\StartEventStub.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\PortailSearchXpaths.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\CertificatReceptionProjets\backejbs\CertificatReceptionProjetsBean.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\reporting\reportsimulateur\PersoReportsimulateurReport.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\AutorisationsConstructionPetitsProjets\backejbs\AutorisationsConstructionPetitsProjetsBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\oldallGlobalTAskSearch\backejbs\OldallGlobalTAskSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\PortailSearchBrowser.java
@@ -33,6 +34,7 @@ C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\p
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\publicCentralSearch\backejbs\PublicCentralSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\DashboardGenericAction.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\proceduresEconomique\backejbs\ProceduresEconomiqueBean.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\dashboardsearch\model\PrintReportSumilateurBeans.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\allGlobalModelSearch\backejbs\AllGlobalModelSearchBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\ObjectFactory.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\oldallObjectGlobalModelSearch\backejbs\OldallObjectGlobalModelSearchBean.java
@@ -69,5 +71,7 @@ C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\p
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\backejbs\GestionDashboardSearchProcessBeanLoader.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\allKarazuxresults\backejbs\AllKarazuxresultsBean.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\process\GestionDashboardSearch\backejbs\ScriptTask.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\reporting\reportsimulateur\ReportsimulateurReportInterceptor.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\model\PortailSearchJxDoi.java
+C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\reporting\reportsimulateur\ReportsimulateurReport.java
 C:\KStudio\eclipse\workspace\karaz_ux_hub\src\main\java\karazapps\karaz\ux\hub\portailsearch\search\opendataFrame\backejbs\OpendataFrameBean.java

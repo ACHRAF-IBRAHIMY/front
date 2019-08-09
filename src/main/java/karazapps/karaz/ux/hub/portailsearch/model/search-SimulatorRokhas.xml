@@ -7,6 +7,10 @@
       <idObject />
       <parentP />
     </query>
+    <krn />
+    <repport>
+     <gedId />
+    </repport>
     <collapsed>false</collapsed>
   </data>
   <view>
@@ -42,6 +46,8 @@
         <div style="height: 30px;" />
       </html>
       <vbox className="hp-small simulator">
+      <button label="print etat" actionName="karaz/ux/hub/dashboardsearch/PrintReportSumilateurBeans" postProcessing="openFile,repport.gedId,none">
+      </button>
         <vbox className="hp-box simulator-sub">
           <html>
             <div class="vpanel-title">

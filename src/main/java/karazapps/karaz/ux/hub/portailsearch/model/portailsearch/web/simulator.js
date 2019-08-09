@@ -108,7 +108,16 @@ function createQuestion(type,obj,hide,clmm){
 
     var q1 = document.createElement("div");
     q1.setAttribute("class","ques");
-    q1.innerHTML= obj.question;
+    if(obj.response.help != undefined){
+        if(obj.response.help.trim()!=""){
+            q1.innerHTML= obj.question+"<i class=\"fas fa-question-circle\" title=\""+obj.response.help+"\"></i>";
+        }else{
+            q1.innerHTML= obj.question;
+        }
+    }else{
+        q1.innerHTML= obj.question;
+    }
+    
     var q2 = document.createElement("div");
     q2.setAttribute("class","rep");
     
@@ -363,9 +372,9 @@ function getQuestions(qstts,type,clmm,iter){
             qstArray[0].push(result._source);
             qstArray[1].push(type[iter]);
             qstArray[2].push(clmm[iter]);
-            if(qstts.length-1==iter || qstts[iter+1]==-1 ){
-                console.log("***** End Qst Load *****");
-                addQuestion(qstArray);
+            if(qstts.length-1==iter || qstts[iter+1].toString()=="-1"){
+                
+                if(qstts[iter].toString()!="-1")addQuestion(qstArray);
             }else{
                 getQuestions(qstts,type,clmm,iter+1);
             }    
@@ -510,7 +519,7 @@ function allNextClick(){
 
 var autoEconom = ["Simple Déclaration","Établissement classé","Occupation Domaine Public",]
 var autoUrba = [["Projet de construction d'institution à caractère industriel","Projet de construction à usage mixte","Equipements commerciaux","Projet de construction d'équipement à usage commercial","Projet de construction d'équipement à usage public"],["Modifications de constructions existantes"],["Projet de morcellement"],["Projet de construction à usage d'habitation"],["Projet de lotissement"]];
-var autoodp = ["Activité Normale","Télécom","Travaux Publics","Affichage Publicitaire","Stationnement Réservé"]
+var autoodp = ["Télécom","Travaux Publics","Affichage Publicitaire","Stationnement Réservé","Activité Normale",]
 
 function nextClick(qr,iter){
         console.log(qr);
@@ -615,7 +624,13 @@ function nextClick(qr,iter){
                         typeAutt = autoEconom.indexOf(typeAut);
                         console.log("typeAutt",typeAutt);
                         if(typeAutt==2){
-                            typeAutt = typeAutt+autoodp.indexOf(typeAct);
+                            if(autoodp.indexOf(typeAct)==0 || autoodp.indexOf(typeAct)==1){
+                                typeAutt = 2;
+                            }else if(autoodp.indexOf(typeAct)==2){
+                                typeAutt = 3;
+                            }else if(autoodp.indexOf(typeAct)==3 || autoodp.indexOf(typeAct)==4 ){
+                                typeAutt = 4;
+                            }
                         }
                     };
 
@@ -719,7 +734,7 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
 
     
 
-    if(existBody2(treeLocal)){
+    if(existBody2(treeLocal,val) ){
       if(treeLocal.length == 1){
         var id = Object.keys(treeLocal[0])[0];
         console.log(arrayVect [0].length - qstArray[0].length + iter);
@@ -758,10 +773,22 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
     }
 }
 
-function existBody2(treeGl){
-    if(Object.keys(treeGl).length==0 || treeGl.question_id=="-1"){
+function existBody2(treeGl,val){
+    
+    console.log("treeeGl"+JSON.stringify(treeGl));
+    if(Object.keys(treeGl).length==0){
         return false;
     }else{
+        if(Object.keys(treeGl).length==1){
+            if(Object.keys(treeGl[0])[0].toString()=="-1" ){
+                return false;
+            }
+        }else{
+            if(Object.keys(treeGl[val])[0].toString()=="-1" ){
+                return false;
+            }
+        }
+
         return true;
     }
 }
@@ -1296,7 +1323,6 @@ function stopedButton(type){
        $(".simulator .simulator-qr .next-button .back-rq").addClass("stopped");
     }
 }
-
 
 function startButton(type){
     if(type==0){

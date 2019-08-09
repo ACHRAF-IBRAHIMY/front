@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report name="autorisation" label="Imprimer Rapport Alerte" printAction="cug/cri/urbanisme/autorisation/reporting/reportAlerte/ReportAlerteReport">
+                                                              
+	 
+		 
+		<data>
+			<print> 
+				<qrc />
+				<header />
+				<footer />
+				<pdf />  
+				<signature />
+				<demandeur />
+				<travaux />
+				<terrain />
+			</print>
+		</data>
+		<view>
+		<screen labelWidth="150" width="500" height="300">
+			<HBox>
+				<FieldSet label="Mise en Forme" ratio="2">
+					<field xpath="print.qrc" label="Imprimer le QR Code" widget="boolean" />
+					<field xpath="print.header" label="Ajouter l'entête" widget="boolean" />
+					<field xpath="print.footer" label="Ajouter le Pied de page" widget="boolean" />
+					<field xpath="print.signature" label="Ajouter la Signature" widget="boolean" />
+					<field xpath="print.pdf" label="Format" widget="booleanToggler" trueLabel="PDF" falseLabel="Excel" />
+				</FieldSet>
+			</HBox>
+		</screen>
+		<buttonBar>
+		</buttonBar>
+	</view>
+		
+	</report>

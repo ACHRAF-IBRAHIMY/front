@@ -297,7 +297,7 @@
     padding: 5px;
 }
 
-.simulator-cms .side-bar .body  .cms-form .class-responses,.simulator-cms .side-bar .body  .cms-form .class-responses-q ,.simulator-cms .side-bar .body  .cms-form .class-placeholder-q{
+.simulator-cms .side-bar .body  .cms-form .class-help-q,.simulator-cms .side-bar .body  .cms-form .class-responses,.simulator-cms .side-bar .body  .cms-form .class-responses-q ,.simulator-cms .side-bar .body  .cms-form .class-placeholder-q{
     padding: 6px;
     border: 1px solid #eee;
 }
