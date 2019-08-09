@@ -83,9 +83,7 @@ context.formRender.notifyObservers("query.tos");
 					</fieldset>
 				</vbox>
 
-
 			</vbox>
-
 		</screen>
 
 	</view>
