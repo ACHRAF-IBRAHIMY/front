@@ -524,6 +524,7 @@ function removeNode(id){
     var list = id.split("-");
     var pos = list.pop();
     var str  = getParentPath(list);
+    simple_chart_config.nodeStructure = removeRed();
     console.log(getParentPath(id.split("-")));
     var treeObj = eval("simple_chart_config.nodeStructure"+getParentPath(id.split("-")));
     getIdDeletedColumns(treeObj);
@@ -533,6 +534,7 @@ function removeNode(id){
         eval("simple_chart_config.nodeStructure.children=[]");
     }
     setIdTree([],simple_chart_config.nodeStructure.children);
+    reduitAll();
     refrechTreant();
 }
 
@@ -581,6 +583,12 @@ function showQuestion(results){
         $(".simulator-cms .side-bar .body .div-2 .cms-form .class-responses-q").hide();
     }else{
         $(".simulator-cms .side-bar .body .div-2 .cms-form  .class-responses-q").show();                
+    }
+
+    if(results._source.response.help != undefined){
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-help-q input").val(results._source.response.help);
+    }else{
+        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-help-q input").val("");
     }
 
     if(type=="input" || type=="input-conditional"){
@@ -685,6 +693,9 @@ function getQuestionDet(){
     var id = $(".cms-form .body-cms-form .class-question-q input.id").val();
     var question = $(".cms-form .body-cms-form .class-question-q .link-sim-cms textarea").val();
     var type = $(".cms-form .body-cms-form .class-type-question select option:selected").val();
+    var help = $(".simulator-cms .side-bar .body .div-2 .cms-form .class-help-q input").val();
+    
+    
     var content = [];
     
     content=$(".cms-form .body-cms-form .class-responses-q .responses-sim-cms div textarea").val().split("//");
@@ -701,7 +712,8 @@ function getQuestionDet(){
     obj["question"]=question;
     obj["response"]={
         "type":type,
-        "content":content
+        "content":content,
+        "help":help
     };
 
     if(type=="input" || type=="input-conditional"){
@@ -721,6 +733,9 @@ function showAddQuestionForm(){
     $(".cms-form-2 .body-cms-form .class-type-question select option").eq(0).prop("selected",true);
     $(".cms-form-2 .body-cms-form .class-responses-q .responses-sim-cms input").val("");
     $(".cms-form-2 .body-cms-form .class-placeholder-q .responses-sim-cms input").val("");
+    
+    $(".simulator-cms .side-bar .body .cms-form-2 .class-help-q input").val("");
+    
     $(".simulator-cms .side-bar .body .div-3 .cms-form-2  .class-responses-q").show();                
     $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-placeholder-q").hide();                
     $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-location-q").hide();
@@ -733,6 +748,7 @@ function addQuestionForm(){
     var obj = {};
     var question = $(".cms-form-2 .body-cms-form .class-question-q .link-sim-cms textarea").val();
     var type = $(".cms-form-2 .body-cms-form .class-type-question select option:selected").val();
+    var help = $(".simulator-cms .side-bar .body .cms-form-2 .class-help-q input").val();
     var content = [];
     
     if(type != "input" && type != "location" ){
@@ -753,7 +769,8 @@ function addQuestionForm(){
     obj["question"]=question;
     obj["response"]={
         "type":type,
-        "content":content
+        "content":content,
+        "help":help
     };
 
     if(type=="input" || type=="input-conditional"){
@@ -1040,6 +1057,34 @@ function uploadTreeToES(){
         }
     }); 
 }
+
+function uploadTreeToESHS(){
+    var treeObject = {};
+    simple_chart_config.nodeStructure = removeRed();
+    treeObject["treeComp"]= simple_chart_config.nodeStructure;
+    treeObject["treeSimp"]= convertTreeComp2SimpleTree(simple_chart_config.nodeStructure);
+    var dateD = new Date();
+    var date = dateD.getFullYear().toString()+(dateD.getMonth()+1).toString()+dateD.getDate().toString()+dateD.getHours().toString()+dateD.getMinutes().toString()+dateD.getSeconds().toString()
+
+    $.ajax({
+        type: "post",
+        //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+        url: URL_SEARCH+"/simulator_index_tree_hs/tree/"+date,
+        datatype: "application/json",
+        data:JSON.stringify(treeObject),
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        },
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    }); 
+}
+
 
 function createBulkRequestMatrix(){
     var str = "";

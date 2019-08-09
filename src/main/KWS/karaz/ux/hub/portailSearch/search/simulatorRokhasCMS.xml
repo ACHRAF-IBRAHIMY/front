@@ -133,12 +133,14 @@
 
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button.save").click(function(){
                 uploadTreeToES();
+                uploadTreeToESHS();
             });
 
             $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button.reset").click(function(){
                 if(confirm("Veuillez vous réinitialiser ?")){
                     
                     getTreeFromEs(0);
+                    
                 }
                     
             });

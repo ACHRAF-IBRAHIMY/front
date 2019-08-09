@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+#macro( xt $str )
+    <span>$str.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#39;")</span>
+#end
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Rapport des Alertes</title>
+<style type="text/css">
+h1
+{
+  font-size: 28px;
+  font-family:"Comic Sans MS", cursive, sans-serif;
+  color: #DF2348;
+  padding:10px 0 0 0;
+  font-weight:lighter;
+  text-align:center;
+  text-decoration: underline;
+  display:block;  
+}
+
+.titreH1
+{
+  font-size: 23px;
+  font-family:"Comic Sans MS", cursive, sans-serif;
+  color: #457DBB;
+  padding:10px 0 0 0;
+  font-weight:lighter;
+  margin-left: 20.0pt;
+  text-decoration: underline;
+  display:block;  
+}
+
+.titreguichet
+{
+  font-family:"Candara", cursive, sans-serif;
+  color: #1C1C1C;
+  padding:10px 0 0 0;
+  text-decoration: underline;
+  margin-left: 20.0pt;
+  
+}
+
+h2 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #DF2348;
+    background-color: #FCFCFC;
+    font-family: 'Gabriela', serif;
+    font-size: 20px;
+    letter-spacing: .10em;
+    text-align: center;
+	text-shadow: 0px 0px 0px #767676;
+}
+
+h3 {
+	font-size: 100%;
+	color: black;
+	font-style: italic;
+	font-weight: bold;
+	text-align:center;
+}
+
+.arabicSequence {
+	font-family: 'Arial Unicode MS';
+	font-size: 14px;
+	text-align: right;
+	float: right;
+	margin: 0.0cm;
+	padding-right: 0px;
+	right: 0;
+	width: auto;
+	display: block;
+}
+
+.myTable {
+	background-color: #FFFFFE;
+	border-collapse: collapse;
+	margin-left:auto;
+    margin-right:auto;
+	-fs-table-paginate: paginate;
+}
+
+.myTable td,.myTable th {
+	padding: 5px;
+	border: 0.5px solid #437BBC;
+}
+
+.myTable th {
+	background-color: #ECF0F6;
+	color: black;
+	text-align: center;
+	color: #3C5F8D;
+}
+.myTable tr {
+	page-break-inside: avoid;
+}
+
+.myTable tr td {
+	border: 0.5px solid #437BBC;
+}
+.myTable td {
+	word-wrap: break-word;
+	white-space: normal;
+	overflow: hidden;
+	text-align: left;
+	padding-left: 0.25cm
+	font-size: 10px;
+}
+
+.tableHFill {
+	width: auto;
+	margin: 0.2cm;
+	border: 1px solid #333;
+}
+
+.tableHFill th {
+	text-align: center;
+	background-color: #ECECEC;
+}
+
+.tableHFill td {
+	text-align: center;
+	padding: 0.2cm;
+}
+
+.pieddepage {
+  height: 20px; 
+  margin-top;
+  color:#03224C;
+  font-family: Garamond, serif;
+}
+
+.fieldsets {
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;	
+    margin-left:15.0pt;
+    padding: 14px;
+	font-family:verdana;
+    position: relative;
+    border: 1px black blue dashed;
+	width:270px;
+}
+
+.conteneur{
+  text-align: center;
+}
+
+
+@page { 
+margin-top:17mm;margin-bottom:17mm;
+size:landscape; 
+@bottom-left{ content: "© CASAURBA"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
+@bottom-center { content: "Imprimé Le : $sdf.format($now)"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
+@bottom-right { content: "Page " counter(page) " / " counter(pages)  ; font-size:12px; font-family:Candara; color:#3C5F8D;}
+} 
+
+
+</style>
+</head>
+
+<body>
+<div>hello!</div>
+</body>
+</html>

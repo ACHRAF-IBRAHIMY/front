@@ -203,6 +203,13 @@ public class PortailSearchLoader {
     	BackEndEJBContext.getSequenceService().createSeqGenIfNotExist("karazapps.karaz.ux.hub.portailsearch.model.PortailSearch", "DashboardSearch-{BI}/{Year}");
     	
 
+    	try { 
+			BackEndEJBContext.getPRLookUp().addPRFromList( "karaz/ux/hub/portailsearch/reporting/reportsimulateur/ReportsimulateurReport", "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch" 
+			, getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/qrcodes.xml") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/reportsimulateur-template.xhtml") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/resource-entete-page.PNG") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/resource-pied-page.PNG")  );
+		} catch (Exception e) { 
+			System.out.println("Erreur lors de chargment prLookUp.addPRFromFolder(karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur , karaz/ux/hub/portailsearch/reporting/reportsimulateur/ReportsimulateurReport, karazapps.karaz.ux.hub.portailsearch.model.PortailSearch ");
+			e.printStackTrace();
+		}
 		
     	try { 
 			BackEndEJBContext.getMPLookUp().addMPFromFile("karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-parametrages-ini.xml", "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch"); 
