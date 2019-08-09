@@ -85,7 +85,6 @@ context.formRender.notifyObservers("query.tos");
 
 
 			</vbox>
-
 		</screen>
 
 	</view>
