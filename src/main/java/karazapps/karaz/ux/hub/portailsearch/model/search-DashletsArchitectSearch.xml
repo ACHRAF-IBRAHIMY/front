@@ -34,37 +34,7 @@ root.query.tos=userData.User.email;
 context.formRender.notifyObservers("query.tos");
 
 
-
-
 </script> 
-
-<script postLoad="true">
-$(".ind1").click(function(){
-	$(".graph-ind").hide();
-	$(".graph1").show();
-	$(".indicator-div-title").removeClass("active");
-	$(this).addClass("active");
-});
-
-$(".ind2").click(function(){
-	$(".graph-ind").hide();
-	$(".graph2").show();
-	$(".indicator-div-title").removeClass("active");
-	$(this).addClass("active");
-});
-
-$(".ind3").click(function(){
-	$(".graph-ind").hide();
-	$(".graph3").show();
-	$(".indicator-div-title").removeClass("active");
-	$(this).addClass("active");
-});
-
-	setTimeout(function(){
-		$(".graph2,.graph3").hide();
-	},2000);
-
-</script>
 			<vbox id="dashboardArchitect" columns="72% 28%">
 
 				<!-- <vbox id="blinkSearch" columns="20% auto" height="300px"> -->
@@ -76,7 +46,7 @@ $(".ind3").click(function(){
 								<vbox />
 								<vbox />
 								<html>
-									<div class="ow-thumbnail-action  fas fa-cogs" onclick="ApplicationManager.run('karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch', 'search', 'Toutes les tâches')" style="width: 100%;text-align: right;margin: 12px 0;padding-right: 18px;color: #999;">
+									<div class="ow-thumbnail-action  fas fa-cogs" onclick="ApplicationManager.run('karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch', 'search', 'Toutes les tâches')" style="width: 300px;margin-left: 49%;">
 										Toutes les tâches
 									</div>
 								</html>
@@ -95,94 +65,22 @@ $(".ind3").click(function(){
                          			</framedPanel>
 
 					<framedPanel label="Indicateurs de performance" collapsible="false">
-						<vbox>
-									<html className="dash-menu-graph">
-										<div class="indicator-div-title ind1 active">
-											<span><i class="fas fa-chart-area fat" /> Délai moyen d'autorisation</span>
-											<span style=""><i title="Représente le délai moyen (en jour) que je mets pour vallider mon avis à compter du jour de la tenue commission." class="fas fa-question-circle" /></span>
-										</div>	
-										<div class="indicator-div-title ind2">
-											<span><i class="fas fa-chart-bar fat" /> Evolution nombre dossiers</span>
-											<span style=""><i title="Représente l'évolution des délais d'émission des PV commission" class="fas fa-question-circle" /></span>
-										</div>
-										<div class="indicator-div-title ind3">
-											<span><i title="Représente l'évolution des délais d'émission des PV commission" class="fas fa-chart-pie fat" /> Taux itération dossiers</span>
-											<span style=""><i class="fas fa-question-circle" /></span>
-										</div>
-									</html>
-								</vbox>
-								<vbox className="graph1 graph-ind">
-									<inner-chart title="undefined"><json><![CDATA[{"olap":{"resourceQN":"cug/cri/urbanisme/autorisation/search/OlapAutorisationConstruction","modelQN":"cug/cri/urbanisme/autorisation/process/CreerAutorisationProcess","facts":{"fact":[{"_item":"indexString.s17","_as":"arrondissement ","_label":"Arrondissement "},{"_item":"indexString.s16","_as":"prefecture ","_label":"Prefecture "},{"_item":"AVG(indexDouble.d7)","_as":"longitude","_label":"Longitude"},{"_item":"AVG(indexDouble.d8)","_as":"latitude","_label":"Latitude","_initialRow":"0"},{"_item":"","_as":"","_label":"EMPTY","_initialRow":""}]},"drills":{"drillMapping":[{"source":"","level":"","target":"","_owsk_":0}]},"legends":{"mapping":[{"index":"","rangeMin":"","rangeMax":"","color":"","label":"","_owsk_":0}]},"title":"","description":"","export":{"save":{"configName":"","note":""}},"kpi":{"htmlTemplate":""},"group":{"groupby":{"index":["year","mois"]}},"order":{"orderBy":[{"index":"year","dir":"DESC","_owsk_":0},{"index":"mois","dir":"DESC","_owsk_":1}]},"_labelWidth":"200","_labelAlign":"left","_transContext":"/","_masterId":"","filter":[],"stat":[],"maxQuerySize":20,"legend":true,"itemHighlighting":true,"itemHiding":true,"firstRenderer":"line","selected":{"dimension":[{"_item":"indexString.s6","id":"architecte","_label":"Architecte","_as":"architecte","result":[{"value":"null","on":false},{"value":"","on":false},{"value":"Administrateur KARAZ ","on":false},{"value":"EL KORTBI YOUSSEF ","on":false},{"value":"ELBOUADANI YOUSSEF ","on":false},{"value":"Elmahdi KHACHAFI ","on":false},{"value":"Faycal","on":false},{"value":"Hicham","on":false},{"value":"KARIM IKRAMI BEN MOHAMED","on":true},{"value":"KARIM TADLAOUI BEN ALI","on":false},{"value":"mehdi.mr","on":false},{"value":"Mohamed FARAJI ","on":false},{"value":"NATI ADIL","on":false},{"value":"Oussama amraoui ","on":false},{"value":"Pétitionnaire ","on":false},{"value":"RACHID ROUCHDI","on":false},{"value":"RBAHI YASSINE","on":false},{"value":"RIDA  TAHRAOUI","on":false}],"_filterEnabled":true,"_checkAll":false},{"_item":"EXTRACT(MONTH FROM indexTime.d3)","id":"mois","_label":"Mois","_as":"mois","result":[{"value":"null","on":false},{"value":1,"on":true},{"value":2,"on":true},{"value":3,"on":true},{"value":4,"on":true},{"value":5,"on":true},{"value":6,"on":true},{"value":7,"on":true},{"value":8,"on":true},{"value":9,"on":true},{"value":10,"on":true},{"value":11,"on":true},{"value":12,"on":true}],"_filterEnabled":true}],"measure":[{"_item":"count(di.id)","id":"nbr","_label":"Nombre Autorisation","_as":"nbr","_aggregator":"sum"}]},"scatter":{"maxRadius":"100","minRadius":"10","radiusScale":"1"}},"dataFilter":"<data><query><modelName>karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction</modelName><toBeDeleted>false</toBeDeleted><entity></entity><reference></reference><statut></statut><type></type><nature></nature><categorie></categorie><guichet><dataObjectId></dataObjectId><description></description></guichet><dateDepot><min></min><max></max></dateDepot><dateCommission><min></min><max></max></dateCommission><geoCenterX></geoCenterX><geoCenterY></geoCenterY><geoPath></geoPath><geoShapeType></geoShapeType></query><mode>extra</mode><uid>{uid}</uid><userName>{userName}</userName><userEntity>{userEntity}</userEntity></data>"}]]></json><pdo><![CDATA[{"select":[{"_item":"indexString.s6","_as":"architecte"},{"_item":"EXTRACT(MONTH FROM indexTime.d3)","_as":"mois"},{"_item":"count(di.id)","_as":"nbr","_fact":true}],"roots":{"from":{"_as":"di","__text":"DataObject"},"join":[{"_as":"indexString","_outer":"left","__text":"di.indexString"},{"_as":"indexInteger","_outer":"left","__text":"di.indexInteger"},{"_as":"indexDouble","_outer":"left","__text":"di.indexDouble"},{"_as":"indexTime","_outer":"left","__text":"di.indexTime"}]},"clause":{"criter":[{"operand":"indexString.s1","operator":"like","value":"query.reference","_optional":"true","_indexType":"string"},{"operand":"di.modelName","operator":"=","value":"query.modelName","_optional":"true","_xcstt":"x"},{"operand":"di.toBeDeleted","operator":"=","value":"query.toBeDeleted","_optional":"true","_indexType":"boolean"},{"operand":"di.entity","operator":"like","value":"query.entity","_optional":"true","_xcstt":"x"},{"operand":"indexString.s2","operator":"=","value":"query.statut","_optional":"true","_indexType":"string"},{"operand":"indexString.s4","operator":"like","value":"query.type","_optional":"true","_indexType":"string"},{"operand":"indexString.s5","operator":"like","value":"query.categorie","_optional":"true","_indexType":"string"},{"operand":"indexString.s13","operator":"like","value":"query.nature","_optional":"true","_indexType":"string"},{"operand":"indexString.s12","operator":"like","value":"query.guichet.description","_optional":"true","_indexType":"string"},{"operand":"indexTime.d1","operator":">=","value":"query.dateDepot.min","_optional":"true","_indexType":"date"},{"operand":"indexTime.d1","operator":"<=","value":"query.dateDepot.max","_optional":"true","_indexType":"date"},{"operand":"indexTime.d2","operator":">=","value":"query.dateCommission.min","_optional":"true","_indexType":"date"},{"operand":"indexTime.d2","operator":"<=","value":"query.dateCommission.max","_optional":"true","_indexType":"date"},{"value":" architecte in (\"KARIM IKRAMI BEN MOHAMED\") ","_asSQL":true,"_filter":true,"_filterDimension":"architecte"},{"value":" mois in (\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\") ","_asSQL":true,"_filter":true,"_filterDimension":"mois"}]},"_persistenceUnit":"PESA","_targetClass":"ma.ribatis.karaz.server.persistance.DataObject","groupBy":[{"_item":"architecte"},{"_item":"mois"}],"having":[],"stat":[]}]]></pdo></inner-chart>
-								</vbox>
-								<vbox className="graph2 graph-ind">
-									<inner-chart title="undefined"><json><![CDATA[{"olap":{"resourceQN":"cug/cri/urbanisme/autorisation/search/OlapAutorisationConstruction","modelQN":"cug/cri/urbanisme/autorisation/process/CreerAutorisationProcess","facts":{"fact":[{"_item":"indexString.s17","_as":"arrondissement ","_label":"Arrondissement "},{"_item":"indexString.s16","_as":"prefecture ","_label":"Prefecture "},{"_item":"AVG(indexDouble.d7)","_as":"longitude","_label":"Longitude"},{"_item":"AVG(indexDouble.d8)","_as":"latitude","_label":"Latitude","_initialRow":"0"},{"_item":"","_as":"","_label":"EMPTY","_initialRow":""}]},"drills":{"drillMapping":[{"source":"","level":"","target":"","_owsk_":0}]},"legends":{"mapping":[{"index":"","rangeMin":"","rangeMax":"","color":"","label":"","_owsk_":0}]},"title":"","description":"","export":{"save":{"configName":"","note":""}},"kpi":{"htmlTemplate":""},"group":{"groupby":{"index":["year","mois"]}},"order":{"orderBy":[{"index":"year","dir":"DESC","_owsk_":0},{"index":"mois","dir":"DESC","_owsk_":1}]},"_labelWidth":"200","_labelAlign":"left","_transContext":"/","_masterId":"","filter":[],"stat":[],"maxQuerySize":20,"legend":true,"itemHighlighting":true,"itemHiding":true,"firstRenderer":"pie","selected":{"dimension":[{"_item":"indexString.s6","id":"architecte","_label":"Architecte","_as":"architecte","_display":"row","result":[{"value":"null","on":false},{"value":"","on":false},{"value":"Administrateur KARAZ ","on":false},{"value":"EL KORTBI YOUSSEF ","on":false},{"value":"ELBOUADANI YOUSSEF ","on":false},{"value":"Elmahdi KHACHAFI ","on":false},{"value":"Faycal","on":false},{"value":"Hicham","on":false},{"value":"KARIM IKRAMI BEN MOHAMED","on":true},{"value":"KARIM TADLAOUI BEN ALI","on":false},{"value":"mehdi.mr","on":false},{"value":"Mohamed FARAJI ","on":false},{"value":"NATI ADIL","on":false},{"value":"Oussama amraoui ","on":false},{"value":"Pétitionnaire ","on":false},{"value":"RACHID ROUCHDI","on":false},{"value":"RBAHI YASSINE","on":false},{"value":"RIDA  TAHRAOUI","on":false}],"_filterEnabled":true,"_checkAll":false},{"_item":"EXTRACT(MONTH FROM indexTime.d3)","id":"mois","_label":"Mois","_as":"mois","_display":"row","result":[{"value":"null","on":false},{"value":1,"on":true},{"value":2,"on":true},{"value":3,"on":true},{"value":4,"on":true},{"value":5,"on":true},{"value":6,"on":true},{"value":7,"on":true},{"value":8,"on":true},{"value":9,"on":true},{"value":10,"on":true},{"value":11,"on":true},{"value":12,"on":true}],"_filterEnabled":true}],"measure":[{"_item":"AVG(indexDouble.d9)","id":"soumission","_label":"Délai Soumission","_as":"soumission","_aggregator":"avg"}]},"scatter":{"maxRadius":"100","minRadius":"10","radiusScale":"1"}},"dataFilter":"<data><query><modelName>karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction</modelName><toBeDeleted>false</toBeDeleted><entity></entity><reference></reference><statut></statut><type></type><nature></nature><categorie></categorie><guichet><dataObjectId></dataObjectId><description></description></guichet><dateDepot><min></min><max></max></dateDepot><dateCommission><min></min><max></max></dateCommission><geoCenterX></geoCenterX><geoCenterY></geoCenterY><geoPath></geoPath><geoShapeType></geoShapeType></query><mode>extra</mode><uid>{uid}</uid><userName>{userName}</userName><userEntity>{userEntity}</userEntity></data>"}]]></json><pdo><![CDATA[{"select":[{"_item":"indexString.s6","_as":"architecte"},{"_item":"EXTRACT(MONTH FROM indexTime.d3)","_as":"mois"},{"_item":"AVG(indexDouble.d9)","_as":"soumission","_fact":true}],"roots":{"from":{"_as":"di","__text":"DataObject"},"join":[{"_as":"indexString","_outer":"left","__text":"di.indexString"},{"_as":"indexInteger","_outer":"left","__text":"di.indexInteger"},{"_as":"indexDouble","_outer":"left","__text":"di.indexDouble"},{"_as":"indexTime","_outer":"left","__text":"di.indexTime"}]},"clause":{"criter":[{"operand":"indexString.s1","operator":"like","value":"query.reference","_optional":"true","_indexType":"string"},{"operand":"di.modelName","operator":"=","value":"query.modelName","_optional":"true","_xcstt":"x"},{"operand":"di.toBeDeleted","operator":"=","value":"query.toBeDeleted","_optional":"true","_indexType":"boolean"},{"operand":"di.entity","operator":"like","value":"query.entity","_optional":"true","_xcstt":"x"},{"operand":"indexString.s2","operator":"=","value":"query.statut","_optional":"true","_indexType":"string"},{"operand":"indexString.s4","operator":"like","value":"query.type","_optional":"true","_indexType":"string"},{"operand":"indexString.s5","operator":"like","value":"query.categorie","_optional":"true","_indexType":"string"},{"operand":"indexString.s13","operator":"like","value":"query.nature","_optional":"true","_indexType":"string"},{"operand":"indexString.s12","operator":"like","value":"query.guichet.description","_optional":"true","_indexType":"string"},{"operand":"indexTime.d1","operator":">=","value":"query.dateDepot.min","_optional":"true","_indexType":"date"},{"operand":"indexTime.d1","operator":"<=","value":"query.dateDepot.max","_optional":"true","_indexType":"date"},{"operand":"indexTime.d2","operator":">=","value":"query.dateCommission.min","_optional":"true","_indexType":"date"},{"operand":"indexTime.d2","operator":"<=","value":"query.dateCommission.max","_optional":"true","_indexType":"date"},{"value":" architecte in (\"KARIM IKRAMI BEN MOHAMED\") ","_asSQL":true,"_filter":true,"_filterDimension":"architecte"},{"value":" mois in (\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\") ","_asSQL":true,"_filter":true,"_filterDimension":"mois"}]},"_persistenceUnit":"PESA","_targetClass":"ma.ribatis.karaz.server.persistance.DataObject","groupBy":[{"_item":"architecte"},{"_item":"mois"}],"having":[],"stat":[]}]]></pdo></inner-chart>
-								</vbox>
-								<vbox className="graph3 graph-ind">
-									<inner-chart title="undefined"><json><![CDATA[{"olap":{"resourceQN":"cug/cri/urbanisme/autorisation/search/OlapAutorisationConstruction","modelQN":"cug/cri/urbanisme/autorisation/process/CreerAutorisationProcess","facts":{"fact":[{"_item":"indexString.s17","_as":"arrondissement ","_label":"Arrondissement "},{"_item":"indexString.s16","_as":"prefecture ","_label":"Prefecture "},{"_item":"AVG(indexDouble.d7)","_as":"longitude","_label":"Longitude"},{"_item":"AVG(indexDouble.d8)","_as":"latitude","_label":"Latitude","_initialRow":"0"},{"_item":"","_as":"","_label":"EMPTY","_initialRow":""}]},"drills":{"drillMapping":[{"source":"","level":"","target":"","_owsk_":0}]},"legends":{"mapping":[{"index":"","rangeMin":"","rangeMax":"","color":"","label":"","_owsk_":0}]},"title":"","description":"","export":{"save":{"configName":"","note":""}},"kpi":{"htmlTemplate":""},"group":{"groupby":{"index":["year","mois"]}},"order":{"orderBy":[{"index":"year","dir":"DESC","_owsk_":0},{"index":"mois","dir":"DESC","_owsk_":1}]},"_labelWidth":"200","_labelAlign":"left","_transContext":"/","_masterId":"","filter":[],"stat":[],"maxQuerySize":20,"legend":true,"itemHighlighting":true,"itemHiding":true,"firstRenderer":"line","selected":{"dimension":[{"_item":"indexString.s6","id":"architecte","_label":"Architecte","_as":"architecte","result":[{"value":"null","on":false},{"value":"","on":false},{"value":"Administrateur KARAZ ","on":false},{"value":"EL KORTBI YOUSSEF ","on":false},{"value":"ELBOUADANI YOUSSEF ","on":false},{"value":"Elmahdi KHACHAFI ","on":false},{"value":"Faycal","on":false},{"value":"Hicham","on":false},{"value":"KARIM IKRAMI BEN MOHAMED","on":true},{"value":"KARIM TADLAOUI BEN ALI","on":false},{"value":"mehdi.mr","on":false},{"value":"Mohamed FARAJI ","on":false},{"value":"NATI ADIL","on":false},{"value":"Oussama amraoui ","on":false},{"value":"Pétitionnaire ","on":false},{"value":"RACHID ROUCHDI","on":false},{"value":"RBAHI YASSINE","on":false},{"value":"RIDA  TAHRAOUI","on":false}],"_filterEnabled":true,"_checkAll":false},{"_item":"EXTRACT(MONTH FROM indexTime.d3)","id":"mois","_label":"Mois","_as":"mois","result":[{"value":"null","on":false},{"value":1,"on":true},{"value":2,"on":true},{"value":3,"on":true},{"value":4,"on":true},{"value":5,"on":true},{"value":6,"on":true},{"value":7,"on":true},{"value":8,"on":true},{"value":9,"on":true},{"value":10,"on":true},{"value":11,"on":true},{"value":12,"on":true}],"_filterEnabled":true}],"measure":[{"_item":"count(di.id)","id":"nbr","_label":"Nombre Autorisation","_as":"nbr","_aggregator":"sum"}]},"scatter":{"maxRadius":"100","minRadius":"10","radiusScale":"1"}},"dataFilter":"<data><query><modelName>karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction</modelName><toBeDeleted>false</toBeDeleted><entity></entity><reference></reference><statut></statut><type></type><nature></nature><categorie></categorie><guichet><dataObjectId></dataObjectId><description></description></guichet><dateDepot><min></min><max></max></dateDepot><dateCommission><min></min><max></max></dateCommission><geoCenterX></geoCenterX><geoCenterY></geoCenterY><geoPath></geoPath><geoShapeType></geoShapeType></query><mode>extra</mode><uid>{uid}</uid><userName>{userName}</userName><userEntity>{userEntity}</userEntity></data>"}]]></json><pdo><![CDATA[{"select":[{"_item":"indexString.s6","_as":"architecte"},{"_item":"EXTRACT(MONTH FROM indexTime.d3)","_as":"mois"},{"_item":"count(di.id)","_as":"nbr","_fact":true}],"roots":{"from":{"_as":"di","__text":"DataObject"},"join":[{"_as":"indexString","_outer":"left","__text":"di.indexString"},{"_as":"indexInteger","_outer":"left","__text":"di.indexInteger"},{"_as":"indexDouble","_outer":"left","__text":"di.indexDouble"},{"_as":"indexTime","_outer":"left","__text":"di.indexTime"}]},"clause":{"criter":[{"operand":"indexString.s1","operator":"like","value":"query.reference","_optional":"true","_indexType":"string"},{"operand":"di.modelName","operator":"=","value":"query.modelName","_optional":"true","_xcstt":"x"},{"operand":"di.toBeDeleted","operator":"=","value":"query.toBeDeleted","_optional":"true","_indexType":"boolean"},{"operand":"di.entity","operator":"like","value":"query.entity","_optional":"true","_xcstt":"x"},{"operand":"indexString.s2","operator":"=","value":"query.statut","_optional":"true","_indexType":"string"},{"operand":"indexString.s4","operator":"like","value":"query.type","_optional":"true","_indexType":"string"},{"operand":"indexString.s5","operator":"like","value":"query.categorie","_optional":"true","_indexType":"string"},{"operand":"indexString.s13","operator":"like","value":"query.nature","_optional":"true","_indexType":"string"},{"operand":"indexString.s12","operator":"like","value":"query.guichet.description","_optional":"true","_indexType":"string"},{"operand":"indexTime.d1","operator":">=","value":"query.dateDepot.min","_optional":"true","_indexType":"date"},{"operand":"indexTime.d1","operator":"<=","value":"query.dateDepot.max","_optional":"true","_indexType":"date"},{"operand":"indexTime.d2","operator":">=","value":"query.dateCommission.min","_optional":"true","_indexType":"date"},{"operand":"indexTime.d2","operator":"<=","value":"query.dateCommission.max","_optional":"true","_indexType":"date"},{"value":" architecte in (\"KARIM IKRAMI BEN MOHAMED\") ","_asSQL":true,"_filter":true,"_filterDimension":"architecte"},{"value":" mois in (\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\") ","_asSQL":true,"_filter":true,"_filterDimension":"mois"}]},"_persistenceUnit":"PESA","_targetClass":"ma.ribatis.karaz.server.persistance.DataObject","groupBy":[{"_item":"architecte"},{"_item":"mois"}],"having":[],"stat":[]}]]></pdo></inner-chart>
-								</vbox>
-												
+
 					</framedPanel>
 					<framedPanel label="Astuces, conseils et et nouvelles fonctionnalités" collapsible="false">
-								
+
 					</framedPanel>
 				</vbox>
 
+				
 				<vbox label="Notifications">
 					<fieldset label="Notifications" collapsible="false" height="100">
-                        <vbox columns="70% 20%">
-                    
-               <field xpath="query.unifiedCriteria" noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
-               <button className="dashboardArchitect_serach_Button" noLabel="true" icon="fas fa-filter" postProcessing="search()" tooltipX="Appliquer filtres" />
-                  </vbox>
-						<objectList displayMode="thumbnail" searchQN="notify/email/search/AllEmail?limitxx=3" collectionName="notifs">
-							<field_ol name="reference" label="Reference" index="stringIndex1" widget="text" />
-							<field_ol name="type" label="Type" index="stringIndex3" widget="text" hidden="true" />
-							<field_ol name="tos" label="To" index="stringIndex4" widget="text" />
-							<field_ol name="ccs" label="Ccs" index="stringIndex5" widget="text" hidden="true" />
-							<field_ol name="bccs" label="Bccs" index="stringIndex6" widget="text" hidden="true" />
-							<field_ol name="subject" label="Subject" index="stringIndex7" widget="text" />
-							<field_ol name="priority" label="Priority" index="intIndex1" widget="integer" hidden="true" />
-							<field_ol name="application" label="Application" index="stringIndex8" widget="text" />
-							<field_ol name="origine" label="Origine" index="stringIndex9" widget="text" />
-							<field_ol name="modelQN" label="ModelQN" index="stringIndex10" widget="text" />
-							<field_ol name="processQN" label="Process QN" index="stringIndex11" widget="text" />
-							<field_ol name="activityName" label="Activity Name" index="stringIndex12" widget="text" hidden="true" />
-							<field_ol name="activityLabel" label="Activity Label" index="stringIndex13" widget="text" />
-							<field_ol name="moment" label="Moment" index="stringIndex14" widget="text" hidden="true" />
-							<field_ol name="affected" label="Affected" index="stringIndex15" widget="text" hidden="true" />
-							<field_ol name="allocation" label="Allocation" index="stringIndex16" widget="text" hidden="true" />
-							<field_ol name="dateCreation" label="DateCreation" index="dateIndex1" widget="date" hidden="true" />
-							<field_ol name="entity" label="Entity" index="stringIndex19" widget="text" hidden="true" />
-							<vbox>
-<html>
-                                    <div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold">
-											
-											<div class="ow-pl-inner">
-												<div class="ow-html">
-                                                <div class="notif_info_header">
-                                                <div class="sf_notif fas notificone_${notifs[$i].type}" />
-												<div>${notifs[$i].changeTime}</div>
-												<div class="email_to_cls">${notifs[$i].tos}</div>
-											      </div>
-                                              <div class="notif_emailSubject">${notifs[$i].subject}</div>
-                                                 </div>
-												<div style="clear:both">
-												</div>
-                                         <div>
-                                          <button class="ow-button usage_r float k-btn-radius" onclick="ApplicationManager.displayObject(${notifs[$i].id}, '${notifs[$i].modelName}', '${notifs[$i].reference}');"> <span class="ow-btn-label">  Voire</span> 
-                                             <div class="ow-vl    ow-postchange"><div class="ow-vl-inner" /></div>
-                                          </button>
-                                         </div>
-											</div>
-                                         
-										</div>
-							</html>				
-							</vbox>
-						</objectList>
-
+                        <vbox columns="70% 30%" style="margin-left:24px">
+                    		<field xpath="query.unifiedCriteria" noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
+               				<button className="dashboardArchitect_serach_Button" noLabel="true" icon="fas fa-filter" postProcessing="search()" tooltipX="Appliquer filtres" style="margin: auto" />
+                  		</vbox>	
+                  		<search searchQN="notify/email/search/AllnotificationEmail?limit=3" collectionName="notifs" />
 					</fieldset>
-					<!--fieldset labelAlign="float" label="Calendrier commissions" collapsible="false" 
-						height="100"> </fieldset -->
 				</vbox>
 
 

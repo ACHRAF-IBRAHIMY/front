@@ -1,12 +1,12 @@
 <menus> 
- <menu relId="Importation_karaz_ux_hub" label="karaz_ux_hub" icone="process"   ignoreIfExist="true"   parent_id="backend/admin/importation/process" />
+ <menu relId="Importation_portal" label="portal" icone="process"   ignoreIfExist="true"   parent_id="backend/admin/importation/process" />
       <menu relId="Importation_PortailSearch" label="PortailSearch " icone="process" 
-      parent_id="backend/admin/importation/process/Importation_karaz_ux_hub">
+      parent_id="backend/admin/importation/process/Importation_portal">
         <resource type="launchProcess">backend/admin/importation/process/GestionImportProcess?modelQN=karazapps.karaz.ux.hub.portailsearch.model.PortailSearch</resource>
       </menu> 
-   <menu relId="AllImportation_karaz_ux_hub" label="karaz_ux_hub" icone="search"    ignoreIfExist="true"     parent_id="backend/admin/importation/search" />     
+   <menu relId="AllImportation_portal" label="portal" icone="search"    ignoreIfExist="true"     parent_id="backend/admin/importation/search" />     
          <menu relId="AllImportation_PortailSearch" label="PortailSearch" icone="search" 
-       parent_id="backend/admin/importation/search/AllImportation_karaz_ux_hub" >
+       parent_id="backend/admin/importation/search/AllImportation_portal" >
         <resource type="search">backend/admin/importation/search/AllImportation?query.modelQN=karazapps.karaz.ux.hub.portailsearch.model.PortailSearch&amp;targetScreen=karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-importation&amp;use=modelQN</resource>
       </menu> 
 </menus>
