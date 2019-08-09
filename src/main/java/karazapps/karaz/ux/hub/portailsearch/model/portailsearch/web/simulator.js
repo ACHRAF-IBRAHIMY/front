@@ -732,8 +732,6 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
     console.log("%%%% ",treeLocal);
     console.log("traitement "+val);
 
-    
-
     if(existBody2(treeLocal,val) ){
       if(treeLocal.length == 1){
         var id = Object.keys(treeLocal[0])[0];
@@ -827,10 +825,10 @@ function endFunctionSendAdv(){
             vector.push(objSearchMatrix);
         }
     };
-
+    countDocAdv(0,vector);
+    countDocAdv(2,vector);
     countDocAdv(1,vector);
-    countDoc(1,objSearchMatrix);
-
+    //countDoc(1,objSearchMatrix);
 }
 
 function concatIfExist(vectorG,vector){
@@ -882,7 +880,7 @@ function makeResponse(array){
     return reps;
 }               
 
-var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[],[]];
+var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[],[],[]];
 
 function searchInMatrix(matrix,key){
      var index = matrix[0].indexOf(key);
@@ -910,11 +908,83 @@ function searchInMatrix2(matrix,listKey){
     }
     
     if(index!=-1){
-        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index],docSort :matrix[5][index] };
+        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index],docSort :matrix[5][index],docComSort :matrix[6][index] };
      }else{
          console.log("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
          return null;
      }
+}
+
+var report = {
+    chemin :[{
+        "question":"Qst1 ?",
+        "reponse":"Reponse1"
+    },{
+        "question":"Qst2 ?",
+        "reponse":"Reponse1"
+    },{
+        "question":"Qst3 ?",
+        "reponse":"Reponse1"
+    },{
+        "question":"Qst4 ?",
+        "reponse":"Reponse1"
+    }],
+    docsR:[{
+        "docName":"doc1",
+        "type":"N"
+    },{
+        "docName":"doc2",
+        "type":"D"
+    },{
+        "docName":"doc3",
+        "type":"N"
+    },{
+        "docName":"doc4",
+        "type":"D"
+    }],
+    docC:[{
+        "docName":"doc1",
+        "type":"N"
+    },{
+        "docName":"doc2",
+        "type":"D"
+    },{
+        "docName":"doc3",
+        "type":"N"
+    },{
+        "docName":"doc4",
+        "type":"D"
+    }],
+    steps:[{
+        "docName":"doc1",
+        "type":"N"
+    },{
+        "docName":"doc2",
+        "type":"D"
+    },{
+        "docName":"doc3",
+        "type":"N"
+    },{
+        "docName":"doc4",
+        "type":"D"
+    }],
+    docF:[{
+        "docName":"doc1",
+        "type":"N"
+    },{
+        "docName":"doc2",
+        "type":"D"
+    },{
+        "docName":"doc3",
+        "type":"N"
+    },{
+        "docName":"doc4",
+        "type":"D"
+    }]
+};
+
+function getReportData(root){
+    root.report = report;
 }
 
 function bulkRequest(vector,type){
@@ -1003,7 +1073,7 @@ function firstEsTreeCall(){
             var sizeQuestions = result.responses[0].hits.hits.length;
             var columns = result.responses[1].hits.hits;
             console.log("matrix length :" + columns.length);
-            matrix = [[],[],[],[],[],[]];
+            matrix = [[],[],[],[],[],[],[]];
             qsts =[];
             for(var i=0;i<result.responses[0].hits.hits.length;i++){
                 qsts.push(result.responses[0].hits.hits[i]._source.id.toString());
@@ -1024,6 +1094,11 @@ function firstEsTreeCall(){
                 matrix[3].push(columns[i]._source.docs_comp);
                 matrix[4].push(columns[i]._source.stepSort);
                 matrix[5].push(columns[i]._source.docSort);
+                if(columns[i]._source.docsCompSort==undefined){
+                    matrix[6].push([]);
+                }else{
+                    matrix[6].push(columns[i]._source.docsCompSort);
+                }
 
                 console.log(completeArrayMatrix(ar1,ar2,sizeQuestions));
             }
@@ -1052,7 +1127,12 @@ function countDocAdv(type,objSearchMatrixArr){
             "match_all": {}
         }
     };
-    var url = "simulator_index_docs/docs/_count";
+    if(type==0 || type==2){
+        var url = "simulator_index_docs/docs/_count";
+    }else if(type==1){
+        var url = "simulator_index_steps/steps/_count";
+    }
+
     $.ajax({
         type: "post",
       //  url: "http://localhost:9200/" + url,
@@ -1067,18 +1147,32 @@ function countDocAdv(type,objSearchMatrixArr){
             var vectorGlo = [];
             console.log(objSearchMatrixArr);
             for(var i=0;i<objSearchMatrixArr.length;i++){
-                var inte = objSearchMatrixArr[i].docSort;
+                if(type==0){
+                    var inte = objSearchMatrixArr[i].docSort;
+                }else if(type==2){
+                    var inte = objSearchMatrixArr[i].docComSort;
+                }else if(type==1){
+                    var inte = objSearchMatrixArr[i].stepSort;
+                }
                 console.log(inte);
                 vectorGlo = concatIfExist(vectorGlo,inte);
             };
             console.log(vectorGlo);
-            var bulk = bulkRequestByVect2(vectorGlo);
+            if(type==0 || type==2){
+                var bulk = bulkRequestByVect2(vectorGlo);
+            }else if(type==1){
+                var bulk = bulkRequestByVect(vectorGlo);
+            }
             console.log(bulk);
             if (bulk != "") {
                 console.log(bulk);
-                sendRequestBulk(bulk,0);
+                sendRequestBulk(bulk,type);
             } else {
-                addDocs([], 0);
+                if(type==0 || type==2){
+                    addDocs([],type);
+                }else if(type==1){
+                    addSteps([]);
+                }
             }
         },
         error: function (error) {
@@ -1251,6 +1345,7 @@ function backQst(){
 function addDocs(result,type){
     if(result.length==0){
         document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0].innerHTML="";
+        document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0].innerHTML="";
     }else{
         if(type==0){
             $(".simulator .docs-qr div.ow-pl").eq(0).addClass("expanded");

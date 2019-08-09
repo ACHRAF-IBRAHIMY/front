@@ -1404,8 +1404,15 @@ function nextStepDocsIn(type,id){
             objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id,ident)["docs_requis"];
             objectJsonMatrixColumns["docSort"] = getListStepsAdded();
             
+            if(objectJsonMatrixColumns["docs_comp"]!=undefined){
+                list = bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"]));
+                sortedList = objectJsonMatrixColumns["docsCompSort"];
+            } 
+
+            getAllCms(0,createAllCms,list,sortedList);        
+
             console.log("else :"+JSON.stringify(objectJsonMatrixColumns));
-            getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
+            //getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
         }
         $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
@@ -1414,6 +1421,7 @@ function nextStepDocsIn(type,id){
         
     }else if(type==1){
         objectJsonMatrixColumns["docs_comp"] = getListDocsAdded();
+        objectJsonMatrixColumns["docsCompSort"] = getListStepsAdded();
         var list = [];
         var sortedList = [];
         if(objectJsonMatrixColumns["steps"]!=undefined){
