@@ -72,63 +72,15 @@ context.formRender.notifyObservers("query.tos");
 					</framedPanel>
 				</vbox>
 
+				
 				<vbox label="Notifications">
 					<fieldset label="Notifications" collapsible="false" height="100">
-                        <vbox columns="70% 20%">
-                    
-               <field xpath="query.unifiedCriteria" noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
-               <button className="dashboardArchitect_serach_Button" noLabel="true" icon="fas fa-filter" postProcessing="search()" tooltipX="Appliquer filtres" />
-                  </vbox>
-						<objectList displayMode="thumbnail" searchQN="notify/email/search/AllEmail?limitxx=3" collectionName="notifs">
-							<field_ol name="reference" label="Reference" index="stringIndex1" widget="text" />
-							<field_ol name="type" label="Type" index="stringIndex3" widget="text" hidden="true" />
-							<field_ol name="tos" label="To" index="stringIndex4" widget="text" />
-							<field_ol name="ccs" label="Ccs" index="stringIndex5" widget="text" hidden="true" />
-							<field_ol name="bccs" label="Bccs" index="stringIndex6" widget="text" hidden="true" />
-							<field_ol name="subject" label="Subject" index="stringIndex7" widget="text" />
-							<field_ol name="priority" label="Priority" index="intIndex1" widget="integer" hidden="true" />
-							<field_ol name="application" label="Application" index="stringIndex8" widget="text" />
-							<field_ol name="origine" label="Origine" index="stringIndex9" widget="text" />
-							<field_ol name="modelQN" label="ModelQN" index="stringIndex10" widget="text" />
-							<field_ol name="processQN" label="Process QN" index="stringIndex11" widget="text" />
-							<field_ol name="activityName" label="Activity Name" index="stringIndex12" widget="text" hidden="true" />
-							<field_ol name="activityLabel" label="Activity Label" index="stringIndex13" widget="text" />
-							<field_ol name="moment" label="Moment" index="stringIndex14" widget="text" hidden="true" />
-							<field_ol name="affected" label="Affected" index="stringIndex15" widget="text" hidden="true" />
-							<field_ol name="allocation" label="Allocation" index="stringIndex16" widget="text" hidden="true" />
-							<field_ol name="dateCreation" label="DateCreation" index="dateIndex1" widget="date" hidden="true" />
-							<field_ol name="entity" label="Entity" index="stringIndex19" widget="text" hidden="true" />
-							<vbox>
-<html>
-                                    <div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold">
-											
-											<div class="ow-pl-inner">
-												<div class="ow-html">
-                                                <div class="notif_info_header">
-                                                <div class="sf_notif fas notificone_${notifs[$i].type}" />
-												<div>${notifs[$i].changeTime}</div>
-												<div class="email_to_cls">${notifs[$i].tos}</div>
-											      </div>
-                                              <div class="notif_emailSubject">${notifs[$i].subject}</div>
-                                                 </div>
-												<div style="clear:both">
-												</div>
-                                         <div>
-                                          <button class="ow-button usage_r float k-btn-radius" onclick="ApplicationManager.displayObject(${notifs[$i].id}, '${notifs[$i].modelName}', '${notifs[$i].reference}');"> <span class="ow-btn-label">  Voire</span> 
-                                             <div class="ow-vl    ow-postchange"><div class="ow-vl-inner" /></div>
-                                          </button>
-                                         </div>
-											</div>
-                                         
-										</div>
-</html>
-								
-							</vbox>
-						</objectList>
-
+                        <vbox columns="70% 30%" style="margin-left:24px">
+                    		<field xpath="query.unifiedCriteria" noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
+               				<button className="dashboardArchitect_serach_Button" noLabel="true" icon="fas fa-filter" postProcessing="search()" tooltipX="Appliquer filtres" style="margin: auto"/>
+                  		</vbox>	
+                  		<search searchQN="notify/email/search/AllnotificationEmail?limit=3" collectionName="notifs" />
 					</fieldset>
-					<!--fieldset labelAlign="float" label="Calendrier commissions" collapsible="false" 
-						height="100"> </fieldset -->
 				</vbox>
 
 
