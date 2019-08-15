@@ -27,12 +27,13 @@
 	<view>
 		<screen id="dashboardMain" noToolBar="true">
 <script onLoad="true">
-var x2js = new X2JS();
-var userData = x2js.xml_str2json(karazDataUserXml);
-console.log(" userData email", userData.User.email);
-root.query.tos=userData.User.email;
-context.formRender.notifyObservers("query.tos");
+	var userData = $.parseXML( karazDataUserXml );
+    var   $xml = $(userData);
+    var email =$xml.find('email').text();
+	root.query.tos=email;
+	context.formRender.notifyObservers("query.tos");
 
+	console.log('email==',query.tos);
 
 </script> 
 			<vbox id="dashboardArchitect" columns="72% 28%">
@@ -74,17 +75,43 @@ context.formRender.notifyObservers("query.tos");
 				</vbox>
 
 				
-				<vbox label="Notifications">
-					<fieldset label="Notifications" collapsible="false" height="100">
+				<vbox label="">
+					<fieldset label="Notifications" collapsible="false">
+						<html style="display: flex; justify-content: flex-end; height: 0px;">
+							<span class="fs-tooltip">
+	                            <div>
+	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Toutes les Notifications ">                                          
+	                               </span>
+	                               <span class="fs-item-bag fas fa-envelope" style="transform: translateY(-39px); font-size: 22px;" onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Les Notifications Archivées')" />
+	                            </div>
+	                    	</span>
+	                    	<span class="fs-tooltip">
+	                            <div>
+	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Notifications Lues ">                                          
+	                               </span>
+	                               <span class="fs-item-bag fas fa-envelope-open" style="transform: translateY(-39px); font-size: 22px;" onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Lu&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Les Notifications Archivées')" />
+	                            </div>
+	                    	</span>
+	                        <span class="fs-tooltip">
+	                            <div>
+	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Notifications Archivées ">                                          
+	                               </span>
+	                               <span class="fs-item-bag fas fa-archive" style="transform: translateY(-39px); font-size: 22px;" onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Archiver&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Les Notifications Archivées')" />
+	                            </div>
+	                    	</span>
+	                    	
+	                    </html>
                         <vbox columns="70% 30%" style="margin-left:24px">
                     		<field xpath="query.unifiedCriteria" noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
                				<button className="dashboardArchitect_serach_Button" noLabel="true" icon="fas fa-filter" postProcessing="search()" tooltipX="Appliquer filtres" style="margin: auto" />
                   		</vbox>	
-                  		<search searchQN="notify/email/search/AllnotificationEmail?limit=3" collectionName="notifs" />
+                  		<search searchQN="notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Brouilon&amp;loadXml=true&amp;query.tos={query.tos}" collectionName="notifs" />
 					</fieldset>
 				</vbox>
 
+
 			</vbox>
+
 		</screen>
 
 	</view>
