@@ -1,6 +1,4 @@
 
-
-
 function NQF_remove_subtitle() {
     $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
 }

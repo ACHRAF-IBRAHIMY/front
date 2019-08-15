@@ -7,9 +7,9 @@
       <idObject />
       <parentP />
     </query>
-    <krn></krn>
+    <krn />
     <repport>
-     <gedId></gedId>
+     <gedId />
     </repport>
     <collapsed>false</collapsed>
   </data>
@@ -84,17 +84,17 @@
                 </div>
               </html>
             </vbox>
-                      <vbox>
+                      <vbox className="size955">
+                      <fieldSet header="RÉCAPITULATIF DES CHOIX" className="info-container-div">
+                <html>
+                  <div class="info-container" />
+                </html>
+             </fieldSet>
           </vbox>
 
             </vbox>
 
-            <vbox className="docs-qr">
-            <fieldSet header="DONNÉES AUTORISATION" className="info-container-div">
-                <html>
-                  <div class="info-container" />
-                </html>
-             </fieldSet>   
+            <vbox className="docs-qr">   
               <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div">
                 <html>
                   <div class="docs-container" />
@@ -113,6 +113,16 @@
               <fieldSet header="DOCUMENTS COMPLEMENTAIRES">
                 <html>
                   <div class="docs-comp-container" />
+                </html>
+              </fieldSet>
+              <fieldSet header="DOCUMENTS FACULTATIFS">
+                <html>
+                  <div class="docs-fac-container" />
+                </html>
+              </fieldSet>
+              <fieldSet header="DOCUMENTS DÉLIVRÉS">
+                <html>
+                  <div class="docs-sort-container" />
                 </html>
               </fieldSet>
             </vbox>

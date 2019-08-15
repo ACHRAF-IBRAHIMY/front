@@ -4,7 +4,7 @@
 }
 
 .type-demande i{
-    font-size: 50px;
+    font-size: 41px;
 }
 .type-demande span{
     margin-top: 7px;
@@ -22,7 +22,7 @@
     text-align: center;
     margin: auto;
     margin-top: 20px;
-    padding: 10px 3px;
+    padding: 17px 3px;
     cursor: pointer;
 }
 
@@ -52,6 +52,11 @@
 .simulator .simulator-qr{
     margin-left: 10px !important;
     position: relative;
+    height: auto !important;
+}
+
+.size955{
+    width: 97.5%;
 }
 
 .simulator .simulator-qr .qr{
@@ -171,14 +176,25 @@
         
 }
 
-.simulator .docs-container .doc-item,.simulator .steps-container .doc-item,.simulator .docs-comp-container .doc-item{
+.simulator .docs-container .doc-item,.simulator .steps-container .doc-item,.simulator .docs-comp-container .doc-item,.simulator .docs-fac-container .doc-item,.simulator .docs-sort-container .doc-item{
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 10% 80% 10%;
     text-align: left;
     width: 80%;
     margin: auto;
     color: #777;
     margin-bottom: 9px;
+}
+
+.simulator .docs-container i.fa-info,.simulator .docs-comp-container i.fa-info,.simulator .docs-fac-container i.fa-info,.simulator .docs-sort-container i.fa-info{
+    color: #fff;
+    font-size: 12px !important;
+    width: 17px;
+    background: #38A;
+    height: 17px;
+    text-align: CENTER;
+    line-height: 17px;
+    border-radius: 50%;
 }
 
 .simulator .steps-container .doc-item span.icon-number{
@@ -191,7 +207,7 @@
     line-height: 100%;
 }
 
-.simulator .docs-container .doc-item i,.simulator .steps-container .doc-item i,.simulator .docs-comp-container .doc-item i{
+.simulator .docs-container .doc-item i,.simulator .steps-container .doc-item i,.simulator .docs-comp-container .doc-item i,.simulator .docs-fac-container .doc-item i,.simulator .docs-sort-container .doc-item i{
     font-size: 28px;
 }
 

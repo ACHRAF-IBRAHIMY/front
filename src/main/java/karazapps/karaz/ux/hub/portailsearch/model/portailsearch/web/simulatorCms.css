@@ -4,6 +4,10 @@
     padding: 9px;
 }
 
+.att-img{
+    visibility: hidden;
+}
+
 .top-header-doc span{
     background: #eee;
     text-align: center;
