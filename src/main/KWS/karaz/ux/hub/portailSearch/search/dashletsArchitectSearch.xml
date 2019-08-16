@@ -82,7 +82,7 @@
 	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Toutes les Notifications ">                                          
 	                               </span>
 	                               <span class="fs-item-bag fas fa-envelope" style="transform: translateY(-39px); font-size: 22px;" 
-	                               	onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Les Notifications Archivées')"
+	                               	onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Toutes les Notifications')"
 	                               	/>
 	                            </div>
 	                    	</span>
@@ -91,7 +91,7 @@
 	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Notifications Lues ">                                          
 	                               </span>
 	                               <span class="fs-item-bag fas fa-envelope-open" style="transform: translateY(-39px); font-size: 22px;" 
-	                               	onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Lu&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Les Notifications Archivées')"
+	                               	onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Lu&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Notifications Lues')"
 	                               	/>
 	                            </div>
 	                    	</span>
@@ -100,7 +100,7 @@
 	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Notifications Archivées ">                                          
 	                               </span>
 	                               <span class="fs-item-bag fas fa-archive" style="transform: translateY(-39px); font-size: 22px;" 
-	                               	onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Archiver&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Les Notifications Archivées')"
+	                               	onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Archiver&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Notifications Archivées')"
 	                               	/>
 	                            </div>
 	                    	</span>
