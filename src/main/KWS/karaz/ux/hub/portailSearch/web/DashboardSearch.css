@@ -181,6 +181,7 @@
     border-left: none;
     border-right: none;
     padding: 9px 5px;
+    width: 88px;
 }
 
 #ranking-table td.sp-td{
@@ -195,6 +196,37 @@
 }
 
 #ranking-table i.fa-sort-up{
+    display: none;
+    vertical-align: bottom;
+}
+
+
+#ranking-table2{
+    margin: auto;
+    width: 85%;
+    text-align: center;
+}
+
+#ranking-table2 td{
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    padding: 9px 5px;
+    width: 80px;
+}
+
+#ranking-table2 td.sp-td{
+    border: 1px solid #ddd;
+    color: #666;
+    background: #eee;
+}
+
+#ranking-table2 i.fa-sort-up,#ranking-table i.fa-sort-down{
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#ranking-table2 i.fa-sort-up{
     display: none;
     vertical-align: bottom;
 }

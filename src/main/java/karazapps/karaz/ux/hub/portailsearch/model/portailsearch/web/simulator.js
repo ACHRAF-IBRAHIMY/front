@@ -1426,7 +1426,7 @@ function addDocs(result,type){
             if(srcImg != undefined){
                 var docImg = document.createElement("div");
                 docImg.setAttribute("style","display:none;position: absolute;width: 327px;background: #EEE;right: 12px;height: 312px;z-index: 1;");
-                docImg.innerHTML = "<img style=\"width: 100%;\" src="+srcImg+" />";
+                docImg.innerHTML = "<img style=\"width: 100%;border: 1px solid black;\" src="+srcImg+" />";
                 docApr.addEventListener("mouseenter",function(){
                     this.getElementsByTagName("div")[0].style.display = "block";
                 });
