@@ -101,13 +101,14 @@ function createBarTop10(result,id,select){
   
 function createCommuneTable(result){
     var results = result.hits.hits;
-    var tableHtml = $("#ranking-table");
+    var tableHtml = $("#ranking-table2");
 
-    $("#ranking-table tr:not(.first-tr)").remove();
+    //$("#ranking-table tr:not(.first-tr)").remove();
+    $("#ranking-table2 tr").remove();
 
     for(var i=0;i<results.length;i++){
         var tr = $(document.createElement("tr"));
-        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;">`+results[i]._source.commune+`</td>`);
+        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+results[i]._source.commune+`</td>`);
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
         tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
