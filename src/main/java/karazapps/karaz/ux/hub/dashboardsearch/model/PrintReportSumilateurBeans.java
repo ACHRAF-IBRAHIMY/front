@@ -39,8 +39,9 @@ public class PrintReportSumilateurBeans implements KarazRemoteAction {
 				
 				doid=res.doi.getId();
 			}
+		    log("repport attach file id=="+ret);
 		 RepositoryServiceRemote rs = BackEndEJBContext.getRepositoryService();
-		 Attachment att = rs.createAttachment(new File(rs.getAttachmentPath(ret)), doid, attName, true);
+		 Attachment att = rs.createAttachment(new File(rs.getAttachmentPath(ret)), doid, attName, false);
 		 try {
 			    XmlHelper xh  =new XmlHelper(xml);
 			    log("repport attach=="+att.getDocument().getGedId());
