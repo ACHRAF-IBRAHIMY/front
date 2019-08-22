@@ -1867,7 +1867,8 @@ var scrollLeft = 0;
         but3.innerHTML = "<i class=\"fas fa-minus\"></i>";
         but3.setAttribute("class", "add-button-class red");
         but3.addEventListener("click", function () {
-            reduitNode(node.getElementsByClassName("node-id")[0].innerHTML,0);
+            alert("cette fonctionnalité est temporairement bloquée !");
+            //reduitNode(node.getElementsByClassName("node-id")[0].innerHTML,0);
         });
 
         var but4 = document.createElement("button");

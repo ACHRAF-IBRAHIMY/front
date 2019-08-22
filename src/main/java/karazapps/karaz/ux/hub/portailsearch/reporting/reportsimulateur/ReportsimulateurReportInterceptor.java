@@ -16,7 +16,7 @@ public class ReportsimulateurReportInterceptor implements ReportInterceptor   {
 	@Override
 	public void intercept(IDataObject doi, String xml,  String reportName, TreeMap<String, String> ctx,  TreeMap<String, Serializable> vctx ) {
 		try {
-	        System.out.println(" send dataXhelper........");
+	        System.out.println(" send dataXhelper........"+xml);
 	          XmlHelper xhData = new XmlHelper(xml);
 	          TreeMap<String, Object> data=new TreeMap<String, Object>();
 	          data.put("data", xhData);
