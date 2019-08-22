@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 
 import org.apache.log4j.Logger;
 
+import karazapps.karaz.ux.hub.portailsearch.model.PortailSearchBrowser;
+import karazapps.karaz.ux.hub.portailsearch.model.PortailSearchJxDoi;
 import ma.ribatis.karaz.repository.RepositoryConfig;
 import ma.ribatis.karaz.repository.RepositoryServiceRemote;
 import ma.ribatis.karaz.server.BackEndEJBContext;
@@ -27,7 +29,16 @@ public class PrintReportSumilateurBeans implements KarazRemoteAction {
 		String attName = "RAPPORT SUMILATEUR";
 	     ctx.put("attachmentName", attName);
 		 Long ret = BackEndEJBContext.getPrintAction( "karaz/ux/hub/portailsearch/reporting/reportsimulateur/PersoReportsimulateurReport").print(doid, xml, ctx);
-		
+		    if(doid<=0){
+				PortailSearchBrowser br=new PortailSearchBrowser(null);
+				PortailSearchJxDoi res = br.first();
+				if(res==null){
+					res=PortailSearchJxDoi.newInstance("/");
+					res.save();
+				}
+				
+				doid=res.doi.getId();
+			}
 		 RepositoryServiceRemote rs = BackEndEJBContext.getRepositoryService();
 		 Attachment att = rs.createAttachment(new File(rs.getAttachmentPath(ret)), doid, attName, true);
 		 try {
