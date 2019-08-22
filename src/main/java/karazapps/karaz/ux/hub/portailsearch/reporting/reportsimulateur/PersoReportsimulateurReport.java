@@ -74,16 +74,27 @@ public class PersoReportsimulateurReport implements PrintAction {
 	@Override
 	public Long print(Long doid, String xml, TreeMap<String, String> ctx) {
 		DataObject doi = new DataObject();
+		DataObject xdoi = new DataObject();
+		if(doid<=0){
+			PortailSearchBrowser br=new PortailSearchBrowser(null);
+			PortailSearchJxDoi res = br.first();
+			if(res==null){
+				res=PortailSearchJxDoi.newInstance("/");
+				res.save();
+			}
+			
+			xdoi=res.doi;
+		}
 		if(xml!=null) {
 			
-			doi.setId(doid);
-//			doi.setBI(xdoi.getBI());
-//			doi.setOwningSeq(xdoi.getOwningSeq());
-//			doi.setSequence(xdoi.getSequence());
-//			doi.setChangeTime(xdoi.getChangeTime());
-//			doi.setCreationTime(xdoi.getCreationTime());
-//			doi.setModelName(xdoi.getModelName());
-//			doi.setEntity(xdoi.getEntity()); 
+			doi.setId(xdoi.getId());
+            doi.setBI(xdoi.getBI());
+			doi.setOwningSeq(xdoi.getOwningSeq());
+			doi.setSequence(xdoi.getSequence());
+			doi.setChangeTime(xdoi.getChangeTime());
+			doi.setCreationTime(xdoi.getCreationTime());
+            doi.setModelName(xdoi.getModelName());
+            doi.setEntity(xdoi.getEntity()); 
 			doi.setXmlData(xml);
 		}
 		PortailSearch jx= null;
