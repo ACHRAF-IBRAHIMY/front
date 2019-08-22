@@ -22,7 +22,7 @@ import ma.ribatis.karaz.server.DataObjectServiceLocal;
 import ma.ribatis.karaz.server.persistance.DataObject;
 
 /**
- * Session Bean implementation class ReportsimulateurReport
+ * Session Bean implementation class ReportsimulateurReport 
  */
 @Stateless(name = "karaz/ux/hub/portailsearch/reporting/reportsimulateur/PersoReportsimulateurReport", mappedName = "karaz/ux/hub/portailsearch/reporting/reportsimulateur/PersoReportsimulateurReport")
 @Remote
