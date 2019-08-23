@@ -153,6 +153,7 @@ function createQuestion(type,obj,hide,clmm){
                 $(this).children(".check-ent").addClass("active-check");
                 if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                    $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                   $(".simulator .simulator-qr button.next-report").hide();
                    removeExpanded(); 
                 }
             });
@@ -182,6 +183,7 @@ function createQuestion(type,obj,hide,clmm){
        response.addEventListener("change",function(){
             if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                 $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                $(".simulator .simulator-qr button.next-report").hide();
                 removeExpanded(); 
             }
        });
@@ -193,6 +195,8 @@ function createQuestion(type,obj,hide,clmm){
        response.addEventListener("input",function(){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            $(".simulator .simulator-qr button.next-report").hide();
+
             removeExpanded(); 
          }
        });
@@ -213,6 +217,8 @@ function createQuestion(type,obj,hide,clmm){
         response.addEventListener("input",function(){
             if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                 $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                $(".simulator .simulator-qr button.next-report").hide();
+
                 removeExpanded(); 
              }
            });
@@ -225,6 +231,8 @@ function createQuestion(type,obj,hide,clmm){
         response.addEventListener("input",function(){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            $(".simulator .simulator-qr button.next-report").hide();
+
             removeExpanded(); 
             }
         });
@@ -252,6 +260,8 @@ function createQuestion(type,obj,hide,clmm){
         response.addEventListener("input",function(){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            $(".simulator .simulator-qr button.next-report").hide();
+
             removeExpanded(); 
             }
         });
@@ -259,10 +269,6 @@ function createQuestion(type,obj,hide,clmm){
         var index = localiteType.indexOf(content);
         q2.appendChild(response);
         
-
-        if(localiteLib.length==0){
-            q2.innerHTML += "<img src=\"img/loadgif3.gif\" style=\"width:50px;vertical-align: top;\" class=\"loadGif\"></img>";
-        }
 
         var icon = document.createElement("i");
         icon.setAttribute("class","fas fa-edit");
@@ -510,16 +516,18 @@ function intializeVectArray(){
 }
 
 function allNextClick(){
-        var qrs = document.querySelectorAll(".simulator .ques-rep");
-        for(var i=0;i<qrs.length;i++){
-            console.log(qrs[i],i);
-            nextClick(qrs[i],i);
-        } 
+    var qrs = document.querySelectorAll(".simulator .ques-rep");
+    for(var i=0;i<qrs.length;i++){
+        console.log(qrs[i],i);
+        nextClick(qrs[i],i);
+    }
 }
 
 var autoEconom = ["Simple Déclaration","Établissement classé","Occupation Domaine Public",]
 var autoUrba = [["Projet de construction d'institution à caractère industriel","Projet de construction à usage mixte","Equipements commerciaux","Projet de construction d'équipement à usage commercial","Projet de construction d'équipement à usage public"],["Modifications de constructions existantes"],["Projet de morcellement"],["Projet de construction à usage d'habitation"],["Projet de lotissement"]];
 var autoodp = ["Télécom","Travaux Publics","Affichage Publicitaire","Stationnement Réservé","Activité Normale",]
+var autoec = ["agroalimentaire", "agroalimentaire 1", "automobile et motocycle", "automobile et motocycle 1", "beauté et bien être", "chaudronnier, tuyauteur et soudeur", "chimie et peinture", "cérémonie et loisir", "décors et meuble", "décors et meuble 1", "dépôt et froid", "dépôt et froid 1", "école et Institut", "import Export", "imprimerie", "industrie plastique", "industrie de cuir", "industrie métallique", "industrie métallique 1", "industrie: bois, liège, vannerie et sparterie", "industrie: electronique electrique et câblages", "industrie: electronique electrique et câblages 1", "industrie: marbre, carrelage et pierre", "industrie: minéraux non métalliques", "joaillerie et bijouterie", "maison et jardin", "papier et carton", "production et distribution d'électricité, de gaz, de vapeur et d'air conditionné", "sport", "textile et chaussure", "textile et chaussure 1", "transformation et conservation de la viande", "construction"];
+var autosd = ["agriculture et jardin", "agroalimentaire", "animaux", "automobile et motocycle", "beauté et bien être", "bois, liège, vannerie et sparterie", "décors et meuble", "ecole et institut", "electrique, electronique, électromécanique et hydromécanique", "evénements et attractions", "finance et assurance", "informatique, multimédia et télécom", "jouets et articles de cadeaux", "juridique", "librairie, papeterie et imprimerie", "maison et métier lié", "matériels et accessoires sportif", "restaurant, traiteur, café et snack", "sanitaire", "santé", "siège société et bureau d'études", "textile et chaussure", "tourisme et hôtellerie", "transport et messagerie"];
 
 function nextClick(qr,iter){
         console.log(qr);
@@ -534,7 +542,7 @@ function nextClick(qr,iter){
         }else if(type.hasClass("rep-type-5")){
             type=5;
         }else{
-            type=2
+            type=2;
         }
 
         switch(type){
@@ -623,6 +631,23 @@ function nextClick(qr,iter){
                         typeAutG = 2;
                         typeAutt = autoEconom.indexOf(typeAut);
                         console.log("typeAutt",typeAutt);
+
+                        if(typeAutt==0){
+                            if(autosd.indexOf(natureAct.toLowerCase())!=-1){
+                                typeActt = autosd.indexOf(natureAct.toLowerCase());
+                            }else{
+                                typeActt = null;
+                            }
+                        }
+
+                        if(typeAutt==1){
+                            if(autoec.indexOf(natureAct.toLowerCase())!=-1){
+                                typeActt = autoec.indexOf(natureAct.toLowerCase());
+                            }else{
+                                typeActt = null;
+                            }
+                        }
+
                         if(typeAutt==2){
                             if(autoodp.indexOf(typeAct)==0 || autoodp.indexOf(typeAct)==1){
                                 typeAutt = 2;
@@ -677,10 +702,10 @@ function nextClick(qr,iter){
         }
 } 
 
-function infoAutorisationSim(){
+function infoAutorisationSim(final){
     var bulk = createBulkRequestFromArrayVect();
     console.log(bulk);
-    sendBulkRequestFromArrayVect(bulk);
+    sendBulkRequestFromArrayVect(bulk,final);
 
 };
 
@@ -693,7 +718,7 @@ function createBulkRequestFromArrayVect(){
     return request;
 };
 
-function sendBulkRequestFromArrayVect(bulk){
+function sendBulkRequestFromArrayVect(bulk,final){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
@@ -706,6 +731,7 @@ function sendBulkRequestFromArrayVect(bulk){
         },
         success: function (result) {
             $(".simulator .info-container").html("") ;
+            reportD.chemin = [];
             for(var i=0;i<result.responses.length;i++){
                 var qstio = result.responses[i].hits.hits[0]._source;
                 if( (qstio.response.type=="select" || qstio.response.type=="check") && Number(arrayVect[1][i]) != 0 ){
@@ -713,17 +739,27 @@ function sendBulkRequestFromArrayVect(bulk){
                     doc.setAttribute("class","ctr");
                     doc.innerHTML = "<div style=\"padding: 3px 35px; text-align:left; font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 50px;text-align:left;color: #38A;\">"+qstio.response.content[Number(arrayVect[1][i])-1]+"</div>"
                     $(".simulator .info-container").append(doc) ;
+                    var obj = {
+                        "question":qstio.question,
+                        "reponse":qstio.response.content[Number(arrayVect[1][i])-1]
+                    }
+                    reportD.chemin.push(obj);
                 }else{
                     continue;
                 }
             };
                
             console.log(result);
-            
+
+            if(final==true){
+                $(".simulator .next-report").addClass("autori");
+            }else{
+                $(".simulator .next-report").removeClass("autori");
+            }
+
         },
         error: function (error) {
             console.log(error.responseText);
-
         }
     })
 };
@@ -731,6 +767,7 @@ function sendBulkRequestFromArrayVect(bulk){
 function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
     console.log("%%%% ",treeLocal);
     console.log("traitement "+val);
+    var existBody = true;
 
     if(existBody2(treeLocal,val) ){
       if(treeLocal.length == 1){
@@ -755,19 +792,22 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
             console.log(arrayVect);
             qstArray = [[],[],[]];
             if(dontShow!=true){
-                infoAutorisationSim();
+                infoAutorisationSim(false);
                 getQuestions(qstss[0],qstss[1],qstss[2],0);    
             }
         }
     }else{
       console.log("end");
-      infoAutorisationSim();
+      infoAutorisationSim(true);
       stopedButton(0);
+      existBody = false;
+      $(".simulator .simulator-qr .next-report").show();
+
     }
 
 
     if(classed==true){
-        endFunctionSendAdv();
+        endFunctionSendAdv(existBody);
     }
 }
 
@@ -808,7 +848,7 @@ function endFunctionSend(){
     
 }
 
-function endFunctionSendAdv(){
+function endFunctionSendAdv(existBody){
     var list = [[],[],[],[]];
     var vector = [];
     for(var i=0;i<arrayVect[0].length+1;i++){
@@ -825,11 +865,11 @@ function endFunctionSendAdv(){
             vector.push(objSearchMatrix);
         }
     };
-    countDocAdv(0,vector);
-    countDocAdv(2,vector);
-    countDocAdv(1,vector);
-    countDocAdv(3,vector);
-    countDocAdv(4,vector);
+    countDocAdv(0,vector,existBody);
+    countDocAdv(2,vector,existBody);
+    countDocAdv(1,vector,existBody);
+    countDocAdv(3,vector,existBody);
+    countDocAdv(4,vector,existBody);
     //countDoc(1,objSearchMatrix);
 }
 
@@ -917,76 +957,19 @@ function searchInMatrix2(matrix,listKey){
      }
 }
 
-var report = {
-    chemin :[{
-        "question":"Qst1 ?",
-        "reponse":"Reponse1"
-    },{
-        "question":"Qst2 ?",
-        "reponse":"Reponse1"
-    },{
-        "question":"Qst3 ?",
-        "reponse":"Reponse1"
-    },{
-        "question":"Qst4 ?",
-        "reponse":"Reponse1"
-    }],
-    docsR:[{
-        "docName":"doc1",
-        "type":"N"
-    },{
-        "docName":"doc2",
-        "type":"D"
-    },{
-        "docName":"doc3",
-        "type":"N"
-    },{
-        "docName":"doc4",
-        "type":"D"
-    }],
-    docC:[{
-        "docName":"doc1",
-        "type":"N"
-    },{
-        "docName":"doc2",
-        "type":"D"
-    },{
-        "docName":"doc3",
-        "type":"N"
-    },{
-        "docName":"doc4",
-        "type":"D"
-    }],
-    steps:[{
-        "docName":"doc1",
-        "type":"N"
-    },{
-        "docName":"doc2",
-        "type":"D"
-    },{
-        "docName":"doc3",
-        "type":"N"
-    },{
-        "docName":"doc4",
-        "type":"D"
-    }],
-    docF:[{
-        "docName":"doc1",
-        "type":"N"
-    },{
-        "docName":"doc2",
-        "type":"D"
-    },{
-        "docName":"doc3",
-        "type":"N"
-    },{
-        "docName":"doc4",
-        "type":"D"
-    }]
+var reportD = {
+    chemin :[],
+    docsR:[],
+    docC:[],
+    steps:[],
+    docF:[]
 };
 
-function getReportData(root){
-    root.report = report;
+function getReportData(root,context){
+    root.dataReport = {};
+    context.formRender.notifyObservers("dataReport");
+    root.dataReport = reportD;
+    context.formRender.notifyObservers("dataReport");
 }
 
 function bulkRequest(vector,type){
@@ -1029,7 +1012,7 @@ function bulkRequestByVect2(vector) {
     return request;
 }
 
-function sendRequestBulk(bulk,type){
+function sendRequestBulk(bulk,type,existBody){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
@@ -1044,9 +1027,9 @@ function sendRequestBulk(bulk,type){
             console.log(result);
             if(type==0 || type==2 || type==3 || type==4){
                 $(".simulator .simulator-qr .next-button img").hide();
-                addDocs(result.responses,type);
+                addDocs(result.responses,type,existBody);
             }else{
-                addSteps(result.responses);                
+                addSteps(result.responses,existBody);                
             }
         },
         error: function (error) {
@@ -1134,7 +1117,7 @@ function firstEsTreeCall(){
     })
 }
 
-function countDocAdv(type,objSearchMatrixArr){
+function countDocAdv(type,objSearchMatrixArr,existBody){
     $(".simulator .simulator-qr .next-button img").show();
     var obj = {
         "query": {
@@ -1184,12 +1167,12 @@ function countDocAdv(type,objSearchMatrixArr){
             console.log("bulk :::"+type+" \n"+bulk);
             if (bulk != "") {
                 console.log(bulk);
-                sendRequestBulk(bulk,type);
+                sendRequestBulk(bulk,type,existBody);
             } else {
                 if(type==0 || type==2 || type==3 || type==4){
-                    addDocs([],type);
+                    addDocs([],type,existBody);
                 }else if(type==1){
-                    addSteps([]);
+                    addSteps([],existBody);
                 }
             }
         },
@@ -1340,6 +1323,7 @@ function backClick(){
     
 
     startButton(0);
+    $(".simulator .simulator-qr .next-report").hide();
 
     
 
@@ -1354,8 +1338,8 @@ function backClick(){
         stopedButton(1);
     }
 
-    endFunctionSendAdv();
-    infoAutorisationSim();
+    endFunctionSendAdv(true);
+    infoAutorisationSim(false);
 
     getQuestions(qstss[0],qstss[1],qstss[2],0);
 }
@@ -1384,7 +1368,7 @@ function backQst(){
     
 }
 
-function addDocs(result,type){
+function addDocs(result,type,existBody){
     
     if(result.length==0){
         document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0].innerHTML="";
@@ -1393,12 +1377,15 @@ function addDocs(result,type){
         document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-sort-container")[0].innerHTML="";
     }else{
         if(type==0){
+            reportD.docsR = [];
             $(".simulator .docs-qr div.ow-pl").eq(0).addClass("expanded");
             var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0];
         }else if(type==2){
+            reportD.docsC = [];
             $(".simulator .docs-qr div.ow-pl").eq(3).addClass("expanded");
             var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0];    
         }else if(type==3){
+            reportD.docsF = [];
             $(".simulator .docs-qr div.ow-pl").eq(4).addClass("expanded");
             var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-fac-container")[0];                
         }else if(type==4){
@@ -1407,7 +1394,7 @@ function addDocs(result,type){
         }
         
         docContainer.innerHTML="";
-        
+        var docsTemp = [];
         
         for(var i =0 ; i <result.length;i++){
             var doc = document.createElement("div");
@@ -1420,6 +1407,12 @@ function addDocs(result,type){
             var docApr = document.createElement("i");
             docApr.setAttribute("style","cursor:pointer");
             docApr.setAttribute("class","fas fa-info");
+            var obj = {
+                "docName":result[i].hits.hits[0]._source.title,
+                "type":"PAPIER"
+            };
+
+            docsTemp.push(obj);
 
             var srcImg = result[i].hits.hits[0]._source.attachementImg;
 
@@ -1441,17 +1434,39 @@ function addDocs(result,type){
             doc.appendChild(docApr);
             docContainer.appendChild(doc);
         }
+
+        if(type==0){
+            reportD.docsR = docsTemp;
+            if(existBody==false){
+                $(".simulator .next-report").addClass("docsR");
+            };
+        }else if(type==2){
+            reportD.docsC = docsTemp;
+            if(existBody==false){
+                $(".simulator .next-report").addClass("docsC");
+            };
+        }else if(type==3){
+            reportD.docsF = docsTemp;
+            if(existBody==false){
+                $(".simulator .next-report").addClass("docsF");
+            };
+        }else if(type==4){
+        }
+
+        
     }
 }
 
 
-function addSteps(result){
+function addSteps(result,existBody){
     var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("steps-container")[0];
     docContainer.innerHTML="";
     
     if(result.length!=0){
         $(".simulator .docs-qr div.ow-pl").eq(1).addClass("expanded");
     }
+
+    reportD.steps=[];
 
     for(var i =0 ; i <result.length;i++){
         var doc = document.createElement("div");
@@ -1462,7 +1477,14 @@ function addSteps(result){
         var docName = document.createElement("span");
         docName.innerHTML = result[i].hits.hits[0]._source.title;
         docName.setAttribute("class","doc-name");
-        
+
+        var obj = {
+            "stepName":result[i].hits.hits[0]._source.title,
+            "membre":result[i].hits.hits[0]._source.membres
+        };
+
+        reportD.steps.push(obj);
+
         doc.appendChild(icon);
         if(result[i].hits.hits[0]._source.membres != undefined){
             for(var j=0;j<result[i].hits.hits[0]._source.membres.length;j++){
@@ -1481,6 +1503,10 @@ function addSteps(result){
         docContainer.appendChild(doc);
 
     }
+
+    if(existBody==false){
+        $(".simulator .next-report").addClass("steps");
+    };
 }
 
 function stopedButton(type){
@@ -1492,6 +1518,7 @@ function stopedButton(type){
 }
 
 function startButton(type){
+    $(".simulator .simulator-qr .next-report").hide();
     if(type==0){
        $(".simulator .simulator-qr .next-button .next-rq").removeClass("stopped");
     }else{
