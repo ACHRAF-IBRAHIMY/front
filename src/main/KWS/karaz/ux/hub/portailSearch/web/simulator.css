@@ -15,6 +15,9 @@
     display: none;
 }
 
+.simulator .simulator-qr .next-report{
+    display: none;
+}
 
 .type-demande{
     width: 140px;
