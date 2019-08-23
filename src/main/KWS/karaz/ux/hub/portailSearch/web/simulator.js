@@ -177,7 +177,16 @@ function createQuestion(type,obj,hide,clmm){
        for(var i=0;i<size;i++){
          var check = document.createElement("option");
          check.setAttribute("value",i+1);
-         check.innerHTML = obj.response.content[i];   
+
+         if(obj.response.content[i].indexOf("***")!=-1){
+            var a = obj.response.content[i];
+            var elm = a.substring(a.indexOf("***")+3,a.indexOf("***",a.indexOf("***")+1));
+            check.setAttribute("title",elm);
+            check.innerHTML = obj.response.content[i].substring(0,a.indexOf("***"));   
+         }else{
+            check.innerHTML = obj.response.content[i];   
+         }
+
          response.appendChild(check);
        }
        response.addEventListener("change",function(){
@@ -633,6 +642,7 @@ function nextClick(qr,iter){
                         console.log("typeAutt",typeAutt);
 
                         if(typeAutt==0){
+                            alert(natureAct+" "+autoec.indexOf(natureAct.toLowerCase()));
                             if(autosd.indexOf(natureAct.toLowerCase())!=-1){
                                 typeActt = autosd.indexOf(natureAct.toLowerCase());
                             }else{
@@ -641,6 +651,7 @@ function nextClick(qr,iter){
                         }
 
                         if(typeAutt==1){
+                            alert(natureAct+" "+autoec.indexOf(natureAct.toLowerCase()));
                             if(autoec.indexOf(natureAct.toLowerCase())!=-1){
                                 typeActt = autoec.indexOf(natureAct.toLowerCase());
                             }else{
@@ -737,11 +748,19 @@ function sendBulkRequestFromArrayVect(bulk,final){
                 if( (qstio.response.type=="select" || qstio.response.type=="check") && Number(arrayVect[1][i]) != 0 ){
                     var doc = document.createElement("div");
                     doc.setAttribute("class","ctr");
-                    doc.innerHTML = "<div style=\"padding: 3px 35px; text-align:left; font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 50px;text-align:left;color: #38A;\">"+qstio.response.content[Number(arrayVect[1][i])-1]+"</div>"
+                    
+                    if(qstio.response.content[Number(arrayVect[1][i])-1].indexOf("***")!=-1){
+                        var a = qstio.response.content[Number(arrayVect[1][i])-1]
+                        var  reponseTemp = a.substring(0,a.indexOf("***"));   
+                     }else{
+                        var reponseTemp = qstio.response.content[Number(arrayVect[1][i])-1];   
+                     }
+
+                    doc.innerHTML = "<div style=\"padding: 3px 35px; text-align:left; font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 50px;text-align:left;color: #38A;\">"+reponseTemp+"</div>"
                     $(".simulator .info-container").append(doc) ;
                     var obj = {
                         "question":qstio.question,
-                        "reponse":qstio.response.content[Number(arrayVect[1][i])-1]
+                        "reponse":reponseTemp
                     }
                     reportD.chemin.push(obj);
                 }else{

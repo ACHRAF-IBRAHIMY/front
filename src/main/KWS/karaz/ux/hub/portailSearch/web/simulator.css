@@ -192,13 +192,15 @@
 
 .simulator .docs-container i.fa-info,.simulator .docs-comp-container i.fa-info,.simulator .docs-fac-container i.fa-info,.simulator .docs-sort-container i.fa-info{
     color: #fff;
-    font-size: 12px !important;
-    width: 17px;
-    background: #38A;
-    height: 17px;
+    font-size: 9px !important;
+    width: 15px;
+    background: #999;
+    height: 15px;
     text-align: CENTER;
-    line-height: 17px;
+    line-height: 15px;
     border-radius: 50%;
+    display: inline-block;
+    margin-top: 8px;
 }
 
 .simulator .steps-container .doc-item span.icon-number{
