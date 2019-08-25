@@ -73,6 +73,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AccesAuFoncier", "karazapps/karaz/ux/hub/portailsearch/model/search-AccesAuFoncier.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AffichagePub", "karazapps/karaz/ux/hub/portailsearch/model/search-AffichagePub.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-AllGlobalTAskSearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AllKarazuxresults", "karazapps/karaz/ux/hub/portailsearch/model/search-AllKarazuxresults.xml");
@@ -103,6 +105,10 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DownloadEdit", "karazapps/karaz/ux/hub/portailsearch/model/search-DownloadEdit.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/EtablissementClasse", "karazapps/karaz/ux/hub/portailsearch/model/search-EtablissementClasse.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/EtablissementClasse2", "karazapps/karaz/ux/hub/portailsearch/model/search-EtablissementClasse2.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "karazapps/karaz/ux/hub/portailsearch/model/search-EtudeImpactEnvironemmental.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/FaqDetail", "karazapps/karaz/ux/hub/portailsearch/model/search-FaqDetail.xml");
@@ -116,6 +122,12 @@ public class PortailSearchLoader {
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/NewRefJuridique", "karazapps/karaz/ux/hub/portailsearch/model/search-NewRefJuridique.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/NewfreqQuestion", "karazapps/karaz/ux/hub/portailsearch/model/search-NewfreqQuestion.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OccupationDomainPubRT", "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubRT.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OccupationDomainPubRp", "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubRp.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OccupationDomainPubUC", "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubUC.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OpendataFrame", "karazapps/karaz/ux/hub/portailsearch/model/search-OpendataFrame.xml");
 

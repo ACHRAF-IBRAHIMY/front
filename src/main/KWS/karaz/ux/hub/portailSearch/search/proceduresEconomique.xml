@@ -113,7 +113,7 @@
                     </html>
                     <button className="det-but" label="Détail">
                       <postChange>
-                        <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtablissementClasse2", "search", "Etude Impact Environemmental", {});
                       </postChange>
                     </button>
                   </vbox>

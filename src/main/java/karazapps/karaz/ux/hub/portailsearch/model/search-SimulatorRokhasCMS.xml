@@ -423,6 +423,12 @@
                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                       </div>
                     </div>
+                    <div class="class-help-q">
+                      <span>Help :</span>
+                        <div class="responses-sim-cms">
+                          <input class="placeholder" type="text" placeholder="Text" />
+                        </div>
+                    </div>
                     <div class="class-update-button">
                       <button class="save">Sauvegarder</button>
                       <button class="remove" style="background:red">Supprimer</button>
@@ -480,6 +486,12 @@
                       <span>Placeholder :</span>
                       <div class="responses-sim-cms">
                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
+                      </div>
+                    </div>
+                    <div class="class-help-q">
+                      <span>Help :</span>
+                      <div class="responses-sim-cms">
+                        <input class="placeholder" type="text" placeholder="help" />
                       </div>
                     </div>
                     <div class="class-update-button">
