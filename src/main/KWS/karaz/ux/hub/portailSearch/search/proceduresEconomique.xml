@@ -92,7 +92,7 @@
                     </html>
                     <button className="det-but" label="Détail">
                       <postChange>
-                        <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtablissementClasse", "search", "Etablissement classé catégorie 3", {});
                       </postChange>
                     </button>
                   </vbox>
@@ -113,7 +113,7 @@
                     </html>
                     <button className="det-but" label="Détail">
                       <postChange>
-                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtablissementClasse2", "search", "Etude Impact Environemmental", {});
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtablissementClasse2", "search", "Etablissement classé catégorie 2", {});
                       </postChange>
                     </button>
                   </vbox>
@@ -135,7 +135,7 @@
                     </html>
                     <button className="det-but" label="Détail">
                       <postChange>
-                        <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/AffichagePub", "search", "Affichage Publicitaire", {});
                       </postChange>
                     </button>
                   </vbox>
@@ -157,7 +157,7 @@
                     </html>
                     <button className="det-but" label="Détail">
                       <postChange>
-                        <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubRT", "search", "Occupation Domaine Public RT", {});
                       </postChange>
                     </button>
                   </vbox>
@@ -179,7 +179,7 @@
                     </html>
                     <button className="det-but" label="Détail">
                       <postChange>
-                        <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubRp", "search", "Occupation Domaine Public RP", {});
                       </postChange>
                     </button>
                   </vbox>
@@ -200,7 +200,7 @@
                     </html>
                     <button className="det-but" label="Détail">
                       <postChange>
-                        <!-- ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental", "search", "Etude Impact Environemmental", {}); -->
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubUC", "search", "Occupation Domaine Public UC", {});
                       </postChange>
                     </button>
                   </vbox>
@@ -272,4 +272,3 @@
     </screen>
   </view>
 </search>
-
