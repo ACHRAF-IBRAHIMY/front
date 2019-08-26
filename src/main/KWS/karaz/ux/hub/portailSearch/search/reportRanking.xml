@@ -15,16 +15,16 @@
           removeLastRootPage(userName);
           loadPageBytype(0);
           
-          var tabInd = ["1-2019"];
+          var tabInd = ["4-2018"];
 
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.score","desc",60,0,0);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.delai","desc",3,0,1);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.attractivite","desc",3,0,2);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.digital","desc",3,0,3);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.ecosystem","desc",3,0,4);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.fiscalite","desc",3,0,5);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.scoreU","desc",10,0,6);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.scoreE","desc",10,0,7);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",60,0,0);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.delai","desc",3,0,1);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.attractivite","desc",3,0,2);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.digital","desc",3,0,3);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.ecosystem","desc",3,0,4);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.fiscalite","desc",3,0,5);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreU","desc",10,0,6);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreE","desc",10,0,7);
 
           getAllByAggs("trim.keyword",100,null,"",0);
           getAllByAggs("région.keyword",100,null,"",1);
@@ -121,6 +121,16 @@
               tabInd.push(prefecture);
 
               restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
+
+              restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
+              restGetAllCommue([filters,filtersBy],"indecators.delai","desc",3,0,1);
+              restGetAllCommue([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
+              restGetAllCommue([filters,filtersBy],"indecators.digital","desc",3,0,3);
+              restGetAllCommue([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
+              restGetAllCommue([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
+              restGetAllCommue([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
+              restGetAllCommue([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
+              
 
 
           });

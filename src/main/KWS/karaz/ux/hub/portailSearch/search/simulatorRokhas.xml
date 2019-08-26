@@ -24,7 +24,9 @@
         if($(this).hasClass("docsR")){
           if($(this).hasClass("docsC")){
             if($(this).hasClass("steps")){
-              $(".chargement-btn").click();
+              if($(this).hasClass("docsD")){
+                $(".chargement-btn").click();
+              }
             }else{}
           }else{}
         }else{}
@@ -99,7 +101,7 @@
                 <div class="next-button">
                   <button class="back-rq stopped">Précédent</button>
                   <button class="next-rq">Suivant</button>
-                  <button class="next-report" style="background: red;color: #fff;border: none;"><i class="fas fa-print"></i> Résultat</button>
+                  <button class="next-report" style="background: red;color: #fff;border: none;"><i class="fas fa-print" /> Résultat</button>
                 </div>
               </html>
               <button visible="1,=,2" label="test button" className="chargement-btn">

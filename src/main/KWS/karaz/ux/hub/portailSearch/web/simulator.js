@@ -177,7 +177,16 @@ function createQuestion(type,obj,hide,clmm){
        for(var i=0;i<size;i++){
          var check = document.createElement("option");
          check.setAttribute("value",i+1);
-         check.innerHTML = obj.response.content[i];   
+
+         if(obj.response.content[i].indexOf("***")!=-1){
+            var a = obj.response.content[i];
+            var elm = a.substring(a.indexOf("***")+3,a.indexOf("***",a.indexOf("***")+1));
+            check.setAttribute("title",elm);
+            check.innerHTML = obj.response.content[i].substring(0,a.indexOf("***"));   
+         }else{
+            check.innerHTML = obj.response.content[i];   
+         }
+
          response.appendChild(check);
        }
        response.addEventListener("change",function(){
@@ -378,8 +387,8 @@ function getQuestions(qstts,type,clmm,iter){
             qstArray[0].push(result._source);
             qstArray[1].push(type[iter]);
             qstArray[2].push(clmm[iter]);
+            startButton(1);
             if(qstts.length-1==iter || qstts[iter+1].toString()=="-1"){
-                
                 if(qstts[iter].toString()!="-1")addQuestion(qstArray);
             }else{
                 getQuestions(qstts,type,clmm,iter+1);
@@ -517,6 +526,7 @@ function intializeVectArray(){
 
 function allNextClick(){
     var qrs = document.querySelectorAll(".simulator .ques-rep");
+    
     for(var i=0;i<qrs.length;i++){
         console.log(qrs[i],i);
         nextClick(qrs[i],i);
@@ -737,11 +747,19 @@ function sendBulkRequestFromArrayVect(bulk,final){
                 if( (qstio.response.type=="select" || qstio.response.type=="check") && Number(arrayVect[1][i]) != 0 ){
                     var doc = document.createElement("div");
                     doc.setAttribute("class","ctr");
-                    doc.innerHTML = "<div style=\"padding: 3px 35px; text-align:left; font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 50px;text-align:left;color: #38A;\">"+qstio.response.content[Number(arrayVect[1][i])-1]+"</div>"
+                    
+                    if(qstio.response.content[Number(arrayVect[1][i])-1].indexOf("***")!=-1){
+                        var a = qstio.response.content[Number(arrayVect[1][i])-1]
+                        var  reponseTemp = a.substring(0,a.indexOf("***"));   
+                     }else{
+                        var reponseTemp = qstio.response.content[Number(arrayVect[1][i])-1];   
+                     }
+
+                    doc.innerHTML = "<div style=\"padding: 3px 35px; text-align:left; font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 50px;text-align:left;color: #38A;\">"+reponseTemp+"</div>"
                     $(".simulator .info-container").append(doc) ;
                     var obj = {
                         "question":qstio.question,
-                        "reponse":qstio.response.content[Number(arrayVect[1][i])-1]
+                        "reponse":reponseTemp
                     }
                     reportD.chemin.push(obj);
                 }else{
@@ -802,9 +820,8 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
       stopedButton(0);
       existBody = false;
       $(".simulator .simulator-qr .next-report").show();
-
+      $(".simulator .simulator-qr .next-button .back-rq").removeClass("stopped");
     }
-
 
     if(classed==true){
         endFunctionSendAdv(existBody);
@@ -851,6 +868,7 @@ function endFunctionSend(){
 function endFunctionSendAdv(existBody){
     var list = [[],[],[],[]];
     var vector = [];
+
     for(var i=0;i<arrayVect[0].length+1;i++){
         list[0] = arrayVect[0].slice(0,i);
         list[1] = arrayVect[1].slice(0,i);
@@ -858,13 +876,14 @@ function endFunctionSendAdv(existBody){
         list[3] = arrayVect[3].slice(0,i);
         var search = makeResponse(list);
         var objSearchMatrix = searchInMatrix2(matrix,search);
+
         console.log(search);
         console.log(objSearchMatrix);
         if(objSearchMatrix!=null){
-            console.log("objSearchMatrix :"+JSON.stringify(objSearchMatrix));
             vector.push(objSearchMatrix);
         }
     };
+
     countDocAdv(0,vector,existBody);
     countDocAdv(2,vector,existBody);
     countDocAdv(1,vector,existBody);
@@ -922,7 +941,7 @@ function makeResponse(array){
     return reps;
 }               
 
-var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[],[],[],[],[]];
+var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[],[],[],[],[],[]];
 
 function searchInMatrix(matrix,key){
      var index = matrix[0].indexOf(key);
@@ -950,7 +969,7 @@ function searchInMatrix2(matrix,listKey){
     }
     
     if(index!=-1){
-        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index],docSort :matrix[5][index],docComSort :matrix[6][index],docFacSort:matrix[7][index],docSortSort:matrix[8][index] };
+        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index],docSort :matrix[5][index],docComSort :matrix[6][index],docFacSort:matrix[7][index],docSortSort:matrix[8][index],id:matrix[9][index] };
      }else{
          console.log("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
          return null;
@@ -962,7 +981,14 @@ var reportD = {
     docsR:[],
     docC:[],
     steps:[],
-    docF:[]
+    docF:[],
+    docD:[],
+    chemins:0,
+    docsRs:0,
+    docsFs:0,
+    docsCs:0,
+    stepsS:0,
+    docDs:0
 };
 
 function getReportData(root,context){
@@ -1042,7 +1068,7 @@ function sendRequestBulk(bulk,type,existBody){
 }
 
 function firstEsTreeCall(){
-    var bulk = "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
+    var bulk = "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n{\"size\":6000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
@@ -1058,7 +1084,7 @@ function firstEsTreeCall(){
             var sizeQuestions = result.responses[0].hits.hits.length;
             var columns = result.responses[1].hits.hits;
             console.log("matrix length :" + columns.length);
-            matrix = [[],[],[],[],[],[],[],[],[]];
+            matrix = [[],[],[],[],[],[],[],[],[],[]];
             qsts =[];
             for(var i=0;i<result.responses[0].hits.hits.length;i++){
                 qsts.push(result.responses[0].hits.hits[i]._source.id.toString());
@@ -1097,6 +1123,8 @@ function firstEsTreeCall(){
                     matrix[8].push(columns[i]._source.docSortSort);
                 }
 
+                matrix[9].push(columns[i]._id);
+
                 console.log(completeArrayMatrix(ar1,ar2,sizeQuestions));
             }
 
@@ -1119,11 +1147,13 @@ function firstEsTreeCall(){
 
 function countDocAdv(type,objSearchMatrixArr,existBody){
     $(".simulator .simulator-qr .next-button img").show();
+    
     var obj = {
         "query": {
             "match_all": {}
         }
     };
+
     if(type==0 || type==2 || type==3 || type==4){
         var url = "simulator_index_docs/docs/_count";
     }else if(type==1){
@@ -1132,7 +1162,7 @@ function countDocAdv(type,objSearchMatrixArr,existBody){
 
     $.ajax({
         type: "post",
-      //  url: "http://localhost:9200/" + url,
+        //  url: "http://localhost:9200/" + url,
         url: URL_SEARCH+"/"+url,
         datatype: "application/json",
         contentType: "application/json",
@@ -1310,6 +1340,8 @@ function countDoc(type,objSearchMatrix) {
 
 function backClick(){
     console.log("######1"+arrayVect[0]);
+    
+    stopedButton(1);
 
     while(arrayVect[1].length!=1) {
         if(arrayVect[1][arrayVect[1].length-1]==0 || arrayVect[1][arrayVect[1].length-1]=="0"){
@@ -1334,6 +1366,7 @@ function backClick(){
     for(var i=0;i<qstss[0].length;i++){
         if(qstss[0][i]!="-1")addToArrayVect(qstss[0][i],0,0,0);
     }
+
     if(arrayVect[0].length==1){
         stopedButton(1);
     }
@@ -1370,12 +1403,7 @@ function backQst(){
 
 function addDocs(result,type,existBody){
     
-    if(result.length==0){
-        document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0].innerHTML="";
-        document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0].innerHTML="";
-        document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-fac-container")[0].innerHTML="";
-        document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-sort-container")[0].innerHTML="";
-    }else{
+    
         if(type==0){
             reportD.docsR = [];
             $(".simulator .docs-qr div.ow-pl").eq(0).addClass("expanded");
@@ -1389,6 +1417,7 @@ function addDocs(result,type,existBody){
             $(".simulator .docs-qr div.ow-pl").eq(4).addClass("expanded");
             var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-fac-container")[0];                
         }else if(type==4){
+            reportD.docsD = [];
             $(".simulator .docs-qr div.ow-pl").eq(5).addClass("expanded");
             var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-sort-container")[0];    
         }
@@ -1437,24 +1466,32 @@ function addDocs(result,type,existBody){
 
         if(type==0){
             reportD.docsR = docsTemp;
+            reportD.docsRs = docsTemp.length;
             if(existBody==false){
                 $(".simulator .next-report").addClass("docsR");
             };
         }else if(type==2){
             reportD.docsC = docsTemp;
+            reportD.docsCs = docsTemp.length;
             if(existBody==false){
                 $(".simulator .next-report").addClass("docsC");
             };
         }else if(type==3){
             reportD.docsF = docsTemp;
+            reportD.docsFs = docsTemp.length;
             if(existBody==false){
                 $(".simulator .next-report").addClass("docsF");
             };
         }else if(type==4){
+            reportD.docD = docsTemp;
+            reportD.docDs = docsTemp.length;
+            if(existBody==false){
+                $(".simulator .next-report").addClass("docsD");
+            };
         }
 
         
-    }
+    
 }
 
 
@@ -1503,6 +1540,8 @@ function addSteps(result,existBody){
         docContainer.appendChild(doc);
 
     }
+
+    reportD.stepsS = reportD.steps.length;
 
     if(existBody==false){
         $(".simulator .next-report").addClass("steps");

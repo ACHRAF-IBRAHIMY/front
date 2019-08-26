@@ -6,163 +6,138 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Rapport des Alertes</title>
+<title>SIMULATEUR DES PROCÉDURES</title>
 <style type="text/css">
-h1
-{
-  font-size: 28px;
-  font-family:"Comic Sans MS", cursive, sans-serif;
-  color: #DF2348;
-  padding:10px 0 0 0;
-  font-weight:lighter;
-  text-align:center;
-  text-decoration: underline;
-  display:block;  
-}
-
-.titreH1
-{
-  font-size: 23px;
-  font-family:"Comic Sans MS", cursive, sans-serif;
-  color: #457DBB;
-  padding:10px 0 0 0;
-  font-weight:lighter;
-  margin-left: 20.0pt;
-  text-decoration: underline;
-  display:block;  
-}
-
-.titreguichet
-{
-  font-family:"Candara", cursive, sans-serif;
-  color: #1C1C1C;
-  padding:10px 0 0 0;
-  text-decoration: underline;
-  margin-left: 20.0pt;
-  
-}
-
-h2 {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-    color: #DF2348;
-    background-color: #FCFCFC;
-    font-family: 'Gabriela', serif;
-    font-size: 20px;
-    letter-spacing: .10em;
-    text-align: center;
-	text-shadow: 0px 0px 0px #767676;
-}
-
-h3 {
-	font-size: 100%;
-	color: black;
-	font-style: italic;
-	font-weight: bold;
-	text-align:center;
-}
-
-.arabicSequence {
-	font-family: 'Arial Unicode MS';
-	font-size: 14px;
-	text-align: right;
-	float: right;
-	margin: 0.0cm;
-	padding-right: 0px;
-	right: 0;
-	width: auto;
-	display: block;
-}
-
-.myTable {
-	background-color: #FFFFFE;
-	border-collapse: collapse;
-	margin-left:auto;
-    margin-right:auto;
-	-fs-table-paginate: paginate;
-}
-
-.myTable td,.myTable th {
-	padding: 5px;
-	border: 0.5px solid #437BBC;
-}
-
-.myTable th {
-	background-color: #ECF0F6;
-	color: black;
-	text-align: center;
-	color: #3C5F8D;
-}
-.myTable tr {
-	page-break-inside: avoid;
-}
-
-.myTable tr td {
-	border: 0.5px solid #437BBC;
-}
-.myTable td {
-	word-wrap: break-word;
-	white-space: normal;
-	overflow: hidden;
-	text-align: left;
-	padding-left: 0.25cm
-	font-size: 10px;
-}
-
-.tableHFill {
-	width: auto;
-	margin: 0.2cm;
-	border: 1px solid #333;
-}
-
-.tableHFill th {
-	text-align: center;
-	background-color: #ECECEC;
-}
-
-.tableHFill td {
-	text-align: center;
-	padding: 0.2cm;
-}
-
-.pieddepage {
-  height: 20px; 
-  margin-top;
-  color:#03224C;
-  font-family: Garamond, serif;
-}
-
-.fieldsets {
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;	
-    margin-left:15.0pt;
-    padding: 14px;
-	font-family:verdana;
-    position: relative;
-    border: 1px black blue dashed;
-	width:270px;
-}
-
-.conteneur{
-  text-align: center;
-}
-
 
 @page { 
 margin-top:17mm;margin-bottom:17mm;
-size:landscape; 
-@bottom-left{ content: "© CASAURBA"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
+size:A4; 
+@bottom-left{ content: "© ROKHAS"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
 @bottom-center { content: "Imprimé Le : $sdf.format($now)"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
 @bottom-right { content: "Page " counter(page) " / " counter(pages)  ; font-size:12px; font-family:Candara; color:#3C5F8D;}
 } 
 
+table {    -fs-table-paginate: paginate;}
+tr{ page-break-inside:avoid;}
+
+.table5 {
+    width: 95%;
+    margin: auto;
+    margin-top: 35px;
+}
+
+.table5 td {
+    padding-right: 2mm;
+    height: 15px;
+    font-size: 12px;
+    font-family: Candara;
+    text-align: left;
+    margin: 0;
+}
+
+.table5 th {
+    text-align: center;
+    height: 15px;
+    font-size: 15px;
+    font-family: Candara;
+}
+
+.table5 td, th {
+  border: 1px solid #eee;
+  padding: 8px;
+}
+
+.table5 tr:nth-child(even) {
+  background-color: #eee;
+}
+
+span.mem{
+    border: 1px solid #000;
+    border-radius: 2px;
+    padding: 2px 4px;
+    margin: 2px;
+    display: inline-block; 
+}
 
 </style>
 </head>
-
+ 
 <body>
-<div>hello!</div>
+<div style="text-align:center;margin:auto"> <img src="$resource-entete-page_PNG" /></div>
+<div style="font-size: 15px;font-family: Candara;text-align: justify;margin: auto;width:95%;margin-top:30px;">
+    SIMULATEUR DES PROCÉDURES :    
+</div>
+#set($xml=$dt.get("data"))
+
+<table  class="table5">
+<thead>
+<tr><th colspan="2">RÉCAPITULATIF DES CHOIX</th></tr>
+</thead>
+<tbody>
+#foreach($ch in $xml.getElements("dataReport.chemin"))
+<tr><td>$xml.getValue($ch,"question")</td><td>$xml.getValue($ch,"reponse")</td></tr>
+ #end
+ </tbody> 
+</table>
+
+<table  class="table5">
+<thead>
+<tr><th>DOCUMENTS REQUIS</th><th>FORMAT</th></tr>
+</thead>
+<tbody>
+#foreach($ch in $xml.getElements("dataReport.docsR"))
+<tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+ #end
+ </tbody> 
+</table>
+
+<table  class="table5">
+<thead>
+<tr><th colspan="2">ÉTAPES CLÉS</th></tr>
+</thead>
+<tbody>
+#set($index=1)    
+#foreach($ch in $xml.getElements("dataReport.steps"))
+<tr>
+    <td>$index</td>
+    <td>$xml.getValue($ch,"stepName")
+        #foreach($m in $xml.getElements($ch,"membre"))
+            <span class="mem"> $m.getText() </span>
+        #end
+    </td>
+</tr>
+#set($index=$index+1)
+ #end
+ </tbody> 
+</table>
+
+<table  class="table5">
+<thead>
+<tr><th>DOCUMENTS COMPLEMENTAIRES
+</th><th>FORMAT</th></tr>
+</thead>
+<tbody>
+#foreach($ch in $xml.getElements("dataReport.docsC"))
+<tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+ #end
+ </tbody> 
+</table>
+
+<table  class="table5">
+<thead>
+<tr><th>DOCUMENTS FACULTATIFS</th><th>FORMAT</th></tr>
+</thead>
+<tbody>
+#foreach($ch in $xml.getElements("dataReport.docsF"))
+<tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+ #end
+ </tbody> 
+</table>
+
 </body>
+
+<div style="font-size: 12px;font-family: Candara;text-align: justify;margin: auto;width:95%;margin-top:30px;">
+    <p><b>Remarque : </b> Des variations peuvent être constatées entre les informations fournies par le simulateur Rokhas.ma et le déroulement réel de la procédure lors du dépôt de la demande sur la plateforme. 
+Ces potentielles variations dépendent généralement de la nature particulière de certains dossiers, de l'évaluation de l'administration compétente et de la localisation du projet concerné.</p>   
+</div>
 </html>

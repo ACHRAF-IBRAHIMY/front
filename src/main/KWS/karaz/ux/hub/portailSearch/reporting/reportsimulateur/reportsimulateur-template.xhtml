@@ -85,8 +85,10 @@ span.mem{
 <tr><th>DOCUMENTS REQUIS</th><th>FORMAT</th></tr>
 </thead>
 <tbody>
+    #if($xml.getValue("dataReport.docsRs")!=0)
 #foreach($ch in $xml.getElements("dataReport.docsR"))
 <tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+ #end
  #end
  </tbody> 
 </table>
@@ -96,7 +98,8 @@ span.mem{
 <tr><th colspan="2">ÉTAPES CLÉS</th></tr>
 </thead>
 <tbody>
-#set($index=1)    
+#set($index=1)
+#if($xml.getValue("dataReport.stepsS")!=0)
 #foreach($ch in $xml.getElements("dataReport.steps"))
 <tr>
     <td>$index</td>
@@ -108,6 +111,7 @@ span.mem{
 </tr>
 #set($index=$index+1)
  #end
+ #end
  </tbody> 
 </table>
 
@@ -117,8 +121,10 @@ span.mem{
 </th><th>FORMAT</th></tr>
 </thead>
 <tbody>
+    #if($xml.getValue("dataReport.docsCs")!=0)
 #foreach($ch in $xml.getElements("dataReport.docsC"))
 <tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+ #end
  #end
  </tbody> 
 </table>
@@ -128,11 +134,27 @@ span.mem{
 <tr><th>DOCUMENTS FACULTATIFS</th><th>FORMAT</th></tr>
 </thead>
 <tbody>
+    #if($xml.getValue("dataReport.docsFs")!=0)
 #foreach($ch in $xml.getElements("dataReport.docsF"))
 <tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
  #end
+ #end
  </tbody> 
 </table>
+
+<table  class="table5">
+<thead>
+<tr><th>DOCUMENTS DÉLIVRÉS</th><th>FORMAT</th></tr>
+</thead>
+<tbody>
+    #if($xml.getValue("dataReport.docDs")!=0)
+#foreach($ch in $xml.getElements("dataReport.docD"))
+<tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+ #end
+ #end
+ </tbody> 
+</table>
+
 
 </body>
 

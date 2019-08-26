@@ -1,15 +1,14 @@
 
 
-
 function getAllCommuneObject(filters,sortBy,rev,size,from){
     var filtersObj = [];
     
       for(var i=0;i<filters[0].length;i++){
         var filter = {
-          "match":{}     
+          "term":{}     
         };
       
-        filter["match"][filters[0][i]]=filters[1][i];
+        filter["term"][filters[0][i]]=filters[1][i];
         filtersObj.push(filter);
       }
     
@@ -91,6 +90,9 @@ function createBarTop3(result,id,select){
 
 function createBarTop10(result,id,select){
     var bar = $(id);
+    bar.find(".div-1-top10").html("");
+    bar.find(".div-3-top10").html("");
+
     var results = result.hits.hits;
 
     for(var i=0;i<results.length;i++){
@@ -108,7 +110,17 @@ function createCommuneTable(result){
 
     for(var i=0;i<results.length;i++){
         var tr = $(document.createElement("tr"));
-        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+results[i]._source.commune+`</td>`);
+        var rankCom = results[i]._source.rankComp;
+        var rankStr = "";
+        
+        if(rankCom>0){
+            rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
+        }else if(rankCom<0){
+            rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+        }else{
+            rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+        }
+        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,25)+"</span> "+rankStr+`</span></td>`);
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
         tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
@@ -332,4 +344,3 @@ function getAllByAggs(field,size,filter,byfilter,type){
 
 
   }
-

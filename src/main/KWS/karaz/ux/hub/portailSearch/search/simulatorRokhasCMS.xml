@@ -423,6 +423,12 @@
                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                       </div>
                     </div>
+                    <div class="class-help-q">
+                      <span>Help :</span>
+                        <div class="responses-sim-cms">
+                          <input class="placeholder" type="text" placeholder="Text" />
+                        </div>
+                    </div>
                     <div class="class-update-button">
                       <button class="save">Sauvegarder</button>
                       <button class="remove" style="background:red">Supprimer</button>
@@ -482,6 +488,12 @@
                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                       </div>
                     </div>
+                    <div class="class-help-q">
+                      <span>Help :</span>
+                      <div class="responses-sim-cms">
+                        <input class="placeholder" type="text" placeholder="help" />
+                      </div>
+                    </div>
                     <div class="class-update-button">
                       <button>Ajouter</button>
                     </div>
@@ -520,7 +532,7 @@
                   </div>
                 </div>
               </html>
-              <field xpath="attachementImg" className="att-img" krn="3d284095-58d7-4eea-b021-89f18d5d2b6a" label="attacher" widget="fileUpload" />
+              <field xpath="attachementImg" className="att-img" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
             </vbox>
             <vbox className="div-5">
               <html>
@@ -576,7 +588,7 @@
                       </span>
                       <span>Image</span>
                       <button class="but">Attacher</button>
-                      <input class="att" type="hidden" value=""/>
+                      <input class="att" type="hidden" value="" />
                     </div>
                     <div class="class-update-button">
                       <button>Modifier</button>
@@ -584,7 +596,7 @@
                   </div>
                 </div>
               </html>
-              <field xpath="attachementImg" className="att-img" krn="3d284095-58d7-4eea-b021-89f18d5d2b6a" label="attacher" widget="fileUpload" />
+              <field xpath="attachementImg" className="att-img" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
             </vbox>
             <vbox className="div-7">
               <html>
