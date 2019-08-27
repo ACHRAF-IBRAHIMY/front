@@ -18,11 +18,7 @@
 		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
 		    });
 		
-		    $(".header-div-toggle .dropdown").mouseenter(function(){
-		        $(".header-div-toggle .dropdown-content").slideDown();
-		    }).mouseleave(function(){
-		        $(".header-div-toggle .dropdown-content").slideUp();
-		    }); 
+		  
                var mem = null;
                document.getElementsByClassName("back-div")[0].addEventListener("click",function(){
                     callLoadGif();
