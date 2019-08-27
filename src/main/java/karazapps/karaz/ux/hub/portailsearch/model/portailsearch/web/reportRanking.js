@@ -1,5 +1,4 @@
 
-
 function getAllCommuneObject(filters,sortBy,rev,size,from){
     var filtersObj = [];
     
@@ -100,6 +99,35 @@ function createBarTop10(result,id,select){
         bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source.indecators[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span>");
     }
 }  
+
+function updateTitles(){
+    var trim = $(".ranking-fieldset #period option:selected").val();
+    var region = $(".ranking-fieldset #region option:selected").val();
+    var prefecture = $(".ranking-fieldset #prefecture option:selected").val();
+    var str = "";
+    $(".ranking-fieldset .ow-label-pl span").remove();
+    var trims = trim.split("-");
+
+    if(trims[0]=="1"){
+        str += "1er trimestre "+trims[1];
+    }else if(trims[0]=="2"){
+        str += "2éme trimestre "+trims[1];
+    }else if(trims[0]=="3"){
+        str += "3éme trimestre "+trims[1];
+    }else if(trims[0]=="4"){
+        str += "4éme trimestre "+trims[1];
+    }
+
+    if(region != "default"){
+        str += " | "+region;
+    }
+
+    if(prefecture != "default"){
+        str += " | "+prefecture;
+    }
+
+    $(".ranking-fieldset > .ow-pl-toolbar .ow-label-pl").append("<span style=\"color:orange\"> "+str+"</span>");
+}
   
 function createCommuneTable(result){
     var results = result.hits.hits;
@@ -226,6 +254,11 @@ function getAllByAggs(field,size,filter,byfilter,type){
         option.innerHTML = elms[i].key;
         option.setAttribute("value",elms[i].key);
         select.append(option);
+      }
+
+      if(idHtml=="#period"){
+        $(".ranking-fieldset #period").val("4-2018");
+        updateTitles();
       }
   }
 

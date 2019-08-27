@@ -16,6 +16,8 @@
           loadPageBytype(0);
           
           var tabInd = ["4-2018"];
+          
+
 
           restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",60,0,0);
           restGetAllCommue([["trim.keyword"],tabInd],"indecators.delai","desc",3,0,1);
@@ -121,7 +123,6 @@
               tabInd.push(prefecture);
 
               restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
-
               restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
               restGetAllCommue([filters,filtersBy],"indecators.delai","desc",3,0,1);
               restGetAllCommue([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
@@ -131,7 +132,7 @@
               restGetAllCommue([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
               restGetAllCommue([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
               
-
+              updateTitles();
 
           });
 
