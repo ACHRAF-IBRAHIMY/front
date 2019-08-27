@@ -24,7 +24,9 @@
         if($(this).hasClass("docsR")){
           if($(this).hasClass("docsC")){
             if($(this).hasClass("steps")){
-              $(".chargement-btn").click();
+              if($(this).hasClass("docsD")){
+                $(".chargement-btn").click();
+              }
             }else{}
           }else{}
         }else{}
