@@ -517,8 +517,8 @@
                       <span>Type</span>
                       <span class="link-sim-cms">
                         <select>
-                          <option value="type-1">Type 1</option>
-                          <option value="type-2">Type 2</option>
+                          <option value="type-1">A ATTACHER</option>
+                          <option value="type-2">PAR ROKHAS</option>
                         </select>
                       </span>
                     </div>
@@ -555,7 +555,11 @@
                     <div class="class-membre-q form-grid">
                       <span>Membres</span>
                       <span class="link-sim-cms">
-                        <input type="text" placeholder="Séparer par - Exemple : membre1-membre2" />
+                        <input type="text" placeholder="Séparer par - Exemple : membre1**type-membre2**type" />
+                      </span>
+                      <span></span>
+                      <span style="font-size: 12px;">
+                        les types sont : D pour Demandeur et A pour Administration
                       </span>
                     </div>
                     <div class="class-update-button">
@@ -582,8 +586,8 @@
                       <span>Type</span>
                       <span class="link-sim-cms">
                         <select>
-                          <option value="type-1">Type 1</option>
-                          <option value="type-2">Type 2</option>
+                          <option value="type-1">A ATTACHER</option>
+                          <option value="type-2">PAR ROKHAS</option>
                         </select>
                       </span>
                       <span>Image</span>
@@ -620,7 +624,11 @@
                     <div class="class-membre-q form-grid">
                       <span>Membres</span>
                       <span class="link-sim-cms">
-                        <input type="text" placeholder="Séparer par - Exemple : membre1-membre2" />
+                        <input type="text" placeholder="Séparer par - Exemple : membre1**type-membre2**type" />
+                      </span>
+                      <span></span>
+                      <span style="font-size: 12px;">
+                        les types sont : D pour Demandeur et A pour Administration
                       </span>
                     </div>
                     <div class="class-update-button">

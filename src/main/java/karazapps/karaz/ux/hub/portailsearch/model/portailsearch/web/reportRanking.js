@@ -1,4 +1,5 @@
 
+
 function getAllCommuneObject(filters,sortBy,rev,size,from){
     var filtersObj = [];
     
@@ -246,21 +247,70 @@ function getAllByAggs(field,size,filter,byfilter,type){
         var elms = result.aggregations.genres.buckets;
       }
 
+      if(idHtml=="#period"){
+        elms = triPeriods(elms);
+      }
+
       $(".ranking-fieldset "+idHtml+" option:not(.ranking-fieldset "+idHtml+" option:first-child)").remove();
       var select = $(".ranking-fieldset "+idHtml);  
 
       for(var i=0;i<elms.length;i++){
         var option = document.createElement("option");
-        option.innerHTML = elms[i].key;
+        var str = "";
+        if(idHtml=="#period"){
+            var trims = elms[i].key.split("-");
+            if(trims[0]=="1"){
+                str += "1er trimestre "+trims[1];
+            }else if(trims[0]=="2"){
+                str += "2éme trimestre "+trims[1];
+            }else if(trims[0]=="3"){
+                str += "3éme trimestre "+trims[1];
+            }else if(trims[0]=="4"){
+                str += "4éme trimestre "+trims[1];
+            }
+          }
+        option.innerHTML = str;
         option.setAttribute("value",elms[i].key);
         select.append(option);
       }
 
-      if(idHtml=="#period"){
+      if(idHtml=="#period"){  
         $(".ranking-fieldset #period").val("4-2018");
         updateTitles();
       }
   }
+
+  function triPeriods(elm){
+      var newElm = [];
+
+      if(elm.length!=0){
+        newElm.push(elm[0]);
+      }
+
+      newElm = elm.sort(function(a,b){
+        return -compareTrims(a.key,b.key);
+      });
+      
+
+      return newElm;
+  }
+
+  function compareTrims(trimA,trimB){
+    var trimAs = trimA.split("-");
+    var trimBs = trimB.split("-");
+    if(Number(trimAs[1])>Number(trimBs[1])){
+      return 1;
+    }else if(Number(trimAs[1])<Number(trimBs[1])){
+      return -1;
+    }else{
+      if(Number(trimAs[0])<Number(trimBs[0])){
+          return -1;
+        }else{
+          return 1;
+        }
+    }
+}
+
 
   var region_color = ["#4472C4","#FFC000","#264478","#AA8B2B","#ED7D31","##77ACDC","#AE6736","#255E91",
     "#B4B4B4","#70AD47","#7D7D7D","#43682B"];

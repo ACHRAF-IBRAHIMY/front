@@ -902,10 +902,11 @@ function convertTreeComp2SimpleTree(tree){
 }
 
 var matrixBulk = [];
+var histoIds = [];
+var histoRaw = [[],[]];
 
 function conevertTo(tree,array,newObj){
   for(var i=0;i<tree.children.length;i++){
-
         if(tree.children[i].text.status==1){
             var list = tree.children[i].text.id.split("-");
             var obj = simple_chart_config.nodeStructure;    
@@ -924,10 +925,24 @@ function conevertTo(tree,array,newObj){
                     "list":matrixColumn,
                     "list_rep": parcourirTreeReps(tree.children[i].text.id,Number(column[j]))
                 }
+
+                if(histoIds.indexOf(tree.children[i].text.columns_idB[column[j]])==-1){
+                    histoIds.push(tree.children[i].text.columns_idB[column[j]]);
+                    histoRaw[0].push(tree.children[i].text.columns_idB[column[j]]);
+                    histoRaw[1].push([parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-")]);
+                }else{
+                    if(histoRaw[0].indexOf(tree.children[i].text.columns_idB[column[j]])==-1){
+                        histoRaw[0].push(tree.children[i].text.columns_idB[column[j]]);
+                        histoRaw[1].push([parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-")]);
+                    }else{
+                        var index = histoRaw[0].indexOf(tree.children[i].text.columns_idB[column[j]]);
+                        if(histoRaw[1][index].indexOf(parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-"))==-1)
+                        histoRaw[1][index].push(parcourirTreeReps(tree.children[i].text.id,Number(column[j])));
+                    }
+                }
+                matrixBulk.push(bulk);
             }
-            
-            
-            matrixBulk.push(bulk);
+
         }
     
     
@@ -949,6 +964,18 @@ function conevertTo(tree,array,newObj){
     array[0].pop();
     array[1].pop();
   }
+
+            var tepmRaw = [[],[]];
+
+            for(var k=0;k<histoRaw[0].length;k++){
+                if(histoRaw[1][k].length!=1){
+                    tepmRaw[0].push(histoRaw[0][k]);
+                    tepmRaw[1].push(histoRaw[1][k])
+                }
+            }
+            
+            histoRaw = tepmRaw;
+
   return newObj;
 }
 
@@ -985,6 +1012,9 @@ function getContentSubTree(id){
 
 
 function parcourirTreeReps(id,add){
+    if(id=="1-0-0"){
+    }
+
     var list = id.split("-");
     if(add!=null)list.push(add);
     var newList = [];
@@ -1400,7 +1430,6 @@ function nextStepDocsIn(type,id){
             objectJsonMatrixColumns = makeMatrixClass(id,ident);
             getAllCms(0,createAllCms,[]);
         }else{
-            
             objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id,ident)["docs_requis"];
             objectJsonMatrixColumns["docSort"] = getListStepsAdded();
             
@@ -1881,7 +1910,18 @@ function getModifyObject(type,root){
         case 3: obj.id = $(".simulator-cms .side-bar .body .div-7 .input-id").val();
                 obj.title = $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val();
                 obj.description = $(".simulator-cms .side-bar .body .div-7 .class-desc-q input").val();
-                obj.membres = $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val().split("-");
+                obj.membress = $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val().split("-");
+
+                var copies = [];
+                obj.membress.forEach(function(elm){ 
+                    if(elm.indexOf("***")!=-1){
+                        copies.push({"membre":elm.split("***")[0],"type":elm.split("***")[1]});
+                    }else{
+                        copies.push({"membre":elm,"type":"A"});
+                    }
+                });
+                obj.membress = copies;
+
                 break;
     }
     return obj;
@@ -1892,7 +1932,7 @@ function detailsDocObject(result,type,root){
         $(".simulator-cms .side-bar .body .div-6 .input-id").val(result._id);
         $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val(result._source.title);
         var selected = Number(result._source.type.split("-")[1])-1;
-        $(".simulator-cms .side-bar .body .div-6 .class-type-question select option").eq(selected).select();
+        $(".simulator-cms .side-bar .body .div-6 .class-type-question select").val(result._source.type);
         if(result._source.attachementImg!=undefined){
             $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val(result._source.attachementImg);
         }else{
@@ -1911,7 +1951,9 @@ function detailsDocObject(result,type,root){
         $(".simulator-cms .side-bar .body .div-7 .input-id").val(result._id);
         $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val(result._source.title);
         $(".simulator-cms .side-bar .body .div-7 .class-desc-q input").val(result._source.description);
-        $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val(result._source.membres.join("-"));
+        var mms = [];
+        result._source.membress.forEach(function(elm){ mms.push(elm.membre+"***"+elm.type) });
+        $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val(mms.join("-"));
     }
 }
 
