@@ -12,7 +12,7 @@
 @page { 
 margin-top:17mm;margin-bottom:17mm;
 size:A4; 
-@bottom-left{ content: "© ROKHAS"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
+@bottom-left{ content: "© $sdf.format($now).toString().split("/")[2] ROKHAS – Powered By Karaz"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
 @bottom-center { content: "Imprimé Le : $sdf.format($now)"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
 @bottom-right { content: "Page " counter(page) " / " counter(pages)  ; font-size:12px; font-family:Candara; color:#3C5F8D;}
 } 
@@ -36,7 +36,8 @@ tr{ page-break-inside:avoid;}
 }
 
 .table5 th {
-    text-align: center;
+    text-align: left;
+    padding-left:180px;	
     height: 15px;
     font-size: 15px;
     font-family: Candara;
@@ -59,19 +60,27 @@ span.mem{
     display: inline-block; 
 }
 
+
 </style>
 </head>
  
 <body>
-<div style="text-align:center;margin:auto"> <img src="$resource-entete-page_PNG" /></div>
-<div style="font-size: 15px;font-family: Candara;text-align: justify;margin: auto;width:95%;margin-top:30px;">
-    SIMULATEUR DES PROCÉDURES :    
-</div>
+<div style="width:90%;height:100px;margin:auto;display:grid;grid-template-columns:40% 60%;position:relative">
+<img style="width:30%;position:absolute;top:0;left:0" src="$resource-entete-page_PNG" /> 
+	<div style="position:absolute;top:0;left:35%;height:33px;border-left:1px solid #eee;padding:15px 35px;font-size: 19px;font-family: Candara;text-align: left;width:80%;display:inline">
+SIMULATEUR DE PROCÉDURES D'AUTORISATION <span class="rokhas-file"></span>
+	</div>
+ </div>
+<div>
+ff
+	<img alt="casaurba" src="data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='file-code' class='svg-inline--fa fa-file-code fa-w-12' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath fill='currentColor' d='M384 121.941V128H256V0h6.059c6.365 0 12.47 2.529 16.971 7.029l97.941 97.941A24.005 24.005 0 0 1 384 121.941zM248 160c-13.2 0-24-10.8-24-24V0H24C10.745 0 0 10.745 0 24v464c0 13.255 10.745 24 24 24h336c13.255 0 24-10.745 24-24V160H248zM123.206 400.505a5.4 5.4 0 0 1-7.633.246l-64.866-60.812a5.4 5.4 0 0 1 0-7.879l64.866-60.812a5.4 5.4 0 0 1 7.633.246l19.579 20.885a5.4 5.4 0 0 1-.372 7.747L101.65 336l40.763 35.874a5.4 5.4 0 0 1 .372 7.747l-19.579 20.884zm51.295 50.479l-27.453-7.97a5.402 5.402 0 0 1-3.681-6.692l61.44-211.626a5.402 5.402 0 0 1 6.692-3.681l27.452 7.97a5.4 5.4 0 0 1 3.68 6.692l-61.44 211.626a5.397 5.397 0 0 1-6.69 3.681zm160.792-111.045l-64.866 60.812a5.4 5.4 0 0 1-7.633-.246l-19.58-20.885a5.4 5.4 0 0 1 .372-7.747L284.35 336l-40.763-35.874a5.4 5.4 0 0 1-.372-7.747l19.58-20.885a5.4 5.4 0 0 1 7.633-.246l64.866 60.812a5.4 5.4 0 0 1-.001 7.879z'%3E%3C/path%3E%3C/svg%3E" style="height: 66px; margin-left: 10px; margin-right: 10px; width: 180px" />
+</div>	
+
 #set($xml=$dt.get("data"))
 
 <table  class="table5">
 <thead>
-<tr><th colspan="2">RÉCAPITULATIF DES CHOIX</th></tr>
+<tr><th colspan="2" style="text-align:center;padding-left:0">RÉCAPITULATIF DES CHOIX</th></tr>
 </thead>
 <tbody>
 #foreach($ch in $xml.getElements("dataReport.chemin"))
@@ -80,22 +89,10 @@ span.mem{
  </tbody> 
 </table>
 
-<table  class="table5">
-<thead>
-<tr><th>DOCUMENTS REQUIS</th><th>FORMAT</th></tr>
-</thead>
-<tbody>
-    #if($xml.getValue("dataReport.docsRs")!=0)
-#foreach($ch in $xml.getElements("dataReport.docsR"))
-<tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
- #end
- #end
- </tbody> 
-</table>
 
 <table  class="table5">
 <thead>
-<tr><th colspan="2">ÉTAPES CLÉS</th></tr>
+<tr><th colspan="2" style="text-align:center;padding-left:0">ÉTAPES CLÉS</th></tr>
 </thead>
 <tbody>
 #set($index=1)
@@ -105,7 +102,7 @@ span.mem{
     <td>$index</td>
     <td>$xml.getValue($ch,"stepName")
         #foreach($m in $xml.getElements($ch,"membre"))
-            <span class="mem"> $m.getText() </span>
+            <span class="mem"> $xml.getValue($m,"membre") </span>
         #end
     </td>
 </tr>
@@ -115,15 +112,30 @@ span.mem{
  </tbody> 
 </table>
 
+
+<table  class="table5">
+<thead>
+<tr><th>DOCUMENTS REQUIS</th><th style="width:20%;text-align:center;padding-left:0" >SOURCE</th></tr>
+</thead>
+<tbody>
+    #if($xml.getValue("dataReport.docsRs")!=0)
+#foreach($ch in $xml.getElements("dataReport.docsR"))
+<tr><td>$xml.getValue($ch,"docName")</td><td style="text-align:center">$xml.getValue($ch,"type")</td></tr>
+ #end
+ #end
+ </tbody> 
+</table>
+
+
 <table  class="table5">
 <thead>
 <tr><th>DOCUMENTS COMPLEMENTAIRES
-</th><th>FORMAT</th></tr>
+</th><th style="width:20%;text-align:center;padding-left:0" >SOURCE</th></tr>
 </thead>
 <tbody>
     #if($xml.getValue("dataReport.docsCs")!=0)
 #foreach($ch in $xml.getElements("dataReport.docsC"))
-<tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+<tr><td>$xml.getValue($ch,"docName")</td><td style="text-align:center">$xml.getValue($ch,"type")</td></tr>
  #end
  #end
  </tbody> 
@@ -131,12 +143,12 @@ span.mem{
 
 <table  class="table5">
 <thead>
-<tr><th>DOCUMENTS FACULTATIFS</th><th>FORMAT</th></tr>
+<tr><th>DOCUMENTS FACULTATIFS</th><th style="width:20%;text-align:center;padding-left:0">SOURCE</th></tr>
 </thead>
 <tbody>
     #if($xml.getValue("dataReport.docsFs")!=0)
 #foreach($ch in $xml.getElements("dataReport.docsF"))
-<tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+<tr><td>$xml.getValue($ch,"docName")</td><td style="text-align:center">$xml.getValue($ch,"type")</td></tr>
  #end
  #end
  </tbody> 
@@ -144,12 +156,12 @@ span.mem{
 
 <table  class="table5">
 <thead>
-<tr><th>DOCUMENTS DÉLIVRÉS</th><th>FORMAT</th></tr>
+<tr><th>DOCUMENTS DÉLIVRÉS</th><th style="width:20%;text-align:center;padding-left:0">SOURCE</th></tr>
 </thead>
 <tbody>
     #if($xml.getValue("dataReport.docDs")!=0)
 #foreach($ch in $xml.getElements("dataReport.docD"))
-<tr><td>$xml.getValue($ch,"docName")</td><td>$xml.getValue($ch,"type")</td></tr>
+<tr><td>$xml.getValue($ch,"docName")</td><td style="text-align:center" >$xml.getValue($ch,"type")</td></tr>
  #end
  #end
  </tbody> 

@@ -182,12 +182,16 @@
 
 .simulator .docs-container .doc-item,.simulator .steps-container .doc-item,.simulator .docs-comp-container .doc-item,.simulator .docs-fac-container .doc-item,.simulator .docs-sort-container .doc-item{
     display: grid;
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 10% 90%;
     text-align: left;
     width: 80%;
     margin: auto;
     color: #777;
     margin-bottom: 9px;
+}
+
+.simulator .steps-container .doc-item{
+    width: 90%;
 }
 
 .simulator .docs-container i.fa-info,.simulator .docs-comp-container i.fa-info,.simulator .docs-fac-container i.fa-info,.simulator .docs-sort-container i.fa-info{
@@ -200,8 +204,11 @@
     line-height: 15px;
     border-radius: 50%;
     display: inline-block;
-    margin-top: 8px;
+    margin-left: 5px;
+    vertical-align: text-bottom;
 }
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 .simulator .steps-container .doc-item span.icon-number{
     border: 2px solid;
@@ -210,7 +217,8 @@
     background: #777;
     color: #fff;
     border-radius: 50%;
-    line-height: 100%;
+    line-height: 18px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .simulator .docs-container .doc-item i,.simulator .steps-container .doc-item i,.simulator .docs-comp-container .doc-item i,.simulator .docs-fac-container .doc-item i,.simulator .docs-sort-container .doc-item i{

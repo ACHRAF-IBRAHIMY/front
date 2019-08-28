@@ -876,7 +876,9 @@ function endFunctionSendAdv(existBody){
         list[3] = arrayVect[3].slice(0,i);
         var search = makeResponse(list);
         var objSearchMatrix = searchInMatrix2(matrix,search);
-
+        if(objSearchMatrix!=null){
+           // alert(JSON.stringify(objSearchMatrix));
+        }
         console.log(search);
         console.log(objSearchMatrix);
         if(objSearchMatrix!=null){
@@ -1429,16 +1431,25 @@ function addDocs(result,type,existBody){
             var doc = document.createElement("div");
             doc.setAttribute("class","doc-item");
             var icon = document.createElement("i");
-            icon.setAttribute("class","far fa-file-alt");
+
+            if(result[i].hits.hits[0]._source.type=="type-1"){
+                icon.setAttribute("class","far fa-file-alt");
+            }else{
+                icon.setAttribute("class","far fa-file-code");
+                icon.setAttribute("style","color:#f93");
+            }
+
             var docName = document.createElement("span");
-            docName.innerHTML = result[i].hits.hits[0]._source.title;
-            docName.setAttribute("class","doc-name");
             var docApr = document.createElement("i");
             docApr.setAttribute("style","cursor:pointer");
             docApr.setAttribute("class","fas fa-info");
+            docName.innerHTML = result[i].hits.hits[0]._source.title;
+            docName.setAttribute("class","doc-name");
+            
+
             var obj = {
                 "docName":result[i].hits.hits[0]._source.title,
-                "type":"PAPIER"
+                "type":result[i].hits.hits[0]._source.type
             };
 
             docsTemp.push(obj);
@@ -1447,7 +1458,7 @@ function addDocs(result,type,existBody){
 
             if(srcImg != undefined){
                 var docImg = document.createElement("div");
-                docImg.setAttribute("style","display:none;position: absolute;width: 327px;background: #EEE;right: 12px;height: 312px;z-index: 1;");
+                docImg.setAttribute("style","display:none;position: absolute;width: 327px;background: #EEE;right: 12px;z-index: 1;");
                 docImg.innerHTML = "<img style=\"width: 100%;border: 1px solid black;\" src="+srcImg+" />";
                 docApr.addEventListener("mouseenter",function(){
                     this.getElementsByTagName("div")[0].style.display = "block";
@@ -1458,9 +1469,10 @@ function addDocs(result,type,existBody){
                 docApr.appendChild(docImg);
             };
 
+            docName.appendChild(docApr);
             doc.appendChild(icon);
             doc.appendChild(docName);
-            doc.appendChild(docApr);
+            //doc.appendChild(docApr);
             docContainer.appendChild(doc);
         }
 
@@ -1517,15 +1529,19 @@ function addSteps(result,existBody){
 
         var obj = {
             "stepName":result[i].hits.hits[0]._source.title,
-            "membre":result[i].hits.hits[0]._source.membres
+            "membre":result[i].hits.hits[0]._source.membress
         };
 
         reportD.steps.push(obj);
 
         doc.appendChild(icon);
-        if(result[i].hits.hits[0]._source.membres != undefined){
-            for(var j=0;j<result[i].hits.hits[0]._source.membres.length;j++){
-                var spa = "<span class=\"membre-span\">"+result[i].hits.hits[0]._source.membres[j]+"</span>"
+        if(result[i].hits.hits[0]._source.membress != undefined){
+            for(var j=0;j<result[i].hits.hits[0]._source.membress.length;j++){
+                if(result[i].hits.hits[0]._source.membress[j].type=="D"){
+                    var spa = "<span class=\"membre-span\" onmouseover=\"this.style.background='#38A';this.style.color='#FFF';\" onmouseout=\"this.style.background='';this.style.color='#38A';\" style=\"cursor:pointer;padding: 2px;line-height: 150%;color:#38a;border-color:#38a;\">"+result[i].hits.hits[0]._source.membress[j].membre+"</span>"
+                }else{
+                    var spa = "<span class=\"membre-span\" onmouseover=\"this.style.background='#f93';this.style.color='#FFF';\" onmouseout=\"this.style.background='';this.style.color='#f93';\" style=\"cursor:pointer;padding: 2px;line-height: 150%\">"+result[i].hits.hits[0]._source.membress[j].membre+"</span>"
+                }
                 docName.innerHTML+=spa;
             }
         }
