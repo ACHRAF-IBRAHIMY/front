@@ -557,7 +557,7 @@
                       <span class="link-sim-cms">
                         <input type="text" placeholder="Séparer par - Exemple : membre1**type-membre2**type" />
                       </span>
-                      <span></span>
+                      <span />
                       <span style="font-size: 12px;">
                         les types sont : D pour Demandeur et A pour Administration
                       </span>
@@ -594,6 +594,7 @@
                       <button class="but">Attacher</button>
                       <input class="att" type="hidden" value="" />
                     </div>
+                    <div class="class-img"></div>
                     <div class="class-update-button">
                       <button>Modifier</button>
                     </div>
@@ -626,7 +627,7 @@
                       <span class="link-sim-cms">
                         <input type="text" placeholder="Séparer par - Exemple : membre1**type-membre2**type" />
                       </span>
-                      <span></span>
+                      <span />
                       <span style="font-size: 12px;">
                         les types sont : D pour Demandeur et A pour Administration
                       </span>
