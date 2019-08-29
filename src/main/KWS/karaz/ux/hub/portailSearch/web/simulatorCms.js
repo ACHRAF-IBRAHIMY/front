@@ -1933,14 +1933,20 @@ function detailsDocObject(result,type,root){
         $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val(result._source.title);
         var selected = Number(result._source.type.split("-")[1])-1;
         $(".simulator-cms .side-bar .body .div-6 .class-type-question select").val(result._source.type);
+
         if(result._source.attachementImg!=undefined){
+            $(".simulator-cms .side-bar .body .div-6").css("height","auto");
             $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val(result._source.attachementImg);
+            $(".simulator-cms .side-bar .body .div-6 .class-img").html("<img style=\"    display: block;height: 300px;margin: auto;margin-top: 15px;\" src=\""+result._source.attachementImg+"\" />");
         }else{
+            $(".simulator-cms .side-bar .body .div-6").css("height","360px");
             $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val("");
+            $(".simulator-cms .side-bar .body .div-6 .class-img").html("No file");
         }
+
         root.attachementImg = {
             fileId : "",
-            gedId : "",
+            gedId : "", 
             fileName : "",
             fileSize : "",
             fileSignature : "",

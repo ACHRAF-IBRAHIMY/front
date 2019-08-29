@@ -94,10 +94,17 @@
                 <div class="qr">
                   <img src="img/load-text.gif" style="margin: auto;display: block;height: 100px;" alt="" />
                 </div>
+                <div class="error-msg-sim">
+                  <div><i class="fas fa-exclamation-triangle" ></i></div>
+                  <p class="">Cette procédure sera décrite et mise en ligne après publication au bulletin officiel des décrets :
+                  <br/>
+                     - N° 2.18.475 précisant les modalités de délivrance des autorisations de réfection, de régularisation et de démolition.
+                    <br/> - N° 2.18.577 remplaçant le décret N° 2.13.424 du 24 Mai 2013 (Règlement général de construction)</p>
+                </div>
                 <div class="next-button">
                   <button class="back-rq stopped">Précédent</button>
                   <button class="next-rq">Suivant</button>
-                  <button class="next-report" style="background: red;color: #fff;border: none;"><i class="fas fa-print" /> Résultat</button>
+                  <button class="next-report" style="background: red;color: #fff;border: none;width:auto"><i class="fas fa-print" /> Imprimer la procédure</button>
                 </div>
               </html>
               <button visible="1,=,2" label="test button" className="chargement-btn">

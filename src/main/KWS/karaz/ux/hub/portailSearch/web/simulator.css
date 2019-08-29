@@ -1,4 +1,23 @@
 
+.error-msg-sim{
+    padding: 12px 15px;
+    background: #666;
+    color: #fff;
+    margin-bottom: 25px;
+    margin-top: -31px;
+    display: none;
+}
+
+.error-msg-sim p{
+    text-align: left;
+    font-size: 15px;
+}
+
+.error-msg-sim i{
+    font-size: 31px;
+    color: #f93;
+}
+
 .ques-rep .fa-question-circle{
     margin-left: 7px;
 }

@@ -1,5 +1,4 @@
 
-
 function getAllCommuneObject(filters,sortBy,rev,size,from){
     var filtersObj = [];
     
@@ -268,6 +267,8 @@ function getAllByAggs(field,size,filter,byfilter,type){
             }else if(trims[0]=="4"){
                 str += "4éme trimestre "+trims[1];
             }
+          }else{
+              str = elms[i].key;
           }
         option.innerHTML = str;
         option.setAttribute("value",elms[i].key);
@@ -275,7 +276,7 @@ function getAllByAggs(field,size,filter,byfilter,type){
       }
 
       if(idHtml=="#period"){  
-        $(".ranking-fieldset #period").val("4-2018");
+        $(".ranking-fieldset #period").val(elms[0].key);
         updateTitles();
       }
   }

@@ -145,15 +145,32 @@ function createQuestion(type,obj,hide,clmm){
             input.setAttribute("value",i+1);
             var res = document.createElement("span");
             res.setAttribute("class","rep-check");
-            res.innerHTML = obj.response.content[i];   
+              
             var check = document.createElement("span");
             check.setAttribute("class","check");
+
+            if(obj.response.content[i].indexOf("***")!=-1){
+                var a = obj.response.content[i];
+                var elm = a.substring(a.indexOf("***")+3,a.indexOf("***",a.indexOf("***")+1));
+                var icc = document.createElement("i");
+                icc.setAttribute("class","fas fa-info");
+                icc.setAttribute("style","margin-left: 7px;font-size: 11px;width: 17px;background: #38a;color: #fff;border-radius: 50%;text-align: center;height: 17px;line-height: 17px;cursor: pointer;");
+                icc.setAttribute("title",elm);
+                res.innerHTML = obj.response.content[i].substring(0,a.indexOf("***"))+" "; 
+                res.appendChild(icc);
+             }else{
+                res.innerHTML = obj.response.content[i]; 
+            }
+
+
             check.addEventListener("click",function(){
                 $(this).parent().parent().find(".check-ent").removeClass("active-check");
                 $(this).children(".check-ent").addClass("active-check");
                 if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                    $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
                    $(".simulator .simulator-qr button.next-report").hide();
+                   $(".error-msg-sim").hide();
+
                    removeExpanded(); 
                 }
             });
@@ -193,6 +210,8 @@ function createQuestion(type,obj,hide,clmm){
             if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                 $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
                 $(".simulator .simulator-qr button.next-report").hide();
+                $(".error-msg-sim").hide();
+
                 removeExpanded(); 
             }
        });
@@ -205,6 +224,8 @@ function createQuestion(type,obj,hide,clmm){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
             $(".simulator .simulator-qr button.next-report").hide();
+            $(".error-msg-sim").hide();
+
 
             removeExpanded(); 
          }
@@ -227,6 +248,7 @@ function createQuestion(type,obj,hide,clmm){
             if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                 $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
                 $(".simulator .simulator-qr button.next-report").hide();
+                $(".error-msg-sim").hide();
 
                 removeExpanded(); 
              }
@@ -241,6 +263,7 @@ function createQuestion(type,obj,hide,clmm){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
             $(".simulator .simulator-qr button.next-report").hide();
+            $(".error-msg-sim").hide();
 
             removeExpanded(); 
             }
@@ -270,6 +293,8 @@ function createQuestion(type,obj,hide,clmm){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
             $(".simulator .simulator-qr button.next-report").hide();
+            $(".error-msg-sim").hide();
+
 
             removeExpanded(); 
             }
@@ -787,7 +812,7 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
     console.log("traitement "+val);
     var existBody = true;
 
-    if(existBody2(treeLocal,val) ){
+    if(existBody2(treeLocal,val)==true ){
       if(treeLocal.length == 1){
         var id = Object.keys(treeLocal[0])[0];
         console.log(arrayVect [0].length - qstArray[0].length + iter);
@@ -819,8 +844,15 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
       infoAutorisationSim(true);
       stopedButton(0);
       existBody = false;
-      $(".simulator .simulator-qr .next-report").show();
-      $(".simulator .simulator-qr .next-button .back-rq").removeClass("stopped");
+      
+      if(existBody2(treeLocal,val)==null){
+        $(".simulator .simulator-qr .next-button .back-rq").removeClass("stopped");
+        $(".error-msg-sim").show();
+      }else{
+        $(".simulator .simulator-qr .next-report").show();
+        $(".simulator .simulator-qr .next-button .back-rq").removeClass("stopped");
+      }
+
     }
 
     if(classed==true){
@@ -839,9 +871,14 @@ function existBody2(treeGl,val){
                 return false;
             }
         }else{
-            if(Object.keys(treeGl[val])[0].toString()=="-1" ){
-                return false;
+            if(treeGl[val]!=undefined){
+                if(Object.keys(treeGl[val])[0].toString()=="-1" ){
+                    return false;
+                }
+            }else{
+               return null;
             }
+            
         }
 
         return true;
@@ -1574,6 +1611,8 @@ function stopedButton(type){
 
 function startButton(type){
     $(".simulator .simulator-qr .next-report").hide();
+    $(".error-msg-sim").hide();
+
     if(type==0){
        $(".simulator .simulator-qr .next-button .next-rq").removeClass("stopped");
     }else{
