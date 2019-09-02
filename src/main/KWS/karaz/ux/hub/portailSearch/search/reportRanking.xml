@@ -15,16 +15,18 @@
           removeLastRootPage(userName);
           loadPageBytype(0);
           
-          var tabInd = ["1-2019"];
+          var tabInd = ["2-2019"];
+          
 
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.score","desc",10,0,0);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.delai","desc",3,0,1);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.attractivite","desc",3,0,2);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.digital","desc",3,0,3);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.ecosystem","desc",3,0,4);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.fiscalite","desc",3,0,5);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.scoreU","desc",10,0,6);
-          restGetAllCommue([["trim"],["1-2019"]],"indecators.scoreE","desc",10,0,7);
+
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",60,0,0);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.delai","desc",3,0,1);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.attractivite","desc",3,0,2);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.digital","desc",3,0,3);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.ecosystem","desc",3,0,4);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.fiscalite","desc",3,0,5);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreU","desc",10,0,6);
+          restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreE","desc",10,0,7);
 
           getAllByAggs("trim.keyword",100,null,"",0);
           getAllByAggs("région.keyword",100,null,"",1);
@@ -41,17 +43,17 @@
             $(this).hide();
 
             if(classe=="rank-dl"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","asc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","asc",60,0,0)
             }else if(classe=="rank-dg"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.digital","asc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.digital","asc",60,0,0)
             }else if(classe=="rank-at"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.attractivite","asc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.attractivite","asc",60,0,0)
             }else if(classe=="rank-es"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.ecosystem","asc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.ecosystem","asc",60,0,0)
             }else if(classe=="rank-fs"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.fiscalite","asc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.fiscalite","asc",60,0,0)
             }else if(classe=="sp-td"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.score","asc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.score","asc",60,0,0)
             }
           });
 
@@ -66,17 +68,17 @@
             $(this).hide();
 
             if(classe=="rank-dl"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","desc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","desc",60,0,0)
             }else if(classe=="rank-dg"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.digital","desc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.digital","desc",60,0,0)
             }else if(classe=="rank-at"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.attractivite","desc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.attractivite","desc",60,0,0)
             }else if(classe=="rank-es"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.ecosystem","desc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.ecosystem","desc",60,0,0)
             }else if(classe=="rank-fs"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.fiscalite","desc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.fiscalite","desc",60,0,0)
             }else if(classe=="sp-td"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.score","desc",10,0,0)
+              restGetAllCommue(getFiltersArray(tabInd),"indecators.score","desc",60,0,0)
             }
           });
           
@@ -120,8 +122,17 @@
               tabInd.push(region);
               tabInd.push(prefecture);
 
-              restGetAllCommue([filters,filtersBy],"indecators.score","desc",10,0,0);
-
+              restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
+              restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
+              restGetAllCommue([filters,filtersBy],"indecators.delai","desc",3,0,1);
+              restGetAllCommue([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
+              restGetAllCommue([filters,filtersBy],"indecators.digital","desc",3,0,3);
+              restGetAllCommue([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
+              restGetAllCommue([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
+              restGetAllCommue([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
+              restGetAllCommue([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
+              
+              updateTitles();
 
           });
 
@@ -162,7 +173,7 @@
               </html>
             </vbox>
 
-            <vbox></vbox>
+            <vbox />
             
             <vbox columns="80% 15%">
               <field label="Rechercher collectivité" widget="text" labelAlign="float" xpath="searchColl" />
@@ -190,7 +201,7 @@
           <html>
             <table id="ranking-table">
               <tr class="first-tr">
-                <td style="visibility:hidden;width: 335px;" />
+                <td style="visibility:hidden;width: 28%;" />
                 <td class="sp-td">Rang  </td>
                 <td class="sp-td">Score <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
                 <td class="rank-dl">Délai <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
@@ -200,6 +211,11 @@
                 <td class="rank-fs">Fiscalité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
               </tr>  
             </table>
+            <div style="height: 400px;overflow: auto;">
+            <table id="ranking-table2">
+            
+            </table>
+            </div>
           </html>
         </vbox>
       </fieldSet>
@@ -276,7 +292,7 @@
                   
                 </div>
                 <div class="div-2-top10">
-                  <div></div>
+                  <div />
                 </div>
                 <div class="div-3-top10">
                  
@@ -291,7 +307,7 @@
                   
                 </div>
                 <div class="div-2-top10">
-                  <div></div>
+                  <div />
                 </div>
                 <div class="div-3-top10">
                  
@@ -310,7 +326,7 @@
         <vbox columns="50% 50%">
           <vbox className="radar-div">
             <html>
-              <canvas id="radarCanvas"  width="300" height="300"></canvas>
+              <canvas id="radarCanvas" width="300" height="300" />
               
             </html>
           </vbox>

@@ -53,6 +53,7 @@
 .h-icon{
     height: 5rem !important;
     font-size: 4rem !important;
+    width:50px;
 }
 
 .link-div-ref{

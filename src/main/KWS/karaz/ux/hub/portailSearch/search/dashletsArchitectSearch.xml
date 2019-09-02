@@ -47,9 +47,9 @@
 								<vbox />
 								<vbox />
 								<html>
-									<div class="ow-thumbnail-action" onclick="ApplicationManager.run('karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch', 'search', 'TACHES A FAIRE')" style="float: right;width: fit-content;margin-right: 24px;">
-										<span class="fas fa-cogs" />
-										<span>Toutes les tâches</span>
+									<div  class="ow-thumbnail-action" onclick="ApplicationManager.run('karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch', 'search', 'TACHES A FAIRE')" style="float: right;width: fit-content;margin-right: 24px;" >
+										<span class="fas fa-cogs"></span>
+										<span >Toutes les tâches</span>
 									</div>
 								</html>
 							</vbox>

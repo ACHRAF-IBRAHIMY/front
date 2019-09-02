@@ -22,11 +22,7 @@
 		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
 		    });
 		
-		    $(".header-div-toggle .dropdown").mouseenter(function(){
-		        $(".header-div-toggle .dropdown-content").slideDown();
-		    }).mouseleave(function(){
-		        $(".header-div-toggle .dropdown-content").slideUp();
-		    }); 
+	
 
             Array.from(document.querySelectorAll(".classSearch-2 .div-full-search-bar .ow-field-input")).forEach(function(elm){
                 elm.addEventListener("keydown", function (e) {

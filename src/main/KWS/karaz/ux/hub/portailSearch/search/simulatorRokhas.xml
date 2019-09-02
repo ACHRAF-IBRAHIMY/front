@@ -7,15 +7,32 @@
       <idObject />
       <parentP />
     </query>
-    <krn></krn>
+    <krn />
     <repport>
-     <gedId></gedId>
+     <gedId />
     </repport>
     <collapsed>false</collapsed>
+	  <dataReport>
+	  </dataReport>
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
+
+    $(".simulator .next-report").click(function(){
+      if($(this).hasClass("autori")){
+        if($(this).hasClass("docsR")){
+          if($(this).hasClass("docsC")){
+            if($(this).hasClass("steps")){
+              if($(this).hasClass("docsD")){
+                $(".chargement-btn").click();
+              }
+            }else{}
+          }else{}
+        }else{}
+      }else{}
+    });
+
     $(".simulator .simulator-qr .check-ent").click(function(){
       $(this).toggleClass("active-check");
     });       
@@ -37,22 +54,21 @@
         ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
     });
 
-    $(".header-div-toggle .dropdown").mouseenter(function(){
-        $(".header-div-toggle .dropdown-content").slideDown();
-    }).mouseleave(function(){
-        $(".header-div-toggle .dropdown-content").slideUp();
-    });</script>
+    
+    
+    
+    </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
       <vbox className="hp-small simulator">
-      <button label="print etat" actionName="karaz/ux/hub/dashboardsearch/PrintReportSumilateurBeans" postProcessing="openFile,repport.gedId,none">
+      <button label="print etat" visible="1,=,2" className="report-hiden" actionName="karaz/ux/hub/dashboardsearch/PrintReportSumilateurBeans" postProcessing="openFile,repport.gedId,none">
       </button>
         <vbox className="hp-box simulator-sub">
           <html>
             <div class="vpanel-title">
               <div class="vpanel-title">
-                <span>SIMULATEUR DSE PROCÉDURES</span>
+                <span>SIMULATEUR DES PROCÉDURES</span>
                 <hr class="header-create-account-horizontal-line hr-hub" />
               </div>
             </div>
@@ -78,23 +94,39 @@
                 <div class="qr">
                   <img src="img/load-text.gif" style="margin: auto;display: block;height: 100px;" alt="" />
                 </div>
+                <div class="error-msg-sim">
+                  <div><i class="fas fa-exclamation-triangle" ></i></div>
+                  <p class="">Cette procédure sera décrite et mise en ligne après publication au bulletin officiel des décrets :
+                  <br/>
+                     - N° 2.18.475 précisant les modalités de délivrance des autorisations de réfection, de régularisation et de démolition.
+                    <br/> - N° 2.18.577 remplaçant le décret N° 2.13.424 du 24 Mai 2013 (Règlement général de construction)</p>
+                </div>
                 <div class="next-button">
                   <button class="back-rq stopped">Précédent</button>
                   <button class="next-rq">Suivant</button>
+                  <button class="next-report" style="background: red;color: #fff;border: none;width:auto"><i class="fas fa-print" /> Imprimer la procédure</button>
                 </div>
               </html>
+              <button visible="1,=,2" label="test button" className="chargement-btn">
+                <postChange>
+
+                  getReportData(root,context);
+                  $(".report-hiden").click();
+            
+                </postChange>
+              </button>
             </vbox>
-                      <vbox>
+                      <vbox className="size955">
+                      <fieldSet header="RÉCAPITULATIF DES CHOIX" className="info-container-div">
+                <html>
+                  <div class="info-container" />
+                </html>
+             </fieldSet>
           </vbox>
 
             </vbox>
 
-            <vbox className="docs-qr">
-            <fieldSet header="DONNÉES AUTORISATION" className="info-container-div">
-                <html>
-                  <div class="info-container" />
-                </html>
-             </fieldSet>   
+            <vbox className="docs-qr">   
               <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div">
                 <html>
                   <div class="docs-container" />
@@ -106,14 +138,25 @@
                 </html>
               </fieldSet>
               <!--
-              <fieldSet header="DOCUMENTS DÉLIVRÉS" />
-              <fieldSet header="COÛT ÉSTIMATIF" />
+                <fieldSet header="DOCUMENTS DÉLIVRÉS" />
+                <fieldSet header="COÛT ÉSTIMATIF" />
+              -->
+
               <fieldSet header="DOCUMENTS COMPLEMENTAIRES">
                 <html>
                   <div class="docs-comp-container" />
                 </html>
               </fieldSet>
-              -->
+              <fieldSet header="DOCUMENTS FACULTATIFS">
+                <html>
+                  <div class="docs-fac-container" />
+                </html>
+              </fieldSet>
+              <fieldSet header="DOCUMENTS DÉLIVRÉS">
+                <html>
+                  <div class="docs-sort-container" />
+                </html>
+              </fieldSet>
             </vbox>
           </vbox>
           <html>

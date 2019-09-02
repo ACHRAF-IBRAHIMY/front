@@ -8,6 +8,14 @@
       <parentP />
     </query>
     <collapsed>false</collapsed>
+    <attachementImg>
+          <fileId />
+          <fileName />
+          <fileSize />
+          <fileSignature />
+          <fileTime />
+          <gedId />
+    </attachementImg>
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
@@ -24,11 +32,11 @@
                 if(page=="1"){
                     showDivManager(2);
                 }else if(page=="2"){
-                    showDivManager(1);
-                    getAllDocsClass(0);
+                    showDivManager(1,root);
+                    getAllDocsClass(0,root);
                 }else if(page=="3"){
                     showDivManager(3);
-                    getAllDocsClass(1);
+                    getAllDocsClass(1,root);
                 }else if(page=="4"){
                     showDivManager(6);
                     getAllCoumnsMatrixCn4();
@@ -69,7 +77,6 @@
                 if(id!=undefined){
                     getQuestionCms(id);
                 }
-                
             });
              
             $(".simulator-cms .side-bar .body .div-3 .cms-form-2 .class-type-question select").change(function(){
@@ -171,7 +178,7 @@
                 var id = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
                 nextStepDocsIn(step,id);
                 step++;
-                if(step==3)step=0;
+                if(step==5)step=0;
             });
 
             $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
@@ -179,39 +186,47 @@
             });
 
             $(".simulator-cms .side-bar .body .div-4 .class-update-button button").click(function(){
-                var docObj = getModifyObject(0);
-                getMaxDocsClass(0,docObj);
+                var docObj = getModifyObject(0,root);
+                getMaxDocsClass(0,docObj,root);
                 console.log(docObj);
             });
             $(".simulator-cms .side-bar .body .div-5 .class-update-button button").click(function(){
-                var docObj = getModifyObject(1);
-                getMaxDocsClass(1,docObj);
+                var docObj = getModifyObject(1,root);
+                getMaxDocsClass(1,docObj,root);
                 console.log(docObj);
             });
             $(".simulator-cms .side-bar .body .div-6 .class-update-button button").click(function(){
-                var docObj = getModifyObject(2);
+                var docObj = getModifyObject(2,root);
                 updateDocClass(0,docObj);
+                showDivManager(6);
             });
             $(".simulator-cms .side-bar .body .div-7 .class-update-button button").click(function(){
-                var docObj = getModifyObject(3);
+                var docObj = getModifyObject(3,root);
                 updateDocClass(1,docObj);
+                showDivManager(6);
             });
             
             $(".simulator-cms .container-sim-cms .container-2 .add-doc-class").click(function(){
-                showDivManager(1);
+                showDivManager(1,root);
             });
 
             $(".simulator-cms .container-sim-cms .container-3 .add-doc-class").click(function(){
-                showDivManager(3);
+                showDivManager(3,root);
             });
 
             showUpdate("");
             $(".simulator-cms .side-bar .body .div-1 .cms-form .class-question .link-sim-cms span").click();
-            dragscroll.reset();
+              dragscroll.reset();
             
             $(".container-sim-cms").click(function(){
                 $(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide").hide();
-            });</script>
+            });
+            
+            $(".attachement-img button").click(function(){
+              $(".att-img button").click();
+            });
+            
+            </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
@@ -408,6 +423,12 @@
                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                       </div>
                     </div>
+                    <div class="class-help-q">
+                      <span>Help :</span>
+                        <div class="responses-sim-cms">
+                          <input class="placeholder" type="text" placeholder="Text" />
+                        </div>
+                    </div>
                     <div class="class-update-button">
                       <button class="save">Sauvegarder</button>
                       <button class="remove" style="background:red">Supprimer</button>
@@ -467,6 +488,12 @@
                         <input class="placeholder" type="text" placeholder="Résponses séparer par // Exemple: rep1//rep2//rep3" />
                       </div>
                     </div>
+                    <div class="class-help-q">
+                      <span>Help :</span>
+                      <div class="responses-sim-cms">
+                        <input class="placeholder" type="text" placeholder="help" />
+                      </div>
+                    </div>
                     <div class="class-update-button">
                       <button>Ajouter</button>
                     </div>
@@ -490,10 +517,14 @@
                       <span>Type</span>
                       <span class="link-sim-cms">
                         <select>
-                          <option value="type-1">Type 1</option>
-                          <option value="type-2">Type 2</option>
+                          <option value="type-1">A ATTACHER</option>
+                          <option value="type-2">PAR ROKHAS</option>
                         </select>
                       </span>
+                    </div>
+                    <div class="attachement-img form-grid">
+                      <span>Image</span>
+                      <button class="but">Attacher</button>
                     </div>
                     <div class="class-update-button">
                       <button>Ajouter</button>
@@ -501,6 +532,7 @@
                   </div>
                 </div>
               </html>
+              <field xpath="attachementImg" className="att-img" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
             </vbox>
             <vbox className="div-5">
               <html>
@@ -523,7 +555,11 @@
                     <div class="class-membre-q form-grid">
                       <span>Membres</span>
                       <span class="link-sim-cms">
-                        <input type="text" placeholder="Séparer par - Exemple : membre1-membre2" />
+                        <input type="text" placeholder="Séparer par - Exemple : membre1**type-membre2**type" />
+                      </span>
+                      <span />
+                      <span style="font-size: 12px;">
+                        les types sont : D pour Demandeur et A pour Administration
                       </span>
                     </div>
                     <div class="class-update-button">
@@ -546,14 +582,17 @@
                         <input type="text" placeholder="Titre du document" />
                       </span>
                     </div>
-                    <div class="class-type-question form-grid">
+                    <div class="class-type-question form-grid attachement-img">
                       <span>Type</span>
                       <span class="link-sim-cms">
                         <select>
-                          <option value="type-1">Type 1</option>
-                          <option value="type-2">Type 2</option>
+                          <option value="type-1">A ATTACHER</option>
+                          <option value="type-2">PAR ROKHAS</option>
                         </select>
                       </span>
+                      <span>Image</span>
+                      <button class="but">Attacher</button>
+                      <input class="att" type="hidden" value="" />
                     </div>
                     <div class="class-update-button">
                       <button>Modifier</button>
@@ -561,6 +600,7 @@
                   </div>
                 </div>
               </html>
+              <field xpath="attachementImg" className="att-img" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
             </vbox>
             <vbox className="div-7">
               <html>
@@ -584,7 +624,11 @@
                     <div class="class-membre-q form-grid">
                       <span>Membres</span>
                       <span class="link-sim-cms">
-                        <input type="text" placeholder="Séparer par - Exemple : membre1-membre2" />
+                        <input type="text" placeholder="Séparer par - Exemple : membre1**type-membre2**type" />
+                      </span>
+                      <span />
+                      <span style="font-size: 12px;">
+                        les types sont : D pour Demandeur et A pour Administration
                       </span>
                     </div>
                     <div class="class-update-button">
@@ -620,6 +664,14 @@
                   <span class="steps">
                     <i class="fas fa-tasks" />
                     Etapes
+                  </span>
+                  <span class="docs-fac">
+                    <i class="fas fa-tasks" />
+                    Documents facultatifs
+                  </span>
+                  <span class="docs-sortie">
+                    <i class="fas fa-tasks" />
+                    Documents en sortie
                   </span>
                 </div>
                 <div class="docs-added" />

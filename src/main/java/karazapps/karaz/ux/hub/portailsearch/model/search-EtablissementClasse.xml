@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="EtablissementClasse" label="Etablissement Classé 3éme Catégorie">
+  <query />
+  <data>
+    <query>
+      <search />
+      <idObject />
+      <parentP />
+    </query>
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">removeLastRootPage(userName);
+          $(".rokhas-home").click(function(){
+               ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+          });      
+          
+          
+          $(".tags a").click(function(){
+              console.log("href:"+$(this).attr("href"));
+              var pos = $("."+$(this).attr("href").substr(1)).offset().top;
+              $('html,body').animate(
+                     {
+                      scrollTop: pos
+                 },
+                 'slow');   
+          });
+          
+          
+          $(".scroll-top-sp").click(function(){
+              $('html,body').animate(
+                     {
+                      scrollTop: $("body").offset().top
+                 },
+                 'slow'); 
+          });
+          
+          
+          $(".back-to-acc").click(function(){
+              ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets","search", "Acceptabilite Projets", {});
+          });
+
+
+          // add right icon to ANNONCES header
+          PCD_addtitle();
+
+          // add style to main header
+          PCD_add_header_style_action_eco(".pcd-header-PHCC", "DECLARATION D'UNE ACTIVITE CLASSEE-CATEGORIE 3");
+
+          // header color 
+          PCD_headerfieldset_color(".pcd-ha-color");
+
+         // start  question frequente
+         PCD_headerfieldset_color(".NFQ-quest-title");
+	     $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+
+         PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
+         PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")               
+         PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
+         PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
+         PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
+         PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
+
+        PCD_headerfieldset_color(".pcd-ha-color");
+
+        RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",2)
+        RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",2)
+        RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
+        RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",2)
+        RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
+        RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)</script>
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox columns="70% 30%">
+        <fieldset label="AUTORISATIONS ECONOMIQUES" collapsible="false" className="pcd-header-PHCC div-det-acc PDC-hov-title">
+          <vbox className="accp">
+            <html>
+              <span style="text-align:left;color:#333;" class="title-4x b-title">
+                <i class="fas fa-cogs" style="margin-right:10px" />
+Déclaration d'une activité classée-catégorie 3
+
+              </span>
+            </html>
+            <vbox className="desc">
+              <html>
+<p>Les établissements classés en 3ème catégorie désignent les activités de commerce, de service ou de fabrication industrielle utilisant des procédés, des outils ou des équipements susceptibles de présenter des causes d'insalubrité, d'incommodité ou de danger. De tels établissements ne peuvent être ouverts à l'exploitation qu'après obtention d'une autorisation émanant des services communaux.
+</p>              </html>
+            </vbox>
+            <vbox className="note-danger cl-orange PCD-gap-ic" columns="5% 95%">
+              <html style="align-self: center;">
+                <i class="fas fa-exclamation-triangle" />
+              </html>
+              <html>
+                <p>
+                  Notez que les démarches, documents requis et toute autre information indiqués par la plateforme Rokhas.ma sont à titre strictement indicatif. Il reste de la responsabilité du demandeur, de
+                  <span style="text-decoration: underline;">se renseigner auprès des administrations compétentes</span>
+                  sur toute modification réglementaire ou procédurale survenue.
+                </p>
+              </html>
+            </vbox>
+            <vbox>
+              <html className="tags">
+                <a href="#fs1">Étapes clés</a>
+                |
+                <a href="#fs2">Documents requis</a>
+                |
+                <a href="#fs3">Membres commission</a>
+                |
+                <a href="#fs4">Résultat</a>
+                |
+                <a href="#fs5">Référentiel juridique</a>
+                |
+                <a href="#fs6">Informations complémentaires</a>
+              </html>
+            </vbox>
+            <vbox className="fieldSets">
+              <fieldSet header="Étapes clés" className="fs1">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">1</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Saisie de la demande</span>
+                    </html>
+                    <button className="but-orange" label="Demandeur " />
+                    <html>
+                      <p>Saisie en ligne de la demande en fournissant le données relatives au projet et au maitre d'ouvrage.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">2</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Attachement des documents requis</span>
+                    </html>
+                    <button className="but-orange" label="Demandeur " />
+                    <html>
+                      <p>Numérisation et attachement des documents requis et optionnellement des documents complémentaires apportant une information utile à l'instruction du dossier.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">3</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Vérification du dossier numérique</span>
+                    </html>
+                    <button className="but-blue" label="Commune" />
+                    <html>
+                      <p>Vérification de la complétude sur le plan administratif des documents numériques et soumission au service économique si complet ou retour motivé au demandeur si pièce obligatoire manquante.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">4</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Instruction du dossier</span>
+                    </html>
+                    <button className="but-blue" label="Service économique" />
+                    <html>
+                      <p>Instruction du dossier sous format numérique et approbation de principe si dossier conforme.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">5</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Prise de rendez-vous pour dépôt du dossier physique</span>
+                    </html>
+                    <button className="but-orange" label="Demandeur " />
+                    <html>
+                      <p>Prise de rendez-vous pour le dépôt physique du dépôt, lequel doit être conforme au dossier numérique déposé à base duquel l'accord de principe a été donné.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">6</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Réception du dossier physique</span>
+                    </html>
+                    <button className="but-orange" label="Commune " />
+                    <html>
+                      <p>Réception du dossier physique et comparaison avec le dossier numérique à base duquel l'accord de principe a été fourni.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">7</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Contrôle des documents avant e-signature</span>
+                    </html>
+                    <button className="but-blue" label="Secrétariat" />
+                    <html>
+                      <p>Vérification finale du recipicé de déclaration à délivrer avant soumission au président de la commune pour signature électronique.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">8</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>e-Signature des documents à délivrer</span>
+                    </html>
+                    <button className="but-blue" label="Président commune" />
+                    <html>
+                      <p>Signature électronique du recipicé de déclaration.</p>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
+                  <html>
+                    <i class="fas fa-exclamation-triangle" />
+                  </html>
+                  <html>
+<p>Une visite "A posteriori" du lieu de l'activité est opérée par une commission mixte quelques semaine après la délivrance de l'accusé de réception. Cette visite a pour objectif de vérifier la conformité de  l'activité exercée à l'objet de la déclaration déposée.
+
+</p>                  </html>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+              <fieldSet header="Documents requis au dépôt" className="fs2">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <!-- <vbox className="title-principale">
+                                    <html>
+                                        <span>Liste des pièces à fournir d’Etude d’Impact sur l’Environnement</span>
+                                    </html>
+                                </vbox> -->
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">1</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Formulaire de la demande rempli et légalisé</span>
+                    </html>
+                    <html>
+<p>Demande adressée par le pétitionnaire au président de la commune, faisant office de déclaration de l'intention d'ouvrir un établissement pour l'exercice d'une activité classée - catégorie 3.
+
+</p>                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-code" style="color:orange;" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">2</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Facture d'achat d'extincteurs</span>
+                    </html>
+                    <html>
+                      <p>Facture d'achat d'extincteurs établie au nom du pétitionnaire.</p>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">3</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Certificat de propriété récent</span>
+                    </html>
+                    <html>
+                      <p>Certificat de propriété du local destiné à accueillir l'activité. Le document doit être délivré depuis moins de 3 mois.</p>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">4</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Pièce d'identité</span>
+                    </html>
+                    <html>
+                      <p>Copie numérique d'une pièce d'identité du pétitionnaire (Carte nationale d'identité, passeport, carte de séjour, ...)</p>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">5</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+<span>Copie certifiée conforme à l’original : du plan autorisé, d’aménagement ou cadastral du local
+
+</span>                    </html>
+                    <html>
+                      <p>Plan architectural d'aménagement du local destiné à accueillir l'activité déclarée</p>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">6</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Statuts de la société en cas de personne morale</span>
+                    </html>
+                    <html>
+                      <p>Statuts de la société u de l'organisme dans le cas d'une personne morale accompagné d'un document prouvant le pouvoir accordés au représentant légal</p>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">7</span>
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Cahier des charges</span>
+                    </html>
+                    <html>
+                      <p>Certaines activités quoique soumises à la procédure de simple déclaration, requierent la signature par le pétitionnaire d'un cahier des charges précisant les pré-requis et les conditions d'exercice que l'établissement devra respecter.</p>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox style="margin-left: 7vw;">
+                  <html columns="100%">
+                    <i class="far fa-file-code" style="color:orange;" />
+                    <span style="font-size:8px; color:#999999;">Document généré par Rokhas</span>
+                  </html>
+                  <html columns="100%">
+                    <i class="far fa-file-alt" style="color:#666666;" />
+                    <span style="font-size:8px; color:#999999;">Document à numériser et attacher</span>
+                  </html>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+              <fieldSet header="MEMBRES DE COMMISSION" className="fs3">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Service communal en charge des autorisations économiques</span>
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
+                  <html>
+                    <i class="fas fa-exclamation-triangle" />
+                  </html>
+                  <html>
+                    <p>D'autres membres non permanents peuvent être convoqués dépendamment de la nature du projet</p>
+                  </html>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+              <fieldSet label="DOCUMENTS DÉLIVRÉS" className="fs4">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="far fa-check-circle" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Récipicé de la déclaration d'ouverture d'une activité non classée signé par le président de la commune</span>
+                    </html>
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+              <fieldSet label="RÉFÉRENTIEL JURIDIQUE" className="fs5">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-gavel" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Dahir 13 Octobre 1933 relatif aux établissements classés</span>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-gavel" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Dahir du 25 août 1914 portant réglementation des établissements classés</span>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-gavel" />
+                  </html>
+                  <vbox>
+                    <html className="inline-html">
+                      <span>Loi organique N° 113-14 relative aux communes</span>
+                    </html>
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="scroll-top">
+                  <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>Haut</span>
+                    </span>
+                  </html>
+                </vbox>
+              </fieldSet>
+            </vbox>
+          </vbox>
+        </fieldset>
+        <vbox>
+          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+            <!-- start modification -->
+            <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+              <html>
+                <div class="NFQ-quest-type-esign NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Générale" className="NFQ-quest-title NFQ-type-general ">
+              <html>
+                <div class="NFQ-quest-type-general NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+              <html>
+                <div class="NFQ-quest-type-document NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
+              <html>
+                <div class="NFQ-quest-type-plat NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
+              <html>
+                <div class="NFQ-quest-type-archit NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
+              <html>
+                <div class="NFQ-quest-type-adminis NFQ-fieldset">
+                  <!-- Les questions s'affiche ici                                  -->
+                </div>
+              </html>
+            </fieldset>
+            <!-- end modification -->
+          </fieldset>
+        </vbox>
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
+    </screen>
+    <script onLoad="true" />
+  </view>
+</search>
