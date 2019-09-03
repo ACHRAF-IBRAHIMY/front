@@ -14,7 +14,7 @@
 	<dateUpdateFromFile></dateUpdateFromFile>
 	<sourceFileLocation></sourceFileLocation>
 	<entries>
-                    <option value="PCT-Block Maître d’ouvrage" label="PCT-Block Maître d’ouvrage"/>
+                   <option value="PCT-Block Maître d’ouvrage" label="PCT-Block Maître d’ouvrage"/>
                     <option value="PCT-Block Consistance du projet" label="PCT-Block Consistance du projet"/>
 					<option value="PCT-Block Localisation du projet" label="PCT-Block Localisation du projet"/>
 					<option value="PCT-Block Composition du projet" label="PCT-Block Composition du projet"/>

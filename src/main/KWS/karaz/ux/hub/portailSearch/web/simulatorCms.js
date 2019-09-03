@@ -1745,6 +1745,23 @@ function getAllDocsClassDiv(data,type,root){
       var div1 = document.createElement("i");
       div1.setAttribute("class","fas fa-file");
      
+
+      if(data[i]["_source"]["attachementImg"]!=undefined){
+          if(data[i]["_source"]["attachementImg"]!=""){
+            div1.setAttribute("style","color:green");
+          }else{
+              var ind1 = data[i]["_source"]["attachementImg"].indexOf("gedId");
+              var ind2 = data[i]["_source"]["attachementImg"].indexOf("&amp;",ind1);
+              var strr = data[i]["_source"]["attachementImg"].substring(ind1+6,ind2);
+              if(strr==""){
+                div1.setAttribute("style","color:yellow");
+              }
+          }
+      }else{
+        div1.setAttribute("style","color:red");
+      }
+      
+      
       var div2 = document.createElement("div");
       div2.setAttribute("class","note");
       div2.innerHTML = data[i]["_source"]["title"];
