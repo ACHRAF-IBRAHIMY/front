@@ -141,11 +141,11 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
             if (totalPage == 0 && typePage ==0) {
                 noResults(cls);
             }else if( typePage==1){
-                fullSearchList(result,cls);
+                fullSearchList(result,cls,typePage);
             }else if( typePage==2){
-                fullSearchList(faqs,cls);
+                fullSearchList(faqs,cls,typePage);
             }else{
-                fullSearchList(result,cls);
+                fullSearchList(result,cls,typePage);
             }            
         }
     };
@@ -157,6 +157,10 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     }else if(typePage==1){
         xhttp.open("POST",URL_SEARCH+"/reglementation_index/reglementation/_search");
+        xhttp.setRequestHeader("Authorization",AUTH);
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    }else if(typePage==80){
+        xhttp.open("POST",URL_SEARCH+"/articles_index/article/_search");
         xhttp.setRequestHeader("Authorization",AUTH);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     }
@@ -347,7 +351,72 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
     }else if(typePage==12){
         $("."+cls+" .full-search-list").hide();
         RestSearchDownload(prefix,from,4,null,3,null,prev,cls);
-    }
+    } else if(typePage==80){
+        if(prefix.trim()==""){
+            xhttp.send(JSON.stringify(
+                {
+                    "from":from,"size":4,
+                    "query": {
+                             "match_all": {}
+                            }
+                }));
+        }else{
+       
+        if(testLanguage.test(prefix)){
+            xhttp.send(JSON.stringify(
+                {
+                    "from":from,"size":4,
+                    "query": {
+                        "bool": {
+                            "must": [
+                                { "multi_match": {
+                                    "query": prefix,
+                                    "fields": ["title","descreption","content"],
+                                    "analyzer": "rebuilt_arabic",
+                                    "fuzziness": "AUTO",
+                                    "minimum_should_match": "70%"
+                                }}
+                            ],
+                            "should": [
+                                {
+                                    "match": {
+                                        "title": prefix
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            ));
+        }else{
+            xhttp.send(JSON.stringify(
+                {
+                    "from":from,"size":4,
+                    "query": {
+                        "bool": {
+                            "must": [
+                                { "multi_match": {
+                                    "query": prefix,
+                                    "fields": ["title","descreption","content"],
+                                    "analyzer": "rebuilt_french",
+                                    "fuzziness": "AUTO",
+                                    "minimum_should_match": "70%"
+                                }}
+                            ],
+                            "should": [
+                                {
+                                    "match": {
+                                        "title": prefix
+                                    }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ));
+            }
+        }
+    };
 
     return result;
 }
@@ -2592,7 +2661,7 @@ function autocomplete(inp,arr) {
        typePage = type;
    } 
 
-   function fullSearchList(results,cls){
+   function fullSearchList(results,cls,typePage){
        var a = $("."+cls+" .full-search-list");
        if(typePage== 1){
         console.log(results)
@@ -2717,76 +2786,149 @@ function autocomplete(inp,arr) {
                 a2.appendChild(b);
             }
 
-       }else{
-       for(i=0;i<results.length;i++){
-           console.log(results[i]);
-           var id = results[i]._id;
-           var intituleFr = results[i]._source.content.intituleFr;
-           var intituleAr = results[i]._source.content.intituleAr;
-           var typeAc = checkUndefined(results[i]._source.parents["TypeActivite"]);
-           var nature = checkUndefined(results[i]._source.parents["NatureActivite"]);
-           var typeAt = checkUndefined(results[i]._source.parents["TypeAutorisation"]);
-           var typeAG="Activités économiques";
-           var setting = getColIcon(typeAt);
-           var b = document.createElement("div");
-           b.setAttribute("class","hp-box full-search-list-item");
-           b.setAttribute("style","height: 173px;");
-           var c = document.createElement("div");
-           c.setAttribute("class","c-path");
-          // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
-           var s = document.createElement("span");
-           s.setAttribute("class","cl-orange");
-           s.innerHTML=" > ";
-           c.appendChild(addEventSpan("p1",typeAt,cls));
-           c.appendChild(s);
-           // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-           c.appendChild(addEventSpan("p2",typeAc,cls));
-           s = document.createElement("span");
-           s.setAttribute("class","cl-orange");
-           s.innerHTML=" > ";
-           c.appendChild(s);
-           // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-           c.appendChild(addEventSpan("p3",nature,cls));
-           var d = document.createElement("div");
-           d.setAttribute("class","item-body");
-           var e = document.createElement("div");
-           e.setAttribute("class","item-body-title");
-           e.innerHTML="<span title=\""+intituleFr+"\">"+subLong(intituleFr,60)+"</span>";
-           e.innerHTML+="<span class=\"complete-text\">"+intituleFr+"</span>";
-           var f = document.createElement("p");
-           //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
-           f.innerHTML = subLongAr(intituleAr,75);
-           f.setAttribute("title",intituleAr);
-           d.appendChild(c);
-           d.appendChild(e);
-           d.appendChild(f);
-           var g = document.createElement("button");
-           g.addEventListener("click",function(){
-               var id=$(this).children("input").val();
-               //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
-               ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimpleDeclaration", "search", "Simple Decleration", {});
+    }else if(typePage==80){
+
+        console.log(results)
+        for(i=0;i<results.length;i++){
+            
+            var id = results[i]._id;
+            var titleTx = results[i]._source.title;
+            var text = results[i]._source.description;
+            var type = results[i]._source.type;
+            var img = results[i]._source.imgP;
+            var tags = results[i]._source.tags;
+            
+
+            var b = document.createElement("div");
+            b.setAttribute("class","hp-box full-search-list-item");
+            b.setAttribute("style","grid-template-columns: 0% 35% 65%;height: 190px;");
+
+            var imgit = document.createElement("div");
+            imgit.setAttribute("class","item-img");
+            imgit.innerHTML="<img style=\"width: 93%;height: 170px;position: relative;    right: -9px;top: -11px;\" src=\""+img+"\"/>";
+
+            var d = document.createElement("div");
+            d.setAttribute("class","item-body");
+            d.setAttribute("style","padding:0 15px");
+            var e = document.createElement("div");
+            e.setAttribute("class","item-body-title");
+            e.setAttribute("style","font-size:16px");
+            e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100).toUpperCase()+"</span>";
+            var f = document.createElement("p");
+            f.innerHTML = subLong(text,200);
+            f.setAttribute("style","font-size: 0.955vw;text-align: left;width: 100%;color: #777;")
+            d.appendChild(e);
+            d.appendChild(f);
+
+            var tgg = document.createElement("div");
+
+            tags.forEach(function(elm){
+                tgg.innerHTML += "<span style=\" background:#38a;color:#fff;padding: 0px 4px;margin: 4px;border-radius: 3px;cursor:pointer; \">"+elm.tag+"</span>";
             });
-           g.setAttribute("class","item-body-button hp-sbox-btn");
-           g.innerHTML="Voire procédure<input type=\"hidden\" value=\""+id+"\" > ";
-           g.setAttribute("style","display: inline-block;color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
-           d.appendChild(g);
-           var title = document.createElement("div");
-           title.setAttribute("class","item-title");
-           title.setAttribute("style","background:"+setting.color);
-           title.setAttribute("title",typeAt);
-           title.innerHTML=subLong(typeAt);
-           title.addEventListener("click",function(){
-               currentPage=0;
-               $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
-               restFullSearchList($(this).html(),0,false,4,cls);
-           });
-           b.appendChild(title);
-           var icons = document.createElement("div");
-           icons.setAttribute("class","item-icon");
-           icons.innerHTML="<i class=\"far fa-file-image\" /><i class=\""+setting.icon+"\" />";
-           b.appendChild(icons);
-           b.appendChild(d);
-           a.append(b);
+            d.appendChild(tgg);
+
+            var g = document.createElement("a");
+            g.addEventListener("click",function(){
+                var id=$(this).children("input").val();
+                //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+            });
+
+            g.setAttribute("class","item-body-button");
+            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;display: block;width: 100%;position: inherit;text-align: right;");
+            g.innerHTML="Lire la suite <input type=\"hidden\" value=\""+id+"\" > ";
+            d.appendChild(g);
+            var title = document.createElement("div");
+            title.setAttribute("class","item-title");
+            title.setAttribute("title",type);
+            var style = "line-height:30px;top: 59px;height: 30px;right: 100px;width:190px;";
+
+            if(type=="ASTUCES ET FONCTIONNALITES"){
+                style+="background:#38a";
+            }else if(type=="A LA UNE"){
+                style+="background:#f90";
+            }else if(type=="A VENIR"){
+                style+="background:#363";
+            }
+
+            title.setAttribute("style",style);
+            title.innerHTML = subLong(type);
+            b.appendChild(title);
+            b.appendChild(imgit);
+            b.appendChild(d);
+            a.append(b);
+        }
+       
+    
+    }else{
+            for(i=0;i<results.length;i++){
+            console.log(results[i]);
+            var id = results[i]._id;
+            var intituleFr = results[i]._source.content.intituleFr;
+            var intituleAr = results[i]._source.content.intituleAr;
+            var typeAc = checkUndefined(results[i]._source.parents["TypeActivite"]);
+            var nature = checkUndefined(results[i]._source.parents["NatureActivite"]);
+            var typeAt = checkUndefined(results[i]._source.parents["TypeAutorisation"]);
+            var typeAG="Activités économiques";
+            var setting = getColIcon(typeAt);
+            var b = document.createElement("div");
+            b.setAttribute("class","hp-box full-search-list-item");
+            b.setAttribute("style","height: 173px;");
+            var c = document.createElement("div");
+            c.setAttribute("class","c-path");
+            // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
+            var s = document.createElement("span");
+            s.setAttribute("class","cl-orange");
+            s.innerHTML=" > ";
+            c.appendChild(addEventSpan("p1",typeAt,cls));
+            c.appendChild(s);
+            // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+            c.appendChild(addEventSpan("p2",typeAc,cls));
+            s = document.createElement("span");
+            s.setAttribute("class","cl-orange");
+            s.innerHTML=" > ";
+            c.appendChild(s);
+            // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+            c.appendChild(addEventSpan("p3",nature,cls));
+            var d = document.createElement("div");
+            d.setAttribute("class","item-body");
+            var e = document.createElement("div");
+            e.setAttribute("class","item-body-title");
+            e.innerHTML="<span title=\""+intituleFr+"\">"+subLong(intituleFr,60)+"</span>";
+            e.innerHTML+="<span class=\"complete-text\">"+intituleFr+"</span>";
+            var f = document.createElement("p");
+            //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
+            f.innerHTML = subLongAr(intituleAr,75);
+            f.setAttribute("title",intituleAr);
+            d.appendChild(c);
+            d.appendChild(e);
+            d.appendChild(f);
+            var g = document.createElement("button");
+            g.addEventListener("click",function(){
+                var id=$(this).children("input").val();
+                //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimpleDeclaration", "search", "Simple Decleration", {});
+                });
+            g.setAttribute("class","item-body-button hp-sbox-btn");
+            g.innerHTML="Voire procédure<input type=\"hidden\" value=\""+id+"\" > ";
+            g.setAttribute("style","display: inline-block;color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
+            d.appendChild(g);
+            var title = document.createElement("div");
+            title.setAttribute("class","item-title");
+            title.setAttribute("style","background:"+setting.color);
+            title.setAttribute("title",typeAt);
+            title.innerHTML=subLong(typeAt);
+            title.addEventListener("click",function(){
+                currentPage=0;
+                $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
+                restFullSearchList($(this).html(),0,false,4,cls);
+            });
+            b.appendChild(title);
+            var icons = document.createElement("div");
+            icons.setAttribute("class","item-icon");
+            icons.innerHTML="<i class=\"far fa-file-image\" /><i class=\""+setting.icon+"\" />";
+            b.appendChild(icons);
+            b.appendChild(d);
+            a.append(b);
        }
     }
    }
