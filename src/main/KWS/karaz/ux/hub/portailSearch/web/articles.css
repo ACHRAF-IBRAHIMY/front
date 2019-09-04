@@ -9,15 +9,39 @@
     border: 1px solid #eee;
     box-shadow: #999 1px 1px 5px;
     position: relative;
+    height: 450px;
+    cursor: pointer;
+    overflow: hidden;
   }
+
+  .fieldset-articles .article .footer-article{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background: #fff;
+    z-index: 5;
+    padding-bottom: 4px;
+  }
+
+  .fieldset-articles .article .footer-article span{
+    margin: 3px;
+}
 
   .fieldset-articles .article img{
-      max-width: 100%;
-      max-height: 250px;
-      top: 4px;
-      right: 0px;
+        width: 100%;
+        height: 190px;
+        top: 4px;
+        right: 0px;
+        display: block;
   }
 
+  .fieldset-articles .article .like-icon{
+      position: absolute;
+      color: #aaa;
+      top: 17px;
+      right: 17px;
+      font-size: 24px;
+  }
 
   .fieldset-articles .article span.tag{
     padding: 2px 10px;
@@ -25,4 +49,118 @@
     border-radius: 2px;
     color: #fff;
     cursor: pointer;
+    display: none;
+    margin: 3px;
   }
+
+  .fieldset-articles .article .pub-by {
+    margin: 9px;
+    display: none;
+  }
+
+  .fieldset-articles .article .toggle-art{
+      position: absolute;
+      top: auto;
+  }
+
+  .fieldset-articles .article:hover img{
+      opacity: 0.3;
+      transition-duration: .7s;
+  }
+
+  .fieldset-articles .article:hover .pub-by{
+      -webkit-animation-name: showB; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 0.8s; /* Safari 4.0 - 8.0 */
+        animation-name: showB;
+        animation-duration: 0.8s;
+        display: block;
+
+  }
+
+  .fieldset-articles .article:hover span.tag{
+      -webkit-animation-name: showIB; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 0.8s; /* Safari 4.0 - 8.0 */
+        animation-name: showIB;
+        animation-duration: 0.8s;
+        display: inline-block;
+
+  }
+
+  .fieldset-articles .article:hover .toggle-art{
+      top: 100px;
+      background: #fff;
+      -webkit-animation-name: movment; /* Safari 4.0 - 8.0 */
+      -webkit-animation-duration: 0.7s; /* Safari 4.0 - 8.0 */
+      animation-name: movment;
+      animation-duration: 0.7s;
+  }
+
+  @keyframes movment {
+    from {top: 200px;}
+    to {top: 100px;}
+  }
+
+  @keyframes showB {
+    from {display: none;}
+    to {display: block;}
+  }
+
+  @keyframes showIB {
+    from {display: none;}
+    to {display: inline-block;}
+  }
+  
+.fieldset-footer {
+    margin-top: 23px;
+    cursor: pointer;
+    color: #fff;
+    background: #666;
+    padding: 14px;
+    border-radius: 2px;
+}
+
+.fieldset-footer:hover {
+    text-decoration: underline;
+}
+
+.search-input-articles .hp-search_field{
+    padding-left: 0 !important;
+}
+
+.search-input-articles{
+    width: 80%;
+    margin: auto;
+}
+
+
+.divSearch-article{
+    color:#333 !important;
+    padding : 0 !important;
+  }
+
+  .divSearch-article .div-fsb-details .fsb-container {
+      padding-left: 0; 
+ }
+
+  .divSearch-article .det-div{
+    color:#333;
+    border: 1px solid #ccc;
+    background: #eee;
+    padding: 8px;
+  }
+
+  .divSearch-article .article-img{
+      border: 1px solid #ccc;
+      border-bottom:none;
+      background: #eee;
+  }
+  
+  .divSearch-article .article-desc{
+    background: #eee;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding-left : 5px;
+    padding-right : 5px;
+    color:#333;
+  }
+

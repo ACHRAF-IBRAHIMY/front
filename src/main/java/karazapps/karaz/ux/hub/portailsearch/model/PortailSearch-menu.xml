@@ -165,6 +165,12 @@
         <menu relId="Articles" label="Articles" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/Articles</resource>
         </menu>
+        <menu relId="ArticlesListe" label="Liste d'articles" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/ArticlesListe</resource>
+        </menu>
+        <menu relId="ArticleConsultation" label="Article" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/ArticleConsultation</resource>
+        </menu>
       </menu>
     </menu>
   </menu>
