@@ -356,3 +356,578 @@ Caused by: java.lang.ClassNotFoundException: org.apache.log.format.Formatter
 2019-08-27 11:46:02,764 - Null reference [template 'Parametrages-ini', line 185, column 44] : ${message.momentLabel} cannot be resolved.
 2019-08-27 11:46:02,764 - Null reference [template 'Parametrages-ini', line 185, column 81] : $message.activityLabel cannot be resolved.
 2019-08-27 11:46:02,764 - Null reference [template 'Parametrages-ini', line 240, column 28] : $pv.cps.getConfigparam().size() cannot be resolved.
+2019-08-28 18:46:56,170 - Log4JLogChute initialized using file 'velocity.log'
+2019-08-28 18:46:56,170 - Velocity was not initialized! Calling init()...
+2019-08-28 18:46:56,170 - Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
+2019-08-28 18:46:56,170 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2019-08-28 18:46:56,170 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2019-08-28 18:46:56,170 - Couldn't find class org.apache.velocity.runtime.log.AvalonLogChute or necessary supporting classes in classpath.
+java.lang.NoClassDefFoundError: org/apache/log/format/Formatter
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.velocity.util.ClassUtils.getClass(ClassUtils.java:63)
+	at org.apache.velocity.util.ClassUtils.getNewInstance(ClassUtils.java:95)
+	at org.apache.velocity.runtime.log.LogManager.createLogChute(LogManager.java:147)
+	at org.apache.velocity.runtime.log.LogManager.updateLog(LogManager.java:208)
+	at org.apache.velocity.runtime.RuntimeInstance.initializeLog(RuntimeInstance.java:728)
+	at org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:240)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:993)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:972)
+	at karaz.tools.kbuilder.Helper.loadTemplate(Helper.java:52)
+	at karaz.tools.kbuilder.ModelBuilder.buildJxFactory(ModelBuilder.java:195)
+	at karaz.tools.kbuilder.ModelBuilder.buildFromXsd(ModelBuilder.java:176)
+	at karaz.tools.kbuilder.ModuleBuilder.build(ModuleBuilder.java:126)
+	at karaz.tools.kbuilder.mojo.Builder.execute(Builder.java:109)
+	at karaz.tools.kbuilder.mojo.BuildAll.execute(BuildAll.java:17)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:207)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:863)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:288)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:199)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+Caused by: java.lang.ClassNotFoundException: org.apache.log.format.Formatter
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	... 38 more
+2019-08-28 18:46:56,176 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-08-28 18:46:56,176 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-08-28 18:46:56,181 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2019-08-28 18:46:56,187 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2019-08-28 18:46:56,188 - Do unicode file recognition:  false
+2019-08-28 18:46:56,188 - FileResourceLoader : adding path '.'
+2019-08-28 18:46:56,210 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2019-08-28 18:46:56,211 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2019-08-28 18:46:56,213 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2019-08-28 18:46:56,215 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2019-08-28 18:46:56,217 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2019-08-28 18:46:56,218 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2019-08-28 18:46:56,240 - Created '20' parsers.
+2019-08-28 18:46:56,245 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2019-08-28 18:46:56,245 - Velocimacro : Default library not found.
+2019-08-28 18:46:56,245 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2019-08-28 18:46:56,245 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2019-08-28 18:46:56,245 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2019-08-28 18:46:56,245 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2019-08-28 18:46:56,286 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:46:56,287 - Introspection Error : Ambiguous method invocation getAttributeValue(java.lang.String, null) for class class org.jdom2.Element
+2019-08-28 18:46:56,287 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:46:56,287 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:46:56,287 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:46:56,287 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:46:56,287 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:46:56,287 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:46:56,287 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:46:56,290 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:46:56,290 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:46:56,290 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:46:56,290 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:46:56,290 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:46:56,290 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:46:56,290 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:46:56,290 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:46:56,290 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:46:56,290 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:46:56,290 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:46:56,290 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:46:56,320 - Null reference [template 'tklLoader.xml', line 82, column 97] : ${usage} cannot be resolved.
+2019-08-28 18:46:57,749 - Left side ($dependsOnExists) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. modelLoader [line 34, column 23]
+2019-08-28 18:46:57,749 - Null reference [template 'modelLoader', line 49, column 67] : $xml0ESFileAsPath cannot be resolved.
+2019-08-28 18:46:57,749 - Null reference [template 'modelLoader', line 50, column 61] : $attachFileAsPath cannot be resolved.
+2019-08-28 18:46:59,453 - Null reference [template 'view-parametrages', line 129, column 140] : ${body} cannot be resolved.
+2019-08-28 18:46:59,454 - Null reference [template 'view-parametrages', line 271, column 91] : ${description} cannot be resolved.
+2019-08-28 18:46:59,457 - Null reference [template 'Parametrages-ini', line 78, column 41] : ${message.momentLabel} cannot be resolved.
+2019-08-28 18:46:59,457 - Null reference [template 'Parametrages-ini', line 78, column 67] : $message.activityLabel cannot be resolved.
+2019-08-28 18:46:59,457 - Null reference [template 'Parametrages-ini', line 78, column 95] : $message.sequence cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 95, column 83] : $message.activityLabel cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 96, column 34] : $message.sequence cannot be resolved.
+2019-08-28 18:46:59,458 - Left side (${moment}) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. Parametrages-ini [line 99, column 49]
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 102, column 48] : $message.dateCreation cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 110, column 49] : $message.modelName cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 121, column 46] : $message.processName cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 131, column 107] : $message.activityLabel cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 139, column 107] : $message.momentLabel cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 147, column 86] : $role cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 150, column 62] : ${frontEndLink} cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 150, column 114] : ${message.dataObjectId} cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 185, column 24] : $message.sequence cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 185, column 44] : ${message.momentLabel} cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 185, column 81] : $message.activityLabel cannot be resolved.
+2019-08-28 18:46:59,458 - Null reference [template 'Parametrages-ini', line 240, column 28] : $pv.cps.getConfigparam().size() cannot be resolved.
+2019-08-28 18:47:47,159 - Log4JLogChute initialized using file 'velocity.log'
+2019-08-28 18:47:47,160 - Velocity was not initialized! Calling init()...
+2019-08-28 18:47:47,160 - Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
+2019-08-28 18:47:47,160 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2019-08-28 18:47:47,160 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2019-08-28 18:47:47,160 - Couldn't find class org.apache.velocity.runtime.log.AvalonLogChute or necessary supporting classes in classpath.
+java.lang.NoClassDefFoundError: org/apache/log/format/Formatter
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.velocity.util.ClassUtils.getClass(ClassUtils.java:63)
+	at org.apache.velocity.util.ClassUtils.getNewInstance(ClassUtils.java:95)
+	at org.apache.velocity.runtime.log.LogManager.createLogChute(LogManager.java:147)
+	at org.apache.velocity.runtime.log.LogManager.updateLog(LogManager.java:208)
+	at org.apache.velocity.runtime.RuntimeInstance.initializeLog(RuntimeInstance.java:728)
+	at org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:240)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:993)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:972)
+	at karaz.tools.kbuilder.Helper.loadTemplate(Helper.java:52)
+	at karaz.tools.kbuilder.ModelBuilder.buildJxFactory(ModelBuilder.java:195)
+	at karaz.tools.kbuilder.ModelBuilder.buildFromXsd(ModelBuilder.java:176)
+	at karaz.tools.kbuilder.ModuleBuilder.build(ModuleBuilder.java:126)
+	at karaz.tools.kbuilder.mojo.Builder.execute(Builder.java:109)
+	at karaz.tools.kbuilder.mojo.BuildModel.execute(BuildModel.java:17)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:207)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:863)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:288)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:199)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+Caused by: java.lang.ClassNotFoundException: org.apache.log.format.Formatter
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	... 38 more
+2019-08-28 18:47:47,161 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-08-28 18:47:47,161 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-08-28 18:47:47,163 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2019-08-28 18:47:47,164 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2019-08-28 18:47:47,165 - Do unicode file recognition:  false
+2019-08-28 18:47:47,165 - FileResourceLoader : adding path '.'
+2019-08-28 18:47:47,171 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2019-08-28 18:47:47,171 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2019-08-28 18:47:47,172 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2019-08-28 18:47:47,173 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2019-08-28 18:47:47,173 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2019-08-28 18:47:47,173 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2019-08-28 18:47:47,187 - Created '20' parsers.
+2019-08-28 18:47:47,189 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2019-08-28 18:47:47,189 - Velocimacro : Default library not found.
+2019-08-28 18:47:47,189 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2019-08-28 18:47:47,189 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2019-08-28 18:47:47,189 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2019-08-28 18:47:47,189 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2019-08-28 18:47:47,220 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:47:47,220 - Introspection Error : Ambiguous method invocation getAttributeValue(java.lang.String, null) for class class org.jdom2.Element
+2019-08-28 18:47:47,220 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:47:47,221 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:47:47,221 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:47:47,221 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:47:47,221 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:47:47,221 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:47:47,221 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:47:47,222 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:47:47,222 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:47:47,222 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:47:47,222 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:47:47,222 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:47:47,223 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:47:47,223 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:47:47,223 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:47:47,223 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:47:47,223 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:47:47,223 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:47:47,223 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:47:47,240 - Null reference [template 'tklLoader.xml', line 82, column 97] : ${usage} cannot be resolved.
+2019-08-28 18:47:48,644 - Left side ($dependsOnExists) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. modelLoader [line 34, column 23]
+2019-08-28 18:47:48,644 - Null reference [template 'modelLoader', line 49, column 67] : $xml0ESFileAsPath cannot be resolved.
+2019-08-28 18:47:48,644 - Null reference [template 'modelLoader', line 50, column 61] : $attachFileAsPath cannot be resolved.
+2019-08-28 18:47:49,385 - Null reference [template 'view-parametrages', line 129, column 140] : ${body} cannot be resolved.
+2019-08-28 18:47:49,386 - Null reference [template 'view-parametrages', line 271, column 91] : ${description} cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 78, column 41] : ${message.momentLabel} cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 78, column 67] : $message.activityLabel cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 78, column 95] : $message.sequence cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 95, column 83] : $message.activityLabel cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 96, column 34] : $message.sequence cannot be resolved.
+2019-08-28 18:47:49,391 - Left side (${moment}) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. Parametrages-ini [line 99, column 49]
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 102, column 48] : $message.dateCreation cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 110, column 49] : $message.modelName cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 121, column 46] : $message.processName cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 131, column 107] : $message.activityLabel cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 139, column 107] : $message.momentLabel cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 147, column 86] : $role cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 150, column 62] : ${frontEndLink} cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 150, column 114] : ${message.dataObjectId} cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 185, column 24] : $message.sequence cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 185, column 44] : ${message.momentLabel} cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 185, column 81] : $message.activityLabel cannot be resolved.
+2019-08-28 18:47:49,391 - Null reference [template 'Parametrages-ini', line 240, column 28] : $pv.cps.getConfigparam().size() cannot be resolved.
+2019-08-28 18:49:17,535 - Log4JLogChute initialized using file 'velocity.log'
+2019-08-28 18:49:17,535 - Velocity was not initialized! Calling init()...
+2019-08-28 18:49:17,535 - Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
+2019-08-28 18:49:17,535 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2019-08-28 18:49:17,535 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2019-08-28 18:49:17,535 - Couldn't find class org.apache.velocity.runtime.log.AvalonLogChute or necessary supporting classes in classpath.
+java.lang.NoClassDefFoundError: org/apache/log/format/Formatter
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.velocity.util.ClassUtils.getClass(ClassUtils.java:63)
+	at org.apache.velocity.util.ClassUtils.getNewInstance(ClassUtils.java:95)
+	at org.apache.velocity.runtime.log.LogManager.createLogChute(LogManager.java:147)
+	at org.apache.velocity.runtime.log.LogManager.updateLog(LogManager.java:208)
+	at org.apache.velocity.runtime.RuntimeInstance.initializeLog(RuntimeInstance.java:728)
+	at org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:240)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:993)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:972)
+	at karaz.tools.kbuilder.Helper.loadTemplate(Helper.java:52)
+	at karaz.tools.kbuilder.ModelBuilder.buildJxFactory(ModelBuilder.java:195)
+	at karaz.tools.kbuilder.ModelBuilder.buildFromXsd(ModelBuilder.java:176)
+	at karaz.tools.kbuilder.ModuleBuilder.build(ModuleBuilder.java:126)
+	at karaz.tools.kbuilder.mojo.Builder.execute(Builder.java:109)
+	at karaz.tools.kbuilder.mojo.BuildAll.execute(BuildAll.java:17)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:207)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:863)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:288)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:199)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+Caused by: java.lang.ClassNotFoundException: org.apache.log.format.Formatter
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	... 38 more
+2019-08-28 18:49:17,536 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-08-28 18:49:17,536 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-08-28 18:49:17,538 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2019-08-28 18:49:17,539 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2019-08-28 18:49:17,540 - Do unicode file recognition:  false
+2019-08-28 18:49:17,540 - FileResourceLoader : adding path '.'
+2019-08-28 18:49:17,545 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2019-08-28 18:49:17,546 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2019-08-28 18:49:17,549 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2019-08-28 18:49:17,550 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2019-08-28 18:49:17,550 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2019-08-28 18:49:17,551 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2019-08-28 18:49:17,563 - Created '20' parsers.
+2019-08-28 18:49:17,565 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2019-08-28 18:49:17,566 - Velocimacro : Default library not found.
+2019-08-28 18:49:17,566 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2019-08-28 18:49:17,566 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2019-08-28 18:49:17,566 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2019-08-28 18:49:17,566 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2019-08-28 18:49:17,594 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:49:17,595 - Introspection Error : Ambiguous method invocation getAttributeValue(java.lang.String, null) for class class org.jdom2.Element
+2019-08-28 18:49:17,595 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:49:17,595 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:49:17,595 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:49:17,595 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:49:17,595 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:49:17,595 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:49:17,595 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:49:17,597 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:49:17,597 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:49:17,597 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:49:17,597 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:49:17,597 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:49:17,597 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:49:17,597 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:49:17,597 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:49:17,597 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-08-28 18:49:17,597 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-08-28 18:49:17,597 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-08-28 18:49:17,597 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-08-28 18:49:17,613 - Null reference [template 'tklLoader.xml', line 82, column 97] : ${usage} cannot be resolved.
+2019-08-28 18:49:18,922 - Left side ($dependsOnExists) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. modelLoader [line 34, column 23]
+2019-08-28 18:49:18,922 - Null reference [template 'modelLoader', line 49, column 67] : $xml0ESFileAsPath cannot be resolved.
+2019-08-28 18:49:18,922 - Null reference [template 'modelLoader', line 50, column 61] : $attachFileAsPath cannot be resolved.
+2019-08-28 18:49:19,651 - Null reference [template 'view-parametrages', line 129, column 140] : ${body} cannot be resolved.
+2019-08-28 18:49:19,651 - Null reference [template 'view-parametrages', line 271, column 91] : ${description} cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 78, column 41] : ${message.momentLabel} cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 78, column 67] : $message.activityLabel cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 78, column 95] : $message.sequence cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 95, column 83] : $message.activityLabel cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 96, column 34] : $message.sequence cannot be resolved.
+2019-08-28 18:49:19,653 - Left side (${moment}) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. Parametrages-ini [line 99, column 49]
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 102, column 48] : $message.dateCreation cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 110, column 49] : $message.modelName cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 121, column 46] : $message.processName cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 131, column 107] : $message.activityLabel cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 139, column 107] : $message.momentLabel cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 147, column 86] : $role cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 150, column 62] : ${frontEndLink} cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 150, column 114] : ${message.dataObjectId} cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 185, column 24] : $message.sequence cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 185, column 44] : ${message.momentLabel} cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 185, column 81] : $message.activityLabel cannot be resolved.
+2019-08-28 18:49:19,653 - Null reference [template 'Parametrages-ini', line 240, column 28] : $pv.cps.getConfigparam().size() cannot be resolved.
+2019-09-03 12:16:08,312 - Log4JLogChute initialized using file 'velocity.log'
+2019-09-03 12:16:08,313 - Velocity was not initialized! Calling init()...
+2019-09-03 12:16:08,313 - Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
+2019-09-03 12:16:08,313 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2019-09-03 12:16:08,314 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2019-09-03 12:16:08,314 - Couldn't find class org.apache.velocity.runtime.log.AvalonLogChute or necessary supporting classes in classpath.
+java.lang.NoClassDefFoundError: org/apache/log/format/Formatter
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.velocity.util.ClassUtils.getClass(ClassUtils.java:63)
+	at org.apache.velocity.util.ClassUtils.getNewInstance(ClassUtils.java:95)
+	at org.apache.velocity.runtime.log.LogManager.createLogChute(LogManager.java:147)
+	at org.apache.velocity.runtime.log.LogManager.updateLog(LogManager.java:208)
+	at org.apache.velocity.runtime.RuntimeInstance.initializeLog(RuntimeInstance.java:728)
+	at org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:240)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:993)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:972)
+	at karaz.tools.kbuilder.Helper.loadTemplate(Helper.java:52)
+	at karaz.tools.kbuilder.ModelBuilder.buildJxFactory(ModelBuilder.java:195)
+	at karaz.tools.kbuilder.ModelBuilder.buildFromXsd(ModelBuilder.java:176)
+	at karaz.tools.kbuilder.ModuleBuilder.build(ModuleBuilder.java:126)
+	at karaz.tools.kbuilder.mojo.Builder.execute(Builder.java:109)
+	at karaz.tools.kbuilder.mojo.BuildAll.execute(BuildAll.java:17)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:207)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:863)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:288)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:199)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+Caused by: java.lang.ClassNotFoundException: org.apache.log.format.Formatter
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	... 38 more
+2019-09-03 12:16:08,315 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-09-03 12:16:08,315 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-09-03 12:16:08,317 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2019-09-03 12:16:08,320 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2019-09-03 12:16:08,321 - Do unicode file recognition:  false
+2019-09-03 12:16:08,321 - FileResourceLoader : adding path '.'
+2019-09-03 12:16:08,329 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2019-09-03 12:16:08,330 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2019-09-03 12:16:08,331 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2019-09-03 12:16:08,332 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2019-09-03 12:16:08,332 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2019-09-03 12:16:08,333 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2019-09-03 12:16:08,345 - Created '20' parsers.
+2019-09-03 12:16:08,348 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2019-09-03 12:16:08,349 - Velocimacro : Default library not found.
+2019-09-03 12:16:08,349 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2019-09-03 12:16:08,349 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2019-09-03 12:16:08,349 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2019-09-03 12:16:08,349 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2019-09-03 12:16:08,383 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 12:16:08,383 - Introspection Error : Ambiguous method invocation getAttributeValue(java.lang.String, null) for class class org.jdom2.Element
+2019-09-03 12:16:08,383 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 12:16:08,383 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 12:16:08,383 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 12:16:08,383 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 12:16:08,383 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 12:16:08,383 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 12:16:08,383 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 12:16:08,385 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 12:16:08,385 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 12:16:08,385 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 12:16:08,385 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 12:16:08,385 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 12:16:08,385 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 12:16:08,385 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 12:16:08,385 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 12:16:08,385 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 12:16:08,385 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 12:16:08,385 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 12:16:08,385 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 12:16:08,403 - Null reference [template 'tklLoader.xml', line 82, column 97] : ${usage} cannot be resolved.
+2019-09-03 12:16:09,803 - Left side ($dependsOnExists) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. modelLoader [line 34, column 23]
+2019-09-03 12:16:09,803 - Null reference [template 'modelLoader', line 49, column 67] : $xml0ESFileAsPath cannot be resolved.
+2019-09-03 12:16:09,803 - Null reference [template 'modelLoader', line 50, column 61] : $attachFileAsPath cannot be resolved.
+2019-09-03 12:16:10,536 - Null reference [template 'view-parametrages', line 129, column 140] : ${body} cannot be resolved.
+2019-09-03 12:16:10,536 - Null reference [template 'view-parametrages', line 271, column 91] : ${description} cannot be resolved.
+2019-09-03 12:16:10,539 - Null reference [template 'Parametrages-ini', line 78, column 41] : ${message.momentLabel} cannot be resolved.
+2019-09-03 12:16:10,539 - Null reference [template 'Parametrages-ini', line 78, column 67] : $message.activityLabel cannot be resolved.
+2019-09-03 12:16:10,540 - Null reference [template 'Parametrages-ini', line 78, column 95] : $message.sequence cannot be resolved.
+2019-09-03 12:16:10,540 - Null reference [template 'Parametrages-ini', line 95, column 83] : $message.activityLabel cannot be resolved.
+2019-09-03 12:16:10,540 - Null reference [template 'Parametrages-ini', line 96, column 34] : $message.sequence cannot be resolved.
+2019-09-03 12:16:10,540 - Left side (${moment}) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. Parametrages-ini [line 99, column 49]
+2019-09-03 12:16:10,540 - Null reference [template 'Parametrages-ini', line 102, column 48] : $message.dateCreation cannot be resolved.
+2019-09-03 12:16:10,540 - Null reference [template 'Parametrages-ini', line 110, column 49] : $message.modelName cannot be resolved.
+2019-09-03 12:16:10,540 - Null reference [template 'Parametrages-ini', line 121, column 46] : $message.processName cannot be resolved.
+2019-09-03 12:16:10,540 - Null reference [template 'Parametrages-ini', line 131, column 107] : $message.activityLabel cannot be resolved.
+2019-09-03 12:16:10,541 - Null reference [template 'Parametrages-ini', line 139, column 107] : $message.momentLabel cannot be resolved.
+2019-09-03 12:16:10,541 - Null reference [template 'Parametrages-ini', line 147, column 86] : $role cannot be resolved.
+2019-09-03 12:16:10,541 - Null reference [template 'Parametrages-ini', line 150, column 62] : ${frontEndLink} cannot be resolved.
+2019-09-03 12:16:10,541 - Null reference [template 'Parametrages-ini', line 150, column 114] : ${message.dataObjectId} cannot be resolved.
+2019-09-03 12:16:10,541 - Null reference [template 'Parametrages-ini', line 185, column 24] : $message.sequence cannot be resolved.
+2019-09-03 12:16:10,541 - Null reference [template 'Parametrages-ini', line 185, column 44] : ${message.momentLabel} cannot be resolved.
+2019-09-03 12:16:10,542 - Null reference [template 'Parametrages-ini', line 185, column 81] : $message.activityLabel cannot be resolved.
+2019-09-03 12:16:10,542 - Null reference [template 'Parametrages-ini', line 240, column 28] : $pv.cps.getConfigparam().size() cannot be resolved.
+2019-09-03 18:35:01,038 - Log4JLogChute initialized using file 'velocity.log'
+2019-09-03 18:35:01,039 - Velocity was not initialized! Calling init()...
+2019-09-03 18:35:01,039 - Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
+2019-09-03 18:35:01,039 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2019-09-03 18:35:01,039 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2019-09-03 18:35:01,040 - Couldn't find class org.apache.velocity.runtime.log.AvalonLogChute or necessary supporting classes in classpath.
+java.lang.NoClassDefFoundError: org/apache/log/format/Formatter
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.velocity.util.ClassUtils.getClass(ClassUtils.java:63)
+	at org.apache.velocity.util.ClassUtils.getNewInstance(ClassUtils.java:95)
+	at org.apache.velocity.runtime.log.LogManager.createLogChute(LogManager.java:147)
+	at org.apache.velocity.runtime.log.LogManager.updateLog(LogManager.java:208)
+	at org.apache.velocity.runtime.RuntimeInstance.initializeLog(RuntimeInstance.java:728)
+	at org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:240)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:993)
+	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:972)
+	at karaz.tools.kbuilder.Helper.loadTemplate(Helper.java:52)
+	at karaz.tools.kbuilder.ModelBuilder.buildJxFactory(ModelBuilder.java:195)
+	at karaz.tools.kbuilder.ModelBuilder.buildFromXsd(ModelBuilder.java:176)
+	at karaz.tools.kbuilder.ModuleBuilder.build(ModuleBuilder.java:126)
+	at karaz.tools.kbuilder.mojo.Builder.execute(Builder.java:109)
+	at karaz.tools.kbuilder.mojo.BuildAll.execute(BuildAll.java:17)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:207)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:863)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:288)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:199)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+Caused by: java.lang.ClassNotFoundException: org.apache.log.format.Formatter
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	... 38 more
+2019-09-03 18:35:01,043 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-09-03 18:35:01,043 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2019-09-03 18:35:01,046 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2019-09-03 18:35:01,050 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2019-09-03 18:35:01,050 - Do unicode file recognition:  false
+2019-09-03 18:35:01,051 - FileResourceLoader : adding path '.'
+2019-09-03 18:35:01,064 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2019-09-03 18:35:01,065 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2019-09-03 18:35:01,066 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2019-09-03 18:35:01,067 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2019-09-03 18:35:01,068 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2019-09-03 18:35:01,069 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2019-09-03 18:35:01,096 - Created '20' parsers.
+2019-09-03 18:35:01,100 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2019-09-03 18:35:01,102 - Velocimacro : Default library not found.
+2019-09-03 18:35:01,102 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2019-09-03 18:35:01,102 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2019-09-03 18:35:01,102 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2019-09-03 18:35:01,102 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2019-09-03 18:35:01,161 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 18:35:01,162 - Introspection Error : Ambiguous method invocation getAttributeValue(java.lang.String, null) for class class org.jdom2.Element
+2019-09-03 18:35:01,162 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 18:35:01,162 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 18:35:01,162 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 18:35:01,162 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 18:35:01,162 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 18:35:01,162 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 18:35:01,162 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 18:35:01,164 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 18:35:01,164 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 18:35:01,165 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 18:35:01,165 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 18:35:01,165 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 18:35:01,165 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 18:35:01,165 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 18:35:01,165 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 18:35:01,165 - RHS of #set statement is null. Context will not be modified. listDynamic [line 18, column 1]
+2019-09-03 18:35:01,165 - RHS of #set statement is null. Context will not be modified. listDynamic [line 19, column 1]
+2019-09-03 18:35:01,165 - Null reference [template 'listDynamic', line 21, column 36] : $val cannot be resolved.
+2019-09-03 18:35:01,165 - Null reference [template 'listDynamic', line 21, column 49] : $lab cannot be resolved.
+2019-09-03 18:35:01,191 - Null reference [template 'tklLoader.xml', line 82, column 97] : ${usage} cannot be resolved.
+2019-09-03 18:35:02,729 - Left side ($dependsOnExists) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. modelLoader [line 34, column 23]
+2019-09-03 18:35:02,730 - Null reference [template 'modelLoader', line 49, column 67] : $xml0ESFileAsPath cannot be resolved.
+2019-09-03 18:35:02,730 - Null reference [template 'modelLoader', line 50, column 61] : $attachFileAsPath cannot be resolved.
+2019-09-03 18:35:03,553 - Null reference [template 'view-parametrages', line 129, column 140] : ${body} cannot be resolved.
+2019-09-03 18:35:03,553 - Null reference [template 'view-parametrages', line 271, column 91] : ${description} cannot be resolved.
+2019-09-03 18:35:03,563 - Null reference [template 'Parametrages-ini', line 78, column 41] : ${message.momentLabel} cannot be resolved.
+2019-09-03 18:35:03,563 - Null reference [template 'Parametrages-ini', line 78, column 67] : $message.activityLabel cannot be resolved.
+2019-09-03 18:35:03,563 - Null reference [template 'Parametrages-ini', line 78, column 95] : $message.sequence cannot be resolved.
+2019-09-03 18:35:03,563 - Null reference [template 'Parametrages-ini', line 95, column 83] : $message.activityLabel cannot be resolved.
+2019-09-03 18:35:03,563 - Null reference [template 'Parametrages-ini', line 96, column 34] : $message.sequence cannot be resolved.
+2019-09-03 18:35:03,563 - Left side (${moment}) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. Parametrages-ini [line 99, column 49]
+2019-09-03 18:35:03,563 - Null reference [template 'Parametrages-ini', line 102, column 48] : $message.dateCreation cannot be resolved.
+2019-09-03 18:35:03,564 - Null reference [template 'Parametrages-ini', line 110, column 49] : $message.modelName cannot be resolved.
+2019-09-03 18:35:03,564 - Null reference [template 'Parametrages-ini', line 121, column 46] : $message.processName cannot be resolved.
+2019-09-03 18:35:03,564 - Null reference [template 'Parametrages-ini', line 131, column 107] : $message.activityLabel cannot be resolved.
+2019-09-03 18:35:03,564 - Null reference [template 'Parametrages-ini', line 139, column 107] : $message.momentLabel cannot be resolved.
+2019-09-03 18:35:03,564 - Null reference [template 'Parametrages-ini', line 147, column 86] : $role cannot be resolved.
+2019-09-03 18:35:03,564 - Null reference [template 'Parametrages-ini', line 150, column 62] : ${frontEndLink} cannot be resolved.
+2019-09-03 18:35:03,564 - Null reference [template 'Parametrages-ini', line 150, column 114] : ${message.dataObjectId} cannot be resolved.
+2019-09-03 18:35:03,565 - Null reference [template 'Parametrages-ini', line 185, column 24] : $message.sequence cannot be resolved.
+2019-09-03 18:35:03,565 - Null reference [template 'Parametrages-ini', line 185, column 44] : ${message.momentLabel} cannot be resolved.
+2019-09-03 18:35:03,565 - Null reference [template 'Parametrages-ini', line 185, column 81] : $message.activityLabel cannot be resolved.
+2019-09-03 18:35:03,565 - Null reference [template 'Parametrages-ini', line 240, column 28] : $pv.cps.getConfigparam().size() cannot be resolved.

@@ -1399,7 +1399,7 @@ function createChildClasses(){
             ic.setAttribute("class","fas fa-close");
             ic.setAttribute("index",i);
             ic.addEventListener("click",function(){
-                if(confirm("SUPPRIMER !!")){
+                if(window.confirm("SUPPRIMER !!")){
                     deleted.push(clms[this.getAttribute("index").toString()]);
                     this.style.display = "none";
                     eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]["+this.getAttribute("index").toString()+"]");
@@ -1745,6 +1745,23 @@ function getAllDocsClassDiv(data,type,root){
       var div1 = document.createElement("i");
       div1.setAttribute("class","fas fa-file");
      
+
+      if(data[i]["_source"]["attachementImg"]!=undefined){
+          if(data[i]["_source"]["attachementImg"]!=""){
+            div1.setAttribute("style","color:green");
+          }else{
+              var ind1 = data[i]["_source"]["attachementImg"].indexOf("gedId");
+              var ind2 = data[i]["_source"]["attachementImg"].indexOf("&amp;",ind1);
+              var strr = data[i]["_source"]["attachementImg"].substring(ind1+6,ind2);
+              if(strr==""){
+                div1.setAttribute("style","color:yellow");
+              }
+          }
+      }else{
+        div1.setAttribute("style","color:red");
+      }
+      
+      
       var div2 = document.createElement("div");
       div2.setAttribute("class","note");
       div2.innerHTML = data[i]["_source"]["title"];
@@ -1775,7 +1792,9 @@ function getAllDocsClassDiv(data,type,root){
       div4.addEventListener("click",function(){
         var id = this.parentElement.getElementsByClassName("id-note")[0].value;
         this.parentElement.style.display = "none";
-        removeDocObject(type,id);
+        if(window.confirm("Supprimer")){
+            removeDocObject(type,id);
+        }
       });
       
       divG.appendChild(div1);
@@ -1898,14 +1917,18 @@ function getModifyObject(type,root){
                 obj.title = $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val();
                 obj.type = $(".simulator-cms .side-bar .body .div-6 .class-type-question select option:selected").val();
                 
-                if(root.attachementImg.gedId!=""){
-                    var gedId = root.attachementImg.gedId;
-                    var krn = gedId.split("/")[0];
-                    obj.attachementImg = "/karazal/DownloadFile?gedId="+gedId+"&amp;krn="+krn+"&amp;thumbnail=large&amp;or=img/no-file.svg";    
-                }else{
-                    obj.attachementImg = $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val();
-                }
+                var removeAtt = $(".simulator-cms .side-bar .body .div-6 .class-img").attr("remove");
 
+                if(removeAtt=="false"){
+                    if(root.attachementImg.gedId!=""){
+                        var gedId = root.attachementImg.gedId;
+                        var krn = gedId.split("/")[0];
+                        obj.attachementImg = "/karazal/DownloadFile?gedId="+gedId+"&amp;krn="+krn+"&amp;thumbnail=large&amp;or=img/no-file.svg";    
+                    }else{
+                        obj.attachementImg = $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val();
+                    }
+                }
+                
                 break;
         case 3: obj.id = $(".simulator-cms .side-bar .body .div-7 .input-id").val();
                 obj.title = $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val();
@@ -1933,14 +1956,33 @@ function detailsDocObject(result,type,root){
         $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val(result._source.title);
         var selected = Number(result._source.type.split("-")[1])-1;
         $(".simulator-cms .side-bar .body .div-6 .class-type-question select").val(result._source.type);
+
+        $(".simulator-cms .side-bar .body .div-6 .class-img").attr("remove","false");
+
         if(result._source.attachementImg!=undefined){
+            $(".simulator-cms .side-bar .body .div-6").css("height","auto");
             $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val(result._source.attachementImg);
+            
+            var deleteButt = document.createElement("button");
+            deleteButt.innerHTML = "Supprimer l'image";
+            deleteButt.setAttribute("style","margin:auto;margin-top:10px;color:#fff;background:red;border:none;display:block;");
+            deleteButt.addEventListener("click",function(){
+                this.parentNode.setAttribute("remove","true");
+                this.parentNode.innerHTML="No file";
+            });
+            
+            $(".simulator-cms .side-bar .body .div-6 .class-img").html("<img style=\"    display: block;height: 300px;margin: auto;margin-top: 15px;\" src=\""+result._source.attachementImg+"\" />");
+            $(".simulator-cms .side-bar .body .div-6 .class-img").append(deleteButt);
+        
         }else{
+            $(".simulator-cms .side-bar .body .div-6").css("height","360px");
             $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val("");
+            $(".simulator-cms .side-bar .body .div-6 .class-img").html("No file");
         }
+
         root.attachementImg = {
             fileId : "",
-            gedId : "",
+            gedId : "", 
             fileName : "",
             fileSize : "",
             fileSignature : "",

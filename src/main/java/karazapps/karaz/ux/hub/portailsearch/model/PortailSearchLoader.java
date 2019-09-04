@@ -83,6 +83,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-AllTaskGlobalModelSearch.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/Articles", "karazapps/karaz/ux/hub/portailsearch/model/search-Articles.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AutorisationDemolition", "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationDemolition.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AutorisationRefection", "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationRefection.xml");
@@ -177,6 +179,7 @@ public class PortailSearchLoader {
 
     	
     	try {  
+    			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/articles.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/DashboardSearch.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/globalSearch.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/mainDefault.css");
