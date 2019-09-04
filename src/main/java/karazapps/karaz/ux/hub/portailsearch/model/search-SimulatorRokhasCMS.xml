@@ -594,6 +594,7 @@
                       <button class="but">Attacher</button>
                       <input class="att" type="hidden" value="" />
                     </div>
+                    <div class="class-img" />
                     <div class="class-update-button">
                       <button>Modifier</button>
                     </div>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="Articles" label="Actualités">
+
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+        </query>
+        <collapsed>false</collapsed>
+
+        <numDossier />
+        <numCommission />
+        <login />
+        <visualizer>0</visualizer>
+    </data>
+    <view>
+        <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
+            <script onLoad="true">
+            // root.login=userQN;
+             //context.formRender.notifyObservers("login");
+            </script>
+            <script postLoad="true">
+                
+            </script>
+            
+            <vbox columns="70% 30%">
+                <vbox className="hp-box" >
+                    <html>
+                        <div class="vpanel-title">
+                            <div class="vpanel-title">
+                                <span>ACTUALITES</span>
+                                <hr class="header-create-account-horizontal-line hr-hub" />
+                            </div>
+                             <div class="hp-sbox-text">
+                            Retrouvez ici les dernières nouveautés de votre plateforme : Nouveaux services digitaux, Nouvelles fonctionnalités, changements réglementaires ou procédurales, évènements planifiés, ...
+                                    </div>
+                                <div style="height: 50px;" />
+                        </div> 
+                    </html>
+                    <fieldset className="fieldset-articles" header="ASTUCES ET FONCTIONNALITES">
+                        <vbox columns="33.3% 33.3% 33.3%">
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt=""/>
+                                </html>
+                               <html>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                               </html>
+                            </vbox>
+
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt=""/>
+                                </html>
+                               <html>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                               </html>
+                            </vbox>
+
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt=""/>
+                                </html>
+                               <html>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                               </html>
+                            </vbox>
+
+                        </vbox>
+                    </fieldset>
+                </vbox>
+                <vbox className="hp-box" >
+
+                </vbox>
+            </vbox>
+            
+        </screen>
+    </view>
+</search>

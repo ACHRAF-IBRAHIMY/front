@@ -60,7 +60,9 @@
     </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
+
       </html>
+
       <vbox className="hp-small simulator">
       <button label="print etat" visible="1,=,2" className="report-hiden" actionName="karaz/ux/hub/dashboardsearch/PrintReportSumilateurBeans" postProcessing="openFile,repport.gedId,none">
       </button>
@@ -94,10 +96,23 @@
                 <div class="qr">
                   <img src="img/load-text.gif" style="margin: auto;display: block;height: 100px;" alt="" />
                 </div>
+                <div class="error-msg-sim error-msg-sim1">
+                  <div><i class="fas fa-exclamation-triangle" /></div>
+                  <p class="">Cette procédure sera décrite et mise en ligne après entrée en vigueur des décrets :
+                  <br />
+                     - N° 2.18.475 précisant les modalités de délivrance des autorisations de réfection, de régularisation et de démolition.
+                    <br /> - N° 2.18.577 remplaçant le décret N° 2.13.424 du 24 Mai 2013 (Règlement général de construction)</p>
+                </div>
+                <div class="error-msg-sim error-msg-sim2">
+                  <div><i class="fas fa-exclamation-triangle" /></div>
+                  <p class="">
+                    Pour tout projet d’investissement éligible au passage par le Comité Régional Unifié d’Investissement (CRUI), merci d’utiliser la plateforme CRI 2.0.   
+                  </p>
+                </div>
                 <div class="next-button">
                   <button class="back-rq stopped">Précédent</button>
                   <button class="next-rq">Suivant</button>
-                  <button class="next-report" style="background: red;color: #fff;border: none;"><i class="fas fa-print" /> Résultat</button>
+                  <button class="next-report" style="background: red;color: #fff;border: none;width:auto"><i class="fas fa-print" /> Imprimer la procédure</button>
                 </div>
               </html>
               <button visible="1,=,2" label="test button" className="chargement-btn">
