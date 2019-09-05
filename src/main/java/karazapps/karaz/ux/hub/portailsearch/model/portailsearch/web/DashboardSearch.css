@@ -171,7 +171,7 @@
 
 #ranking-table{
     margin: auto;
-    width: 85%;
+    width: 95%;
     text-align: center;
     margin-top: 33px;
 }
@@ -203,7 +203,7 @@
 
 #ranking-table2{
     margin: auto;
-    width: 85%;
+    width: 95%;
     text-align: center;
 }
 
@@ -238,16 +238,15 @@
 .ranking-fieldset .ow-btn-container{
     display: inherit;
     height: 36px;
-    width: 30px;
     margin-top: 12px;
     text-align: left;
+    width: auto;
 }
 
 .ranking-fieldset .ow-btn-container button{
     border: 1.5px solid #666;
     color: #666;
 }
-
 
 .consultation-video {
     padding: 18px;

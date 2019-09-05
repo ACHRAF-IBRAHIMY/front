@@ -81,9 +81,9 @@ function createBarTop3(result,id,select){
     var hg2 = results[0]._source.indecators[select];
     var hg3 = results[2]._source.indecators[select];
 
-    bar.find(".div-bar-1 .bar1 .bottom-div").html("<div class=\"cm cm1\">"+cm1+"</div><div style=\"height:"+((hg1*155)/hg2)+"px\"><span>"+Number(hg1).toFixed(2)+"</span></div>");
-    bar.find(".div-bar-1 .bar2 .bottom-div").html("<div class=\"cm cm2\">"+cm2+"</div><div style=\"height:"+((hg2*155)/hg2)+"px\"><span>"+Number(hg2).toFixed(2)+"</span></div>");
-    bar.find(".div-bar-1 .bar3 .bottom-div").html("<div class=\"cm cm3\">"+cm3+"</div><div style=\"height:"+((hg3*155)/hg2)+"px\"><span>"+Number(hg3).toFixed(2)+"</span></div>");
+    bar.find(".div-bar-1 .bar1 .bottom-div").html("<div class=\"cm cm1\">"+cm1+"</div><div style=\"height:"+((hg1*155)/hg2)+"px\"><span>"+Number(hg1).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+2+"</span></div>");
+    bar.find(".div-bar-1 .bar2 .bottom-div").html("<div class=\"cm cm2\">"+cm2+"</div><div style=\"height:"+((hg2*155)/hg2)+"px\"><span>"+Number(hg2).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+1+"</span></div>");
+    bar.find(".div-bar-1 .bar3 .bottom-div").html("<div class=\"cm cm3\">"+cm3+"</div><div style=\"height:"+((hg3*155)/hg2)+"px\"><span>"+Number(hg3).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+3+"</span></div>");
 
 }
 
@@ -129,6 +129,8 @@ function updateTitles(){
     $(".ranking-fieldset > .ow-pl-toolbar .ow-label-pl").append("<span style=\"color:orange\"> "+str+"</span>");
 }
   
+var dataReportRk = [];
+
 function createCommuneTable(result){
     var results = result.hits.hits;
     var tableHtml = $("#ranking-table2");
@@ -141,6 +143,8 @@ function createCommuneTable(result){
         var rankCom = results[i]._source.rankComp;
         var rankStr = "";
         
+        dataReportRk.push(results[i]._source);
+
         if(rankCom>0){
             rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
         }else if(rankCom<0){
@@ -148,7 +152,7 @@ function createCommuneTable(result){
         }else{
             rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
         }
-        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,25)+"</span> "+rankStr+`</span></td>`);
+        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
         tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
@@ -160,6 +164,14 @@ function createCommuneTable(result){
     }
    
 }
+
+function getReportDataRk(root,context){
+    root.dataReportRk = {};
+    context.formRender.notifyObservers("dataReportRk");
+    root.dataReportRk = dataReportRk;
+    context.formRender.notifyObservers("dataReportRk");
+}
+
 
 function getAllByAggs(field,size,filter,byfilter,type){
 
@@ -316,8 +328,13 @@ function getAllByAggs(field,size,filter,byfilter,type){
   var region_color = ["#4472C4","#FFC000","#264478","#AA8B2B","#ED7D31","##77ACDC","#AE6736","#255E91",
     "#B4B4B4","#70AD47","#7D7D7D","#43682B"];
 
-  function drawRadarRegion(){
-      var obj = {
+  function drawRadarRegion(trim){
+      
+      var obj = {"query" : {
+        "term":{
+            "trim.keyword":trim
+        }
+      },
         "aggregations": {
            "region_ind": {
               "aggregations": {
@@ -425,6 +442,5 @@ function getAllByAggs(field,size,filter,byfilter,type){
             console.log(error);
         }
     });
-
 
   }
