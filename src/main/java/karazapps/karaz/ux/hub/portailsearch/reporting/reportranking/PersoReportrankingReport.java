@@ -24,7 +24,7 @@ import ma.ribatis.karaz.server.persistance.DataObject;
 /**
  * Session Bean implementation class ReportsimulateurReport 
  */
-@Stateless(name = "karaz/ux/hub/portailsearch/reporting/reportsimulateur/PersoReportsimulateurReport", mappedName = "karaz/ux/hub/portailsearch/reporting/reportsimulateur/PersoReportsimulateurReport")
+@Stateless(name = "karaz/ux/hub/portailsearch/reporting/reportranking/PersoReportrankingReport", mappedName = "karaz/ux/hub/portailsearch/reporting/reportranking/PersoReportrankingReport")
 @Remote
 public class PersoReportrankingReport implements PrintAction {
 	@EJB 
@@ -33,12 +33,12 @@ public class PersoReportrankingReport implements PrintAction {
 	@EJB 
 	PrintReportHandler printReportHandler;
 
-	private String reportName="karaz/ux/hub/portailsearch/reporting/reportsimulateur/ReportsimulateurReport";
+	private String reportName="karaz/ux/hub/portailsearch/reporting/reportranking/ReportrankingReport";
 
-	private CharSequence skin="karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/reportsimulateur-skin.css";
+	private CharSequence skin="karazapps/karaz/ux/hub/portailsearch/reporting/reportranking/reportranking-skin.css";
 
-	private CharSequence template="karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/reportsimulateur-template.xhtml";
-	String qrcodesPath="karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/qrcodes.xml";
+	private CharSequence template="karazapps/karaz/ux/hub/portailsearch/reporting/reportranking/reportranking-template.xhtml";
+	String qrcodesPath="karazapps/karaz/ux/hub/portailsearch/reporting/reportranking/qrcodes.xml";
 	private TreeMap<String, CharSequence> resourcePathMap=new TreeMap<String, CharSequence>() ;
 	
 
