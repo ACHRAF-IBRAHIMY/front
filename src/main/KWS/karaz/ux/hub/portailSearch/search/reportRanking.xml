@@ -7,6 +7,10 @@
       <idObject />
       <parentP />
     </query>
+    <krn />
+    <repport>
+     <gedId />
+    </repport>
     <dataReportRk>
     </dataReportRk>
     <collapsed>false</collapsed>
@@ -17,7 +21,7 @@
           removeLastRootPage(userName);
           loadPageBytype(0);
           
-          var tabInd = ["2-2019"];
+          var tabInd = ["1-2019"];
           
 
 
@@ -103,7 +107,7 @@
 
               if(trim=="default"){
                 filters.push("trim.keyword");
-                filtersBy.push("1-2019");
+                filtersBy.push(tabInd[0]);
               }else{
                 filters.push("trim.keyword");
                 filtersBy.push(trim);
@@ -138,23 +142,47 @@
 
           });
 
-        drawRadarRegion();
+        drawRadarRegion(tabInd[0]);
 
       </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
+      <html>
+        <style>
+
+          .self-align-vb{
+            align-self: center;
+          }
+
+          span.nbr-rnk{
+            border: 1px solid #333;
+            height: 24px;
+            width: 24px;
+            display: block;
+            margin: auto;
+            border-radius: 50%;
+            line-height: 24px;
+          }
+
+
+          .but-rnk:hover{
+            color:#fff !important;
+          }
+
+        </style>
+      </html>
       <vbox columns="20% 80%" className="hp-box">
-        <vbox>
+        <vbox className="self-align-vb">
           <html>
             <img style="width: 140px;" src="img/logo_rokhas_ranking_u1286.png" alt="" />
           </html>
         </vbox>
         <vbox>
           <html>
-            <div><h3 style="text-align: left;color: #666;font-weight: 650;">Indicateur Rokhas</h3></div>
+            <div><h3 style="text-align: left;color: #666;font-weight: 650;">Index Rokhas pour la performance territoriale</h3></div>
             <div><p style="text-align: left;color: #666;margin-bottom:0">Classement national de la performance des collectivités territoriales en matière de délivrance d'autorisations.</p></div>
-            <div><p style="text-align: left;font-size: 14.5px;color: #666;">L’indicateur Rokhas classe les collectivités territoriales marocaines sur la base de leurs performance en matière de délivrance des autorisations. Il s’agit d’un classement totalement automatisé issu des données collectées en temps réel à travers la plateforme Rokhas.ma. L'indicateur Rokhas est calculé à partir de l’évaluation de 5 sous-indicateurs dans les 2 domaines d’autorisations clés, à savoir l’activité urbanistique et l’activité économique : <b>Délai, Attractivité, Digital, Ecosystème, Fiscalité</b></p></div>
+            <div><p style="text-align: left;font-size: 14.5px;color: #666;">L’index Rokhas classe les collectivités territoriales marocaines sur la base de leurs performance en matière de délivrance des autorisations. Il s’agit d’un classement totalement automatisé issu des données collectées en temps réel à travers la plateforme Rokhas.ma. L'index Rokhas est calculé à partir de l’évaluation de 5 sous-index dans les 2 domaines d’autorisations clés, à savoir l’activité urbanistique et l’activité économique : <b>Délai, Attractivité, Digital, Ecosystème, Fiscalité</b></p></div>
             <div style="text-align: right;font-size: 15px;padding: 0 29px;"><a href="">Détail de la méthodologie</a></div>
           </html>
         </vbox>            
@@ -163,10 +191,10 @@
         <html> 
           <div style="padding-left: 23px;">
                  Classement global des collectivités territoriales à base de leur score dans chacun 
-                 des 5 sous-indicateurs clés.
+                 des 5 sous-index clés.
           </div>
         </html>
-        <vbox columns="20% 14% 26% 20% 20%">
+        <vbox columns="18% 13% 21% 18% 18% 12%">
             <vbox>
               <html>
                 <select name="period" id="period">
@@ -177,15 +205,25 @@
 
             <vbox />
             
-            <vbox columns="80% 15%">
+            <!-- <vbox columns="80% 15%">
               <field label="Rechercher collectivité" widget="text" labelAlign="float" xpath="searchColl" />
               <button className="fa fa-search" />          
+            </vbox> -->
+
+            <vbox>
+              <html>
+                <select name="trierPar" id="rankBy">
+                  <option value="commune">Classer par commune/arrondissement</option>
+                  <option value="prefecture">Classer par préfecture</option>
+                  <option value="region">Classer par région</option>
+                </select>
+              </html>
             </vbox>
 
             <vbox>
               <html>
                 <select name="region" id="region">
-                  <option value="default">Par région</option>
+                    <option value="default">Par région</option>
                 </select>
               </html>
             </vbox>
@@ -196,6 +234,15 @@
                   <option value="default">Par préfecture/province</option>
                 </select>
               </html>
+            </vbox>
+
+            <vbox>
+            <button label="IMPRIMER" icon="fas fa-print" className="but-rnk">
+                   <postChange>
+                      getReportDataRk(root,context);
+                      $(".report-hiden-rk").click();
+                   </postChange>
+                </button>
             </vbox>
 
         </vbox>
@@ -213,26 +260,21 @@
                 <td class="rank-fs">Fiscalité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
               </tr>  
             </table>
-            <div style="height: 400px;overflow: auto;">
+            <div style="height: 400px;overflow: overlay;">
             <table id="ranking-table2">
             
             </table>
             </div>
           </html>
-           <button label="PRINT">
-                   <postChange>
-                      getReportDataRnk(root,context);
-                      $(".report-hiden-rk").click();
-                   </postChange>
-                </button>
-                <button label="PRINT" visible="1,=,2" className="report-hiden-rk" actionName="karaz/ux/hub/dashboardsearch/PrintReportRankingBeans" postProcessing="openFile,repport.gedId,none"/>
+           
+              <button label="PRINT" visible="1,=,2" className="report-hiden-rk" actionName="karaz/ux/hub/dashboardsearch/PrintReportRankingBeans" postProcessing="openFile,repport.gedId,none" />
         
                </vbox>
       </fieldSet>
-      <fieldSet className="hp-box ranking-fieldset" label="CHAMPIONS DES SOUS -INDICATEURS">
+      <fieldSet className="hp-box ranking-fieldset" label="CHAMPIONS DES SOUS-INDEX">
         <html> 
           <div style="padding-left: 23px;">
-                 Les 3 champions dans chacun des 5 sous-indicateurs considérés.
+                 Les 3 champions dans chacun des 5 sous-index considérés.
           </div>
         </html>
         <vbox columns="33% 33% 33%">
@@ -330,7 +372,7 @@
       <fieldSet className="hp-box ranking-fieldset" label="RADAR DES REGIONS">
         <html> 
           <div style="padding-left: 23px;">
-                 Comparatif de la performance des 12 régions au regard des 5 sous indicateurs clés.
+                 Comparatif de la performance des 12 régions au regard des 5 sous index clés.
           </div>
         </html>
         <vbox columns="50% 50%">
@@ -361,7 +403,7 @@
             d'unicité de la ville (Casablanca, Rabat, Tanger, Salé, Marrakech, Fes, ... ), traitent 
             exclusivement les dossiers d'urbanisme relevant de la catégorie "Grand projets". 
             Ne profitant pas de l'effet favorable des "Petits projet" sur les délais moyens 
-            de traitement, leur score dus sous-indicateur "Délais" sera majoré automatiquement 
+            de traitement, leur score dus sous-index "Délais" sera majoré automatiquement 
             de 5 points.
           </div> 
         </html>    
