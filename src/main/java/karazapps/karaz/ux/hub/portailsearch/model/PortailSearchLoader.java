@@ -222,6 +222,13 @@ public class PortailSearchLoader {
     	
 
     	try { 
+			BackEndEJBContext.getPRLookUp().addPRFromList( "karaz/ux/hub/portailsearch/reporting/reportranking/ReportrankingReport", "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch" 
+			, getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportranking/qrcodes.xml") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportranking/reportranking-template.xhtml") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportranking/resource-entete-page.PNG") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportranking/resource-pied-page.PNG")  );
+		} catch (Exception e) { 
+			System.out.println("Erreur lors de chargment prLookUp.addPRFromFolder(karazapps/karaz/ux/hub/portailsearch/reporting/reportranking , karaz/ux/hub/portailsearch/reporting/reportranking/ReportrankingReport, karazapps.karaz.ux.hub.portailsearch.model.PortailSearch ");
+			e.printStackTrace();
+		}
+    	try { 
 			BackEndEJBContext.getPRLookUp().addPRFromList( "karaz/ux/hub/portailsearch/reporting/reportsimulateur/ReportsimulateurReport", "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch" 
 			, getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/qrcodes.xml") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/reportsimulateur-template.xhtml") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/resource-entete-page.PNG") , getFile("karazapps/karaz/ux/hub/portailsearch/reporting/reportsimulateur/resource-pied-page.PNG")  );
 		} catch (Exception e) { 
