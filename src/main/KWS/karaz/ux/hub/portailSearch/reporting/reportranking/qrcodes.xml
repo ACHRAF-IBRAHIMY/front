@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <qrcodes>
+      <qrcode>
+        <ref >qrcode data </ref>
+        <type />
+        <expression />
+        <w>300</w>
+        <h>300</h>
+      </qrcode>
+    </qrcodes>  
