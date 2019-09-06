@@ -847,7 +847,8 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
       
       if(existBody2(treeLocal,val)==null){
         $(".simulator .simulator-qr .next-button .back-rq").removeClass("stopped");
-        if(Object.keys(treeLocal[0])[0]==2 && val == 6){
+        console.log()
+        if((Object.keys(treeLocal[0])[0]==2 && val == 6) || (Object.keys(treeLocal[0])[0]==37 && val ==5 ) ){
             $(".error-msg-sim2").show();
         }else{
             $(".error-msg-sim1").show();

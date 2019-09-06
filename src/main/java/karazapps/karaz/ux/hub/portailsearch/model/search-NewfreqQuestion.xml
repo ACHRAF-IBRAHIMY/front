@@ -176,12 +176,12 @@
           <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
             <!-- start modification -->
             <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)=='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-esign NFQ-fieldset" />
                 </html>
               </test>
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)!='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-esign1 NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
@@ -190,14 +190,14 @@
               </test>
             </fieldset>
             <fieldset header="Générale" className="NFQ-quest-title NFQ-type-general ">
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)=='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-general NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
               </test>
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)!='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-general1 NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
@@ -206,14 +206,14 @@
               </test>
             </fieldset>
             <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)=='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-document NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
               </test>
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)!='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-document1 NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
@@ -222,14 +222,14 @@
               </test>
             </fieldset>
             <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)=='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-plat NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
               </test>
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)!='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-plat1 NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
@@ -238,14 +238,14 @@
               </test>
             </fieldset>
             <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)=='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-archit NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
               </test>
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)!='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-archit1 NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
@@ -254,14 +254,14 @@
               </test>
             </fieldset>
             <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)=='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-adminis NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
               </test>
-              <test expression="'{profiles}'.match(/ADMINISTRATEUR/)!='ADMINISTRATEUR',expr,string" separator=",">
+              <test expression="'{profiles}'.match(/ADMIN_FAQ/)!='ADMIN_FAQ',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-adminis1 NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
