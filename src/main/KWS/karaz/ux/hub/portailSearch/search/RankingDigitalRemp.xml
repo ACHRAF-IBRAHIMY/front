@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="RankingDigitalRemp" label="Digital">
+
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+        </query>
+        <collapsed>false</collapsed>
+    </data>
+    <view>
+        <screen labelWidth="80" label="" noToolBar="true">
+            <script postLoad="true">
+                getAllProc().done(function(liste){
+                    getAllCommuneProc(liste,0);
+                });
+
+                $(".click-all").click(function(){
+                    getAllProc().done(function(liste){
+                        getAllCommuneProc(liste,1);
+                    });
+                });
+
+
+                $(".click-active").click(function(){
+                    getAllProc().done(function(liste){
+                        getAllCommuneProc(liste,0);
+                    });
+                });
+
+
+                $(".dg-add-1").click(function(){
+                    var tr = document.createElement("tr");
+                    tr.setAttribute("typeIdd","add");
+                    tr.setAttribute("idd","null");
+
+                    var td1 = document.createElement("td");
+                    var input1 = document.createElement("input");
+                    input1.setAttribute("value",$(".table-rk-pc tr").length);
+                    input1.setAttribute("style","border:none;width:100%;padding:4px 5px;text-align:center");
+                    td1.appendChild(input1);
+                    var td2 = document.createElement("td");
+                    var input = document.createElement("input");
+                    input.setAttribute("value","procédure "+$(".table-rk-pc tr").length);
+                    input.setAttribute("style","border:none;width:100%;padding:4px 5px;");
+                    td2.appendChild(input);
+                    var td3 = document.createElement("td");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class","fas fa-close");
+                    icon.setAttribute("style","cursor:pointer");
+                    icon.addEventListener("click",function(){
+                        var elem = icon.parentNode.parentNode;
+                        elem.parentNode.removeChild(elem);
+                    });
+
+                    td3.appendChild(icon);
+
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    
+                    $(".table-rk-pc").append(tr);
+
+                });
+
+                $(".dg-save-1").click(function(){
+                    saveListProc(".table-rk-pc");
+                });
+
+                $(".dg-save-2").click(function(){
+                    saveListCommune(".table-rk-dg");
+                });
+
+            </script>
+            <vbox>
+            <html>
+                <style>
+                
+                    .table-rk-pc{
+                        width:50%;
+                        text-align:center;
+                        margin:auto;
+                    }
+
+                    .table-rk-pc tr td{
+                        border:1px solid #eee;
+                    }
+
+                    .table-rk-pc tr th{
+                        background:#eee;
+                        border:1px solid #eee;
+                    }
+
+                    .buttons-rk-dg{
+                        margin-top : 10px;
+                    }
+
+
+                </style>
+            </html>
+            
+            <fieldset header="Procédures">
+                    <vbox>
+                        <html>
+                             <table style="width:50%" class="table-rk-pc">
+                                <tr>
+                                    <th>
+                                        Procédure N°
+                                    </th>
+                                    <th>
+                                        Titre
+                                    </th>
+                                    <th>
+                                        
+                                    </th>
+                                </tr>
+                            </table>
+                        </html>
+                        
+                        <html>
+                            <div class="buttons-rk-dg" style="width:100%; text-align:center">
+                                <button class="dg-save-1">Sauvgarder</button>
+                                <button class="dg-add-1">Ajouter nouvelle procédure</button>
+                            </div>
+                        </html>
+                    </vbox>
+                </fieldset>
+
+                <fieldset header="Digital">
+                    <vbox>
+                    <html>
+                        <div>
+                            <button class="click-all">All</button>
+                            <button class="click-active">active</button>
+                        </div>
+                    </html>
+                        <html>
+                            <table style="width:100%" class="table-rk-dg">
+                                <tr>
+                                    <th>Commune</th>
+                                    <th>Proc1</th>
+                                    <th>Proc2</th>
+                                </tr>
+                            </table>
+                        </html>
+                        <html>
+                            <div class="buttons-rk-dg" style="width:100%; text-align:center">
+                                <button class="dg-save-2">Sauvgarder</button>
+                            </div>
+                        </html>
+                    </vbox>
+                </fieldset>
+
+            </vbox>
+        </screen>
+    </view>
+</search>

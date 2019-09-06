@@ -173,7 +173,9 @@
           <resource type="search">karaz/ux/hub/portailsearch/search/ArticleConsultation</resource>
         </menu>
       </menu>
-      
+      <menu relId="RankingDigitalRemp" label="Ranking Digitalite" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/RankingDigitalRemp</resource>
+        </menu>
     </menu>
   </menu>
 </menus>

@@ -138,9 +138,18 @@
               restGetAllCommue([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
               restGetAllCommue([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
               
+              
               updateTitles();
 
           });
+
+
+            $(".ranking-fieldset #period").change(function(){
+                var trim = $(".ranking-fieldset #period option:selected").val();
+                if(trim!="default"){
+                  drawRadarRegion(trim);
+                }
+            });
 
         drawRadarRegion(tabInd[0]);
 
@@ -393,21 +402,7 @@
         </vbox>
       </fieldSet>
       
-      <vbox columns="7% 93%" className="vbox-danger-msg">  
-        <html>
-          <i class="fas fa-exclamation-triangle" />
-        </html> 
-        <html>
-          <div style="font-size: 13px;color: #666;">
-            Les guichets uniques communaux d'urbanisme relevant des communes régies par le système 
-            d'unicité de la ville (Casablanca, Rabat, Tanger, Salé, Marrakech, Fes, ... ), traitent 
-            exclusivement les dossiers d'urbanisme relevant de la catégorie "Grand projets". 
-            Ne profitant pas de l'effet favorable des "Petits projet" sur les délais moyens 
-            de traitement, leur score dus sous-index "Délais" sera majoré automatiquement 
-            de 5 points.
-          </div> 
-        </html>    
-      </vbox>
+      
   
       <html>
         <div style="height: 30px;" />
