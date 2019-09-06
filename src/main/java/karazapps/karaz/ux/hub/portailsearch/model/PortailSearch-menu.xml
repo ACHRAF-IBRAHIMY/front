@@ -161,6 +161,7 @@
           <resource type="search">karaz/ux/hub/portailsearch/search/DownloadEdit</resource>
         </menu>
       </menu>
+      
       <menu relId="ModuleArticle" label="Module article">
         <menu relId="Articles" label="Articles" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/Articles</resource>
@@ -172,6 +173,7 @@
           <resource type="search">karaz/ux/hub/portailsearch/search/ArticleConsultation</resource>
         </menu>
       </menu>
+      
     </menu>
   </menu>
 </menus>
