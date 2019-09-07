@@ -101,6 +101,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/BackEndPage", "karazapps/karaz/ux/hub/portailsearch/model/search-BackEndPage.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/CalculIndex", "karazapps/karaz/ux/hub/portailsearch/model/search-CalculIndex.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/CertificatReceptionProjets", "karazapps/karaz/ux/hub/portailsearch/model/search-CertificatReceptionProjets.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DashletsArchitectSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DashletsArchitectSearch.xml");
