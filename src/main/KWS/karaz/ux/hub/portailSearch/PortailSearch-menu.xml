@@ -175,7 +175,10 @@
       </menu>
       <menu relId="RankingDigitalRemp" label="Ranking Digitalite" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/RankingDigitalRemp</resource>
-        </menu>
+       </menu>
+       <menu relId="CalculIndex" label="Calcul des index" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/CalculIndex</resource>
+       </menu>
     </menu>
   </menu>
 </menus>

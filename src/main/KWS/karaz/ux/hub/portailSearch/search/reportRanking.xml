@@ -192,7 +192,7 @@
             <div><h3 style="text-align: left;color: #666;font-weight: 650;">Index Rokhas pour la performance territoriale</h3></div>
             <div><p style="text-align: left;color: #666;margin-bottom:0">Classement national de la performance des collectivités territoriales en matière de délivrance d'autorisations.</p></div>
             <div><p style="text-align: left;font-size: 14.5px;color: #666;">L’index Rokhas classe les collectivités territoriales marocaines sur la base de leurs performance en matière de délivrance des autorisations. Il s’agit d’un classement totalement automatisé issu des données collectées en temps réel à travers la plateforme Rokhas.ma. L'index Rokhas est calculé à partir de l’évaluation de 5 sous-index dans les 2 domaines d’autorisations clés, à savoir l’activité urbanistique et l’activité économique : <b>Délai, Attractivité, Digital, Ecosystème, Fiscalité</b></p></div>
-            <div style="text-align: right;font-size: 15px;padding: 0 29px;"><a href="">Détail de la méthodologie</a></div>
+            <div style="text-align: right;font-size: 15px;padding: 0 29px;"><a click='javascript:ApplicationManager.run("karaz/ux/hub/portailsearch/search/CalculIndex", "search", "Méthodologie de calcul des index Ranking", {});' href="">Détail de la méthodologie</a></div>
           </html>
         </vbox>            
       </vbox>
