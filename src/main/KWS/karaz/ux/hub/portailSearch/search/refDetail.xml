@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="FaqDetail" label="Faq Detail">
+<search name="RefDetail" label="Ref Detail">
   <query />
   <data>
     <query>
@@ -11,32 +11,21 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">removeLastRootPage(userName);
+      <script postLoad="true">
                 profilesT = profiles;  
-
-                $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-                    $(".header-div-toggle").slideToggle(); 
-                });         
     
                 $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
                 });
 
-                $(".header-div-toggle .dropdown").mouseenter(function(){
-                    $(".header-div-toggle .dropdown-content").slideDown();
-                }).mouseleave(function(){
-                    $(".header-div-toggle .dropdown-content").slideUp();
-                });
-
-                intializeFaqPages();
 
                 var id = root.query.idObject;
-                //var id = "vBcI22oBLueSVKZn4Ob4";
-                getQsFaq(id,1,"classSearch-4");
+               // var id = "ZuWjEm0BwP6ZdSKajY39";
+                getRefJ(id,1,"clasAA");
 
 
                 PCD_headerfieldset_color(".NFQ-quest-title");
-	              $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+	            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
                 PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
                 PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
                
@@ -44,8 +33,6 @@
                 PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
                 PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
                 PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
-
-
                 
                 // header color
                 PCD_headerfieldset_color(".pcd-ha-color");
@@ -54,7 +41,8 @@
                 RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],3,"USER");
 
                 // hide saisie info question
-                $(".NQF-edit-modif").hide()</script>
+                $(".NQF-edit-modif").hide()
+             </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
@@ -65,7 +53,7 @@
               <div class="vpanel-title">
                 <div class="vpanel-title">
                   <span>
-                    QUESTIONS FRÉQUENTES |
+                    RÉFÉRENTIEL JURIDIQUE |
                     <span class="blue-small" style="color: #38a;" />
                   </span>
                   <hr class="header-create-account-horizontal-line hr-hub" />
@@ -76,33 +64,18 @@
               <html>
                 <div class="qst-body" />
                 <div class="response-body" />
+                <div class="response-att" style="margin:auto;text-align:center;display:none">
+                  <button class="" style="color:#fff;background:#38a;border:none;border-raduis:3px" onclick="window.open();">
+                    <i class="fas fa-download" /> Télecharger
+                  </button>
+                </div>  
                 <div class="link-footer">
-                  <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage', 'search', 'Faq', {})">Retour au référentiel des questions fréquentes</a>
+                  <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ReferentielJuridique', 'search', 'Ref', {})">Retour au référentiels juridiques </a>
                 </div>
               </html>
             </vbox>
           </vbox>
-          <vbox className="hp-box hp-sec other-qst-faq faq-fieldset-det">
-            <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span>
-                    AUTRES QUESTIONS FRÉQUENTES DE LA CATÉGORIE |
-                    <span class="blue-small" style="color: #38a;" />
-                  </span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                </div>
-              </div>
-              <div class="vpanel-body full-search-list" />
-              <div class="searchGif2" style="display:none;line-height: 0;">
-                <img src="img/search-move.gif" />
-              </div>
-              <div class="pagination-new-style">
-                <div class="pagination-1" />
-              </div>
-            </html>
-          </vbox>
-        </vbox>
+         </vbox> 
         <vbox>
           <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
             <!-- start modification -->

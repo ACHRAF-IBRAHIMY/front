@@ -11,7 +11,8 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">removeLastRootPage(userName);
+      <script postLoad="true">
+      profilesT = profiles;
                 loadPageBytype(2);
                 $(".searchbuttun").click();
                 $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
@@ -69,7 +70,7 @@
                 RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
                 RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)
               */
-                RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],3,"USER");
+                RestSearchFaqSec("",0,5,0,[".vv0 .NFQ-quest-type-document",".vv0 .NFQ-quest-type-plat",".vv0 .NFQ-quest-type-general",".vv0 .NFQ-quest-type-esign",".vv0 .NFQ-quest-type-archit",".vv0 .NFQ-quest-type-adminis"],3,"USER");
 
                 // hide saisie info question
                 $(".NQF-edit-modif").hide()
@@ -100,7 +101,7 @@
                                 currentPage=0;
                                 var pp=root.query.parentP;
                                 if(pp==1){
-                                    pp=0;
+                                     pp=0;
                                 }
                                 removeExpanded(2);
                                 intializeFaqPages();
@@ -345,7 +346,7 @@
           </vbox>
         </vbox>
         <vbox>
-          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest vv2 vv0">
             <!-- start modification -->
             <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
               <html>
