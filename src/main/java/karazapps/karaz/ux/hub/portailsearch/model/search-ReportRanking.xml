@@ -18,12 +18,9 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
-          removeLastRootPage(userName);
           loadPageBytype(0);
           
           var tabInd = ["1-2019"];
-          
-
 
           restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",60,0,0);
           restGetAllCommue([["trim.keyword"],tabInd],"indecators.delai","desc",3,0,1);
@@ -47,7 +44,9 @@
             $(this).parent().find(".fa-sort-up").addClass("blue-icon");
             
             $(this).hide();
+            sortByRanking(tabInd,classe,$(".ranking-fieldset #rankBy option:selected").val(),"asc");
 
+/*
             if(classe=="rank-dl"){
               restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","asc",60,0,0)
             }else if(classe=="rank-dg"){
@@ -61,6 +60,7 @@
             }else if(classe=="sp-td"){
               restGetAllCommue(getFiltersArray(tabInd),"indecators.score","asc",60,0,0)
             }
+            */
           });
 
           $("#ranking-table .fa-sort-up").click(function(){
@@ -73,6 +73,8 @@
             
             $(this).hide();
 
+            sortByRanking(tabInd,classe,$(".ranking-fieldset #rankBy option:selected").val(),"desc");
+/*
             if(classe=="rank-dl"){
               restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","desc",60,0,0)
             }else if(classe=="rank-dg"){
@@ -86,6 +88,7 @@
             }else if(classe=="sp-td"){
               restGetAllCommue(getFiltersArray(tabInd),"indecators.score","desc",60,0,0)
             }
+*/            
           });
           
           $(".ranking-fieldset #region").change(function(){
@@ -97,10 +100,11 @@
               }
           });
 
-          $(".ranking-fieldset #period,.ranking-fieldset #region,.ranking-fieldset #prefecture").change(function(){
+          $(".ranking-fieldset #period,.ranking-fieldset #region,.ranking-fieldset #prefecture,.ranking-fieldset #rankBy").change(function(){
               var trim = $(".ranking-fieldset #period option:selected").val();
               var region = $(".ranking-fieldset #region option:selected").val();
               var prefecture = $(".ranking-fieldset #prefecture option:selected").val();
+              var rankBy = $(".ranking-fieldset #rankBy option:selected").val();
 
               var filters = [];
               var filtersBy = [];
@@ -113,12 +117,17 @@
                 filtersBy.push(trim);
               }
 
-              if(region!="default"){
+              if( !(region=="default" || rankBy!="commune") ){
                 filters.push("région.keyword");
                 filtersBy.push(region);
               }
 
-              if(prefecture!="default"){
+               if( !(region=="default" || rankBy!="prefecture") ){
+                filters.push("region.keyword");
+                filtersBy.push(region);
+              }
+
+              if( !(prefecture=="default" || rankBy=="region" || rankBy=="prefecture") ){
                 filters.push("préfecture.keyword");
                 filtersBy.push(prefecture);
               }
@@ -128,18 +137,37 @@
               tabInd.push(region);
               tabInd.push(prefecture);
 
-              restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
-              restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
-              restGetAllCommue([filters,filtersBy],"indecators.delai","desc",3,0,1);
-              restGetAllCommue([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
-              restGetAllCommue([filters,filtersBy],"indecators.digital","desc",3,0,3);
-              restGetAllCommue([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
-              restGetAllCommue([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
-              restGetAllCommue([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
-              restGetAllCommue([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
+              if(rankBy=="commune"){
+                restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
+                restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
+                restGetAllCommue([filters,filtersBy],"indecators.delai","desc",3,0,1);
+                restGetAllCommue([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
+                restGetAllCommue([filters,filtersBy],"indecators.digital","desc",3,0,3);
+                restGetAllCommue([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
+                restGetAllCommue([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
+                restGetAllCommue([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
+                restGetAllCommue([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
+              }else if(rankBy=="prefecture"){
+                restGetAllPrefecture([filters,filtersBy],"score","desc",60,0,0);
+                restGetAllPrefecture([filters,filtersBy],"score","desc",60,0,0);
+                restGetAllPrefecture([filters,filtersBy],"delai","desc",3,0,1);
+                restGetAllPrefecture([filters,filtersBy],"attractivite","desc",3,0,2);
+                restGetAllPrefecture([filters,filtersBy],"digital","desc",3,0,3);
+                restGetAllPrefecture([filters,filtersBy],"ecosystem","desc",3,0,4);
+                restGetAllPrefecture([filters,filtersBy],"fiscalite","desc",3,0,5);
+                restGetAllPrefecture([filters,filtersBy],"score","desc",10,0,6);
+              }else if(rankBy=="region"){
+                restGetAllRegion([filters,filtersBy],"score","desc",60,0,0);
+                restGetAllRegion([filters,filtersBy],"score","desc",60,0,0);
+                restGetAllRegion([filters,filtersBy],"delai","desc",3,0,1);
+                restGetAllRegion([filters,filtersBy],"attractivite","desc",3,0,2);
+                restGetAllRegion([filters,filtersBy],"digital","desc",3,0,3);
+                restGetAllRegion([filters,filtersBy],"ecosystem","desc",3,0,4);
+                restGetAllRegion([filters,filtersBy],"fiscalite","desc",3,0,5);
+                restGetAllRegion([filters,filtersBy],"score","desc",10,0,6);
+              }
               
-              
-              updateTitles();
+               updateTitles();
 
           });
 
@@ -148,6 +176,20 @@
                 var trim = $(".ranking-fieldset #period option:selected").val();
                 if(trim!="default"){
                   drawRadarRegion(trim);
+                }
+            });
+
+            $(".ranking-fieldset #rankBy").change(function(){
+                var rankBy = $(".ranking-fieldset #rankBy option:selected").val();
+                if(rankBy=="commune"){
+                  $(".ranking-fieldset #region option").prop("disabled",false);
+                  $(".ranking-fieldset #prefecture option").prop("disabled",false);
+                }else if(rankBy=="prefecture"){
+                  $(".ranking-fieldset #region option").prop("disabled",false);
+                  $(".ranking-fieldset #prefecture option").prop("disabled",true);
+                }else if(rankBy=="region"){
+                  $(".ranking-fieldset #region option").prop("disabled",true)
+                  $(".ranking-fieldset #prefecture option").prop("disabled",true)
                 }
             });
 
