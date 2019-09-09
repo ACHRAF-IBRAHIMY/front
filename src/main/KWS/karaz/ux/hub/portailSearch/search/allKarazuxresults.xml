@@ -63,12 +63,7 @@
 		    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
 		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
 		    });
-		
-		    $(".header-div-toggle .dropdown").mouseenter(function(){
-		        $(".header-div-toggle .dropdown-content").slideDown();
-		    }).mouseleave(function(){
-		        $(".header-div-toggle .dropdown-content").slideUp();
-		    }); 
+		 
 		            
                 PCD_headerfieldset_color(".NFQ-quest-title");
 	            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');

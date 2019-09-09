@@ -145,14 +145,32 @@ function createQuestion(type,obj,hide,clmm){
             input.setAttribute("value",i+1);
             var res = document.createElement("span");
             res.setAttribute("class","rep-check");
-            res.innerHTML = obj.response.content[i];   
+              
             var check = document.createElement("span");
             check.setAttribute("class","check");
+
+            if(obj.response.content[i].indexOf("***")!=-1){
+                var a = obj.response.content[i];
+                var elm = a.substring(a.indexOf("***")+3,a.indexOf("***",a.indexOf("***")+1));
+                var icc = document.createElement("i");
+                icc.setAttribute("class","fas fa-info");
+                icc.setAttribute("style","margin-left: 7px;font-size: 11px;width: 17px;background: #38a;color: #fff;border-radius: 50%;text-align: center;height: 17px;line-height: 17px;cursor: pointer;");
+                icc.setAttribute("title",elm);
+                res.innerHTML = obj.response.content[i].substring(0,a.indexOf("***"))+" "; 
+                res.appendChild(icc);
+             }else{
+                res.innerHTML = obj.response.content[i]; 
+            }
+
+
             check.addEventListener("click",function(){
                 $(this).parent().parent().find(".check-ent").removeClass("active-check");
                 $(this).children(".check-ent").addClass("active-check");
                 if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                    $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                   $(".simulator .simulator-qr button.next-report").hide();
+                   $(".error-msg-sim").hide();
+
                    removeExpanded(); 
                 }
             });
@@ -176,12 +194,24 @@ function createQuestion(type,obj,hide,clmm){
        for(var i=0;i<size;i++){
          var check = document.createElement("option");
          check.setAttribute("value",i+1);
-         check.innerHTML = obj.response.content[i];   
+
+         if(obj.response.content[i].indexOf("***")!=-1){
+            var a = obj.response.content[i];
+            var elm = a.substring(a.indexOf("***")+3,a.indexOf("***",a.indexOf("***")+1));
+            check.setAttribute("title",elm);
+            check.innerHTML = obj.response.content[i].substring(0,a.indexOf("***"));   
+         }else{
+            check.innerHTML = obj.response.content[i];   
+         }
+
          response.appendChild(check);
        }
        response.addEventListener("change",function(){
             if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                 $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                $(".simulator .simulator-qr button.next-report").hide();
+                $(".error-msg-sim").hide();
+
                 removeExpanded(); 
             }
        });
@@ -193,6 +223,10 @@ function createQuestion(type,obj,hide,clmm){
        response.addEventListener("input",function(){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            $(".simulator .simulator-qr button.next-report").hide();
+            $(".error-msg-sim").hide();
+
+
             removeExpanded(); 
          }
        });
@@ -213,6 +247,9 @@ function createQuestion(type,obj,hide,clmm){
         response.addEventListener("input",function(){
             if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
                 $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+                $(".simulator .simulator-qr button.next-report").hide();
+                $(".error-msg-sim").hide();
+
                 removeExpanded(); 
              }
            });
@@ -225,6 +262,9 @@ function createQuestion(type,obj,hide,clmm){
         response.addEventListener("input",function(){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            $(".simulator .simulator-qr button.next-report").hide();
+            $(".error-msg-sim").hide();
+
             removeExpanded(); 
             }
         });
@@ -252,6 +292,10 @@ function createQuestion(type,obj,hide,clmm){
         response.addEventListener("input",function(){
         if($(".simulator .simulator-qr .next-button button.next-rq").hasClass("stopped")){
             $(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+            $(".simulator .simulator-qr button.next-report").hide();
+            $(".error-msg-sim").hide();
+
+
             removeExpanded(); 
             }
         });
@@ -259,10 +303,6 @@ function createQuestion(type,obj,hide,clmm){
         var index = localiteType.indexOf(content);
         q2.appendChild(response);
         
-
-        if(localiteLib.length==0){
-            q2.innerHTML += "<img src=\"img/loadgif3.gif\" style=\"width:50px;vertical-align: top;\" class=\"loadGif\"></img>";
-        }
 
         var icon = document.createElement("i");
         icon.setAttribute("class","fas fa-edit");
@@ -372,8 +412,8 @@ function getQuestions(qstts,type,clmm,iter){
             qstArray[0].push(result._source);
             qstArray[1].push(type[iter]);
             qstArray[2].push(clmm[iter]);
+            startButton(1);
             if(qstts.length-1==iter || qstts[iter+1].toString()=="-1"){
-                
                 if(qstts[iter].toString()!="-1")addQuestion(qstArray);
             }else{
                 getQuestions(qstts,type,clmm,iter+1);
@@ -510,16 +550,19 @@ function intializeVectArray(){
 }
 
 function allNextClick(){
-        var qrs = document.querySelectorAll(".simulator .ques-rep");
-        for(var i=0;i<qrs.length;i++){
-            console.log(qrs[i],i);
-            nextClick(qrs[i],i);
-        } 
+    var qrs = document.querySelectorAll(".simulator .ques-rep");
+    
+    for(var i=0;i<qrs.length;i++){
+        console.log(qrs[i],i);
+        nextClick(qrs[i],i);
+    }
 }
 
 var autoEconom = ["Simple Déclaration","Établissement classé","Occupation Domaine Public",]
 var autoUrba = [["Projet de construction d'institution à caractère industriel","Projet de construction à usage mixte","Equipements commerciaux","Projet de construction d'équipement à usage commercial","Projet de construction d'équipement à usage public"],["Modifications de constructions existantes"],["Projet de morcellement"],["Projet de construction à usage d'habitation"],["Projet de lotissement"]];
 var autoodp = ["Télécom","Travaux Publics","Affichage Publicitaire","Stationnement Réservé","Activité Normale",]
+var autoec = ["agroalimentaire", "agroalimentaire 1", "automobile et motocycle", "automobile et motocycle 1", "beauté et bien être", "chaudronnier, tuyauteur et soudeur", "chimie et peinture", "cérémonie et loisir", "décors et meuble", "décors et meuble 1", "dépôt et froid", "dépôt et froid 1", "école et Institut", "import Export", "imprimerie", "industrie plastique", "industrie de cuir", "industrie métallique", "industrie métallique 1", "industrie: bois, liège, vannerie et sparterie", "industrie: electronique electrique et câblages", "industrie: electronique electrique et câblages 1", "industrie: marbre, carrelage et pierre", "industrie: minéraux non métalliques", "joaillerie et bijouterie", "maison et jardin", "papier et carton", "production et distribution d'électricité, de gaz, de vapeur et d'air conditionné", "sport", "textile et chaussure", "textile et chaussure 1", "transformation et conservation de la viande", "construction"];
+var autosd = ["agriculture et jardin", "agroalimentaire", "animaux", "automobile et motocycle", "beauté et bien être", "bois, liège, vannerie et sparterie", "décors et meuble", "ecole et institut", "electrique, electronique, électromécanique et hydromécanique", "evénements et attractions", "finance et assurance", "informatique, multimédia et télécom", "jouets et articles de cadeaux", "juridique", "librairie, papeterie et imprimerie", "maison et métier lié", "matériels et accessoires sportif", "restaurant, traiteur, café et snack", "sanitaire", "santé", "siège société et bureau d'études", "textile et chaussure", "tourisme et hôtellerie", "transport et messagerie"];
 
 function nextClick(qr,iter){
         console.log(qr);
@@ -534,7 +577,7 @@ function nextClick(qr,iter){
         }else if(type.hasClass("rep-type-5")){
             type=5;
         }else{
-            type=2
+            type=2;
         }
 
         switch(type){
@@ -623,6 +666,23 @@ function nextClick(qr,iter){
                         typeAutG = 2;
                         typeAutt = autoEconom.indexOf(typeAut);
                         console.log("typeAutt",typeAutt);
+
+                        if(typeAutt==0){
+                            if(autosd.indexOf(natureAct.toLowerCase())!=-1){
+                                typeActt = autosd.indexOf(natureAct.toLowerCase());
+                            }else{
+                                typeActt = null;
+                            }
+                        }
+
+                        if(typeAutt==1){
+                            if(autoec.indexOf(natureAct.toLowerCase())!=-1){
+                                typeActt = autoec.indexOf(natureAct.toLowerCase());
+                            }else{
+                                typeActt = null;
+                            }
+                        }
+
                         if(typeAutt==2){
                             if(autoodp.indexOf(typeAct)==0 || autoodp.indexOf(typeAct)==1){
                                 typeAutt = 2;
@@ -677,10 +737,10 @@ function nextClick(qr,iter){
         }
 } 
 
-function infoAutorisationSim(){
+function infoAutorisationSim(final){
     var bulk = createBulkRequestFromArrayVect();
     console.log(bulk);
-    sendBulkRequestFromArrayVect(bulk);
+    sendBulkRequestFromArrayVect(bulk,final);
 
 };
 
@@ -693,7 +753,7 @@ function createBulkRequestFromArrayVect(){
     return request;
 };
 
-function sendBulkRequestFromArrayVect(bulk){
+function sendBulkRequestFromArrayVect(bulk,final){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
@@ -706,24 +766,43 @@ function sendBulkRequestFromArrayVect(bulk){
         },
         success: function (result) {
             $(".simulator .info-container").html("") ;
+            reportD.chemin = [];
             for(var i=0;i<result.responses.length;i++){
                 var qstio = result.responses[i].hits.hits[0]._source;
                 if( (qstio.response.type=="select" || qstio.response.type=="check") && Number(arrayVect[1][i]) != 0 ){
                     var doc = document.createElement("div");
                     doc.setAttribute("class","ctr");
-                    doc.innerHTML = "<div style=\"padding: 3px 15px;/* text-align:left; */font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 15px;color: #38A;\">"+qstio.response.content[Number(arrayVect[1][i])-1]+"</div>"
+                    
+                    if(qstio.response.content[Number(arrayVect[1][i])-1].indexOf("***")!=-1){
+                        var a = qstio.response.content[Number(arrayVect[1][i])-1]
+                        var  reponseTemp = a.substring(0,a.indexOf("***"));   
+                     }else{
+                        var reponseTemp = qstio.response.content[Number(arrayVect[1][i])-1];   
+                     }
+
+                    doc.innerHTML = "<div style=\"padding: 3px 35px; text-align:left; font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 50px;text-align:left;color: #38A;\">"+reponseTemp+"</div>"
                     $(".simulator .info-container").append(doc) ;
+                    var obj = {
+                        "question":qstio.question,
+                        "reponse":reponseTemp
+                    }
+                    reportD.chemin.push(obj);
                 }else{
                     continue;
                 }
             };
                
             console.log(result);
-            
+
+            if(final==true){
+                $(".simulator .next-report").addClass("autori");
+            }else{
+                $(".simulator .next-report").removeClass("autori");
+            }
+
         },
         error: function (error) {
             console.log(error.responseText);
-
         }
     })
 };
@@ -731,10 +810,9 @@ function sendBulkRequestFromArrayVect(bulk){
 function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
     console.log("%%%% ",treeLocal);
     console.log("traitement "+val);
+    var existBody = true;
 
-    
-
-    if(existBody2(treeLocal,val) ){
+    if(existBody2(treeLocal,val)==true ){
       if(treeLocal.length == 1){
         var id = Object.keys(treeLocal[0])[0];
         console.log(arrayVect [0].length - qstArray[0].length + iter);
@@ -757,19 +835,28 @@ function traitementResponse(treeLocal,val,iter,typpe,classed,dontShow){
             console.log(arrayVect);
             qstArray = [[],[],[]];
             if(dontShow!=true){
-                infoAutorisationSim();
+                infoAutorisationSim(false);
                 getQuestions(qstss[0],qstss[1],qstss[2],0);    
             }
         }
     }else{
       console.log("end");
-      infoAutorisationSim();
+      infoAutorisationSim(true);
       stopedButton(0);
+      existBody = false;
+      
+      if(existBody2(treeLocal,val)==null){
+        $(".simulator .simulator-qr .next-button .back-rq").removeClass("stopped");
+        $(".error-msg-sim").show();
+      }else{
+        $(".simulator .simulator-qr .next-report").show();
+        $(".simulator .simulator-qr .next-button .back-rq").removeClass("stopped");
+      }
+
     }
 
-
     if(classed==true){
-        endFunctionSendAdv();
+        endFunctionSendAdv(existBody);
     }
 }
 
@@ -784,9 +871,14 @@ function existBody2(treeGl,val){
                 return false;
             }
         }else{
-            if(Object.keys(treeGl[val])[0].toString()=="-1" ){
-                return false;
+            if(treeGl[val]!=undefined){
+                if(Object.keys(treeGl[val])[0].toString()=="-1" ){
+                    return false;
+                }
+            }else{
+               return null;
             }
+            
         }
 
         return true;
@@ -810,9 +902,10 @@ function endFunctionSend(){
     
 }
 
-function endFunctionSendAdv(){
+function endFunctionSendAdv(existBody){
     var list = [[],[],[],[]];
     var vector = [];
+
     for(var i=0;i<arrayVect[0].length+1;i++){
         list[0] = arrayVect[0].slice(0,i);
         list[1] = arrayVect[1].slice(0,i);
@@ -820,17 +913,22 @@ function endFunctionSendAdv(){
         list[3] = arrayVect[3].slice(0,i);
         var search = makeResponse(list);
         var objSearchMatrix = searchInMatrix2(matrix,search);
+        if(objSearchMatrix!=null){
+           // alert(JSON.stringify(objSearchMatrix));
+        }
         console.log(search);
         console.log(objSearchMatrix);
         if(objSearchMatrix!=null){
-            console.log("objSearchMatrix :"+JSON.stringify(objSearchMatrix));
             vector.push(objSearchMatrix);
         }
     };
 
-    countDocAdv(1,vector);
-    countDoc(1,objSearchMatrix);
-
+    countDocAdv(0,vector,existBody);
+    countDocAdv(2,vector,existBody);
+    countDocAdv(1,vector,existBody);
+    countDocAdv(3,vector,existBody);
+    countDocAdv(4,vector,existBody);
+    //countDoc(1,objSearchMatrix);
 }
 
 function concatIfExist(vectorG,vector){
@@ -882,7 +980,7 @@ function makeResponse(array){
     return reps;
 }               
 
-var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[],[]];
+var matrix = [["11110000","11130000","11220000","11120000","11210000","11230000","11310001","11330001","11320001","11320002","11310002","11330002"],[67111656,67111656,323552,67373800,61408,61408,4072,4072,266216,266217,4073,4073],[1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023,1023],[4096,4096,0000,4096,0000,0000,0000,0000,0000,0000,0000,0000],[],[],[],[],[],[]];
 
 function searchInMatrix(matrix,key){
      var index = matrix[0].indexOf(key);
@@ -910,11 +1008,33 @@ function searchInMatrix2(matrix,listKey){
     }
     
     if(index!=-1){
-        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index],docSort :matrix[5][index] };
+        return { docs :matrix[1][index], steps :matrix[2][index] , docsComp : matrix[3][index],stepSort : matrix[4][index],docSort :matrix[5][index],docComSort :matrix[6][index],docFacSort:matrix[7][index],docSortSort:matrix[8][index],id:matrix[9][index] };
      }else{
          console.log("Ce chemin n'existe pas encore dans la matrice de classement, veuillez choisir un autre chemin.");
          return null;
      }
+}
+
+var reportD = {
+    chemin :[],
+    docsR:[],
+    docC:[],
+    steps:[],
+    docF:[],
+    docD:[],
+    chemins:0,
+    docsRs:0,
+    docsFs:0,
+    docsCs:0,
+    stepsS:0,
+    docDs:0
+};
+
+function getReportData(root,context){
+    root.dataReport = {};
+    context.formRender.notifyObservers("dataReport");
+    root.dataReport = reportD;
+    context.formRender.notifyObservers("dataReport");
 }
 
 function bulkRequest(vector,type){
@@ -957,7 +1077,7 @@ function bulkRequestByVect2(vector) {
     return request;
 }
 
-function sendRequestBulk(bulk,type){
+function sendRequestBulk(bulk,type,existBody){
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
@@ -970,11 +1090,11 @@ function sendRequestBulk(bulk,type){
         },
         success: function (result) {    
             console.log(result);
-            if(type==0 || type==2){
+            if(type==0 || type==2 || type==3 || type==4){
                 $(".simulator .simulator-qr .next-button img").hide();
-                addDocs(result.responses,type);
+                addDocs(result.responses,type,existBody);
             }else{
-                addSteps(result.responses);                
+                addSteps(result.responses,existBody);                
             }
         },
         error: function (error) {
@@ -987,7 +1107,7 @@ function sendRequestBulk(bulk,type){
 }
 
 function firstEsTreeCall(){
-    var bulk = "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
+    var bulk = "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n{\"size\":6000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
@@ -1003,7 +1123,7 @@ function firstEsTreeCall(){
             var sizeQuestions = result.responses[0].hits.hits.length;
             var columns = result.responses[1].hits.hits;
             console.log("matrix length :" + columns.length);
-            matrix = [[],[],[],[],[],[]];
+            matrix = [[],[],[],[],[],[],[],[],[],[]];
             qsts =[];
             for(var i=0;i<result.responses[0].hits.hits.length;i++){
                 qsts.push(result.responses[0].hits.hits[i]._source.id.toString());
@@ -1017,13 +1137,32 @@ function firstEsTreeCall(){
             for(var i=0;i<columns.length;i++){
                 var ar1 = columns[i]._source.list; 
                 var ar2 = columns[i]._source.list_rep;
-                console.log(ar1);
                 matrix[0].push(completeArrayMatrix(ar1,ar2,sizeQuestions)); 
                 matrix[1].push(columns[i]._source.docs_requis);
                 matrix[2].push(columns[i]._source.steps);
                 matrix[3].push(columns[i]._source.docs_comp);
                 matrix[4].push(columns[i]._source.stepSort);
                 matrix[5].push(columns[i]._source.docSort);
+    
+                if(columns[i]._source.docsCompSort==undefined){
+                    matrix[6].push([]);
+                }else{
+                    matrix[6].push(columns[i]._source.docsCompSort);
+                }
+
+                if(columns[i]._source.docFacSort==undefined){
+                    matrix[7].push([]);
+                }else{
+                    matrix[7].push(columns[i]._source.docFacSort);
+                }
+
+                if(columns[i]._source.docSortSort==undefined){
+                    matrix[8].push([]);
+                }else{
+                    matrix[8].push(columns[i]._source.docSortSort);
+                }
+
+                matrix[9].push(columns[i]._id);
 
                 console.log(completeArrayMatrix(ar1,ar2,sizeQuestions));
             }
@@ -1045,17 +1184,24 @@ function firstEsTreeCall(){
     })
 }
 
-function countDocAdv(type,objSearchMatrixArr){
+function countDocAdv(type,objSearchMatrixArr,existBody){
     $(".simulator .simulator-qr .next-button img").show();
+    
     var obj = {
         "query": {
             "match_all": {}
         }
     };
-    var url = "simulator_index_docs/docs/_count";
+
+    if(type==0 || type==2 || type==3 || type==4){
+        var url = "simulator_index_docs/docs/_count";
+    }else if(type==1){
+        var url = "simulator_index_steps/steps/_count";
+    }
+
     $.ajax({
         type: "post",
-      //  url: "http://localhost:9200/" + url,
+        //  url: "http://localhost:9200/" + url,
         url: URL_SEARCH+"/"+url,
         datatype: "application/json",
         contentType: "application/json",
@@ -1067,18 +1213,36 @@ function countDocAdv(type,objSearchMatrixArr){
             var vectorGlo = [];
             console.log(objSearchMatrixArr);
             for(var i=0;i<objSearchMatrixArr.length;i++){
-                var inte = objSearchMatrixArr[i].docSort;
+                if(type==0){
+                    var inte = objSearchMatrixArr[i].docSort;
+                }else if(type==2){
+                    var inte = objSearchMatrixArr[i].docComSort;
+                }else if(type==1){
+                    var inte = objSearchMatrixArr[i].stepSort;
+                }else if(type==3){
+                    var inte = objSearchMatrixArr[i].docFacSort;
+                }else if(type==4){
+                    var inte = objSearchMatrixArr[i].docSortSort;
+                }
                 console.log(inte);
                 vectorGlo = concatIfExist(vectorGlo,inte);
             };
             console.log(vectorGlo);
-            var bulk = bulkRequestByVect2(vectorGlo);
-            console.log(bulk);
+            if(type==0 || type==2 || type==3 || type==4){
+                var bulk = bulkRequestByVect2(vectorGlo);
+            }else if(type==1){
+                var bulk = bulkRequestByVect(vectorGlo);
+            }
+            console.log("bulk :::"+type+" \n"+bulk);
             if (bulk != "") {
                 console.log(bulk);
-                sendRequestBulk(bulk,0);
+                sendRequestBulk(bulk,type,existBody);
             } else {
-                addDocs([], 0);
+                if(type==0 || type==2 || type==3 || type==4){
+                    addDocs([],type,existBody);
+                }else if(type==1){
+                    addSteps([],existBody);
+                }
             }
         },
         error: function (error) {
@@ -1177,6 +1341,30 @@ function countDoc(type,objSearchMatrix) {
                     addDocs([], 2);
                 }
                 
+            } else if (type == 3) {
+                var inte3 = objSearchMatrix.docFacSort;
+                var vector3 = bin2vec(int2bin(inte3));
+                vector3 = completVec(result.count, vector3);
+                var bulk3 = bulkRequest(vector3, 0);
+                if (bulk3 != "") {
+                    console.log(bulk3.length + " ln");
+                    sendRequestBulk(bulkRequest(vector3, 0), 2);
+                } else {
+                    addDocs([], 2);
+                }
+                
+            } else if (type == 4) {
+                var inte3 = objSearchMatrix.docSortSort;
+                var vector3 = bin2vec(int2bin(inte3));
+                vector3 = completVec(result.count, vector3);
+                var bulk3 = bulkRequest(vector3, 0);
+                if (bulk3 != "") {
+                    console.log(bulk3.length + " ln");
+                    sendRequestBulk(bulkRequest(vector3, 0), 2);
+                } else {
+                    addDocs([], 2);
+                }
+                
             } else if (type == 20) {
                 
             }
@@ -1191,6 +1379,8 @@ function countDoc(type,objSearchMatrix) {
 
 function backClick(){
     console.log("######1"+arrayVect[0]);
+    
+    stopedButton(1);
 
     while(arrayVect[1].length!=1) {
         if(arrayVect[1][arrayVect[1].length-1]==0 || arrayVect[1][arrayVect[1].length-1]=="0"){
@@ -1204,6 +1394,7 @@ function backClick(){
     
 
     startButton(0);
+    $(".simulator .simulator-qr .next-report").hide();
 
     
 
@@ -1214,12 +1405,13 @@ function backClick(){
     for(var i=0;i<qstss[0].length;i++){
         if(qstss[0][i]!="-1")addToArrayVect(qstss[0][i],0,0,0);
     }
+
     if(arrayVect[0].length==1){
         stopedButton(1);
     }
 
-    endFunctionSendAdv();
-    infoAutorisationSim();
+    endFunctionSendAdv(true);
+    infoAutorisationSim(false);
 
     getQuestions(qstss[0],qstss[1],qstss[2],0);
 }
@@ -1248,43 +1440,119 @@ function backQst(){
     
 }
 
-function addDocs(result,type){
-    if(result.length==0){
-        document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0].innerHTML="";
-    }else{
+function addDocs(result,type,existBody){
+    
+    
         if(type==0){
+            reportD.docsR = [];
             $(".simulator .docs-qr div.ow-pl").eq(0).addClass("expanded");
             var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0];
         }else if(type==2){
-            $(".simulator .docs-qr div.ow-pl").eq(4).addClass("expanded");
+            reportD.docsC = [];
+            $(".simulator .docs-qr div.ow-pl").eq(3).addClass("expanded");
             var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0];    
+        }else if(type==3){
+            reportD.docsF = [];
+            $(".simulator .docs-qr div.ow-pl").eq(4).addClass("expanded");
+            var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-fac-container")[0];                
+        }else if(type==4){
+            reportD.docsD = [];
+            $(".simulator .docs-qr div.ow-pl").eq(5).addClass("expanded");
+            var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-sort-container")[0];    
         }
         
         docContainer.innerHTML="";
+        var docsTemp = [];
         
         for(var i =0 ; i <result.length;i++){
             var doc = document.createElement("div");
             doc.setAttribute("class","doc-item");
             var icon = document.createElement("i");
-            icon.setAttribute("class","far fa-file-alt");
+
+            if(result[i].hits.hits[0]._source.type=="type-1"){
+                icon.setAttribute("class","far fa-file-alt");
+            }else{
+                icon.setAttribute("class","far fa-file-code");
+                icon.setAttribute("style","color:#f93");
+            }
+
             var docName = document.createElement("span");
+            var docApr = document.createElement("i");
+            docApr.setAttribute("style","cursor:pointer");
+            docApr.setAttribute("class","fas fa-info");
             docName.innerHTML = result[i].hits.hits[0]._source.title;
             docName.setAttribute("class","doc-name");
+            
+
+            var obj = {
+                "docName":result[i].hits.hits[0]._source.title,
+                "type":result[i].hits.hits[0]._source.type
+            };
+
+            docsTemp.push(obj);
+
+            var srcImg = result[i].hits.hits[0]._source.attachementImg;
+
+            if(srcImg != undefined){
+                var docImg = document.createElement("div");
+                docImg.setAttribute("style","display:none;position: absolute;width: 327px;background: #EEE;right: 12px;z-index: 1;");
+                docImg.innerHTML = "<img style=\"width: 100%;border: 1px solid black;\" src="+srcImg+" />";
+                docApr.addEventListener("mouseenter",function(){
+                    this.getElementsByTagName("div")[0].style.display = "block";
+                });
+                docApr.addEventListener("mouseleave",function(){
+                    this.getElementsByTagName("div")[0].style.display = "none";
+                });
+                docApr.appendChild(docImg);
+            };
+
+            docName.appendChild(docApr);
             doc.appendChild(icon);
             doc.appendChild(docName);
+            //doc.appendChild(docApr);
             docContainer.appendChild(doc);
         }
-    }
+
+        if(type==0){
+            reportD.docsR = docsTemp;
+            reportD.docsRs = docsTemp.length;
+            if(existBody==false){
+                $(".simulator .next-report").addClass("docsR");
+            };
+        }else if(type==2){
+            reportD.docsC = docsTemp;
+            reportD.docsCs = docsTemp.length;
+            if(existBody==false){
+                $(".simulator .next-report").addClass("docsC");
+            };
+        }else if(type==3){
+            reportD.docsF = docsTemp;
+            reportD.docsFs = docsTemp.length;
+            if(existBody==false){
+                $(".simulator .next-report").addClass("docsF");
+            };
+        }else if(type==4){
+            reportD.docD = docsTemp;
+            reportD.docDs = docsTemp.length;
+            if(existBody==false){
+                $(".simulator .next-report").addClass("docsD");
+            };
+        }
+
+        
+    
 }
 
 
-function addSteps(result){
+function addSteps(result,existBody){
     var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("steps-container")[0];
     docContainer.innerHTML="";
     
     if(result.length!=0){
         $(".simulator .docs-qr div.ow-pl").eq(1).addClass("expanded");
     }
+
+    reportD.steps=[];
 
     for(var i =0 ; i <result.length;i++){
         var doc = document.createElement("div");
@@ -1295,11 +1563,22 @@ function addSteps(result){
         var docName = document.createElement("span");
         docName.innerHTML = result[i].hits.hits[0]._source.title;
         docName.setAttribute("class","doc-name");
-        
+
+        var obj = {
+            "stepName":result[i].hits.hits[0]._source.title,
+            "membre":result[i].hits.hits[0]._source.membress
+        };
+
+        reportD.steps.push(obj);
+
         doc.appendChild(icon);
-        if(result[i].hits.hits[0]._source.membres != undefined){
-            for(var j=0;j<result[i].hits.hits[0]._source.membres.length;j++){
-                var spa = "<span class=\"membre-span\">"+result[i].hits.hits[0]._source.membres[j]+"</span>"
+        if(result[i].hits.hits[0]._source.membress != undefined){
+            for(var j=0;j<result[i].hits.hits[0]._source.membress.length;j++){
+                if(result[i].hits.hits[0]._source.membress[j].type=="D"){
+                    var spa = "<span class=\"membre-span\" onmouseover=\"this.style.background='#38A';this.style.color='#FFF';\" onmouseout=\"this.style.background='';this.style.color='#38A';\" style=\"cursor:pointer;padding: 2px;line-height: 150%;color:#38a;border-color:#38a;\">"+result[i].hits.hits[0]._source.membress[j].membre+"</span>"
+                }else{
+                    var spa = "<span class=\"membre-span\" onmouseover=\"this.style.background='#f93';this.style.color='#FFF';\" onmouseout=\"this.style.background='';this.style.color='#f93';\" style=\"cursor:pointer;padding: 2px;line-height: 150%\">"+result[i].hits.hits[0]._source.membress[j].membre+"</span>"
+                }
                 docName.innerHTML+=spa;
             }
         }
@@ -1314,6 +1593,12 @@ function addSteps(result){
         docContainer.appendChild(doc);
 
     }
+
+    reportD.stepsS = reportD.steps.length;
+
+    if(existBody==false){
+        $(".simulator .next-report").addClass("steps");
+    };
 }
 
 function stopedButton(type){
@@ -1325,6 +1610,9 @@ function stopedButton(type){
 }
 
 function startButton(type){
+    $(".simulator .simulator-qr .next-report").hide();
+    $(".error-msg-sim").hide();
+
     if(type==0){
        $(".simulator .simulator-qr .next-button .next-rq").removeClass("stopped");
     }else{

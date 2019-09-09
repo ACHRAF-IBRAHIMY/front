@@ -1,15 +1,14 @@
 
 
-
 function getAllCommuneObject(filters,sortBy,rev,size,from){
     var filtersObj = [];
     
       for(var i=0;i<filters[0].length;i++){
         var filter = {
-          "match":{}     
+          "term":{}     
         };
       
-        filter["match"][filters[0][i]]=filters[1][i];
+        filter["term"][filters[0][i]]=filters[1][i];
         filtersObj.push(filter);
       }
     
@@ -91,6 +90,9 @@ function createBarTop3(result,id,select){
 
 function createBarTop10(result,id,select){
     var bar = $(id);
+    bar.find(".div-1-top10").html("");
+    bar.find(".div-3-top10").html("");
+
     var results = result.hits.hits;
 
     for(var i=0;i<results.length;i++){
@@ -98,16 +100,56 @@ function createBarTop10(result,id,select){
         bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source.indecators[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span>");
     }
 }  
+
+function updateTitles(){
+    var trim = $(".ranking-fieldset #period option:selected").val();
+    var region = $(".ranking-fieldset #region option:selected").val();
+    var prefecture = $(".ranking-fieldset #prefecture option:selected").val();
+    var str = "";
+    $(".ranking-fieldset .ow-label-pl span").remove();
+    var trims = trim.split("-");
+
+    if(trims[0]=="1"){
+        str += "1er trimestre "+trims[1];
+    }else if(trims[0]=="2"){
+        str += "2éme trimestre "+trims[1];
+    }else if(trims[0]=="3"){
+        str += "3éme trimestre "+trims[1];
+    }else if(trims[0]=="4"){
+        str += "4éme trimestre "+trims[1];
+    }
+
+    if(region != "default"){
+        str += " | "+region;
+    }
+
+    if(prefecture != "default"){
+        str += " | "+prefecture;
+    }
+
+    $(".ranking-fieldset > .ow-pl-toolbar .ow-label-pl").append("<span style=\"color:orange\"> "+str+"</span>");
+}
   
 function createCommuneTable(result){
     var results = result.hits.hits;
-    var tableHtml = $("#ranking-table");
+    var tableHtml = $("#ranking-table2");
 
-    $("#ranking-table tr:not(.first-tr)").remove();
+    //$("#ranking-table tr:not(.first-tr)").remove();
+    $("#ranking-table2 tr").remove();
 
     for(var i=0;i<results.length;i++){
         var tr = $(document.createElement("tr"));
-        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;">`+results[i]._source.commune+`</td>`);
+        var rankCom = results[i]._source.rankComp;
+        var rankStr = "";
+        
+        if(rankCom>0){
+            rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
+        }else if(rankCom<0){
+            rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+        }else{
+            rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+        }
+        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,25)+"</span> "+rankStr+`</span></td>`);
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
         tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
@@ -205,16 +247,70 @@ function getAllByAggs(field,size,filter,byfilter,type){
         var elms = result.aggregations.genres.buckets;
       }
 
+      if(idHtml=="#period"){
+        elms = triPeriods(elms);
+      }
+
       $(".ranking-fieldset "+idHtml+" option:not(.ranking-fieldset "+idHtml+" option:first-child)").remove();
       var select = $(".ranking-fieldset "+idHtml);  
 
       for(var i=0;i<elms.length;i++){
         var option = document.createElement("option");
-        option.innerHTML = elms[i].key;
+        var str = "";
+        if(idHtml=="#period"){
+            var trims = elms[i].key.split("-");
+            if(trims[0]=="1"){
+                str += "1er trimestre "+trims[1];
+            }else if(trims[0]=="2"){
+                str += "2éme trimestre "+trims[1];
+            }else if(trims[0]=="3"){
+                str += "3éme trimestre "+trims[1];
+            }else if(trims[0]=="4"){
+                str += "4éme trimestre "+trims[1];
+            }
+          }
+        option.innerHTML = str;
         option.setAttribute("value",elms[i].key);
         select.append(option);
       }
+
+      if(idHtml=="#period"){  
+        $(".ranking-fieldset #period").val("4-2018");
+        updateTitles();
+      }
   }
+
+  function triPeriods(elm){
+      var newElm = [];
+
+      if(elm.length!=0){
+        newElm.push(elm[0]);
+      }
+
+      newElm = elm.sort(function(a,b){
+        return -compareTrims(a.key,b.key);
+      });
+      
+
+      return newElm;
+  }
+
+  function compareTrims(trimA,trimB){
+    var trimAs = trimA.split("-");
+    var trimBs = trimB.split("-");
+    if(Number(trimAs[1])>Number(trimBs[1])){
+      return 1;
+    }else if(Number(trimAs[1])<Number(trimBs[1])){
+      return -1;
+    }else{
+      if(Number(trimAs[0])<Number(trimBs[0])){
+          return -1;
+        }else{
+          return 1;
+        }
+    }
+}
+
 
   var region_color = ["#4472C4","#FFC000","#264478","#AA8B2B","#ED7D31","##77ACDC","#AE6736","#255E91",
     "#B4B4B4","#70AD47","#7D7D7D","#43682B"];
@@ -331,4 +427,3 @@ function getAllByAggs(field,size,filter,byfilter,type){
 
 
   }
-

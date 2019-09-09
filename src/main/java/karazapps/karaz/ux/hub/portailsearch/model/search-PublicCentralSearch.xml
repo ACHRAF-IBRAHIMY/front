@@ -93,12 +93,7 @@
         ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
     });
 
-    $(".header-div-toggle .dropdown").mouseenter(function(){
-        $(".header-div-toggle .dropdown-content").slideDown();
-    }).mouseleave(function(){
-        $(".header-div-toggle .dropdown-content").slideUp();
-    });
-
+    
 
 
 
@@ -134,9 +129,11 @@
         prevGeneratedDiv();    
     });
 
-    getCountCommune();
+    //getCountCommune();
 
-    scrollChiffreFunction();</script>
+    //scrollChiffreFunction();
+    
+    </script>
       <vbox usage="embedded:N" xcstt="x">
         <html id="hSeparator">
           <div style="height: 30px;" />
@@ -289,7 +286,7 @@
               <vbox columns="66% 34%" className="div-main-icons">
                 <html>
                   <div class="main-icon-title-bx t1">
-                    <div class="title">Quelle demande déposer ?</div>
+                    <div class="title">Quelle procédure suivre ?</div>
                     <div class="par full-grid-small">
                       <i class="fas fa-map-signs" />
                       <span>Répondez à quelques questions pour être mieux orienté.</span>
@@ -441,7 +438,7 @@
             </box-card>
           </html>
           <html>
-            <box-card style="height:178px;cursor:pointer" class="download-card">
+            <box-card style="height:178px;cursor:pointer" class="download-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/DownloadConsultation','search','Attachement',{});">
               <box-icon class="fas fa-download h-icon" />
               <box-big-title>Téléchargements</box-big-title>
             </box-card>
@@ -451,10 +448,10 @@
           <div style="height: 30px;" />
         </html>
         <html>
-          <cms-topicTitle>Chiffres clés</cms-topicTitle>
+          <cms-topicTitle>Rokhas en Chiffres</cms-topicTitle>
           <cms-topicSeparator />
         </html>
-        <vbox columns="25% 25% 25% 25%">
+        <!-- <vbox columns="25% 25% 25% 25%">
           <html>
             <box-card class="card-bx">
               <box-icon class="fas fa-university" />
@@ -512,6 +509,34 @@
             </box-card>
           </html>
         </vbox>
+        -->
+        <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
+              <box-icon class="fas fa-university h-icon" />
+              <box-big-title>Couverture géographique</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ReportRanking','search','Rokhas Ranking',{});">
+              <box-icon class="fas fa-trophy h-icon" />
+              <box-big-title>Classement national</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
+              <box-icon class="fas fa-users-cog h-icon" />
+              <box-big-title>Machine Learning</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpendataFrame','search','Open Data',{});">
+              <box-icon class="fas fa-chart-pie h-icon" />
+              <box-big-title>Open Data</box-big-title>
+            </box-card>
+          </html>
+        </vbox>
+        
         <html>
           <div style="height: 30px;" />
         </html>

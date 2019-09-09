@@ -902,10 +902,11 @@ function convertTreeComp2SimpleTree(tree){
 }
 
 var matrixBulk = [];
+var histoIds = [];
+var histoRaw = [[],[]];
 
 function conevertTo(tree,array,newObj){
   for(var i=0;i<tree.children.length;i++){
-
         if(tree.children[i].text.status==1){
             var list = tree.children[i].text.id.split("-");
             var obj = simple_chart_config.nodeStructure;    
@@ -924,10 +925,24 @@ function conevertTo(tree,array,newObj){
                     "list":matrixColumn,
                     "list_rep": parcourirTreeReps(tree.children[i].text.id,Number(column[j]))
                 }
+
+                if(histoIds.indexOf(tree.children[i].text.columns_idB[column[j]])==-1){
+                    histoIds.push(tree.children[i].text.columns_idB[column[j]]);
+                    histoRaw[0].push(tree.children[i].text.columns_idB[column[j]]);
+                    histoRaw[1].push([parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-")]);
+                }else{
+                    if(histoRaw[0].indexOf(tree.children[i].text.columns_idB[column[j]])==-1){
+                        histoRaw[0].push(tree.children[i].text.columns_idB[column[j]]);
+                        histoRaw[1].push([parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-")]);
+                    }else{
+                        var index = histoRaw[0].indexOf(tree.children[i].text.columns_idB[column[j]]);
+                        if(histoRaw[1][index].indexOf(parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-"))==-1)
+                        histoRaw[1][index].push(parcourirTreeReps(tree.children[i].text.id,Number(column[j])));
+                    }
+                }
+                matrixBulk.push(bulk);
             }
-            
-            
-            matrixBulk.push(bulk);
+
         }
     
     
@@ -949,6 +964,18 @@ function conevertTo(tree,array,newObj){
     array[0].pop();
     array[1].pop();
   }
+
+            var tepmRaw = [[],[]];
+
+            for(var k=0;k<histoRaw[0].length;k++){
+                if(histoRaw[1][k].length!=1){
+                    tepmRaw[0].push(histoRaw[0][k]);
+                    tepmRaw[1].push(histoRaw[1][k])
+                }
+            }
+            
+            histoRaw = tepmRaw;
+
   return newObj;
 }
 
@@ -985,6 +1012,9 @@ function getContentSubTree(id){
 
 
 function parcourirTreeReps(id,add){
+    if(id=="1-0-0"){
+    }
+
     var list = id.split("-");
     if(add!=null)list.push(add);
     var newList = [];
@@ -1400,12 +1430,18 @@ function nextStepDocsIn(type,id){
             objectJsonMatrixColumns = makeMatrixClass(id,ident);
             getAllCms(0,createAllCms,[]);
         }else{
-            
             objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id,ident)["docs_requis"];
             objectJsonMatrixColumns["docSort"] = getListStepsAdded();
             
+            if(objectJsonMatrixColumns["docs_comp"]!=undefined){
+                list = bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"]));
+                sortedList = objectJsonMatrixColumns["docsCompSort"];
+            } 
+
+            getAllCms(0,createAllCms,list,sortedList);        
+
             console.log("else :"+JSON.stringify(objectJsonMatrixColumns));
-            getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
+            //getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
         }
         $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
@@ -1414,6 +1450,7 @@ function nextStepDocsIn(type,id){
         
     }else if(type==1){
         objectJsonMatrixColumns["docs_comp"] = getListDocsAdded();
+        objectJsonMatrixColumns["docsCompSort"] = getListStepsAdded();
         var list = [];
         var sortedList = [];
         if(objectJsonMatrixColumns["steps"]!=undefined){
@@ -1425,19 +1462,56 @@ function nextStepDocsIn(type,id){
         $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
         $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.steps").addClass("active");
-        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).hide();
-        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).show();
         
     }else if(type==2){
         objectJsonMatrixColumns["steps"] = getListDocsAdded();
         objectJsonMatrixColumns["stepSort"] = getListStepsAdded();
 
+        var list = [];
+        var sortedList = [];
+        if(objectJsonMatrixColumns["docs_fac"]!=undefined){
+            list = bin2vec(int2bin(objectJsonMatrixColumns["docs_fac"]));
+            sortedList = objectJsonMatrixColumns["docFacSort"];
+        } 
+        
+        getAllCms(0,createAllCms,list,sortedList);        
+    
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-fac").addClass("active");
+        console.log("objectJson::::::",objectJsonMatrixColumns);
+        //var ident = $(".simulator-cms .side-bar .body1 .docs-in").attr("ident");
+        //addMatrixElement(objectJsonMatrixColumns,id,ident);
+    }else if(type==3){
+        objectJsonMatrixColumns["docs_fac"] = getListDocsAdded();
+        objectJsonMatrixColumns["docFacSort"] = getListStepsAdded();
+        var list = [];
+        var sortedList = [];
+       
+            if(objectJsonMatrixColumns["docs_sortie"]!=undefined){
+                list = bin2vec(int2bin(objectJsonMatrixColumns["docs_sortie"]));
+                sortedList = objectJsonMatrixColumns["docSortSort"];
+            } 
+        
+            getAllCms(0,createAllCms,list,sortedList);        
+        
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
+        $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-sortie").addClass("active");
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).hide();
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).show();
+
+    }else if(type==4){
+        objectJsonMatrixColumns["docs_sortie"] = getListDocsAdded();
+        objectJsonMatrixColumns["docSortSort"] = getListStepsAdded();
         $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
         $(".simulator-cms .side-bar .body1 .docs-in .header-doc span").removeClass("active");
         $(".simulator-cms .side-bar .body1 .docs-in .header-doc span.docs-requis").addClass("active");
         $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(1).hide();
-        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();
+        $(".simulator-cms .side-bar .body1 .docs-in .docs-in-buttons button").eq(0).show();        
         console.log("objectJson::::::",objectJsonMatrixColumns);
         var ident = $(".simulator-cms .side-bar .body1 .docs-in").attr("ident");
         addMatrixElement(objectJsonMatrixColumns,id,ident);
@@ -1625,7 +1699,7 @@ function setIdTree(list,childs){
   }
 
 
-function getAllDocsClass(type){
+function getAllDocsClass(type,root){
     if(type==0){
       var index = "simulator_index_docs/docs/_search";
     }else if(type==1){
@@ -1645,7 +1719,7 @@ function getAllDocsClass(type){
       data: JSON.stringify(obj),
       success: function (result) {
           console.log(result['hits']['hits']);
-          getAllDocsClassDiv(result['hits']['hits'],type);
+          getAllDocsClassDiv(result['hits']['hits'],type,root);
       },
       error: function (error) {
           console.log(error.responseText);
@@ -1653,7 +1727,7 @@ function getAllDocsClass(type){
   });
 }
 
-function getAllDocsClassDiv(data,type){
+function getAllDocsClassDiv(data,type,root){
   if(type==0){
       var tab = document.getElementsByClassName("simulator-cms")[0].getElementsByClassName("container-sim-cms")[0].getElementsByClassName("container-2")[0].getElementsByClassName("container-docs")[0];
       $(".simulator-cms .container-sim-cms .container-2 .container-docs").html("");
@@ -1687,11 +1761,11 @@ function getAllDocsClassDiv(data,type){
         if(type==0){
             var id = this.parentElement.getElementsByClassName("id-note")[0].value;
             showDivManager(4);
-            getDocClass(type,id);
+            getDocClass(type,id,root);
         }else{
             var id = this.parentElement.getElementsByClassName("id-note")[0].value;
             showDivManager(5);
-            getDocClass(type,id);
+            getDocClass(type,id,root);
         }        
     });
      
@@ -1715,7 +1789,7 @@ function getAllDocsClassDiv(data,type){
   
 }
 
-function showDivManager(type){
+function showDivManager(type,root){
     if(type==1){
         $(".simulator-cms .side-bar .body .div-1").hide();
         $(".simulator-cms .side-bar .body .div-2").hide();
@@ -1724,6 +1798,14 @@ function showDivManager(type){
         $(".simulator-cms .side-bar .body .div-5").hide();
         $(".simulator-cms .side-bar .body .div-6").hide();
         $(".simulator-cms .side-bar .body .div-7").hide();
+        root.attachementImg = {
+            fileId:"",
+            gedId:"",
+            fileName:"",
+            fileSignature:"",
+            fileSize:"",
+            fileTime:""
+        };
     }else if(type==2){
         $(".simulator-cms .side-bar .body .div-4").hide();
         $(".simulator-cms .side-bar .body .div-1").show();
@@ -1762,7 +1844,7 @@ function showDivManager(type){
     }
 }
 
-function updateDocClass(type,doc){
+function updateDocClass(type,doc,root){
     if(type==0){
         var index = "simulator_index_docs/docs/";
       }else if(type==1){
@@ -1789,7 +1871,7 @@ function updateDocClass(type,doc){
         },
         data: JSON.stringify(doc),
         success: function (result) {
-            setTimeout(getAllDocsClass(type),2000);
+            setTimeout(getAllDocsClass(type,root),2000);
             console.log(result);
             //getAllDocsClassDiv(result['hits']['hits'],type);
         },
@@ -1799,11 +1881,14 @@ function updateDocClass(type,doc){
     });
 }
 
-function getModifyObject(type){
+function getModifyObject(type,root){
     var obj = {};
     switch(type){
         case 0: obj.title = $(".simulator-cms .side-bar .body .div-4 .class-question-q input").val();
                 obj.type = $(".simulator-cms .side-bar .body .div-4 .class-type-question select option:selected").val();
+                var gedId = root.attachementImg.gedId;
+                var krn = gedId.split("/")[0];
+                obj.attachementImg = "/karazal/DownloadFile?gedId="+gedId+"&amp;krn="+krn+"&amp;thumbnail=large&amp;or=img/no-file.svg";
                 break;
         case 1: obj.title = $(".simulator-cms .side-bar .body .div-5 .class-question-q input").val();
                 obj.description = $(".simulator-cms .side-bar .body .div-5 .class-desc-q input").val();
@@ -1812,31 +1897,73 @@ function getModifyObject(type){
         case 2: obj.id = $(".simulator-cms .side-bar .body .div-6 .input-id").val();
                 obj.title = $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val();
                 obj.type = $(".simulator-cms .side-bar .body .div-6 .class-type-question select option:selected").val();
+                
+                if(root.attachementImg.gedId!=""){
+                    var gedId = root.attachementImg.gedId;
+                    var krn = gedId.split("/")[0];
+                    obj.attachementImg = "/karazal/DownloadFile?gedId="+gedId+"&amp;krn="+krn+"&amp;thumbnail=large&amp;or=img/no-file.svg";    
+                }else{
+                    obj.attachementImg = $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val();
+                }
+
                 break;
         case 3: obj.id = $(".simulator-cms .side-bar .body .div-7 .input-id").val();
                 obj.title = $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val();
                 obj.description = $(".simulator-cms .side-bar .body .div-7 .class-desc-q input").val();
-                obj.membres = $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val().split("-");
+                obj.membress = $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val().split("-");
+
+                var copies = [];
+                obj.membress.forEach(function(elm){ 
+                    if(elm.indexOf("***")!=-1){
+                        copies.push({"membre":elm.split("***")[0],"type":elm.split("***")[1]});
+                    }else{
+                        copies.push({"membre":elm,"type":"A"});
+                    }
+                });
+                obj.membress = copies;
+
                 break;
     }
     return obj;
 }
 
-function detailsDocObject(result,type){
+function detailsDocObject(result,type,root){
     if(type==0){
         $(".simulator-cms .side-bar .body .div-6 .input-id").val(result._id);
         $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val(result._source.title);
         var selected = Number(result._source.type.split("-")[1])-1;
-        $(".simulator-cms .side-bar .body .div-6 .class-type-question select option").eq(selected).select();
+        $(".simulator-cms .side-bar .body .div-6 .class-type-question select").val(result._source.type);
+
+        if(result._source.attachementImg!=undefined){
+            $(".simulator-cms .side-bar .body .div-6").css("height","auto");
+            $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val(result._source.attachementImg);
+            $(".simulator-cms .side-bar .body .div-6 .class-img").html("<img style=\"    display: block;height: 300px;margin: auto;margin-top: 15px;\" src=\""+result._source.attachementImg+"\" />");
+        }else{
+            $(".simulator-cms .side-bar .body .div-6").css("height","360px");
+            $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val("");
+            $(".simulator-cms .side-bar .body .div-6 .class-img").html("No file");
+        }
+
+        root.attachementImg = {
+            fileId : "",
+            gedId : "", 
+            fileName : "",
+            fileSize : "",
+            fileSignature : "",
+            fileTime : ""
+        };
+
     }else if(type==1){
         $(".simulator-cms .side-bar .body .div-7 .input-id").val(result._id);
         $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val(result._source.title);
         $(".simulator-cms .side-bar .body .div-7 .class-desc-q input").val(result._source.description);
-        $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val(result._source.membres.join("-"));
+        var mms = [];
+        result._source.membress.forEach(function(elm){ mms.push(elm.membre+"***"+elm.type) });
+        $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val(mms.join("-"));
     }
 }
 
-function getDocClass(type,id){
+function getDocClass(type,id,root){
     if(type==0){
         var index = "simulator_index_docs/docs/";
     }else if(type==1){
@@ -1853,7 +1980,7 @@ function getDocClass(type,id){
         },
         success: function (result) {
             console.log(result);
-            detailsDocObject(result,type);
+            detailsDocObject(result,type,root);
             //getAllDocsClassDiv(result['hits']['hits'],type);
         },
         error: function (error) {
@@ -1887,7 +2014,7 @@ function removeDocObject(type,id){
     });
 }
 
-function getMaxDocsClass(type,object){
+function getMaxDocsClass(type,object,root){
     var obj = {
         "aggs" : {
             "max_id" : { "max" : { "field" : "id" } }
@@ -1912,7 +2039,7 @@ function getMaxDocsClass(type,object){
         success: function (result) {
             console.log(Number(result.aggregations.max_id.value)+1);
             object.id = Number(result.aggregations.max_id.value)+1;
-            updateDocClass(type,object);
+            updateDocClass(type,object,root);
             //getAllDocsClass(type);
         },
         error: function (error) {
