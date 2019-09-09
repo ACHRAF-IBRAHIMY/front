@@ -16,9 +16,10 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
-        removeLastRootPage(userName);
+                        profilesT = profiles;
+
         $(".rokhas-home").click(function(){
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+          ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
         });
 
 
@@ -31,22 +32,6 @@
         },
         'slow');
         });
-
-
-                $(".scroll-top-sp").click(function(){
-                $('html,body').animate(
-                {
-                scrollTop: $("body").offset().top
-                },
-                'slow');
-                });
-
-
-                $(".back-to-acc").click(function(){
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets","search", "Acceptabilite Projets", {});
-                });
-
-
 
 
                 // add style to question type header
@@ -68,9 +53,9 @@
                 //all question
                 $(".classSearch-5 .NFQ-all-quest").hide() 
 
-                $(".NQF-vue-question").hide();
-                RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
-                RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document1",".NFQ-quest-type-plat1",".NFQ-quest-type-general1",".NFQ-quest-type-esign1",".NFQ-quest-type-archit1",".NFQ-quest-type-adminis1"],2);
+                $(".classSearch-5 .NQF-vue-question").hide();
+                RestSearchFaqSec("",0,5,0,[".vv1 .NFQ-quest-type-document",".vv1 .NFQ-quest-type-plat",".vv1 .NFQ-quest-type-general",".vv1 .NFQ-quest-type-esign",".vv1 .NFQ-quest-type-archit",".vv1 .NFQ-quest-type-adminis"],1);
+                RestSearchFaqSec("",0,5,0,[".vv1 .NFQ-quest-type-document1",".vv1 .NFQ-quest-type-plat1",".vv1 .NFQ-quest-type-general1",".vv1 .NFQ-quest-type-esign1",".vv1 .NFQ-quest-type-archit1",".vv1 .NFQ-quest-type-adminis1"],2);
 
 
 
@@ -78,7 +63,16 @@
                 $(".classSearch-5 .NQF-edit-modif").hide()
                 // hide imge
                 $(".classSearch-5 .NFQ-load-img").hide();
+
+                
+              
+
       </script>
+      <script postChange="true" delai="500">
+                if(root.query.idObject.trim()!=''){
+                    getQsFaq(root.query.idObject,0,"classSearch-5");
+                }
+      </script> 
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
@@ -173,7 +167,7 @@
           </fieldset>
         </vbox>
         <vbox>
-          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest vv2 vv1">
             <!-- start modification -->
             <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
               <test expression="'{profiles}'.match(/ADMIN_FAQ/)=='ADMIN_FAQ',expr,string" separator=",">

@@ -359,7 +359,9 @@ function NQF_edit(type,clas) {
 			let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
 			let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
 			let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
-			
+            var attachement = root.attachementRef;
+			let urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
+
 			console.log(title, categ, texte, description)
 			
 			if(categ == "Urbanisme"){
@@ -368,33 +370,38 @@ function NQF_edit(type,clas) {
 				T = 1;
 			}
 			let id = "";
-			id = $("."+clas+".NQF-id-ref").val();
-			$("."+clas+".NQF-title-ref").text(title);
-			$("."+clas+".NQF-desc-ref").text(description);
-			$("."+clas+".NQF-text-ref").html(texte);
+			id = $("."+clas+" .NQF-id-ref").val();
+			$("."+clas+" .NQF-title-ref").text(title);
+			$("."+clas+" .NQF-desc-ref").text(description);
+			$("."+clas+" .NQF-text-ref").html(texte);
 
 			var req = {
 				"title": "",
 				"type": "",
 				"content": "",
-				"desc":""
+				"desc":"",
+                "attachementRef":"",
+                "urlV":""
 			}
 			req.title = title;
 			req.type = T.toString();
 			req.content = texte;
 			req.desc = description;
+            req.urlV = urlV;
+            req.attachementRef = attachement;
+
 			console.log(req, id);
 			
 			//
-			if ($("."+clas+".ow-btn-container:has(> i)").length == 0) {
-				$("."+clas+".ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+			if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+				$("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
 			}
 			setTimeout(function () {
-				$("."+clas+".ow-btn-container i.fa-check").remove()
-				$("."+clas+".NQF-edit-modif").hide()
-				$("."+clas+".NQF-new-quest-btn").show();
-				$("."+clas+".NQF-vue-ref").show();
-				$("."+clas+".NQF-btn-alg").hide();
+				$("."+clas+" .ow-btn-container i.fa-check").remove()
+				$("."+clas+" .NQF-edit-modif").hide()
+				$("."+clas+" .NQF-new-quest-btn").show();
+				$("."+clas+" .NQF-vue-ref").show();
+				$("."+clas+" .NQF-btn-alg").hide();
 			}, 2000);
 			
 			updateReglementation(id,req);
@@ -613,9 +620,17 @@ function NQF_edit(type,clas) {
 											
 											</div>`)
 		} else if (type == 2 || type ==3) {
+
+
+             if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+                var str = `toModifyFaq("${id}")`; 
+            }else{
+                var str = `ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject=${id}","search", "FaqDetail", {});`
+            } 
+
 			$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt">
 			<div class="vpanel-body-title " style="font-size: 14px;">
-				<span class = 'NFQ-click-btn' onclick='javascript:ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject=${id}","search", "FaqDetail", {});' >` + quest + `</span>
+				<span class = 'NFQ-click-btn' onclick='javascript:`+str+`' >` + quest + `</span>
 			</div>
 			<hr class="NQF-horizontal-line " />
 			
@@ -696,7 +711,7 @@ function NQF_edit(type,clas) {
 				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
 			},
 			success: function (result) {
-                voidRestSearch("",0,7,0,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],0);
+                voidRestSearch("",0,7,0,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],0);
                 console.log(result);
 			},
 			error: function (error) {
@@ -777,7 +792,7 @@ function NQF_edit(type,clas) {
 
             var str = "";
             if (type == 0) {
-                $(".faq-fieldset").hide();
+                $(".vv2 .faq-fieldset").hide();
                 str += generateRequestFaqSearch(prefix, "DOCUMENT", page, size);
                 str += generateRequestFaqSearch(prefix, "PLATEFORME", page, size);
                 str += generateRequestFaqSearch(prefix, "GENERAL", page, size);
@@ -814,13 +829,12 @@ function NQF_edit(type,clas) {
             
                 if(atr==0){
                     setTimeout(function () {
-                        RestSearchref("",0,7,0,1,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"]);
-                        RestSearchref("",0,7,0,2,[".NFQ-quest-type-eco1",".NFQ-quest-type-urba1"]);
+                        RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],"classSearch-3");
                     }, 1000);
                 }else{
                     setTimeout(function () {
-                        RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
-                        RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document1",".NFQ-quest-type-plat1",".NFQ-quest-type-general1",".NFQ-quest-type-esign1",".NFQ-quest-type-archit1",".NFQ-quest-type-adminis1"],2);    
+                        RestSearchFaqSec("",0,5,0,[".vv1 .NFQ-quest-type-document",".vv1 .NFQ-quest-type-plat",".vv1 .NFQ-quest-type-general",".vv1 .NFQ-quest-type-esign",".vv1 .NFQ-quest-type-archit",".vv1 .NFQ-quest-type-adminis"],1);
+                        RestSearchFaqSec("",0,5,0,[".vv1 .NFQ-quest-type-document1",".vv1 .NFQ-quest-type-plat1",".vv1 .NFQ-quest-type-general1",".vv1 .NFQ-quest-type-esign1",".vv1 .NFQ-quest-type-archit1",".vv1 .NFQ-quest-type-adminis1"],2);    
                     }, 1000);
                 }
             },error: function (error) {
@@ -832,10 +846,10 @@ function NQF_edit(type,clas) {
 function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee) {
 
     var str = ""
-    $(".faq-vbox .no-response-find").hide();
+    //$(".faq-vbox .no-response-find").hide();
 
     if (type == 0) {
-        $(".faq-fieldset").hide();
+        $(".vv2 .faq-fieldset").hide();
         str += generateRequestFaqSearch(prefix, "DOCUMENT", page,size,typee);
         str += generateRequestFaqSearch(prefix, "PLATEFORME", page,size,typee);
         str += generateRequestFaqSearch(prefix, "GENERAL", page,size,typee);
@@ -856,11 +870,12 @@ function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee) {
         str += generateRequestFaqSearch(prefix, "ADMINISTRATION", page,size,typee);
     }
 
+/*
     if (type != 0) {
         $(".faq-fieldset .full-search-list").eq(type - 1).html("");
         $(".faq-fieldset .searchGif2").eq(type - 1).show();
     }
-
+*/
     $.ajax({
         type: "post",
         //url: "http://localhost:9200/_msearch",
@@ -925,7 +940,9 @@ function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee) {
     }
 
     
-
+    function toModifyFaq(id){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewfreqQuestion?query.idObject="+id,"search", "Edit question fréquente", {});
+    };
 	
 	
 	function removeQuestionNFQ(id,indexType) {
@@ -976,19 +993,44 @@ function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee) {
 			$("."+clas+" .NQF-btn-alg").hide();
 		} else if(type == 2){
 			// add edit here
-			let title = $("."+clas+" .NQF-title-ref").text();
-			let desc  = $("."+clas+" .NQF-desc-ref").text();
-			let text  = $("."+clas+" .NQF-text-ref").html();
-			let type  = $("."+clas+" .NQF-type-ref").text();
+			let title = refObject.title;
+			let desc  = refObject.desc;
+			let text  = refObject.content;
+			let type  = refObject.type;
+            if(refObject.urlV != undefined){
+                var urlV = refObject.urlV;
+            }else{
+                var urlV = "";
+            }
+
+            if( refObject.attachementRef != undefined){
+                let attachement = refObject.attachementRef;
+                dataroot.attachementRef = attachement;
+                ctx.formRender.notifyObservers("attachementRef");
+            }else{
+                let attachement = {
+                    "fileId":"",
+                    "fileName":"",
+                    "fileSize":"",
+                    "fileSignature":"",
+                    "fileTime":"",
+                    "gedId":""
+                };
+                dataroot.attachementRef = attachement;
+                ctx.formRender.notifyObservers("attachementRef");
+            }
+
 			console.log(title, desc, text, type);
 
 			dataroot.NQFtitle=title;
-
 			dataroot.NQFtype=type;
 			dataroot.NQFdesc=desc;
+            dataroot.urlRef =urlV;
+
 			ctx.formRender.notifyObservers("NQFtitle");
 			ctx.formRender.notifyObservers("NQFtype");
 			ctx.formRender.notifyObservers("NQFdesc");
+            ctx.formRender.notifyObservers("urlRef");
 
 			$("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
 			$("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html(text)

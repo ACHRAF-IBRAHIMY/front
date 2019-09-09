@@ -11,7 +11,9 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">removeLastRootPage(userName);
+      <script postLoad="true">
+                  profilesT = profiles;
+
             $(".classSearch-1 .searchbuttun").click();
             $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
 		        $(".header-div-toggle").slideToggle(); 
@@ -161,4 +163,3 @@
     </screen>
   </view>
 </search>
-

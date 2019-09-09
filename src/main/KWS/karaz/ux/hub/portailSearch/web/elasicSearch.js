@@ -425,7 +425,7 @@ function generateRequestFaqSearch(prefix,type,from,size,visi){
  
     if(visi!=undefined)   {
         if(prefix.trim()!=""){
-            var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}},{\"match_phrase\": {\"visibility\": true}]}}}\n";
+            var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}},{\"match_phrase\": {\"visibility\": \"USER\" }}]}}}\n";
         }else{
             var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }},{\"match\":{ \"visibility\":\""+visi+"\" }}]}}}\n";    
         }
@@ -635,7 +635,6 @@ function RestSearchref(prefix, page, size, type, typeUse, cls,clas) {
                 for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
 					console.log(result.responses[i].hits.hits[j]._id);
 					// typeUse 1 for admin and 2for normal user
-
 					NQF_add_ref(result.responses[i].hits.hits[j]._source.title, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
 
 					// console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
@@ -1071,7 +1070,7 @@ function NQF_add_ref(quest, id, cls, type,clas) {
 
 	// console.log(id);
 	if (type == 1) {
-		$(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
+        $(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
 										<div class="vpanel-body-title NQF-quest-delete" style="font-size: 14px;">
 											<span class = 'NFQ-click-btn'  onclick='getRefJ("${id}",0,"${clas}")' >` + quest + `</span>
 											<span class = 'far fa-times-circle NFQ-close-quest' onclick='removerefNQF("${id}")' />
@@ -1223,16 +1222,19 @@ function NQF_add_attachement(quest,attachement,desc,imgUrl,categ,id, cls, type,c
 }
 
 function getRefJ(id, type,clas) {
-    $("."+clas+" .NFQ-load-img").show();
-    $("."+clas+" .NFQ-all-quest").hide();
-    $("."+clas+" .NQF-vue-ref").hide();
-    $("."+clas+" .NQF-edit-modif").hide();
+    if(type==0){
+        $("."+clas+" .NFQ-load-img").show();
+        $("."+clas+" .NFQ-all-quest").hide();
+        $("."+clas+" .NQF-vue-ref").hide();
+        $("."+clas+" .NQF-edit-modif").hide();
 
-	var pos = $(".pcd-header-NQF").offset().top;
+	    var pos = $(".pcd-header-NQF").offset().top;
         $('html,body').animate({
                 scrollTop: pos
-            },
-            'fast');
+        },
+        'fast');
+    }
+    
 	$.ajax({
 		type: "get",
 		url: URL_SEARCH + "/reglementation_index/reglementation/" + id,
@@ -1241,6 +1243,7 @@ function getRefJ(id, type,clas) {
 			xhr.setRequestHeader("Authorization", AUTH);
 		},
 		success: function (result) {
+            refObject = result._source;
 			if (type == 0) {
 				$("."+clas+" .NFQ-load-img").hide();
 				$("."+clas+" .NQF-btn-alg").show();
@@ -1252,7 +1255,7 @@ function getRefJ(id, type,clas) {
 				$("."+clas+" .NQF-id-ref").val(id);
                 
             } else if (type == 1) {
-				 
+				 createDivQuestionRef(result);
 			}
 		},
 		error: function (error) {
@@ -1596,6 +1599,7 @@ function getQsFaq(id,type,cls){
 var videoObject = null;
 var attachementObject = null;
 var faqObject = null;
+var refObject = null;
 
 function getVideo(id,type,cls){
     if(type==0){
@@ -1885,6 +1889,26 @@ function createDivQuestionFaq(result){
     $(".other-qst-faq .vpanel-title .blue-small").html(getTypeFaq(result._source.type));
 }
 
+function createDivQuestionRef(result){
+    $(".qst-faq .vpanel-title .blue-small").html(subLong(result._source.title,110));
+    $(".qst-faq .vpanel-title .blue-small").attr("title",result._source.title);
+    $(".qst-faq .vpanel-body .qst-body").html(result._source.title);
+    $(".qst-faq .vpanel-body .response-body").html(result._source.content);
+    if(result._source.urlV != undefined){
+        if(result._source.urlV.trim() != "" ){
+            alert(result._source.urlV);
+            $(".qst-faq .vpanel-body .response-att button").attr("onclick","window.open(\""+contextPath+"/DownloadFile?gedId="+result._source.attachementRef.gedId+"\")")
+            $(".qst-faq .vpanel-body .response-att").show();
+        }else{
+            $(".qst-faq .vpanel-body .response-att").hide();
+        }
+    }else{
+        $(".qst-faq .vpanel-body .response-att").hide();
+    }
+    
+}
+
+
 function getTypeFaq(type){
     var types = ["E-SIGN","ADMINISTRATION","ARCHITECTE","DOCUMENT","PLATEFORME","GENERAL"];
     var listType = ["e-Signature","Administration","Architecte","Pieces requises","Plateforme","Général"];
@@ -1986,7 +2010,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse,cls,typee){
     }else if(type==6){
         str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,typee); 
     }
-
+    
     console.log(str);
 
     if(type!=0 && typeUse != -1){
@@ -2054,6 +2078,7 @@ function RestSearchFaq(prefix,page,size,type,typeUse,cls,typee){
     })
 }
 
+var profilesT;
 
 function fullCreateFaqByType(results,type,typeUse,cls){
 
@@ -2090,12 +2115,15 @@ function fullCreateFaqByType(results,type,typeUse,cls){
             
             g.addEventListener("click",function(){
                 var id=$(this).children("input").val();
-               if(typePage==2 || typePage==5){
-                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
-               }else{
-    			   getQsFaq(id,0,cls);
-
-               }
+                if(profilesT.match(/ADMIN_FAQ/)!='ADMIN_FAQ'){
+                    if(typePage==2 || typePage==5){
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
+                    }else{
+                        getQsFaq(id,0,cls);
+                    }
+                }else{
+                    toModifyFaq(id);
+                } 
 			});
             
             g.setAttribute("class","item-body-button");
@@ -2148,7 +2176,11 @@ function fullCreateFaqByType(results,type,typeUse,cls){
             var g = document.createElement("a");
             g.addEventListener("click",function(){
                 var id=$(this).children("input").val();
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
+                if(profilesT.match(/ADMIN_FAQ/)!='ADMIN_FAQ'){
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
+                }else{
+                    toModifyFaq(id);
+                } 
             });
             g.setAttribute("class","item-body-button");
             g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;bottom: 5px;right: 0px;");
@@ -2694,10 +2726,14 @@ function autocomplete(inp,arr) {
             var g = document.createElement("a");
             g.addEventListener("click",function(){
                 var id=$(this).children("input").val();
-                //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewRefJuridique?query.idObject="+id,"search", "Référentiel juridique", {});
+                }else{
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefDetail?query.idObject="+id,"search", "Référentiel juridique", {});
+                } 
             });
             g.setAttribute("class","item-body-button");
-            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;");
+            g.setAttribute("style","color:#38a;border: none;text-decoration: underline;text-align: right;width: 85%;display: block;");
             g.innerHTML="Texte intégral<input type=\"hidden\" value=\""+id+"\" > ";
             d.appendChild(g);
             var title = document.createElement("div");

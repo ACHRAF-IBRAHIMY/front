@@ -144,6 +144,9 @@
         <menu relId="RefrentielJuridique" label="Refrentiel Juridique" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/RefrentielJuridique</resource>
         </menu>
+        <menu relId="refDetail" label="Refrentiel Juridique" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/RefDetail</resource>
+        </menu>
       </menu>
       <menu relId="ModuleGuideVidéo" label="Module Guide Vidéo">
         <menu relId="GuideVideoConsultation" label="Guide Video Consultation" icone="search">
