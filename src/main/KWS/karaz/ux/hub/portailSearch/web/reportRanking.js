@@ -68,6 +68,142 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
   };
   
+  function restGetAllPrefecture(filters,sortBy,rev,size,from,type){
+    
+    var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
+
+    console.log(JSON.stringify(obj));
+    
+    $.ajax({
+          type: "post",
+          url: URL_SEARCH + "/ranking_index_prefecture/_search",
+          datatype: "application/json",
+          contentType: "application/json",
+          data: JSON.stringify(obj),
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader("Authorization", AUTH);
+          },
+          success: function (result) {
+              console.log(result);
+  
+            switch (type){
+                case 0 : createCommuneTableP(result);break;
+                case 1 : createBarTop3P(result,".ranking-bar3-dl","delai");break;   
+                case 2 : createBarTop3P(result,".ranking-bar3-at","attractivite");break;   
+                case 3 : createBarTop3P(result,".ranking-bar3-dg","digital");break;   
+                case 4 : createBarTop3P(result,".ranking-bar3-es","ecosystem");break;   
+                case 5 : createBarTop3P(result,".ranking-bar3-fs","fiscalite");break; 
+                case 6 : createBarTop10P(result,".ranking-bar10-U","scoreU");break;  
+                case 7 : createBarTop10P(result,".ranking-bar10-E","scoreE");break;  
+            }
+               
+
+          },
+          error: function (error) {
+              console.log(error);
+          }
+      })
+    
+  };
+
+  function restGetAllRegion(filters,sortBy,rev,size,from,type){
+    
+    var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
+
+    console.log(JSON.stringify(obj));
+    
+    $.ajax({
+          type: "post",
+          url: URL_SEARCH + "/ranking_index_region/_search",
+          datatype: "application/json",
+          contentType: "application/json",
+          data: JSON.stringify(obj),
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader("Authorization", AUTH);
+          },
+          success: function (result) {
+              console.log(result);
+  
+            switch (type){
+                case 0 : createCommuneTableG(result);break;
+                case 1 : createBarTop3G(result,".ranking-bar3-dl","delai");break;   
+                case 2 : createBarTop3G(result,".ranking-bar3-at","attractivite");break;   
+                case 3 : createBarTop3G(result,".ranking-bar3-dg","digital");break;   
+                case 4 : createBarTop3G(result,".ranking-bar3-es","ecosystem");break;   
+                case 5 : createBarTop3G(result,".ranking-bar3-fs","fiscalite");break; 
+                case 6 : createBarTop10G(result,".ranking-bar10-U","scoreU");break;  
+                case 7 : createBarTop10G(result,".ranking-bar10-E","scoreE");break;  
+            }
+               
+
+          },
+          error: function (error) {
+              console.log(error);
+          }
+      })
+    
+  };
+
+  function sortByRanking(tabs,classe,val,type){
+
+    if(val=="commune"){
+        var newTabs = tabs;
+    }else if(val=="prefecture"){
+       var newTabs = [];
+       newTabs.push(tabs[0]);
+       newTabs.push(tabs[1]);
+    }else if(val=="region"){
+        var newTabs = [];
+        newTabs.push(tabs[0]);
+    }
+
+      if(val=="commune"){
+        if(classe=="rank-dl"){
+            restGetAllCommue(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+          }else if(classe=="rank-dg"){
+            restGetAllCommue(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+          }else if(classe=="rank-at"){
+            restGetAllCommue(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+          }else if(classe=="rank-es"){
+            restGetAllCommue(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+          }else if(classe=="rank-fs"){
+            restGetAllCommue(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+          }else if(classe=="sp-td"){
+            restGetAllCommue(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+          }
+      }else if(val=="prefecture"){
+        if(classe=="rank-dl"){
+            restGetAllPrefecture(getFiltersArray(newTabs),"delai",type,60,0,0)
+          }else if(classe=="rank-dg"){
+            restGetAllPrefecture(getFiltersArray(newTabs),"digital",type,60,0,0)
+          }else if(classe=="rank-at"){
+            restGetAllPrefecture(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+          }else if(classe=="rank-es"){
+            restGetAllPrefecture(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+          }else if(classe=="rank-fs"){
+            restGetAllPrefecture(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+          }else if(classe=="sp-td"){
+            restGetAllPrefecture(getFiltersArray(newTabs),"score",type,60,0,0)
+          }
+      }else if(val=="region"){
+        if(classe=="rank-dl"){
+            restGetAllRegion(getFiltersArray(newTabs),"delai",type,60,0,0)
+          }else if(classe=="rank-dg"){
+            restGetAllRegion(getFiltersArray(newTabs),"digital",type,60,0,0)
+          }else if(classe=="rank-at"){
+            restGetAllRegion(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+          }else if(classe=="rank-es"){
+            restGetAllRegion(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+          }else if(classe=="rank-fs"){
+            restGetAllRegion(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+          }else if(classe=="sp-td"){
+            restGetAllRegion(getFiltersArray(newTabs),"score",type,60,0,0)
+          }
+      }
+
+    
+  }
+
 
 function createBarTop3(result,id,select){
     var bar = $(id);
@@ -99,6 +235,70 @@ function createBarTop10(result,id,select){
         bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source.indecators[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span>");
     }
 }  
+
+
+function createBarTop3P(result,id,select){
+    var bar = $(id);
+    var results = result.hits.hits;
+
+    var cm1 = results[1]._source.prefecture.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm2 = results[0]._source.prefecture.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm3 = results[2]._source.prefecture.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    
+    var hg1 = results[1]._source[select];
+    var hg2 = results[0]._source[select];
+    var hg3 = results[2]._source[select];
+
+    bar.find(".div-bar-1 .bar1 .bottom-div").html("<div class=\"cm cm1\">"+cm1+"</div><div style=\"height:"+((hg1*155)/hg2)+"px\"><span>"+Number(hg1).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+2+"</span></div>");
+    bar.find(".div-bar-1 .bar2 .bottom-div").html("<div class=\"cm cm2\">"+cm2+"</div><div style=\"height:"+((hg2*155)/hg2)+"px\"><span>"+Number(hg2).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+1+"</span></div>");
+    bar.find(".div-bar-1 .bar3 .bottom-div").html("<div class=\"cm cm3\">"+cm3+"</div><div style=\"height:"+((hg3*155)/hg2)+"px\"><span>"+Number(hg3).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+3+"</span></div>");
+
+}
+
+function createBarTop10P(result,id,select){
+    var bar = $(id);
+    bar.find(".div-1-top10").html("");
+    bar.find(".div-3-top10").html("");
+
+    var results = result.hits.hits;
+
+    for(var i=0;i<results.length;i++){
+        bar.find(".div-1-top10").append("<span>"+results[i]._source.prefecture+"</span>");
+        bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span>");
+    }
+}
+
+
+function createBarTop3G(result,id,select){
+    var bar = $(id);
+    var results = result.hits.hits;
+
+    var cm1 = results[1]._source.region.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm2 = results[0]._source.region.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm3 = results[2]._source.region.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    
+    var hg1 = results[1]._source[select];
+    var hg2 = results[0]._source[select];
+    var hg3 = results[2]._source[select];
+
+    bar.find(".div-bar-1 .bar1 .bottom-div").html("<div class=\"cm cm1\">"+cm1+"</div><div style=\"height:"+((hg1*155)/hg2)+"px\"><span>"+Number(hg1).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+2+"</span></div>");
+    bar.find(".div-bar-1 .bar2 .bottom-div").html("<div class=\"cm cm2\">"+cm2+"</div><div style=\"height:"+((hg2*155)/hg2)+"px\"><span>"+Number(hg2).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+1+"</span></div>");
+    bar.find(".div-bar-1 .bar3 .bottom-div").html("<div class=\"cm cm3\">"+cm3+"</div><div style=\"height:"+((hg3*155)/hg2)+"px\"><span>"+Number(hg3).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+3+"</span></div>");
+
+}
+
+function createBarTop10G(result,id,select){
+    var bar = $(id);
+    bar.find(".div-1-top10").html("");
+    bar.find(".div-3-top10").html("");
+
+    var results = result.hits.hits;
+
+    for(var i=0;i<results.length;i++){
+        bar.find(".div-1-top10").append("<span>"+results[i]._source.region+"</span>");
+        bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span>");
+    }
+}
 
 function updateTitles(){
     var trim = $(".ranking-fieldset #period option:selected").val();
@@ -160,6 +360,74 @@ function createCommuneTable(result){
         tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
         tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
         tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.fiscalite)+`</td>`);
+        tableHtml.append(tr);
+    }
+   
+}
+
+function createCommuneTableP(result){
+    var results = result.hits.hits;
+    var tableHtml = $("#ranking-table2");
+
+    //$("#ranking-table tr:not(.first-tr)").remove();
+    $("#ranking-table2 tr").remove();
+
+    for(var i=0;i<results.length;i++){
+        var tr = $(document.createElement("tr"));
+        var rankCom = results[i]._source.rankComp;
+        var rankStr = "";
+        
+        dataReportRk.push(results[i]._source);
+
+        if(rankCom>0){
+            rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
+        }else if(rankCom<0){
+            rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+        }else{
+            rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+        }
+        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.prefecture+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.prefecture,30)+"</span> "+rankStr+`</span></td>`);
+        tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
+        tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.attractivite)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.digital)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.ecosystem)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.fiscalite)+`</td>`);
+        tableHtml.append(tr);
+    }
+   
+}
+
+function createCommuneTableG(result){
+    var results = result.hits.hits;
+    var tableHtml = $("#ranking-table2");
+
+    //$("#ranking-table tr:not(.first-tr)").remove();
+    $("#ranking-table2 tr").remove();
+
+    for(var i=0;i<results.length;i++){
+        var tr = $(document.createElement("tr"));
+        var rankCom = results[i]._source.rankComp;
+        var rankStr = "";
+        
+        dataReportRk.push(results[i]._source);
+
+        if(rankCom>0){
+            rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
+        }else if(rankCom<0){
+            rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+        }else{
+            rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+        }
+        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.region+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.region,30)+"</span> "+rankStr+`</span></td>`);
+        tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
+        tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.attractivite)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.digital)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.ecosystem)+`</td>`);
+        tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.fiscalite)+`</td>`);
         tableHtml.append(tr);
     }
    

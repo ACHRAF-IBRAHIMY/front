@@ -111,6 +111,30 @@ img.iconS{
     left: 40px;
 }
 
+.table3{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table3 td, .table3 th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align:center;
+  font-size:14px;
+}
+
+.table3 tr:nth-child(even){background-color: #f2f2f2;}
+
+
+.table3 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #38A;
+  color: white;
+}
+
 </style>
 </head>
  
@@ -140,20 +164,17 @@ img.iconS{
             <tr>
                 <td>$xml.getValue($ch,"commune")</td>
                 <td>$xml.getValue($ch,"rank")</td>
-                <td>$xml.getValue($ch,"indecators.score")</td>
-                <td>$xml.getValue($ch,"indecators.delai")</td>
-                <td>$xml.getValue($ch,"indecators.attractivite")</td>
-                <td>$xml.getValue($ch,"indecators.digital")</td>
-                <td>$xml.getValue($ch,"indecators.ecosystem")</td>
-                <td>$xml.getValue($ch,"indecators.fiscalite")</td>
+                <td>$xml.getDouble($ch,"indecators.score").intValue()</td>
+                <td>$xml.getDouble($ch,"indecators.delai").intValue()</td>
+                <td>$xml.getDouble($ch,"indecators.attractivite").intValue()</td>
+                <td>$xml.getDouble($ch,"indecators.digital").intValue()</td>
+                <td>$xml.getDouble($ch,"indecators.ecosystem").intValue()</td>
+                <td>$xml.getDouble($ch,"indecators.fiscalite").intValue()</td>
 
 
             </tr>
         #end
-        <tr>
-            <td></td>
-        </tr>
-    </table>
+            </table>
  </div>
 
 
