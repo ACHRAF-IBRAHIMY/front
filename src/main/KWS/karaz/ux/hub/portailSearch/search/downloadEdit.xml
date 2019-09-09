@@ -34,16 +34,16 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
-      context.formRender.metaData.id=-1;
-      $(".krnActionBtn").click();
-     /*   ApplicationManager.runRemoteAction('karaz/ux/hub/action/PortailActions?operation=getKrn',context.formRender.metaData.id,context.formRender.dataObjectRoot,context.formRender);
-        
-        console.log("root***=",root);
-        console.log("context***=",context);
-       root.krn=context.formRender.dataObject.krn;
-       context.formRender.notifyObservers("krn");
-       context.formRender.krn=root.krn;*/
-        removeLastRootPage(userName);
+                context.formRender.metaData.id=-1;
+                $(".krnActionBtn").click();
+                /*   ApplicationManager.runRemoteAction('karaz/ux/hub/action/PortailActions?operation=getKrn',context.formRender.metaData.id,context.formRender.dataObjectRoot,context.formRender);
+
+                console.log("root***=",root);
+                console.log("context***=",context);
+                root.krn=context.formRender.dataObject.krn;
+                context.formRender.notifyObservers("krn");
+                context.formRender.krn=root.krn;*/
+                removeLastRootPage(userName);
             	
                 $(".rokhas-home").click(function(){
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
@@ -98,6 +98,12 @@
             });
 
             </script>
+            <script postLoad="true" delai="500">
+                if(root.query.idObject.trim()!=''){
+                  getAttachement(root.query.idObject,0,"classSearch-11");
+                }
+          </script>
+
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
@@ -114,18 +120,27 @@
             <vbox className="NQF-new-quest-btn">
               <button label="Nouveau attachement" style="margin-bottom:10px" className="NQF-btn-new">
                 <postChange>
+
+                    $(".classSearch-11 .NQF-id").val("");
                     $('.classSearch-11 .ow-field-input[data-xpath="title"]').val("");
                     $('.classSearch-11 .ow-field-input-select[data-xpath="categ"]').text("");
                     $('.classSearch-11 .ow-field-input[data-xpath="url"]').val("");
+                    $('.classSearch-11 .ow-field-input[data-xpath="urlImg"]').val("");
                     $('.classSearch-11 .ow-field-input-line textarea[data-xpath="description"]').val(""); 
                     $('.classSearch-11 .ow-field-input-select[data-xpath="playlist"]').text("");
+                    $('.classSearch-11 .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
+
                     $(".classSearch-11 .NQF-vue-question").hide();
                     $(".classSearch-11 .NQF-edit-modif").show();
+
                     root.attachement.fileId = "";
                     root.attachement.gedId = "";
                     root.url = "";
                     context.formRender.notifyObservers("url");
                     context.formRender.notifyObservers("attachement");
+                    root.imgUrl = "";
+                    context.formRender.notifyObservers("imgUrl");
+                    
                     //NQF_new_QR(1);
                 </postChange>
               </button>
@@ -205,11 +220,16 @@
                   <button label="Nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
                     <postChange>
                               //NQF_new_QR(1);
+                              $(".classSearch-11 .NQF-id").val("");
                               $('.classSearch-11 .ow-field-input[data-xpath="title"]').val("");
                               $('.classSearch-11 .ow-field-input-select[data-xpath="categ"]').text("");
                               $('.classSearch-11 .ow-field-input[data-xpath="url"]').val("");
                               $('.classSearch-11 .ow-field-input-line textarea[data-xpath="description"]').val(""); 
                               $('.classSearch-11 .ow-field-input-select[data-xpath="playlist"]').text("");
+                              $('.classSearch-11 .ow-field-input[data-xpath="title"]').val("");
+                              $('.classSearch-11 .ow-field-input[data-xpath="urlImg"]').val("");
+                              $('.classSearch-11 .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
+
                               $(".classSearch-11 .NQF-vue-question").hide();</postChange>
                   </button>
                   <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
@@ -282,10 +302,10 @@
       <button className="k-btn-transparent hidden button111" icon="fas fa-close" usage="visualisation=R">
                        <postChange>
                         setTimeout(function(){
-                          root.url = "/karazal/DownloadFile?gedId="+root.attachement.gedId ;
+                          //root.url = "/karazal/DownloadFile?gedId="+root.attachement.gedId ;
                           root.imgUrl = "/karazal/DownloadFile?gedId="+root.attachementImg.gedId ;
                           context.formRender.notifyObservers("imgUrl");
-                          context.formRender.notifyObservers("url");
+                          //context.formRender.notifyObservers("url");
                         },1000);
                           
                        </postChange>

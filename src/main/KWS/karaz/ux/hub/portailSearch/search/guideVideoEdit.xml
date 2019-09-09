@@ -46,7 +46,14 @@
                 $(".classSearch-6 .NQF-edit-modif").hide()
                 // hide imge
                 $(".classSearch-6 .NFQ-load-img").hide();
-                getAllplayLists(1,100,"classSearch-6");</script>
+                getAllplayLists(1,100,"classSearch-6");
+              </script>
+                
+                <script postLoad="true" delai="1000">
+                  if(root.query.idObject.trim()!=''){
+                      getVideo(root.query.idObject,0,"classSearch-6");
+                  }
+                </script> 
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>

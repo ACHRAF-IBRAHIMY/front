@@ -15,7 +15,8 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
-        removeLastRootPage(userName);
+        profilesT=profiles;
+
         getAllplayListsD(2,4,"classSearch-12");
         $(".classSearch-12 .searchbuttun").click();
 

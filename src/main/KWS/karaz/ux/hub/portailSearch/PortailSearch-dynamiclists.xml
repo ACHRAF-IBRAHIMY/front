@@ -13,12 +13,11 @@
     <option value="p3" label="Karaz GIS" />
   </dynamiclist>
   <dynamiclist name="frontal/uxhub/portailSearch/tag" description="tag pour appeler une vidéo" >
-   	<option>Without_tag</option>
-   	<option>tag 1</option>
+   	<option value="Without_tag" label="Without_tag"/>
+   	<option value="tag 1" label="tag 1"/>
   </dynamiclist>
     <dynamiclist name="frontal/uxhub/portailSearch/visibility" description="Visibilité de QR de Module FAQ" >
-        <option>ADMIN</option>
-   		<option>USER</option>
-   		<option>SUPPORT</option>
+        <option value="USER" label="USER"/>
+   		<option value="ADMIN" label="ADMIN"/>
      </dynamiclist>
-</tns:dynamiclists>
+</tns:dynamiclists> 

@@ -10,6 +10,7 @@ var diff = 0;
 var p=0;
 
 //var AUTH = "Basic cm9raGFzX3VzZXI6YWRtaW4x";
+var ADMIN_AUTH = "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6" ;
 var URL_SEARCH = "https://elasticdata.karaz.org:9200";
 //var URL_SEARCH = "https://localhost:9200";
 var AUTH = "Basic cmVhZGFsbDpyZWFkYWxs";
@@ -774,7 +775,11 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
                     var g = document.createElement("button");
                     g.addEventListener("click",function(){
                         var id=$(this).children("input").val();
-                        getVideo(id,1,clas);
+                        if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/GuideVideoEdit?query.idObject="+id,"search", "video", {});
+                        }else{
+                            getVideo(id,1,clas);
+                        } 
                         //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
                      });
                     g.setAttribute("class","item-body-button hp-sbox-btn");
@@ -837,7 +842,7 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
                 for (var i = 0; i < result.responses.length; i++) {
                     playlist_videos.push(new Array());
 
-                    $(cls[i]+" .det").html("");
+                    $("."+clas+" "+cls[i]+" .det").html("");
                     
                     for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
                         playlist_videos[i].push(result.responses[i].hits.hits[j]._source);
@@ -950,11 +955,11 @@ function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
                                 var str = "<i class=\"fas fa-download\" style=\"font-size: 9VW;color: #38A;\"></i>";
                             }
                         }else{
-                            var str = "<img style=\"width:100%;height: 100%;\" src="+imgUrl+">";
+                            var str = "<img style=\"max-width: 70%;max-height: 157px;\" src="+imgUrl+">";
                         }    
                     }else{
                         var krn = attachement.gedId.split("/")[0];
-                        var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+                        var str = '<div class="docthumbnail"><img style="max-width: 70%;max-height: 157px;" class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
                     }
                     
                     
@@ -987,8 +992,12 @@ function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
                     var g = document.createElement("button");
                     g.addEventListener("click",function(){
                         var id=$(this).children("input").val();
-                        getAttachement(id,1,clas);
-                        //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                        if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+                            ApplicationManager.run("karaz/ux/hub/portailsearch/search/DownloadEdit?query.idObject="+id,"search", "attachement", {});
+
+                        }else{
+                            getAttachement(id,1,clas);
+                        } 
                      });
                     g.setAttribute("class","item-body-button hp-sbox-btn");
                     g.innerHTML="Détails<input type=\"hidden\" value=\""+id+"\" > ";
@@ -1049,7 +1058,7 @@ function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
                 for (var i = 0; i < result.responses.length; i++) {
                     playlist_attachement.push(new Array());
 
-                    $(cls[i]+" .det").html("");
+                    $("."+clas+" "+cls[i]+" .det").html("");
                     
                     for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
                         playlist_attachement[i].push(result.responses[i].hits.hits[j]._source);
@@ -1123,8 +1132,11 @@ function NQF_add_video(quest,desc,imgUrl, id, cls, type,clas) {
             <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
         </div>`;
         div.addEventListener("click",function(){
-            
-            getVideo(id,1,clas);
+            if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/GuideVideoEdit?query.idObject="+id,"search", "video", {});
+            }else{
+                getVideo(id,1,clas);
+            } 
         });
 
         div.setAttribute("idd",id);
@@ -1210,7 +1222,12 @@ function NQF_add_attachement(quest,attachement,desc,imgUrl,categ,id, cls, type,c
 </div>`;
 
         div.addEventListener("click",function(){
-            getAttachement(id,1,clas);
+            if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/DownloadEdit?query.idObject="+id,"search", "attachement", {});
+
+            }else{
+                getAttachement(id,1,clas);
+            } 
         });
 
         div.setAttribute("idd",id);
