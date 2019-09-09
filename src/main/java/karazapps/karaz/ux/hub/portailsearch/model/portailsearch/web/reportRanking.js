@@ -328,6 +328,52 @@ function getAllByAggs(field,size,filter,byfilter,type){
   var region_color = ["#4472C4","#FFC000","#264478","#AA8B2B","#ED7D31","##77ACDC","#AE6736","#255E91",
     "#B4B4B4","#70AD47","#7D7D7D","#43682B"];
 
+  /*function getObjRankBy(trim,rankBy){
+    return {"query" : {
+        "term":{
+            "trim.keyword":trim
+        }
+      },
+        "aggregations": {
+           "region_ind": {
+              "aggregations": {
+                 "score": {
+                    "avg": {
+                       "field": "indecators.score"
+                    }
+                 },
+                  "delai": {
+                    "avg": {
+                       "field": "indecators.delai"
+                    }
+                    },"attractivite": {
+                    "avg": {
+                       "field": "indecators.attractivite"
+                    }
+                    },"digital": {
+                    "avg": {
+                       "field": "indecators.digital"
+                    }
+                    },"ecosystem": {
+                    "avg": {
+                       "field": "indecators.ecosystem"
+                    }
+                    },"fiscalite": {
+                    "avg": {
+                       "field": "indecators.fiscalite"
+                    }
+                    }
+                    }
+                 ,"terms": {
+                 "field": rankBy,
+                 "order": {
+                    "score": "desc"
+                 }
+             }
+      }}
+      };
+
+  }*/
 
   function drawRadarRegion(trim){
       
@@ -570,19 +616,20 @@ function getAllCommuneProc(liste,type){
             });
 
             var tr = document.createElement("tr");
-            var td = document.createElement("td");
+            var td = document.createElement("th");
             td.innerHTML = "Commune";
             tr.appendChild(td);
             var procId = [];
             for(var i=0;i<liste.hits.hits.length;i++){
-                td = document.createElement("td");
+                td = document.createElement("th");
                 td.innerHTML = "P "+(i+1);
                 td.setAttribute("title",liste.hits.hits[i]._source.title);
                 tr.appendChild(td);
                 procId.push(liste.hits.hits[i]._id);
             };
-            var td = document.createElement("td");
+            var td = document.createElement("th");
             td.innerHTML = "Bonus";
+            td.setAttribute("style","width:50px");
             tr.appendChild(td);
 
             $(".table-rk-dg").append(tr);
@@ -603,6 +650,7 @@ function getAllCommuneProc(liste,type){
                         td = document.createElement("td");
                         td.setAttribute("idd",procId[j]);
                         td.innerHTML = "<input type='checkbox' value='0' />";
+                        td.setAttribute("title",liste.hits.hits[j]._source.title);
                         td.addEventListener("click",function(){
                             this.parentNode.setAttribute("typeIdd","update");
                         });
@@ -769,6 +817,10 @@ function sendBulkRequestProc(bulk){
             },2000);
                 },
         error: function (error) {
+            alert("Ops !! Error"+error.responseText);
+            getAllProc().done(function(liste){
+                getAllCommuneProc(liste,0);
+            });
             console.log(error.responseText);
         }
     })
@@ -786,7 +838,6 @@ function createBulkRequestCommune(liste){
         }
 
     });
-    alert(str);
 
     return str;
 }
@@ -810,7 +861,11 @@ function sendBulkRequestCommune(bulk){
             },2000);
         },
         error: function (error) {
+            alert("Ops !! Error"+error.responseText);
             console.log(error.responseText);
+            getAllProc().done(function(liste){
+                getAllCommuneProc(liste,0);
+            });
         }
     })
     

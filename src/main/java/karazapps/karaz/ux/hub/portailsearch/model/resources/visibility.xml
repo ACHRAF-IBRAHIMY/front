@@ -15,11 +15,9 @@
 	<sourceFileLocation></sourceFileLocation>
 	<entries>
   
-                    <option value="$val" label="$lab"/>
+                    <option value="USER" label="USER"/>
   
-                    <option value="$val" label="$lab"/>
-  
-                    <option value="$val" label="$lab"/>
+                    <option value="ADMIN" label="ADMIN"/>
  					 
 			    
 	</entries>

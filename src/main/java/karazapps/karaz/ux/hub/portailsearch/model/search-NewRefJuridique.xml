@@ -62,7 +62,7 @@
 
             
       </script>
-      <script postChange="true" delai="500">
+      <script postLoad="true" delai="500">
                 if(root.query.idObject.trim()!=''){
                     getRefJ(root.query.idObject,0,"classSearch-3");
                 }
@@ -76,6 +76,8 @@
             <vbox className="NQF-new-quest-btn">
               <button label="Nouveau Référentiel Juridique" style="" className="NQF-btn-new">
                 <postChange>
+                    $(".classSearch-3 .NQF-id-ref").val("");
+                    
                     $('.classSearch-3 .ow-field-input[data-xpath="NQFtitle"]').val("");
                     $('.classSearch-3 .ow-field-input-select[data-xpath="NQFtype"]').text("");
                     $('.classSearch-3 .ow-field-input[data-xpath="urlRef"]').val("");
