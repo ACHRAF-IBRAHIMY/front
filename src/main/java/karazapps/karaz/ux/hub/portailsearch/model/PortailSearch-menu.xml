@@ -175,6 +175,9 @@
         <menu relId="ArticleConsultation" label="Article" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/ArticleConsultation</resource>
         </menu>
+        <menu relId="NewArticle" label="Nouveau Article" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/NewArticle</resource>
+        </menu>
       </menu>
       <menu relId="RankingDigitalRemp" label="Ranking Digitalite" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/RankingDigitalRemp</resource>

@@ -139,14 +139,19 @@ img.iconS{
 </head>
  
 <body>
+    #set($xml=$dt.get("data"))
+
 <div style="width:90%;height:80px;margin:auto;display:grid;grid-template-columns:40% 60%;position:relative">
 <img style="width:30%;position:absolute;top:0;left:0" src="$resource-entete-page_PNG" /> 
 	<div style="position:absolute;top:0;left:35%;height:33px;border-left:1px solid #eee;padding:15px 35px;font-size: 19px;font-family: Candara;text-align: left;width:80%;display:inline">
         INDEX ROKHAS <span class="rokhas-file"></span>
 	</div>
+	
+ </div>
+ <div style="text-align:center;font-size: 19px;width:90%;text-transform: uppercase;height:80px;margin:auto;text-aglin:center;margin-bottom:-15px;">
+   <span>Classement de $xml.getValue("dataReportRk.trim")</span>
  </div>
  <div>
-    #set($xml=$dt.get("data"))
 
     <table class="table3">
     
@@ -160,18 +165,16 @@ img.iconS{
             <th>Ecosystème</th>
             <th>Fiscalité</th>
         </tr>
-        #foreach($ch in $xml.getElements("dataReportRk"))
+        #foreach($ch in $xml.getElements("dataReportRk.data"))
             <tr>
-                <td>$xml.getValue($ch,"commune")</td>
-                <td>$xml.getValue($ch,"rank")</td>
-                <td>$xml.getDouble($ch,"indecators.score").intValue()</td>
-                <td>$xml.getDouble($ch,"indecators.delai").intValue()</td>
-                <td>$xml.getDouble($ch,"indecators.attractivite").intValue()</td>
-                <td>$xml.getDouble($ch,"indecators.digital").intValue()</td>
-                <td>$xml.getDouble($ch,"indecators.ecosystem").intValue()</td>
-                <td>$xml.getDouble($ch,"indecators.fiscalite").intValue()</td>
-
-
+                <td width="30%" style="text-align:left;font-size:14px" >$xml.getValue($ch,"commune")</td>
+                <td width="7%">$xml.getValue($ch,"rank")</td>
+                <td width="12%">$xml.getDouble($ch,"indecators.score").intValue()</td>
+                <td width="12%">$xml.getDouble($ch,"indecators.delai").intValue()</td>
+                <td width="13%">$xml.getDouble($ch,"indecators.attractivite").intValue()</td>
+                <td width="12%">$xml.getDouble($ch,"indecators.digital").intValue()</td>
+                <td width="12%">$xml.getDouble($ch,"indecators.ecosystem").intValue()</td>
+                <td width="12%">$xml.getDouble($ch,"indecators.fiscalite").intValue()</td>
             </tr>
         #end
             </table>
