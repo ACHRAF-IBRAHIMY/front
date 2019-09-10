@@ -469,6 +469,23 @@ function generateRequestVideoSearch(prefix,type,from,size,typeUse){
     return str;
 }
 
+function generateRequestArticleSearch(prefix,type,from,size,typeUse){
+    
+    if(typeUse==0){
+        var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"date\" : {\"order\" : \"desc\"}}],\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+
+    }else{
+        if(prefix.trim()!=""){
+            var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+        }else{
+            var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+        }
+    }
+    
+
+    return str;
+}
+
 function generateRequestAttachementSearch(prefix,type,from,size,typeUse){
     
     if(typeUse==0){
@@ -866,6 +883,104 @@ function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
         })
     }   
 }
+
+
+function RestSearchArticleSec(prefix, page, size, type, typeUse, cls,prev,clas){
+
+    var str = '';
+    for(var i=0;i<type.length;i++){
+        str += generateRequestArticleSearch(prefix,type[i], page, size,typeUse-2);
+    }
+
+    alert(str);
+
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH + "/_msearch",
+        datatype: "application/json",
+        contentType: "application/x-ndjson",
+        data: str,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+            console.log(result);
+            //playlist_videos = [];
+            alert(JSON.stringify(result))
+            for (var i = 0; i < result.responses.length; i++) {
+                //playlist_videos.push(new Array());
+
+                $("."+clas+" "+cls[i]+" .det").html("");
+                
+                for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
+                    //playlist_videos[i].push(result.responses[i].hits.hits[j]._source);
+                    console.log(result.responses[i].hits.hits[j]._id);
+                    // typeUse 1 for admin and 2for normal user
+                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+
+                    // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
+                    console.log(result.responses[i].hits.hits[j]._source.type);
+                }
+            }
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    })
+}
+
+function NQF_add_article(quest,desc,imgUrl, id, cls, type,clas){
+    if (type == 1) {
+
+        var div = document.createElement("div");
+
+        div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
+        <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
+    </div>
+    <div>
+        <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+        <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
+    </div>`;
+
+    div.addEventListener("click",function(){
+        getArticle(id,0,clas);
+    });
+
+    div.setAttribute("idd",id);
+    div.setAttribute("class","video-list-item");
+    div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
+
+    $("."+clas+" "+ cls + "").append(div);
+    
+    console.log(".v-edit" + cls + "");
+        
+	} else if (type == 2) {
+        var div = document.createElement("div");
+        div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
+            <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
+            </div>
+        <div>
+            <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+            <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
+        </div>`;
+        div.addEventListener("click",function(){
+            if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/GuideVideoEdit?query.idObject="+id,"search", "video", {});
+            }else{
+                getArticle(id,1,clas);
+            } 
+        });
+
+        div.setAttribute("idd",id);
+        div.setAttribute("class","video-list-item");
+        div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
+
+        $("."+clas+" "+ cls + "").append(div);
+
+    }
+}
+
+
 
 function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
     var str = ""

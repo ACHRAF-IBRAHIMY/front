@@ -164,6 +164,7 @@
                             <div class="buttons-rk-dg" style="width:100%; text-align:center">
                                 <button class="dg-save-1">Sauvgarder</button>
                                 <button class="dg-add-1">Ajouter nouvelle procédure</button>
+                                
                             </div>
                         </html>
                     </vbox>
@@ -175,6 +176,7 @@
                         <div class="div-btns-rk-dg">
                             <button class="click-all">All</button>
                             <button class="click-active active">active</button>
+                            <span> <i class="far fa-smile"></i> la procédure est totalement dématérialisée  - <i class="far fa-meh"></i>la procédure est déclenchée sur Rokhas mais que l'autorisation n'est pas délivrée de façon numérique</span>
                         </div>
                     </html>
                         <html>

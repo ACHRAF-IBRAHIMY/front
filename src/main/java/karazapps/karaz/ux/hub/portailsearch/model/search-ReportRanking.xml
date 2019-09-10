@@ -46,21 +46,6 @@
             $(this).hide();
             sortByRanking(tabInd,classe,$(".ranking-fieldset #rankBy option:selected").val(),"asc");
 
-/*
-            if(classe=="rank-dl"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","asc",60,0,0)
-            }else if(classe=="rank-dg"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.digital","asc",60,0,0)
-            }else if(classe=="rank-at"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.attractivite","asc",60,0,0)
-            }else if(classe=="rank-es"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.ecosystem","asc",60,0,0)
-            }else if(classe=="rank-fs"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.fiscalite","asc",60,0,0)
-            }else if(classe=="sp-td"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.score","asc",60,0,0)
-            }
-            */
           });
 
           $("#ranking-table .fa-sort-up").click(function(){
@@ -74,21 +59,7 @@
             $(this).hide();
 
             sortByRanking(tabInd,classe,$(".ranking-fieldset #rankBy option:selected").val(),"desc");
-/*
-            if(classe=="rank-dl"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.delai","desc",60,0,0)
-            }else if(classe=="rank-dg"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.digital","desc",60,0,0)
-            }else if(classe=="rank-at"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.attractivite","desc",60,0,0)
-            }else if(classe=="rank-es"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.ecosystem","desc",60,0,0)
-            }else if(classe=="rank-fs"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.fiscalite","desc",60,0,0)
-            }else if(classe=="sp-td"){
-              restGetAllCommue(getFiltersArray(tabInd),"indecators.score","desc",60,0,0)
-            }
-*/            
+   
           });
           
           $(".ranking-fieldset #region").change(function(){
@@ -127,7 +98,7 @@
                 filtersBy.push(region);
               }
 
-              if( !(prefecture=="default" || rankBy=="region" || rankBy=="prefecture") ){
+              if( !(prefecture=="default" || rankBy=="region" || rankBy=="ville" || rankBy=="prefecture") ){
                 filters.push("préfecture.keyword");
                 filtersBy.push(prefecture);
               }
@@ -135,7 +106,7 @@
               tabInd = [];
               tabInd.push(trim);
               tabInd.push(region);
-              tabInd.push(prefecture);
+              tabInd.push(prefecture); 
 
               if(rankBy=="commune"){
                 restGetAllCommue([filters,filtersBy],"indecators.score","desc",60,0,0);
@@ -165,6 +136,15 @@
                 restGetAllRegion([filters,filtersBy],"ecosystem","desc",3,0,4);
                 restGetAllRegion([filters,filtersBy],"fiscalite","desc",3,0,5);
                 restGetAllRegion([filters,filtersBy],"score","desc",10,0,6);
+              }else if(rankBy=="ville"){
+                restGetAllVille([filters,filtersBy],"score","desc",60,0,0);
+                restGetAllVille([filters,filtersBy],"score","desc",60,0,0);
+                restGetAllVille([filters,filtersBy],"delai","desc",3,0,1);
+                restGetAllVille([filters,filtersBy],"attractivite","desc",3,0,2);
+                restGetAllVille([filters,filtersBy],"digital","desc",3,0,3);
+                restGetAllVille([filters,filtersBy],"ecosystem","desc",3,0,4);
+                restGetAllVille([filters,filtersBy],"fiscalite","desc",3,0,5);
+                restGetAllVille([filters,filtersBy],"score","desc",10,0,6);
               }
               
                updateTitles();
@@ -188,6 +168,9 @@
                   $(".ranking-fieldset #region option").prop("disabled",false);
                   $(".ranking-fieldset #prefecture option").prop("disabled",true);
                 }else if(rankBy=="region"){
+                  $(".ranking-fieldset #region option").prop("disabled",true)
+                  $(".ranking-fieldset #prefecture option").prop("disabled",true)
+                }else if(rankBy=="ville"){
                   $(".ranking-fieldset #region option").prop("disabled",true)
                   $(".ranking-fieldset #prefecture option").prop("disabled",true)
                 }
@@ -267,6 +250,7 @@
                   <option value="commune">Classer par commune/arrondissement</option>
                   <option value="prefecture">Classer par préfecture</option>
                   <option value="region">Classer par région</option>
+                  <option value="ville">Classer par conseils ville</option>
                 </select>
               </html>
             </vbox>

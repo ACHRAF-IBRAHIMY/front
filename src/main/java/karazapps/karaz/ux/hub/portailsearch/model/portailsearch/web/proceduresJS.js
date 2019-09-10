@@ -184,6 +184,8 @@ function NQF_edit(type,clas) {
                 $("."+clas+" .NQF-btn-alg").hide();
                 $("."+clas+" .NQF-vue-question").show();
 			}
+        }else if(type==7){
+
         }
 	}
 
