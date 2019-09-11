@@ -47,7 +47,7 @@
               PCD_headerfieldset_color(".pcd-ha-color");
 
               $(".NQF-vue-ref").hide();
-              RestSearchArticleSec("", 0, 5, ["astuce","alune","avenir"], 0, [".vv1 .NFQ-type-astuce",".vv1 .NFQ-type-astuce"],0,"classSearch-99")
+              RestSearchArticleSec("", 0, 5, ["ASTUCES ET FONCTIONNALITES","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99")
               // hide saisie info question
               $(".classSearch-99 .NQF-edit-modif").hide()
               //img loding ref
@@ -69,6 +69,11 @@
       </script> 
       <html id="hSeparator">
         <div style="height: 30px;" />
+        <style>
+          .classSearch-99 .upload{
+            display:none;
+          }
+        </style>
       </html>
       <vbox columns="70% 30%" className="classSearch-99">
         <vbox>
@@ -76,21 +81,25 @@
             <vbox className="NQF-new-quest-btn">
               <button label="Nouveau article" style="" className="NQF-btn-new">
                 <postChange>
-                    $(".classSearch-99 .NQF-id").val("");
+                     $(".classSearch-99 .NQF-id").val("");
                     
-                    $('.classSearch-99 .ow-field-input[data-xpath="ArticleTitle"]').val("");
-                    $('.classSearch-99 .ow-field-input-select[data-xpath="Articletype"]').text("");
-                    //$('.classSearch-99 .ow-field-input[data-xpath="urlArt"]').val("");
-                    $('.classSearch-99 .ow-field-input-line textarea[data-xpath="Articledesc"]').val(""); 
-                    $('.classSearch-99 .ow-field-input-select[data-xpath="playlist"]').text("");
-                    $('.classSearch-99 .ow-field-htmleditor[data-xpath="Articletext"] .ql-editor').empty();
+                      $('.classSearch-99 .ow-field-input[data-xpath="NQFtitle"]').val("");
+                      $('.classSearch-99 .ow-field-input-select[data-xpath="NQFtype"]').text("");
+                      $('.classSearch-99 .ow-field-input-select[data-xpath="NQFcategorie"]').text("");
 
+                      //$('.classSearch-99 .ow-field-input[data-xpath="urlRef"]').val("");
+                      $('.classSearch-99 .ow-field-input-line textarea[data-xpath="NQFdesc"]').val(""); 
+                      $('.classSearch-99 .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
+                      $('.classSearch-99 .ow-field-input[data-xpath="NQFtags"]').val("");
 
-                    root.attachementArImg.fileId = "";
-                    root.attachementArImg.gedId = "";
-                    root.urlRef = "";
-                    context.formRender.notifyObservers("urlRef");  
-                    context.formRender.notifyObservers("attachementArImg");
+                      root.attachementArImg.fileId = "";
+                      root.attachementArImg.gedId = "";
+                      root.urlRef = "";
+                      context.formRender.notifyObservers("urlRef");  
+                      context.formRender.notifyObservers("attachementArImg");
+
+                      root.NQFauthor = userName;
+                      context.formRender.notifyObservers("NQFauthor");
                    
                     $(".classSearch-99 .NFQ-all-quest").hide();
                     $(".classSearch-99 .NQF-edit-modif").show();
@@ -113,7 +122,7 @@
                     <field widget="select" label="Catégorie" labelAlign="float" xpath="NQFcategorie">
                       <option value="1" label="ASTUCES ET FONCTIONNALITES" />
                       <option value="2" label="A LA UNE" />
-                      <option value="3" label="VENIR" />
+                      <option value="3" label="A VENIR" />
                     </field>
                     <field label="Image principale" widget="text" labelAlign="float" className="url-vue" xpath="urlRef" readOnly="true" />
                     <field xpath="attachementArImg" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
@@ -150,35 +159,68 @@
                 <hx />
                 <vbox columns="33% 33% auto" style="margin-right: 2em;">
                   <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
-                    <postChange>NQF_preview_QR(7,"classSearch-99");</postChange>
+                    <postChange>NQF_preview_QR(7,"classSearch-99",root);</postChange>
                   </button>
                   <button label="Nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
-                    <postChange>NQF_new_QR(7,"classSearch-99");</postChange>
+                      <postChange>
+                      $(".classSearch-99 .NQF-id").val("");
+                    
+                      $('.classSearch-99 .ow-field-input[data-xpath="NQFtitle"]').val("");
+                      $('.classSearch-99 .ow-field-input-select[data-xpath="NQFtype"]').text("");
+                      $('.classSearch-99 .ow-field-input-select[data-xpath="NQFcategorie"]').text("");
+
+                      //$('.classSearch-99 .ow-field-input[data-xpath="urlRef"]').val("");
+                      $('.classSearch-99 .ow-field-input-line textarea[data-xpath="NQFdesc"]').val(""); 
+                      $('.classSearch-99 .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
+                      $('.classSearch-99 .ow-field-input[data-xpath="NQFtags"]').val("");
+
+                      root.attachementArImg.fileId = "";
+                      root.attachementArImg.gedId = "";
+                      root.urlRef = "";
+                      context.formRender.notifyObservers("urlRef");  
+                      context.formRender.notifyObservers("attachementArImg");
+
+                      root.NQFauthor = userName;
+                      context.formRender.notifyObservers("NQFauthor");
+
+                      $(".classSearch-99 .NFQ-all-quest").hide();
+                      $(".classSearch-99 .NQF-edit-modif").show();
+
+                      </postChange>
                   </button>
                   <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
-                    <postChange>NQF_save_QR(7,root);</postChange>
+                    <postChange>
+                    if(verifieArticle("classSearch-99",root)){
+                      NQF_save_QR(7,root);
+                    }
+                    
+                    </postChange>
                   </button>
                 </vbox>
               </vbox>
             </vbox>
-            <vbox className="NQF-vue-ref">
-              <vbox columns="85% auto">
-                <html>
-                  <h4 class="NQF-prev-ref">
-                    <b class="NQF-title-ref">Quels sont les pièces requises pour l'obtention d'un permis de construire ?</b>
-                    <div class="NQF-desc-ref">description description description description description</div>
-                  </h4>
-                  <p class="NQF-text-ref ">Signature électronique des plans architecturaux par l'architecte et dans certains cas par les co-concepteurs du projet (Architecte en groupement, géomètre topographe, ...) ainsi que le cahier des charges associé au projet de lotissement.</p>
-                  <p hidden="hidden" class="NQF-type-ref" />
-                  <p hidden="hidden" class="NQF-id-ref" />
+            <vbox className="NQF-vue-video NQF-vue-question">
+              <vbox columns="50% 50%">
+                <html className="vue-video-frame">
+                  <iframe src="https://player.vimeo.com/video/241206308?rel=0" width="100%" height="100%" frameborder="0" />
+                </html>
+                <html className="vue-video">
+                  <div style="padding-left:15px;">
+                    <h4 class="vue-video-title">
+                      <b>1-title1title1title1title1</b>
+                    </h4>
+                    <p class="vue-video-description">descriptionde scr iption descrip tiond escript iondescripti ondes cri ption de scription description description description</p>
+                    <p hidden="hidden" class="NQF-categorie" />
+                    <p hidden="hidden" class="NQF-id" />
+                  </div>
                 </html>
                 <vbox />
               </vbox>
               <vbox columns="80% 10% auto" className="NQF-btn-alg">
                 <vbox />
                 <button label="Supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
-                  <postChange>let id = $(".classSearch-99 .NQF-id-ref").val();
-                              removereArticle(id);
+                  <postChange>let id = $(".classSearch-99 .NQF-id").val();
+                              removereArticle(id,"classSearch-99");
                               $(".classSearch-99 .NQF-vue-ref").hide();
                   </postChange>
                 </button>
@@ -188,6 +230,7 @@
                             console.log("context================",context);
                             NQF_edit_av(7,root,context,"classSearch-99");
                             $(".classSearch-99 .NFQ-all-quest").hide();
+                            $("")
                       </postChange>
                 </button>
               </vbox>
@@ -211,14 +254,14 @@
             <fieldset header="ASTUCES" className="NFQ-quest-title NFQ-type-astuce ">
               <test expression="'{profiles}'.match(/FAQ_ADMIN/)=='FAQ_ADMIN',expr,string" separator=",">
                 <html>
-                  <div class="NFQ-quest-type-urba NFQ-fieldset">
+                  <div class="NFQ-quest-type-astuce NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
               </test>
               <test expression="'{profiles}'.match(/FAQ_ADMIN/)!='FAQ_ADMIN',expr,string" separator=",">
                 <html>
-                  <div class="NFQ-quest-type-urba1 NFQ-fieldset">
+                  <div class="NFQ-quest-type-astuce NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
@@ -227,14 +270,14 @@
             <fieldset header="A LA UNE" className="NFQ-quest-title NFQ-type-alune ">
               <test expression="'{profiles}'.match(/FAQ_ADMIN/)=='FAQ_ADMIN',expr,string" separator=",">
                 <html>
-                  <div class="NFQ-quest-type-eco NFQ-fieldset">
+                  <div class="NFQ-quest-type-alune NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
               </test>
               <test expression="'{profiles}'.match(/FAQ_ADMIN/)!='FAQ_ADMIN',expr,string" separator=",">
                 <html>
-                  <div class="NFQ-quest-type-eco1 NFQ-fieldset">
+                  <div class="NFQ-quest-type-alune NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
@@ -244,14 +287,14 @@
             <fieldset header="A VENIR" className="NFQ-quest-title NFQ-type-avenir ">
               <test expression="'{profiles}'.match(/FAQ_ADMIN/)=='FAQ_ADMIN',expr,string" separator=",">
                 <html>
-                  <div class="NFQ-quest-type-eco NFQ-fieldset">
+                  <div class="NFQ-quest-type-avenir NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>
               </test>
               <test expression="'{profiles}'.match(/FAQ_ADMIN/)!='FAQ_ADMIN',expr,string" separator=",">
                 <html>
-                  <div class="NFQ-quest-type-eco1 NFQ-fieldset">
+                  <div class="NFQ-quest-type-avenir NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>

@@ -1,4 +1,3 @@
-
 function NQF_remove_subtitle() {
     $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`);
 }
@@ -185,7 +184,23 @@ function NQF_edit(type,clas) {
                 $("."+clas+" .NQF-vue-question").show();
 			}
         }else if(type==7){
+            let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
+            let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
+            let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFcategorie"]').text();
+            let author = $('.'+clas+' .ow-field-input[data-xpath="NQFauthor"]').val();
+            let tags = $('.'+clas+' .ow-field-input[data-xpath="NQFtags"]').val();
+			let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
+            let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
 
+            if(dataroot.attachementArImg.gedId!=""){  
+                imgUrl = "/karazal/DownloadFile?gedId="+dataroot.attachementArImg.gedId+"&thumbnail=small&krn="+dataroot.attachementArImg.gedId.split("/")[0]+"&or=img/no-file.svg";
+           }
+            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+            $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+            $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
+            $("."+clas+" .NQF-vue-video").show();
+            $("."+clas+" .NQF-btn-alg").hide();
+            $("."+clas+" .NQF-vue-question").show();
         }
 	}
 
@@ -209,8 +224,6 @@ function NQF_edit(type,clas) {
 		$("."+clas+" .NQF-vue-question").hide();
 		} else if(type == 2){
 		$("."+clas+" .NQF-titre-ref > .ow-pl-toolbar .ow-label-pl").html(`NOUVEAU RÉFÉRENTIEL JURIDIQUE`);
-
-		
 		
 
 		$("."+clas+' .ow-field-input[data-xpath="NQFtitle"]').val("");
@@ -223,8 +236,6 @@ function NQF_edit(type,clas) {
 		$("."+clas+" .NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput filledInput");
 		$("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
 		$("."+clas+" .ow-field-textArea-container:has(.NFQ-desc-refjuridique)").removeClass("filledInput")
-		
-		 
 
 		$("."+clas+" .NQF-vue-ref").hide();
 		}
@@ -252,6 +263,42 @@ function NQF_edit(type,clas) {
 
         if(urlV.trim()==""){
             alert("Veuillez saisir le lien de vidéo !");
+            return false;
+        }
+
+        return vr;
+    }
+
+
+    function verifieArticle(clas,root){
+        var vr = true;  
+        let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
+        let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
+        let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFcategorie"]').text();
+        let author = $('.'+clas+' .ow-field-input[data-xpath="NQFauthor"]').val();
+        let tags = $('.'+clas+' .ow-field-input[data-xpath="NQFtags"]').val();
+        let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
+        let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+            
+        var attachement = root.attachementArImg;
+
+        if(title.trim()==""){
+            alert("Veuillez saisir le titre de l'article");
+            return false;
+        }
+        
+        if(categ.trim()==""){
+            alert("Veuillez selectionner le type d'article !");
+            return false;
+        }
+
+        if(typee.trim()==""){
+            alert("Veuillez selectionner la categorie d'article !");
+            return false;
+        }
+
+        if(attachement.gedId.trim()==""){
+            alert("Veuillez ajouter l'image principale de l'article !");
             return false;
         }
 
@@ -610,6 +657,110 @@ function NQF_edit(type,clas) {
 
             updatePlaylist(id,req);
             
+        }else if(type==7){
+            var clas = "classSearch-99";
+
+			let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
+            let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
+            let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFcategorie"]').text();
+            let author = $('.'+clas+' .ow-field-input[data-xpath="NQFauthor"]').val();
+            let tags = $('.'+clas+' .ow-field-input[data-xpath="NQFtags"]').val();
+			let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
+            let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+            
+            var attachement = root.attachementArImg;
+
+            if(attachement.gedId.trim()!=""){
+                var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
+            }else{
+                var urlV = "";
+            }
+            var current_datetime = new Date();
+            
+            var dateYear = current_datetime.getFullYear();
+            var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
+            var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
+
+            var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
+            var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
+            var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
+            
+            var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
+
+			console.log(title, categ, texte, description)
+            
+            let id = "";
+            
+			id = $("."+clas+" .NQF-id").val();
+            
+            /*$("."+clas+" .NQF-title-ref").text(title);
+			$("."+clas+" .NQF-desc-ref").text(description);
+			$("."+clas+" .NQF-text-ref").html(texte);
+            */
+
+			var req = {
+				"title": "",
+				"type": "",
+				"content": "",
+				"description":"",
+                "attachementRef":"",
+                "imgP":"",
+                "datePr":"",
+                "categorie":"",
+                "author":"",
+                "tags":"",
+                "tagsText":"",
+                "vue":0,
+                "like":0
+            }
+
+            
+            
+			req.title = title;
+			req.type = categ;
+			req.content = texte;
+			req.description = description;
+            req.imgP = urlV;
+            req.attachementRef = attachement;
+            req.categorie = typee;
+            req.datePr = formatted_date;
+            req.author = author;
+            req.tagsText = tags;
+
+            var ttg = tags.split("-");
+            var tagsArr = [];
+
+            ttg.forEach(function(elm){
+                var tagObj = {
+                    "tag":elm,
+                    "id":""
+                };
+                tagsArr.push(tagObj);
+            })
+
+            req.tags = tagsArr;
+
+            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+urlV+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+            $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+            $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
+                        
+
+			console.log(req, id);
+			
+			//
+			if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+				$("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+            }
+            
+			setTimeout(function () {
+				$("."+clas+" .ow-btn-container i.fa-check").remove()
+				$("."+clas+" .NQF-edit-modif").hide()
+				$("."+clas+" .NQF-new-quest-btn").show();
+				$("."+clas+" .NQF-vue-video").show();
+				$("."+clas+" .NQF-btn-alg").hide();
+			}, 2000);
+			
+			updateArticle(id,req);
         }
 	}
 	
@@ -727,6 +878,37 @@ function NQF_edit(type,clas) {
 
     }
     
+    function updateArticle(id, obj) {
+
+
+		let newID = ""
+		if (id != "") {
+			newID = id;
+		}
+		$.ajax({
+			type: "post",
+
+			url: URL_SEARCH + "/articles_index/article/" + newID,
+			datatype: "application/json",
+			data: JSON.stringify(obj),
+			contentType: "application/json",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+			},
+			success: function (result) {
+                //voidRestSearch("",0,7,0,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],0);
+                setTimeout(function(){
+                    RestSearchArticleSec("", 0, 5, ["ASTUCES ET FONCTIONNALITES","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99")
+                },2000);
+                console.log(result);
+			},
+			error: function (error) {
+				console.log(error.responseText);
+			}
+		});
+
+    }
+
     function updateVideo(id, obj) {
 		let newID = ""
 		if (id != "") {
@@ -743,6 +925,7 @@ function NQF_edit(type,clas) {
 				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
 			},
 			success: function (result) {
+                
                 //voidRestSearch("",0,7,0,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],0);
                 console.log(result);
                 
@@ -1090,5 +1273,61 @@ function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee) {
             
 			$("."+clas+" .NQF-edit-modif").show();
 			$("."+clas+" .NQF-btn-alg").hide();
+        }else if(type==7){
+            // add edit here
+			let title = ArticleObject.title;
+			let desc  = ArticleObject.description;
+			let text  = ArticleObject.content;
+            let type  = ArticleObject.type;
+            let categ = ArticleObject.categorie;
+            let author = ArticleObject.author;
+            let tag = ArticleObject.tagsText;
+
+            if(ArticleObject.imgP != undefined){
+                var urlV = ArticleObject.imgP;
+            }else{
+                var urlV = "";
+            }
+
+            if( ArticleObject.attachementRef != undefined){
+                let attachement = ArticleObject.attachementRef;
+                dataroot.attachementArImg = attachement;
+                ctx.formRender.notifyObservers("attachementArImg");
+            }else{
+                let attachement = {
+                    "fileId":"",
+                    "fileName":"",
+                    "fileSize":"",
+                    "fileSignature":"",
+                    "fileTime":"",
+                    "gedId":""
+                };
+                dataroot.attachementArImg = attachement;
+                ctx.formRender.notifyObservers("attachementArImg");
+            }
+
+			console.log(title, desc, text, type);
+
+			dataroot.NQFtitle=title;
+			dataroot.NQFtype=categ;
+			dataroot.NQFdesc=desc;
+            dataroot.urlRef =urlV;
+            dataroot.NQFcategorie = type;
+            dataroot.NQFauthor = author;
+            dataroot.NQFtags = tag;
+
+			ctx.formRender.notifyObservers("NQFtitle");
+			ctx.formRender.notifyObservers("NQFtype");
+			ctx.formRender.notifyObservers("NQFdesc");
+            ctx.formRender.notifyObservers("urlRef");
+            ctx.formRender.notifyObservers("NQFcategorie");
+			ctx.formRender.notifyObservers("NQFauthor");
+			ctx.formRender.notifyObservers("NQFtags");
+
+			$("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
+			$("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html(text)
+			$("."+clas+" .NQF-edit-modif").show();
+			$("."+clas+" .NQF-btn-alg").hide();
+
         }
 }

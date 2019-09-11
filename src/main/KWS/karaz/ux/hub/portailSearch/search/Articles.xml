@@ -52,7 +52,7 @@
                 <html>
               <div style="height: 50px;" />
             </html>
-                    <fieldset className="fieldset-articles" header="ASTUCES ET FONCTIONNALITES">
+                    <fieldset className="fieldset-articles fieldser-article-1" header="ASTUCES ET FONCTIONNALITES">
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
                             <vbox className="article">
                                 <html>
@@ -123,6 +123,154 @@
                         <vbox className="fieldset-footer">
                             <html>
                                 <div>Afficher tous les articles | ASTUCES ET FONCTIONNALITES</div>
+                            </html>
+                        </vbox>
+                    </fieldset>
+                    <fieldset className="fieldset-articles fieldser-article-2" header="A LA UNE !">
+                        <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt="">
+                                        <i class="fas fa-heart like-icon" />
+                                    </img>
+                                </html>
+                               
+                               <html className="toggle-art">
+                                    
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <div class="pub-by">
+                                        publié par : <span style="">FRIKI Doha</span> 
+                                    </div>
+                              
+                               </html>
+
+                               <html className="footer-article">
+                                    <span>
+                                        <i class="fas fa-calendar-alt" />
+                                        20/10/2018
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-heart" />
+                                        24
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-eye" />
+                                        245
+                                    </span>
+                               </html>
+                            </vbox>
+
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt="" />
+                                </html>
+                               <html>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                               </html>
+                            </vbox>
+
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt="" />
+                                </html>
+                               <html>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                               </html>
+                            </vbox>
+
+                        </vbox>
+                        <vbox className="fieldset-footer">
+                            <html>
+                                <div>Afficher tous les articles | A LA UNE !</div>
+                            </html>
+                        </vbox>
+                    </fieldset>
+                    <fieldset className="fieldset-articles fieldser-article-3" header="A VENIR !">
+                        <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt="">
+                                        <i class="fas fa-heart like-icon" />
+                                    </img>
+                                </html>
+                               
+                               <html className="toggle-art">
+                                    
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <div class="pub-by">
+                                        publié par : <span style="">FRIKI Doha</span> 
+                                    </div>
+                              
+                               </html>
+
+                               <html className="footer-article">
+                                    <span>
+                                        <i class="fas fa-calendar-alt" />
+                                        20/10/2018
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-heart" />
+                                        24
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-eye" />
+                                        245
+                                    </span>
+                               </html>
+                            </vbox>
+
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt="" />
+                                </html>
+                               <html>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                               </html>
+                            </vbox>
+
+                            <vbox className="article">
+                                <html>
+                                    <img src="extensions/img/u7789.png" alt="" />
+                                </html>
+                               <html>
+                                    <div>
+                                        <span class="tag">e-service</span>
+                                        <span class="tag">Simulateur</span>
+                                    </div>
+                                    <h3>Lancement d’un simulateur de procédures</h3>
+                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
+                               </html>
+                            </vbox>
+
+                        </vbox>
+                        <vbox className="fieldset-footer">
+                            <html>
+                                <div>Afficher tous les articles | A VENIR</div>
                             </html>
                         </vbox>
                     </fieldset>
