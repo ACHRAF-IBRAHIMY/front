@@ -217,14 +217,14 @@
             <div><h3 style="text-align: left;color: #666;font-weight: 650;">Index Rokhas pour la performance territoriale</h3></div>
             <div><p style="text-align: left;color: #666;margin-bottom:0">Classement national de la performance des collectivités territoriales en matière de délivrance d'autorisations.</p></div>
             <div><p style="text-align: left;font-size: 14.5px;color: #666;">L’index Rokhas classe les collectivités territoriales marocaines sur la base de leurs performance en matière de délivrance des autorisations. Il s’agit d’un classement totalement automatisé issu des données collectées en temps réel à travers la plateforme Rokhas.ma. L'index Rokhas est calculé à partir de l’évaluation de 5 sous-index dans les 2 domaines d’autorisations clés, à savoir l’activité urbanistique et l’activité économique : <b>Délai, Attractivité, Digital, Ecosystème, Fiscalité</b></p></div>
-            <div style="text-align: right;font-size: 15px;padding: 0 29px;"><a click="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/CalculIndex&quot;, &quot;search&quot;, &quot;Méthodologie de calcul des index Ranking&quot;, {});" href="">Détail de la méthodologie</a></div>
+            <div style="text-align: right;font-size: 15px;padding: 0 29px;"><span style="color:#38A;cursor:pointer" onClick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/CalculIndex&quot;, &quot;search&quot;, &quot;Méthodologie de calcul des index Ranking&quot;, {});" href="">Détail de la méthodologie</span></div>
           </html>
         </vbox>            
       </vbox>
       <fieldSet className="hp-box ranking-fieldset" label="CLASSEMENT TRIMESTRIEL GLOBAL">
         <html> 
           <div style="padding-left: 23px;">
-                 Classement global des collectivités territoriales à base de leur score dans chacun 
+                 Classement global des collectivités territoriales à base de leur score dans chacun
                  des 5 sous-index clés.
           </div>
         </html>

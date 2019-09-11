@@ -24,40 +24,36 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
-                  profilesT = profiles;
+            profilesT = profiles;
 
-                $(".rokhas-home").click(function(){
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-                });
+            $(".rokhas-home").click(function(){
+            ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
+            });
 
-                // add style to question type header
-        <!-- PCD_add_header_style_action(".pcd-header-NQF", "Quels sont les pièces requises pour l'obtention d'un permis de construire ?"); -->
-        PCD_headerfieldset_color(".classSearch-3 .NFQ-quest-title");
-	            $(".classSearch-3 .NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
-                PCD_header_style_quest_type(".classSearch-3 .NFQ-type-urba" , "far fa-building")
-                PCD_header_style_quest_type(".classSearch-3 .NFQ-type-eco" , "fas fa-cog")
-               
-                
+            // add style to question type header
+            <!-- PCD_add_header_style_action(".pcd-header-NQF", "Quels sont les pièces requises pour l'obtention d'un permis de construire ?"); -->
+            PCD_headerfieldset_color(".classSearch-3 .NFQ-quest-title");
+            $(".classSearch-3 .NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+            PCD_header_style_quest_type(".classSearch-3 .NFQ-type-urba" , "far fa-building")
+            PCD_header_style_quest_type(".classSearch-3 .NFQ-type-eco" , "fas fa-cog")
+                          
+            // header color
+            PCD_headerfieldset_color(".pcd-ha-color");
 
+            $(".NQF-vue-ref").hide();
+            RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],"classSearch-3");
+            
+            // hide saisie info question
+            $(".classSearch-3 .NQF-edit-modif").hide()
+            //img loding ref
+            $(".classSearch-3 .NFQ-load-img").hide();
 
-                
-                // header color
-                PCD_headerfieldset_color(".pcd-ha-color");
-
-                $(".NQF-vue-ref").hide();
-                RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],"classSearch-3");
-                
-                // hide saisie info question
-                $(".classSearch-3 .NQF-edit-modif").hide()
-                //img loding ref
-                $(".classSearch-3 .NFQ-load-img").hide();
-
-              $(".ref-form .fa-close-1").click(function(){
-                $(".close1-ref").click();
+            $(".ref-form .fa-close-1-ref").click(function(){
+              $(".close1-ref").click();
             });
 
             $(".ref-form .fa-upload-1-ref").click(function(){
-                $(".ref-form button.upload").click();
+              $(".ref-form button.upload").click();
             });
 
             
@@ -68,6 +64,12 @@
                 }
       </script> 
       <html id="hSeparator">
+      <style>
+      .classSearch-3 .upload{
+	display:none;
+}
+
+      </style>
         <div style="height: 30px;" />
       </html>
       <vbox columns="70% 30%" className="classSearch-3">

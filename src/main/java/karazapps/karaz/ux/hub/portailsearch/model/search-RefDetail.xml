@@ -70,7 +70,7 @@
                   </button>
                 </div>  
                 <div class="link-footer">
-                  <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ReferentielJuridique', 'search', 'Ref', {})">Retour au référentiels juridiques </a>
+                  <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique', 'search', 'Ref', {})">Retour au référentiels juridiques </a>
                 </div>
               </html>
             </vbox>

@@ -362,7 +362,11 @@ function NQF_edit(type,clas) {
 			let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
 			let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
             var attachement = root.attachementRef;
-			let urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
+            if(attachement.gedId.trim()!=""){
+                var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
+            }else{
+                var urlV = "";
+            }
 
 			console.log(title, categ, texte, description)
 			

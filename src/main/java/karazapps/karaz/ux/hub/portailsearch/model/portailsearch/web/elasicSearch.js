@@ -661,7 +661,7 @@ function RestSearchref(prefix, page, size, type, typeUse, cls,clas) {
 
 				// la page a affiché  
                 console.log("***************"+NQFrefCAtegorie[i]);
-				$(cls[i]).append(`<span  class="NFQ-end" onclick='RestSearchRefWithIntilize("",0,2,${i+1},-1,null,${clas})'>  ${NQFrefCAtegorie[i]}<span>`);
+				$(cls[i]).append(`<span  class="NFQ-end" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique', 'search', 'Ref', {})">  ${NQFrefCAtegorie[i]}<span>`);
 
             }
         }else if(typeUse==-1){
@@ -2028,7 +2028,6 @@ function createDivQuestionRef(result){
     $(".qst-faq .vpanel-body .response-body").html(result._source.content);
     if(result._source.urlV != undefined){
         if(result._source.urlV.trim() != "" ){
-            alert(result._source.urlV);
             $(".qst-faq .vpanel-body .response-att button").attr("onclick","window.open(\""+contextPath+"/DownloadFile?gedId="+result._source.attachementRef.gedId+"\")")
             $(".qst-faq .vpanel-body .response-att").show();
         }else{

@@ -70,7 +70,7 @@
             <vbox className="hp-box calcul-index">
             <vbox columns="50% 50%">
                 <html><h1>Méthodologie de ranking Rokhas</h1></html>
-                <html className="link-rokhas-index"> <a click="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ReportRanking&quot;, &quot;search&quot;, &quot;Rokhas Ranking&quot;, {});" href="">Retour à Index Rokhas</a></html>  
+                <html className="link-rokhas-index"> <span style="cursor:pointer;color:#38a" onclick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ReportRanking&quot;, &quot;search&quot;, &quot;Rokhas Ranking&quot;, {});" href="">Retour à Index Rokhas</span></html>  
             </vbox>
             <html>
                 <p>Au regard de l’importance de l’index Rokhas entant qu’outil d’évaluation de la performance opérationnelle des collectivités territoriales en matière de délivrance d’autorisations, il est extrêmement important que la méthodologie de calcul des scores soit totalement objective, factuelle et précise.
