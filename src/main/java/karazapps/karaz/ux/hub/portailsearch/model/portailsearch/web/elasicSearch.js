@@ -472,8 +472,8 @@ function generateRequestVideoSearch(prefix,type,from,size,typeUse){
 function generateRequestArticleSearch(prefix,type,from,size,typeUse){
     
     if(typeUse==0){
-        var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"date\" : {\"order\" : \"desc\"}}],\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
-
+        var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"datePr\" : {\"order\" : \"desc\"}}],\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+        console.log(str);
     }else{
         if(prefix.trim()!=""){
             var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
@@ -892,7 +892,6 @@ function RestSearchArticleSec(prefix, page, size, type, typeUse, cls,prev,clas){
         str += generateRequestArticleSearch(prefix,type[i], page, size,typeUse-2);
     }
 
-    alert(str);
 
     $.ajax({
         type: "post",
@@ -906,11 +905,10 @@ function RestSearchArticleSec(prefix, page, size, type, typeUse, cls,prev,clas){
         success: function (result) {
             console.log(result);
             //playlist_videos = [];
-            alert(JSON.stringify(result))
             for (var i = 0; i < result.responses.length; i++) {
                 //playlist_videos.push(new Array());
 
-                $("."+clas+" "+cls[i]+" .det").html("");
+                $("."+clas+" "+cls[i]+"").html("");
                 
                 for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
                     //playlist_videos[i].push(result.responses[i].hits.hits[j]._source);
@@ -964,11 +962,13 @@ function NQF_add_article(quest,desc,imgUrl, id, cls, type,clas){
             <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
         </div>`;
         div.addEventListener("click",function(){
-            if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/GuideVideoEdit?query.idObject="+id,"search", "video", {});
-            }else{
-                getArticle(id,1,clas);
-            } 
+            // if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+            //     ApplicationManager.run("karaz/ux/hub/portailsearch/search/GuideVideoEdit?query.idObject="+id,"search", "video", {});
+            // }else{
+            //     getArticle(id,1,clas);
+            // } 
+
+            getArticle(id,1,clas);
         });
 
         div.setAttribute("idd",id);
@@ -1400,7 +1400,7 @@ function getRefJ(id, type,clas) {
 
 function removerefNQF(id) {
 
-	if (window.confirm("Voulez-vous vraiment supprimer cet référentiel?")) {
+	if (window.confirm("Voulez-vous vraiment supprimer ce référentiel?")) {
 		$.ajax({
 			type: "delete",
 			url: URL_SEARCH + "/reglementation_index/reglementation/" + id,
@@ -1422,6 +1422,28 @@ function removerefNQF(id) {
 
 }
 
+function removereArticle(id,clas) {
+
+	if (window.confirm("Voulez-vous vraiment supprimer cet article?")) {
+		$.ajax({
+			type: "delete",
+			url: URL_SEARCH + "/articles_index/article/" + id,
+			//url: "http://localhost:9200/index_classification_cluster/avis/_search",
+			contentType: "application/json",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+			},
+			success: function (result) {
+				console.log(result);
+				$("."+clas+" div[idd=" + id + "]").hide();
+			},
+			error: function (error) {
+				console.log(error);
+			}
+		});
+	}
+
+}
 
 
 var NQFrefCAtegorie = ["Tous les référentiels économiques","Tous les référentiels urbanistiques"];
@@ -1814,6 +1836,62 @@ function getVideo(id,type,cls){
         }
     });
 }
+
+var ArticleObject = {};
+function getArticle(id,type,cls){
+    if(type==0){
+        $("."+cls+" .NQF-new-quest-btn").show();
+        $("."+cls+" .NFQ-load-img").show();
+	    $("."+cls+" .NQF-vue-question").hide();
+        var pos = $(".pcd-header-NQF").offset().top;
+        $('html,body').animate({
+                scrollTop: pos
+            },
+            'fast');
+    }
+
+    $("."+cls+" .NFQ-all-quest").hide();
+
+    $.ajax({
+        type: "get",
+        url: URL_SEARCH+"/articles_index/article/" + id,
+        datatype: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization",AUTH);
+        },
+        success: function (result) {
+
+				$("."+cls+" .NFQ-load-img").hide();
+				$("."+cls+" .NQF-vue-question").show();
+				//add header
+				$("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
+
+                
+               ArticleObject = result._source;
+               
+               $("."+cls+" .NQF-vue-question .vue-video-frame").html("<img src="+result._source.imgP+" width=\"90%\" height=\"100%\" frameborder=\"0\" >");
+               $("."+cls+" .NQF-vue-question .vue-video-title b").html(result._source.title);
+               $("."+cls+" .NQF-vue-question .vue-video-description").html(result._source.description);
+               
+                $("."+cls+" .NQF-id").val(id);
+                $("."+cls+" .NQF-vue-question").show();
+				$("."+cls+" .NQF-edit-modif").hide();
+				$("."+cls+" .NQF-btn-alg").show();
+               
+                let a = $("."+cls+" .NQF-categorie")
+				
+                $("."+cls+" .NQF-new-quest-btn").show();
+
+            
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+}
+
+
+
 
 function getAttachement(id,type,cls){
     if(type==0){
