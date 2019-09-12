@@ -5,27 +5,39 @@
     <query>
       <search />
       <idObject />
+      <typeArticle />
+      <text />
       <parentP />
     </query>
     <collapsed>false</collapsed>
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">removeLastRootPage(userName);
-            $(".classSearch-80 .searchbuttun").click();
-            $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
+      <script postLoad="true">
+      
+      if(root.query.typeArticle==""){
+        $(".classSearch-80 .vpanel-title .title-2x").html("TOUS");
+      }else if(root.query.typeArticle==1){
+        $(".classSearch-80 .vpanel-title .title-2x").html("ASTUCES ET FONCTIONNALITES");
+      }else if(root.query.typeArticle==2){
+       $(".classSearch-80 .vpanel-title .title-2x").html("A LA UNE");
+      }else if(root.query.typeArticle==3){
+        $(".classSearch-80 .vpanel-title .title-2x").html("A VENIR");
+      }
+
+      
+      removeLastRootPage(userName);
+          $(".classSearch-80 .searchbuttun").click();
+          profilesT = profiles;
+        
+        $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
 		        $(".header-div-toggle").slideToggle(); 
 		    });         
 		   
 		    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
 		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
 		    });
-		
-		    $(".header-div-toggle .dropdown").mouseenter(function(){
-		        $(".header-div-toggle .dropdown-content").slideDown();
-		    }).mouseleave(function(){
-		        $(".header-div-toggle .dropdown-content").slideUp();
-		    }); 
+	
           
             document.querySelector(".classSearch-80 .div-full-search-bar .ow-field-input").addEventListener("keydown", function (e) {
                     var x =  document.querySelector(".classSearch-80 #autocomplete-list");
@@ -61,36 +73,37 @@
             // header color
             PCD_headerfieldset_color(".pcd-ha-color");
 
-            RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",2)
-            RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",2)
-            RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
-            RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",2)
-            RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
-            RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)</script>
+            RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset .NFQ-quest-type-recent",".det-article-fieldset .NFQ-quest-type-popular",".det-article-fieldset .NFQ-quest-type-liked"],0,"classSearch-80")
+
+        </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
-      <vbox columns="70% 30%" className="classSearch-80">
+      <vbox columns="70% 30%" className="classSearch-80 search-article">
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
             <html>
               <div class="vpanel-title">
                 <div class="vpanel-title">
-                  <span>RÉFÉRENTIEL JURIDIQUE</span>
+                  <span>ARTICLES |
+                      <span class="cl-orange title-2x">A LA UNE !</span></span>
                   <hr class="header-create-account-horizontal-line hr-hub" />
                 </div>
               </div>
-              <div class="hp-sbox-text">Vous trouverez ici les textes de loi et réglementation encadrant les procédures administratives gérées par la plateforme Rokhas. Saisissez un mot clé pour accéder directement à l'article recherché ou bien afficher le texte intégral de la référence juridique.</div>
+              <div class="hp-sbox-text">
+                            Retrouvez ici les dernières nouveautés de votre plateforme : Nouveaux services digitaux, Nouvelles fonctionnalités, changements réglementaires ou procédurales, évènements planifiés, ...
+              </div>
               <div style="height: 50px;" />
             </html>
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-              <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
+              <field className="hp-search_field" label="" xpath="query.text" widget="text" emptyText="Saisissez vos mots clés ici" />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                 <postChange>
+                    var prefix = root.query.text;
                     var prefix = $(".classSearch-80 .div-full-search-bar .hp-search_field input").val();
                     currentPage=0;
-                    var pp=root.query.parentP;
-                    if(pp==1){
+                    var pp = root.query.typeArticle;
+                    if(pp==""){
                         pp=0;
                     }
                     restFullSearchList(prefix,0,false,pp,"classSearch-80");
@@ -99,7 +112,7 @@
               </button>
             </vbox>
             <html>
-              <div style="height: 70px;" />
+              <div style="height: 30px;" />
             </html>
             <html>
               <div class="searchGif">
@@ -110,18 +123,37 @@
             </html>
           </vbox>
         </vbox>
-        <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+        <fieldset header="ARTICLES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset NQF-freq-quest">
           <!-- start modification -->
-          <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+          <fieldset header="Catégorie" className="NFQ-quest-title NFQ-type-esign ">
             <html>
-              <div class="NFQ-quest-type-esign NFQ-fieldset">
+              <div class="NFQ-quest-type NFQ-fieldset">
+                <ul class="article-categorie" style="list-style: none;text-align: left;padding: 0;">
+                  <li>Tous les articles</li>
+                  <li class="">Astuces et fonctionnalités</li>
+                  <li class="">A la une</li>
+                  <li class="active">A venir</li>
+                </ul>
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Les plus populaires" className="NFQ-quest-title NFQ-type-general ">
+            <html>
+              <div class="NFQ-quest-type-popular NFQ-fieldset">
                 <!-- Les questions s'affiche ici                                  -->
               </div>
             </html>
           </fieldset>
-          <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
+          <fieldset header="Les plus récents" className="NFQ-quest-title NFQ-type-document ">
             <html>
-              <div class="NFQ-quest-type-general NFQ-fieldset">
+              <div class="NFQ-quest-type-recent NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-document ">
+            <html>
+              <div class="NFQ-quest-type-liked NFQ-fieldset">
                 <!-- Les questions s'affiche ici                                  -->
               </div>
             </html>
@@ -129,27 +161,6 @@
           <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
             <html>
               <div class="NFQ-quest-type-document NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-            <html>
-              <div class="NFQ-quest-type-plat NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-            <html>
-              <div class="NFQ-quest-type-archit NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-            <html>
-              <div class="NFQ-quest-type-adminis NFQ-fieldset">
                 <!-- Les questions s'affiche ici                                  -->
               </div>
             </html>
@@ -163,4 +174,3 @@
     </screen>
   </view>
 </search>
-

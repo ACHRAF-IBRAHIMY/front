@@ -11,9 +11,7 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
-        removeLastRootPage(userName);
         var id = root.query.idObject;
-        id = "neWb_GwBwP6ZdSKaBICn";
         getObjectArticle(id);
       </script>
       <html>
@@ -55,15 +53,20 @@
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
-      <vbox columns="70% 30%">
+      <vbox columns="70% 30%" className="classSearch-82">
         <vbox className="hp-box hp-small divSearch divSearch-article">
           <vbox className="hp-box divSearchBar hp-small div-full-search-bar div-fsb-details">
             <html>
               <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span>
-                    ARTICLE |
-                    <span class="cl-orange title-2x">A LA UNE !</span>
+                <div class="vpanel-title" >
+                  <span style="display:grid;grid-template-columns:50% 50%">
+                    <span>
+                      ARTICLE |
+                      <span class="cl-orange title-2x">A LA UNE !</span>
+                    </span>
+                    <span style="color:#38A;cursor:pointer;text-align:right;" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0", "search", "Articles", {});'>
+                      Retour à la liste d'article
+                    </span>  
                   </span>
                   <hr class="header-create-account-horizontal-line hr-hub" />
                   <!--                       <img src="./img/u201.png" /> -->
@@ -95,21 +98,21 @@
                 </html>
                 <html>
                   <div class="dd date-det">
-                     <i class="fas fa-eye"></i> <span class="">205</span> 
-                     <i class="fas fa-heart"></i> <span>23</span>   
+                     <i class="fas fa-eye" /> <span class="">205</span> 
+                     <i class="fas fa-heart" /> <span>23</span>   
                   </div>
                 </html>
                 <html>
                 <div class="dd">
-                  <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-thumbs-up"></i> J'aime </span>
-                  <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-comment"></i> Commenter</span>
-                  <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-share"></i> Partager  </span>
+                  <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-thumbs-up" /> J'aime </span>
+                  <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-comment" /> Commenter</span>
+                  <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-share" /> Partager  </span>
                 </div>
                 </html>
               </vbox>
               <vbox className="article-img">
                 <html>
-                  <img style="width:100%" src="extensions/img/u7789.png" alt=""/>
+                  <img style="width:100%" src="extensions/img/u7789.png" alt="" />
                 </html>
               </vbox>  
 

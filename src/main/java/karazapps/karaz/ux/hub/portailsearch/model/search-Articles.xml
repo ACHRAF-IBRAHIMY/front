@@ -23,10 +23,50 @@
              //context.formRender.notifyObservers("login");
             </script>
             <script postLoad="true">
-                createArticlesHtml(".vbox-articles .ow-vl-inner",articles_);
+                
+                profilesT = profiles;
+
+                getMostPopularArticle(3,"ASTUCES ET FONCTIONNALITES",".fieldser-article-1 .vbox-articles .ow-vl-inner");
+                getMostPopularArticle(3,"A LA UNE",".fieldser-article-2 .vbox-articles .ow-vl-inner");
+                getMostPopularArticle(3,"A VENIR",".fieldser-article-3 .vbox-articles .ow-vl-inner");
+        
+            document.querySelector(".classSearch-81 .search-input-articles .ow-field-input").addEventListener("keydown", function (e) {
+                    var x =  document.querySelector(".classSearch-81 #autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,1,"classSearch-81");
+            }); 
+          
+            document.querySelector(".classSearch-81 .search-input-articles .ow-field-input").addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = this;
+
+                    var val = inp.value.toLowerCase();
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    console.log(val);
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete(inp,val,true);
+            });
+
             </script>
             
-            <vbox columns="70% 30%">
+            <html>
+                <style>
+                
+
+                .classSearch-81 .left-box-fsb .hp-box {
+                    color: #999;
+                    margin: 7px 1vw !important;
+                }
+
+                </style>
+            </html>
+
+            <vbox columns="70% 30%" className="classSearch-81">
                 <vbox className="hp-box">
                     <html>
                         <div class="vpanel-title">
@@ -39,12 +79,12 @@
                                     </div>
                         </div> 
                     </html>
-                    <vbox columns="90% 10%" className="stay-grid search-input-articles" columns-small="80% 20%" contentAlign="center">
+                    <vbox columns="90% 10%" className="stay-grid search-input-articles div-full-search-bar" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés." />
               
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                     <postChange>
-                          
+                          ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.text="+root.query.search, "search", "Articles", {});
                     </postChange>
                 </button>
 
@@ -54,230 +94,88 @@
             </html>
                     <fieldset className="fieldset-articles fieldser-article-1" header="ASTUCES ET FONCTIONNALITES">
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="">
-                                        <i class="fas fa-heart like-icon" />
-                                    </img>
-                                </html>
-                               
-                               <html className="toggle-art">
-                                    
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <div class="pub-by">
-                                        publié par : <span style="">FRIKI Doha</span> 
-                                    </div>
-                              
-                               </html>
-
-                               <html className="footer-article">
-                                    <span>
-                                        <i class="fas fa-calendar-alt" />
-                                        20/10/2018
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-heart" />
-                                        24
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-eye" />
-                                        245
-                                    </span>
-                               </html>
-                            </vbox>
-
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="" />
-                                </html>
-                               <html>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                               </html>
-                            </vbox>
-
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="" />
-                                </html>
-                               <html>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                               </html>
-                            </vbox>
-
+                           
                         </vbox>
                         <vbox className="fieldset-footer">
                             <html>
-                                <div>Afficher tous les articles | ASTUCES ET FONCTIONNALITES</div>
+                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | ASTUCES ET FONCTIONNALITES</div>
                             </html>
                         </vbox>
                     </fieldset>
                     <fieldset className="fieldset-articles fieldser-article-2" header="A LA UNE !">
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="">
-                                        <i class="fas fa-heart like-icon" />
-                                    </img>
-                                </html>
-                               
-                               <html className="toggle-art">
-                                    
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <div class="pub-by">
-                                        publié par : <span style="">FRIKI Doha</span> 
-                                    </div>
-                              
-                               </html>
-
-                               <html className="footer-article">
-                                    <span>
-                                        <i class="fas fa-calendar-alt" />
-                                        20/10/2018
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-heart" />
-                                        24
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-eye" />
-                                        245
-                                    </span>
-                               </html>
-                            </vbox>
-
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="" />
-                                </html>
-                               <html>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                               </html>
-                            </vbox>
-
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="" />
-                                </html>
-                               <html>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                               </html>
-                            </vbox>
-
+                       
                         </vbox>
                         <vbox className="fieldset-footer">
                             <html>
-                                <div>Afficher tous les articles | A LA UNE !</div>
+                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | A LA UNE !</div>
                             </html>
                         </vbox>
                     </fieldset>
                     <fieldset className="fieldset-articles fieldser-article-3" header="A VENIR !">
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="">
-                                        <i class="fas fa-heart like-icon" />
-                                    </img>
-                                </html>
-                               
-                               <html className="toggle-art">
-                                    
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <div class="pub-by">
-                                        publié par : <span style="">FRIKI Doha</span> 
-                                    </div>
-                              
-                               </html>
-
-                               <html className="footer-article">
-                                    <span>
-                                        <i class="fas fa-calendar-alt" />
-                                        20/10/2018
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-heart" />
-                                        24
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-eye" />
-                                        245
-                                    </span>
-                               </html>
-                            </vbox>
-
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="" />
-                                </html>
-                               <html>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                               </html>
-                            </vbox>
-
-                            <vbox className="article">
-                                <html>
-                                    <img src="extensions/img/u7789.png" alt="" />
-                                </html>
-                               <html>
-                                    <div>
-                                        <span class="tag">e-service</span>
-                                        <span class="tag">Simulateur</span>
-                                    </div>
-                                    <h3>Lancement d’un simulateur de procédures</h3>
-                                    <p>Dans le cadre de la diversification des services offerts à sa clientèle, Rokhas a mis en ligne un outil de simulation des procédures...</p>
-                               </html>
-                            </vbox>
+                            
 
                         </vbox>
                         <vbox className="fieldset-footer">
                             <html>
-                                <div>Afficher tous les articles | A VENIR</div>
+                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | A VENIR</div>
                             </html>
                         </vbox>
                     </fieldset>
                 </vbox>
-                <vbox className="hp-box">
-                        
+                <vbox>
+                <vbox className="hp-box hp-small left-box-fsb">
+          <html>
+            <div class="vpanel-title">
+              <span>ACTUALITES</span>
+              <hr class="header-create-account-horizontal-line hr-hub" />
+            </div>
+          </html>
+          <vbox className="hp-box">
+            <html>
+              <div class="vpanel-body-title">
+                <i class="fas fa-cog" />
+                <span>ASTUCES ET FONCTIONNALITES</span>
+              </div>
+              <div class="vpanel-body-icon">
+                <i class="fas fa-cogs" />
+              </div>
+              <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="hp-sbox-btn">Consulter</div>
+            </html>
+          </vbox>
+          <vbox className="hp-box">
+            <html>
+              <div class="vpanel-body-title">
+                <i class="fas fa-newspaper" />
+                <span>A LA UNE !</span>
+              </div>
+              <div class="vpanel-body-icon">
+                <i class="fas fa-newspaper" />
+              </div>
+              <div class="hp-sbox-btn" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Consulter</div>
+            </html>
+          </vbox>
+          <vbox className="hp-box">
+            <html>
+              <div class="vpanel-body-title">
+                    <i class="far fa-clock" />
+                    <span>A VENIR</span>
+              </div>
+              <div class="vpanel-body-icon">
+                    <i class="far fa-clock" />
+              </div>
+              <div class="hp-sbox-btn" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Consulter</div>
+            </html>
+          </vbox>
+          <html>
+            <div style="height: 50px;" />
+          </html>
+          
+        </vbox>
+        <vbox />
                 </vbox>
+        
             </vbox>
             
         </screen>

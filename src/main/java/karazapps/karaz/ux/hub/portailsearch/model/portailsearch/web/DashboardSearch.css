@@ -341,6 +341,10 @@
     height: 780px;
 }
 
+.search-article .full-search-list{
+    height: 820px;
+}
+
 .search-video .full-search-list-item {
     grid-template-columns: 0% 40% 55%;
     grid-column-gap: 15px;
