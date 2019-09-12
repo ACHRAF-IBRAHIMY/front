@@ -109,10 +109,10 @@
                     Pour tout projet d’investissement éligible au passage par le Comité Régional Unifié d’Investissement (CRUI), merci d’utiliser la plateforme CRI 2.0.   
                   </p>
                 </div>
-                <div class="next-button">
+                <div class="next-button" style="position:relative">
                   <button class="back-rq stopped">Précédent</button>
                   <button class="next-rq">Suivant</button>
-                  <button class="next-report" style="background: red;color: #fff;border: none;width:auto"><i class="fas fa-print" /> Imprimer la procédure</button>
+                  <button class="next-report" style="background: #02a202;display: inline-block;position: absolute;right: 22px;color: #fff;border: none;width:auto"><i class="fas fa-print" /> Imprimer la procédure</button>
                 </div>
               </html>
               <button visible="1,=,2" label="test button" className="chargement-btn">

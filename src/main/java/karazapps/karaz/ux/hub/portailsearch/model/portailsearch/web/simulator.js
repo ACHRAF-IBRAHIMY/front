@@ -1448,104 +1448,105 @@ function backQst(){
 function addDocs(result,type,existBody){
     
     
-        if(type==0){
-            reportD.docsR = [];
-            $(".simulator .docs-qr div.ow-pl").eq(0).addClass("expanded");
-            var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0];
-        }else if(type==2){
-            reportD.docsC = [];
-            $(".simulator .docs-qr div.ow-pl").eq(3).addClass("expanded");
-            var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0];    
-        }else if(type==3){
-            reportD.docsF = [];
-            $(".simulator .docs-qr div.ow-pl").eq(4).addClass("expanded");
-            var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-fac-container")[0];                
-        }else if(type==4){
-            reportD.docsD = [];
-            $(".simulator .docs-qr div.ow-pl").eq(5).addClass("expanded");
-            var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-sort-container")[0];    
-        }
-        
-        docContainer.innerHTML="";
-        var docsTemp = [];
-        
-        for(var i =0 ; i <result.length;i++){
-            var doc = document.createElement("div");
-            doc.setAttribute("class","doc-item");
-            var icon = document.createElement("i");
-
-            if(result[i].hits.hits[0]._source.type=="type-1"){
-                icon.setAttribute("class","far fa-file-alt");
-            }else{
-                icon.setAttribute("class","far fa-file-code");
-                icon.setAttribute("style","color:#f93");
-            }
-
-            var docName = document.createElement("span");
-            var docApr = document.createElement("i");
-            docApr.setAttribute("style","cursor:pointer");
-            docApr.setAttribute("class","fas fa-info");
-            docName.innerHTML = result[i].hits.hits[0]._source.title;
-            docName.setAttribute("class","doc-name");
-            
-
-            var obj = {
-                "docName":result[i].hits.hits[0]._source.title,
-                "type":result[i].hits.hits[0]._source.type
-            };
-
-            docsTemp.push(obj);
-
-            var srcImg = result[i].hits.hits[0]._source.attachementImg;
-
-            if(srcImg != undefined){
-                var docImg = document.createElement("div");
-                docImg.setAttribute("style","display:none;position: absolute;width: 327px;background: #EEE;right: 12px;z-index: 1;");
-                docImg.innerHTML = "<img style=\"width: 100%;border: 1px solid black;\" src="+srcImg+" />";
-                docApr.addEventListener("mouseenter",function(){
-                    this.getElementsByTagName("div")[0].style.display = "block";
-                });
-                docApr.addEventListener("mouseleave",function(){
-                    this.getElementsByTagName("div")[0].style.display = "none";
-                });
-                docApr.appendChild(docImg);
-            };
-
-            docName.appendChild(docApr);
-            doc.appendChild(icon);
-            doc.appendChild(docName);
-            //doc.appendChild(docApr);
-            docContainer.appendChild(doc);
-        }
-
-        if(type==0){
-            reportD.docsR = docsTemp;
-            reportD.docsRs = docsTemp.length;
-            if(existBody==false){
-                $(".simulator .next-report").addClass("docsR");
-            };
-        }else if(type==2){
-            reportD.docsC = docsTemp;
-            reportD.docsCs = docsTemp.length;
-            if(existBody==false){
-                $(".simulator .next-report").addClass("docsC");
-            };
-        }else if(type==3){
-            reportD.docsF = docsTemp;
-            reportD.docsFs = docsTemp.length;
-            if(existBody==false){
-                $(".simulator .next-report").addClass("docsF");
-            };
-        }else if(type==4){
-            reportD.docD = docsTemp;
-            reportD.docDs = docsTemp.length;
-            if(existBody==false){
-                $(".simulator .next-report").addClass("docsD");
-            };
-        }
-
-        
+    if(type==0){
+        reportD.docsR = [];
+        $(".simulator .docs-qr div.ow-pl").eq(0).addClass("expanded");
+        var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-container")[0];
+    }else if(type==2){
+        reportD.docsC = [];
+        $(".simulator .docs-qr div.ow-pl").eq(3).addClass("expanded");
+        var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-comp-container")[0];    
+    }else if(type==3){
+        reportD.docsF = [];
+        $(".simulator .docs-qr div.ow-pl").eq(4).addClass("expanded");
+        var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-fac-container")[0];                
+    }else if(type==4){
+        reportD.docsD = [];
+        $(".simulator .docs-qr div.ow-pl").eq(5).addClass("expanded");
+        var docContainer = document.getElementsByClassName("simulator")[0].getElementsByClassName("docs-qr")[0].getElementsByClassName("docs-sort-container")[0];    
+    }
     
+    docContainer.innerHTML="";
+    var docsTemp = [];
+    
+    for(var i =0 ; i <result.length;i++){
+        var doc = document.createElement("div");
+        doc.setAttribute("class","doc-item");
+        var icon = document.createElement("i");
+
+        if(result[i].hits.hits[0]._source.type=="type-1"){
+            icon.setAttribute("class","far fa-file-alt");
+            icon.setAttribute("title","Document à numériser et attacher");
+        }else{
+            icon.setAttribute("class","far fa-file-code");
+            icon.setAttribute("style","color:#f93");
+            icon.setAttribute("title","Document généré par ROKHAS");
+
+        }
+
+        var docName = document.createElement("span");
+        var docApr = document.createElement("i");
+        docApr.setAttribute("style","cursor:pointer");
+        docApr.setAttribute("class","fas fa-info");
+        docName.innerHTML = result[i].hits.hits[0]._source.title;
+        docName.setAttribute("class","doc-name");
+        
+
+        var obj = {
+            "docName":result[i].hits.hits[0]._source.title,
+            "type":result[i].hits.hits[0]._source.type
+        };
+
+        docsTemp.push(obj);
+
+        var srcImg = result[i].hits.hits[0]._source.attachementImg;
+
+        if(srcImg != undefined){
+            var docImg = document.createElement("div");
+            docImg.setAttribute("style","display:none;position: absolute;width: 327px;background: #EEE;right: 12px;z-index: 1;");
+            docImg.innerHTML = "<img style=\"width: 100%;border: 1px solid black;\" src="+srcImg+" />";
+            docApr.addEventListener("mouseenter",function(){
+                this.getElementsByTagName("div")[0].style.display = "block";
+            });
+            docApr.addEventListener("mouseleave",function(){
+                this.getElementsByTagName("div")[0].style.display = "none";
+            });
+            docApr.appendChild(docImg);
+        };
+
+        docName.appendChild(docApr);
+        doc.appendChild(icon);
+        doc.appendChild(docName);
+        //doc.appendChild(docApr);
+        docContainer.appendChild(doc);
+    }
+
+    if(type==0){
+        reportD.docsR = docsTemp;
+        reportD.docsRs = docsTemp.length;
+        if(existBody==false){
+            $(".simulator .next-report").addClass("docsR");
+        };
+    }else if(type==2){
+        reportD.docsC = docsTemp;
+        reportD.docsCs = docsTemp.length;
+        if(existBody==false){
+            $(".simulator .next-report").addClass("docsC");
+        };
+    }else if(type==3){
+        reportD.docsF = docsTemp;
+        reportD.docsFs = docsTemp.length;
+        if(existBody==false){
+            $(".simulator .next-report").addClass("docsF");
+        };
+    }else if(type==4){
+        reportD.docD = docsTemp;
+        reportD.docDs = docsTemp.length;
+        if(existBody==false){
+            $(".simulator .next-report").addClass("docsD");
+        };
+    }
+
 }
 
 
