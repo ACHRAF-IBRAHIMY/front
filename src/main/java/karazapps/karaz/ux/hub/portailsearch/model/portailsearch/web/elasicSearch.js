@@ -221,7 +221,6 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
                     }
                 };
         p=parent;
-        console.log(p);
         if(parent==2){
             objectJson.query.bool.must[0].multi_match.fields=["parents.TypeActivite"];  
             delete objectJson.query.bool.must[0].multi_match.analyzer;
@@ -353,73 +352,118 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
         $("."+cls+" .full-search-list").hide();
         RestSearchDownload(prefix,from,4,null,3,null,prev,cls);
     } else if(typePage==80){
-        if(prefix.trim()==""){
-            xhttp.send(JSON.stringify(
-                {
-                    "from":from,"size":4,
-                    "query": {
-                             "match_all": {}
-                            }
-                }));
-        }else{
-       
-        if(testLanguage.test(prefix)){
-            xhttp.send(JSON.stringify(
-                {
-                    "from":from,"size":4,
-                    "query": {
-                        "bool": {
-                            "must": [
-                                { "multi_match": {
-                                    "query": prefix,
-                                    "fields": ["title","descreption","content"],
-                                    "analyzer": "rebuilt_arabic",
-                                    "fuzziness": "AUTO",
-                                    "minimum_should_match": "70%"
-                                }}
-                            ],
-                            "should": [
-                                {
-                                    "match": {
-                                        "title": prefix
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            ));
-        }else{
-            xhttp.send(JSON.stringify(
-                {
-                    "from":from,"size":4,
-                    "query": {
-                        "bool": {
-                            "must": [
-                                { "multi_match": {
-                                    "query": prefix,
-                                    "fields": ["title","descreption","content"],
-                                    "analyzer": "rebuilt_french",
-                                    "fuzziness": "AUTO",
-                                    "minimum_should_match": "70%"
-                                }}
-                            ],
-                            "should": [
-                                {
-                                    "match": {
-                                        "title": prefix
-                                    }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                ));
-            }
-        }
+        xhttp.send(JSON.stringify(getObjectToSendArticle(parent,prefix,testLanguage.test(prefix),from)));
+        
     };
 
     return result;
+}
+
+function getObjectToSendArticle(parent,prefix,lang,from){
+    if(parent==0){
+        if(prefix.trim()!=""){
+            return {
+                "from":from,"size":4,
+                "query": {
+                    "bool": {
+                        "must": [
+                            { "multi_match": {
+                                "query": prefix,
+                                "fields": ["title","descreption","content"],
+                                "analyzer": ll,
+                                "fuzziness": "AUTO",
+                                "minimum_should_match": "70%"
+                            }}
+                        ],
+                        "should": [
+                            {
+                                "match": {
+                                    "title": prefix
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+        }else{
+            return {
+                    "from":from,
+                    "size":4,
+                    "query": {
+                             "match_all": {}
+                            }
+                };
+        }
+       
+    }else if(parent!=0 && prefix.trim()!=""){
+
+        if(parent==1){
+            var type = "ASTUCES ET FONCTIONNALITES";
+        }else if(parent==2){
+            var type = "A LA UNE";
+        }else if(parent==3){
+            var type = "A VENIR";
+        }
+
+        if(lang==true){
+            var ll = "rebuilt_arabic";
+        }else{
+            var ll = "rebuilt_french";
+        }
+
+        return {
+            "from":from,"size":4,
+            "query": {
+                "bool": {
+                    "must": [
+                        { "multi_match": {
+                            "query": prefix,
+                            "fields": ["title","descreption","content"],
+                            "analyzer": ll,
+                            "fuzziness": "AUTO",
+                            "minimum_should_match": "70%"
+                        }},{
+                            "term":{
+                                "type.keyword":type
+                            }
+                        }
+                    ],
+                    "should": [
+                        {
+                            "match": {
+                                "title": prefix
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+    }else{
+        if(parent==1){
+            var type = "ASTUCES ET FONCTIONNALITES";
+        }else if(parent==2){
+            var type = "A LA UNE";
+        }else if(parent==3){
+            var type = "A VENIR";
+        }
+
+        return {
+            "from":from,"size":4,
+            "query": {
+                "bool": {
+                    "must": [
+                        { "match_all": {
+                            
+                        }},{
+                            "term":{
+                                "type.keyword":type
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+    } 
 }
 
 function generateRequestFaqSearch(prefix,type,from,size,visi){
@@ -470,15 +514,18 @@ function generateRequestVideoSearch(prefix,type,from,size,typeUse){
 }
 
 function generateRequestArticleSearch(prefix,type,from,size,typeUse){
-    
     if(typeUse==0){
-        var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"datePr\" : {\"order\" : \"desc\"}}],\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+        var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"datePr\" : {\"order\" : \"desc\"}}],\"query\":{ \"term\":{ \"type.keyword\":\""+type+"\" }}}\n";
         console.log(str);
+    }else if(typeUse==1){
+        var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"datePr\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{ }}}\n";
+        str += "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"vue\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{  }}}\n";
+        str += "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"like\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{ }}}\n";
     }else{
         if(prefix.trim()!=""){
             var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
         }else{
-            var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+            var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"term\":{ \"type.keyword\":\""+type+"\" }}}\n";
         }
     }
     
@@ -914,7 +961,18 @@ function RestSearchArticleSec(prefix, page, size, type, typeUse, cls,prev,clas){
                     //playlist_videos[i].push(result.responses[i].hits.hits[j]._source);
                     console.log(result.responses[i].hits.hits[j]._id);
                     // typeUse 1 for admin and 2for normal user
-                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+                    if(typeUse==3){
+                        var objj = {
+                            "desc":result.responses[i].hits.hits[j]._source.description,
+                            "date":result.responses[i].hits.hits[j]._source.datePr.split(" ")[0].replace(/-/g,"/"),
+                            "like":result.responses[i].hits.hits[j]._source.like,
+                            "vue":result.responses[i].hits.hits[j]._source.vue,
+                            "author":result.responses[i].hits.hits[j]._source.author
+                        }
+                        NQF_add_article(result.responses[i].hits.hits[j]._source.title,objj,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+                    }else{
+                        NQF_add_article(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+                    }
 
                     // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
                     console.log(result.responses[i].hits.hits[j]._source.type);
@@ -977,6 +1035,32 @@ function NQF_add_article(quest,desc,imgUrl, id, cls, type,clas){
 
         $("."+clas+" "+ cls + "").append(div);
 
+    } else if(type==3){
+        var div = document.createElement("div");
+        div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
+            <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
+            </div>
+        <div>
+            <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+            <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc.desc,70)+`</p>
+            <p style="font-size: 12px;text-align: left;margin: auto;margin-top: 4px;color:#666">
+                <span><i class="fas fa-calendar-alt"></i> `+desc.date+`</span> - <span><i class="fas fa-heart"></i> `+desc.like+`</span><br/>
+                <span><i class="fas fa-user"></i> `+desc.author+`</span>
+            </p>
+        </div>`;
+        div.addEventListener("click",function(){
+             if(profilesT.match(/ADMIN_FAQ/)!='ADMIN_FAQ'){
+                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "article", {});
+             }else{
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Cms article", {});
+            } 
+        });
+
+        div.setAttribute("idd",id);
+        div.setAttribute("class","video-list-item");
+        div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
+
+        $("."+clas+" "+ cls + "").append(div);
     }
 }
 
@@ -3075,7 +3159,11 @@ function autocomplete(inp,arr) {
             var g = document.createElement("a");
             g.addEventListener("click",function(){
                 var id=$(this).children("input").val();
-                //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Article CMS", {});
+                }else{
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "DetailsActivitySearch", {});
+                } 
             });
 
             g.setAttribute("class","item-body-button");

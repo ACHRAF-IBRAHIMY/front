@@ -64,7 +64,7 @@
       </script>
       <script postLoad="true" delai="500">
         if(root.query.idObject.trim()!=''){
-            getRefJ(root.query.idObject,0,"classSearch-99");
+            getArticle(root.query.idObject,0,"classSearch-99");
         }
       </script> 
       <html id="hSeparator">
