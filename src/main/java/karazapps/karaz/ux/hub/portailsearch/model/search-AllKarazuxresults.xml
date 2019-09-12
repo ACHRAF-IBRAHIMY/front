@@ -12,6 +12,7 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">removeLastRootPage(userName);
+      	   profilesT = profiles;
           
            $(".classSearch-0 .searchbuttun").click();
            
