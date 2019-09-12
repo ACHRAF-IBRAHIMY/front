@@ -365,6 +365,98 @@
           <div style="height: 30px;" />
         </html>
         <html>
+          <cms-topicTitle>Rokhas en Chiffres</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <!-- <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-university" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Commune</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Couverture géographique
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-folder" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Dossier traité / jour</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Performance par commune
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-user-tie" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Fonctionnaire</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
+                  Rokhas Machine Learning
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-users" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Utilisateur</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Question fréquentes
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+        </vbox>
+        -->
+        <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
+              <box-icon class="fas fa-university h-icon" />
+              <box-big-title>Couverture géographique</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ReportRanking','search','Rokhas Ranking',{});">
+              <box-icon class="fas fa-trophy h-icon" />
+              <box-big-title>Classement national</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
+              <box-icon class="fas fa-users-cog h-icon" />
+              <box-big-title>Machine Learning</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpendataFrame','search','Open Data',{});">
+              <box-icon class="fas fa-chart-pie h-icon" />
+              <box-big-title>Open Data</box-big-title>
+            </box-card>
+          </html>
+        </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
           <cms-topicTitle>COMMENT CA MARCHE ?</cms-topicTitle>
           <cms-topicSeparator />
         </html>
@@ -444,98 +536,7 @@
             </box-card>
           </html>
         </vbox>
-        <html>
-          <div style="height: 30px;" />
-        </html>
-        <html>
-          <cms-topicTitle>Rokhas en Chiffres</cms-topicTitle>
-          <cms-topicSeparator />
-        </html>
-        <!-- <vbox columns="25% 25% 25% 25%">
-          <html>
-            <box-card class="card-bx">
-              <box-icon class="fas fa-university" />
-              <box-big-title>0</box-big-title>
-              <box-small-title>Commune</box-small-title>
-              <box-h-sep />
-              <box-text>
-                <a>
-                  Couverture géographique
-                  <i class="fas fa-external-link-alt" />
-                </a>
-              </box-text>
-            </box-card>
-          </html>
-          <html>
-            <box-card class="card-bx">
-              <box-icon class="fas fa-folder" />
-              <box-big-title>0</box-big-title>
-              <box-small-title>Dossier traité / jour</box-small-title>
-              <box-h-sep />
-              <box-text>
-                <a>
-                  Performance par commune
-                  <i class="fas fa-external-link-alt" />
-                </a>
-              </box-text>
-            </box-card>
-          </html>
-          <html>
-            <box-card class="card-bx">
-              <box-icon class="fas fa-user-tie" />
-              <box-big-title>0</box-big-title>
-              <box-small-title>Fonctionnaire</box-small-title>
-              <box-h-sep />
-              <box-text>
-                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
-                  Rokhas Machine Learning
-                  <i class="fas fa-external-link-alt" />
-                </a>
-              </box-text>
-            </box-card>
-          </html>
-          <html>
-            <box-card class="card-bx">
-              <box-icon class="fas fa-users" />
-              <box-big-title>0</box-big-title>
-              <box-small-title>Utilisateur</box-small-title>
-              <box-h-sep />
-              <box-text>
-                <a>
-                  Question fréquentes
-                  <i class="fas fa-external-link-alt" />
-                </a>
-              </box-text>
-            </box-card>
-          </html>
-        </vbox>
-        -->
-        <vbox columns="25% 25% 25% 25%">
-          <html>
-            <box-card style="height:178px;cursor:pointer"  onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
-              <box-icon class="fas fa-university h-icon" />
-              <box-big-title>Couverture géographique</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer"  onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ReportRanking','search','Rokhas Ranking',{});">
-              <box-icon class="fas fa-trophy h-icon" />
-              <box-big-title>Classement national</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer"  onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
-              <box-icon class="fas fa-users-cog h-icon" />
-              <box-big-title>Machine Learning</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpendataFrame','search','Open Data',{});">
-              <box-icon class="fas fa-chart-pie h-icon" />
-              <box-big-title>Open Data</box-big-title>
-            </box-card>
-          </html>
-        </vbox>
+        
         
         <html>
           <div style="height: 30px;" />

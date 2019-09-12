@@ -36,11 +36,7 @@
         ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
     });
 
-    $(".header-div-toggle .dropdown").mouseenter(function(){
-        $(".header-div-toggle .dropdown-content").slideDown();
-    }).mouseleave(function(){
-        $(".header-div-toggle .dropdown-content").slideUp();
-    });</script>
+     </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>

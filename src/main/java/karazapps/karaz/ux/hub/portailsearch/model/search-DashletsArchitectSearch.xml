@@ -75,39 +75,7 @@
 				</vbox>
 
 				
-				<vbox label="">
-					<fieldset label="Notifications" collapsible="false">
-						<html style="display: flex; justify-content: flex-end; height: 0px;">
-							<span class="fs-tooltip">
-	                            <div>
-	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Toutes les Notifications ">                                          
-	                               </span>
-	                               <span class="fs-item-bag fas fa-envelope" style="color: #64646499;transform: translateY(-39px); font-size: 18px;" onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?loadXml=true&amp;query.tos=${query.tos}', 'search', 'Toutes les Notifications')" />
-	                            </div>
-	                    	</span>
-	                    	<span class="fs-tooltip">
-	                            <div>
-	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Notifications Lues ">                                          
-	                               </span>
-	                               <span class="fs-item-bag fas fa-envelope-open" style="color: #64646499;transform: translateY(-39px); font-size: 18px;" onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?query.emailState=Lu&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Notifications Lues')" />
-	                            </div>
-	                    	</span>
-	                        <span class="fs-tooltip">
-	                            <div>
-	                               <span class="fs-tooltiptext" style="width: max-content; z-index: 10; transform: translate(-170px,-62px); padding: 0 9px;" tooltip-content-before="Notifications Archivées ">                                          
-	                               </span>
-	                               <span class="fs-item-bag fas fa-archive" style="color: #64646499;transform: translateY(-39px); font-size: 18px;" onclick="ApplicationManager.run('notify/email/search/AllnotificationEmail?query.emailState=Archiver&amp;loadXml=true&amp;query.tos=${query.tos}', 'search', 'Notifications Archivées')" />
-	                            </div>
-	                    	</span>
-	                    	
-	                    </html>
-                        <vbox columns="81% 14%" style="margin-left:18px">
-                    		<field xpath="query.unifiedCriteria" noLabel="true" label="" emptyText="Mots clé : Réf dossier, Email, Sujet, ..." widget="text" postProcessing="search()" />
-               				<button className="dashboardArchitect_serach_Btn" noLabel="true" icon="fas fa-search" postProcessing="search()" tooltipX="Appliquer filtres" style="margin: auto" />
-                  		</vbox>	
-                  		<search searchQN="notify/email/search/AllnotificationEmail?query.emailState=Brouilon&amp;loadXml=true&amp;query.tos={query.tos}" collectionName="notifs" />
-					</fieldset>
-				</vbox>
+				<search searchQN="notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Brouilon&amp;loadXml=true&amp;query.tos={query.tos}" collectionName="notifs" style="margin: -0.75em;" />
 
 
 			</vbox>

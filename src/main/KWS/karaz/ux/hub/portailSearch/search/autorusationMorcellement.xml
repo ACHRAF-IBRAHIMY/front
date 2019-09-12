@@ -59,11 +59,7 @@
         ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
     });
 
-    $(".header-div-toggle .dropdown").mouseenter(function(){
-        $(".header-div-toggle .dropdown-content").slideDown();
-    }).mouseleave(function(){
-        $(".header-div-toggle .dropdown-content").slideUp();
-    });</script>
+     </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
@@ -401,7 +397,7 @@
                       <span>Plan du projet de morcellement</span>
                     </html>
                     <html>
-                      <p>Plan du projet de morcellement régulier établi au 1/500 ou au 1/1000 lorsqu'il ne s'agit pas d'une vente en indivision ;</p>
+                      <p>Plan du projet de morcellement régulier établi au 1/500 ou au 1/1000 lorsqu'il ne s'agit pas d'une vente en indivision </p>
                     </html>
                   </vbox>
                   <vbox className="doc-icon cl-orange">

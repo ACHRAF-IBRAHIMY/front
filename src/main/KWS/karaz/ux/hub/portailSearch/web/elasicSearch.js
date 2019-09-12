@@ -169,6 +169,7 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
     
     var testLanguage = RegExp('[أ-ي]');
     if(typePage==0){
+        
         if(testLanguage.test(prefix)){
         xhttp.send(JSON.stringify(
             {
@@ -237,7 +238,23 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
             console.log(objectJson);
             xhttp.send(JSON.stringify(objectJson));
         }else{
-            xhttp.send(JSON.stringify(
+            if(prefix.trim()==""){
+                xhttp.send(JSON.stringify(
+                    {
+                        "from":from,"size":4,
+                  "query": {
+                    "bool":{
+                      "must": [{
+                        "match_all": {}
+                      },{
+                        "match_phrase": {
+                          "content.categorie": "intitulé activité"
+                        }
+                      }]
+                    }}}
+                ));
+            }else{
+                xhttp.send(JSON.stringify(
                 {
                 "from":from,"size":4,
                   "min_score":3,
@@ -275,7 +292,7 @@ function restFullSearchList(prefix,from,prev,parent,cls) {
                   }
                 }
             ));
-        }
+        }}
         }
     }else if(typePage==1){
         if(prefix.trim()==""){
