@@ -365,89 +365,6 @@
           <div style="height: 30px;" />
         </html>
         <html>
-          <cms-topicTitle>COMMENT CA MARCHE ?</cms-topicTitle>
-          <cms-topicSeparator />
-        </html>
-        <vbox columns="20% 20% 20% 20% 20%">
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">1</span>
-              </html>
-              <box-small-title>Créer votre espace privé sur rokhas.ma</box-small-title>
-              <button class="main-btn" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">2</span>
-              </html>
-              <box-small-title>Saisissez votre demande en ligne</box-small-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">3</span>
-              </html>
-              <box-small-title>Attachez vos pièces justificatives</box-small-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">4</span>
-              </html>
-              <box-small-title>Suivez le traitement du dossier en ligne</box-small-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">5</span>
-              </html>
-              <box-small-title>Recevez votre document e-signé</box-small-title>
-            </box-card>
-          </html>
-        </vbox>
-        <html>
-          <div style="height: 30px;" />
-        </html>
-        <html>
-          <cms-topicTitle>RESSOURCES PRATIQUES</cms-topicTitle>
-          <cms-topicSeparator />
-        </html>
-        <vbox columns="25% 25% 25% 25%">
-          <html>
-            <box-card style="height:178px;cursor:pointer" class="video-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
-              <box-icon class="fas fa-video h-icon" />
-              <box-big-title>Guides vidéos</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" class="faq-card">
-              <box-icon class="fas fa-question-circle h-icon" />
-              <box-big-title>Questions fréquentes</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" class="reglementation-card">
-              <box-icon class="fas fa-gavel h-icon" />
-              <box-big-title>Réglementation</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" class="download-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/DownloadConsultation','search','Attachement',{});">
-              <box-icon class="fas fa-download h-icon" />
-              <box-big-title>Téléchargements</box-big-title>
-            </box-card>
-          </html>
-        </vbox>
-        <html>
-          <div style="height: 30px;" />
-        </html>
-        <html>
           <cms-topicTitle>Rokhas en Chiffres</cms-topicTitle>
           <cms-topicSeparator />
         </html>
@@ -536,6 +453,90 @@
             </box-card>
           </html>
         </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle>COMMENT CA MARCHE ?</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <vbox columns="20% 20% 20% 20% 20%">
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">1</span>
+              </html>
+              <box-small-title>Créer votre espace privé sur rokhas.ma</box-small-title>
+              <button class="main-btn" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">2</span>
+              </html>
+              <box-small-title>Saisissez votre demande en ligne</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">3</span>
+              </html>
+              <box-small-title>Attachez vos pièces justificatives</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">4</span>
+              </html>
+              <box-small-title>Suivez le traitement du dossier en ligne</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">5</span>
+              </html>
+              <box-small-title>Recevez votre document e-signé</box-small-title>
+            </box-card>
+          </html>
+        </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle>RESSOURCES PRATIQUES</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="video-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
+              <box-icon class="fas fa-video h-icon" />
+              <box-big-title>Guides vidéos</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="faq-card">
+              <box-icon class="fas fa-question-circle h-icon" />
+              <box-big-title>Questions fréquentes</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="reglementation-card">
+              <box-icon class="fas fa-gavel h-icon" />
+              <box-big-title>Réglementation</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="download-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/DownloadConsultation','search','Attachement',{});">
+              <box-icon class="fas fa-download h-icon" />
+              <box-big-title>Téléchargements</box-big-title>
+            </box-card>
+          </html>
+        </vbox>
+        
         
         <html>
           <div style="height: 30px;" />
