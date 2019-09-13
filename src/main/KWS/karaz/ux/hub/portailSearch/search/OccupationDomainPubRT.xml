@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="OccupationDomainPubUC" label="Occupation Domain Public UC">
+<search name="OccupationDomainPubRT" label="Occupation Domain Public RT">
   <query />
   <data>
     <query>
@@ -11,7 +11,7 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">removeLastRootPage(userName);
+      <script postLoad="true">
           $(".rokhas-home").click(function(){
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });      
@@ -46,7 +46,7 @@
           PCD_addtitle();
 
           // add style to main header
-          PCD_add_header_style_action_eco(".pcd-header-PHCC", "OCCUPATION DU DOMAINE PUBLIC POUR DES UTILISATIONS COURANTES");
+          PCD_add_header_style_action_eco(".pcd-header-PHCC", "OCCUPATION DU DOMAINE PUBLIC PAR LES RÉSEAUX ET ÉQUIPEMENTS TÉLÉCOM");
 
           // header color 
           PCD_headerfieldset_color(".pcd-ha-color");
