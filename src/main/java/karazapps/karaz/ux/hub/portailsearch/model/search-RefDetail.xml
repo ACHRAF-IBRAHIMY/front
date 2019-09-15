@@ -65,8 +65,11 @@
                 <div class="qst-body" />
                 <div class="response-body" />
                 <div class="response-att" style="margin:auto;text-align:center;display:none">
-                  <button class="" style="color:#fff;background:#38a;border:none;border-raduis:3px" onclick="window.open();">
+                  <button class="download-fr" style="color:#fff;background:#38a;border:none;border-raduis:3px;" onclick="window.open();">
                     <i class="fas fa-download" /> Télecharger
+                  </button>
+                  <button class="download-ar" style="color:#fff;background:#38a;border:none;border-raduis:3px;" onclick="window.open();">
+                    <i class="fas fa-download" /> Télecharger version arabe
                   </button>
                 </div>  
                 <div class="link-footer">

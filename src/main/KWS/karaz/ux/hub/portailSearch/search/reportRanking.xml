@@ -31,7 +31,20 @@
           restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreU","desc",10,0,6);
           restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreE","desc",10,0,7);
 
-          getAllByAggs("trim.keyword",100,null,"",0);
+          getAllByAggs("trim.keyword",100,null,"",0).done(function(result){
+              var elms = result.aggregations.genres.buckets;
+              elms = triPeriods(elms);
+              tabInd=[elms[0].key];
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",60,0,0);
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.delai","desc",3,0,1);
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.attractivite","desc",3,0,2);
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.digital","desc",3,0,3);
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.ecosystem","desc",3,0,4);
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.fiscalite","desc",3,0,5);
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreU","desc",10,0,6);
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreE","desc",10,0,7);
+          });
+
           getAllByAggs("région.keyword",100,null,"",1);
           getAllByAggs("préfecture.keyword",100,null,"",2);
 
