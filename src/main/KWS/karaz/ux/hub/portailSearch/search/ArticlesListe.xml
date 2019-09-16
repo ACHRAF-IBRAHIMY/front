@@ -133,10 +133,10 @@
             <html>
               <div class="NFQ-quest-type NFQ-fieldset">
                 <ul class="article-categorie" style="list-style: none;text-align: left;padding: 0 15px;font-size: 17px;color: #38A;">
-                  <li onclick='restFullSearchList("",0,false,0,"classSearch-80")' style="cursor:pointer">Tous les articles <span style="float:right"></span> </li>
-                  <li onclick='restFullSearchList("",0,false,1,"classSearch-80")' style="cursor:pointer">Astuces et fonctionnalités <span style="float:right"></span></li>
-                  <li onclick='restFullSearchList("",0,false,2,"classSearch-80")' style="cursor:pointer">A la une <span style="float:right"></span></li>
-                  <li onclick='restFullSearchList("",0,false,3,"classSearch-80")' style="cursor:pointer">A venir <span style="float:right"></span></li>
+                  <li onclick="restFullSearchList(&quot;&quot;,0,false,0,&quot;classSearch-80&quot;)" style="cursor:pointer">Tous les articles <span style="float:right" /> </li>
+                  <li onclick="restFullSearchList(&quot;&quot;,0,false,1,&quot;classSearch-80&quot;)" style="cursor:pointer">Astuces et fonctionnalités <span style="float:right" /></li>
+                  <li onclick="restFullSearchList(&quot;&quot;,0,false,2,&quot;classSearch-80&quot;)" style="cursor:pointer">A la une <span style="float:right" /></li>
+                  <li onclick="restFullSearchList(&quot;&quot;,0,false,3,&quot;classSearch-80&quot;)" style="cursor:pointer">A venir <span style="float:right" /></li>
                 </ul>
               </div>
             </html>
@@ -158,13 +158,6 @@
           <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-document ">
             <html>
               <div class="NFQ-quest-type-liked NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-            <html>
-              <div class="NFQ-quest-type-document NFQ-fieldset">
                 <!-- Les questions s'affiche ici                                  -->
               </div>
             </html>

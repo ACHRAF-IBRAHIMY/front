@@ -26,49 +26,53 @@ if(rootElms.length>1 && userName=="Guest"){
 
 }
 
-function restAutoComplete(inp,prefix,type){
-var result = [];
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
 
-    if (this.readyState == 4 && this.status == 200) {
-        closeAllLists();
-        var res = JSON.parse(this.responseText);
-        for(var i=0;i<res.hits.hits.length;i++){
-            var elm = res.hits.hits[i]._source.value;
-            if(check(result,elm)){
-                result.push(elm);
+function restAutoComplete(inp,prefix,type){
+    var result = [];
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+            closeAllLists();
+            var res = JSON.parse(this.responseText);
+            for(var i=0;i<res.hits.hits.length;i++){
+                var elm = res.hits.hits[i]._source.value;
+                if(check(result,elm)){
+                    result.push(elm);
+                }
             }
+            autocompleteF(inp,result,prefix,type);
         }
-        autocompleteF(inp,result,prefix,type);
-    }
-};
+    };
 // xhttp.open("POST", "http://localhost:9200/activite_economique/activite/_search");
-xhttp.open("POST",URL_SEARCH+"/completion_index/completionTerm/_search");
-xhttp.setRequestHeader("Authorization",AUTH);
-xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xhttp.send(JSON.stringify({
-        "size": 5,
-        "query": {
-            "bool":{
-                "must":[{
-                    "query_string": {
-                        "fields":["value"],
-                        "query": "*"+prefix+"*",
-                        //"analyzer": "rebuilt_french",
-                        "fuzziness": "AUTO",
-                        "minimum_should_match": "100%"
-                    }
-                }],
-                "should":[{
-                    "match_phrase_prefix":{
-                        "value":prefix
-                    }
-                }]
+    xhttp.open("POST",URL_SEARCH+"/completion_index/completionTerm/_search");
+    xhttp.setRequestHeader("Authorization",AUTH);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    if(prefix.length>=3){
+        xhttp.send(JSON.stringify({
+            "size": 5,
+            "query": {
+                "bool":{
+                    "must":[{
+                        "query_string": {
+                            "fields":["value"],
+                            "query": "*"+prefix+"*",
+                            //"analyzer": "rebuilt_french",
+                            "fuzziness": "AUTO",
+                            "minimum_should_match": "100%"
+                        }
+                    }],
+                    "should":[{
+                        "match_phrase_prefix":{
+                            "value":prefix
+                        }
+                    }]
+                }
             }
-        }
+            }
+        ));
     }
-));
+    
 return result;
 }
 
