@@ -560,54 +560,8 @@ Déclaration d'une activité classée-catégorie 3
             </vbox>
           </vbox>
         </fieldset>
-        <vbox>
-          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
-            <!-- start modification -->
-            <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-              <html>
-                <div class="NFQ-quest-type-esign NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Générale" className="NFQ-quest-title NFQ-type-general ">
-              <html>
-                <div class="NFQ-quest-type-general NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-              <html>
-                <div class="NFQ-quest-type-document NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-              <html>
-                <div class="NFQ-quest-type-plat NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-              <html>
-                <div class="NFQ-quest-type-archit NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-              <html>
-                <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <!-- end modification -->
-          </fieldset>
-        </vbox>
+                  <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
+
       </vbox>
       <html>
         <div style="height: 30px;" />

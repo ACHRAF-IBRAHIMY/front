@@ -185,6 +185,9 @@
        <menu relId="CalculIndex" label="Calcul des index" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/CalculIndex</resource>
        </menu>
+       <menu relId="RightAside" label="Right Aside" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/RightAside</resource>
+       </menu>
     </menu>
   </menu>
 </menus>

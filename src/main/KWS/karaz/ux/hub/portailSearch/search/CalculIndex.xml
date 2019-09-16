@@ -73,9 +73,9 @@
                 <html className="link-rokhas-index"> <span style="cursor:pointer;color:#38a" onclick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ReportRanking&quot;, &quot;search&quot;, &quot;Rokhas Ranking&quot;, {});" href="">Retour à Index Rokhas</span></html>  
             </vbox>
             <html>
-                <p>Au regard de l’importance de l’index Rokhas entant qu’outil d’évaluation de la performance opérationnelle des collectivités territoriales en matière de délivrance d’autorisations, il est extrêmement important que la méthodologie de calcul des scores soit totalement objective, factuelle et précise.
-Il est également primordial que les données qui sont à la base des calculs de score soient produites automatiquement par les usagers, les fonctionnaires et les élus eux-mêmes et ce à travers le travail qu’ils effectuent au quotidien de façon totalement naturelle. Ainsi, aucune donnée rentrant dans le calcul des scores n’est collectée, traitée ou saisie manuellement.
-Dans le but de garantir une compréhension fine et une bonne interprétation des scores affichés, - qu’ils soient partiels ou globaux -, cette fiche explique en détail les étapes de pré-calcul des données nécessaires à l’établissement des scores ainsi que la méthode de calcul des scores eux même.
+                <p>Au regard de l’importance de l’index Rokhas entant qu’outil d’évaluation de la performance opérationnelle des collectivités territoriales en matière de délivrance d’autorisations, il est extrêmement important que la méthodologie de calcul des scores soit totalement objective, factuelle et précise. </p><p>
+Il est également primordial que les données qui sont à la base des calculs de score soient produites automatiquement par les usagers, les fonctionnaires et les élus eux-mêmes et ce à travers le travail qu’ils effectuent au quotidien de façon totalement naturelle. Ainsi, aucune donnée rentrant dans le calcul des scores n’est collectée, traitée ou saisie manuellement.</p><p>
+Dans le but de garantir une compréhension fine et une bonne interprétation des scores affichés, - qu’ils soient partiels ou globaux -, cette fiche explique en détail les étapes de pré-calcul des données nécessaires à l’établissement des scores ainsi que la méthode de calcul des scores eux même.</p><p>
 L’index Rokhas est calculé à travers l’évaluation de 5 sous-index dans les 2 domaines d’autorisations clés, à savoir l’activité urbanistique et l’activité économique.</p>
             </html>
              
@@ -84,19 +84,19 @@ L’index Rokhas est calculé à travers l’évaluation de 5 sous-index dans le
              <h4>Les 5 sous-index sont :</h4>
              <ul>
                 <li>
-                    Délai : Délai moyen de délivrance des autorisations.             
+                    <b>Délai</b> : Délai moyen de délivrance des autorisations.             
                 </li>
                 <li>
-                    Attractivité : Nombre d’autorisations délivrées.             
+                    <b>Attractivité</b> : Nombre d’autorisations soumis.             
                 </li>
                 <li>
-                    Digital : Nombre de procédures dématérialisées.             
+                    <b>Digital</b> : Nombre de procédures dématérialisées.             
                 </li>
                 <li>
-                    Ecosystème : Assiduité et performance des services extérieurs.             
+                    <b>Ecosystème</b> : Assiduité et performance des services extérieurs.             
                 </li>
                 <li>
-                    Fiscalité : Prix moyen de taxation du m2 / ml autorisé.             
+                    <b>Fiscalité</b> : Prix moyen de taxation du m2 / ml autorisé.             
                 </li>   
              </ul>
 
@@ -106,7 +106,7 @@ L’index Rokhas est calculé à travers l’évaluation de 5 sous-index dans le
                  <span style="color:red;font-size:18px;margin-top : 25px;margin-bottom : 10px;display:block">Remarques importantes :</span>
                  <ul>
                     <li>Par le terme « Commune », nous désignons invariablement « Commune » ou « Arrondissement ».</li>
-                    <li>Le score d’une commune désigne son score entant que territoire et non en tant qu’entité administrative. Ainsi dans le cas d’un arrondissement par exemple, son score prend en compte aussi bien ses propres performances (dossiers de catégorie « Petit projets » qu’il traite entant qu’entité administrative) que celles de la commune (Pour les dossiers de catégorie « Grand projets » traités par la commune). Ceci est vrai également pour les autorisations économiques et tout autre type d’autorisation qui sera traité dans le futur.</li>
+                    <li>Le score d’une commune désigne son score <u>entant que territoire</u> et <u>non en tant qu’entité administrative</u>. Ainsi dans le cas d’un arrondissement par exemple, son score prend en compte aussi bien ses propres performances (dossiers de catégorie « Petit projets » qu’il traite entant qu’entité administrative) que celles de la commune (Pour les dossiers de catégorie « Grand projets » traités par la commune). Ceci est vrai également pour les autorisations économiques et tout autre type d’autorisation qui sera traité dans le futur.</li>
                     <li>Dans sa première version, l’index Rokhas prendra exclusivement en compte la performance des collectivités territoriales en matière de délivrance des Permis de Construire. Dans ses prochaines versions, l’index Rokhas intègrera progressivement les autres procédures.</li>
                  </ul>    
              </html>

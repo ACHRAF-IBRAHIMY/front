@@ -19,6 +19,14 @@
           <fileTime />
           <gedId />
     </attachementRef>
+    <attachementRefAr>
+          <fileId />
+          <fileName />
+          <fileSize />
+          <fileSignature />
+          <fileTime />
+          <gedId />
+    </attachementRefAr>
     <urlRef />
   </data>
   <view>
@@ -41,7 +49,7 @@
             PCD_headerfieldset_color(".pcd-ha-color");
 
             $(".NQF-vue-ref").hide();
-            RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],"classSearch-3");
+            RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1",".vv1 .NFQ-quest-type-autre1"],"classSearch-3");
             
             // hide saisie info question
             $(".classSearch-3 .NQF-edit-modif").hide()
@@ -53,7 +61,15 @@
             });
 
             $(".ref-form .fa-upload-1-ref").click(function(){
-              $(".ref-form button.upload").click();
+              $(".ref-form .uploadRef1 button.upload").click();
+            });
+
+             $(".ref-form .fa-close-2-ref").click(function(){
+              $(".close2-ref").click();
+            });
+
+            $(".ref-form .fa-upload-2-ref").click(function(){
+              $(".ref-form .uploadRef2 button.upload").click();
             });
 
             
@@ -82,7 +98,9 @@
                     
                     $('.classSearch-3 .ow-field-input[data-xpath="NQFtitle"]').val("");
                     $('.classSearch-3 .ow-field-input-select[data-xpath="NQFtype"]').text("");
+                    $('.classSearch-3 .ow-field-input-select[data-xpath="NQFtypeRef"]').text("");
                     $('.classSearch-3 .ow-field-input[data-xpath="urlRef"]').val("");
+                    $('.classSearch-3 .ow-field-input[data-xpath="urlRef2"]').val("");
                     $('.classSearch-3 .ow-field-input-line textarea[data-xpath="NQFdesc"]').val(""); 
                     $('.classSearch-3 .ow-field-input-select[data-xpath="playlist"]').text("");
                     $('.classSearch-3 .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
@@ -93,6 +111,12 @@
                     root.urlRef = "";
                     context.formRender.notifyObservers("urlRef");  
                     context.formRender.notifyObservers("attachementRef");
+
+                    root.attachementRefAr.fileId = "";
+                    root.attachementRefAr.gedId = "";
+                    root.urlRef2 = "";
+                    context.formRender.notifyObservers("urlRef2");  
+                    context.formRender.notifyObservers("attachementRefAr");
                    
                     $(".classSearch-3 .NFQ-all-quest").hide();
                     $(".classSearch-3 .NQF-edit-modif").show();
@@ -112,9 +136,10 @@
                     <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
                       <option value="2" label="Urbanisme" />
                       <option value="1" label="Economique" />
+                      <option value="3" label="Autre" />
                     </field>
                     <field label="URL Attachement" widget="text" labelAlign="float" className="url-vue" xpath="urlRef" />
-                    <field xpath="attachementRef" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
+                    <field xpath="attachementRef" className="uploadRef1" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
                     <button className="k-btn-transparent hidden close1-ref" icon="fas fa-close" usage="visualisation=R">
                        <postChange>
                         var attachement = root.attachementRef;
@@ -131,6 +156,36 @@
                       <html className="att-icons">
                         <i class="fas fa-upload fa-upload-1-ref" title="Attacher un fichier (moins de 15 mb)" style="color:#38A;font-size=13px" />
                         <i class="fas fa-close fa-close-1-ref" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;" />
+                      </html>
+                    <vbox />
+                  </vbox>
+                   <vbox contentAlign="center" columns="40% 49% 1% 0% 10%" className="NQF-edit-select-float">
+                    <field widget="select" label="Type de texte" labelAlign="float" xpath="NQFtypeRef">
+                      <option value="Décrét" label="Décret"/>
+                      <option value="Dahir" label="Dahir" />
+                      <option value="Circulaire" label="Circulaire" />
+                      <option value="Loi" label="Loi" />
+                      <option value="Arrêté" label="Arrêté" />
+                      <option value="Note de service" label="Note de service" />
+                    </field>
+                    <field label="URL Attachement Arabe" widget="text" labelAlign="float" className="url-vue" xpath="urlRef2" />
+                    <field xpath="attachementRefAr" className="uploadRef2" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="Attacher texte arabe" widget="fileUpload" />
+                    <button className="k-btn-transparent hidden close2-ref" icon="fas fa-close" usage="visualisation=R">
+                       <postChange>
+                        var attachement = root.attachementRefAr;
+                        console.log("Emptyyyyyyyyyyy:"+JSON.stringify(attachement));
+                        root.attachementRefAr.fileId = "";
+                        root.attachementRefAr.gedId = "";
+                        root.urlRef2 = "";
+                        context.formRender.notifyObservers("attachementRefAr");
+                        context.formRender.notifyObservers("urlRef2");
+                        attachement = root.attachementRefAr;
+                        console.log(attachement);
+                       </postChange>
+                    </button>
+                      <html className="att-icons">
+                        <i class="fas fa-upload fa-upload-2-ref" title="Attacher un fichier (moins de 15 mb)" style="color:#38A;font-size=13px" />
+                        <i class="fas fa-close fa-close-2-ref" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;" />
                       </html>
                     <vbox />
                   </vbox>
@@ -172,14 +227,14 @@
                 <vbox />
                 <button label="Supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
                   <postChange>let id = $(".classSearch-3 .NQF-id-ref").val();
-                                        removerefNQF(id);
-                                        $(".classSearch-3 .NQF-vue-ref").hide();</postChange>
+                              removerefNQF(id);
+                              $(".classSearch-3 .NQF-vue-ref").hide();</postChange>
                 </button>
                 <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
                   <postChange>console.log("root================",root);
-                                        console.log("context================",context);
-                                        NQF_edit_av(2,root,context,"classSearch-3");
-                                        $(".classSearch-3 .NFQ-all-quest").hide();</postChange>
+                              console.log("context================",context);
+                              NQF_edit_av(2,root,context,"classSearch-3");
+                              $(".classSearch-3 .NFQ-all-quest").hide();</postChange>
                 </button>
               </vbox>
             </vbox>
@@ -226,6 +281,22 @@
               <test expression="'{profiles}'.match(/FAQ_ADMIN/)!='FAQ_ADMIN',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-eco1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <fieldset header="Autre" className="NFQ-quest-title NFQ-type-autre ">
+              <test expression="'{profiles}'.match(/FAQ_ADMIN/)=='FAQ_ADMIN',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-autre NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/FAQ_ADMIN/)!='FAQ_ADMIN',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-autre1 NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>

@@ -45,19 +45,25 @@
             <html>
               <div class="vpanel-title">
                 <div class="vpanel-title">
+                <span style="display:grid;grid-template-columns:50% 50%">
                   <span>VIDÉOS DIDACTIQUES</span>
+                  <span style="text-align:right;color:#38A;cursor:pointer;font-size:13px" onclick="showListVideo('classSearch-7')">Retour à la liste des vidéos</span>
+                </span>
                   <hr class="header-create-account-horizontal-line hr-hub" />
                 </div>
+                <div class="hp-sbox-text">
+Vous trouverez ici tous les tutoriels et vidéos nécessaires pour vous familiariser avec la plateforme Rokhas, de l'inscription , à la création d'une première demande et à la maîtrise des autres étapes et options avancées.                </div>
               </div>
             </html>
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Rechercher une vidéo" />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                <postChange>var prefix = $(".classSearch-7 .div-full-search-bar .search-video-input input").val();
-                                currentPage=0;
-                                $(".classSearch-7 .consultation-video").hide();
-                                $(".classSearch-7 .search-video").show();
-                                restFullSearchList(prefix,0,false,0,"classSearch-7");</postChange>
+                <postChange>
+                        var prefix = $(".classSearch-7 .div-full-search-bar .search-video-input input").val();
+                        currentPage=0;
+                        $(".classSearch-7 .consultation-video").hide();
+                        $(".classSearch-7 .search-video").show();
+                        restFullSearchList(prefix,0,false,0,"classSearch-7");</postChange>
               </button>
             </vbox>
             <html>

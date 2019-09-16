@@ -133,6 +133,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/NewfreqQuestion", "karazapps/karaz/ux/hub/portailsearch/model/search-NewfreqQuestion.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OccupationDomainPubRT", "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubRT.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OccupationDomainPubRp", "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubRp.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OccupationDomainPubUC", "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubUC.xml");
@@ -156,6 +158,8 @@ public class PortailSearchLoader {
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/ReportRanking", "karazapps/karaz/ux/hub/portailsearch/model/search-ReportRanking.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/RetageProdHomePage", "karazapps/karaz/ux/hub/portailsearch/model/search-RetageProdHomePage.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/RightAside", "karazapps/karaz/ux/hub/portailsearch/model/search-RightAside.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/SimpleDeclaration", "karazapps/karaz/ux/hub/portailsearch/model/search-SimpleDeclaration.xml");
 

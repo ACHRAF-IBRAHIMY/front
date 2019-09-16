@@ -12,9 +12,9 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
-      profilesT = profiles;
+      		profilesT = profiles;
                 loadPageBytype(2);
-                $(".searchbuttun").click();
+            $(".classSearch-2 .searchbuttun").click();
                 $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
 		        $(".header-div-toggle").slideToggle(); 
 		    });         
@@ -98,15 +98,15 @@
               <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Posez votre question ici ..." />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                 <postChange>var prefix = $(".classSearch-2 .div-full-search-bar .hp-search_field input").val();
-                                currentPage=0;
-                                var pp=root.query.parentP;
-                                if(pp==1){
-                                     pp=0;
-                                }
-                                removeExpanded(2);
-                                intializeFaqPages();
-                                restFullSearchList(prefix,0,false,pp,"classSearch-2");
-                                root.query.parentP=0;</postChange>
+                            currentPage=0;
+                            var pp=root.query.parentP;
+                            if(pp==1){
+                                  pp=0;
+                            }
+                            removeExpanded(2);
+   	                       intializeFaqPages();
+                           restFullSearchList(prefix,0,false,pp,"classSearch-2");
+                            root.query.parentP=0;</postChange>
               </button>
             </vbox>
             <html>
