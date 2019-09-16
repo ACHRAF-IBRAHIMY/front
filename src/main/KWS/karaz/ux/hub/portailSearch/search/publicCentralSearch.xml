@@ -31,6 +31,8 @@
 	   ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');
 	}</script>
       <script postLoad="true">var currentFocus;
+          getMostPopularArticle(4,"",".fieldser-article-1 .vbox-articles .ow-vl-inner");
+
                 removeLastRootPage(userName);
                     document.querySelector(".classSearch-home .divSearchBar input").addEventListener("input", function () {
                     var a, b, i;
@@ -134,7 +136,7 @@
     //scrollChiffreFunction();
     
     </script>
-      <vbox usage="embedded:N" xcstt="x">
+      <vbox usage="embedded:N" className="classSearch-home-glo " xcstt="x">
         <html id="hSeparator">
           <div style="height: 30px;" />
         </html>
@@ -361,6 +363,23 @@
             </html>
           </vbox>
         </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle>Actualités</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <vbox className="fieldset-articles fieldser-article-1" >
+                        <vbox className="vbox-articles" columns="25% 25% 25% 25%">
+                           
+                        </vbox>
+                        <vbox className="fieldset-footer">
+                            <html>
+                                <div style="text-align:center;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">AFFICHER TOUS LES ACTUALITÉS</div>
+                            </html>
+                        </vbox>
+                </vbox>
         <html>
           <div style="height: 30px;" />
         </html>

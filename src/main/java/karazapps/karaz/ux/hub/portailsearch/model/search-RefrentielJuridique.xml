@@ -100,6 +100,10 @@
               <div class="searchGif">
                 <img src="img/search-move.gif" />
               </div>
+              <div class="no-result-v" style="display:none;line-height: 100px;">
+                    Aucun résultat trouvé. 
+                    Essayez d'autres mots clés
+              </div>
               <div class="full-search-list" />
               <div class="pagination pagination-second" />
             </html>

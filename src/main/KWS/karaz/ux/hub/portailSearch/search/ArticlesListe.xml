@@ -14,7 +14,7 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
-      
+      getCountArticles();
       if(root.query.typeArticle==""){
         $(".classSearch-80 .vpanel-title .title-2x").html("TOUS");
       }else if(root.query.typeArticle==1){
@@ -61,7 +61,7 @@
             });
 
             PCD_headerfieldset_color(".NFQ-quest-title");
-            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+            $(".NFQ-quest-title .ow-label-pl").css('text-transform','upperCase');
             PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
             PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
                
@@ -118,6 +118,10 @@
               <div class="searchGif">
                 <img src="img/search-move.gif" />
               </div>
+              <div class="no-result-v" style="display:none;line-height: 100px;">
+                    Aucun résultat trouvé. 
+                    Essayez d'autres mots clés
+              </div>
               <div class="full-search-list" />
               <div class="pagination pagination-second" />
             </html>
@@ -128,11 +132,11 @@
           <fieldset header="Catégorie" className="NFQ-quest-title NFQ-type-esign ">
             <html>
               <div class="NFQ-quest-type NFQ-fieldset">
-                <ul class="article-categorie" style="list-style: none;text-align: left;padding: 0;">
-                  <li>Tous les articles</li>
-                  <li class="">Astuces et fonctionnalités</li>
-                  <li class="">A la une</li>
-                  <li class="active">A venir</li>
+                <ul class="article-categorie" style="list-style: none;text-align: left;padding: 0 15px;font-size: 17px;color: #38A;">
+                  <li onclick='restFullSearchList("",0,false,0,"classSearch-80")' style="cursor:pointer">Tous les articles <span style="float:right"></span> </li>
+                  <li onclick='restFullSearchList("",0,false,1,"classSearch-80")' style="cursor:pointer">Astuces et fonctionnalités <span style="float:right"></span></li>
+                  <li onclick='restFullSearchList("",0,false,2,"classSearch-80")' style="cursor:pointer">A la une <span style="float:right"></span></li>
+                  <li onclick='restFullSearchList("",0,false,3,"classSearch-80")' style="cursor:pointer">A venir <span style="float:right"></span></li>
                 </ul>
               </div>
             </html>

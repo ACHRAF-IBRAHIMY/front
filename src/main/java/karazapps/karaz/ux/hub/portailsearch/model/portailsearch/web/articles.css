@@ -1,3 +1,9 @@
+
+
+.classSearch-home-glo .h-icon{
+    width: auto !important;
+}
+
  .fieldset-articles{
 
   }
@@ -5,13 +11,15 @@
   .fieldset-articles .article{
     padding: 7px;
     width: 97%;
-    margin: auto;
-    border: 1px solid #eee;
+    margin: 4px;
+        border: 1px solid #eee;
     box-shadow: #999 1px 1px 5px;
+    background: #fff;
     position: relative;
     height: 450px;
     cursor: pointer;
     overflow: hidden;
+    text-align: center;
   }
 
   .fieldset-articles .article .footer-article{
@@ -163,4 +171,3 @@
     padding-right : 5px;
     color:#333;
   }
-

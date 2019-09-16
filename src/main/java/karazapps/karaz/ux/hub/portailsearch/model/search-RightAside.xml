@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="RightAside" label="Right A side">
+  <query />
+  <data>
+    <query>
+      <search />
+      <idObject />
+      <parentP />
+    </query>
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">
+          </script>
+     
+      <html>
+                <style>
+                
+
+                .right-vbox .left-box-fsb .hp-box {
+                    color: #999;
+                    margin: 7px 0vw !important;
+                                              
+                }
+
+                .right-vbox .left-box-fsb{
+                  margin:0 !important;
+                }
+
+                
+
+                </style>
+            </html>
+      <vbox columns="0% 100%">
+        <vbox>
+        </vbox>
+        <vbox className="right-vbox">
+            <vbox className="hp-box hp-small left-box-fsb">
+            <html>
+            <div class="vpanel-title">
+              <span>ACTUALITES</span>
+              <hr class="header-create-account-horizontal-line hr-hub" />
+            </div>
+            </html>
+            <vbox className="hp-box">
+            <html>
+              <div class="vpanel-body-title">
+<i class="fas fa-newspaper" />                <span>Actualités</span> <i class="fas fa-info-circle" style="float: right;font-size: 18px;color: #38A;" title="Retrouvez ici les dernières nouveautés de votre plateforme : Nouveaux services digitaux, Nouvelles fonctionnalités, changements réglementaires ou procédurales, évènements planifiés, ..." />
+              </div>
+              <div class="vpanel-body-icon">
+<i class="fas fa-newspaper" />              </div>
+              <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/Articles&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="hp-sbox-btn">Consulter</div>
+            </html>
+            </vbox>
+            <vbox className="hp-box">
+            <html>
+              <div class="vpanel-body-title">
+                  <i class="fas fa-map-signs" />
+                <span>Rokhas Simulateur</span>
+                <i class="fas fa-info-circle" style="float: right;font-size: 18px;color: #38A;" title="Répondez à quelques questions sur le simulateur rokhas pour être mieux orienté." />
+              </div>
+              <div class="vpanel-body-icon">
+                <i class="fas fa-map-signs" />
+              </div>
+              <div class="hp-sbox-btn" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/SimulatorRokhas&quot;, &quot;search&quot;, &quot;Simulateur Rokhas&quot;, {});">Consulter</div>
+            </html>
+            </vbox>
+            <vbox className="hp-box">
+            <html>
+              <div class="vpanel-body-title">
+<i class="fas fa-question-circle" />                    <span>Questions fréquentes</span>
+<i class="fas fa-info-circle" style="float: right;font-size: 18px;color: #38A;" title="Vous trouverez ici des réponses complètes aux questions les plus fréquemment posées par les usagers et par les fonctionnaires." />
+              </div>
+              <div class="vpanel-body-icon">
+<i class="fas fa-question-circle" />              </div>
+              <div class="hp-sbox-btn" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/FaqPage&quot;, &quot;search&quot;, &quot;FAQ&quot;, {});">Consulter</div>
+            </html>
+          </vbox>
+        <html>
+        <div style="height: 50px;" />
+        </html>
+
+        </vbox>
+                </vbox>
+
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
+    </screen>
+    <script onLoad="true" />
+  </view>
+</search>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="OccupationDomainPubRT" label="Occupation Domain Public RT">
+<search name="OccupationDomainPubRT" label="Occupation Domaine Public RT">
   <query />
   <data>
     <query>
@@ -11,7 +11,7 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">
+      <script postLoad="true">removeLastRootPage(userName);
           $(".rokhas-home").click(function(){
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
           });      
@@ -46,7 +46,7 @@
           PCD_addtitle();
 
           // add style to main header
-          PCD_add_header_style_action_eco(".pcd-header-PHCC", "OCCUPATION DU DOMAINE PUBLIC PAR LES RÉSEAUX ET ÉQUIPEMENTS TÉLÉCOM");
+          PCD_add_header_style_action_eco(".pcd-header-PHCC", "OCCUPATION DU DOMAINE PUBLIC  PAR LES RESEAUX ET EQUIPEMENTS TELECOM");
 
           // header color 
           PCD_headerfieldset_color(".pcd-ha-color");
@@ -78,16 +78,14 @@
           <vbox className="accp">
             <html>
               <span style="text-align:left;color:#333;" class="title-4x b-title">
-                <i class="fas fa-coffee" style="margin-right:10px" />
-Occupation du domaine public pour des utilisations courantes
- </span>
+                <i class="fas fa-road" style="margin-right:10px" />
+Occupation du domaine public par les réseaux et équipements télécom             </span>
             </html>
             <vbox className="desc">
               <html>
-<p>Les activités économiques, sociales et culturelles permanentes ou occasionnelles font souvent appel à l'utilisation du domaine public (Terrasses de café, Bâches, Tournage, Stationnement réservé, ...). Cette exploitation de l'espace commun ne peut avoir lieu qu'après obtention d'une autorisation de la part des services communaux et l'acquittement par le bénéficiaire des droits associés, conformément à l'arrêté fiscal communal.
-
-</p>
-              </html>
+<p>
+L'utilisation du domaine public pour le déploiement de réseaux filaires ou l'installation d'équipements de télécommunication nécessite l'obtention préalable par l'opérateur concerné d'une autorisation appropriée. L'autorisation précise explicitement les délimitations géographique des travaux, la nature des équipements à installer et les dates de réalisation de ces travaux.
+</p>              </html>
             </vbox>
             <vbox className="note-danger cl-orange PCD-gap-ic" columns="5% 95%">
               <html style="align-self: center;">
@@ -332,12 +330,11 @@ Occupation du domaine public pour des utilisations courantes
                   </html>
                   <vbox>
                     <html className="inline-html">
-                      <span>Pièce d'identité et autorisation d'exercer</span>
+                      <span>Pièce d'identité</span>
                     </html>
                     <html>
-<p>Copie numérique d'une pièce d'identité du pétitionnaire (Carte nationale d'identité, passeport, carte de séjour, ...), et une autorisation d'exercer si la personne est physique.
-
-</p>                    </html>
+                      <p>Copie numérique d'une pièce d'identité du pétitionnaire (Carte nationale d'identité, passeport, carte de séjour, ...)</p>
+                    </html>
                   </vbox>
                   <vbox className="doc-icon">
                     <html />
@@ -354,10 +351,10 @@ Occupation du domaine public pour des utilisations courantes
                   </html>
                   <vbox>
                     <html className="inline-html">
-                      <span>Autorisation du centre cinématographique du Maroc</span>
+                      <span>Plan descriptif technique de l'installation des dispositifs d'un BET agrée</span>
                     </html>
                     <html>
-<p>Autorisation du centre cinématographique du Maroc ou CCM. Le délai de délivrance de la décision d'autorisation de tournage est de 3 à 21 jours ouvrés suivant le type de production souhaité.
+<p>Plan descriptif technique de l'installation des dispositifs (Fibre Optique, Boitier de Connexion ou / et Armoire de Connexion)
 
 </p>                    </html>
                   </vbox>
@@ -565,54 +562,8 @@ Occupation du domaine public pour des utilisations courantes
             </vbox>
           </vbox>
         </fieldset>
-        <vbox>
-          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
-            <!-- start modification -->
-            <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-              <html>
-                <div class="NFQ-quest-type-esign NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Générale" className="NFQ-quest-title NFQ-type-general ">
-              <html>
-                <div class="NFQ-quest-type-general NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-              <html>
-                <div class="NFQ-quest-type-document NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-              <html>
-                <div class="NFQ-quest-type-plat NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-              <html>
-                <div class="NFQ-quest-type-archit NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-              <html>
-                <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                  <!-- Les questions s'affiche ici                                  -->
-                </div>
-              </html>
-            </fieldset>
-            <!-- end modification -->
-          </fieldset>
-        </vbox>
+                  <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
+
       </vbox>
       <html>
         <div style="height: 30px;" />

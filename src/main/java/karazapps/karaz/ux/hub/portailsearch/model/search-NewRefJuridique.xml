@@ -49,7 +49,7 @@
             PCD_headerfieldset_color(".pcd-ha-color");
 
             $(".NQF-vue-ref").hide();
-            RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],"classSearch-3");
+            RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1",".vv1 .NFQ-quest-type-autre1"],"classSearch-3");
             
             // hide saisie info question
             $(".classSearch-3 .NQF-edit-modif").hide()
@@ -164,8 +164,11 @@
                       <option value="Décrét" label="Décret" />
                       <option value="Dahir" label="Dahir" />
                       <option value="Circulaire" label="Circulaire" />
+                      <option value="Loi" label="Loi" />
+                      <option value="Arrêté" label="Arrêté" />
+                      <option value="Note de service" label="Note de service" />
                     </field>
-                    <field label="URL Attachement" widget="text" labelAlign="float" className="url-vue" xpath="urlRef2" />
+                    <field label="URL Attachement Arabe" widget="text" labelAlign="float" className="url-vue" xpath="urlRef2" />
                     <field xpath="attachementRefAr" className="uploadRef2" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="Attacher texte arabe" widget="fileUpload" />
                     <button className="k-btn-transparent hidden close2-ref" icon="fas fa-close" usage="visualisation=R">
                        <postChange>
@@ -278,6 +281,22 @@
               <test expression="'{profiles}'.match(/FAQ_ADMIN/)!='FAQ_ADMIN',expr,string" separator=",">
                 <html>
                   <div class="NFQ-quest-type-eco1 NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+            </fieldset>
+            <fieldset header="Autre" className="NFQ-quest-title NFQ-type-autre ">
+              <test expression="'{profiles}'.match(/FAQ_ADMIN/)=='FAQ_ADMIN',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-autre NFQ-fieldset">
+                    <!-- Les questions s'affiche ici                                  -->
+                  </div>
+                </html>
+              </test>
+              <test expression="'{profiles}'.match(/FAQ_ADMIN/)!='FAQ_ADMIN',expr,string" separator=",">
+                <html>
+                  <div class="NFQ-quest-type-autre1 NFQ-fieldset">
                     <!-- Les questions s'affiche ici                                  -->
                   </div>
                 </html>

@@ -502,62 +502,8 @@
             </vbox>
           </vbox>
         </fieldset>
-        <vbox>
-          <fieldset header="ANNONCES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color">
-            <!-- <i class="fas fa-info-circle PCD-tooltip" title="Il s'agit d'indicateurs contextuels représentants la performances relatifs au processus, à l'entité ou à l'utilisateur concerné"/> -->
-            <html>
-              <div class="vpanel-body-title PCD-filtre-scf">
-                <i class="fas fa-filter" style="font-size:13px;" />
-                <span>Filtres</span>
-              </div>
-            </html>
-            <vbox className="PCD-hp-box ">
-              <html>
-                <div class="vpanel-body-title PCD-parent-ann">
-                  <i class="fas fa-chart-line" />
-                  <span>Etudes de marchés</span>
-                  <i class="fas fa-info-circle PCD-tooltip" title="Représente le délai moyen (en jour) que je mets pour valider mon avis à compter du jour de la tenue commission" />
-                </div>
-                <div class="PCD-vpanel-body-icon">
-                  <i class="fas fa-shopping-cart" />
-                </div>
-                <div class="hp-sbox-btn">Détails</div>
-              </html>
-            </vbox>
-            <html>
-              <div style="height: 50px;" />
-            </html>
-            <vbox className="PCD-hp-box ">
-              <html>
-                <div class="vpanel-body-title PCD-parent-ann">
-                  <i class="far fa-edit" />
-                  <span>votre e-parapheur</span>
-                  <i class="fas fa-info-circle PCD-tooltip" title="Représente l'évolution des délais d'emission des PV commission" />
-                </div>
-                <div class="PCD-vpanel-body-icon">
-                  <i class="far fa-edit" />
-                </div>
-                <div class="hp-sbox-btn">Détails</div>
-              </html>
-            </vbox>
-            <html>
-              <div style="height: 50px;" />
-            </html>
-            <vbox className="PCD-hp-box ">
-              <html>
-                <div class="vpanel-body-title PCD-parent-ann">
-                  <i class="fas fa-cog" />
-                  <span>Transformation digitale</span>
-                  <i class="fas fa-info-circle PCD-tooltip" title="Représente l'évolution des délais d'emission des PV commission" />
-                </div>
-                <div class="PCD-vpanel-body-icon">
-                  <i class="fas fa-cogs" />
-                </div>
-                <div class="hp-sbox-btn">Détails</div>
-              </html>
-            </vbox>
-          </fieldset>
-        </vbox>
+                  <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
+
       </vbox>
       <html>
         <div style="height: 30px;" />
