@@ -13,6 +13,22 @@
       <script postLoad="true">
         var id = root.query.idObject;
         getObjectArticle(id);
+
+        PCD_headerfieldset_color(".NFQ-quest-title");
+            $(".NFQ-quest-title .ow-label-pl").css('text-transform','upperCase');
+            PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
+            PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
+               
+            PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
+            PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
+            PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
+            PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
+
+            // header color
+            PCD_headerfieldset_color(".pcd-ha-color");
+
+            RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset2 .NFQ-quest-type-recent",".det-article-fieldset2 .NFQ-quest-type-popular",".det-article-fieldset2 .NFQ-quest-type-liked"],0,"classSearch-82")
+
       </script>
       <html>
       <style>
@@ -47,6 +63,10 @@
           padding-right : 5px;
           color:#333;
         }
+
+        .classSearch-82 .content-article{
+          color:#666;
+        }
       
       </style>
       </html>
@@ -58,14 +78,14 @@
           <vbox className="hp-box divSearchBar hp-small div-full-search-bar div-fsb-details">
             <html>
               <div class="vpanel-title">
-                <div class="vpanel-title" >
+                <div class="vpanel-title">
                   <span style="display:grid;grid-template-columns:50% 50%">
                     <span>
                       ARTICLE |
                       <span class="cl-orange title-2x">A LA UNE !</span>
                     </span>
-                    <span style="color:#38A;cursor:pointer;text-align:right;" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0", "search", "Articles", {});'>
-                      Retour à la liste d'article
+                    <span style="color:#38A;cursor:pointer;text-align:right;" onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">
+                      Retour à la liste d'articles
                     </span>  
                   </span>
                   <hr class="header-create-account-horizontal-line hr-hub" />
@@ -139,57 +159,43 @@
             </html>
           </vbox>
         </vbox>
-        <vbox className="hp-box hp-small left-box-fsb">
-          <html>
-            <div class="vpanel-title">
-              <span>ANNONCES</span>
-              <hr class="header-create-account-horizontal-line hr-hub" />
-            </div>
-          </html>
-          <vbox className="hp-box">
+                  <vbox>
+
+        <fieldset header="ARTICLES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset2 NQF-freq-quest">
+          <!-- start modification -->
+          <fieldset header="Les plus populaires" className="NFQ-quest-title NFQ-type-general ">
             <html>
-              <div class="vpanel-body-title">
-                <i class="fas fa-chart-line" />
-                <span>Etudes de marchés</span>
+              <div class="NFQ-quest-type-popular NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
               </div>
-              <div class="vpanel-body-icon">
-                <i class="fas fa-shopping-cart" />
-              </div>
-              <div class="hp-sbox-btn">Détails</div>
             </html>
-          </vbox>
-          <html>
-            <div style="height: 50px;" />
-          </html>
-          <vbox className="hp-box">
+          </fieldset>
+          <fieldset header="Les plus récents" className="NFQ-quest-title NFQ-type-document ">
             <html>
-              <div class="vpanel-body-title">
-                <i class="far fa-edit" />
-                <span>votre e-parapheur</span>
+              <div class="NFQ-quest-type-recent NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
               </div>
-              <div class="vpanel-body-icon">
-                <i class="far fa-edit" />
-              </div>
-              <div class="hp-sbox-btn">Détails</div>
             </html>
-          </vbox>
-          <html>
-            <div style="height: 50px;" />
-          </html>
-          <vbox className="hp-box">
+          </fieldset>
+          <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-document ">
             <html>
-              <div class="vpanel-body-title">
-                <i class="fas fa-cog" />
-                <span>Transformation digitale</span>
+              <div class="NFQ-quest-type-liked NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
               </div>
-              <div class="vpanel-body-icon">
-                <i class="fas fa-cogs" />
-              </div>
-              <div class="hp-sbox-btn">Détails</div>
             </html>
-          </vbox>
+          </fieldset>
+          <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+            <html>
+              <div class="NFQ-quest-type-document NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <!-- end modification -->
+        </fieldset>
+        <vbox>
         </vbox>
-      </vbox>
+      </vbox></vbox>
       <html>
         <div style="height: 30px;" />
       </html>

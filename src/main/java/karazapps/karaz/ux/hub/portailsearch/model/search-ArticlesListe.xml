@@ -162,13 +162,6 @@
               </div>
             </html>
           </fieldset>
-          <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-            <html>
-              <div class="NFQ-quest-type-document NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
           <!-- end modification -->
         </fieldset>
       </vbox>
