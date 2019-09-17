@@ -47,7 +47,7 @@
               PCD_headerfieldset_color(".pcd-ha-color");
 
               $(".NQF-vue-ref").hide();
-              RestSearchArticleSec("", 0, 5, ["ASTUCES ET FONCTIONNALITES","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99")
+              RestSearchArticleSec("", 0, 5, ["ASTUCES ET FONCTIONNALITES","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99",context.formRender.targetPanel);
               // hide saisie info question
               $(".classSearch-99 .NQF-edit-modif").hide()
               //img loding ref
@@ -64,7 +64,7 @@
       </script>
       <script postLoad="true" delai="500">
         if(root.query.idObject.trim()!=''){
-            getArticle(root.query.idObject,0,"classSearch-99");
+            getArticle(root.query.idObject,0,"classSearch-99",context.formRender.targetPanel);
         }
       </script> 
       <html id="hSeparator">
@@ -118,6 +118,7 @@
                   <vbox contentAlign="center" columns="30% 30% 30% 1% 0% 9%" className="NQF-edit-select-float">
                     <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
                       <option value="1" label="Article Normal" />
+                      <option value="2" label="Top" />
                     </field>
                     <field widget="select" label="Catégorie" labelAlign="float" xpath="NQFcategorie">
                       <option value="1" label="ASTUCES ET FONCTIONNALITES" />
@@ -148,7 +149,7 @@
                   <field widget="textArea" xpath="NQFdesc" label="Description" labelAlign="float" className="NFQ-desc-refjuridique" />
                   <vbox columns="50% 50%">
                       <field widget="input" xpath="NQFauthor" label="Auteur" labelAlign="float" className="" />
-                      <field widget="input" xpath="NQFtags" label="Tags : tag1 - tag2" labelAlign="float" className="" />
+                      <field widget="input" xpath="NQFtags" label="Tags : tag1 // tag2" labelAlign="float" className="" />
                   </vbox>
                 </vbox>
               </fieldset>

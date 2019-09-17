@@ -66,7 +66,7 @@
                 </style>
             </html>
 
-            <vbox columns="70% 30%" className="classSearch-81" >
+            <vbox columns="70% 30%" className="classSearch-81">
                 <vbox className="hp-box">
                     <html>
                         <div class="vpanel-title">
@@ -96,9 +96,9 @@
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
                            
                         </vbox>
-                        <vbox className="fieldset-footer">
+                        <vbox className="fieldset-footer fieldset-footer-1">
                             <html>
-                                <div onClick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1", "search", "Articles", {});'>Afficher tous les articles | ASTUCES ET FONCTIONNALITES</div>
+                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | ASTUCES ET FONCTIONNALITES</div>
                             </html>
                         </vbox>
                     </fieldset>
@@ -106,9 +106,9 @@
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
                        
                         </vbox>
-                        <vbox className="fieldset-footer">
+                        <vbox className="fieldset-footer fieldset-footer-2" >
                             <html>
-                                <div onClick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2", "search", "Articles", {});'>Afficher tous les articles | A LA UNE !</div>
+                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | A LA UNE !</div>
                             </html>
                         </vbox>
                     </fieldset>
@@ -117,9 +117,9 @@
                             
 
                         </vbox>
-                        <vbox className="fieldset-footer">
+                        <vbox className="fieldset-footer fieldset-footer-3">
                             <html>
-                                <div onClick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3", "search", "Articles", {});' >Afficher tous les articles | A VENIR</div>
+                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | A VENIR</div>
                             </html>
                         </vbox>
                     </fieldset>
@@ -141,31 +141,31 @@
               <div class="vpanel-body-icon">
                 <i class="fas fa-cogs" />
               </div>
-              <div onClick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1", "search", "Articles", {});' class="hp-sbox-btn">Consulter</div>
+              <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="hp-sbox-btn">Consulter</div>
             </html>
           </vbox>
           <vbox className="hp-box">
             <html>
               <div class="vpanel-body-title">
-                <i class="fas fa-newspaper"></i>
+                <i class="fas fa-newspaper" />
                 <span>A LA UNE !</span>
               </div>
               <div class="vpanel-body-icon">
-                <i class="fas fa-newspaper"></i>
+                <i class="fas fa-newspaper" />
               </div>
-              <div class="hp-sbox-btn" onClick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2", "search", "Articles", {});' >Consulter</div>
+              <div class="hp-sbox-btn" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Consulter</div>
             </html>
           </vbox>
           <vbox className="hp-box">
             <html>
               <div class="vpanel-body-title">
-                    <i class="far fa-clock"></i>
+                    <i class="far fa-clock" />
                     <span>A VENIR</span>
               </div>
               <div class="vpanel-body-icon">
-                    <i class="far fa-clock"></i>
+                    <i class="far fa-clock" />
               </div>
-              <div class="hp-sbox-btn" onClick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3", "search", "Articles", {});'>Consulter</div>
+              <div class="hp-sbox-btn" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Consulter</div>
             </html>
           </vbox>
           <html>
@@ -173,7 +173,7 @@
           </html>
           
         </vbox>
-        <vbox></vbox>
+        <vbox />
                 </vbox>
         
             </vbox>

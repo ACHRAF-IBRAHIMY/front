@@ -68,10 +68,10 @@
                 
                 <div class="response-att" style="margin:auto;text-align:center;display:none">
                   <button class="download-fr" style="color:#fff;background:#38a;border:none;border-radius: 2px;padding: 3px 9px;" onclick="window.open();">
-                    <i class="fas fa-download" /> Télecharger
+                    <i class="fas fa-download" /> Télécharger
                   </button>
                   <button class="download-ar" style="color:#fff;background:#38a;border:none;border-radius: 2px;padding: 3px 9px;" onclick="window.open();">
-                    <i class="fas fa-download" /> Télecharger la version arabe
+                    <i class="fas fa-download" /> Télécharger la version arabe
                   </button>
                 </div>  
                 <div class="iframe-tab" style="width:100%;margin-bottom:20px;margin-top:20px;">

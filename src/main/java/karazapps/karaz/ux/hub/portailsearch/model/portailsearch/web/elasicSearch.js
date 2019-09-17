@@ -700,7 +700,7 @@ $.ajax({
 })
 }
 
-function RestSearchref(prefix, page, size, type, typeUse, cls,clas) {
+function RestSearchref(prefix, page, size, type, typeUse, cls,clas,target) {
 var str = ""
 
 if (type == 0) {
@@ -736,12 +736,12 @@ $.ajax({
     if(typeUse!=-1){
         for (var i = 0; i < result.responses.length; i++) {
             
-            $(cls[i]).html("");
+            target.find(cls[i]).html("");
             
             for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
                 console.log(result.responses[i].hits.hits[j]._id);
                 // typeUse 1 for admin and 2for normal user
-                NQF_add_ref(result.responses[i].hits.hits[j]._source.title, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+                NQF_add_ref(result.responses[i].hits.hits[j]._source.title, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas,target)
 
                 // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
                 console.log(result.responses[i].hits.hits[j]._source.type);
@@ -973,7 +973,7 @@ if(type==null){
 }
 
 
-function RestSearchArticleSec(prefix, page, size, type, typeUse, cls,prev,clas){
+function RestSearchArticleSec(prefix, page, size, type, typeUse, cls,prev,clas,target){
 
 var str = '';
 for(var i=0;i<type.length;i++){
@@ -996,7 +996,7 @@ $.ajax({
         for (var i = 0; i < result.responses.length; i++) {
             //playlist_videos.push(new Array());
 
-            $("."+clas+" "+cls[i]+"").html("");
+            target.find("."+clas+" "+cls[i]+"").html("");
             
             for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
                 //playlist_videos[i].push(result.responses[i].hits.hits[j]._source);
@@ -1010,9 +1010,9 @@ $.ajax({
                         "vue":result.responses[i].hits.hits[j]._source.vue,
                         "author":result.responses[i].hits.hits[j]._source.author
                     }
-                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,objj,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,objj,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas,target)
                 }else{
-                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas,target)
                 }
 
                 // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
@@ -1026,7 +1026,7 @@ $.ajax({
 })
 }
 
-function NQF_add_article(quest,desc,imgUrl, id, cls, type,clas){
+function NQF_add_article(quest,desc,imgUrl, id, cls, type,clas,target){
 if (type == 1) {
 
     var div = document.createElement("div");
@@ -1040,14 +1040,14 @@ if (type == 1) {
 </div>`;
 
 div.addEventListener("click",function(){
-    getArticle(id,0,clas);
+    getArticle(id,0,clas,target);
 });
 
 div.setAttribute("idd",id);
 div.setAttribute("class","video-list-item");
 div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
 
-$("."+clas+" "+ cls + "").append(div);
+target.find("."+clas+" "+ cls + "").append(div);
 
 console.log(".v-edit" + cls + "");
     
@@ -1067,14 +1067,14 @@ console.log(".v-edit" + cls + "");
         //     getArticle(id,1,clas);
         // } 
 
-        getArticle(id,1,clas);
+        getArticle(id,1,clas,target);
     });
 
     div.setAttribute("idd",id);
     div.setAttribute("class","video-list-item");
     div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
 
-    $("."+clas+" "+ cls + "").append(div);
+    target.find("."+clas+" "+ cls + "").append(div);
 
 } else if(type==3){
     var div = document.createElement("div");
@@ -1315,22 +1315,51 @@ if(type==null){
 }   
 }
 
-function NQF_add_ref(quest, id, cls, type,clas) {
+function NQF_add_ref(quest, id, cls, type,clas,target) {
 
 // console.log(id);
 if (type == 1) {
-    $(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
-                                    <div class="vpanel-body-title NQF-quest-delete" style="font-size: 14px;">
-                                        <span class = 'NFQ-click-btn'  onclick='getRefJ("${id}",0,"${clas}")' >` + quest + `</span>
-                                        <span class = 'far fa-times-circle NFQ-close-quest' onclick='removerefNQF("${id}")' />
-                                    </div>
-                                    <hr class="NQF-horizontal-line " />
+    var div = document.createElement("div");
+    div.setAttribute("class","NFQ-mgn-bt");
+    div.setAttribute("idd",id);
+
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","vpanel-body-title NQF-quest-delete");
+    div2.setAttribute("style","font-size: 14px;");
+
+    var span = document.createElement("span");
+    span.setAttribute("class","NFQ-click-btn");
+    span.innerHTML = quest;
+    span.addEventListener("click",function(){
+        getRefJ(id,0,clas,target);
+    });
+
+    var hr = document.createElement("hr");
+    hr.setAttribute("class","NQF-horizontal-line");
+    
+    var span2 = document.createElement("span");
+    span2.setAttribute("class","far fa-times-circle NFQ-close-quest");
+    span2.setAttribute("onclick",'removerefNQF('+id+')');
+    
+    div2.appendChild(span);
+    div2.appendChild(span2);
+    div2.appendChild(hr);
+    div.appendChild(div2);
+
+    target.find(cls + ":not(:has(>.NFQ-end))").append(div);
+
+    // target.find(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
+    //                                 <div class="vpanel-body-title NQF-quest-delete" style="font-size: 14px;">
+    //                                     <span class = 'NFQ-click-btn'  onclick='getRefJ("${id}",0,"${clas}",${target})' >` + quest + `</span>
+    //                                     <span class = 'far fa-times-circle NFQ-close-quest' onclick='removerefNQF("${id}")' />
+    //                                 </div>
+    //                                 <hr class="NQF-horizontal-line " />
                                     
-                                    </div>`)
+    //                                 </div>`)
 } else if (type == 2) {
-    $(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt">
+    target.find(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt">
     <div class="vpanel-body-title " style="font-size: 14px;">
-        <span class = 'NFQ-click-btn' onclick='getRefJ("${id}",0,"${clas}")' >` + quest + `</span>
+        <span class = 'NFQ-click-btn' onclick='getRefJ("${id}",0,"${clas}",${target})' >` + quest + `</span>
     </div>
     <hr class="NQF-horizontal-line " />
     
@@ -1478,14 +1507,14 @@ div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
 }
 }
 
-function getRefJ(id, type,clas) {
+function getRefJ(id, type,clas,target) {
 if(type==0){
-    $("."+clas+" .NFQ-load-img").show();
-    $("."+clas+" .NFQ-all-quest").hide();
-    $("."+clas+" .NQF-vue-ref").hide();
-    $("."+clas+" .NQF-edit-modif").hide();
+    target.find("."+clas+" .NFQ-load-img").show();
+    target.find("."+clas+" .NFQ-all-quest").hide();
+    target.find("."+clas+" .NQF-vue-ref").hide();
+    target.find("."+clas+" .NQF-edit-modif").hide();
 
-    var pos = $(".pcd-header-NQF").offset().top;
+    var pos = target.find(".pcd-header-NQF").offset().top;
     $('html,body').animate({
             scrollTop: pos
     },
@@ -1502,14 +1531,14 @@ $.ajax({
     success: function (result) {
         refObject = result._source;
         if (type == 0) {
-            $("."+clas+" .NFQ-load-img").hide();
-            $("."+clas+" .NQF-btn-alg").show();
-            $("."+clas+" .NQF-vue-ref").show();
-            $("."+clas+" .NQF-vue-ref .NQF-prev-ref >b").text(result._source.title);
-            $("."+clas+" .NQF-text-ref").html(result._source.title);
-            $("."+clas+" .NQF-desc-ref").text(result._source.desc);
-            $("."+clas+" .NQF-type-ref").text(result._source.type);
-            $("."+clas+" .NQF-id-ref").val(id);
+            target.find("."+clas+" .NFQ-load-img").hide();
+            target.find("."+clas+" .NQF-btn-alg").show();
+            target.find("."+clas+" .NQF-vue-ref").show();
+            target.find("."+clas+" .NQF-vue-ref .NQF-prev-ref >b").text(result._source.title);
+            target.find("."+clas+" .NQF-text-ref").html(result._source.title);
+            target.find("."+clas+" .NQF-desc-ref").text(result._source.desc);
+            target.find("."+clas+" .NQF-type-ref").text(result._source.type);
+            target.find("."+clas+" .NQF-id-ref").val(id);
             
         } else if (type == 1) {
              createDivQuestionRef(result);
@@ -1963,19 +1992,19 @@ $.ajax({
 }
 
 var ArticleObject = {};
-function getArticle(id,type,cls){
+function getArticle(id,type,cls,target){
 if(type==0){
-    $("."+cls+" .NQF-new-quest-btn").show();
-    $("."+cls+" .NFQ-load-img").show();
-    $("."+cls+" .NQF-vue-question").hide();
-    var pos = $(".pcd-header-NQF").offset().top;
+    target.find("."+cls+" .NQF-new-quest-btn").show();
+    target.find("."+cls+" .NFQ-load-img").show();
+    target.find("."+cls+" .NQF-vue-question").hide();
+    var pos = target.find(".pcd-header-NQF").offset().top;
     $('html,body').animate({
             scrollTop: pos
         },
         'fast');
 }
 
-$("."+cls+" .NFQ-all-quest").hide();
+target.find("."+cls+" .NFQ-all-quest").hide();
 
 $.ajax({
     type: "get",
@@ -1986,26 +2015,25 @@ $.ajax({
     },
     success: function (result) {
 
-            $("."+cls+" .NFQ-load-img").hide();
-            $("."+cls+" .NQF-vue-question").show();
+            target.find("."+cls+" .NFQ-load-img").hide();
+            target.find("."+cls+" .NQF-vue-question").show();
             //add header
-            $("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
-
+            target.find("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
             
-           ArticleObject = result._source;
-           
-           $("."+cls+" .NQF-vue-question .vue-video-frame").html("<img src="+result._source.imgP+" width=\"90%\" height=\"100%\" frameborder=\"0\" >");
-           $("."+cls+" .NQF-vue-question .vue-video-title b").html(result._source.title);
-           $("."+cls+" .NQF-vue-question .vue-video-description").html(result._source.description);
-           
-            $("."+cls+" .NQF-id").val(id);
-            $("."+cls+" .NQF-vue-question").show();
-            $("."+cls+" .NQF-edit-modif").hide();
-            $("."+cls+" .NQF-btn-alg").show();
-           
-            let a = $("."+cls+" .NQF-categorie")
+            ArticleObject = result._source;
             
-            $("."+cls+" .NQF-new-quest-btn").show();
+            target.find("."+cls+" .NQF-vue-question .vue-video-frame").html("<img src="+result._source.imgP+" width=\"90%\" height=\"100%\" frameborder=\"0\" >");
+            target.find("."+cls+" .NQF-vue-question .vue-video-title b").html(result._source.title);
+            target.find("."+cls+" .NQF-vue-question .vue-video-description").html(result._source.description);
+           
+            target.find("."+cls+" .NQF-id").val(id);
+            target.find("."+cls+" .NQF-vue-question").show();
+            target.find("."+cls+" .NQF-edit-modif").hide();
+            target.find("."+cls+" .NQF-btn-alg").show();
+           
+            let a = target.find("."+cls+" .NQF-categorie");
+            
+            target.find("."+cls+" .NQF-new-quest-btn").show();
 
         
     },
@@ -2242,6 +2270,10 @@ $(".qst-faq .vpanel-body .response-body").html(result._source.content);
         }
         
         if(result._source.urlV2.trim() != "" ){
+            if(result._source.urlV.trim() == ""){
+                $(".qst-faq .vpanel-body .iframe-tab iframe").attr("src",contextPath+"/DownloadFile?gedId="+result._source.attachementRefAr.gedId);
+                $(".qst-faq .vpanel-body .iframe-tab iframe").show();
+            }
             $(".qst-faq .vpanel-body .response-att button.download-ar").attr("onclick","window.open(\""+contextPath+"/DownloadFile?gedId="+result._source.attachementRefAr.gedId+"\")")
             $(".qst-faq .vpanel-body .response-att").show();
         }else{
@@ -2589,7 +2621,7 @@ if(typeUse==-1){
         
         g.addEventListener("click",function(){
             var id=$(this).children("input").val();
-            getRefJ(id,0);
+            getRefJ(id,0,null);
         });
         
         g.setAttribute("class","item-body-button");
@@ -3205,9 +3237,9 @@ function fullSearchList(results,cls,typePage){
         d.setAttribute("class","item-body");
         d.setAttribute("style","padding:0 15px");
         var e = document.createElement("div");
-        e.setAttribute("class","item-body-title");
+        e.setAttribute("class","item-body-title"); 
         e.setAttribute("style","font-size:16px");
-        e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100).toUpperCase()+"</span>";
+        e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,60).toUpperCase()+"</span>";
         var f = document.createElement("p");
         f.innerHTML = subLong(text,200);
         f.setAttribute("style","font-size: 0.955vw;text-align: left;width: 100%;color: #777;")
