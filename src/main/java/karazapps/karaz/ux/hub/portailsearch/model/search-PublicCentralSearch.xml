@@ -374,9 +374,9 @@
                         <vbox className="vbox-articles" columns="25% 25% 25% 25%">
                            
                         </vbox>
-                        <vbox className="fieldset-footer">
+                        <vbox className="fieldset-footer-home">
                             <html>
-                                <div style="text-align:center;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">AFFICHER TOUS LES ACTUALITÉS</div>
+                                <div style="text-align:center;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">AFFICHER TOUTES LES ACTUALITÉS</div>
                             </html>
                         </vbox>
                 </vbox>

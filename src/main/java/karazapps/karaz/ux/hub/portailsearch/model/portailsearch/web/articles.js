@@ -1,4 +1,27 @@
 
+function getAllArticlesByType(prefix,type,varfl,pp,clas,root,context){
+    currentPage=0;
+    root.query.typeArticle = pp;
+    context.formRender.notifyObservers("query.typeArticle");
+    var pp = root.query.typeArticle;
+
+    if(pp==""){
+        pp=0;
+    }
+ 
+    if(root.query.typeArticle==""){
+        $(".classSearch-80 .vpanel-title .title-2x").html("TOUS");
+      }else if(root.query.typeArticle==1){
+        $(".classSearch-80 .vpanel-title .title-2x").html("ASTUCES ET FONCTIONNALITES");
+      }else if(root.query.typeArticle==2){
+       $(".classSearch-80 .vpanel-title .title-2x").html("A LA UNE");
+      }else if(root.query.typeArticle==3){
+        $(".classSearch-80 .vpanel-title .title-2x").html("A VENIR");
+      }
+
+    restFullSearchList(prefix,type,varfl,pp,clas);
+}
+
 function createArticlesHtml(clas,result){
 var divGlo = $(clas);
 $(clas).html("");
@@ -19,13 +42,19 @@ result.forEach(function(elm){
 
     var div4 = document.createElement("div");
     div4.setAttribute("class","ow-html toggle-art");
+    div4.setAttribute("style","padding:3px 12px;");
+
 
     var htitle =  document.createElement("h3");
     htitle.innerHTML = elm._source.title;
+    htitle.setAttribute("style","font-size:19px;font-weight: 600;");
+
     var par = document.createElement("p");
+    par.setAttribute("style","color:#666;font-size:15px;text-align:left");
     par.innerHTML = subLong(elm._source.description,190);
     var tags = elm._source.tags;
     var div5 = document.createElement("div");
+
     for(var i=0;i<tags.length;i++){
         var span = document.createElement("span");
         span.setAttribute("class","tag");
@@ -35,21 +64,30 @@ result.forEach(function(elm){
 
     var div6 = document.createElement("div");
     div6.setAttribute("class","pub-by");
-    div6.innerHTML = 'publié par : <span style="">'+elm._source.author+'</span>';
+    div6.setAttribute("style","color:#333;font-size:15px");
+    try{
+        div6.innerHTML = 'Publié par : <span style=""><span style="font-weight: 600;">'+elm._source.author.split("|")[0].trim()+'</span> <span style="">'+elm._source.author.split("|")[1].trim()+'</span></span>';
+    }
+    
+    catch(e){
+        div6.innerHTML = 'Publié par : <span style=""><span style="font-weight: 600;">'+elm._source.author+'</span></span>';
+
+    }
     
     div4.appendChild(htitle);
-    div4.appendChild(par);
+    div4.appendChild(par); 
     div4.appendChild(div5);
     div4.appendChild(div6);
 
     var div7 = document.createElement("div");
     div7.setAttribute("class","ow-html footer-article");
+    div7.setAttribute("style","color:#666;font-size:15px");
 
     var span2 = document.createElement("span");
-    span2.innerHTML = '<i class="fas fa-calendar-alt"></i> '+elm._source.datePr.split(" ")[0].replace(/-/g,"/");
+    span2.innerHTML = '<i style="color:#38A" class="fas fa-calendar-alt"></i> '+elm._source.datePr.split(" ")[0].replace(/-/g,"/");
 
     var span3 = document.createElement("span");
-    span3.innerHTML = '<i class="fas fa-heart"></i> '+elm._source.like;
+    span3.innerHTML = '<i style="color:#ce1515" class="fas fa-heart"></i> '+elm._source.like;
 
     var span4 = document.createElement("span");
     span4.innerHTML = '<i class="fas fa-eye"></i> '+elm._source.vue;

@@ -96,7 +96,7 @@
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
                            
                         </vbox>
-                        <vbox className="fieldset-footer">
+                        <vbox className="fieldset-footer fieldset-footer-1">
                             <html>
                                 <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | ASTUCES ET FONCTIONNALITES</div>
                             </html>
@@ -106,7 +106,7 @@
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
                        
                         </vbox>
-                        <vbox className="fieldset-footer">
+                        <vbox className="fieldset-footer fieldset-footer-2">
                             <html>
                                 <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | A LA UNE !</div>
                             </html>
@@ -117,7 +117,7 @@
                             
 
                         </vbox>
-                        <vbox className="fieldset-footer">
+                        <vbox className="fieldset-footer fieldset-footer-3">
                             <html>
                                 <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | A VENIR</div>
                             </html>

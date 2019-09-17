@@ -27,7 +27,7 @@
             // header color
             PCD_headerfieldset_color(".pcd-ha-color");
 
-            RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset2 .NFQ-quest-type-recent",".det-article-fieldset2 .NFQ-quest-type-popular",".det-article-fieldset2 .NFQ-quest-type-liked"],0,"classSearch-82")
+            RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset2 .NFQ-quest-type-recent",".det-article-fieldset2 .NFQ-quest-type-popular",".det-article-fieldset2 .NFQ-quest-type-liked"],0,"classSearch-82",context.formRender.targetPanel)
 
       </script>
       <html>
@@ -44,24 +44,24 @@
 
         .divSearch-article .det-div{
           color:#333;
-          border: 1px solid #ccc;
-          background: #eee;
+          //border: 1px solid #ccc;
+          //background: #eee;
           padding: 8px;
         }
 
         .divSearch-article .article-img{
-            border: 1px solid #ccc;
+            //border: 1px solid #ccc;
             border-bottom:none;
             background: #eee;
         }
         
         .divSearch-article .article-desc{
-          background: #eee;
-          border: 1px solid #ccc;
+          //background: #eee;
+          //border: 1px solid #ccc;
           border-top: none;
           padding-left : 5px;
           padding-right : 5px;
-          color:#333;
+          color:#666;
         }
 
         .classSearch-82 .content-article{
@@ -105,7 +105,7 @@
                 </div>
               </html>
 
-              <vbox className="det-div" columns="22% 22% 22% 34%">
+              <vbox className="det-div" columns="40% 15% 15% 30%">
                 <html>
                   <div class="dd author-pub">
                     Publié par <span style="font-weight: 600;">FRIKI Doha</span>
@@ -119,23 +119,17 @@
                 <html>
                   <div class="dd date-det">
                      <i class="fas fa-eye" /> <span class="">205</span> 
-                     <i class="fas fa-heart" /> <span>23</span>   
+                     <i style="color:#ce1515" class="fas fa-heart" /> <span>23</span>   
                   </div>
                 </html>
                 <html>
                 <div class="dd">
-                  <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-thumbs-up" /> J'aime </span>
-                  <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-comment" /> Commenter</span>
+                  <span style="margin-right: 3px;margin-left: 3px;"> <i style="color:#38A" class="fas fa-thumbs-up" /> J'aime </span>
+                  <span style="margin-right: 3px;margin-left: 3px;"> <i style="color:#999" class="fas fa-comment" /> Commenter</span>
                   <span style="margin-right: 3px;margin-left: 3px;"> <i class="fas fa-share" /> Partager  </span>
                 </div>
                 </html>
               </vbox>
-              <vbox className="article-img">
-                <html>
-                  <img style="width:100%" src="extensions/img/u7789.png" alt="" />
-                </html>
-              </vbox>  
-
               <html className="article-desc">
                 <div>
                   <p>
@@ -143,6 +137,13 @@
                   </p>
                 </div>
               </html>
+              <vbox className="article-img">
+                <html>
+                  <img style="width:100%" src="extensions/img/u7789.png" alt="" />
+                </html>
+              </vbox>  
+
+    
 
               <html className="content-article">
 
@@ -184,13 +185,7 @@
               </div>
             </html>
           </fieldset>
-          <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-            <html>
-              <div class="NFQ-quest-type-document NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
+          
           <!-- end modification -->
         </fieldset>
         <vbox>

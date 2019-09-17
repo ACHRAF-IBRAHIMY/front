@@ -49,7 +49,7 @@
             PCD_headerfieldset_color(".pcd-ha-color");
 
             $(".NQF-vue-ref").hide();
-            RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1",".vv1 .NFQ-quest-type-autre1"],"classSearch-3");
+            RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1",".vv1 .NFQ-quest-type-autre1"],"classSearch-3",context.formRender.targetPanel);
             
             // hide saisie info question
             $(".classSearch-3 .NQF-edit-modif").hide()
@@ -76,7 +76,7 @@
       </script>
       <script postLoad="true" delai="500">
                 if(root.query.idObject.trim()!=''){
-                    getRefJ(root.query.idObject,0,"classSearch-3");
+                    getRefJ(root.query.idObject,0,"classSearch-3",context.formRender.targetPanel);
                 }
       </script> 
       <html id="hSeparator">
@@ -161,12 +161,14 @@
                   </vbox>
                    <vbox contentAlign="center" columns="40% 49% 1% 0% 10%" className="NQF-edit-select-float">
                     <field widget="select" label="Type de texte" labelAlign="float" xpath="NQFtypeRef">
-                      <option value="Décrét" label="Décret"/>
+                      <option value="Décrét" label="Décret" />
                       <option value="Dahir" label="Dahir" />
                       <option value="Circulaire" label="Circulaire" />
                       <option value="Loi" label="Loi" />
                       <option value="Arrêté" label="Arrêté" />
                       <option value="Note de service" label="Note de service" />
+                      <option value="Cahier de charge" label="Cahier de charge" />
+
                     </field>
                     <field label="URL Attachement Arabe" widget="text" labelAlign="float" className="url-vue" xpath="urlRef2" />
                     <field xpath="attachementRefAr" className="uploadRef2" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="Attacher texte arabe" widget="fileUpload" />
@@ -205,13 +207,13 @@
                     <postChange>NQF_new_QR(2,"classSearch-3");</postChange>
                   </button>
                   <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
-                    <postChange>NQF_save_QR(2,root);</postChange>
+                    <postChange>NQF_save_QR(2,root,context.formRender.targetPanel);</postChange>
                   </button>
                 </vbox>
               </vbox>
-            </vbox>
+            </vbox> 
             <vbox className="NQF-vue-ref">
-              <vbox columns="85% auto">
+              <vbox columns="85% auto"> 
                 <html>
                   <h4 class="NQF-prev-ref">
                     <b class="NQF-title-ref">Quels sont les pièces requises pour l'obtention d'un permis de construire ?</b>

@@ -331,7 +331,7 @@ function verifieDownload(clas,root){
     return vr;
 }
 
-function NQF_save_QR(type,root) {
+function NQF_save_QR(type,root,target) {
     if (type == 1) {
         var clas = "classSearch-5";
 
@@ -404,13 +404,20 @@ function NQF_save_QR(type,root) {
         
         var clas = "classSearch-3";
 
-        let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
-        let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
-        let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
-        let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtypeRef"]').text();
-        let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+        // let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
+        // let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
+        // let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
+        // let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtypeRef"]').text();
+        // let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+
+        let title = root.NQFtitle;
+        let categ = root.NQFtype;
+        let texte = root.NQFtext;
+        let typee = root.NQFtypeRef;
+        let description = target.find('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+
         var attachement = root.attachementRef;
-        if(attachement.gedId.trim()!=""){
+        if(attachement.gedId.trim()!=""){ 
             var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
         }else{
             var urlV = "";
@@ -424,7 +431,7 @@ function NQF_save_QR(type,root) {
         }
 
         console.log(title, categ, texte, description)
-        
+        var T = 0;
         if(categ == "Urbanisme"){
             T = 2; 
         } else if(categ == "Economique"){
@@ -463,15 +470,15 @@ function NQF_save_QR(type,root) {
         console.log(req, id);
         
         //
-        if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
-            $("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+        if (target.find("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+            target.find("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
         }
         setTimeout(function () {
-            $("."+clas+" .ow-btn-container i.fa-check").remove()
-            $("."+clas+" .NQF-edit-modif").hide()
-            $("."+clas+" .NQF-new-quest-btn").show();
-            $("."+clas+" .NQF-vue-ref").show();
-            $("."+clas+" .NQF-btn-alg").hide();
+            target.find("."+clas+" .ow-btn-container i.fa-check").remove()
+            target.find("."+clas+" .NQF-edit-modif").hide()
+            target.find("."+clas+" .NQF-new-quest-btn").show();
+            target.find("."+clas+" .NQF-vue-ref").show();
+            target.find("."+clas+" .NQF-btn-alg").hide();
         }, 2000);
         
         updateReglementation(id,req);
@@ -728,8 +735,11 @@ function NQF_save_QR(type,root) {
             "tags":"",
             "tagsText":"",
             "vue":0,
-            "like":0
-        }
+            "like":0,
+            "comments":[],
+            "list_vue":[],
+            "list_like":[]
+        };
 
         
         
@@ -744,7 +754,7 @@ function NQF_save_QR(type,root) {
         req.author = author;
         req.tagsText = tags;
 
-        var ttg = tags.split("-");
+        var ttg = tags.split("//"); 
         var tagsArr = [];
 
         ttg.forEach(function(elm){
@@ -915,10 +925,10 @@ function getCountArticles(){
             var count_alaune = result.responses[2].hits.total.value;
             var count_avenir = result.responses[3].hits.total.value;
 
-            $(".classSearch-80 .article-categorie li span").eq(0).html("("+count_all+")");
-            $(".classSearch-80 .article-categorie li span").eq(1).html("("+count_astuce+")");
-            $(".classSearch-80 .article-categorie li span").eq(2).html("("+count_alaune+")");
-            $(".classSearch-80 .article-categorie li span").eq(3).html("("+count_avenir+")");
+            $(".classSearch-80 .article-categorie li.li-1 span").html("("+count_all+")");
+            $(".classSearch-80 .article-categorie li.li-2 span").html("("+count_astuce+")");
+            $(".classSearch-80 .article-categorie li.li-3 span").html("("+count_alaune+")");
+            $(".classSearch-80 .article-categorie li.li-4 span").html("("+count_avenir+")");
 
 
         },
