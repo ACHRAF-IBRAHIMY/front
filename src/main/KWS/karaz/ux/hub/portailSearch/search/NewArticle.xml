@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="NewArticle" label="Nouveau article">
+<search name="NewArticle" label="Nouvel article">
   <query />
   <data>
     <query>
@@ -74,12 +74,12 @@
             display:none;
           }
         </style>
-      </html>
+      </html> 
       <vbox columns="70% 30%" className="classSearch-99">
         <vbox>
-          <fieldset label="NOUVEAU ARTICLE" collapsible="false" className="pcd-header-NQF NQF-titre-ref div-det-acc PDC-hov-title ">
+          <fieldset label="NOUVEL ARTICLE" collapsible="false" className="pcd-header-NQF NQF-titre-ref div-det-acc PDC-hov-title ">
             <vbox className="NQF-new-quest-btn">
-              <button label="Nouveau article" style="" className="NQF-btn-new">
+              <button label="Nouvel article" style="" className="NQF-btn-new">
                 <postChange>
                      $(".classSearch-99 .NQF-id").val("");
                     
