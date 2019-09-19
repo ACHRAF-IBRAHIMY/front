@@ -738,7 +738,7 @@ function NQF_save_QR(type,root,target) {
             "like":0,
             "comments":[],
             "list_vue":[],
-            "list_like":[]
+            "liste_like":[]
         };
 
         
