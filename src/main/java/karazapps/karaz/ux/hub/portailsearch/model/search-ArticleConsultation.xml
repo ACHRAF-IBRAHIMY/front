@@ -24,8 +24,17 @@
         var id = root.query.idObject;
         profilesT = profiles;
         getObjectArticle(id,root,context.formRender.targetPanel);
-        
 
+        context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .comment").click(function(){
+              var pos = context.formRender.targetPanel.find(".classSearch-82 .comment-form").offset().top;
+              $('html,body').animate(
+                     {
+                      scrollTop: pos - 150
+                 },
+                 'slow');   
+          });
+
+    
         PCD_headerfieldset_color(".NFQ-quest-title");
           $(".NFQ-quest-title .ow-label-pl").css('text-transform','upperCase');
           PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
@@ -41,77 +50,114 @@
             
             $(".classSearch-82 .reseau-ss .like").click(function(){
               if($(this).hasClass("active-like")){
-                removeLike(root,userQN+";"+userIp,context.formRender.targetPanel);
+                removeLike(root,userQN+";"+JSON.parse(document.cookie).userRef,context.formRender.targetPanel);
               }else{
                 likeArticle(root,userQN,userIp,context.formRender.targetPanel);
               }
-            });
+            }); 
 
       RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset2 .NFQ-quest-type-recent",".det-article-fieldset2 .NFQ-quest-type-popular",".det-article-fieldset2 .NFQ-quest-type-liked"],0,"classSearch-82",context.formRender.targetPanel)
+      context.formRender.targetPanel.find(".annuler-rep-comment").click(function(){
+          context.formRender.targetPanel.find(".comment-form h1.add-comment").show();
+          context.formRender.targetPanel.find(".comment-form span.rep-comment").hide(); 
+          context.formRender.targetPanel.find(".comment-form span.rep-comment").attr("idd","");
+      });
+
+      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-share").click(function(){
+        context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share").css("display","grid");
+      }); 
+
+      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-close").click(function(){
+        context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share").css("display","none");
+      });
+
+      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-copy").click(function(){
+        var toCopy = context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share .url-text").get(0);
+        toCopy.select();
+        document.execCommand( 'copy' );
+      });
 
       </script>
       <html>
       <style>
 
-      .reseau-ss .like.active-like{
+        .reseau-ss .like.active-like{
         color:#38A;
-      }
-      
+        }
+
         .divSearch-article{
-          color:#333 !important;
-          padding : 0 !important;
+        color:#333 !important;
+        padding : 0 !important;
         }
 
         .divSearch-article .div-fsb-details .fsb-container {
-            padding-left: 0; 
-       }
+        padding-left: 0; 
+        }
 
         .divSearch-article .det-div{
-          color:#333;
-          //border: 1px solid #ccc;
-          //background: #eee;
-          padding: 8px;
+        color:#333;
+        //border: 1px solid #ccc;
+        //background: #eee;
+        padding: 8px;
         }
 
         .divSearch-article .article-img{
-            //border: 1px solid #ccc;
-            border-bottom:none;
-            background: #eee;
+        //border: 1px solid #ccc;
+        border-bottom:none;
+        background: #eee;
         }
-        
+
         .divSearch-article .article-desc{
-          //background: #eee;
-          //border: 1px solid #ccc;
-          border-top: none;
-          padding-left : 5px;
-          padding-right : 5px;
-          color:#666;
+        //background: #eee;
+        //border: 1px solid #ccc;
+        border-top: none;
+        padding-left : 5px;
+        padding-right : 5px;
+        color:#666;
         }
 
         .classSearch-82 .content-article{
-          color:#666;
+        color:#666;
         }
 
         .classSearch-82 .comment-form{
-            padding: 15px 6px;
-            border: 1px solid #eee;
+        padding: 25px 20px;
+        border: 1px solid #eee;
+        background : #f5f5f5;
+        width: 95%;
+        margin:auto;
+        }
+
+        .classSearch-82 .comment-form .ow-field-input{
+        background: #f5f5f5;
+        }
+
+
+        .classSearch-82 .comment-form .ow-field-input-wrapper{
+        background: #f5f5f5;
         }
 
         .classSearch-82 .send-comment{
-          color: #fff;
-          background: #38A;
-          margin-top: 43px;
-          float: right;
-          margin-right: 14px;
-          font-size: 18px;
+        color: #fff;
+        background: #38A;
+        margin-top: 43px;
+        float: right;
+        margin-right: 14px;
+        font-size: 18px;
         } 
-                .classSearch-82 .send-comment span{ font-size:17px;}
+
+      .classSearch-82 .send-comment span{ font-size:17px;}
 
       .classSearch-82 .comment-det{
             text-align: left;
             color: #333;
             margin: 15px 2px;
             padding: 3px 4px;
+      }
+
+      .classSearch-82 .content-article p{
+        margin-top: 12px;
+        margin-bottom: 12px;
       }
 
       </style>
@@ -173,7 +219,7 @@
                 <div class="dd reseau-ss">
                   <span class="like" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i class="fas fa-thumbs-up" /> J'aime </span>
                   <span class="comment" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i style="color:#999" class="fas fa-comment" /> Commenter</span>
-                  <span style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i class="fas fa-share" /> Partager  </span>
+                  <span class="share" style="margin-right: 3px;margin-left: 3px;cursor:pointer;position:relative"> <i class="fas fa-share" /> Partager <span class="url-share" style="border: 1px solid #666;padding: 3px 6px;position: absolute;right: 0;top: 29px;background: #fefefe;width: 58vw;overflow: hidden;display: grid;grid-template-columns: 87% 9% 4%;display:none;"><textArea readonly="readonly" style="word-wrap: break-word;cursor: default;resize:none;" class="url-text">http://frontrokhas.karaz.org:8080/karazal/index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=//search</textArea><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-copy" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-close" /></span> </span>
                 </div> 
                 </html>
               </vbox>
@@ -265,10 +311,18 @@
 
           </vbox>
           
-          <html>
-          <span style="color:#e08a08;text-align:left;font-size:14px;display: block;">Votre adresse de messagerie ne sera pas publiée. Les champs obligatoires sont indiqués avec *</span>
-          </html>
+          
           <vbox className="comment-form">
+          <html>
+            <h1 style="color: #666;font-size: 20px;text-align: left;" class="add-comment">AJOUTER VOTRE COMMENTAIRE</h1>
+            <span class="rep-comment" idd="" style="display:none;">
+              <span style="display:grid;grid-template-columns: 50% 50%;">
+                <span style="color: #666;font-size: 20px;text-align: left;margin-bottom: 5px;">REPONDRE AU COMMANTAIRE</span>
+                <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close" /> Annuler la réponse</span>  
+              </span>
+            </span>
+            <span style="color:#e08a08;text-align:left;font-size:14px;display: block;margin-bottom: 14px;">Votre adresse de messagerie ne sera pas publiée. Les champs obligatoires sont indiqués avec *</span>
+          </html>
             <vbox columns="33% 33% 33%">
                   <field label="NOM*" widget="text" labelAlign="float" xpath="articleCommentName" />
                   <field label="PRENOM*" widget="text" labelAlign="float" xpath="articleCommentLastName" />
@@ -286,7 +340,7 @@
                 <vbox>
                   <button className="send-comment" label="ENVOYER">
                     <postChange>
-                      addComment(root,context.formRender.targetPanel);
+                      addComment(root,context.formRender.targetPanel,context);
                     </postChange>
                   </button>
                 </vbox>                  

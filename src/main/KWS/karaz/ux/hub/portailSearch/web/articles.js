@@ -52,7 +52,7 @@ function removeLike(root,user,target){
         success: function(){
             target.find(".classSearch-82 .reseau-ss .like").removeClass("active-like");
             target.find(".classSearch-82 .date-det span.like-span").html(Number(target.find(".classSearch-82 .date-det span.like-span").html())-1);
-
+            root.article._source.liste_like.splice(root.article._source.liste_like.indexOf(user),1);
         }
     });
 }
@@ -70,7 +70,7 @@ function isEmailValidArt(value){
     }        
 }
 
-function addComment(root,target){
+function addComment(root,target,context){
 
     
 
@@ -95,31 +95,60 @@ function addComment(root,target){
         return ;
     }
 
-    var comment = {
-        "nom": root["articleCommentName"],
-        "prenom":root["articleCommentLastName"],
-        "email":root["articleCommentEmail"],
-        "text":root["articleComment"]
-    };
+    var current_datetime = new Date();
+        
+    var dateYear = current_datetime.getFullYear();
+    var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
+    var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
 
-    addCommentRest(root,target,comment);
+    // var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
+    // var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
+    // var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
+    
+    var formatted_date = dateYear + "/" + dateMonths + "/" + dateDays;
+    
+    if(target.find(".comment-form span.rep-comment").attr("idd")==""){
+        var comment = {
+            "nom": root["articleCommentName"],
+            "prenom":root["articleCommentLastName"],
+            "email":root["articleCommentEmail"],
+            "text":root["articleComment"],
+            "date": formatted_date,
+            "comments":[]
+        };
+        addCommentRest(root,target,comment,context,-1);
+
+    }else{
+        var comment = {
+            "nom": root["articleCommentName"],
+            "prenom":root["articleCommentLastName"],
+            "email":root["articleCommentEmail"],
+            "text":root["articleComment"],
+            "date": formatted_date,
+        };
+        addCommentRest(root,target,comment,context,Number(target.find(".comment-form span.rep-comment").attr("idd")));
+    }
+
+    
+
 }
 
 function createDivComments(comments,target){
     var i = 0;
+    target.find(".comments-list > .ow-vl-inner").html("");
     comments.forEach(function(elm){
         var div = document.createElement("div");
         div.setAttribute("class","ow-vl ow-vbox");
         var div1 = document.createElement("div");
         div1.setAttribute("class","ow-vl-inner ow-gbox");
-        div1.setAttribute("style","grid-template-columns: 20% 80%;");
+        div1.setAttribute("style","grid-template-columns: 100px auto;");
         var div2 = document.createElement("div");
         div2.setAttribute("class","ow-vl ow-vbox comment-user-img");
         var div3 = document.createElement("div");
         div3.setAttribute("class","ow-vl-inner");
         var div4 = document.createElement("div");
         div4.setAttribute("class","ow-html");
-        div4.innerHTML = "<img src="+"./img/defaultAvatar.png"+" style=\"width: 89px;margin-top: 11px;\" />";
+        div4.innerHTML = "<img src="+"./img/defaultAvatar.png"+" style=\"width: 78px;margin-top: 11px;\" />";
         var div5 = document.createElement("div");
         div5.setAttribute("class","ow-vl ow-vbox comment-det");
         var div6 = document.createElement("div");
@@ -137,13 +166,21 @@ function createDivComments(comments,target){
         div10.setAttribute("class","div-date");
         div10.setAttribute("index",i);
         var span = document.createElement("span");
-        span.innerHTML = "20/11/2019";
+        span.innerHTML = elm.date+ " | ";
         span.setAttribute("style","font-size: 14px;display: inline-block;margin-right: 8px;")
         var span1 = document.createElement("span");
-        span1.innerHTML="Répondre";
-        span1.setAttribute("style","cursor:pointer");
+        span1.innerHTML="Répondre à ce commentaire";
+        span1.setAttribute("style","cursor:pointer;font-size: 15px;color: #38A;");
         span1.addEventListener("click",function(){
-            alert(this.parentNode.getAttribute("index"));
+            target.find(".comment-form h1.add-comment").hide();
+            target.find(".comment-form span.rep-comment").show();
+            target.find(".comment-form span.rep-comment").attr("idd",this.parentNode.getAttribute("index"));
+                var pos = target.find(".classSearch-82 .comment-form").offset().top;
+                $('html,body').animate(
+                       {
+                        scrollTop: pos - 150
+                   },
+                   'slow');   
         });
 
         div10.appendChild(span);
@@ -161,20 +198,83 @@ function createDivComments(comments,target){
         i++;
 
         target.find(".comments-list > .ow-vl-inner").append(div);
+        if(elm.comments!=undefined){
+            elm.comments.forEach(function(e){
+                var div = document.createElement("div");
+                div.setAttribute("class","ow-vl ow-vbox");
+                div.setAttribute("style","margin-left: 70px;")
+                var div1 = document.createElement("div");
+                div1.setAttribute("class","ow-vl-inner ow-gbox");
+                div1.setAttribute("style","grid-template-columns: 100px auto;");
+                var div2 = document.createElement("div");
+                div2.setAttribute("class","ow-vl ow-vbox comment-user-img");
+                var div3 = document.createElement("div");
+                div3.setAttribute("class","ow-vl-inner");
+                var div4 = document.createElement("div");
+                div4.setAttribute("class","ow-html");
+                div4.innerHTML = "<img src="+"./img/defaultAvatar.png"+" style=\"width: 78px;margin-top: 11px;\" />";
+                var div5 = document.createElement("div");
+                div5.setAttribute("class","ow-vl ow-vbox comment-det");
+                var div6 = document.createElement("div");
+                div6.setAttribute("class","ow-vl-inner");
+                var div7 = document.createElement("div");
+                div7.setAttribute("class","ow-html");
+                var div8 = document.createElement("div");
+                div8.setAttribute("class","comment-user-name");
+                div8.setAttribute("style","font-size: 17px;font-weight: 600;");
+                div8.innerHTML = e.nom + " " + e.prenom;
+                var div9 = document.createElement("div");
+                div9.setAttribute("class","comment-det");
+                div9.innerHTML = e.text;
+                var div10 = document.createElement("div");
+                div10.setAttribute("class","div-date");
+                div10.setAttribute("index",i);
+                var span = document.createElement("span");
+                span.innerHTML = e.date;
+                span.setAttribute("style","font-size: 14px;display: inline-block;margin-right: 8px;")
+                div10.appendChild(span);
+                div7.appendChild(div8);
+                div7.appendChild(div9);
+                div7.appendChild(div10);
+                div6.appendChild(div7);
+                div5.appendChild(div6);
+                div3.appendChild(div4);
+                div2.appendChild(div3);
+                div1.appendChild(div2);
+                div1.appendChild(div5);
+                div.appendChild(div1);
+                target.find(".comments-list > .ow-vl-inner").append(div);
+
+            });
+        };
     });
 }
 
 
-function addCommentRest(root,target,comment){
-    var obj = {
-        "script" : {
-            "source": "ctx._source.comments.add(params.comment)",
-            "lang": "painless",
-            "params" : {
-                "comment" : comment
+function addCommentRest(root,target,comment,context,type){
+    if(type==-1){
+        var obj = {
+            "script" : {
+                "source": "ctx._source.comments.add(params.comment)",
+                "lang": "painless",
+                "params" : {
+                    "comment" : comment
+                }
             }
-        }
-    };
+        };
+    }else{
+        var obj = {
+            "script" : {
+                "source": "ctx._source.comments[params.index].comments.add(params.comment)",
+                "lang": "painless",
+                "params" : {
+                    "comment" : comment,
+                    "index":type
+                }
+            }
+        };
+    }
+    
 
     $.ajax({
         type: "post",
@@ -186,6 +286,20 @@ function addCommentRest(root,target,comment){
             xhr.setRequestHeader("Authorization", ADMIN_AUTH);
         },
         success: function(){
+
+
+            root.articleCommentName = "";
+            root.articleCommentLastName = "";
+            root.articleCommentEmail = "";
+            root.articleComment = "";
+
+            context.formRender.notifyObservers("articleCommentName");
+            context.formRender.notifyObservers("articleCommentLastName");
+            context.formRender.notifyObservers("articleCommentEmail");
+            context.formRender.notifyObservers("articleComment");
+
+            getObjectArticle(root.query.idObject,root,target);
+
         //     target.find(".classSearch-82 .reseau-ss .like").removeClass("active-like");
         //     target.find(".classSearch-82 .date-det span.like-span").html(Number(target.find(".classSearch-82 .date-det span.like-span").html())-1);
         }
@@ -194,16 +308,24 @@ function addCommentRest(root,target,comment){
 
 function verifierLike(user,array){
     var userName = user.split(";")[0];
-    var userIp = user.split(";")[1];
     var index = -1;
 
     if(userName=="anonymous@karaz"){
-        index = array.indexOf(user);
-        if(index==-1){
+
+        if(document.cookie.indexOf("userRef")==-1){
+            document.cookie="{\"userRef\":"+(new Date()).getTime()+"}";
             return true;
         }else{
-            return false;
+            index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
+
+            if(index==-1){
+                return true;
+            }else{
+                return false; 
+            }
         }
+
+        
     }else{
         array.forEach(function(elm){
             if(elm.split(";")[0]==userName){
@@ -219,7 +341,7 @@ function likeArticle(root,userQN,userIp,target){
     var user = userQN+";"+userIp;
     if(verifierLike(user,root.article._source.liste_like)){
         target.find(".classSearch-82 .reseau-ss .like").addClass("active-like");
-        addLike(user,root.article._id,target);
+        addLike(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
     }
 }
 
@@ -250,18 +372,51 @@ function addVue(user,id,target){
     });
 }
 
+// function verifierVue(user,array){
+//     var userName = user.split(";")[0];
+//     var userIp = user.split(";")[1];
+//     var index = -1;
+
+//     if(userName=="anonymous@karaz"){
+//         index = array.indexOf(user);
+        
+
+//         if(index==-1){
+//             return true;
+//         }else{
+//             return false;
+//         }
+//     }else{
+//         array.forEach(function(elm){
+//             if(elm.split(";")[0]==userName){
+//                 return false;
+//             }
+//         });
+//     } 
+
+//     return true;
+// }
+
 function verifierVue(user,array){
     var userName = user.split(";")[0];
-    var userIp = user.split(";")[1];
     var index = -1;
 
     if(userName=="anonymous@karaz"){
-        index = array.indexOf(user);
-        if(index==-1){
+
+        if(document.cookie.indexOf("userRef")==-1){
+            document.cookie="{\"userRef\":"+(new Date()).getTime()+"}";
             return true;
         }else{
-            return false;
+            index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
+
+            if(index==-1){
+                return true;
+            }else{
+                return false;
+            }
         }
+
+        
     }else{
         array.forEach(function(elm){
             if(elm.split(";")[0]==userName){
@@ -276,7 +431,7 @@ function verifierVue(user,array){
 function vueArticle(root,userQN,userIp,target){
     var user = userQN+";"+userIp;
     if(verifierVue(user,root.article._source.list_vue)){
-        addVue(user,root.article._id,target);
+        addVue(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
     }
 }
 
@@ -305,8 +460,9 @@ function getAllArticlesByType(prefix,type,varfl,pp,clas,root,context){
 }
 
 function createArticlesHtml(clas,result){
-var divGlo = $(clas);
-$(clas).html("");
+
+ var divGlo = $(clas);
+ divGlo.html("");
 
 result.forEach(function(elm){
     var div1 = document.createElement("div");
@@ -395,7 +551,6 @@ result.forEach(function(elm){
 
 
 function getMostPopularArticle(size,type,clas){
-
 var obj = {
     "size":size,"query":{
    "term":{
@@ -427,44 +582,47 @@ $.ajax({
     }
 }).done(function(result){
         createArticlesHtml(clas,result.hits.hits);
-    
 });
 
 }
 
 
 function getObjectArticle(id,root,target){
-$(".divSearch-article .search-details-icon img").show();
-$.ajax({
-    type: "get",
-    url: URL_SEARCH + "/articles_index/article/"+id,
-    datatype: "application/json",
-    contentType: "application/json",
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", AUTH);
-    }
-}).done(function(results){
+    $(".divSearch-article .search-details-icon img").show();
+    $.ajax({
+        type: "get",
+        url: URL_SEARCH + "/articles_index/article/"+id,
+        datatype: "application/json",
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", AUTH);
+        }
+    }).done(function(results){
 
-    var obj = results._source; 
-    root.article = results;
-    vueArticle(root,userQN,userIp,target);
+        var obj = results._source; 
+        root.article = results;
+        vueArticle(root,userQN,userIp,target);
 
-    if(!verifierLike(userQN+";"+userIp,root.article._source.liste_like)){
-        target.find(".classSearch-82 .reseau-ss .like").addClass("active-like");
-    }
+        target.find(".comment-form h1.add-comment").show();
+        target.find(".comment-form span.rep-comment").hide(); 
+        target.find(".comment-form span.rep-comment").attr("idd","");
 
-    createDivComments(obj.comments,target); 
+        if(!verifierLike(userQN+";"+userIp,root.article._source.liste_like)){
+            target.find(".classSearch-82 .reseau-ss .like").addClass("active-like");
+        }
 
-    target.find(".classSearch-82 .vpanel-title .title-2x").html(obj.type);
-    target.find(".divSearch-article .article-title h1").html(obj.title);
-    target.find(".divSearch-article .det-div .author-pub").html(obj.author);
-    target.find(".divSearch-article .det-div .date-pub").html(obj.datePr.split(" ")[0].replace(/-/g,"/"));
-    target.find(".divSearch-article .date-det span.vue-span").html(obj.vue);
-    target.find(".divSearch-article .date-det span.like-span").html(obj.like);
-    target.find(".divSearch-article .article-img img").attr("src",obj.imgP);
-    target.find(".divSearch-article .article-desc div p").html(obj.description);
-    target.find(".divSearch-article .content-article").html(obj.content);
-    target.find(".divSearch-article .search-details-icon img").hide();
-    target.find(".divSearch-article .div-fsb-details .fsb-container").show();
-});
+        createDivComments(obj.comments,target); 
+
+        target.find(".classSearch-82 .vpanel-title .title-2x").html(obj.type);
+        target.find(".divSearch-article .article-title h1").html(obj.title);
+        target.find(".divSearch-article .det-div .author-pub").html(obj.author);
+        target.find(".divSearch-article .det-div .date-pub").html(obj.datePr.split(" ")[0].replace(/-/g,"/"));
+        target.find(".divSearch-article .date-det span.vue-span").html(obj.vue);
+        target.find(".divSearch-article .date-det span.like-span").html(obj.like);
+        target.find(".divSearch-article .article-img img").attr("src",obj.imgP);
+        target.find(".divSearch-article .article-desc div p").html(obj.description);
+        target.find(".divSearch-article .content-article").html(obj.content);
+        target.find(".divSearch-article .search-details-icon img").hide();
+        target.find(".divSearch-article .div-fsb-details .fsb-container").show();
+    });
 }

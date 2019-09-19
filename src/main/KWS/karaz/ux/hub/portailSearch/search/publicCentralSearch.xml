@@ -25,28 +25,30 @@
     /*      START :: #MFB :: grid Rokhas 3.0 Home page      */
     /********************************************************/
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script onLoad="true">if(root.newUser=="true"){
-	   ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
-	}else if(root.forgetPass=="true"){
-	   ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');
-	}</script>
+      <script onLoad="true">
+      if(root.newUser=="true"){
+        ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
+      }else if(root.forgetPass=="true"){
+        ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');
+      }
+        </script>
       <script postLoad="true">var currentFocus;
-          getMostPopularArticle(4,"",".fieldser-article-1 .vbox-articles .ow-vl-inner");
+            getMostPopularArticle(4,"",".classSearch-home-glo .fieldser-article-1 .vbox-articles .ow-vl-inner");
 
-                removeLastRootPage(userName);
-                    document.querySelector(".classSearch-home .divSearchBar input").addEventListener("input", function () {
-                    var a, b, i;
-                    var inp = document.querySelector(".classSearch-home .divSearchBar input");
-                    var val = inp.value.toLowerCase();
-                    if (!val) {
-                        closeAllLists();
-                        return false;
-                    }
-                    console.log(val);
-                    currentFocus = -1;
-                    //close any already open lists of autocompleted values
-                    closeAllLists();
-                    restAutoComplete(inp,val,true);
+            removeLastRootPage(userName);
+            document.querySelector(".classSearch-home .divSearchBar input").addEventListener("input", function () {
+            var a, b, i;
+            var inp = document.querySelector(".classSearch-home .divSearchBar input");
+            var val = inp.value.toLowerCase();
+            if (!val) {
+                closeAllLists();
+                return false;
+            }
+            console.log(val);
+            currentFocus = -1;
+            //close any already open lists of autocompleted values
+            closeAllLists();
+            restAutoComplete(inp,val,true);
       });
         
       document.querySelector(".divSearchBar input").addEventListener("keydown", function (e) {
@@ -90,10 +92,6 @@
     $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
         $(".header-div-toggle").slideToggle(); 
     });         
-   
-    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
-    });
 
     
 

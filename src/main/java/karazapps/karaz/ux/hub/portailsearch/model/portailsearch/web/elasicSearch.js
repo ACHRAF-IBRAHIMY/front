@@ -953,7 +953,9 @@ if(type==null){
                     playlist_videos[i].push(result.responses[i].hits.hits[j]._source);
                     console.log(result.responses[i].hits.hits[j]._id);
                     // typeUse 1 for admin and 2for normal user
-                    NQF_add_video(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.img_url, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+                    if(j<4){
+                        NQF_add_video(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.img_url, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas)
+                    }
 
                     // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
                     console.log(result.responses[i].hits.hits[j]._source.type);
