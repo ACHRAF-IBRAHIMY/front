@@ -13,7 +13,7 @@
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
             profilesT=profiles;
-            getAllplayLists(2,4,"classSearch-7");
+            getAllplayLists(2,1000,"classSearch-7");
             $(".classSearch-7 .searchbuttun").click();
 
             $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
