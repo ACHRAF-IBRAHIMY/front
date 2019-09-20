@@ -43,7 +43,7 @@
                 root.krn=context.formRender.dataObject.krn;
                 context.formRender.notifyObservers("krn");
                 context.formRender.krn=root.krn;*/
-                removeLastRootPage(userName);
+                 
             	
                 $(".rokhas-home").click(function(){
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});

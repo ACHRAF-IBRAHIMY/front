@@ -15,13 +15,9 @@
       		profilesT = profiles;
                 loadPageBytype(2);
             $(".classSearch-2 .searchbuttun").click();
-                $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-		        $(".header-div-toggle").slideToggle(); 
-		    });         
+                        
 		   
-		    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
-		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
-		    });
+		    
 		
 	
 

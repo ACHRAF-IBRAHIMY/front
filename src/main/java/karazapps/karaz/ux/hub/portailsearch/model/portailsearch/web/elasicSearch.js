@@ -975,7 +975,7 @@ if(type==null){
 }
 
 
-function RestSearchArticleSec(prefix, page, size, type, typeUse, cls,prev,clas,target){
+function RestSearchArticleSec(prefix, page, size, type, typeUse, cls,prev,clas,target,root){
 
 var str = '';
 for(var i=0;i<type.length;i++){
@@ -1012,9 +1012,9 @@ $.ajax({
                         "vue":result.responses[i].hits.hits[j]._source.vue,
                         "author":result.responses[i].hits.hits[j]._source.author
                     }
-                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,objj,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas,target)
+                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,objj,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas,target,root)
                 }else{
-                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas,target)
+                    NQF_add_article(result.responses[i].hits.hits[j]._source.title,result.responses[i].hits.hits[j]._source.description,result.responses[i].hits.hits[j]._source.imgP, result.responses[i].hits.hits[j]._id, cls[i], typeUse,clas,target,root)
                 }
 
                 // console.log(result.responses[i].hits.hits[j]._source.REPONSES);	
@@ -1028,7 +1028,7 @@ $.ajax({
 })
 }
 
-function NQF_add_article(quest,desc,imgUrl, id, cls, type,clas,target){
+function NQF_add_article(quest,desc,imgUrl, id, cls, type,clas,target,root){
 if (type == 1) {
 
     var div = document.createElement("div");
@@ -1042,7 +1042,7 @@ if (type == 1) {
 </div>`;
 
 div.addEventListener("click",function(){
-    getArticle(id,0,clas,target);
+    getArticle(id,0,clas,target,root);
 });
 
 div.setAttribute("idd",id);
@@ -1069,7 +1069,7 @@ console.log(".v-edit" + cls + "");
         //     getArticle(id,1,clas);
         // } 
 
-        getArticle(id,1,clas,target);
+        getArticle(id,1,clas,target,root);
     });
 
     div.setAttribute("idd",id);
@@ -1578,7 +1578,7 @@ if (window.confirm("Voulez-vous vraiment supprimer ce référentiel?")) {
 
 }
 
-function removereArticle(id,clas) {
+function removereArticle(id,clas,target) {
 
 if (window.confirm("Voulez-vous vraiment supprimer cet article?")) {
     $.ajax({
@@ -1591,7 +1591,8 @@ if (window.confirm("Voulez-vous vraiment supprimer cet article?")) {
         },
         success: function (result) {
             console.log(result);
-            $("."+clas+" div[idd=" + id + "]").hide();
+            target.find("."+clas+" .NQF-vue-video").hide();
+            target.find("."+clas+" div[idd=" + id + "]").hide();
         },
         error: function (error) {
             console.log(error);
@@ -1994,7 +1995,7 @@ $.ajax({
 }
 
 var ArticleObject = {};
-function getArticle(id,type,cls,target){
+function getArticle(id,type,cls,target,root){
 if(type==0){
     target.find("."+cls+" .NQF-new-quest-btn").show();
     target.find("."+cls+" .NFQ-load-img").show();
@@ -2023,7 +2024,8 @@ $.ajax({
             target.find("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
             
             ArticleObject = result._source;
-            
+            root.articleCms = result._source;
+
             target.find("."+cls+" .NQF-vue-question .vue-video-frame").html("<img src="+result._source.imgP+" width=\"90%\" height=\"100%\" frameborder=\"0\" >");
             target.find("."+cls+" .NQF-vue-question .vue-video-title b").html(result._source.title);
             target.find("."+cls+" .NQF-vue-question .vue-video-description").html(result._source.description);

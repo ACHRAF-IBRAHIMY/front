@@ -35,7 +35,7 @@
       <script postLoad="true">var currentFocus;
             getMostPopularArticle(4,"",".classSearch-home-glo .fieldser-article-1 .vbox-articles .ow-vl-inner");
 
-            removeLastRootPage(userName);
+             
             document.querySelector(".classSearch-home .divSearchBar input").addEventListener("input", function () {
             var a, b, i;
             var inp = document.querySelector(".classSearch-home .divSearchBar input");
@@ -86,15 +86,6 @@
     $(".to-simulator").click(function(){
         ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
     });
-
-
-
-    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").slideToggle(); 
-    });         
-
-    
-
 
 
     $(".folder-feature .folder-feature-header i").click(function(){
@@ -187,13 +178,13 @@
                     <div class="hp-box-small-title" style="font-size:1.3rem">Etat dossier</div>
                   </html>
                   <html>
-                    <div style="height:50px">
+                    <div class="mobile-height-auto" style="height:50px">
                       <img src="img/loadgif3.gif" style="width:50px;display:none;" class="loadGif" />
                     </div>
                   </html>
                 </vbox>
                 <html>
-                  <div style="height: 10px;" />
+                  <div class="mobile-height-0" style="height: 10px;" />
                 </html>
                 <vbox>
                   <field widget="text" className="hp-text-input" xpath="demandeId" emptyText="Votre référence dossier" noLabel="true" width="80%">

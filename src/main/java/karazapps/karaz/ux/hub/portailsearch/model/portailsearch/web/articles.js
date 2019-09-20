@@ -244,7 +244,6 @@ function createDivComments(comments,target){
                 div1.appendChild(div5);
                 div.appendChild(div1);
                 target.find(".comments-list > .ow-vl-inner").append(div);
-
             });
         };
     });
@@ -407,8 +406,15 @@ function verifierVue(user,array){
             document.cookie="{\"userRef\":"+(new Date()).getTime()+"}";
             return true;
         }else{
-            index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
+            try{
+                index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
+            }
+            catch(e){
+                index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
+            }
 
+            
+            
             if(index==-1){
                 return true;
             }else{
@@ -586,6 +592,67 @@ $.ajax({
 
 }
 
+var rootTest = {
+	    "article":{
+	        "_id":1
+	    }
+	}; 
+
+	function removeCommentRest(root,target,comment,context,type){
+	    if(type==-1){ 
+	        var obj = {
+	            "script" : {
+	                "source": "ctx._source.comments.remove(params.comment)",
+	                "lang": "painless",
+	                "params" : {
+	                    "comment" : comment
+	                }
+	            }
+	        };
+	    }else{
+	        var obj = {
+	            "script" : {
+	                "source": "ctx._source.comments[params.context].comments.remove(params.comment)",
+	                "lang": "painless",
+	                "params" : {
+	                    "comment" : comment,
+	                    "context" : context
+	                }
+	            }
+	        };
+	    }
+	    
+	    
+
+	    $.ajax({
+	        type: "post",
+	        url: URL_SEARCH + "/articles_index/_update/"+root.article._id,
+	        datatype: "application/json",
+	        contentType: "application/json",
+	        data:JSON.stringify(obj),
+	        beforeSend: function (xhr) {
+	            xhr.setRequestHeader("Authorization", ADMIN_AUTH);
+	        },
+	        success: function(){
+
+	            /*
+	            root.articleCommentName = "";
+	            root.articleCommentLastName = "";
+	            root.articleCommentEmail = "";
+	            root.articleComment = "";
+
+	            context.formRender.notifyObservers("articleCommentName");
+	            context.formRender.notifyObservers("articleCommentLastName");
+	            context.formRender.notifyObservers("articleCommentEmail");
+	            context.formRender.notifyObservers("articleComment");
+	        */
+	            getObjectArticle(root.article._id,root,target);
+	        
+	        //     target.find(".classSearch-82 .reseau-ss .like").removeClass("active-like");
+	        //     target.find(".classSearch-82 .date-det span.like-span").html(Number(target.find(".classSearch-82 .date-det span.like-span").html())-1);
+	        }
+	    });
+	}
 
 function getObjectArticle(id,root,target){
     $(".divSearch-article .search-details-icon img").show();
@@ -624,5 +691,6 @@ function getObjectArticle(id,root,target){
         target.find(".divSearch-article .content-article").html(obj.content);
         target.find(".divSearch-article .search-details-icon img").hide();
         target.find(".divSearch-article .div-fsb-details .fsb-container").show();
+        target.find(".classSearch-82 .reseau-ss .url-share textArea").html(window.location.href+"/index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+results._id+"//search");
     });
 }

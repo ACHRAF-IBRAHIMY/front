@@ -1,0 +1,23 @@
+@media screen and (max-width: 500px) {
+
+    .mobile-height-0{
+        height: 0px !important;
+    }
+    
+    .mobile-height-auto{
+        height: auto !important;
+    }    
+
+    .hp-search_field{
+        margin: 0 !important;
+        padding-left : 0 !important;
+    }
+
+    .classSearch-2 .pagination-new-style{
+        display: block;
+    }
+
+    .NQF-freq-quest > .ow-pl-inner{
+        height: auto !important;
+    }
+}

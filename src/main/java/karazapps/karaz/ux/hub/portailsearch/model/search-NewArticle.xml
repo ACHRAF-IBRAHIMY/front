@@ -19,6 +19,7 @@
           <fileTime />
           <gedId />
     </attachementArImg>
+    <articleCms />
     <urlRef />
   </data>
   <view>
@@ -30,14 +31,12 @@
       <script postLoad="true">
               profilesT = profiles;
 
-              $(".rokhas-home").click(function(){
-                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-              });
+              
 
               // add style to question type header
               <!-- PCD_add_header_style_action(".pcd-header-NQF", "Quels sont les pièces requises pour l'obtention d'un permis de construire ?"); -->
               PCD_headerfieldset_color(".classSearch-99 .NFQ-quest-title");
-              $(".classSearch-99 .NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+              context.formRender.targetPanel.find(".classSearch-99 .NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
 
               PCD_header_style_quest_type(".classSearch-99 .NFQ-type-astuce" , "far fa-building")
               PCD_header_style_quest_type(".classSearch-99 .NFQ-type-alune" , "fas fa-cog")
@@ -46,25 +45,25 @@
               // header color
               PCD_headerfieldset_color(".pcd-ha-color");
 
-              $(".NQF-vue-ref").hide();
-              RestSearchArticleSec("", 0, 5, ["ASTUCES ET FONCTIONNALITES","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99",context.formRender.targetPanel);
+              context.formRender.targetPanel.find(".NQF-vue-ref").hide();
+              RestSearchArticleSec("", 0, 5, ["ASTUCES ET FONCTIONNALITES","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99",context.formRender.targetPanel,root);
               // hide saisie info question
-              $(".classSearch-99 .NQF-edit-modif").hide()
+              context.formRender.targetPanel.find(".classSearch-99 .NQF-edit-modif").hide()
               //img loding ref
-              $(".classSearch-99 .NFQ-load-img").hide();
+              context.formRender.targetPanel.find(".classSearch-99 .NFQ-load-img").hide();
 
-              $(".ref-form .fa-close-1").click(function(){
-                $(".close1-ref").click();
+              context.formRender.targetPanel.find(".ref-form .fa-close-1").click(function(){
+                context.formRender.targetPanel.find(".close1-ref").click();
               });
 
-              $(".ref-form .fa-upload-1-ref").click(function(){
-                  $(".ref-form button.upload").click();
+              context.formRender.targetPanel.find(".ref-form .fa-upload-1-ref").click(function(){
+                  context.formRender.targetPanel.find(".ref-form button.upload").click();
               });
             
       </script>
       <script postLoad="true" delai="500">
         if(root.query.idObject.trim()!=''){
-            getArticle(root.query.idObject,0,"classSearch-99",context.formRender.targetPanel);
+            getArticle(root.query.idObject,0,"classSearch-99",context.formRender.targetPanel,root);
         }
       </script> 
       <html id="hSeparator">
@@ -81,16 +80,16 @@
             <vbox className="NQF-new-quest-btn">
               <button label="Nouvel article" style="" className="NQF-btn-new">
                 <postChange>
-                     $(".classSearch-99 .NQF-id").val("");
+                     context.formRender.targetPanel.find(".classSearch-99 .NQF-id").val("");
                     
-                      $('.classSearch-99 .ow-field-input[data-xpath="NQFtitle"]').val("");
-                      $('.classSearch-99 .ow-field-input-select[data-xpath="NQFtype"]').text("");
-                      $('.classSearch-99 .ow-field-input-select[data-xpath="NQFcategorie"]').text("");
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input[data-xpath="NQFtitle"]').val("");
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input-select[data-xpath="NQFtype"]').text("");
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input-select[data-xpath="NQFcategorie"]').text("");
 
-                      //$('.classSearch-99 .ow-field-input[data-xpath="urlRef"]').val("");
-                      $('.classSearch-99 .ow-field-input-line textarea[data-xpath="NQFdesc"]').val(""); 
-                      $('.classSearch-99 .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
-                      $('.classSearch-99 .ow-field-input[data-xpath="NQFtags"]').val("");
+                      //context.formRender.targetPanel.find('.classSearch-99 .ow-field-input[data-xpath="urlRef"]').val("");
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input-line textarea[data-xpath="NQFdesc"]').val(""); 
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input[data-xpath="NQFtags"]').val("");
 
                       root.attachementArImg.fileId = "";
                       root.attachementArImg.gedId = "";
@@ -101,8 +100,8 @@
                       root.NQFauthor = userName;
                       context.formRender.notifyObservers("NQFauthor");
                    
-                    $(".classSearch-99 .NFQ-all-quest").hide();
-                    $(".classSearch-99 .NQF-edit-modif").show();
+                    context.formRender.targetPanel.find(".classSearch-99 .NFQ-all-quest").hide();
+                    context.formRender.targetPanel.find(".classSearch-99 .NQF-edit-modif").show();
                     //NQF_new_QR(6,"classSearch-99");
 
                 </postChange>
@@ -121,9 +120,9 @@
                       <option value="2" label="Top" />
                     </field>
                     <field widget="select" label="Catégorie" labelAlign="float" xpath="NQFcategorie">
-                      <option value="1" label="ASTUCES ET FONCTIONNALITES" />
-                      <option value="2" label="A LA UNE" />
-                      <option value="3" label="A VENIR" />
+                      <option value="ASTUCES ET FONCTIONNALITES" label="ASTUCES ET FONCTIONNALITES" />
+                      <option value="A LA UNE" label="A LA UNE" />
+                      <option value="A VENIR" label="A VENIR" />
                     </field>
                     <field label="Image principale" widget="text" labelAlign="float" className="url-vue" xpath="urlRef" readOnly="true" />
                     <field xpath="attachementArImg" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
@@ -160,20 +159,20 @@
                 <hx />
                 <vbox columns="33% 33% auto" style="margin-right: 2em;">
                   <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
-                    <postChange>NQF_preview_QR(7,"classSearch-99",root);</postChange>
+                    <postChange>NQF_preview_QR(7,"classSearch-99",root,context.formRender.targetPanel);</postChange>
                   </button>
                   <button label="Nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
                       <postChange>
-                      $(".classSearch-99 .NQF-id").val("");
+                      context.formRender.targetPanel.find(".classSearch-99 .NQF-id").val("");
                     
-                      $('.classSearch-99 .ow-field-input[data-xpath="NQFtitle"]').val("");
-                      $('.classSearch-99 .ow-field-input-select[data-xpath="NQFtype"]').text("");
-                      $('.classSearch-99 .ow-field-input-select[data-xpath="NQFcategorie"]').text("");
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input[data-xpath="NQFtitle"]').val("");
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input-select[data-xpath="NQFtype"]').text("");
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input-select[data-xpath="NQFcategorie"]').text("");
 
-                      //$('.classSearch-99 .ow-field-input[data-xpath="urlRef"]').val("");
-                      $('.classSearch-99 .ow-field-input-line textarea[data-xpath="NQFdesc"]').val(""); 
-                      $('.classSearch-99 .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
-                      $('.classSearch-99 .ow-field-input[data-xpath="NQFtags"]').val("");
+                      //context.formRender.targetPanel.find('.classSearch-99 .ow-field-input[data-xpath="urlRef"]').val("");
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input-line textarea[data-xpath="NQFdesc"]').val(""); 
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
+                      context.formRender.targetPanel.find('.classSearch-99 .ow-field-input[data-xpath="NQFtags"]').val("");
 
                       root.attachementArImg.fileId = "";
                       root.attachementArImg.gedId = "";
@@ -184,20 +183,20 @@
                       root.NQFauthor = userName;
                       context.formRender.notifyObservers("NQFauthor");
 
-                      $(".classSearch-99 .NFQ-all-quest").hide();
-                      $(".classSearch-99 .NQF-edit-modif").show();
+                      context.formRender.targetPanel.find(".classSearch-99 .NFQ-all-quest").hide();
+                      context.formRender.targetPanel.find(".classSearch-99 .NQF-edit-modif").show();
 
                       </postChange>
                   </button>
                   <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
                     <postChange>
-                    if(verifieArticle("classSearch-99",root)){
-                      NQF_save_QR(7,root);
+                    if(verifieArticle("classSearch-99",root,context.formRender.targetPanel)){
+                      NQF_save_QR(7,root,context.formRender.targetPanel);
                     }
                     
                     </postChange>
                   </button>
-                </vbox>
+                </vbox> 
               </vbox>
             </vbox>
             <vbox className="NQF-vue-video NQF-vue-question">
@@ -220,18 +219,17 @@
               <vbox columns="80% 10% auto" className="NQF-btn-alg">
                 <vbox />
                 <button label="Supprimer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
-                  <postChange>let id = $(".classSearch-99 .NQF-id").val();
-                              removereArticle(id,"classSearch-99");
-                              $(".classSearch-99 .NQF-vue-ref").hide();
+                  <postChange>let id = context.formRender.targetPanel.find(".classSearch-99 .NQF-id").val();
+                              removereArticle(id,"classSearch-99",context.formRender.targetPanel);
+                              context.formRender.targetPanel.find(".classSearch-99 .NQF-vue-ref").hide();
                   </postChange>
                 </button>
                 <button label="Editer" className="DC-btn-filtrer-NQF NQF-btn-color NQF-btn-color-blue ">
                       <postChange>
                             console.log("root================",root);
                             console.log("context================",context);
-                            NQF_edit_av(7,root,context,"classSearch-99");
-                            $(".classSearch-99 .NFQ-all-quest").hide();
-                            $("")
+                            NQF_edit_av(7,root,context,"classSearch-99",context.formRender.targetPanel);
+                            context.formRender.targetPanel.find(".classSearch-99 .NFQ-all-quest").hide();
                       </postChange>
                 </button>
               </vbox>
