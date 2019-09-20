@@ -259,7 +259,7 @@
               <html>
                 <div class="hp-sbox-big-title" style="color: var(--fg0);">Pont de confiance Usager / Administration</div>
                 <div class="hp-sbox-text">Un parcours d'autorisation 100% digital, 100% traçable avec Zéro papier déposé et Zéro papier délivré.</div>
-                <div style="height: 50px;" />
+                <div class="height-mobile-20" style="height: 50px;" />
               </html>
               <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
                 <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ..." />
@@ -272,7 +272,7 @@
                 <a>Référentiel des activités</a>
               </html>
               <html>
-                <div style="height: 70px;" />
+                <div class="height-mobile-10" style="height: 70px;" />
               </html>
               <vbox columns="66% 34%" className="div-main-icons">
                 <html>

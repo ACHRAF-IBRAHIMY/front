@@ -20,4 +20,144 @@
     .NQF-freq-quest > .ow-pl-inner{
         height: auto !important;
     }
+
+    .divSearch-article .fsb-container{
+        padding: 13px !important;
+    }
+
+    button.send-comment{
+        float: none !important;
+        margin: auto !important;
+        display: block !important;
+    }
+
+    .divSearch-article .det-div{
+        color:#333;
+        padding: 8px;
+        font-size:15px;
+      }
+
+    .reseau-ss{
+        text-align: left !important;
+    }
+
+    .comments-list .grided-mobile{
+        grid-template-columns: 63px auto !important;
+        display: grid !important;
+        font-size: 14px !important;
+    }
+
+
+    .comments-list .comment-user-img img{
+        width: 46px !important;
+    }
+
+    .size955 {
+        width: 100%;
+    }
+
+    .simulator .simulator-qr {
+        margin: auto !important;
+        margin-left: 0px !important;
+        position: relative;
+        height: auto !important;
+        
+    }
+
+    .simulator .simulator-qr .next-button button{
+        margin-bottom: 4px !important;
+        height: auto !important;
+        margin-left: 0;
+    }
+    
+    .simulator .simulator-sub {
+        padding: 10px 15px !important;
+    }
+
+    .docs-container-div .doc-item .doc-name div,.docs-comp-container .doc-item .doc-name div,.docs-sort-container .doc-item .doc-name div,.docs-fac-container .doc-item .doc-name div{
+        width: 250px !important;
+        right:0 !important;
+    }
+    
+    .full-search-list-item{
+        height: auto !important;
+    }
+
+    .full-search-list-item .item-body-button{
+        float: none !important;
+        display: block;
+        margin: auto
+    }
+
+    .video-iframe {
+        height: auto;
+        margin: 9px 0 9px 0;
+    }
+
+    .height-mobile-10{
+        height: 10px !important;
+    }
+
+    .height-mobile-20{
+        height: 20px !important;
+    }
+
+    .div-main-icons {
+        width: 100%;
+        margin: auto;
+    }
+
+    .support-html{
+        display: block;
+        font-size: 20px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .classSearch-4 .iframe-tab iframe{
+        height: auto !important;
+    }
+
+    .classSearch-1 .full-search-list-item{
+        margin-top: 0 !important;
+        padding-top:0 !important;
+    }
+
+    .classSearch-1 .full-search-list-item .item-title{
+        top: 71px !important;
+    }
+
+    .classSearch-1 .full-search-list .full-search-list-item .item-body{
+        margin-top: 0 !important;
+    }
+
+    .classSearch-1 .full-search-list .full-search-list-item .item-body .item-body-title{
+        font-size: 14px;
+    }
+
+    .type-demande{
+        display: grid !important;
+        grid-template-columns: 25% 75% !important;
+        width: 100%;
+        height: auto;
+        margin: 9px auto;
+        font-size: 13px;
+    }
+
+    .type-demande i{
+        font-size: 30px;
+    }
+
+    #ranking-table td,#ranking-table2 td{
+        font-size: 12px;
+    }
+
+    #ranking-table td.rank-dl,#ranking-table td.rank-dg,#ranking-table td.rank-at,#ranking-table td.rank-fs,#ranking-table td.rank-es{
+        display: none;
+    }
+
+    #ranking-table2 td.rm{
+        display: none;
+    } 
+
+
 }

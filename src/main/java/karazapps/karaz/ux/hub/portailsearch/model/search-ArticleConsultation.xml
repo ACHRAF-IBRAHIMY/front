@@ -95,10 +95,11 @@
         }
 
         .divSearch-article .det-div{
-        color:#333;
+          color:#333;
         //border: 1px solid #ccc;
         //background: #eee;
-        padding: 8px;
+          padding: 8px;
+          font-size:1vw;
         }
 
         .divSearch-article .article-img{
@@ -198,7 +199,7 @@
                 </div>
               </html>
 
-              <vbox className="det-div" columns="40% 15% 15% 30%">
+              <vbox className="det-div" columns="auto 110px 95px auto">
                 <html>
                   <div class="dd author-pub">
                     Publié par <span style="font-weight: 600;">FRIKI Doha</span>
@@ -216,7 +217,7 @@
                   </div>
                 </html>
                 <html> 
-                <div class="dd reseau-ss">
+                <div class="dd reseau-ss" style="text-align:right">
                   <span class="like" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i class="fas fa-thumbs-up" /> J'aime </span>
                   <span class="comment" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i style="color:#999" class="fas fa-comment" /> Commenter</span>
                   <span class="share" style="margin-right: 3px;margin-left: 3px;cursor:pointer;position:relative"> <i class="fas fa-share" /> Partager <span class="url-share" style="border: 1px solid #666;padding: 3px 6px;position: absolute;right: 0;top: 29px;background: #fefefe;width: 58vw;overflow: hidden;display: grid;grid-template-columns: 87% 9% 4%;display:none;"><textArea readonly="readonly" style="word-wrap: break-word;cursor: default;resize:none;" class="url-text" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-copy" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-close" /></span> </span>
@@ -256,7 +257,7 @@
         
         
         
-        <vbox className="hp-box">
+        <vbox className="hp-box hp-small">
           <html>
             <span style="display:grid;grid-template-columns:100%;text-align:left">
               <span>

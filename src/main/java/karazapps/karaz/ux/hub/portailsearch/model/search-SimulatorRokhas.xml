@@ -46,9 +46,7 @@
       if(!$(this).hasClass("stopped"))backClick();
       });            
       
-    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-      $(".header-div-toggle").slideToggle(); 
-    });         
+             
    
      
 
