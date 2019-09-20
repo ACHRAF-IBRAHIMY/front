@@ -27,16 +27,12 @@
       }
 
       
-      removeLastRootPage(userName);
+       
           profilesT = profiles;
         
-        $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-		        $(".header-div-toggle").slideToggle(); 
-		    });         
+                
 		   
-		    $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
-		        ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
-		    });
+		    
 	
           
             document.querySelector(".classSearch-80 .div-full-search-bar .ow-field-input").addEventListener("keydown", function (e) {
@@ -73,7 +69,7 @@
             // header color
             PCD_headerfieldset_color(".pcd-ha-color");
 
-            RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset .NFQ-quest-type-recent",".det-article-fieldset .NFQ-quest-type-popular",".det-article-fieldset .NFQ-quest-type-liked"],0,"classSearch-80",context.formRender.targetPanel)
+            RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset .NFQ-quest-type-recent",".det-article-fieldset .NFQ-quest-type-popular",".det-article-fieldset .NFQ-quest-type-liked"],0,"classSearch-80",context.formRender.targetPanel,root)
 
             $(".classSearch-80 .article-categorie .li-1").click(function(){
                 getAllArticlesByType("",0,false,0,"classSearch-80",root,context);

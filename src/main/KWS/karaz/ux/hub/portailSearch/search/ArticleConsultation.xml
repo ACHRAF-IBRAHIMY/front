@@ -56,7 +56,7 @@
               }
             }); 
 
-      RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset2 .NFQ-quest-type-recent",".det-article-fieldset2 .NFQ-quest-type-popular",".det-article-fieldset2 .NFQ-quest-type-liked"],0,"classSearch-82",context.formRender.targetPanel)
+      RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset2 .NFQ-quest-type-recent",".det-article-fieldset2 .NFQ-quest-type-popular",".det-article-fieldset2 .NFQ-quest-type-liked"],0,"classSearch-82",context.formRender.targetPanel,root)
       context.formRender.targetPanel.find(".annuler-rep-comment").click(function(){
           context.formRender.targetPanel.find(".comment-form h1.add-comment").show();
           context.formRender.targetPanel.find(".comment-form span.rep-comment").hide(); 
@@ -219,7 +219,7 @@
                 <div class="dd reseau-ss">
                   <span class="like" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i class="fas fa-thumbs-up" /> J'aime </span>
                   <span class="comment" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i style="color:#999" class="fas fa-comment" /> Commenter</span>
-                  <span class="share" style="margin-right: 3px;margin-left: 3px;cursor:pointer;position:relative"> <i class="fas fa-share" /> Partager <span class="url-share" style="border: 1px solid #666;padding: 3px 6px;position: absolute;right: 0;top: 29px;background: #fefefe;width: 58vw;overflow: hidden;display: grid;grid-template-columns: 87% 9% 4%;display:none;"><textArea readonly="readonly" style="word-wrap: break-word;cursor: default;resize:none;" class="url-text">http://frontrokhas.karaz.org:8080/karazal/index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=//search</textArea><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-copy"></i><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-close"></i></span> </span>
+                  <span class="share" style="margin-right: 3px;margin-left: 3px;cursor:pointer;position:relative"> <i class="fas fa-share" /> Partager <span class="url-share" style="border: 1px solid #666;padding: 3px 6px;position: absolute;right: 0;top: 29px;background: #fefefe;width: 58vw;overflow: hidden;display: grid;grid-template-columns: 87% 9% 4%;display:none;"><textArea readonly="readonly" style="word-wrap: break-word;cursor: default;resize:none;" class="url-text"></textArea><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-copy" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-close" /></span> </span>
                 </div> 
                 </html>
               </vbox>
@@ -314,11 +314,11 @@
           
           <vbox className="comment-form">
           <html>
-            <h1 style="color: #666;font-size: 20px;text-align: left;" class="add-comment" >AJOUTER VOTRE COMMENTAIRE</h1>
+            <h1 style="color: #666;font-size: 20px;text-align: left;" class="add-comment">AJOUTER VOTRE COMMENTAIRE</h1>
             <span class="rep-comment" idd="" style="display:none;">
               <span style="display:grid;grid-template-columns: 50% 50%;">
                 <span style="color: #666;font-size: 20px;text-align: left;margin-bottom: 5px;">REPONDRE AU COMMANTAIRE</span>
-                <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close"></i> Annuler la réponse</span>  
+                <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close" /> Annuler la réponse</span>  
               </span>
             </span>
             <span style="color:#e08a08;text-align:left;font-size:14px;display: block;margin-bottom: 14px;">Votre adresse de messagerie ne sera pas publiée. Les champs obligatoires sont indiqués avec *</span>

@@ -11,7 +11,7 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true" xcstt="x">removeLastRootPage(userName);
+      <script postLoad="true" xcstt="x"> 
             
             
                 $(".rokhas-home").click(function() {

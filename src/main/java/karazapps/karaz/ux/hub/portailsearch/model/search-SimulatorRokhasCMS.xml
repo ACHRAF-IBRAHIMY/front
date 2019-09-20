@@ -19,7 +19,7 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">removeLastRootPage(userName);
+      <script postLoad="true"> 
             getTreeFromEs(0);            
 
 
