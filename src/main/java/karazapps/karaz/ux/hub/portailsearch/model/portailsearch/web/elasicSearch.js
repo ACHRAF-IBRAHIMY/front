@@ -1926,6 +1926,8 @@ if(type==0){
     $("."+cls+" .search-video").hide();
     $("."+cls+" .consultation-video").hide();
     $("."+cls+" .consultation-video .video-iframe iframe").attr("src","");
+    $("."+cls+" .consultation-video .video-iframe iframe").attr("allowfullscreen","");
+    $("."+cls+" .consultation-video .video-iframe iframe").attr("mozallowfullscreen","");
     $("."+cls+" .searchGif2").show();
 }
 

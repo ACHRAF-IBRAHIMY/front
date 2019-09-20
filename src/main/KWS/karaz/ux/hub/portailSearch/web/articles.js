@@ -1,4 +1,3 @@
-
 function addLike(user,id,target){
     var obj = {
         "script" : {
@@ -129,8 +128,6 @@ function addComment(root,target,context){
         addCommentRest(root,target,comment,context,Number(target.find(".comment-form span.rep-comment").attr("idd")));
     }
 
-    
-
 }
 
 function createDivComments(comments,target){
@@ -140,7 +137,7 @@ function createDivComments(comments,target){
         var div = document.createElement("div");
         div.setAttribute("class","ow-vl ow-vbox");
         var div1 = document.createElement("div");
-        div1.setAttribute("class","ow-vl-inner ow-gbox");
+        div1.setAttribute("class","ow-vl-inner ow-gbox grided-mobile");
         div1.setAttribute("style","grid-template-columns: 100px auto;");
         var div2 = document.createElement("div");
         div2.setAttribute("class","ow-vl ow-vbox comment-user-img");
@@ -204,7 +201,7 @@ function createDivComments(comments,target){
                 div.setAttribute("class","ow-vl ow-vbox");
                 div.setAttribute("style","margin-left: 70px;")
                 var div1 = document.createElement("div");
-                div1.setAttribute("class","ow-vl-inner ow-gbox");
+                div1.setAttribute("class","ow-vl-inner ow-gbox grided-mobile");
                 div1.setAttribute("style","grid-template-columns: 100px auto;");
                 var div2 = document.createElement("div");
                 div2.setAttribute("class","ow-vl ow-vbox comment-user-img");

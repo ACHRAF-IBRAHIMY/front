@@ -57,24 +57,19 @@
                     if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x,1,"classSearch-0");
           }); 
+           
+           PCD_headerfieldset_color(".NFQ-quest-title");
+        $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+           PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
+           PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
           
-                  
-		   
-		    
-		 
-		            
-                PCD_headerfieldset_color(".NFQ-quest-title");
-	            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
-                PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
-                PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
-               
-                PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
-                PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
-                PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
-                PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
+           PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
+           PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
+           PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
+           PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
 
-                // header color
-                PCD_headerfieldset_color(".pcd-ha-color");
+           // header color
+           PCD_headerfieldset_color(".pcd-ha-color");
 
             RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",2)
             RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",2)
@@ -90,7 +85,7 @@
             
             </script>
       <html id="hSeparator">
-        <div style="height: 30px;" />
+        <div class="height-mobile-10" style="height: 30px;" />
       </html>
       <vbox columns="70% 30%" className="classSearch-0">
         <vbox className="hp-box hp-small divSearch">
@@ -108,13 +103,13 @@
                 <span class="prefix" style="color:#f93;" />
                 . Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
               </div>
-              <div style="height: 50px;" />
+              <div class="height-mobile-20" style="height: 50px;" />
             </html>
             <vbox columns="80% 8% 8%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-              <button className="hp-search_field_icon fas fa-keyboard" label="" title="clavier Arabic" postProcessing="search()" separator="!!">
-                <postChange></postChange>
-              </button>
+              <!-- <button className="hp-search_field_icon fas fa-keyboard" label="" title="clavier Arabic" postProcessing="search()" separator="!!">
+                <postChange />
+              </button> -->
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                 <postChange>
                           var prefix = $(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
@@ -130,7 +125,7 @@
             </vbox>
             
             <html>
-              <div style="height: 70px;" />
+              <div class="height-mobile-20" style="height: 70px;" />
             </html>
             <html>
               <div class="searchGif">

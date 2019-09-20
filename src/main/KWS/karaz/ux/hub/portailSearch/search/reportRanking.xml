@@ -211,7 +211,7 @@
 
         </style>
       </html>
-      <vbox columns="20% 80%" className="hp-box">
+      <vbox columns="20% 80%" className="hp-box hp-small">
         <vbox className="self-align-vb">
           <html>
             <img style="width: 140px;" src="img/logo_rokhas_ranking_u1286.png" alt="" />
@@ -226,7 +226,7 @@
           </html>
         </vbox>            
       </vbox>
-      <fieldSet className="hp-box ranking-fieldset" label="CLASSEMENT TRIMESTRIEL GLOBAL">
+      <fieldSet className="hp-box ranking-fieldset hp-small" label="CLASSEMENT TRIMESTRIEL GLOBAL">
         <html> 
           <div style="padding-left: 23px;">
                  Classement global des collectivités territoriales à base de leur score dans chacun
