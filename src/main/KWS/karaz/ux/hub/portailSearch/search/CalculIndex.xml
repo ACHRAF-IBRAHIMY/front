@@ -67,7 +67,7 @@
 
                 </style>
             </html>
-            <vbox className="hp-box calcul-index">
+            <vbox className="hp-box calcul-index hp-small">
             <vbox columns="50% 50%">
                 <html><h1>Méthodologie de ranking Rokhas</h1></html>
                 <html className="link-rokhas-index"> <span style="cursor:pointer;color:#38a" onclick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ReportRanking&quot;, &quot;search&quot;, &quot;Rokhas Ranking&quot;, {});" href="">Retour à Index Rokhas</span></html>  

@@ -13,9 +13,7 @@
       <script postLoad="true">removeLastRootPage(userName)
                 var id = root.query.idObject;
                 getObject(id);
-                $(".rokhas-home").click(function() {
-                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "PublicCentralSearch", {});
-                });
+                
 
                 $(".tab-info-item-s span.new-search").click(function(){
                    var pre=$(".div-fsb-details .vpanel-title .title-2x").html();
@@ -29,9 +27,7 @@
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=" + keyword + "&amp;query.parentP="+parentP, "search", "All Karazuxresults", {});
                 });
 
-                    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").slideToggle(); 
-    });         
+                             
    
      
 

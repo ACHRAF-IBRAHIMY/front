@@ -33,7 +33,6 @@
       }
         </script>
       <script postLoad="true">var currentFocus;
-            getMostPopularArticle(4,"",".classSearch-home-glo .fieldser-article-1 .vbox-articles .ow-vl-inner");
 
              
             document.querySelector(".classSearch-home .divSearchBar input").addEventListener("input", function () {
@@ -124,6 +123,9 @@
 
     //scrollChiffreFunction();
     
+    </script>
+    <script postLoad="true" delay="500">
+            getMostPopularArticle(4,"",".classSearch-home-glo .fieldser-article-1 .vbox-articles .ow-vl-inner");      
     </script>
       <vbox usage="embedded:N" className="classSearch-home-glo " xcstt="x">
         <html id="hSeparator">

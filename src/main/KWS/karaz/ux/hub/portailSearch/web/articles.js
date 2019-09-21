@@ -688,6 +688,6 @@ function getObjectArticle(id,root,target){
         target.find(".divSearch-article .content-article").html(obj.content);
         target.find(".divSearch-article .search-details-icon img").hide();
         target.find(".divSearch-article .div-fsb-details .fsb-container").show();
-        target.find(".classSearch-82 .reseau-ss .url-share textArea").html(window.location.href+"/index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+results._id+"//search");
+        target.find(".classSearch-82 .reseau-ss .url-share textArea").html(window.location.href+"index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+results._id+"//search");
     });
 }

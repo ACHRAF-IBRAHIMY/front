@@ -155,9 +155,84 @@
         display: none;
     }
 
-    #ranking-table2 td.rm{
+    /* #ranking-table2 td.rm{
         display: none;
-    } 
+    }  */
 
+    .ranking-bar10-U .div-1-top10 span{
+        font-size : 12px !important;
+        line-height: 12px !important;
+    }
+
+    .ranking-bar10-U .div-3-top10 div{
+        width: 45% !important;
+    }
+    
+    .ranking-bar10-U .top-10-small{
+        display:grid;
+        grid-template-columns: 65% 5% 30%;
+    }
+
+    .ranking-bar10-E .div-1-top10 span{
+        font-size : 12px !important;
+        line-height: 12px !important;
+    }
+
+    .ranking-bar10-E .div-3-top10 div{
+        width: 45% !important;
+    }
+    
+    .ranking-bar10-E .top-10-small{
+        display:grid;
+        grid-template-columns: 65% 5% 30%;
+    }
+    
+    .legend-region .lg{
+        display:grid;
+        grid-template-columns: 50% 50% !important;
+    }
+
+    .div-bar-1{
+        width: 90%;
+    }
+
+    .div-bar-2{
+        width: 90%;
+    }
+
+    #ranking-table{
+        display: none;
+    }
+
+    #ranking-table2 .commune-td{
+        font-size: 12px !important;
+        padding-left: 0px !important;
+    }
+
+    #ranking-table2 .first-tr{
+        display: contents !important;
+    }
+
+    .dipslay-block{
+        display: block;
+    }
+
+    .calcul-index{
+        font-size: 13px !important;
+        padding: 20px 15px !important;
+        text-align: left !important;
+    }
+
+    .calcul-index img{
+        max-width: 70% !important;
+    }
+
+    .autocomplete-items{
+        width: 95% !important;
+    }
+
+    .hp-small{
+        padding: 10px 20px !important;
+    }
 
 }
