@@ -231,8 +231,16 @@
         width: 95% !important;
     }
 
-    .hp-small{
+    .classSearch-4 .hp-small{
         padding: 10px 20px !important;
     }
+
+	.divSearch-article{
+		font-size:14px !important;
+	}
+	
+	.divSearch-article .content-article{
+		text-align:left !important;
+	}
 
 }
