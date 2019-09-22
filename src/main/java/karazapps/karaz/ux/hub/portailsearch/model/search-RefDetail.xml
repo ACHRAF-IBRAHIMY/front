@@ -13,12 +13,6 @@
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
                 profilesT = profiles;  
-    
-                $(".Header-signup-logo .Header-signup-glo .rokhas-home,.Header-signup .Header-signup-min .menu-bar-img").click(function(){
-                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch", "search", "Public central search", {});
-                });
-
-
 
                 var id = root.query.idObject;
                // var id = "ZuWjEm0BwP6ZdSKajY39";
@@ -49,7 +43,7 @@
       </html>
       <vbox columns="70% 30%" className="classSearch-4">
         <vbox className="hp-small div-det-acc">
-          <vbox className="hp-box hp-sec qst-faq">
+          <vbox className="hp-box hp-sec qst-faq hp-small">
             <html>
               <div class="vpanel-title">
                 <div class="vpanel-title">

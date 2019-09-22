@@ -5,6 +5,7 @@
     <query>
       <keys />
       <idObject />
+      <redirectArt />
     </query>
     <article>
     </article>
@@ -20,10 +21,9 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">
+      <script postLoad="true" delay="500">
         var id = root.query.idObject;
         profilesT = profiles;
-        getObjectArticle(id,root,context.formRender.targetPanel);
 
         context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .comment").click(function(){
               var pos = context.formRender.targetPanel.find(".classSearch-82 .comment-form").offset().top;
@@ -78,6 +78,11 @@
       });
 
       </script>
+      <script postLoad="true" delay="500">
+              var id = root.query.idObject;
+              getObjectArticle(id,root,context.formRender.targetPanel);
+      </script>
+      
       <html>
       <style>
 

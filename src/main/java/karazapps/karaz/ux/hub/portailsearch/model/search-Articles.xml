@@ -67,7 +67,7 @@
             </html>
 
             <vbox columns="70% 30%" className="classSearch-81">
-                <vbox className="hp-box">
+                <vbox className="hp-box hp-small">
                     <html>
                         <div class="vpanel-title">
                             <div class="vpanel-title">

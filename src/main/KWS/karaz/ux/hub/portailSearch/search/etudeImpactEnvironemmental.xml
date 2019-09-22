@@ -44,9 +44,7 @@
               ApplicationManager.run("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets","search", "Acceptabilite Projets", {});
           });
 
-              $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").slideToggle(); 
-    });         
+                       
    
      
 

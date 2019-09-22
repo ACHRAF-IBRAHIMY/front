@@ -312,8 +312,13 @@ function verifierLike(user,array){
             document.cookie="{\"userRef\":"+(new Date()).getTime()+"}";
             return true;
         }else{
-            index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
-
+            try{
+                index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
+            }catch(e){
+                var a= document.cookie;
+                var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1)
+                index = array.indexOf(userName+";"+JSON.parse(b).userRef);
+            }
             if(index==-1){
                 return true;
             }else{
@@ -407,7 +412,9 @@ function verifierVue(user,array){
                 index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
             }
             catch(e){
-                index = array.indexOf(userName+";"+JSON.parse(document.cookie).userRef);
+                var a= document.cookie;
+                var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1)
+                index = array.indexOf(userName+";"+JSON.parse(b).userRef);
             }
 
             
@@ -688,6 +695,6 @@ function getObjectArticle(id,root,target){
         target.find(".divSearch-article .content-article").html(obj.content);
         target.find(".divSearch-article .search-details-icon img").hide();
         target.find(".divSearch-article .div-fsb-details .fsb-container").show();
-        target.find(".classSearch-82 .reseau-ss .url-share textArea").html(window.location.href+"/index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+results._id+"//search");
+        target.find(".classSearch-82 .reseau-ss .url-share textArea").html(window.location.href+"index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+results._id+"//search");
     });
 }

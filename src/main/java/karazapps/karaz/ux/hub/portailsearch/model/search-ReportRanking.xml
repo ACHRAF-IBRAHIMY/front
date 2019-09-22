@@ -53,12 +53,39 @@
 
           });
 
+          $("#ranking-table2 .fa-sort-down").click(function(){
+            
+            var classe = $(this).parent().attr("class");
+            
+            $(this).parent().find(".fa-sort-up").show();
+            $("#ranking-table2 .fa-sort-down,#ranking-table2 .fa-sort-up").removeClass("blue-icon");
+            $(this).parent().find(".fa-sort-up").addClass("blue-icon");
+            
+            $(this).hide();
+            sortByRanking(tabInd,classe,$(".ranking-fieldset #rankBy option:selected").val(),"asc");
+
+          });
+
           $("#ranking-table .fa-sort-up").click(function(){
             
             var classe = $(this).parent().attr("class");
             
             $(this).parent().find(".fa-sort-down").show();
             $("#ranking-table .fa-sort-down,#ranking-table .fa-sort-up").removeClass("blue-icon");
+            $(this).parent().find(".fa-sort-down").addClass("blue-icon");
+            
+            $(this).hide();
+
+            sortByRanking(tabInd,classe,$(".ranking-fieldset #rankBy option:selected").val(),"desc");
+   
+          });
+
+          $("#ranking-table2 .fa-sort-up").click(function(){
+            
+            var classe = $(this).parent().attr("class");
+            
+            $(this).parent().find(".fa-sort-down").show();
+            $("#ranking-table2 .fa-sort-down,#ranking-table2 .fa-sort-up").removeClass("blue-icon");
             $(this).parent().find(".fa-sort-down").addClass("blue-icon");
             
             $(this).hide();
@@ -287,10 +314,15 @@
 
         </vbox>
         <vbox>
+        <html>
+            <table class="hidden-table-rank" style="display:none;">
+              
+            </table>
+          </html>
           <html>
             <table id="ranking-table">
               <tr class="first-tr">
-                <td style="visibility:hidden;width: 28%;" />
+                <td style="visibility:hidden;width: 28%" />
                 <td class="sp-td">Rang  </td>
                 <td class="sp-td">Score <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
                 <td class="rank-dl">Délai <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
@@ -302,7 +334,16 @@
             </table>
             <div style="height: 400px;overflow: overlay;">
             <table id="ranking-table2">
-            
+            <tr class="first-tr" style="display:none;">
+                <td class="dipslay-block" style="visibility:hidden;width: 165px !important;" />
+                <td class="sp-td">Rang  </td>
+                <td class="sp-td">Score <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-dl">Délai <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-at">Attractivité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-dg">Digital <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-es">Ecosystème <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+                <td class="rank-fs">Fiscalité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              </tr>
             </table>
             </div>
           </html>
@@ -311,7 +352,7 @@
         
                </vbox>
       </fieldSet>
-      <fieldSet className="hp-box ranking-fieldset" label="CHAMPIONS DES SOUS-INDEX">
+      <fieldSet className="hp-box ranking-fieldset hp-small" label="CHAMPIONS DES SOUS-INDEX">
         <html> 
           <div style="padding-left: 23px;">
                  Les 3 champions dans chacun des 5 sous-index considérés.
@@ -370,7 +411,7 @@
           </fieldSet>
         </vbox>
       </fieldSet>
-      <fieldSet className="hp-box ranking-fieldset" label="TOP 10 PAR DOMAINE">
+      <fieldSet className="hp-box ranking-fieldset hp-small" label="TOP 10 PAR DOMAINE">
         <html> 
           <div style="padding-left: 23px;">
                  Les 10 Meilleurs classement dans les deux domaines d'autorisations.
@@ -379,7 +420,7 @@
         <vbox columns="50% 50%">
           <fieldSet label="Autorisations d'urbanisme" className="ranking-bar10-U">
             <html>
-              <div style="display:grid;grid-template-columns: 48% 4% 48%;">
+              <div class="top-10-small" style="display:grid;grid-template-columns: 48% 4% 48%;">
                 <div class="div-1-top10">
                   
                 </div>
@@ -409,7 +450,7 @@
           </fieldSet>
         </vbox>
       </fieldSet>
-      <fieldSet className="hp-box ranking-fieldset" label="RADAR DES REGIONS">
+      <fieldSet className="hp-box ranking-fieldset hp-small" label="RADAR DES REGIONS">
         <html> 
           <div style="padding-left: 23px;">
                  Comparatif de la performance des 12 régions au regard des 5 sous index clés.

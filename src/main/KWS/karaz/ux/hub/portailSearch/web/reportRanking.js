@@ -458,9 +458,10 @@ trim : ""
 function createCommuneTable(result,dec){
     var results = result.hits.hits;
     var tableHtml = $("#ranking-table2");
+    
 
     //$("#ranking-table tr:not(.first-tr)").remove();
-    $("#ranking-table2 tr").remove();
+    $("#ranking-table2 tr:not(.first-tr)").remove();
 
 
     for(var i=0;i<results.length;i++){
@@ -479,7 +480,8 @@ function createCommuneTable(result,dec){
         }else{
             rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
         }
-        tr.html(`<td  style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
+        tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
+        $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span>"+rankStr+"</span></td></tr>");
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
         tr.html(tr.html()+`<td class="rm" title=" Grand projets : `+(1/results[i]._source.indecators.delaiPpV).toFixed(2) +` jours - Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours">`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
@@ -497,7 +499,7 @@ function createCommuneTableP(result){
     var tableHtml = $("#ranking-table2");
 
     //$("#ranking-table tr:not(.first-tr)").remove();
-    $("#ranking-table2 tr").remove();
+    $("#ranking-table2 tr:not(.first-tr)").remove();
 
     for(var i=0;i<results.length;i++){
         var tr = $(document.createElement("tr"));
@@ -512,7 +514,7 @@ function createCommuneTableP(result){
         }else{
             rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
         }
-        tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.prefecture+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.prefecture,30)+"</span> "+rankStr+`</span></td>`);
+        tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.prefecture+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.prefecture,30)+"</span> "+rankStr+`</span></td>`);
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
         tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
@@ -530,7 +532,7 @@ var results = result.hits.hits;
 var tableHtml = $("#ranking-table2");
 
 //$("#ranking-table tr:not(.first-tr)").remove();
-$("#ranking-table2 tr").remove();
+    $("#ranking-table2 tr:not(.first-tr)").remove();
 
 for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
@@ -545,7 +547,7 @@ for(var i=0;i<results.length;i++){
     }else{
         rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
     }
-    tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.region+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.region,30)+"</span> "+rankStr+`</span></td>`);
+    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.region+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.region,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
     tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
     tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
@@ -564,7 +566,7 @@ var results = result.hits.hits;
 var tableHtml = $("#ranking-table2");
 
 //$("#ranking-table tr:not(.first-tr)").remove();
-$("#ranking-table2 tr").remove();
+    $("#ranking-table2 tr:not(.first-tr)").remove();
 
 for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
@@ -579,7 +581,7 @@ for(var i=0;i<results.length;i++){
     }else{
         rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
     }
-    tr.html(`<td style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
+    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
     tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
     tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
