@@ -17,9 +17,9 @@
   
                     <option value="g" label="Général"/>
   
-                    <option value="p1" label="ROKHAS"/>
+                    <option value="p1" label="ROKHAS ECONOMIQUE"/>
   
-                    <option value="p2" label="CASAURBA"/>
+                    <option value="p2" label="ROKHAS URBANISTIQUE"/>
   
                     <option value="p3" label="Karaz GIS"/>
  					 
