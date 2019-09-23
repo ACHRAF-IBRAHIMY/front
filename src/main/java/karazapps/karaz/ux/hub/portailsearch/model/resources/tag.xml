@@ -14,20 +14,36 @@
 	<dateUpdateFromFile></dateUpdateFromFile>
 	<sourceFileLocation></sourceFileLocation>
 	<entries>
-                   <option value="PCT-Block Maître d’ouvrage" label="PCT-Block Maître d’ouvrage"/>
+  
+                    <option value="PCT-Block Maître d’ouvrage" label="PCT-Block Maître d’ouvrage"/>
+  
                     <option value="PCT-Block Consistance du projet" label="PCT-Block Consistance du projet"/>
-					<option value="PCT-Block Localisation du projet" label="PCT-Block Localisation du projet"/>
-					<option value="PCT-Block Composition du projet" label="PCT-Block Composition du projet"/>
-					<option value="PCT-Block Autres intervenants sur le projet" label="PCT-Block Autres intervenants sur le projet"/>
-					<option value="PCT-Block Documents justificatifs" label="PCT-Block Documents justificatifs"/>
-					<option value="PCT-Block Position e-Signature" label="PCT-Block Position e-Signature"/>
-					<option value="PCT-Block e-Signature" label="PCT-Block e-Signature"/>
-					<option value="PCT-Block Revue dossier avant e-soumission" label="PCT-Block Revue dossier avant e-soumission"/> 
-					<option value="PCT-Block Réservation créneau commission" label="PCT-Block Réservation créneau commission"/>
-					<option value="PCT-Block Paiement frais de service" label="PCT-Block Paiement frais de service"/>
-					<option value="PCT-Block Vérification du dossier électronique" label="PCT-Block Vérification du dossier électronique"/>
-					<option value="PCT-Block Préparation signature électronique" label="PCT-Block Préparation signature électronique"/>
-					<option value="PCT-Block Signature électronique des documents à délivrer" label="PCT-Block Signature électronique des documents à délivrer"/>
+  
+                    <option value="PCT-Block Localisation du projet" label="PCT-Block Localisation du projet"/>
+  
+                    <option value="PCT-Block Composition du projet" label="PCT-Block Composition du projet"/>
+  
+                    <option value="PCT-Block Autres intervenants sur le projet" label="PCT-Block Autres intervenants sur le projet"/>
+  
+                    <option value="PCT-Block Documents justificatifs" label="PCT-Block Documents justificatifs"/>
+  
+                    <option value="PCT-Block Position e-Signature" label="PCT-Block Position e-Signature"/>
+  
+                    <option value="PCT-Block e-Signature" label="PCT-Block e-Signature"/>
+  
+                    <option value="PCT-Block Revue dossier avant e-soumission" label="PCT-Block Revue dossier avant e-soumission"/>
+  
+                    <option value="PCT-Block Réservation créneau commission" label="PCT-Block Réservation créneau commission"/>
+  
+                    <option value="PCT-Block Paiement frais de service" label="PCT-Block Paiement frais de service"/>
+  
+                    <option value="PCT-Block Vérification du dossier électronique" label="PCT-Block Vérification du dossier électronique"/>
+  
+                    <option value="PCT-Block Préparation signature électronique" label="PCT-Block Préparation signature électronique"/>
+  
+                    <option value="PCT-Block Signature électronique des documents à délivrer" label="PCT-Block Signature électronique des documents à délivrer"/>
+ 					 
+			    
 	</entries>
 </tns:liste>
  
