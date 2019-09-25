@@ -35,6 +35,8 @@
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.fiscalite","desc",3,0,5);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreU","desc",10,0,6);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreE","desc",10,0,7);
+              drawRadarRegion(tabInd[0]);
+              
           });
 
           getAllByAggs("région.keyword",100,null,"",1);
@@ -208,7 +210,6 @@
                 }
             });
 
-        drawRadarRegion(tabInd[0]);
 
       </script>
       <html id="hSeparator">
@@ -322,7 +323,7 @@
           <html>
             <table id="ranking-table">
               <tr class="first-tr">
-                <td  style="visibility:hidden;width: 28%" />
+                <td style="visibility:hidden;width: 28%" />
                 <td class="sp-td">Rang  </td>
                 <td class="sp-td">Score <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
                 <td class="rank-dl">Délai <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>

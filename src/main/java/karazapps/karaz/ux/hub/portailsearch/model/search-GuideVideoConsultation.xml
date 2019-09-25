@@ -13,14 +13,8 @@
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
             profilesT=profiles;
-            getAllplayLists(2,1000,"classSearch-7");
+            getAllplayLists(2,1000,"classSearch-7",context.formRender.targetPanel);
             $(".classSearch-7 .searchbuttun").click();
-
-                    
-		   
-		    
-		
-		     
 
             Array.from(document.querySelectorAll(".classSearch-7 .divSearchBar .hp-search_field input")).forEach(function(elm){
                 autoCompleteSim(elm,"videos_index","title");
@@ -59,11 +53,11 @@ Vous trouverez ici tous les tutoriels et vidéos nécessaires pour vous familiar
                         currentPage=0;
                         $(".classSearch-7 .consultation-video").hide();
                         $(".classSearch-7 .search-video").show();
-                        restFullSearchList(prefix,0,false,0,"classSearch-7");</postChange>
+                        restFullSearchList(prefix,0,false,0,"classSearch-7",context.formRender.targetPanel);</postChange>
               </button>
-            </vbox>
+            </vbox> 
             <html>
-              <div style="height: 30px;" />
+              <div style="height: 30px;" /> 
             </html>
             <html className="search-video">
               <div class="searchGif">

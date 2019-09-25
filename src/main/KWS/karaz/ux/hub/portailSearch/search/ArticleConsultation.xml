@@ -5,7 +5,7 @@
     <query>
       <keys />
       <idObject />
-      <redirectArt></redirectArt>
+      <redirectArt />
     </query>
     <article>
     </article>
@@ -30,20 +30,19 @@
               $('html,body').animate(
                      {
                       scrollTop: pos - 150
-                 },
-                 'slow');   
+                 }, 
+                 'slow');    
           });
 
     
         PCD_headerfieldset_color(".NFQ-quest-title");
           $(".NFQ-quest-title .ow-label-pl").css('text-transform','upperCase');
           PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
-          PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
                
-            PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
-            PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
-            PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
-            PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
+            PCD_header_style_quest_type(".NFQ-type-document" , "fas fa-clock")
+            PCD_header_style_quest_type(".NFQ-type-plat" , "fas fa-clock")
+            PCD_header_style_quest_type(".NFQ-type-general" , "fas fa-eye")
+            PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-heart")
 
             // header color
             PCD_headerfieldset_color(".pcd-ha-color");
@@ -179,8 +178,8 @@
               <div class="vpanel-title">
                 <div class="vpanel-title">
                   <span style="display:grid;grid-template-columns:50% 50%">
-                    <span>
-                      ARTICLE |
+                    <span style="cursor:pointer" >
+                      <span onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ArticlesListe','search','Articles',{});" class="">ARTICLES</span> |
                       <span class="cl-orange title-2x">A LA UNE !</span>
                     </span>
                     <span style="color:#38A;cursor:pointer;text-align:right;" onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">
@@ -379,7 +378,7 @@
               </div>
             </html>
           </fieldset>
-          <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-document ">
+          <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-adminis ">
             <html>
               <div class="NFQ-quest-type-liked NFQ-fieldset">
                 <!-- Les questions s'affiche ici                                  -->

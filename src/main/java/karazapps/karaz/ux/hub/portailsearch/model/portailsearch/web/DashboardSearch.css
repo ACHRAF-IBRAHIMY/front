@@ -2051,7 +2051,6 @@ box-card:hover{
     color: inherit;
 }
 
-
 .stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-avis p{
     border: 1px solid #eee;
     padding: 6px;
@@ -2059,7 +2058,10 @@ box-card:hover{
     margin-top: 3px;
     font-size: 14px;
     color: #888;
+    max-height: 160px;
+    overflow: auto;
  }
+
 .stat-dashbord .dashbord-right .d2 .word-list-text-avis .avis-det-full{
     text-align: left;
     padding: 5px 20px;

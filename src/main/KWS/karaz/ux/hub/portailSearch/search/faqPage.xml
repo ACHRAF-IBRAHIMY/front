@@ -14,13 +14,8 @@
       <script postLoad="true">
       		profilesT = profiles;
                 loadPageBytype(2);
-            $(".classSearch-2 .searchbuttun").click();
-                        
-		   
-		    
-		
-	
-
+            context.formRender.targetPanel.find(".classSearch-2 .searchbuttun").click();
+    
             Array.from(document.querySelectorAll(".classSearch-2 .div-full-search-bar .ow-field-input")).forEach(function(elm){
                 elm.addEventListener("keydown", function (e) {
                     var x =  document.querySelector(".classSearch-2 #autocomplete-list");
@@ -35,18 +30,18 @@
                     moveKey(e,x,1,"classSearch-2");
             }); */ 
 
-            $(".no-response-find .btn-show-support-form").click(function(){
-                $(".no-response-find .support-form-over").slideDown("fast");
+            context.formRender.targetPanel.find(".no-response-find .btn-show-support-form").click(function(){
+                context.formRender.targetPanel.find(".no-response-find .support-form-over").slideDown("fast");
             });
 
-            $(".no-response-find .support-form .f4 button").click(function(){
-                var mail = $(".no-response-find .support-form .f1 input").val();
-                var tele = $(".no-response-find .support-form .f2 input").val();
-                var content = $(".no-response-find .support-form .f textarea").val();
+            context.formRender.targetPanel.find(".no-response-find .support-form .f4 button").click(function(){
+                var mail = context.formRender.targetPanel.find(".no-response-find .support-form .f1 input").val();
+                var tele = context.formRender.targetPanel.find(".no-response-find .support-form .f2 input").val();
+                var content = context.formRender.targetPanel.find(".no-response-find .support-form .f textarea").val();
                 console.log(mail,tele,content);
             });
                 PCD_headerfieldset_color(".NFQ-quest-title");
-	            $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+	            context.formRender.targetPanel.find(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
                 PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
                 PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
                
@@ -58,7 +53,7 @@
                 // header color
                 PCD_headerfieldset_color(".pcd-ha-color");
 
-                $(".NQF-vue-ref").hide();
+                context.formRender.targetPanel.find(".NQF-vue-ref").hide();
             /*    RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",2)
                 RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",2)
                 RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
@@ -66,10 +61,10 @@
                 RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
                 RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)
               */
-                RestSearchFaqSec("",0,5,0,[".vv0 .NFQ-quest-type-document",".vv0 .NFQ-quest-type-plat",".vv0 .NFQ-quest-type-general",".vv0 .NFQ-quest-type-esign",".vv0 .NFQ-quest-type-archit",".vv0 .NFQ-quest-type-adminis"],3,"USER");
+                RestSearchFaqSec("",0,5,0,[".vv0 .NFQ-quest-type-document",".vv0 .NFQ-quest-type-plat",".vv0 .NFQ-quest-type-general",".vv0 .NFQ-quest-type-esign",".vv0 .NFQ-quest-type-archit",".vv0 .NFQ-quest-type-adminis"],3,"USER",context.formRender.targetPanel);
 
                 // hide saisie info question
-                $(".NQF-edit-modif").hide()
+                context.formRender.targetPanel.find(".NQF-edit-modif").hide()
                 
                 Array.from(document.querySelectorAll(".divSearchBar .hp-search_field input")).forEach(function(elm){
                     autoCompleteSim(elm,"faq_index","QUESTIONS");
@@ -93,7 +88,7 @@
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Posez votre question ici ..." />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                <postChange>var prefix = $(".classSearch-2 .div-full-search-bar .hp-search_field input").val();
+                <postChange>var prefix = context.formRender.targetPanel.find(".classSearch-2 .div-full-search-bar .hp-search_field input").val();
                             currentPage=0;
                             var pp=root.query.parentP;
                             if(pp==1){
@@ -101,7 +96,7 @@
                             }
                             removeExpanded(2);
    	                       intializeFaqPages();
-                           restFullSearchList(prefix,0,false,pp,"classSearch-2");
+                           restFullSearchList(prefix,0,false,pp,"classSearch-2",context.formRender.targetPanel);
                             root.query.parentP=0;</postChange>
               </button>
             </vbox>
@@ -127,7 +122,7 @@
                       <div class="f f1">
                         <input type="email" placeholder="Email" />
                       </div>
-                      <div class="f f2">
+                      <div class="f f2"> 
                         <input type="tel" placeholder="Tele" />
                       </div>
                       <div class="f f3">

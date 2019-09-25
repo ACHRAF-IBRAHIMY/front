@@ -8,7 +8,7 @@
             <search />
             <idObject />
             <parentP />
-        </query>
+        </query> 
         <collapsed>false</collapsed>
 
         <numDossier />
@@ -26,9 +26,9 @@
                 
                 profilesT = profiles;
 
-                getMostPopularArticle(3,"ASTUCES ET FONCTIONNALITES",".fieldser-article-1 .vbox-articles .ow-vl-inner");
+                getMostPopularArticle(3,"PRATIQUE",".fieldser-article-1 .vbox-articles .ow-vl-inner");
                 getMostPopularArticle(3,"A LA UNE",".fieldser-article-2 .vbox-articles .ow-vl-inner");
-                getMostPopularArticle(3,"A VENIR",".fieldser-article-3 .vbox-articles .ow-vl-inner");
+//                getMostPopularArticle(3,"A VENIR",".fieldser-article-3 .vbox-articles .ow-vl-inner");
         
             document.querySelector(".classSearch-81 .search-input-articles .ow-field-input").addEventListener("keydown", function (e) {
                     var x =  document.querySelector(".classSearch-81 #autocomplete-list");
@@ -43,7 +43,7 @@
                     var val = inp.value.toLowerCase();
                     if (!val) {
                         closeAllLists();
-                        return false;
+                        return false;  
                     }
                     console.log(val);
                     currentFocus = -1;
@@ -80,25 +80,25 @@
                         </div> 
                     </html>
                     <vbox columns="90% 10%" className="stay-grid search-input-articles div-full-search-bar" columns-small="80% 20%" contentAlign="center">
-              <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés." />
+                  <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés." />
               
-              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                  <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                     <postChange>
                           ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.text="+root.query.search, "search", "Articles", {});
                     </postChange>
-                </button>
+                  </button>
 
                 </vbox>
                 <html>
               <div style="height: 50px;" />
             </html>
-                    <fieldset className="fieldset-articles fieldser-article-1" header="ASTUCES ET FONCTIONNALITES">
+                    <fieldset className="fieldset-articles fieldser-article-1" header="PRATIQUE">
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
                            
                         </vbox>
                         <vbox className="fieldset-footer fieldset-footer-1">
                             <html>
-                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | ASTUCES ET FONCTIONNALITES</div>
+                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | PRATIQUE</div>
                             </html>
                         </vbox>
                     </fieldset>
@@ -112,70 +112,13 @@
                             </html>
                         </vbox>
                     </fieldset>
-                    <fieldset className="fieldset-articles fieldser-article-3" header="A VENIR !">
-                        <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
-                            
-
-                        </vbox>
-                        <vbox className="fieldset-footer fieldset-footer-3">
-                            <html>
-                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | A VENIR</div>
-                            </html>
-                        </vbox>
-                    </fieldset>
+                    
                 </vbox>
-                <vbox>
-                <vbox className="hp-box hp-small left-box-fsb">
-          <html>
-            <div class="vpanel-title">
-              <span>ACTUALITES</span>
-              <hr class="header-create-account-horizontal-line hr-hub" />
-            </div>
-          </html>
-          <vbox className="hp-box">
-            <html>
-              <div class="vpanel-body-title">
-                <i class="fas fa-cog" />
-                <span>ASTUCES ET FONCTIONNALITES</span>
-              </div>
-              <div class="vpanel-body-icon">
-                <i class="fas fa-cogs" />
-              </div>
-              <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="hp-sbox-btn">Consulter</div>
-            </html>
-          </vbox>
-          <vbox className="hp-box">
-            <html>
-              <div class="vpanel-body-title">
-                <i class="fas fa-newspaper" />
-                <span>A LA UNE !</span>
-              </div>
-              <div class="vpanel-body-icon">
-                <i class="fas fa-newspaper" />
-              </div>
-              <div class="hp-sbox-btn" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Consulter</div>
-            </html>
-          </vbox>
-          <vbox className="hp-box">
-            <html>
-              <div class="vpanel-body-title">
-                    <i class="far fa-clock" />
-                    <span>A VENIR</span>
-              </div>
-              <div class="vpanel-body-icon">
-                    <i class="far fa-clock" />
-              </div>
-              <div class="hp-sbox-btn" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Consulter</div>
-            </html>
-          </vbox>
-          <html>
-            <div style="height: 50px;" />
-          </html>
-          
-        </vbox>
+      <vbox>
+                          <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
+
         <vbox />
                 </vbox>
-        
             </vbox>
             
         </screen>

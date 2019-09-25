@@ -338,11 +338,17 @@ function verifierLike(user,array){
     return true;
 }
 
-function likeArticle(root,userQN,userIp,target){
+function likeArticle(root,userQN,userIp,target){ 
     var user = userQN+";"+userIp;
     if(verifierLike(user,root.article._source.liste_like)){
         target.find(".classSearch-82 .reseau-ss .like").addClass("active-like");
-        addLike(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
+        try{
+            addLike(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
+        }catch(e){
+            var a = document.cookie;
+            var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1);
+            addLike(userQN+";"+JSON.parse(b).userRef,root.article._id,target);
+        }
     }
 }
 
@@ -441,7 +447,14 @@ function verifierVue(user,array){
 function vueArticle(root,userQN,userIp,target){
     var user = userQN+";"+userIp;
     if(verifierVue(user,root.article._source.list_vue)){
-        addVue(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
+        try{
+            addVue(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
+
+        }catch(e){
+            var a = document.cookie;
+            var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1);
+            addVue(userQN+";"+JSON.parse(b).userRef,root.article._id,target);
+        }
     }
 }
 
@@ -452,21 +465,21 @@ function getAllArticlesByType(prefix,type,varfl,pp,clas,root,context){
     context.formRender.notifyObservers("query.typeArticle");
     var pp = root.query.typeArticle;
 
-    if(pp==""){
+    if(pp==""){ 
         pp=0;
     }
  
     if(root.query.typeArticle==""){
         $(".classSearch-80 .vpanel-title .title-2x").html("TOUS");
       }else if(root.query.typeArticle==1){
-        $(".classSearch-80 .vpanel-title .title-2x").html("ASTUCES ET FONCTIONNALITES");
+        $(".classSearch-80 .vpanel-title .title-2x").html("PRATIQUE");
       }else if(root.query.typeArticle==2){
        $(".classSearch-80 .vpanel-title .title-2x").html("A LA UNE");
       }else if(root.query.typeArticle==3){
         $(".classSearch-80 .vpanel-title .title-2x").html("A VENIR");
       }
 
-    restFullSearchList(prefix,type,varfl,pp,clas);
+    restFullSearchList(prefix,type,varfl,pp,clas,context.formRender.targetPanel);
 }
 
 function createArticlesHtml(clas,result){
@@ -561,14 +574,14 @@ result.forEach(function(elm){
 
 
 function getMostPopularArticle(size,type,clas){
-var obj = {
-    "size":size,"query":{
-   "term":{
-        "type.keyword":type
-    }
-    },"sort":[{ "vue" : {"order" : "desc"}}]
-     
-};
+    var obj = {
+        "size":size,"query":{
+    "term":{
+            "type.keyword":type
+        }
+        },"sort":[{ "vue" : {"order" : "desc"}}]
+        
+    };
 
 
 if(type==""){
@@ -659,7 +672,7 @@ var rootTest = {
 	}
 
 function getObjectArticle(id,root,target){
-    $(".divSearch-article .search-details-icon img").show();
+    target.find(".divSearch-article .search-details-icon img").show();
     $.ajax({
         type: "get",
         url: URL_SEARCH + "/articles_index/article/"+id,
@@ -685,6 +698,16 @@ function getObjectArticle(id,root,target){
         createDivComments(obj.comments,target); 
 
         target.find(".classSearch-82 .vpanel-title .title-2x").html(obj.type);
+        target.find(".classSearch-82 .vpanel-title .title-2x").click(function(e){
+            if(obj.type="PRATIQUE"){
+                var typeArt = 1;
+            }else if(obj.type="A LA UNE"){
+                var typeArt = 2;
+            }else if(obj.type="A VENIR"){
+                var typeArt = 3;
+            }
+            ApplicationManager.run('karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle='+typeArt,'search','Articles',{});
+        });
         target.find(".divSearch-article .article-title h1").html(obj.title);
         target.find(".divSearch-article .det-div .author-pub").html(obj.author);
         target.find(".divSearch-article .det-div .date-pub").html(obj.datePr.split(" ")[0].replace(/-/g,"/"));

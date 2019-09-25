@@ -27,8 +27,8 @@
 		    
 
         Array.from(document.querySelectorAll(".classSearch-12 .divSearchBar .hp-search_field input")).forEach(function(elm){
-          autoCompleteSim(elm,"attachements_index","title");
-          Array.from(document.querySelectorAll(".classSearch-12 .div-full-search-bar .ow-field-input")).forEach(function(elm){
+            autoCompleteSim(elm,"attachements_index","title");
+            Array.from(document.querySelectorAll(".classSearch-12 .div-full-search-bar .ow-field-input")).forEach(function(elm){
             elm.addEventListener("keydown", function (e) {
             var x = document.querySelector(".classSearch-12 #autocomplete-list");
             if (x) x = x.getElementsByTagName("div");
@@ -60,12 +60,12 @@
                           currentPage=0;
                           $(".classSearch-12 .consultation-video").hide();
                           $(".classSearch-12 .search-video").show();
-                          restFullSearchList(prefix,0,false,0,"classSearch-12");
+                          restFullSearchList(prefix,0,false,0,"classSearch-12",context.formRender.targetPanel);
                       </postChange>
               </button>
             </vbox>
             <html>
-              <div style="height: 30px;" />
+              <div style="height: 30px;" /> 
             </html>
             <html className="search-video">
               <div class="searchGif">

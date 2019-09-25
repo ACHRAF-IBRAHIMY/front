@@ -19,7 +19,7 @@
           <fileTime />
           <gedId />
     </attachementRef>
-    <urlRef/>
+    <urlRef />
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
@@ -38,7 +38,7 @@
                 PCD_headerfieldset_color(".pcd-ha-color");
 
                 $(".NQF-vue-ref").hide();
-                RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],"classSearch-3");
+                RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],"classSearch-3",context.formRender.targetPanel);
                 
                 // hide saisie info question
                 $(".classSearch-3 .NQF-edit-modif").hide()
