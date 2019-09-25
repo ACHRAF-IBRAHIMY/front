@@ -21,7 +21,6 @@
                currentPage=0;
                $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
                 if($(this).attr("class").split(' ')[1]==="p1"){
-                    alert($(this).attr("class").split(' ')[1]);
                    restFullSearchList($(this).html(),0,false,1,"classSearch-0");
                 }else if($(this).attr("class").split(' ')[1]==="p2"){
                     restFullSearchList($(this).html(),0,false,2,"classSearch-0");
@@ -59,7 +58,7 @@
           }); 
            
            PCD_headerfieldset_color(".NFQ-quest-title");
-        $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+           $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
            PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
            PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
           
@@ -116,10 +115,10 @@
                           currentPage=0;
                           var pp=root.query.parentP;
                           if(pp==1){
-                            pp=0;
+                            pp=0;  
                           }
                           console.log(pp);
-                          restFullSearchList(prefix,0,false,pp,"classSearch-0");
+                          restFullSearchList(prefix,0,false,pp,"classSearch-0",context.formRender.targetPanel);
                           root.query.parentP=0;</postChange>
               </button>
             </vbox>
@@ -135,53 +134,11 @@
               <div class="pagination pagination-second" />
             </html>
           </vbox>
+          <vbox> 
+          </vbox>
         </vbox>
-        <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
-          <!-- start modification -->
-          <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
-            <html>
-              <div class="NFQ-quest-type-esign NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
-            <html>
-              <div class="NFQ-quest-type-general NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
-            <html>
-              <div class="NFQ-quest-type-document NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
-            <html>
-              <div class="NFQ-quest-type-plat NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
-            <html>
-              <div class="NFQ-quest-type-archit NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
-            <html>
-              <div class="NFQ-quest-type-adminis NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <!-- end modification -->
-        </fieldset>
+        <search searchQN="karaz/ux/hub/portailsearch/search/RightAside?query.height=1100px" /> 
+
       </vbox>
       <html>
         <div style="height: 30px;" />

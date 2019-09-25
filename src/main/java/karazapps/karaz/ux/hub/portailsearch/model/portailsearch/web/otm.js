@@ -39,7 +39,7 @@ function ESCall(size, membre) {
     callLoadGif();
     $.ajax({
         type: "post",
-        url: URL_SEARCH+"/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification_cluster2/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -254,7 +254,7 @@ function getDetWordKeyLoad(word, membre) {
 
     $.ajax({
         type: "POST",
-        url: URL_SEARCH+"/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification_cluster2/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -498,7 +498,7 @@ function searchBefAft(pos, arr, vr) {
 function getAvis(id, key,type) {
     callLoadGif();
     $.ajax({
-        url: URL_SEARCH+"/index_classification/avis/" + id,
+        url: URL_SEARCH+"/index_classification_cluster2/avis/" + id,
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {
@@ -713,7 +713,7 @@ function restUpdateChart(chart, type, key) {
     }
 
     $.ajax({
-        url: URL_SEARCH+"/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification_cluster2/avis/_search",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
@@ -731,22 +731,22 @@ function restUpdateChart(chart, type, key) {
 function getMembers() {
 
     var obj = {
-        "aggs": {
+        "size":1,"aggs": {
             "membres": {
                 "terms": {
                     "field": "MEMBRE",
-                    "size": 300
+                    "size": 500
                 }
             }
         }
     };
 
     $.ajax({
-        url: URL_SEARCH+"/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification_cluster2/avis/_search?scroll=1m",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
-        beforeSend: function (xhr) {
+        beforeSend: function (xhr) { 
             xhr.setRequestHeader("Authorization", AUTH);
         },
         data: JSON.stringify(obj),
@@ -784,6 +784,7 @@ function updateDashbordStat(nbrAvis, nbrMem, nbrNote) {
 
 function getNumberRemarque(nbrAvis, nbrMem) {
     var obj = {
+        "size":1,
         "query": {
             "match_all": {}
         },
@@ -801,7 +802,7 @@ function getNumberRemarque(nbrAvis, nbrMem) {
 
 
     $.ajax({
-        url: URL_SEARCH+"/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification_cluster2/avis/_search?scroll=1m",
         type: "POST",
         datatype: "application/json",
         contentType: "application/json",
@@ -995,7 +996,7 @@ function searchMLT(word) {
     callLoadGif();
     $.ajax({
         type: "post",
-        url: URL_SEARCH+"/index_classification/avis/_search",
+        url: URL_SEARCH+"/index_classification_cluster2/avis/_search",
         datatype: "application/json",
         contentType: "application/json",
         beforeSend: function (xhr) {

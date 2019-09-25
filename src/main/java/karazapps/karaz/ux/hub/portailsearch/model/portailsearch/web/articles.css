@@ -1,5 +1,4 @@
 
-
 .classSearch-home-glo .h-icon{
     width: auto !important;
 }
@@ -28,7 +27,8 @@
     width: 100%;
     background: #fff;
     z-index: 5;
-    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-bottom: 8px;
   }
 
   .fieldset-articles .article .footer-article span{
@@ -91,7 +91,7 @@
         -webkit-animation-duration: 0.8s; /* Safari 4.0 - 8.0 */
         animation-name: showIB;
         animation-duration: 0.8s;
-        display: inline-block;
+        display: inline-block; 
 
   }
 
@@ -102,6 +102,10 @@
       -webkit-animation-duration: 0.7s; /* Safari 4.0 - 8.0 */
       animation-name: movment;
       animation-duration: 0.7s;
+  }
+
+  .right-side .NQF-freq-quest > .ow-pl-inner{
+    height: auto !important;
   }
 
   @keyframes movment {
@@ -122,27 +126,15 @@
 .fieldset-footer {
     margin-top: 23px;
     cursor: pointer;
-    color: #fff;
-    background: #666;
+    color: #333;
+    text-align: right;
     padding: 2px;
     border-radius: 2px;
 }
 
-.fieldset-footer-1 {
-    background: #38A;
-}
 
-.fieldset-footer-2 {
-    background:#f90
-}
-
-.fieldset-footer-3 {
-    background:#363
-}
 
 .fieldset-footer-home{
-    background: #fff;
-    color: #38A;
     padding: 15px;
     font-size: 17px;
     width: 98%;
@@ -151,7 +143,6 @@
     border-radius: 2px;
     margin-top: 23px;
     cursor: pointer;
-
 }
 
 

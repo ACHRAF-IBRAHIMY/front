@@ -6,12 +6,18 @@
       <search />
       <idObject />
       <parentP />
+      <height />
     </query>
     <collapsed>false</collapsed>
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true">
+
+            getCountArticles("right-side");
+            RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset .NFQ-quest-type-recent",".det-article-fieldset .NFQ-quest-type-popular",".det-article-fieldset .NFQ-quest-type-liked"],0,"right-side",context.formRender.targetPanel,root)
+            context.formRender.targetPanel.find(".right-side").css("height",root.query.height);
+
           </script>
      
       <html>
@@ -25,15 +31,59 @@
                 }
 
                 .right-vbox .left-box-fsb{
-                  margin:0 !important;
+                  margin:0 !important; 
                 }
 
+                .right-side{
+                  margin: -10px;
+                  overflow:auto;
+                }
+
+
+                
                 
 
                 </style>
             </html>
-      <vbox columns="0% 100%">
-        <vbox>
+      <vbox columns="0% 100%" className="right-side">
+      <vbox>
+        </vbox>
+      <fieldset header="ARTICLES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset NQF-freq-quest"> 
+          <!-- start modification -->
+          <html>
+            <div class="">
+              <ul class="article-categorie" style="list-style: none;text-align: center;padding: 0px 0px;font-size: 13px;color: #777;margin:auto;margin-top: 20px;margin-bottom: 20px;">
+                <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">Toutes les articles <span style="color:#f90" /> | </li>
+                <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-2" style="cursor:pointer;margin-right:4px;display:inline-block">Pratique <span style="color:#f90" /> | </li>
+                <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-3" style="cursor:pointer;margin-right:4px;display:inline-block">A la une <span style="color:#f90" /> </li>
+              </ul>
+            </div>
+          </html>
+
+          <fieldset header="Les plus populaires" className="NFQ-quest-title NFQ-type-general ">
+            <html>
+              <div class="NFQ-quest-type-popular NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Les plus récents" className="NFQ-quest-title NFQ-type-plat ">
+            <html>
+              <div class="NFQ-quest-type-recent NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-document ">
+            <html>
+              <div class="NFQ-quest-type-liked NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          <!-- end modification -->
+        </fieldset>
+        <!-- <vbox>
         </vbox>
         <vbox className="right-vbox">
             <vbox className="hp-box hp-small left-box-fsb">
@@ -83,8 +133,8 @@
 
         </vbox>
                 </vbox>
-
-      </vbox>
+-->
+      </vbox> 
       <html>
         <div style="height: 30px;" />
       </html>

@@ -8,12 +8,6 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true"> 
-                loadPageBytype(1);
-                $(".searchbuttun").click();
-                        
-		   
-		    
-		
 		  
                var mem = null;
                document.getElementsByClassName("back-div")[0].addEventListener("click",function(){
@@ -116,7 +110,6 @@
                     }else{
                         mem = selectval;        
                         ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),selectval);
-
                     }
                     $(".stat-dashbord .dashbord-right .d1 .config-bar span.chart-type").removeClass("sp-active");
                     $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp3").addClass("sp-active");
@@ -140,7 +133,7 @@
                 -->
           <vbox columns="100%">
             <vbox columns="33% 34% 33%" className="stat-div">
-              <html>
+              <html> 
                 <div class="stat ow-vbox hp-box">
                   <i class="fas fa-file-alt" />
                   <div>
@@ -298,4 +291,3 @@
     </screen>
   </view>
 </search>
-

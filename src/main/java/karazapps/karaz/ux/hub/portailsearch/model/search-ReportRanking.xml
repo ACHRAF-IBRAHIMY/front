@@ -35,6 +35,8 @@
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.fiscalite","desc",3,0,5);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreU","desc",10,0,6);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreE","desc",10,0,7);
+              drawRadarRegion(tabInd[0]);
+              
           });
 
           getAllByAggs("région.keyword",100,null,"",1);
@@ -208,7 +210,6 @@
                 }
             });
 
-        drawRadarRegion(tabInd[0]);
 
       </script>
       <html id="hSeparator">

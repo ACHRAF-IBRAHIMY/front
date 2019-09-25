@@ -807,11 +807,12 @@ return {"query" : {
 
 function drawRadarRegion(trim){
   
-  var obj = {"query" : {
-    "term":{
-        "trim.keyword":trim
-    }
-  },
+  var obj = {
+    "query" : {
+"term":{
+    "trim.keyword":trim
+}
+},
     "aggregations": {
        "region_ind": {
           "aggregations": {
@@ -843,16 +844,16 @@ function drawRadarRegion(trim){
                 }
                 }
              ,"terms": {
-             "field": "région.keyword",
-             "order": {
-                "score": "desc"
-             }
+                "field": "région.keyword",
+                "order": {
+                    "score": "desc"
+                }
          }
   }}
   };
-
+ 
   $.ajax({
-    type: "post",
+    type: "post", 
     url: URL_SEARCH + "/ranking_index/_search",
     datatype: "application/json",
     contentType: "application/json",
@@ -875,11 +876,11 @@ function drawRadarRegion(trim){
                 borderColor : region_color[i],
                 pointBackgroundColor : region_color[i],
                 data: [
-                    dataset[i].delai.value,
-                    dataset[i].attractivite.value,
-                    dataset[i].digital.value,
-                    dataset[i].ecosystem.value,
-                    dataset[i].fiscalite.value
+                    dataset[i].delai.value.toFixed(2),
+                    dataset[i].attractivite.value.toFixed(2),
+                    dataset[i].digital.value.toFixed(2),
+                    dataset[i].ecosystem.value.toFixed(2),
+                    dataset[i].fiscalite.value.toFixed(2)
                 ]
             };
 

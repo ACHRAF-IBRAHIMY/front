@@ -6,6 +6,8 @@
     </menus>
     <translations>
       <translation resourceName="translation/DashboardSearch-i18n-fr.properties" xcstt="x" />
+      <translation resourceName="translation/DashboardSearch-i18n-ar.properties" />
+      <translation resourceName="translation/DashboardSearch-i18n-en.properties" />
     </translations>
     <actions xcstt="x" />
     <dashboards xcstt="x">

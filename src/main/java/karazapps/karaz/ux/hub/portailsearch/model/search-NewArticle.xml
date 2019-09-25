@@ -46,7 +46,7 @@
               PCD_headerfieldset_color(".pcd-ha-color");
 
               context.formRender.targetPanel.find(".NQF-vue-ref").hide();
-              RestSearchArticleSec("", 0, 5, ["ASTUCES ET FONCTIONNALITES","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99",context.formRender.targetPanel,root);
+              RestSearchArticleSec("", 0, 5, ["PRATIQUE","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99",context.formRender.targetPanel,root);
               // hide saisie info question
               context.formRender.targetPanel.find(".classSearch-99 .NQF-edit-modif").hide()
               //img loding ref
@@ -118,9 +118,9 @@
                     <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
                       <option value="1" label="Article Normal" />
                       <option value="2" label="Top" />
-                    </field>
+                    </field> 
                     <field widget="select" label="Catégorie" labelAlign="float" xpath="NQFcategorie">
-                      <option value="ASTUCES ET FONCTIONNALITES" label="ASTUCES ET FONCTIONNALITES" />
+                      <option value="PRATIQUE" label="PRATIQUE" />
                       <option value="A LA UNE" label="A LA UNE" />
                       <option value="A VENIR" label="A VENIR" />
                     </field>

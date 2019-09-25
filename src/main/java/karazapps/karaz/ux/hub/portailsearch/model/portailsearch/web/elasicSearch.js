@@ -93,8 +93,8 @@ var articles = [];
 var faqs = [];
 
 
-function removeFullListSearch(cls){
-$("."+cls+" .full-search-list").html("");
+function removeFullListSearch(cls,target){
+    target.find("."+cls+" .full-search-list").html("");
 }
 
 function testWidth(width,nbr){
@@ -102,12 +102,12 @@ return width > nbr;
 }
 
 //Search results and redirect to activity model
-function restFullSearchList(prefix,from,prev,parent,cls) {
+function restFullSearchList(prefix,from,prev,parent,cls,target) {
 var result = [];
 var xhttp = new XMLHttpRequest();
-removeFullListSearch(cls);
-$("."+cls+" .searchGif").show();
-$("."+cls+" .no-result-v").hide();
+removeFullListSearch(cls,target);
+target.find("."+cls+" .searchGif").show();
+target.find("."+cls+" .no-result-v").hide();
 
 
 typePage = Number(cls.split("-")[1]);
@@ -115,7 +115,7 @@ typePage = Number(cls.split("-")[1]);
 
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        removeFullListSearch(cls);
+        removeFullListSearch(cls,target);
         var res = JSON.parse(this.responseText);
         for(var i=0;i<res.hits.hits.length;i++){
             result.push(res.hits.hits[i]);
@@ -124,15 +124,15 @@ xhttp.onreadystatechange = function() {
         console.log("typePage :"+typePage);
 
         if(typePage!=1 && typePage !=2){
-            $(".div-full-search-bar .hp-sbox-text span.total").html(res.hits.total.value);
-            $(".div-full-search-bar .hp-sbox-text span.prefix").html(prefix);
+            target.find(".div-full-search-bar .hp-sbox-text span.total").html(res.hits.total.value);
+            target.find(".div-full-search-bar .hp-sbox-text span.prefix").html(prefix);
         }
 
-        $("."+cls+" .searchGif").hide();
+        target.find("."+cls+" .searchGif").hide();
 
         if(currentPage==0){
             totalPage = Math.ceil(res.hits.total.value/4);
-            createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,cls);
+            createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,cls,target);
             if(totalPage!=0){
                 currentPage=1;
                 currentLPage=1;
@@ -140,9 +140,9 @@ xhttp.onreadystatechange = function() {
         }else if(currentPage%10==0){
             currentLPage = (currentPage/10)+1;
             console.log("begin: "+currentPage+"lpage: "+currentLPage);
-            createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,cls);
+            createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,cls,target);
         }else if(prev==true){
-            createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,cls);
+            createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,cls,target);
         }
         
         
@@ -150,18 +150,18 @@ xhttp.onreadystatechange = function() {
             noResults(cls);
         }else if( typePage==1){
             if(result.length==0){
-                $("."+cls+" .no-result-v").show();
+                target.find("."+cls+" .no-result-v").show();
             }
-            fullSearchList(result,cls,typePage);
+            fullSearchList(result,cls,typePage,target);
         }else if( typePage==2){
-            fullSearchList(faqs,cls,typePage);
+            fullSearchList(faqs,cls,typePage,target);
         }else if(typePage==80){
             if(result.length==0){
-                $("."+cls+" .no-result-v").show();
+                target.find("."+cls+" .no-result-v").show();
             }
-            fullSearchList(result,cls,typePage);
+            fullSearchList(result,cls,typePage,target);
         }else{
-            fullSearchList(result,cls,typePage);
+            fullSearchList(result,cls,typePage,target);
         }            
     }
 };
@@ -376,13 +376,13 @@ if(typePage==0){
     }
 }else if(typePage==2){
     //$("."+cls+" .full-search-list").hide();
-    RestSearchFaq(prefix,0,2,0,null,cls,"USER");
+    RestSearchFaq(prefix,0,2,0,null,cls,"USER",target);
 }else if(typePage==7){
     $("."+cls+" .full-search-list").hide();
-    RestSearchVideo(prefix,from,4,null,3,null,prev,cls);
+    RestSearchVideo(prefix,from,4,null,3,null,prev,cls,target);
 }else if(typePage==12){
     $("."+cls+" .full-search-list").hide();
-    RestSearchDownload(prefix,from,4,null,3,null,prev,cls);
+    RestSearchDownload(prefix,from,4,null,3,null,prev,cls,target);
 } else if(typePage==80){
     xhttp.send(JSON.stringify(getObjectToSendArticle(parent,prefix,testLanguage.test(prefix),from)));
     
@@ -430,7 +430,7 @@ if(parent==0){
 }else if(parent!=0 && prefix.trim()!=""){
 
     if(parent==1){
-        var type = "ASTUCES ET FONCTIONNALITES";
+        var type = "PRATIQUE";
     }else if(parent==2){
         var type = "A LA UNE";
     }else if(parent==3){
@@ -472,7 +472,7 @@ if(parent==0){
     };
 }else{
     if(parent==1){
-        var type = "ASTUCES ET FONCTIONNALITES";
+        var type = "PRATIQUE";
     }else if(parent==2){
         var type = "A LA UNE";
     }else if(parent==3){
@@ -528,22 +528,22 @@ if (prefix.trim() != "") {
 return str;
 }
 
-function showListVideo(cls){
-$('.'+cls+' .consultation-video').hide();
+function showListVideo(cls,target){
+$('.'+cls+' .consultation-video').hide(); 
 $('.'+cls+' .search-video').show();
-restFullSearchList('',0,false,0,cls);
+restFullSearchList('',0,false,0,cls,target);
 }
 
 function generateRequestVideoSearch(prefix,type,from,size,typeUse){
 
 if(typeUse==0){
-    var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"date\" : {\"order\" : \"desc\"}}],\"query\":{ \"match\":{ \"playlist\":\""+type+"\" }}}\n";
+    var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"date\" : {\"order\" : \"desc\"}}],\"query\":{ \"match\":{ \"playlist.keyword\":\""+type+"\" }}}\n";
 
 }else{
     if(prefix.trim()!=""){
         var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
     }else{
-        var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"playlist\":\""+type+"\" }}}\n";
+        var str = "{ \"index\": \"videos_index\", \"type\": \"video\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"playlist.keyword\":\""+type+"\" }}}\n";
     }
 }
 
@@ -618,7 +618,7 @@ $.ajax({
 }
 
 
-function getAllplayLists(type,size,clas){
+function getAllplayLists(type,size,clas,target){
     
     var obj = {
         "aggs" : {
@@ -651,7 +651,7 @@ function getAllplayLists(type,size,clas){
                 playlists.push(tab[i].key);
                 playlistsClass.push(".class-playlist"+i);
             }
-            RestSearchVideo("",0,size,playlists,type,playlistsClass,null,clas);
+            RestSearchVideo("",0,size,playlists,type,playlistsClass,null,clas,target);
         },
         error: function (error) {
             console.log(error);
@@ -659,7 +659,7 @@ function getAllplayLists(type,size,clas){
     })
 }
 
-function getAllplayListsD(type,size,clas){
+function getAllplayListsD(type,size,clas,target){
     
 var obj = {
     "aggs" : {
@@ -692,7 +692,7 @@ $.ajax({
             playlists.push(tab[i].key);
             playlistsClass.push(".class-playlist"+i);
         }
-        RestSearchDownload("",0,size,playlists,type,playlistsClass,null,clas);
+        RestSearchDownload("",0,size,playlists,type,playlistsClass,null,clas,target);
     },
     error: function (error) {
         console.log(error);
@@ -716,10 +716,10 @@ if (type == 0) {
 }
 
 if(typeUse == -1){
-    $("."+clas+" .faq-fieldset-det .full-search-list").html("");
-    $("."+clas+" .faq-fieldset-det .searchGif2").show();
-    $("."+clas+" .NQF-edit-modif").hide();
-    $("."+clas+" .NFQ-all-quest").show();
+    target.find("."+clas+" .faq-fieldset-det .full-search-list").html("");
+    target.find("."+clas+" .faq-fieldset-det .searchGif2").show();
+    target.find("."+clas+" .NQF-edit-modif").hide();
+    target.find("."+clas+" .NFQ-all-quest").show();
 }
 
 $.ajax({
@@ -749,7 +749,7 @@ $.ajax({
 
             // la page a affiché  
             console.log("***************"+NQFrefCAtegorie[i]);
-            $(cls[i]).append(`<span  class="NFQ-end" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique', 'search', 'Ref', {})">  ${NQFrefCAtegorie[i]}<span>`);
+            target.find(cls[i]).append(`<span  class="NFQ-end" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique', 'search', 'Ref', {})">  ${NQFrefCAtegorie[i]}<span>`);
 
         }
     }else if(typeUse==-1){
@@ -773,7 +773,7 @@ $.ajax({
 var playlist_videos = [];
 var playlist_attachement = [];
 
-function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas) {
+function RestSearchVideo(prefix, page, size, type, typeUse, cls,prev,clas,target) {
 var str = ""
     
 if(type==null){
@@ -826,7 +826,7 @@ if(type==null){
         success: function (result) {
             if(currentPage==0){
                 totalPage = Math.ceil(result.hits.total.value/4);
-                createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,clas);
+                createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,clas,target);
                 if(totalPage!=0){
                     currentPage=1;
                     currentLPage=1;
@@ -834,9 +834,9 @@ if(type==null){
             }else if(currentPage%10==0){
                 currentLPage = (currentPage/10)+1;
                 console.log("begin: "+currentPage+"lpage: "+currentLPage);
-                createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,clas);
+                createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,clas,target);
             }else if(prev==true){
-                createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,clas);
+                createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,clas,target);
             }
 
             console.log(result);
@@ -860,7 +860,7 @@ if(type==null){
                // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
                 var s = document.createElement("span");
                 s.setAttribute("class","cl-orange");
-                c.appendChild(addEventSpan("p1",playlist,clas));
+                c.appendChild(addEventSpan("p1",playlist,clas,target));
                 c.appendChild(s);
                 // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
                 // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
@@ -1080,19 +1080,20 @@ console.log(".v-edit" + cls + "");
 
 } else if(type==3){
     var div = document.createElement("div");
-    div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
+    div.innerHTML = `<div style="display:grid;grid-template-columns:35% 65%;" ><div class="video-img" style="padding: 3px 7px 1px 1px;">
         <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
         </div>
     <div>
         <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
         <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc.desc,70)+`</p>
-        <p style="font-size: 12px;text-align: left;margin: auto;margin-top: 4px;color:#666">
-            <span><i class="fas fa-calendar-alt"></i> `+desc.date+`</span> - <span><i class="fas fa-heart"></i> `+desc.like+`</span><br/>
-            <span><i class="fas fa-user"></i> `+desc.author+`</span>
-        </p>
-    </div>`;
+    </div></div>
+    <p style="font-size: 12px;text-align: left;margin: auto;margin-top: 4px;color:#666">
+            <span ><i class="fas fa-calendar-alt"></i> `+desc.date+`</span>  <span style="margin-left: 5px;"><i class="fas fa-heart"></i> `+desc.like+`</span>
+            <span style="margin-left: 5px;" ><i class="fas fa-user"></i> `+desc.author+`</span>
+    </p>
+        `;
     div.addEventListener("click",function(){
-         if(profilesT.match(/ADMIN_FAQ/)!='ADMIN_FAQ'){
+         if(profilesT.match(/ADMIN_FAQ/)!='ADMIN_FAQ'){ 
              ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "article", {});
          }else{
             ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Cms article", {});
@@ -1101,7 +1102,7 @@ console.log(".v-edit" + cls + "");
 
     div.setAttribute("idd",id);
     div.setAttribute("class","video-list-item");
-    div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bottom: 15px;cursor:pointer")
+    div.setAttribute("style","margin-bottom: 15px;cursor:pointer")
 
     $("."+clas+" "+ cls + "").append(div);
 }
@@ -1109,7 +1110,7 @@ console.log(".v-edit" + cls + "");
 
 
 
-function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas) {
+function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas,target) {
 var str = ""
     
 if(type==null){
@@ -1162,7 +1163,7 @@ if(type==null){
         success: function (result) {
             if(currentPage==0){
                 totalPage = Math.ceil(result.hits.total.value/4);
-                createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,clas);
+                createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,clas,target);
                 if(totalPage!=0){
                     currentPage=1;
                     currentLPage=1;
@@ -1170,9 +1171,9 @@ if(type==null){
             }else if(currentPage%10==0){
                 currentLPage = (currentPage/10)+1;
                 console.log("begin: "+currentPage+"lpage: "+currentLPage);
-                createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,clas);
+                createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,clas,target);
             }else if(prev==true){
-                createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,clas);
+                createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,clas,target);
             }
 
             console.log("result** "+result);
@@ -1214,7 +1215,7 @@ if(type==null){
                // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
                 var s = document.createElement("span");
                 s.setAttribute("class","cl-orange");
-                c.appendChild(addEventSpan("p1",playlist,clas));
+                c.appendChild(addEventSpan("p1",playlist,clas,target));
                 c.appendChild(s);
                 // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
                 // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
@@ -1620,7 +1621,7 @@ faqGlobalPages = [1,1,1,1,1,1];
 }
 
 
-function generatePaginationFaqPage(index,prefix,typeUse,cls,typee){
+function generatePaginationFaqPage(index,prefix,typeUse,cls,typee,target){
 if(typeUse==-1){
     $("."+cls+" .faq-fieldset-det .pagination-new-style").html("");
     var p = $("."+cls+" .faq-fieldset-det .pagination-new-style");
@@ -1642,7 +1643,7 @@ var a = document.createElement("a");
             if(faqPages[index]%3==0){
                 faqGlobalPages[index]--;    
             }
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee,target);
         } 
         event.preventDefault();
     });
@@ -1674,11 +1675,11 @@ for(var i=begin;i<nbrPage;i++){
                 RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse);
                 */
                 faqPages[index]=Number(this.innerHTML);
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);            
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee,target);            
        
             }else{
                 faqPages[index]= 1;
-                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);
+                RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee,target);
             }
             event.preventDefault();
         });
@@ -1703,7 +1704,7 @@ for(var i=begin;i<nbrPage;i++){
         a.addEventListener("click",function(event){
             event.preventDefault();
             faqPages[index]=Number(this.innerHTML);
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);            
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee,target);            
         });
         if(typeUse==-1){
             p.append(a);
@@ -1721,7 +1722,7 @@ for(var i=begin;i<nbrPage;i++){
             if(faqPages[index]%3==1){
                 faqGlobalPages[index]++    
             }
-            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee);
+            RestSearchFaq(prefix,(faqPages[index]-1)*2,2,(index+1),typeUse,cls,typee,target);
         }
         event.preventDefault();
     });        
@@ -1851,19 +1852,19 @@ for(var i=begin;i<nbrPage;i++){
 }
 
 
-function getQsFaq(id,type,cls){
+function getQsFaq(id,type,cls,target){
 if(type==0){
-    $("."+cls+" .NFQ-load-img").show();
-    $("."+cls+" .NQF-vue-question").hide();
-    var pos = $("."+cls+" .pcd-header-NQF").offset().top;
-    $('html,body').animate({
+    target.find("."+cls+" .NFQ-load-img").show();
+    target.find("."+cls+" .NQF-vue-question").hide();
+    var pos = target.find("."+cls+" .pcd-header-NQF").offset().top;
+    target.find('html,body').animate({
             scrollTop: pos
         },
         'fast');
 }
 
-$("."+cls+" .NFQ-all-quest").hide();
-$("."+cls+" .NQF-edit-modif").hide();
+target.find("."+cls+" .NFQ-all-quest").hide();
+target.find("."+cls+" .NQF-edit-modif").hide();
 
 $.ajax({
     type: "get",
@@ -1877,23 +1878,23 @@ $.ajax({
             console.log(result);
             //traitement rbihi
             faqObject = result._source;
-            $("."+cls+" .NFQ-load-img").hide();
-            $("."+cls+" .NQF-vue-question").show();
+            target.find("."+cls+" .NFQ-load-img").hide();
+            target.find("."+cls+" .NQF-vue-question").show();
             //add header
             // $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
-            $("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
-            $("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES | <span class="title-2x" style="color:#38a; ">` + result._source.QUESTIONS + `</span>`);
+            target.find("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").css("text-transform", "none");
+            target.find("."+cls+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES | <span class="title-2x" style="color:#38a; ">` + result._source.QUESTIONS + `</span>`);
 
-            $("."+cls+" .NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
-            $("."+cls+" .NQF-prev-resp").html(result._source.REPONSES);
-            $("."+cls+" .NQF-categorie").val(result._source.type);
-            $("."+cls+" .NQF-id").val(id);
-            $("."+cls+" .NQF-vue-question").show();
+            target.find("."+cls+" .NQF-vue-question .NQF-prev-quest >b").text(result._source.QUESTIONS);
+            target.find("."+cls+" .NQF-prev-resp").html(result._source.REPONSES);
+            target.find("."+cls+" .NQF-categorie").val(result._source.type);
+            target.find("."+cls+" .NQF-id").val(id);
+            target.find("."+cls+" .NQF-vue-question").show();
             
-            $("."+cls+" .NQF-btn-alg").show();
-            let a = $("."+cls+" .NQF-categorie")
+            target.find("."+cls+" .NQF-btn-alg").show();
+            let a = target.find("."+cls+" .NQF-categorie")
             
-            $("."+cls+" .NQF-new-quest-btn").show();
+            target.find("."+cls+" .NQF-new-quest-btn").show();
 
         }else if(type==1){
             createDivQuestionFaq(result);
@@ -2371,7 +2372,7 @@ $.ajax({
 }
 
 
-function RestSearchFaq(prefix,page,size,type,typeUse,cls,typee){
+function RestSearchFaq(prefix,page,size,type,typeUse,cls,typee,target){
 var str ="";
 if(cls==undefined){
     cls = "ow-view";
@@ -2428,8 +2429,8 @@ $.ajax({
         $("."+cls+" .faq-fieldset .searchGif2").hide();        
         $("."+cls+" .faq-fieldset-det .searchGif2").hide();        
         if(type!=0 && typeUse!=-1){
-            fullCreateFaqByType(result.responses[0].hits.hits,type,undefined,cls);
-            generatePaginationFaqPage((type-1),prefix,0,cls,typee);
+            fullCreateFaqByType(result.responses[0].hits.hits,type,undefined,cls,target);
+            generatePaginationFaqPage((type-1),prefix,0,cls,typee,target);
         }else if(type==0 && typeUse!=-1){
             var k = 0;
             console.log("ici");
@@ -2440,11 +2441,11 @@ $.ajax({
                             $("."+cls+" .faq-fieldset").eq(i).addClass("expanded");
                         })
                     }
-                    fullCreateFaqByType(result.responses[i].hits.hits,(i+1),undefined,cls);
+                    fullCreateFaqByType(result.responses[i].hits.hits,(i+1),undefined,cls,target);
                     k++;
                 }
                 totalFaqPages[i]=result.responses[i].hits.total.value;
-                generatePaginationFaqPage(i,prefix,0,cls,typee);
+                generatePaginationFaqPage(i,prefix,0,cls,typee,target);
             }
 
             if(k==0){
@@ -2454,9 +2455,9 @@ $.ajax({
             console.log("hello");
             
             
-            fullCreateFaqByType(result.responses[0].hits.hits,1,typeUse,cls);
+            fullCreateFaqByType(result.responses[0].hits.hits,1,typeUse,cls,target);
             totalFaqPages[type-1]=result.responses[0].hits.total.value;
-            generatePaginationFaqPage((type-1),prefix,-1,cls,typee);
+            generatePaginationFaqPage((type-1),prefix,-1,cls,typee,target);
             console.log(result.responses[0].hits.total.value);
         }
     },
@@ -2468,7 +2469,7 @@ $.ajax({
 
 var profilesT;
 
-function fullCreateFaqByType(results,type,typeUse,cls){
+function fullCreateFaqByType(results,type,typeUse,cls,target){
 
 if(typeUse==-1){
     $("."+cls+" .faq-vbox").each(function(elm){
@@ -2507,7 +2508,7 @@ if(typeUse==-1){
                 if(typePage==2 || typePage==5){
                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject="+id,"search", "FaqDetail", {});
                 }else{
-                    getQsFaq(id,0,cls);
+                    getQsFaq(id,0,cls,target);
                 }
             }else{
                 toModifyFaq(id);
@@ -2932,14 +2933,14 @@ $(".searchListD .fa-bars").click(function(){
                 modal.style.display = "block";
 });
 
-function createPaginationBar(nbrPage,begin,prefix,type,prev,cls){
-    var p = $("."+cls+" .pagination");
+function createPaginationBar(nbrPage,begin,prefix,type,prev,cls,target){
+    var p = target.find("."+cls+" .pagination");
     p.html(" ");
     var a = document.createElement("a");
             a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
             a.addEventListener("click",function(){
                 console.log("!next");
-                previousPage(prefix,type,cls);
+                previousPage(prefix,type,cls,target);
                 event.preventDefault();
             });
             p.append(a);
@@ -2954,7 +2955,7 @@ function createPaginationBar(nbrPage,begin,prefix,type,prev,cls){
             a.addEventListener("click",function(){
                 event.preventDefault();
                 console.log("1");
-                getPage(begin+1,prefix,type,false,cls);
+                getPage(begin+1,prefix,type,false,cls,target);
             });
     
             p.append(a);
@@ -2968,7 +2969,7 @@ function createPaginationBar(nbrPage,begin,prefix,type,prev,cls){
             a.addEventListener("click",function(event){
                 event.preventDefault();
                 console.log(this.innerHTML+" "+prefix+" "+type);
-                getPage(this.innerHTML,prefix,type,false,cls);
+                getPage(this.innerHTML,prefix,type,false,cls,target);
             });
             p.append(a);        
         }
@@ -2978,44 +2979,47 @@ function createPaginationBar(nbrPage,begin,prefix,type,prev,cls){
    a.addEventListener("click",function(){
        event.preventDefault();
         console.log("next");
-        nextPage(prefix,type,cls);
+        nextPage(prefix,type,cls,target);
    });        
     p.append(a);
 }
 
 
-function nextPage(prefix,type,cls){
+function nextPage(prefix,type,cls,target){
     if(currentPage<totalPage){
         currentPage++;
-        getPage(currentPage,prefix,type,false,cls);
+        getPage(currentPage,prefix,type,false,cls,target);
     }
 }
 
-function previousPage(prefix,type,cls){
+function previousPage(prefix,type,cls,target){
     if(1<currentPage){
         currentPage--;
         if(currentPage<((currentLPage-1)*10)){
-            getPage(currentPage,prefix,type,true,cls);
+            getPage(currentPage,prefix,type,true,cls,target);
         }else{
-            getPage(currentPage,prefix,type,false,cls); 
+            getPage(currentPage,prefix,type,false,cls,target); 
         }
     }
     
 }
 
-function getPage(page,prefix,type,prev,cls){
+function getPage(page,prefix,type,prev,cls,target){
     currentPage=page;
     closeSearchList();
+
     if(type==0){
         restSearchList(prefix,(page-1)*4,prev); 
-        var elm = $(".searchList .pagination a");
+        var elm = $("."+cls+" .searchList .pagination a");
     }else{
-        restFullSearchList(prefix,(page-1)*4,prev,p,cls);
-        var elm = $("."+cls+" .pagination-second a");
+        restFullSearchList(prefix,(page-1)*4,prev,p,cls,target);
+        var elm = target.find("."+cls+" .pagination-second a");
     }
+
     if(prev==true){
         currentLPage--;
     }
+
     activePageBar(elm);
 }
 
@@ -3082,8 +3086,8 @@ function loadPageBytype(type){
 } 
 
 
-function fullSearchList(results,cls,typePage){
-   var a = $("."+cls+" .full-search-list");
+function fullSearchList(results,cls,typePage,target){
+   var a = target.find("."+cls+" .full-search-list");
    if(typePage== 1){
     console.log(results)
     for(i=0;i<results.length;i++){
@@ -3278,12 +3282,12 @@ function fullSearchList(results,cls,typePage){
         title.setAttribute("title",type);
         var style = "line-height:30px;top: 59px;height: 30px;right: 100px;width:190px;";
 
-        if(type=="ASTUCES ET FONCTIONNALITES"){
+        if(type=="PRATIQUE"){
             style+="background:#38a";
         }else if(type=="A LA UNE"){
             style+="background:#f90";
         }else if(type=="A VENIR"){
-            style+="background:#363";
+            style+="background:#363"; 
         }
 
         title.setAttribute("style",style);
@@ -3314,16 +3318,16 @@ function fullSearchList(results,cls,typePage){
             var s = document.createElement("span");
             s.setAttribute("class","cl-orange");
             s.innerHTML=" > ";
-            c.appendChild(addEventSpan("p1",typeAt,cls));
+            c.appendChild(addEventSpan("p1",typeAt,cls,target));
             c.appendChild(s);
             // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-            c.appendChild(addEventSpan("p2",typeAc,cls));
+            c.appendChild(addEventSpan("p2",typeAc,cls,target));
             s = document.createElement("span");
             s.setAttribute("class","cl-orange");
             s.innerHTML=" > ";
             c.appendChild(s);
             // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-            c.appendChild(addEventSpan("p3",nature,cls));
+            c.appendChild(addEventSpan("p3",nature,cls,target));
             var d = document.createElement("div");
             d.setAttribute("class","item-body");
             var e = document.createElement("div");
@@ -3368,7 +3372,7 @@ function fullSearchList(results,cls,typePage){
             title.addEventListener("click",function(){
                 currentPage=0;
                 $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
-                restFullSearchList($(this).html(),0,false,4,cls);
+                restFullSearchList($(this).html(),0,false,4,cls,target);
             });
             b.appendChild(title);
             var icons = document.createElement("div");
@@ -3434,20 +3438,20 @@ function subLongAr(text,max){
     return text;
 }
 
-function addEventSpan(spanClass,text,cls){
+function addEventSpan(spanClass,text,cls,target){
     var span = document.createElement("span");
     span.setAttribute("class","p "+spanClass);
     span.addEventListener("click",function(){
         currentPage=0;
        $("."+cls+" .div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
             if($(this).attr("class").split(' ')[1]==="p1"){
-                restFullSearchList($(this).html(),0,false,1,cls);
+                restFullSearchList($(this).html(),0,false,1,cls,target);
             }else if($(this).attr("class").split(' ')[1]==="p2"){
-                restFullSearchList($(this).html(),0,false,2,cls);
+                restFullSearchList($(this).html(),0,false,2,cls,target);
             }else if($(this).attr("class").split(' ')[1]==="p3"){
-                restFullSearchList($(this).html(),0,false,3,cls);
+                restFullSearchList($(this).html(),0,false,3,cls,target);
             }else{
-               restFullSearchList($(this).html(),0,false,1,cls);
+               restFullSearchList($(this).html(),0,false,1,cls,target);
             } 
     });
     span.innerHTML=text;

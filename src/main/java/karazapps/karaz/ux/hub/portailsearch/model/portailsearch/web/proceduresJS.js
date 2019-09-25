@@ -79,18 +79,18 @@ if(type == 1){
 
 function NQF_preview_QR(type,clas,dataroot,target) {
     if(type == 1){
-        let question = $("."+clas+' .ow-field-input[data-xpath="question"]').val();
-        let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
-        let resp = $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
+        let question = target.find("."+clas+' .ow-field-input[data-xpath="question"]').val();
+        let categ = target.find("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+        let resp = target.find("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
         
 
         if (question == "" && categ == "" && resp == "<p><br></p>") {
             alert("rien à prévisualiser")
 
         } else {
-            $("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
-            $("."+clas+" .NQF-prev-resp").html(resp);
-            $("."+clas+" .NQF-vue-question").show();
+            target.find("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
+            target.find("."+clas+" .NQF-prev-resp").html(resp);
+            target.find("."+clas+" .NQF-vue-question").show();
 
         }
     } else if(type == 2){
@@ -203,41 +203,41 @@ function NQF_preview_QR(type,clas,dataroot,target) {
         target.find("."+clas+" .NQF-vue-question").show();
     }
 }
-
-function NQF_new_QR(type,clas) {
+ 
+function NQF_new_QR(type,clas,target) {
 
     if(type == 1){
     //add header
     // $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl:not(:has(>span))").attr("onclick","ApplicationManager.run('cug/cri/urbanisme/daycommission/search/proceduresUrbanisme', 'search', 'procedures Urbanisme', {});");
-    $("."+clas+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`NOUVELLE QUESTIONS FREQUENTES `);
+    target.find("."+clas+" .NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`NOUVELLE QUESTIONS FREQUENTES `);
 
-    $("."+clas+' .ow-field-input[data-xpath="question"]').val("");
-    $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("");
-    $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').text("")
-    $("."+clas+" .NQF-id").val("");
-
-
-    $("."+clas+" .NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput");
-    $("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
+    target.find("."+clas+' .ow-field-input[data-xpath="question"]').val("");
+    target.find("."+clas+' .ow-field-input-select[data-xpath="categ"]').text("");
+    target.find("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').text("")
+    target.find("."+clas+" .NQF-id").val("");
 
 
-    $("."+clas+" .NQF-vue-question").hide();
+    target.find("."+clas+" .NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput");
+    target.find("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
+
+
+    target.find("."+clas+" .NQF-vue-question").hide();
     } else if(type == 2){
-    $("."+clas+" .NQF-titre-ref > .ow-pl-toolbar .ow-label-pl").html(`NOUVEAU RÉFÉRENTIEL JURIDIQUE`);
+    target.find("."+clas+" .NQF-titre-ref > .ow-pl-toolbar .ow-label-pl").html(`NOUVEAU RÉFÉRENTIEL JURIDIQUE`);
     
 
-    $("."+clas+' .ow-field-input[data-xpath="NQFtitle"]').val("");
-    $("."+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text("");
-    $("."+clas+' .NFQ-desc-refjuridique textarea').val("");
-    $("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html("")
-    $("."+clas+" .NQF-id-ref").val("");
+    target.find("."+clas+' .ow-field-input[data-xpath="NQFtitle"]').val("");
+    target.find("."+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text("");
+    target.find("."+clas+' .NFQ-desc-refjuridique textarea').val("");
+    target.find("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html("")
+    target.find("."+clas+" .NQF-id-ref").val("");
 
 
-    $("."+clas+" .NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput filledInput");
-    $("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
-    $("."+clas+" .ow-field-textArea-container:has(.NFQ-desc-refjuridique)").removeClass("filledInput")
+    target.find("."+clas+" .NQF-edit-float .ow-field-container.ow-field-text-container").removeClass("focusedInput filledInput");
+    target.find("."+clas+" .NQF-edit-select-float  .ow-field-container.ow-field-select-container").removeClass("filledInput");
+    target.find("."+clas+" .ow-field-textArea-container:has(.NFQ-desc-refjuridique)").removeClass("filledInput")
 
-    $("."+clas+" .NQF-vue-ref").hide();
+    target.find("."+clas+" .NQF-vue-ref").hide();
     }
 
 }
@@ -335,10 +335,10 @@ function NQF_save_QR(type,root,target) {
     if (type == 1) {
         var clas = "classSearch-5";
 
-        let question = $("."+clas+' .ow-field-input[data-xpath="question"]').val();
-        let categ = $("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
-        let resp = $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
-        let ID = $("."+clas+" .NQF-id").val();
+        let question = target.find("."+clas+' .ow-field-input[data-xpath="question"]').val();
+        let categ = target.find("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+        let resp = target.find("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html()
+        let ID = target.find("."+clas+" .NQF-id").val();
         let visibility = root.visibility;
 
         if(visibility.trim()==""){
@@ -346,8 +346,8 @@ function NQF_save_QR(type,root,target) {
         }
         
 
-        $("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
-        $("."+clas+" .NQF-prev-resp").html(resp);
+        target.find("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
+        target.find("."+clas+" .NQF-prev-resp").html(resp);
         
         var req = {
             "QUESTIONS": "",
@@ -381,23 +381,23 @@ function NQF_save_QR(type,root,target) {
         if (req.QUESTIONS != "" && req.REPONSES != "" && req.type != "") {
 
             console.log(req, ID);
-            updateQuestionNQF(ID, req);
+            updateQuestionNQF(ID, req,target);
             
-            if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
-                $("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+            if (target.find("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+                target.find("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
             }
             
             setTimeout(function () {
-                $("."+clas+" .ow-btn-container i.fa-check").remove()
-                $("."+clas+" .NQF-edit-modif").hide()
-                $("."+clas+" .NQF-new-quest-btn").show();
-                $("."+clas+" .NQF-vue-question").show();
+                target.find("."+clas+" .ow-btn-container i.fa-check").remove()
+                target.find("."+clas+" .NQF-edit-modif").hide()
+                target.find("."+clas+" .NQF-new-quest-btn").show();
+                target.find("."+clas+" .NQF-vue-question").show();
             }, 2000);
             
             
         } else {
             alert("verifier que tout les champs sont bien remplis");
-            $("."+clas+" .NQF-vue-question").hide();
+            target.find("."+clas+" .NQF-vue-question").hide();
         }
         
     } else if(type == 2){
@@ -481,7 +481,7 @@ function NQF_save_QR(type,root,target) {
             target.find("."+clas+" .NQF-btn-alg").hide();
         }, 2000);
         
-        updateReglementation(id,req);
+        updateReglementation(id,req,target);
     }else if(type==3){
         var clas = "classSearch-6";
         let title = $('.'+clas+' .ow-field-input[data-xpath="title"]').val();
@@ -675,7 +675,7 @@ function NQF_save_QR(type,root,target) {
             $("."+clas+" .NQF-btn-alg").hide();
             $("."+clas+" .NQF-vue-question").show();
             
-            getAllplayListsD(1,100,clas);
+            getAllplayListsD(1,100,clas,target);
 
         }, 2000);
 
@@ -801,20 +801,36 @@ function NQF_save_QR(type,root,target) {
     }
 }
 
-function NQF_add_question(quest, id, cls, type) {
+function NQF_add_question(quest, id, cls, type,target) {
     var clas = "classSearch-5";
     // console.log(id);
     if (type == 1) {
-        $(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt " idd="${id}">
-                                        <div class="vpanel-body-title NQF-quest-delete" style="font-size: 14px;">
-                                            <span class = 'NFQ-click-btn'  onclick='getQsFaq("${id}",0,"${clas}")' >` + quest + `</span>
-                                            <span class = 'far fa-times-circle NFQ-close-quest' onclick='removeQuestionNFQ("${id}","/faq_index/qr/")' />
-                                        </div>
-                                        <hr class="NQF-horizontal-line " />
-                                        
-                                        </div>`)
-    } else if (type == 2 || type ==3) {
+        var div = document.createElement("div");
+        div.setAttribute("idd",id);
+        var div2 = document.createElement("div");
+        div2.setAttribute("class","vpanel-body-title NQF-quest-delete");
+        div2.setAttribute("style","font-size: 14px;");
+        var span1 = document.createElement("span");
+        span1.setAttribute("class","NFQ-click-btn");
+        span1.innerHTML = quest;
+        span1.addEventListener("click",function(){
+            getQsFaq(id,0,clas,target);
+        });
+        var span2 = document.createElement("span");
+        span2.setAttribute("class","far fa-times-circle NFQ-close-quest");
+        span2.addEventListener("click",function(){
+            getQsFaq(id,0,clas,target);
+            removeQuestionNFQ(id,"/faq_index/qr/")
+        });
+        var hr = document.createElement("hr");
+        hr.setAttribute("class","NQF-horizontal-line");
+        div2.appendChild(span1);
+        div2.appendChild(span2);
+        div.appendChild(div2);
+        div.appendChild(hr);
+        target.find(cls + ":not(:has(>.NFQ-end))").append(div);
 
+    } else if (type == 2 || type ==3) {
 
          if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
             var str = `toModifyFaq("${id}")`; 
@@ -822,7 +838,7 @@ function NQF_add_question(quest, id, cls, type) {
             var str = `ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject=${id}","search", "FaqDetail", {});`
         } 
 
-        $(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt">
+        target.find(cls + ":not(:has(>.NFQ-end))").append(`<div class="NFQ-mgn-bt">
         <div class="vpanel-body-title " style="font-size: 14px;">
             <span class = 'NFQ-click-btn' onclick='javascript:`+str+`' >` + quest + `</span>
         </div>
@@ -859,7 +875,7 @@ function viderUrl(type,root,context){
 
 
 
-function updateQuestionNQF(id, obj) {
+function updateQuestionNQF(id, obj,target) {
 
     let newID = ""
     if (id != "") {
@@ -877,7 +893,7 @@ function updateQuestionNQF(id, obj) {
         },
         success: function (result) {
             $(".NQF-id").val(result._id);
-            voidRestSearch("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1);
+            voidRestSearch("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],1,target);
             console.log(result);
         },
         error: function (error) {
@@ -887,7 +903,7 @@ function updateQuestionNQF(id, obj) {
 
 }
 
-function updateReglementation(id, obj) {
+function updateReglementation(id, obj,target) {
 
 
     let newID = ""
@@ -905,7 +921,7 @@ function updateReglementation(id, obj) {
             xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
         },
         success: function (result) {
-            voidRestSearch("",0,7,0,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],0);
+            voidRestSearch("",0,7,0,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],0,target);
             console.log(result);
         },
         error: function (error) {
@@ -915,9 +931,9 @@ function updateReglementation(id, obj) {
 
 }
 
-function getCountArticles(){
+function getCountArticles(cls){
     
-    var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"match_all\": {}}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"ASTUCES ET FONCTIONNALITES\" }}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"A LA UNE\" }}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"A VENIR\" }}}\n";
+    var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"match_all\": {}}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"PRATIQUE\" }}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"A LA UNE\" }}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"A VENIR\" }}}\n";
     
     $.ajax({
         type: "post",
@@ -935,10 +951,10 @@ function getCountArticles(){
             var count_alaune = result.responses[2].hits.total.value;
             var count_avenir = result.responses[3].hits.total.value;
 
-            $(".classSearch-80 .article-categorie li.li-1 span").html("("+count_all+")");
-            $(".classSearch-80 .article-categorie li.li-2 span").html("("+count_astuce+")");
-            $(".classSearch-80 .article-categorie li.li-3 span").html("("+count_alaune+")");
-            $(".classSearch-80 .article-categorie li.li-4 span").html("("+count_avenir+")");
+            $("."+cls+" .article-categorie li.li-1 span").html("("+count_all+")");
+            $("."+cls+" .article-categorie li.li-2 span").html("("+count_astuce+")");
+            $("."+cls+" .article-categorie li.li-3 span").html("("+count_alaune+")");
+            $("."+cls+" .article-categorie li.li-4 span").html("("+count_avenir+")");
 
 
         },
@@ -972,7 +988,7 @@ function updateArticle(id, obj,target,root) {
         success: function (result) {
             //voidRestSearch("",0,7,0,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],0);
             setTimeout(function(){
-                RestSearchArticleSec("", 0, 5, ["ASTUCES ET FONCTIONNALITES","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99",target,root)
+                RestSearchArticleSec("", 0, 5, ["PRATIQUE","A LA UNE","A VENIR"], 2, [".vv1 .NFQ-quest-type-astuce",".vv1 .NFQ-quest-type-alune",".vv1 .NFQ-quest-type-avenir"],0,"classSearch-99",target,root)
             },2000);
             console.log(result);
         },
@@ -1037,7 +1053,7 @@ function updatePlaylist(id, obj) {
 
 }
 
-function voidRestSearch(prefix, page, size, type, cls, atr){
+function voidRestSearch(prefix, page, size, type, cls, atr,target){
     $(".faq-vbox .no-response-find").hide();
     if(atr==0){
             var str = ""
@@ -1092,12 +1108,12 @@ function voidRestSearch(prefix, page, size, type, cls, atr){
         
             if(atr==0){
                 setTimeout(function () {
-                    RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1",".vv1 .NFQ-quest-type-autre1"],"classSearch-3");
+                    RestSearchref("",0,7,0,1,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1",".vv1 .NFQ-quest-type-autre1"],"classSearch-3",target);
                 }, 1000);
             }else{
                 setTimeout(function () {
-                    RestSearchFaqSec("",0,5,0,[".vv1 .NFQ-quest-type-document",".vv1 .NFQ-quest-type-plat",".vv1 .NFQ-quest-type-general",".vv1 .NFQ-quest-type-esign",".vv1 .NFQ-quest-type-archit",".vv1 .NFQ-quest-type-adminis"],1);
-                    RestSearchFaqSec("",0,5,0,[".vv1 .NFQ-quest-type-document1",".vv1 .NFQ-quest-type-plat1",".vv1 .NFQ-quest-type-general1",".vv1 .NFQ-quest-type-esign1",".vv1 .NFQ-quest-type-archit1",".vv1 .NFQ-quest-type-adminis1"],2);    
+                    RestSearchFaqSec("",0,5,0,[".vv1 .NFQ-quest-type-document",".vv1 .NFQ-quest-type-plat",".vv1 .NFQ-quest-type-general",".vv1 .NFQ-quest-type-esign",".vv1 .NFQ-quest-type-archit",".vv1 .NFQ-quest-type-adminis"],1,null,target);
+                    RestSearchFaqSec("",0,5,0,[".vv1 .NFQ-quest-type-document1",".vv1 .NFQ-quest-type-plat1",".vv1 .NFQ-quest-type-general1",".vv1 .NFQ-quest-type-esign1",".vv1 .NFQ-quest-type-archit1",".vv1 .NFQ-quest-type-adminis1"],2,null,target);    
                 }, 1000);
             }
         },error: function (error) {
@@ -1106,13 +1122,13 @@ function voidRestSearch(prefix, page, size, type, cls, atr){
     })
 }
 
-function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee) {
+function RestSearchFaqSec(prefix, page, size, type, cls, atr,typee,target) {
 
 var str = ""
 //$(".faq-vbox .no-response-find").hide();
 
 if (type == 0) {
-    $(".vv2 .faq-fieldset").hide();
+    target.find(".vv2 .faq-fieldset").hide();
     str += generateRequestFaqSearch(prefix, "DOCUMENT", page,size,typee);
     str += generateRequestFaqSearch(prefix, "PLATEFORME", page,size,typee);
     str += generateRequestFaqSearch(prefix, "GENERAL", page,size,typee);
@@ -1158,26 +1174,26 @@ $.ajax({
 
                 for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
             
-                    NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls, atr)
+                    NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls, atr,target)
 
                 }
                 if(atr!=3 && result.responses[i].hits.hits != 0){
-                    $(cls).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Toutes les questions de la catégorie<span>`);
+                    target.find(cls).append(`<span  class="NFQ-end" onclick='ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqPage","search", "Faq Page", {});'> Toutes les questions de la catégorie<span>`);
                 }
                 
             }
         }
         }else{
             for(var i=0;i<result.responses.length;i++){
-                $(cls[i]).html("");
+                target.find(cls[i]).html("");
                 for (let j = 0; j < result.responses[i].hits.hits.length; j++) {
                     
-                    NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls[i], atr)
+                    NQF_add_question(result.responses[i].hits.hits[j]._source.QUESTIONS, result.responses[i].hits.hits[j]._id, cls[i], atr,target)
 
                 }
                 if(atr!=3 && result.responses[i].hits.hits != 0){
                     console.log(result.responses[i].hits);
-                    $(cls[i]).append(`<span  class="NFQ-end" onclick="RestSearchFaqWithIntilize('',0,2,${typesList.indexOf(result.responses[i].hits.hits[0]._source.type)+1},-1)"> Toutes les questions de la catégorie<span>`);                        }else{
+                    target.find(cls[i]).append(`<span  class="NFQ-end" onclick="RestSearchFaqWithIntilize('',0,2,${typesList.indexOf(result.responses[i].hits.hits[0]._source.type)+1},-1)"> Toutes les questions de la catégorie<span>`);                        }else{
                 }   
             }
         }
@@ -1185,15 +1201,15 @@ $.ajax({
     },
     error: function (error) {
         console.log(error.responseText);
-    }
+    } 
 })
 
 
 }
 
-function RestSearchFaqWithIntilize(var1,var2,var3,var4,var5){
+function RestSearchFaqWithIntilize(var1,var2,var3,var4,var5,target){
     intializeFaqPages();
-    RestSearchFaq(var1,var2,var3,var4,var5,undefined,undefined);
+    RestSearchFaq(var1,var2,var3,var4,var5,undefined,undefined,target);
 }
 
 
@@ -1237,10 +1253,10 @@ function removeQuestionNFQ(id,indexType) {
 function NQF_edit_av(type,dataroot,ctx,clas,target) {
     
     if(type == 1){
-        $("."+clas+" .NFQ-all-quest").hide();
+        ctx.formRender.targetPanel.find("."+clas+" .NFQ-all-quest").hide();
 
-        let resp = $("."+clas+" .NQF-prev-resp").html();
-        let ID = $("."+clas+" .NQF-id").val();
+        let resp = ctx.formRender.targetPanel.find("."+clas+" .NQF-prev-resp").html();
+        let ID = ctx.formRender.targetPanel.find("."+clas+" .NQF-id").val();
         dataroot.question= faqObject.QUESTIONS;
        // dataroot.nfqresponse=resp;
         dataroot.categ= faqObject.type;
@@ -1250,10 +1266,10 @@ function NQF_edit_av(type,dataroot,ctx,clas,target) {
         ctx.formRender.notifyObservers("categ");
         ctx.formRender.notifyObservers("visibility");
         
-        $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
-        $("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
-        $("."+clas+" .NQF-edit-modif").show();
-        $("."+clas+" .NQF-btn-alg").hide();
+        ctx.formRender.targetPanel.find("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').empty();
+        ctx.formRender.targetPanel.find("."+clas+' .ow-field-htmleditor[data-xpath="nfqresponse"] .ql-editor').html(resp)
+        ctx.formRender.targetPanel.find("."+clas+" .NQF-edit-modif").show();
+        ctx.formRender.targetPanel.find("."+clas+" .NQF-btn-alg").hide();
     } else if(type == 2){
         // add edit here
         let title = refObject.title;
@@ -1262,7 +1278,7 @@ function NQF_edit_av(type,dataroot,ctx,clas,target) {
         let type  = refObject.type;
         let typeRef = refObject.typeRef;
 
-        if(refObject.urlV != undefined){
+        if(refObject.urlV != undefined){ 
             var urlV = refObject.urlV;
         }else{
             var urlV = "";
