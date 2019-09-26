@@ -8,6 +8,10 @@
       <translation resourceName="translation/DashboardSearch-i18n-fr.properties" xcstt="x" />
       <translation resourceName="translation/DashboardSearch-i18n-ar.properties" />
       <translation resourceName="translation/DashboardSearch-i18n-en.properties" />
+      <translation resourceName="translation/PortailSearch-i18n-ar.properties" />
+      <translation resourceName="translation/PortailSearch-i18n-en.properties" />
+      <translation resourceName="translation/PortailSearch-i18n-fr.properties" />
+      <translation resourceName="translation/PortailSearch-i18n-l0.properties" />
     </translations>
     <actions xcstt="x" />
     <dashboards xcstt="x">

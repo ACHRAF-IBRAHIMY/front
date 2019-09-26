@@ -202,6 +202,26 @@ public class PortailSearchLoader {
 		} catch (Exception e) { 
 			System.out.println("Erreur lors de chargement de translation   karazapps/karaz/ux/hub/portailsearch/model/translation/DashboardSearch-i18n-en.properties");
 		}	
+		try {
+			RootTranslate.addTranslate("karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-ar.properties");
+		} catch (Exception e) { 
+			System.out.println("Erreur lors de chargement de translation   karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-ar.properties");
+		}	
+		try {
+			RootTranslate.addTranslate("karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-en.properties");
+		} catch (Exception e) { 
+			System.out.println("Erreur lors de chargement de translation   karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-en.properties");
+		}	
+		try {
+			RootTranslate.addTranslate("karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-fr.properties");
+		} catch (Exception e) { 
+			System.out.println("Erreur lors de chargement de translation   karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-fr.properties");
+		}	
+		try {
+			RootTranslate.addTranslate("karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-l0.properties");
+		} catch (Exception e) { 
+			System.out.println("Erreur lors de chargement de translation   karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-l0.properties");
+		}	
 
     	
     	try {  
