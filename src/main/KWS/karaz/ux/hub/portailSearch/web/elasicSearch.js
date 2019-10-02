@@ -1034,7 +1034,7 @@ if (type == 1) {
     var div = document.createElement("div");
 
     div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
-    <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
+    <img style="width:100%;height: 68px;" src="http://frontrokhas.karaz.org/`+imgUrl+` alt="">
 </div>
 <div>
     <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
@@ -1056,7 +1056,7 @@ console.log(".v-edit" + cls + "");
 } else if (type == 2) {
     var div = document.createElement("div");
     div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
-        <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
+        <img style="width:100%;height: 68px;" src="http://frontrokhas.karaz.org/`+imgUrl+` alt="">
         </div>
     <div>
         <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
@@ -1081,7 +1081,7 @@ console.log(".v-edit" + cls + "");
 } else if(type==3){
     var div = document.createElement("div");
     div.innerHTML = `<div style="display:grid;grid-template-columns:35% 65%;" ><div class="video-img" style="padding: 3px 7px 1px 1px;">
-        <img style="width:100%;height: 68px;" src=`+imgUrl+` alt="">
+        <img style="width:100%;height: 68px;" src="http://frontrokhas.karaz.org/`+imgUrl+` alt="">
         </div>
     <div>
         <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
@@ -1202,7 +1202,7 @@ if(type==null){
                     }    
                 }else{
                     var krn = attachement.gedId.split("/")[0];
-                    var str = '<div class="docthumbnail"><img style="max-width: 70%;max-height: 157px;" class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+                    var str = '<div class="docthumbnail"><img style="max-width: 70%;max-height: 157px;" class="smallThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
                 }
                 
                 
@@ -1439,7 +1439,7 @@ if (type == 1) {
         }
     }else{
         var krn = attachement.gedId.split("/")[0];
-        var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+        var str = '<div class=""><img class="smallThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
     }
 
     var div = document.createElement("div");
@@ -1481,7 +1481,7 @@ console.log(".v-edit" + cls + " .det");
             }
         }else{
             var krn = attachement.gedId.split("/")[0];           
-            var str = '<div class=""><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+            var str = '<div class=""><img class="smallThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
         }
 
 var div = document.createElement("div");
@@ -2109,7 +2109,7 @@ $.ajax({
             }
         }else{
             var krn = attachement.gedId.split("/")[0];
-            $("."+cls+" .NQF-vue-question .vue-video-frame").html('<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>');
+            $("."+cls+" .NQF-vue-question .vue-video-frame").html('<div class="docthumbnail"><img class="smallThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>');
         }
 
             $("."+cls+" .NQF-id").val(id);
@@ -2238,7 +2238,7 @@ if(attachementFileId==""){
     }
 }else{
     var krn = attachement.gedId.split("/")[0];
-    var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+    var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
 }
 
 $(".consultation-video .consultation-video-title").html(result._source.title);
@@ -2268,7 +2268,7 @@ $(".qst-faq .vpanel-body .response-body").html(result._source.content);
     if(result._source.urlV != undefined){
         if(result._source.urlV.trim() != "" ){
             $(".qst-faq .vpanel-body .response-att button.download-fr").attr("onclick","window.open(\""+contextPath+"/DownloadFile?gedId="+result._source.attachementRef.gedId+"\")")
-            $(".qst-faq .vpanel-body .iframe-tab iframe").attr("src",contextPath+"/DownloadFile?gedId="+result._source.attachementRef.gedId);
+            $(".qst-faq .vpanel-body .iframe-tab iframe").attr("src","http://frontrokhas.karaz.org"+contextPath+"/DownloadFile?gedId="+result._source.attachementRef.gedId);
             $(".qst-faq .vpanel-body .response-att").show();
             $(".qst-faq .vpanel-body .iframe-tab iframe").show();
         }else{
@@ -2278,7 +2278,7 @@ $(".qst-faq .vpanel-body .response-body").html(result._source.content);
         
         if(result._source.urlV2.trim() != "" ){
             if(result._source.urlV.trim() == ""){
-                $(".qst-faq .vpanel-body .iframe-tab iframe").attr("src",contextPath+"/DownloadFile?gedId="+result._source.attachementRefAr.gedId);
+                $(".qst-faq .vpanel-body .iframe-tab iframe").attr("src","http://frontrokhas.karaz.org"+contextPath+"/DownloadFile?gedId="+result._source.attachementRefAr.gedId);
                 $(".qst-faq .vpanel-body .iframe-tab iframe").show();
             }
             $(".qst-faq .vpanel-body .response-att button.download-ar").attr("onclick","window.open(\""+contextPath+"/DownloadFile?gedId="+result._source.attachementRefAr.gedId+"\")")
@@ -3237,17 +3237,17 @@ function fullSearchList(results,cls,typePage,target){
 
         var b = document.createElement("div");
         b.setAttribute("class","hp-box full-search-list-item");
-        b.setAttribute("style","grid-template-columns: 0% 35% 65%;height: 190px;");
+        b.setAttribute("style","grid-template-columns: 0% 35% 65%;height: 190px;"); 
 
         var imgit = document.createElement("div");
         imgit.setAttribute("class","item-img");
-        imgit.innerHTML="<img style=\"width: 93%;height: 170px;position: relative;    right: -9px;top: -11px;\" src=\""+img+"\"/>";
+        imgit.innerHTML="<img style=\"width: 93%;height: 170px;position: relative;    right: -9px;top: -11px;\" src=\"http://frontrokhas.karaz.org/"+img+"\"/>";
 
         var d = document.createElement("div");
         d.setAttribute("class","item-body");
         d.setAttribute("style","padding:0 15px");
         var e = document.createElement("div");
-        e.setAttribute("class","item-body-title"); 
+        e.setAttribute("class","item-body-title");  
         e.setAttribute("style","font-size:16px");
         e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,60).toUpperCase()+"</span>";
         var f = document.createElement("p");

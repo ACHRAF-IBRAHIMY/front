@@ -50,6 +50,9 @@
             if(param!=undefined){
                 $.each($(".class-traduction-ct"),function(key,value){
                     $(value).html(transMap[$(value).attr("tcode")]);
+                    if(param=="ar"){
+                      $(value).css("font-family","Droid Arabic Kufi, sans-serif");
+                    }
                 })
             }
 
@@ -424,7 +427,7 @@
                         </vbox>
                         <vbox className="fieldset-footer-home">
                             <html>
-                                <div style="text-align:right;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher plus d'articles...</div>
+                                <div style="text-align:right;" class="class-traduction" tcode="APA1" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher plus d'articles...</div>
                             </html>
                         </vbox>
                 </vbox>
@@ -432,7 +435,7 @@
           <div style="height: 30px;" />
         </html>
         <html>
-          <cms-topicTitle>Rokhas en Chiffres</cms-topicTitle>
+          <cms-topicTitle class="class-traduction-ct" tcode="EEN1">Rokhas en Chiffres</cms-topicTitle>
           <cms-topicSeparator />
         </html>
         <!-- <vbox columns="25% 25% 25% 25%">
@@ -534,7 +537,7 @@
                 <span class="main-number">1</span>
               </html>
               <box-small-title class="class-traduction-ct" tcode="VV01">Créer votre espace privé sur rokhas.ma</box-small-title>
-              <button class="main-btn" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
+              <button class="main-btn class-traduction-ct" tcode="PCD1" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
             </box-card>
           </html>
           <html>

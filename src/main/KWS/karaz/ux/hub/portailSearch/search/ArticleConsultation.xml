@@ -49,7 +49,12 @@
             
             $(".classSearch-82 .reseau-ss .like").click(function(){
               if($(this).hasClass("active-like")){
-                removeLike(root,userQN+";"+JSON.parse(document.cookie).userRef,context.formRender.targetPanel);
+                if(userQN=="anonymous@karaz"){
+                  removeLike(root,userQN+";"+JSON.parse(document.cookie).userRef,context.formRender.targetPanel);
+                }else{
+                  removeLike(root,userQN+";20191919",context.formRender.targetPanel);
+                }
+                
               }else{
                 likeArticle(root,userQN,userIp,context.formRender.targetPanel);
               }
@@ -178,7 +183,7 @@
               <div class="vpanel-title">
                 <div class="vpanel-title">
                   <span style="display:grid;grid-template-columns:50% 50%">
-                    <span style="cursor:pointer" >
+                    <span style="cursor:pointer">
                       <span onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ArticlesListe','search','Articles',{});" class="">ARTICLES</span> |
                       <span class="cl-orange title-2x">A LA UNE !</span>
                     </span>

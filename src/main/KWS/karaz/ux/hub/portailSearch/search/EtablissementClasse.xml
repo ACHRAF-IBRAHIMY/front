@@ -12,9 +12,7 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true"> 
-          $(".rokhas-home").click(function(){
-               ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
-          });      
+                
           
           
           $(".tags a").click(function(){

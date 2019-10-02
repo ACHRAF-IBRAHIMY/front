@@ -328,11 +328,11 @@ function verifierLike(user,array){
 
         
     }else{
-        array.forEach(function(elm){
-            if(elm.split(";")[0]==userName){
+        for(var i=0;i<array.length;i++){
+            if(array[i].split(";")[0]==userName){
                 return false;
             }
-        });
+        }  
     } 
 
     return true;
@@ -342,13 +342,18 @@ function likeArticle(root,userQN,userIp,target){
     var user = userQN+";"+userIp;
     if(verifierLike(user,root.article._source.liste_like)){
         target.find(".classSearch-82 .reseau-ss .like").addClass("active-like");
-        try{
-            addLike(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
-        }catch(e){
-            var a = document.cookie;
-            var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1);
-            addLike(userQN+";"+JSON.parse(b).userRef,root.article._id,target);
+        if(userQN!="anonymous@karaz"){
+            addLike(userQN+";20191919",root.article._id,target);
+        }else{
+            try{
+                addLike(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
+            }catch(e){
+                var a = document.cookie;
+                var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1);
+                addLike(userQN+";"+JSON.parse(b).userRef,root.article._id,target);
+            }
         }
+        
     }
 }
 
@@ -434,11 +439,13 @@ function verifierVue(user,array){
 
         
     }else{
-        array.forEach(function(elm){
-            if(elm.split(";")[0]==userName){
+        for(var i=0;i<array.length;i++){
+            if(array[i].split(";")[0]==userName){
+                console.log("out");
                 return false;
             }
-        });
+        }
+       
     } 
 
     return true;
@@ -447,14 +454,19 @@ function verifierVue(user,array){
 function vueArticle(root,userQN,userIp,target){
     var user = userQN+";"+userIp;
     if(verifierVue(user,root.article._source.list_vue)){
-        try{
-            addVue(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
-
-        }catch(e){
-            var a = document.cookie;
-            var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1);
-            addVue(userQN+";"+JSON.parse(b).userRef,root.article._id,target);
+        if(userQN!="anonymous@karaz"){
+            addVue(userQN+";20191919",root.article._id,target);
+        }else{
+            try{
+                addVue(userQN+";"+JSON.parse(document.cookie).userRef,root.article._id,target);
+    
+            }catch(e){
+                var a = document.cookie;
+                var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1);
+                addVue(userQN+";"+JSON.parse(b).userRef,root.article._id,target);
+            }
         }
+        
     }
 }
 
@@ -498,7 +510,7 @@ result.forEach(function(elm){
     div3.setAttribute("class","ow-html");
 
     var img = document.createElement("img");
-    img.setAttribute("src",elm._source.imgP);
+    img.setAttribute("src","http://frontrokhas.karaz.org"+elm._source.imgP);
     div3.appendChild(img);
 
     var div4 = document.createElement("div");
@@ -713,7 +725,7 @@ function getObjectArticle(id,root,target){
         target.find(".divSearch-article .det-div .date-pub").html(obj.datePr.split(" ")[0].replace(/-/g,"/"));
         target.find(".divSearch-article .date-det span.vue-span").html(obj.vue);
         target.find(".divSearch-article .date-det span.like-span").html(obj.like);
-        target.find(".divSearch-article .article-img img").attr("src",obj.imgP);
+        target.find(".divSearch-article .article-img img").attr("src","http://frontrokhas.karaz.org"+obj.imgP);
         target.find(".divSearch-article .article-desc div p").html(obj.description);
         target.find(".divSearch-article .content-article").html(obj.content);
         target.find(".divSearch-article .search-details-icon img").hide();

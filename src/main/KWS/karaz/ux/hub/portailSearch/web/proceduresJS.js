@@ -173,7 +173,7 @@ function NQF_preview_QR(type,clas,dataroot,target) {
                 }
             }else{
                 var krn = attachement.gedId.split("/")[0];           
-                $("."+clas+" .NQF-vue-question .vue-video-frame").html('<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>');
+                $("."+clas+" .NQF-vue-question .vue-video-frame").html('<div class="docthumbnail"><img class="smallThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>');
             }
             
             
@@ -659,7 +659,7 @@ function NQF_save_QR(type,root,target) {
             }
         }else{
             var krn = attachement.gedId.split("/")[0];
-            var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+            var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;krn='+krn+'&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="http://frontrokhas.karaz.org/karazal/DownloadFile?gedId='+attachement.gedId+'&amp;krn='+krn+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
         }
 
         let id = "";

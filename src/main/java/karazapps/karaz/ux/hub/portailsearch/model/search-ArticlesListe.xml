@@ -137,7 +137,7 @@
           <html>
             <div class="">
               <ul class="article-categorie" style="list-style: none;text-align: center;padding: 0px 0px;font-size: 13px;color: #777;margin:auto;margin-top: 20px;margin-bottom: 20px;">
-                <li class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">Toutes les articles <span style="color:#f90" /> | </li>
+                <li class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">Tous les articles <span style="color:#f90" /> | </li>
                 <li class="li-2" style="cursor:pointer;margin-right:4px;display:inline-block">Pratique <span style="color:#f90" /> | </li>
                 <li class="li-3" style="cursor:pointer;margin-right:4px;display:inline-block">A la une <span style="color:#f90" /> </li>
               </ul>

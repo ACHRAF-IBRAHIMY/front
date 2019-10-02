@@ -450,7 +450,7 @@ var obj = {
 
 $.ajax({
     type: "post",
-    url: URL_SEARCH+"/simulator_index_qr/qrs/_search",
+    url: URL_SEARCH+"/"+simulator_index_qr+"/qrs/_search",
     datatype: "application/json",
     contentType: "application/json",
     beforeSend: function (xhr) {
@@ -561,9 +561,9 @@ $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").hide();
 $(".cms-form .body-cms-form .class-question .link-sim-cms i.fa-plus").show();
 $(".cms-form .body-cms-form .class-question .link-sim-cms span.update").show();
 //createSelectQuestion(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByTagName("input")[0],idQuestion);
-autoCompleteSim(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByClassName("update")[0].getElementsByTagName("input")[0],"simulator_index_qr","question");
+autoCompleteSim(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByClassName("update")[0].getElementsByTagName("input")[0],simulator_index_qr,"question");
 document.querySelector(".cms-form .body-cms-form .class-question .link-sim-cms span.update .fa-eye").addEventListener("click",function(){
-    getAllCmsQuestion(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByClassName("update")[0].getElementsByTagName("input")[0],"simulator_index_qr");
+    getAllCmsQuestion(document.getElementsByClassName("cms-form")[0].getElementsByClassName("body-cms-form")[0].getElementsByClassName("class-question")[0].getElementsByClassName("update")[0].getElementsByTagName("input")[0],simulator_index_qr);
 });
 }
 
@@ -637,8 +637,8 @@ $(".simulator-cms .side-bar .body .div-3").hide();
 function getQuestionCms(id){
 $.ajax({
     type: "get",
-    //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-    url: URL_SEARCH+"/simulator_index_qr/qrs/" + id,
+    //url: "http://localhost:9200/"+simulator_index_qr+"/qrs/"+id,
+    url: URL_SEARCH+"/"+simulator_index_qr+"/qrs/" + id,
     datatype: "application/json",
     contentType: "application/json",
     beforeSend: function (xhr) {
@@ -661,7 +661,7 @@ restRemoveQuestion(id);
 function restRemoveQuestion(id){
 $.ajax({
     type: "delete",
-    url: URL_SEARCH+"/simulator_index_qr/qrs/"+id,
+    url: URL_SEARCH+"/"+simulator_index_qr+"/qrs/"+id,
     contentType: "application/json",
     beforeSend: function (xhr) {
          xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
@@ -794,7 +794,7 @@ var obj = {
 
 $.ajax({
     type: "post",
-    url: URL_SEARCH+"/simulator_index_qr/qrs/_search",
+    url: URL_SEARCH+"/"+simulator_index_qr+"/qrs/_search",
     //url: "http://localhost:9200/index_classification_cluster/avis/_search",
     datatype: "application/json",
     contentType: "application/json",
@@ -820,8 +820,8 @@ function updateQuestionCms(id,obj){
 updateNodeWithQuestion(id,obj.question);
 $.ajax({
     type: "post",
-    //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-    url: URL_SEARCH+"/simulator_index_qr/qrs/" + id,
+    //url: "http://localhost:9200/"+simulator_index_qr+"/qrs/"+id,
+    url: URL_SEARCH+"/"+simulator_index_qr+"/qrs/" + id,
     datatype: "application/json",
     data:JSON.stringify(obj),
     contentType: "application/json",
@@ -846,7 +846,7 @@ var obj = {
 
 $.ajax({
     type: "post",
-    url: URL_SEARCH+"/simulator_index_qr/qrs/_search",
+    url: URL_SEARCH+"/"+simulator_index_qr+"/qrs/_search",
     //url: "http://localhost:9200/index_classification_cluster/avis/_search",
     datatype: "application/json",
     contentType: "application/json",
@@ -1064,7 +1064,7 @@ $(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide"
 
 $.ajax({
     type: "post",
-    //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+    //url: "http://localhost:9200/"+simulator_index_qr+"/qrs/"+id,
     url: URL_SEARCH+"/simulator_index_tree/tree/2",
     datatype: "application/json",
     data:JSON.stringify(treeObject),
@@ -1098,7 +1098,7 @@ var date = dateD.getFullYear().toString()+(dateD.getMonth()+1).toString()+dateD.
 
 $.ajax({
     type: "post",
-    //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+    //url: "http://localhost:9200/"+simulator_index_qr+"/qrs/"+id,
     url: URL_SEARCH+"/simulator_index_tree_hs/tree/"+date,
     datatype: "application/json",
     data:JSON.stringify(treeObject),
@@ -1187,9 +1187,9 @@ $.ajax({
 function getAllCms(type,callback,hiddenList,sortList){
 var obj = {"size":1000,"query":{"match_all":{}}};
 if(type==0 || type==2){
-    var url = "simulator_index_docs/docs/_search";
+    var url = ""+simulator_index_docs+"/docs/_search";
 }else if(type==1){
-    var url = "simulator_index_steps/steps/_search";
+    var url = ""+simulator_index_steps+"/steps/_search";
 }
 
 $.ajax({
@@ -1562,7 +1562,7 @@ if(objStatus!=0){
 function readMatrixCms(id){
 $.ajax({
     type: "get",
-    //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+    //url: "http://localhost:9200/"+simulator_index_qr+"/qrs/"+id,
     url: URL_SEARCH+"/simulator_index_matrix/columns/"+id,
     datatype: "application/json",
     contentType: "application/json",
@@ -1608,7 +1608,7 @@ if(idObject==0){
 
 $.ajax({
     type: "post",
-    //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
+    //url: "http://localhost:9200/"+simulator_index_qr+"/qrs/"+id,
     url: URL_SEARCH+"/simulator_index_matrix/columns/" + str,
     datatype: "application/json",
     data:JSON.stringify(objectJson),
@@ -1701,9 +1701,9 @@ for(var i=0;i<childs.length;i++){
 
 function getAllDocsClass(type,root){
 if(type==0){
-  var index = "simulator_index_docs/docs/_search";
+  var index = ""+simulator_index_docs+"/docs/_search";
 }else if(type==1){
-  var index = "simulator_index_steps/steps/_search";
+  var index = ""+simulator_index_steps+"/steps/_search";
 }
 
 var obj = {"size":1000,"query":{"match_all":{}}};
@@ -1865,9 +1865,9 @@ if(type==1){
 
 function updateDocClass(type,doc,root){
 if(type==0){
-    var index = "simulator_index_docs/docs/";
+    var index = ""+simulator_index_docs+"/docs/";
   }else if(type==1){
-    var index = "simulator_index_steps/steps/";
+    var index = ""+simulator_index_steps+"/steps/";
   }
 
 
@@ -2001,9 +2001,9 @@ if(type==0){
 
 function getDocClass(type,id,root){
 if(type==0){
-    var index = "simulator_index_docs/docs/";
+    var index = ""+simulator_index_docs+"/docs/";
 }else if(type==1){
-    var index = "simulator_index_steps/steps/";
+    var index = ""+simulator_index_steps+"/steps/";
 }
 
 $.ajax({
@@ -2027,9 +2027,9 @@ $.ajax({
 
 function removeDocObject(type,id){
 if(type==0){
-    var index = "simulator_index_docs/docs/";
+    var index = ""+simulator_index_docs+"/docs/";
 }else if(type==1){
-    var index = "simulator_index_steps/steps/";
+    var index = ""+simulator_index_steps+"/steps/";
 }
 
 $.ajax({
@@ -2057,9 +2057,9 @@ var obj = {
     }
 };
 if(type==0){
-    var index = "simulator_index_docs/docs/_search";
+    var index = ""+simulator_index_docs+"/docs/_search";
 }else if(type==1){
-    var index = "simulator_index_steps/steps/_search";
+    var index = ""+simulator_index_steps+"/steps/_search";
 }
 
 $.ajax({
@@ -2085,7 +2085,7 @@ $.ajax({
 }
 
 function getAllCoumnsMatrixCn4(){
-var bulk = "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
+var bulk = "{ \"index\": \""+simulator_index_qr+"\", \"type\": \"qrs\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
 $(".simulator-cms .container-sim-cms .container-4 table.tab-matrix").html("");
 
 $.ajax({
@@ -2362,7 +2362,7 @@ function autoCompleteSim(inp,index,field,type){
               restAutoComplete2(inp,req,index,field);
           });
           
-      if(index=="simulator_index_qr"){
+      if(index==simulator_index_qr){
           inp.addEventListener("keydown", function(e) {
               var x = document.getElementById("autocomplete-list");
               if (x) x = x.getElementsByTagName("div");
