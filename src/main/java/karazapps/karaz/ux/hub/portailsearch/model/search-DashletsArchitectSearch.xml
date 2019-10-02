@@ -75,7 +75,7 @@
 				</vbox>
 
 				
-				<search searchQN="notify/email/search/AllnotificationEmail?limit=3&amp;query.emailState=Brouilon&amp;loadXml=true&amp;query.tos={query.tos}" collectionName="notifs" style="margin: -0.75em;" />
+				<search searchQN="notify/email/search/AllnotificationEmail?limit=3&amp;query.emailStateIN=Brouilon,,Lu&amp;loadXml=true&amp;query.tos={query.tos}" collectionName="notifs" style="margin: -0.75em;" />
 
 
 			</vbox>

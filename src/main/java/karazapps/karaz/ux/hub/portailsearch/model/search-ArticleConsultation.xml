@@ -49,7 +49,12 @@
             
             $(".classSearch-82 .reseau-ss .like").click(function(){
               if($(this).hasClass("active-like")){
-                removeLike(root,userQN+";"+JSON.parse(document.cookie).userRef,context.formRender.targetPanel);
+                if(userQN=="anonymous@karaz"){
+                  removeLike(root,userQN+";"+JSON.parse(document.cookie).userRef,context.formRender.targetPanel);
+                }else{
+                  removeLike(root,userQN+";20191919",context.formRender.targetPanel);
+                }
+                
               }else{
                 likeArticle(root,userQN,userIp,context.formRender.targetPanel);
               }

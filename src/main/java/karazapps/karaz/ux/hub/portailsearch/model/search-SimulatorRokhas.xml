@@ -46,7 +46,61 @@
       if(!$(this).hasClass("stopped"))backClick();
       });            
       
-             
+       var searchParams = new URLSearchParams(window.location.search)
+            var param = searchParams.get('lang');
+
+            if(param!=undefined){
+                $.each($(".class-traduction"),function(key,value){
+                    $(value).html(transMap[$(value).attr("tcode")]);
+                    if(param=="ar"){
+                      $(value).css("text-align","right");
+                      $(value).css("font-family","Droid Arabic Kufi, sans-serif");
+                    }
+                })
+            }
+
+            if(param!=undefined){
+                $.each($(".class-traduction-ct"),function(key,value){
+                    $(value).html(transMap[$(value).attr("tcode")]);
+                })
+            }
+
+            if(param!=undefined){
+                $.each($(".wg-class-traduction"),function(key,value){
+                    var tcodel = $(value).attr("class").split(" ");
+                    var valuet = "";
+
+                    tcodel.forEach(function(elm){
+                      if(/wg-tcode-/.test(elm)){
+                        valuet = elm.split("-")[2];
+                      }
+                    });
+                    if(valuet!=""){
+
+                    $(value).find("input").attr("placeholder",transMap[valuet]);
+                    $(value).find("input").css("text-align","right");      
+                    }        
+                })
+            }      
+
+            if(param!=undefined){
+                $.each($(".wg-class-traduction-hd"),function(key,value){
+                    var tcodel = $(value).attr("class").split(" ");
+                    var valuet = "";
+
+                    tcodel.forEach(function(elm){
+                      if(/wg-tcode-/.test(elm)){
+                        valuet = elm.split("-")[2];
+                      }
+                    });
+                    if(valuet!=""){
+
+                    $(value).find(".ow-label-pl").html(transMap[valuet]);
+                    $(value).find(".ow-label-pl").css("font-family","Droid Arabic Kufi, sans-serif");
+
+                    }        
+                })
+            }  
    
      
 
@@ -66,11 +120,11 @@
           <html>
             <div class="vpanel-title">
               <div class="vpanel-title">
-                <span>SIMULATEUR DES PROCÉDURES</span>
+                <span class="class-traduction" tcode="SI03">SIMULATEUR DES PROCÉDURES</span>
                 <hr class="header-create-account-horizontal-line hr-hub" />
-              </div>
+              </div> 
             </div>
-            <div class="hp-sbox-text">            
+            <div class="hp-sbox-text class-traduction" tcode="VA03">            
               Vos réponses aux questions posées vous permettront d'obtenir des informations sur les documents requis
               <span style="color:#f93;">*</span>
               , les principales étapes de la procédure, les administrations concernées  ainsi que les documents qui vous seront délivrés au terme de la procédure.
@@ -83,7 +137,7 @@
               <html>
                 <div class="vpanel-title">
                   <div class="vpanel-title">
-                    <span>QUESTIONS / RÈPONSES</span>
+                    <span class="class-traduction" tcode="ID03">QUESTIONS / RÈPONSES</span>
                     <hr class="header-create-account-horizontal-line hr-hub" />
                   </div>
                 </div>
@@ -94,21 +148,21 @@
                 </div>
                 <div class="error-msg-sim error-msg-sim1">
                   <div><i class="fas fa-exclamation-triangle" /></div>
-                  <p class="">Cette procédure sera décrite et mise en ligne après entrée en vigueur des décrets :
+                  <p class="class-traduction" tcode="VE03">Cette procédure sera décrite et mise en ligne après entrée en vigueur des décrets :
                   <br />
                      - N° 2.18.475 précisant les modalités de délivrance des autorisations de réfection, de régularisation et de démolition.
                     <br /> - N° 2.18.577 remplaçant le décret N° 2.13.424 du 24 Mai 2013 (Règlement général de construction)</p>
                 </div>
                 <div class="error-msg-sim error-msg-sim2">
                   <div><i class="fas fa-exclamation-triangle" /></div>
-                  <p class="">
-                    Pour tout projet d’investissement éligible au passage par la Commission Régionale Unifiée d’Investissement (CRUI), merci d’utiliser la plateforme CRI 2.0.   
+                  <p class="class-traduction" tcode="UP03">
+                    Pour tout projet d’investissement éligible au passage par la Comité Régionale Unifiée d’Investissement (CRUI), merci d’utiliser la plateforme CRI 2.0.   
                   </p>
                 </div>
                 <div class="next-button" style="position:relative">
-                  <button class="back-rq stopped">Précédent</button>
-                  <button class="next-rq">Suivant</button>
-                  <button class="next-report" style="background: #02a202;display: inline-block;margin-left: 20px;color: #fff;border: none;width:auto"><i class="fas fa-print" /> Imprimer la procédure</button>
+                  <button class="back-rq stopped class-traduction-ct" tcode="PC03">Précédent</button>
+                  <button class="next-rq class-traduction-ct" tcode="VV03">Suivant</button>
+                  <button class="next-report class-traduction-ct" tcode="IP03" style="background: #02a202;display: inline-block;margin-left: 20px;color: #fff;border: none;width:auto"><i class="fas fa-print" /> Imprimer la procédure</button>
                 </div>
               </html>
               <button visible="1,=,2" label="test button" className="chargement-btn">
@@ -121,7 +175,7 @@
               </button>
             </vbox>
                       <vbox className="size955">
-                      <fieldSet header="RÉCAPITULATIF DES CHOIX" className="info-container-div">
+                      <fieldSet header="RÉCAPITULATIF DES CHOIX" className="info-container-div wg-class-traduction-hd wg-tcode-RG03">
                 <html>
                   <div class="info-container" />
                 </html>
@@ -131,12 +185,12 @@
             </vbox>
 
             <vbox className="docs-qr">   
-              <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div">
+              <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div wg-class-traduction-hd wg-tcode-BN03">
                 <html>
                   <div class="docs-container" />
                 </html>
               </fieldSet>
-              <fieldSet header="ÉTAPES CLÉS">
+              <fieldSet header="ÉTAPES CLÉS" className="wg-class-traduction-hd wg-tcode-TY03">
                 <html>
                   <div class="steps-container" />
                 </html>
@@ -146,17 +200,17 @@
                 <fieldSet header="COÛT ÉSTIMATIF" />
               -->
 
-              <fieldSet header="DOCUMENTS COMPLEMENTAIRES">
+              <fieldSet header="DOCUMENTS COMPLEMENTAIRES" className="wg-class-traduction-hd wg-tcode-TG03">
                 <html>
                   <div class="docs-comp-container" />
                 </html>
               </fieldSet>
-              <fieldSet header="DOCUMENTS FACULTATIFS">
+              <fieldSet header="DOCUMENTS FACULTATIFS" className="wg-class-traduction-hd wg-tcode-TW03">
                 <html>
                   <div class="docs-fac-container" />
                 </html>
               </fieldSet>
-              <fieldSet header="DOCUMENTS DÉLIVRÉS">
+              <fieldSet header="DOCUMENTS DÉLIVRÉS" className="wg-class-traduction-hd wg-tcode-BB03">
                 <html>
                   <div class="docs-sort-container" />
                 </html>
@@ -171,10 +225,10 @@
               <i class="fas fa-exclamation-triangle" />
             </html>
             <html>
-              <span>
-                Des variations peuvent être constatées entre les informations fournies par le simulateur Rokhas.ma et le déroulement réel de la procédure lors du dépôt de la demande sur la plateforme.
+              <span class="">
+                <span class="class-traduction" tcode="NN03">Des variations peuvent être constatées entre les informations fournies par le simulateur Rokhas.ma et le déroulement réel de la procédure lors du dépôt de la demande sur la plateforme.</span>  
                 <br />
-                Ces potentielles variations dépendent généralement de la nature particulière de certains dossiers, de l'évaluation de l'administration compétente et de la localisation du projet concerné
+                <span class="class-traduction" tcode="GG03">Ces potentielles variations dépendent généralement de la nature particulière de certains dossiers, de l'évaluation de l'administration compétente et de la localisation du projet concerné </span>
               </span>
             </html>
           </vbox>

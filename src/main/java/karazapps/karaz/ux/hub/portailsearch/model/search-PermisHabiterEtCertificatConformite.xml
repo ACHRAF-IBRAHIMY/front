@@ -640,7 +640,7 @@
             </vbox>
           </vbox>
         </fieldset>
-                  <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
+        <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
 
       </vbox>
       <html>

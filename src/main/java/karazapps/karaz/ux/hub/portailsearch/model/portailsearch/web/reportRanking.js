@@ -312,7 +312,7 @@ var results = result.hits.hits;
 
 for(var i=0;i<results.length;i++){
     bar.find(".div-1-top10").append("<span>"+results[i]._source.commune+"</span>");
-    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source.indecators[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span>");
+    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source.indecators[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span><br/>");
 }
 }  
 
@@ -348,7 +348,7 @@ var results = result.hits.hits;
 
 for(var i=0;i<results.length;i++){
     bar.find(".div-1-top10").append("<span>"+results[i]._source.prefecture+"</span>");
-    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span>");
+    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
 }
 }
 
@@ -383,7 +383,7 @@ var results = result.hits.hits;
 
 for(var i=0;i<results.length;i++){
     bar.find(".div-1-top10").append("<span>"+results[i]._source.region+"</span>");
-    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span>");
+    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
 }
 }
 
@@ -417,7 +417,7 @@ var results = result.hits.hits;
 
 for(var i=0;i<results.length;i++){
     bar.find(".div-1-top10").append("<span>"+results[i]._source.commune+"</span>");
-    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span>");
+    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
 }
 }
 

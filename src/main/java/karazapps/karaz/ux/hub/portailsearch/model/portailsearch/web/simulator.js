@@ -1,5 +1,21 @@
 
-function removeExpanded(type){
+
+var simulator_index_qr = "simulator_index_qr";
+var simulator_index_docs = "simulator_index_docs";
+var simulator_index_steps = "simulator_index_steps";
+
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+ 
+if(param!=undefined){
+        if(param=="ar"){
+            simulator_index_qr = "simulator_index_qrs_ar"; 
+            simulator_index_docs = "simulator_index_docs_ar";
+            simulator_index_steps = "simulator_index_steps_ar";
+        }
+}
+
+function removeExpanded(type){ 
 if(type==1){
     $(".simulator .docs-qr div.ow-pl").removeClass("expanded");
 }else if(type ==2){
@@ -377,7 +393,7 @@ loadQuestion();
 $.ajax({
     type: "get",
     //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-    url: URL_SEARCH+"/simulator_index_qr/qrs/"+id,
+    url: URL_SEARCH+"/"+simulator_index_qr+"/qrs/"+id,
     datatype: "application/json",
     contentType: "application/json",
     beforeSend: function (xhr) {
@@ -399,8 +415,8 @@ function getQuestions(qstts,type,clmm,iter){
 loadQuestion();
 $.ajax({
     type: "get",
-    //url: "http://localhost:9200/simulator_index_qr/qrs/"+id,
-    url: URL_SEARCH+"/simulator_index_qr/qrs/"+qstts[iter],
+    //url: "http://localhost:9200/"+simulator_index_qr+"/qrs/"+id,
+    url: URL_SEARCH+"/"+simulator_index_qr+"/qrs/"+qstts[iter],
     datatype: "application/json",
     contentType: "application/json",
     beforeSend: function (xhr) {
@@ -747,7 +763,7 @@ sendBulkRequestFromArrayVect(bulk,final);
 function createBulkRequestFromArrayVect(){
 var request = "";
 for(var i=0;i<arrayVect[0].length;i++){
-    request += "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n";
+    request += "{ \"index\": \""+simulator_index_qr+"\", \"type\": \"qrs\" }\n";
     request += "{ \"query\": { \"match\": { \"id\":\""+arrayVect[0][i]+"\"}}}\n";
 };
 return request;
@@ -1048,14 +1064,14 @@ var request = "";
 if(type==0){
     for(var i=0;i<vector.length;i++){
           if(vector[i]==1){
-                request += "{ \"index\": \"simulator_index_docs\", \"type\": \"docs\" }\n";
+                request += "{ \"index\": \""+simulator_index_docs+"\", \"type\": \"docs\" }\n";
                 request += "{ \"query\": { \"match\": { \"id\":"+(i+1)+"}}}\n";
             }
     }
 }else{
     for(var i=0;i<vector.length;i++){
           if(vector[i]==1){
-                request += "{ \"index\": \"simulator_index_steps\", \"type\": \"steps\" }\n";
+                request += "{ \"index\": \""+simulator_index_steps+"\", \"type\": \"steps\" }\n";
                 request += "{ \"query\": { \"match\": { \"id\":"+(i+1)+"}}}\n";
             }
     }
@@ -1067,7 +1083,7 @@ return request;
 function bulkRequestByVect(vector) {
 var request = "";
 for(var i=0;i<vector.length;i++){
-    request += "{ \"index\": \"simulator_index_steps\", \"type\": \"steps\" }\n";
+    request += "{ \"index\": \""+simulator_index_steps+"\", \"type\": \"steps\" }\n";
     request += "{ \"query\": { \"match\": { \"id\":"+vector[i]+"}}}\n";
 }
 return request;
@@ -1076,7 +1092,7 @@ return request;
 function bulkRequestByVect2(vector) {
 var request = "";
 for(var i=0;i<vector.length;i++){
-    request += "{ \"index\": \"simulator_index_docs\", \"type\": \"docs\" }\n";
+    request += "{ \"index\": \""+simulator_index_docs+"\", \"type\": \"docs\" }\n";
     request += "{ \"query\": { \"match\": { \"id\":"+vector[i]+"}}}\n";
 }
 return request;
@@ -1112,7 +1128,7 @@ $.ajax({
 }
 
 function firstEsTreeCall(){
-var bulk = "{ \"index\": \"simulator_index_qr\", \"type\": \"qrs\" }\n{\"size\":6000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
+var bulk = "{ \"index\": \""+simulator_index_qr+"\", \"type\": \"qrs\" }\n{\"size\":6000,\"query\":{\"match_all\":{}}}\n{ \"index\": \"simulator_index_matrix\", \"type\": \"columns\" }\n{\"size\":4000,\"query\":{\"match_all\":{}}}\n";
 $.ajax({
     type: "post",
     //url: "http://localhost:9200/_msearch",
@@ -1199,9 +1215,9 @@ var obj = {
 };
 
 if(type==0 || type==2 || type==3 || type==4){
-    var url = "simulator_index_docs/docs/_count";
+    var url = ""+simulator_index_docs+"/docs/_count";
 }else if(type==1){
-    var url = "simulator_index_steps/steps/_count";
+    var url = ""+simulator_index_steps+"/steps/_count";
 }
 
 $.ajax({
@@ -1281,9 +1297,9 @@ var obj = {
 };
 
 if (type == 0 || type == 2 || type == 20) {
-    var url = "simulator_index_docs/docs/_count";
+    var url = ""+simulator_index_docs+"/docs/_count";
 } else if (type == 1) {
-    var url = "simulator_index_steps/steps/_count";
+    var url = ""+simulator_index_steps+"/steps/_count";
 }
 
 $.ajax({

@@ -50,6 +50,9 @@
             if(param!=undefined){
                 $.each($(".class-traduction-ct"),function(key,value){
                     $(value).html(transMap[$(value).attr("tcode")]);
+                    if(param=="ar"){
+                      $(value).css("font-family","Droid Arabic Kufi, sans-serif");
+                    }
                 })
             }
 
@@ -206,11 +209,11 @@
                 <html>
                   <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');">
                     <i class="fas fa-unlock" />
-                    <span class="class-traduction" tcode="SC00" >Se Connecter</span>
+                    <span class="class-traduction" tcode="SC00">Se Connecter</span>
                   </div>
                   <div class="yb-btn-home" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">
                     <i class="fas fa-user-plus" />
-                    <span class="class-traduction" tcode="SG00" >S'enregistrer</span>
+                    <span class="class-traduction" tcode="SG00">S'enregistrer</span>
                   </div>
                 </html>
               </vbox>
@@ -234,7 +237,7 @@
                     <div class="hp-box-icon fas fa-folder" />
                   </html>
                   <html>
-                    <div class="hp-box-small-title class-traduction" tcode="ED00" style="font-size:1.3rem" >Etat dossier</div>
+                    <div class="hp-box-small-title class-traduction" tcode="ED00" style="font-size:1.3rem">Etat dossier</div>
                   </html>
                   <html>
                     <div class="mobile-height-auto" style="height:50px">
@@ -252,8 +255,8 @@
                   </field>
                   <html>
                     <div class="last-log-info">
-                      <span class="class-traduction" tcode="SR00" >
-                        <span >Saisissez la référence du dossier recherché telle qu'elle figure sur la demande soumise.</span> 
+                      <span class="class-traduction" tcode="SR00">
+                        <span>Saisissez la référence du dossier recherché telle qu'elle figure sur la demande soumise.</span> 
                         <span class="">Exemple : PCT-PANF-MRF-456/2020</span>
                       </span>
                     </div>
@@ -342,7 +345,7 @@
                       <span class="class-traduction" tcode="RM00">Répondez à quelques questions pour être mieux orienté.</span>
                     </div>
                     <div style="text-align:right;">
-                      <button class="main-icon-button to-simulator class-traduction" tcode="DT00" >DÉMARRER SIMULATION</button>
+                      <button class="main-icon-button to-simulator class-traduction" tcode="DT00">DÉMARRER SIMULATION</button>
                     </div>
                   </div>
                 </html>
@@ -351,7 +354,7 @@
                     <div class="main-icon-title t3">
                       <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
                         <i class="fas fa-map-marker-alt" />
-                        <span  class="class-traduction" tcode="AU00" >Autorisations urbanistiques</span>
+                        <span class="class-traduction" tcode="AU00">Autorisations urbanistiques</span>
                       </div>
                     </div>
                   </html>
@@ -379,7 +382,7 @@
                   <span>+212 (0) 5 22 23 23 44</span>
                 </html>
                 <html className="support-time">
-                  <span style="font-size:12px;" class="class-traduction" tcode="LV00" >Lundi au Vendredi de 08:30 à 18:30</span>
+                  <span style="font-size:12px;" class="class-traduction" tcode="LV00">Lundi au Vendredi de 08:30 à 18:30</span>
                 </html>
               </vbox>
             </vbox>
@@ -424,7 +427,7 @@
                         </vbox>
                         <vbox className="fieldset-footer-home">
                             <html>
-                                <div style="text-align:right;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher plus d'articles...</div>
+                                <div style="text-align:right;" class="class-traduction" tcode="APA1" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher plus d'articles...</div>
                             </html>
                         </vbox>
                 </vbox>
@@ -432,7 +435,7 @@
           <div style="height: 30px;" />
         </html>
         <html>
-          <cms-topicTitle>Rokhas en Chiffres</cms-topicTitle>
+          <cms-topicTitle class="class-traduction-ct" tcode="EEN1">Rokhas en Chiffres</cms-topicTitle>
           <cms-topicSeparator />
         </html>
         <!-- <vbox columns="25% 25% 25% 25%">
@@ -534,7 +537,7 @@
                 <span class="main-number">1</span>
               </html>
               <box-small-title class="class-traduction-ct" tcode="VV01">Créer votre espace privé sur rokhas.ma</box-small-title>
-              <button class="main-btn" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
+              <button class="main-btn class-traduction-ct" tcode="PCD1" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
             </box-card>
           </html>
           <html>
