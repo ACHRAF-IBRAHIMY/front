@@ -21,6 +21,17 @@
             <script onLoad="true">
             // root.login=userQN;
              //context.formRender.notifyObservers("login");
+
+             $(".tags a").click(function(){
+                console.log("href:"+$(this).attr("href"));
+                var pos = $("."+$(this).attr("href").substr(1)).offset().top;
+                $('html,body').animate(
+                     {
+                      scrollTop: pos
+                 },
+                'slow');   
+            });
+
             </script>
             <html>
                 <style>
@@ -65,14 +76,70 @@
                         margin-left: 13%;
                     }
 
+                    .calcul-index .tags{
+                        text-align:center;
+                        margin-bottom: 17px;
+                        font-size: 14px;
+                    }
+
+                    .calcul-index .ow-tabpanel-flex .ow-label-pl{
+                        color:#38A;
+                    }
+
                 </style>
             </html>
             <vbox className="hp-box calcul-index hp-small">
-            <vbox columns="50% 50%">
-                <html><h1>Méthodologie de ranking Rokhas</h1></html>
-                <html className="link-rokhas-index"> <span style="cursor:pointer;color:#38a" onclick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ReportRanking&quot;, &quot;search&quot;, &quot;Rokhas Ranking&quot;, {});" href="">Retour à Index Rokhas</span></html>  
+            <vbox columns="100%">
+                <html><h1 style="text-align:center">CONDITIONS GENERALES D’UTILISATION</h1></html>
+                <vbox>
+              <html className="tags">
+                <a href="#fs1">Préambule</a>
+                |
+                <a href="#fs2">Objet</a>
+                |
+                <a href="#fs3">Terminologie</a>
+                |
+                <a href="#fs4">Acceptation des conditions</a>
+                |
+                <a href="#fs5">Description des services</a>
+                |
+                <a href="#fs6">Accès</a>
+                |
+                <a href="#fs7">Souscription aux services</a>
+                |
+                <a href="#fs8">Souscription aux services 'Beta'</a>
+                |
+                <a href="#fs9">Propriété des données</a>
+                |
+                <a href="#fs10">Responsabilité des données publiées</a>
+                |
+                <a href="#fs11">Données à caractère personnel</a>
+                |
+                <a href="#fs12">Protection et sécurité des données</a>
+                |
+                <a href="#fs13">Propriété intellectuelle</a>
+                |
+                <a href="#fs14">Communication de la part de RIBATIS </a>
+                |
+                <a href="#fs15">Politique de gestion des comptes inactifs</a>
+                |
+                <a href="#fs16">Paiement</a>
+                |
+                <a href="#fs17">Responsabilité</a>
+                |
+                <a href="#fs18">Support</a>
+                |
+                <a href="#fs19">Maintenance</a>
+                |
+                <a href="#fs20">Suspension et Résiliation</a>
+                |
+                <a href="#fs21">Droit applicable et règlement de Litiges</a>
+                |
+                <a href="#fs22">Modification des conditions générales d’utilisation</a>
+              </html>
             </vbox>
-            <html>
+            </vbox>
+            <!-- <html>
                 <p>Au regard de l’importance de l’index Rokhas entant qu’outil d’évaluation de la performance opérationnelle des collectivités territoriales en matière de délivrance d’autorisations, il est extrêmement important que la méthodologie de calcul des scores soit totalement objective, factuelle et précise. </p><p>
 Il est également primordial que les données qui sont à la base des calculs de score soient produites automatiquement par les usagers, les fonctionnaires et les élus eux-mêmes et ce à travers le travail qu’ils effectuent au quotidien de façon totalement naturelle. Ainsi, aucune donnée rentrant dans le calcul des scores n’est collectée, traitée ou saisie manuellement.</p><p>
 Dans le but de garantir une compréhension fine et une bonne interprétation des scores affichés, - qu’ils soient partiels ou globaux -, cette fiche explique en détail les étapes de pré-calcul des données nécessaires à l’établissement des scores ainsi que la méthode de calcul des scores eux même.</p><p>
@@ -118,108 +185,209 @@ Afin de garantir la sommabilité des scores intermédiaires sans perdre l’infl
 Il existe plusieurs méthodes de normalisation. Dans notre cas, la méthode Min-Max est la plus adaptée. La normalisation Min-Max conserve la distribution de scores originale à un facteur d’échelle près et transforme tous les scores dans l’intervalle [0,100].
                 </p>
              </html>
-            
+             -->
 
-                <fieldset header="Normalisation de délai">
                     <html>
-                        Soit <span class="oss"><span class="big">S</span><span class="small">g,i</span></span> le score normalisé de délai moyen de délivrance des autorisations de catégorie Grands projets  et <span class="oss"><span class="big">S</span><span class="small">p,i</span></span> le score normalisé de délai moyen de délivrance des autorisations de catégorie Petits projets, telle que :<br />
-                        <img src="img/ranking/form1.PNG" alt="" />
-                            <br />
-                        Et  <br />
-                        <img src="img/ranking/form2.PNG" alt="" /><br /> 
-                        Avec <br /> 	
-                        <img src="img/ranking/form11.PNG" alt="" /><br /> 
-                        <span class="oss"><span class="big">d</span><span class="small">1,i</span></span> : Délai moyen de délivrance des autorisations grands projets par la commune i.<br />
-                        <span class="oss"><span class="big">d</span><span class="small">2,i</span></span> : Délai moyen de délivrance des autorisations petits projets par la commune i.<br />
-                        N : Nombre total de communes. <br /><br />
-                        Le score normalisé de délai est : <br />
-                        <img src="img/ranking/form3.PNG" alt="" /><br /> 
+                        <h3 class="fs1" style="text-transform: uppercase;font-size: 17px;padding-left: 0.4%">Préambule</h3>
+                       <p class="" style="padding: 0px 6px;/* color: black; */margin-bottom: 60px;">
+                       Le présent document se compose des conditions générales d’utilisation qui suivent (désignées ci-après par l'expression "Conditions Générales d’utilisation") et des conditions spécifiques liées à l'utilisation de Services individuels (ci-après, les "Conditions Spécifiques au Service"). <br /><br />
+Les Conditions Générales d’utilisation et Conditions Spécifiques au Service sont collectivement appelées les "Conditions". En cas de conflit entre les Conditions Générales d’utilisation et les Conditions Spécifiques au Service, ce sont les Conditions Spécifiques au Service qui prévalent.
+                       </p>        
+                    </html>
+
+                <fieldset header="Objet" className="fs2">
+                    <html>
+                       Les présentes conditions générales régissent les rapports entre les parties et ont pour objet de définir les modalités et les conditions de mise à disposition par RIBATIS des services fournis par la plateforme, les conditions selon lesquelles RIBATIS s’engage à fournir et héberger pour votre compte des services électroniques de planification et gestion urbaine, ainsi que les droits et obligations de chacune des parties dans le cadre de la fourniture desdits Services.
                     </html>
                 </fieldset>
 
-                <fieldset header="Attractivité">
-                <html>
-                    <p>Le score normalisé d’attractivité est :</p><br />
-                    <img src="img/ranking/form4.PNG" alt="" /><br /> 
-                    Avec <br /> 	
-                                            <img src="img/ranking/form11.PNG" alt="" /><br /> 
-                    <span class="oss"><span class="big">a</span><span class="small">i</span></span> : Nombre total des dossiers soumis par les usagers dans la commune i.<br />
-                    N : Nombre total de communes. 
-                </html>
-                </fieldset>
-
-                <fieldset header="Ecosystème">
-                <html>
-                    <p>Le score normalisé d’écosystème est :</p><br />
-                    <img src="img/ranking/form5.PNG" alt="" /><br /> 
-                    Avec <br /> 	
-                    <img src="img/ranking/form11.PNG" alt="" /><br /> 
-                    <span class="oss"><span class="big">e</span><span class="small">i</span></span> : Nombre de jours de retard sur émission des avis par les membres commissions de commune i.<br />
-                    N : Nombre total de communes. 
-                </html>
-                </fieldset>
-
-                <fieldset header="digitalisation">
-                <html>
-                    <p>Le score normalisé de digitalisation est :</p><br />
-                    <img src="img/ranking/form6.PNG" alt="" /><br /> 
-                    Avec <br /> 	
-                                            <img src="img/ranking/form11.PNG" alt="" /><br /> 
-                    <span class="oss"><span class="big">g</span><span class="small">i</span></span> : Nombre de procédures dématérialisé de la commune i.<br />
-                    N : Nombre total de communes. 
-                </html>
-                </fieldset>
-
-                <fieldset header="Fiscalité">
+                <fieldset header="Terminologie" className="fs3">
                     <html>
-                        <p>Le score normalisé de fiscalité est :</p><br />
-                        <img src="img/ranking/form7.PNG" alt="" /><br /> 
-                        Avec<br /> 	
-                        <img src="img/ranking/form8.PNG" alt="" /><br /> 
-                        Telle que <br /> 	
-                        <span class="oss"><span class="big">t</span><span class="small">i</span></span> : Total des revenus de l'étape taxation de la commune i.<br />
-                        <span class="oss"><span class="big">p</span><span class="small">i</span></span> : Total de surface plancher des projets qui sont autorisés par la commune i.<br />
-                        <span class="oss"><span class="big">f</span><span class="small">i</span></span> : Rapport entre le total des revenus de l’étape taxation de la commune i et le total de surface plancher des projets qui sont autorisés par la commune i.<br />
-                        N : Nombre total de communes.    
+                        Dans ce document, l’utilisation éventuelle du terme « Nous » se rapporte à « RIBATIS » et l’utilisation éventuelle du terme « Vous » se rapport à « Utilisateur».<br /><br />
+                        <ul>
+                            <li><b class="">Utilisateur</b> : Personne physique ou morale titulaire d’un compte d’accès au service fourni par RIBATIS tel que défini ci-dessus.</li>
+                            <li><b class="">Identifiant</b> : Terme qui désigne d’une manière générale, tout code confidentiel ou mot de passe, permettant à l’utilisateur de s’identifier et de se connecter au service.</li>
+                            <li><b class="">Service</b> : L’ensemble des services fournis à l’utilisateur par RIBATIS via la plateforme KARAZ à l’adresse suivante : www.karaz.org</li>
+                            <li><b class="">Plateforme électronique</b> :</li>
+                            <li><b class="">Service électronique</b> :</li>
+                            <li><b class="">Service "Beta"</b> :</li>
+                            <li><b class="">Data center</b> :</li>
+                            <li><b class="">Serveur mutualisé</b> :</li>
+                            <li><b class="">Consoles d’administration</b> :</li>
+                            <li><b class="">Hébergement sur serveur mutualisé</b> :</li>
+                            <li><b class="">Hébergement sur serveur dédié</b> :</li>
+                        </ul>
                     </html>
                 </fieldset>
 
-
-                <html>
-                    <h3>Combinaison simple de données (La somme pondérée) :</h3>
-                    <p>
-                        Une fois les score partiels - par sous-indicateurs – calculés et normalisés, on procède à leur combinaison. <br />
-                        Les méthodes de combinaisons de scores simples sont des méthodes très simples dont l'objectif est d'obtenir un score final <span class="oss"><span class="big">S</span><span class="small">i</span></span> de commune i à partir des 5 scores disponibles <span class="oss"><span class="big">s</span><span class="small">j,i</span></span> pour j = 1 à 5 issus de 5 systèmes (délai, Attractivité, digitalisation, écosystème, fiscalité) de commune i. <br />
-                        La somme pondérée est une méthode un peu plus évoluée qui nécessite une adaptation par le réglage de paramètres.
-                    </p><br />
-                                            <img src="img/ranking/form9.PNG" alt="" /><br /> 
-
-                </html>
-
-                <fieldset header="Score global">
-                <html>
-                    <p>
-                        En prenons <span class="oss"><span class="big">w</span><span class="small">j</span></span> = 1 pour i = 1,2,3,4,5,6 <br />
-                        Le score global de commune i est :<br />
-                        <img src="img/ranking/form10.PNG" alt="" /><br /> 
-                        Avec <br />
-                        <span class="oss"><span class="big">s</span><span class="small">1,i</span></span> : Le score normalisé de délai de la commune i.<br />
-                        <span class="oss"><span class="big">s</span><span class="small">2,i</span></span> : Le score normalisé d'attractivité de la commune i.<br />
-                        <span class="oss"><span class="big">s</span><span class="small">3,i</span></span> : Le score normalisé de digitalisation de la commune i.<br />
-                        <span class="oss"><span class="big">s</span><span class="small">4,i</span></span> : Le score normalisé d'ecosystème de la commune i.<br />
-                        <span class="oss"><span class="big">s</span><span class="small">5,i</span></span> : Le score normalisé de fiscalité de la commune i.<br />
-
-                    </p>
-                </html>
-                        
+                <fieldset header="Acceptation des conditions" className="fs4">
+                    <html>
+                    <ul>
+                       <li>Les services électroniques proposés par RIBATIS à travers la plateforme KARAZ sur le site web à l’adresse suivante : www.karaz.org<br /></li>
+<li>RIBATIS offre l'accès à la plateforme sur la base des conditions qui suivent. <br /></li>
+<li>La souscription aux services proposés par la plateforme suppose l’acceptation des présentes Conditions Générales d’Utilisation.<br /></li>
+<li>Toute commande réalisée sur la plateforme suppose l’acceptation inconditionnelle et irrévocable des présentes conditions.<br /></li>
+<li>La souscription et l’utilisation des services fournis par la plateforme sont conditionnées par l’acceptation des présentes Conditions Générales d’Utilisation.<br /></li>
+<li>L’acceptation des conditions a lieu lorsque, vous cochez une case ou cliquez sur un bouton indiquant son acceptation de ses conditions ou bien lorsque vous utilisez effectivement les Services.<br /></li>
+<li>L'utilisation des services fournis par la plateforme vaut acceptation des conditions, vous vous engagez à vous y conformer et à les respecter.<br /></li>
+<li>Si vous n’acceptez pas les Conditions Générales d’utilisation, vous ne pouvez utiliser aucun de nos Services. </li>
+</ul>
+                    </html>
                 </fieldset>
 
-                <html>
-                    <p>
-                        Quoique la méthodologie utilisée pour le calcul des scores supporte la combinaison pondérée, la première version de l’index Rokhas traitera uniformément les 5 sous-indicateurs (<span class="oss"><span class="big">w</span><span class="small">j</span></span> = 1)<br />
-                        L’observation terrain et l’accumulation des données permettra de proposer pour les prochaines versions de l’index Rokhas, un système de pondération permettant de corriger d’éventuels biais introduits consciemment ou inconsciemment par le facteur humain ou par tout autre paramètre exogène. 
-                    </p>
-                </html>
+                <fieldset header="Description des services" className="fs5">
+                    <html>
+                       RIBATIS vous fournit à travers la plateforme électronique KARAZ l'accès à un ensemble de services en ligne, relatifs à la gestion dématérialisée d’un ensemble de processus métier. Vous pouvez exploiter les Services pour un usage interne à votre organisation ou celle que vous représentez ou bien donnez accès à des utilisateurs externes dans la limite des conditions spécifiques.<br /><br />
+Vous pouvez vous connecter à ce service en utilisant n'importe quel navigateur Internet. Il vous incombe d’avoir un accès Internet et les équipements nécessaires à cet accès pour utiliser les Services. Vous pouvez alors créer, modifier, publier et partager les contenus de vos comptes.<br /><br />
+RIBATIS peut être amené à fournir des fichiers ou des applications de démonstration pour présenter ses Services, en réponse à des besoins spécifiques. Les informations contenues dans ces fichiers de démonstration et ces applications sont données à titre d’exemple. RIBATIS n’apporte aucune garantie, ni expresse ni implicite, quant à la pertinence, l’utilité, l’exhaustivité ou la fiabilité de ces informations ni de ces fichiers ou applications types.
+                    </html>
+                </fieldset>
+
+                <fieldset header="Accès" className="fs6">
+                    <html>
+                       Les codes d'accès sont l'ensemble des éléments permettant à l'utilisateur de s'identifier et de se connecter au service. Ces codes sont personnels et confidentiels.<br /><br />
+L'utilisateur s'engage à ne pas divulguer son identifiant et son code d'accès aux tiers.<br />
+L'utilisateur est entièrement responsable de ses éléments d'identification ainsi que de l'usage qui en est fait.<br />
+Vous n’êtes pas autorisé à : <br />
+(i) transférer ou rendre le Service disponible à un tiers ; <br />
+(ii) fournir un quelconque service utilisant nos Services sans notre accord préalable ; <br />
+(iii) utiliser les liens vers des sites tiers sans valider leurs conditions d’utilisation ;<br />
+(iv) mettre en ligne des liens vers des sites tiers ni utiliser leur logo, ou le nom de leur société, etc., avant toute autorisation préalable de leur part ;<br />
+(v) utiliser les Services à des fins de spam ou dans tout autre but illégal.
+                    </html>
+                </fieldset>
+
+                <fieldset header="Souscription aux services (Pour une souscription en ligne uniquement)" className="fs7">
+                    <html>
+                       Afin d’accéder aux Services ou d’utiliser ces derniers, vous devez disposer d’un compte en fournissant toutes les informations exigées. Si vous représentez une organisation et souhaitez utiliser les Services au sein de cette organisation, nous vous conseillons, ainsi qu’aux autres utilisateurs de l’entreprise, de l’abonner en fournissant les coordonnées de l’organisation. Nous vous recommandons en particulier d’utiliser votre adresse e-mail professionnelle. Vous vous engagez à : <br /><br />
+a) fournir des informations véridiques, précises, à jour et complètes concernant vos coordonnées telles que demandées lors du processus d’abonnement ;<br /><br />
+b) maintenir et mettre rapidement à jour vos données d’abonnement afin de les conserver véridiques, précises, à jour et complètes. <br /><br />
+Si vous fournissez des informations fausses, inappropriées, obsolètes ou incomplètes, ou si RIBATIS a des raisons valables de suspecter que vos informations sont fausses, inappropriées, obsolètes ou incomplètes, RIBATIS se réserve le droit de supprimer votre compte et de vous refuser toute utilisation actuelle ou future des Services.<br /><br />
+RIBATIS se réserve le droit de refuser la souscription aux services faisant l’objet des présentes conditions générales en cas de communication de données erronées ou incomplètes.<br /><br />
+                    </html>
+                </fieldset>
+
+                <fieldset header="Souscription aux services 'Beta'" className="fs8">
+                    <html>
+                       RIBATIS peut offrir certains services en tant que version beta fermée ou ouverte (le "Service Beta") à des fins de test et d'évaluation. RIBATIS aura dans ce cas, toute autorité pour déterminer à discrétion la durée de la période de test et d'évaluation du Service Beta. RIBATIS sera seul juge du succès de ces tests et décidera seul de l'éventuelle commercialisation du Service Beta. Vous n'avez aucune obligation de souscrire à un service commercial du fait de votre souscription au Service Beta. RIBATIS se réserve tout droit de modifier ou d'interrompre, à tout moment, de temps en temps, de façon temporaire ou permanente, tout ou partie du Service Beta, avec ou sans notification. Vous acceptez que RIBATIS ne vous soit pas redevable, ni à toute autre tierce partie, des dommages qui pourraient être causés par la modification, la suppression ou l'interruption du Service Beta, et ce pour quelque raison que ce soit. 
+                    </html>
+                </fieldset>
+
+                <fieldset header="Propriété des données" className="fs9">
+                    <html>
+                       Nous respectons votre droit à la propriété du contenu que vous créez et sauvegardez. Vous êtes propriétaire du contenu que vous créez et sauvegardez. Sauf autorisation expresse de votre part, votre utilisation des Services ne donne pas à RIBATIS le droit d’utiliser, reproduire, adapter, modifier, publier, ni distribuer du contenu créé ou sauvegardé sur votre compte, et ce dans un but commercial, marketing, ou similaire. Néanmoins, vous autorisez RIBATIS à accéder, copier, distribuer, sauvegarder, transmettre, formater, afficher publiquement et mettre en œuvre le contenu de votre compte à seule fin de service.<br /><br />
+Au cours de l’utilisation de l’un quelconque de nos Services, si vous rencontrez un contenu incluant un avis de droit d’auteur ou toute fonction de protection contre la copie, vous acceptez de ne pas supprimer ce droit d’auteur ni de désactiver la protection. Si vous mettez à disposition un contenu protégé ou protégeable par le droit d’auteur, vous affirmez de fait que vous avez obtenu le consentement, l’autorisation ou la permission, selon le cas, de toute personne ayant pouvoir de faire valoir ce droit sur ledit contenu, dès lors que vous rendez ce contenu disponible sous quelque forme que ce soit. De plus, si vous mettez à disposition un contenu de la manière mentionnée ci-dessus, vous convenez expressément que RIBATIS a le droit d’en bloquer l’accès ou de le retirer, si RIBATIS reçoit une quelconque plainte relative à l’illégalité ou à la violation de droits de tiers sur ce contenu. En utilisant l’un quelconque des Services et en transmettant ou en publiant tout contenu à l’aide de l’un des services, vous consentez à ce que l’agent désigné par RIBATIS dans ce but détermine les questions d’illégalité ou de violation de droits de tiers sur ce contenu
+
+                    </html>
+                </fieldset>
+                
+                <fieldset header="Responsabilité des données publiées" className="fs10">
+                    <html>
+                       Vous pouvez transmettre ou publier du contenu alphanumérique et graphique que vous aurez créé en utilisant les Services de RIBATIS ou d’une autre manière. Cependant, vous serez tenu pour seul responsable de ce contenu, ainsi que des conséquences de sa transmission ou de sa publication. Tout contenu rendu public devient de fait publiquement accessible au travers du Web et peut donc être parcouru et indexé par les moteurs de recherche.  Vous assumez l’entière responsabilité de vérifier que vous n’avez pas accidentellement rendu un contenu privé accessible publiquement. Tout contenu que vous pouvez recevoir d’autres utilisateurs des Services vous en est fourni EN L’ETAT uniquement à titre indicatif et pour votre usage personnel et vous acceptez de ne pas l’utiliser, ni le copier, le reproduire, le diffuser, le transmettre, l’émettre, l’afficher, le vendre, le mettre sous licence, ni l’exploiter autrement dans quelque objectif que ce soit, sans le consentement écrit exprès de la personne qui possède les droits sur ce contenu.<br /><br />
+RIBATIS s'efforce d'assurer au mieux de ses possibilités l'exactitude et la mise à jour des informations diffusées sur la plateforme dont elle se réserve le droit, à tout moment et à son entière discrétion, de corriger le contenu. Toutefois, RIBATIS ne peut garantir l'exactitude, la précision, la mise à jour ou l'exhaustivité des informations mises à la disposition sur la plateforme. Chaque utilisateur assume pleinement les risques liés au crédit qu'il accorde à ces informations.
+                    </html>
+                </fieldset>
+                
+                <fieldset header="Données à caractère personnel" className="fs11">
+                    <html>
+                       Les données à caractère personnel que vous fournissez à RIBATIS sont régies par la Politique de Confidentialité RIBATIS et les lois applicables aux données à caractère personnel 09-08. Le choix que vous faites d'utiliser nos Services vaut consentement de votre part à l'ensemble des clauses de notre Politique de Confidentialité. Vous êtes responsable du maintien de la confidentialité des données de votre compte, et de toute autre information sensible. Vous êtes responsable de toutes les manipulations qui pourraient intervenir sur vos données et vous vous engagez à prévenir immédiatement RIBATIS en cas d'utilisation abusive de votre compte à l'adresse mail support@ribatis.com. RIBATIS ne peut être tenu pour responsable de toute destruction ou altération de vos données, que ce soit vis-à-vis de vous ou d'un tiers, du fait d'un accès non autorisé et/ou de l'usage de votre compte ou autre action.<br /><br />
+Les données à caractère personnel relatives aux clients sont considérées comme confidentielles conformément aux lois et réglementations en vigueur. L'utilisateur dispose seul d'un droit individuel d'accès et de rectification des informations le concernant.
+                    </html>
+                </fieldset>
+                
+                <fieldset header="Protection et sécurité des données" className="fs12">
+                    <html>
+                       Les données personnelles des clients RIBATIS sont traitées dans le respect des dispositions de la loi n°09-08 relative à la protection des personnes physiques à l’égard du traitement des données à caractère personnel ainsi qu’aux recommandations prévues par la Commission Nationale de contrôle de la protection des Données  à caractère personnel (www.cndp.ma).<br /><br />
+Les données à caractère personnel communiquées par le Client, nécessaires au bon déroulement des transactions objet des présentes sont conservées par RIBATIS, qui s'engage à les utiliser uniquement dans le cadre des prestations offertes, et à prendre toutes les mesures nécessaires permettant de garantir la sécurité et la confidentialité des informations fournies.<br /><br />
+RIBATIS s'engage à n'opérer aucune commercialisation des informations transmises par le Client au moyen du Service, et à ne pas les communiquer à des tiers, en dehors des cas prévus par la loi. Toutefois, ces données pourront être confiées par RIBATIS à ses sous-traitants et ses partenaires externes. RIBATIS est autorisé à utiliser les données personnelles des utilisateurs à des fins statistiques.<br /><br />
+RIBATIS et ses prestataires de service externes utiliseront les mesures appropriées de sécurité physiques, techniques et organisationnelles afin de protéger vos données personnelles contre toute divulgation ou tout accès non autorisé. <br /><br />
+RIBATIS, dans le cadre de la fourniture du service, conservera vos données personnelles pour la durée nécessaire aux finalités. 
+                    </html>
+                </fieldset>
+
+                <fieldset header="Propriété intellectuelle" className="fs13">
+                    <html>
+                       La marque RIBATIS, le logo RIBATIS, les noms des différents services RIBATIS et leurs logos sont des marques commerciales, propriété de RIBATIS. Vous vous engagez à ne pas afficher ni utiliser, d'aucune manière que ce soit, les marques de RIBATIS sans l'autorisation préalable de RIBATIS.<br /><br />
+La plateforme est une œuvre de l'esprit protégée par les droits de propriété intellectuelle. La plateforme et chacun des éléments qui le composent tels que, notamment marques, textes, illustrations, logos, dénominations sociales, produits, photographies sont la propriété exclusive de RIBATIS. La reproduction de tous documents publiés sur la plateforme est seulement autorisée aux fins exclusives d'information pour un usage strictement personnel et privé.<br /><br />
+A l'exception des circonstances ci-dessus décrites, toute autre reproduction et/ou représentation de la plateforme devra faire l'objet d'une autorisation préalable et écrite de RIBATIS.<br /><br />
+Vous garantissez que n'importe quelle information, quelle qu'en soit la forme, qu'il peut transmettre à RIBATIS ne viole aucun droit de propriété intellectuelle d'un tiers ou une autre loi applicable. De telles informations, quelle qu'en soit la forme, seront traitées comme non confidentielles. En conséquence, en soumettant ainsi des informations, quelle qu'en soit la forme, l'utilisateur cède à RIBATIS tout droit de l'utiliser, de la reproduire, de la diffuser, de la modifier ou de la transmettre dans le but de traiter la demande de l'utilisateur.
+
+                    </html>
+                </fieldset>
+
+                <fieldset header="Communication de la part de RIBATIS " className="fs14">
+                    <html>
+                       Le Service inclut certaines communications en provenance de RIBATIS, telles que des annonces de service, des messages administratifs ou des lettres d'information. Vous acceptez que de telles communications fassent partie des Services de RIBATIS. Pour respecter votre droit à la vie privée, RIBATIS vous propose une option de désabonnement, qui interdit de vous envoyer des mails. Cependant, vous ne pouvez en aucun cas vous désabonner des annonces de service ni des messages administratifs.
+                    </html>
+                </fieldset>
+
+                <fieldset header="Politique de gestion des comptes inactifs" className="fs15">
+                    <html>
+                       Nous nous réservons le droit de clôturer tout compte gratuit, inactif pendant une durée consécutive de 120 jours. Dans ce cas, toutes les données associées à ce compte seront détruites. Nous vous informerons avant toute clôture de compte et vous enverrons une sauvegarde de vos données par e-mail. La politique de suppression de données sera mise en œuvre à l’égard d’une partie ou de la totalité des Services. Chaque service sera considéré indépendamment des autres pour le calcul de la période d’inactivité. Ceci signifie que l’activité sur l’un de nos Services ne préjuge en rien de la poursuite de l’activité des autres services. Pour les comptes impliquant plus d’un utilisateur, dès lors que l’un au moins des utilisateurs est actif, le compte sera considéré comme actif.
+                    </html>
+                </fieldset>
+                <fieldset header="Paiement" className="fs16">
+                    <html>
+                       La demande d’accès à la plateforme est gratuite.<br /><br />
+En contrepartie des services fournis par RIBATIS à travers la plateforme KARAZ, vous vous engagez à vous acquitter de tous vos engagements, dont celles de payer les montants dus à RIBATIS.<br /><br />
+Le paiement en ligne des services fournis par la plateforme s’effectue via un système sécurisé de paiement par carte bancaire dûment autorisé par le CMI (Centre Monétique Interbancaire).<br /><br />
+Toutes les informations collectées lors de l’opération de paiement à distance sont immédiatement cryptées et enregistrées sur le serveur de paiement sécurisé de notre prestataire des services de paiement.<br /><br />
+Les informations collectées lors de l’opération de paiement à distance seront utilisées ou transmises uniquement dans le cadre de l’achat des prestations offertes.
+                    </html>
+                </fieldset>
+                <fieldset header="Responsabilité" className="fs17">
+                    <html>
+                       RIBATIS ne saurait garantir que le fonctionnement de la plateforme sera ininterrompu.<br /><br />
+RIBATIS n'est tenu que d'une obligation de moyen en ce qui concerne le fonctionnement et la continuité du service. De même sa responsabilité ne saurait être engagée pour des faits dus à un cas de force majeure. En tout état de cause, le client s’engage à reconnaître qu'il a une parfaite connaissance de la nature du réseau Internet, et en particulier de ses performances techniques et des temps de réponse pour consulter ou transférer des informations.<br /><br />
+Vous vous engagez expressément à ce que l’usage de nos services se fasse sous votre entière responsabilité. Les services vous sont fournis sur la base de leur disponibilité en l’état. RIBATIS se dégage expressément de toute garantie formelle ou induite, incluant sans s’y limiter, la garantie implicite de valeur marchande et la non adéquation au besoin. RIBATIS ne garantit nullement que les services seront interrompus, opportuns, sécurisés ou sans virus. L’utilisation de tout contenu téléchargé ou obtenu par l’usage des services est à votre entière discrétion et vous serez tenus pour unique responsable de tout dommage à votre ordinateur, téléphone mobile, équipement sans fil ou à vos données résultant de l’usage des services ou du téléchargement de tels contenus. Aucun conseil, aucune information, écrit(e) ou oral(e), que vous obtiendrez de RIBATIS par l’intermédiaire de ses employés ou représentants ne pourra constituer de garantie si elle n’est pas expressément définie dans ces conditions d’utilisation.<br /><br />
+RIBATIS ne pourra pas être tenue pour responsable d'une défaillance des fournisseurs d'accès à Internet (difficultés informatiques ou autres difficultés techniques...).<br /><br />
+Les modalités et opérations de tests de contrôle et de maintenance, ainsi que les interventions nécessaires en cas de panne, peuvent être effectuées par RIBATIS à tout moment. A cet effet, RIBATIS peut procéder sans indemnité et sans préavis ni autre formalité, à des interruptions afin d’entretenir le logiciel existant ou pour installer de nouvelles versions du logiciel.<br /><br />
+RIBATIS n'est pas responsable du transport des données, de la qualité et de la disponibilité des réseaux de télécommunication, d'interruptions de service consécutives à un mauvais fonctionnement du matériel de votre part. <br /><br />
+RIBATIS n'est davantage pas responsable des conséquences de l'utilisation frauduleuse, par un tiers, du code utilisateur et du code confidentiel de l'utilisateur. Il appartient, d'autre part, au client de prendre toutes les précautions nécessaires pour protéger ses données personnelles stockées dans son matériel (notamment contre les virus informatiques ou les piratages).<br /><br />
+RIBATIS décline toute responsabilité en cas de dommage direct ou indirect causé par une utilisation inappropriée des données personnelles, notamment en cas d’utilisation frauduleuse et abusive par un tiers non autorisé. Aussi, causé par l’inexécution ou la mauvaise exécution des prestations offertes, notamment en cas d’indisponibilité technique et informatique, su service ou toute difficulté ou incapacité à télécharger ou à accéder au contenu ou toute autre défaillance du système de communication qui pourrait rendre le service indisponible, de force majeure, pour des raisons de grèves ou disfonctionnements des services communaux.<br /><br />
+Dans les limites autorisées par la loi en vigueur, RIBATIS ne pourra en aucun cas être tenu responsable pour toute conséquence directe ou indirecte, incident, ou toute perte ou dommage, ni pour la perte de chiffre d’affaires, l’interruption d’activité, la panne d’ordinateur, la perte d’information liée à l’activité, ou toute autre perte survenant ou causée par votre utilisation ou mauvais utilisation de nos services, même si RIBATIS a été prévenue de l’existence de tels dommages. Votre seule et unique solution à tout litige avec RIBATIS relatif au service sera l’annulation du service. RIBATIS ne pourra en aucun cas être tenu pour responsable envers vous pour quelque service que ce soit, direct ou indirect, au-delà du montant de l’abonnement que vous payez pour le service.
+                    </html>
+                </fieldset>
+                <fieldset header="Support" className="fs18">
+                    <html>
+                       RIBATIS s’engage à assurer un support technique en ligne via le service Help Desk disponible sur la plateforme KARAZ. Le délai standard de réponse est de 48H à partir de l’heure de dépôt de la requête.<br /><br />
+Toute précision relative à la plateforme des présentes conditions générales, toute demande d'information ou réclamation relative au fonctionnement des services proposés doit être adressée au service – clients, par e-mail à l'adresse : support@ribatis.com    
+                    </html>
+                </fieldset>
+                <fieldset header="Maintenance" className="fs19">
+                    <html>
+                       Vous prendrez note de la nécessité d’interruption des Services fournis par la plateforme KARAZ dans les conditions du présent article.<br /><br />
+<b class="">Maintenance préventive </b><br /><br />
+Afin de maintenir la qualité des Services fournis, RIBATIS doit réaliser des maintenances préventives, sur la plateforme. RIBATIS vous notifiera la maintenance préventive par e-mail à ses contacts techniques au 3 jours calendaires à l'avance.<br /><br />
+Une fois la maintenance réalisée, RIBATIS communiquera sur votre demande les résultats de cette dernière.<br /><br />
+<b class="">Maintenance corrective </b><br /><br />
+RIBATIS s'engage à tout mettre en œuvre pour corriger, éliminer ou contourner les anomalies rencontrées, dès lors que ces anomalies sont détectées par RIBATIS ou notifiées à RIBATIS par vous. Une fois la maintenance corrective réalisée, RIBATIS vous communiquera les résultats de cette dernière à la demande.
+
+                    </html>
+                </fieldset>
+                <fieldset header="Suspension et Résiliation" className="fs20">
+                    <html>
+                       RIBATIS peut suspendre votre compte ou désactiver temporairement votre accès à tout ou partie de l’un des Services en cas de soupçon d’activité illégale, de période d’inactivité prolongée, ou à la demande de la police ou d’une administration publique. RIBATIS se réserve le droit de suspendre ou d’annuler la validité du service souscrit en cas, notamment, d’utilisation frauduleuse, abusive ou non-conforme aux présentes conditions générales. L’intéressé en sera informé, le cas échéant. <br /><br />
+RIBATIS peut résilier un compte suspendu ou désactivé au bout de 30 jours.  RIBATIS résilie également votre compte à votre demande. De plus, RIBATIS se réserve le droit de résilier votre compte et de vous refuser tout accès aux Services, dès lors qu’elle a des raisons suffisantes de croire qu’il avait violé les conditions d’utilisation.  RIBATIS se réserve le droit de mettre fin à votre droit d’accès à tout Service beta en cas de problèmes techniques imprévus ou d’interruption du Service beta. La résiliation de votre compte inclut l’interdiction d’accéder à tous les Services, la suppression des données de votre compte, telle que votre adresse e-mail et votre mot de passe, ainsi que la suppression de toutes les données contenues dans votre compte.<br /><br />
+Toute objection à cette suspension ou désactivation de comptes devra être transmise à l’adresse support@ribatis.com dans les 30 jours suivant la notification de la suspension.  
+                    </html>
+                </fieldset>
+                <fieldset header="Droit applicable et règlement de Litiges" className="fs21">
+                    <html>
+                       Les présentes conditions Générales d’utilisation sont soumises au droit marocain. <br /><br />
+En cas de litige en relation avec les prestations offertes susmentionnées, les utilisateurs feront tous les efforts nécessaires pour régler, à l'amiable, les différends ou litiges survenant entre eux au titre des présentes conditions générales d’utilisation. En cas de désaccord persistant, les différends seront portés devant le tribunal de commerce de Casablanca.<br /><br />
+Tout litige ou toute plainte concernant les termes de ces Conditions d’utilisation sera arbitré en conformité avec les règles du tribunal de Casablanca. Un tel litige ou une telle plainte sera arbitré individuellement, et ne sera pas associé à un autre arbitrage ayant trait à toute autre litige ou plainte d'une tierce partie. En cas d’objection, RIBATIS pourra à tout moment rechercher une injonction ou toute autre forme de compensation de la part de n'importe quelle cour de la juridiction compétente.<br /><br />
+                    Vous vous engagez à indemniser et à ne pas vous retourner contre RIBATIS et ses employés, directeurs, fournisseurs et partenaires, de et contre tout dommage, perte et dépense (incluant les coûts d'assistance juridique) provenant de toute plainte qui proviendrait de votre utilisation des Services en violation des règles des parties, en violation de toute loi ou en violation de toute clause de ces Conditions de Services, sauf si cette utilisation est autorisée par RIBATIS.
+                    </html>
+                </fieldset>
+                <fieldset header="Modification des conditions générales d’utilisation" className="fs22">
+                    <html>
+                       RIBATIS conserve l'entière liberté de modifier, compléter ou supprimer en tout ou partie les présentes Conditions Générales d’utilisation à tout moment, si elle le juge nécessaire et utile, notamment afin de les adapter aux évolutions de son exploitation, et/ ou à l’évolution de la législation et/ou aux évolutions des services proposés. Ces modifications peuvent inclure, sans aucune limite, le paiement des Services. Vous serez informé de la mise en ligne de chaque nouvelle version des présentes Conditions Générales d’utilisation.  Vous serez prévenu de telles modifications par mail ou par la publication de celles-ci sur la plateforme électronique au niveau des pages afférentes aux Conditions Générales d’utilisation.<br /><br /> 
+Dans le cas où RIBATIS modifie ses Conditions Générales d’utilisation, vous pouvez arrêter l'utilisation de tout ou partie des Services. La poursuite de l’utilisation des Services de RIBATIS après notification de tout changement dans les Conditions Générales d’utilisation vaut consentement aux nouvelles clauses amendées.<br /><br />
+Si vous refusez d’accepter les nouvelles Conditions Générales d’Utilisation, toute utilisation du Service sera interdite. En aucun cas vous ne pourrez tenir responsable RIBATIS d’un quelconque dommage et à quelque titre que ce soit, si vous continuez d’utiliser la plateforme malgré votre refus d’adhérer aux nouvelles Conditions Générales d’Utilisation. <br /><br />
+Dans l’hypothèse où l’une ou plusieurs des stipulations des présentes conditions générales serai(en)t ou deviendrai(en)t nulle(s), illégale(s) ou jugé(s) inapplicable(s) pour quelque cause que ce soit, la validité, la légalité ou l’applicabilité de toute autre stipulation des conditions n’en serait aucunement affectée ou altérée, à moins que ces autres stipulations n’en fassent partie intégrante ou soient clairement indissociables des stipulations invalidés ou jugées inapplicables. Dans un tel cas, ladite clause sera remplacée par une autre disposition valable et économiquement équivalente. Il en ira de même s’il s’agit de combler une lacune.
+                    </html>
+                </fieldset>
             </vbox>            
       </screen>
     </view>

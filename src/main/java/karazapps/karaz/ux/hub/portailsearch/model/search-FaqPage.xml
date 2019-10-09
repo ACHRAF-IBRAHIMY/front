@@ -68,7 +68,14 @@
                 
                 Array.from(document.querySelectorAll(".divSearchBar .hp-search_field input")).forEach(function(elm){
                     autoCompleteSim(elm,"faq_index","QUESTIONS");
-                });</script>
+                });
+
+                if(param!=undefined){
+     $(".ow-form-body").css("font-family","Droid Arabic Kufi, sans-serif");
+     $(".ow-form-body").css("text-align","right"); 
+   }
+                
+                </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
