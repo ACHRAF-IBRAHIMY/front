@@ -17,7 +17,7 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">
+      <script postLoad="true" delay="3000">
           loadPageBytype(0);
           
           var tabInd = ["1-2019"];
@@ -127,6 +127,16 @@
                 filtersBy.push(region);
               }
 
+              if( !(region=="default" || rankBy!="commune1") ){
+                filters.push("région.keyword");
+                filtersBy.push(region);
+              }
+
+               if( !(region=="default" || rankBy!="arrondissement") ){
+                filters.push("région.keyword");
+                filtersBy.push(region);
+              }
+
                if( !(region=="default" || rankBy!="prefecture") ){
                 filters.push("region.keyword");
                 filtersBy.push(region);
@@ -152,6 +162,26 @@
                 restGetAllCommue([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
                 restGetAllCommue([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
                 restGetAllCommue([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
+              }else if(rankBy=="commune1"){
+                restGetAllCommune1([filters,filtersBy],"indecators.score","desc",60,0,0);
+                restGetAllCommune1([filters,filtersBy],"indecators.score","desc",60,0,0);
+                restGetAllCommune1([filters,filtersBy],"indecators.delai","desc",3,0,1);
+                restGetAllCommune1([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
+                restGetAllCommune1([filters,filtersBy],"indecators.digital","desc",3,0,3);
+                restGetAllCommune1([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
+                restGetAllCommune1([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
+                restGetAllCommune1([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
+                restGetAllCommune1([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
+              }else if(rankBy=="arrondissement"){
+                restGetAllarrondissement([filters,filtersBy],"indecators.score","desc",60,0,0);
+                restGetAllarrondissement([filters,filtersBy],"indecators.score","desc",60,0,0);
+                restGetAllarrondissement([filters,filtersBy],"indecators.delai","desc",3,0,1);
+                restGetAllarrondissement([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
+                restGetAllarrondissement([filters,filtersBy],"indecators.digital","desc",3,0,3);
+                restGetAllarrondissement([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
+                restGetAllarrondissement([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
+                restGetAllarrondissement([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
+                restGetAllarrondissement([filters,filtersBy],"indecators.scoreE","desc",10,0,7);
               }else if(rankBy=="prefecture"){
                 restGetAllPrefecture([filters,filtersBy],"score","desc",60,0,0);
                 restGetAllPrefecture([filters,filtersBy],"score","desc",60,0,0);
@@ -196,6 +226,12 @@
             $(".ranking-fieldset #rankBy").change(function(){
                 var rankBy = $(".ranking-fieldset #rankBy option:selected").val();
                 if(rankBy=="commune"){
+                  $(".ranking-fieldset #region option").prop("disabled",false);
+                  $(".ranking-fieldset #prefecture option").prop("disabled",false);
+                }else if(rankBy=="commune1"){
+                  $(".ranking-fieldset #region option").prop("disabled",false);
+                  $(".ranking-fieldset #prefecture option").prop("disabled",false);
+                }else if(rankBy=="arrondissement"){
                   $(".ranking-fieldset #region option").prop("disabled",false);
                   $(".ranking-fieldset #prefecture option").prop("disabled",false);
                 }else if(rankBy=="prefecture"){
@@ -280,7 +316,9 @@
             <vbox>
               <html>
                 <select name="trierPar" id="rankBy">
-                  <option value="commune">Classer par commune/arrondissement</option>
+                  <option value="commune">Classement global</option>
+                  <option value="commune1">Classer par commune</option>
+                  <option value="arrondissement">Classer par arrondissement</option>
                   <option value="prefecture">Classer par préfecture</option>
                   <option value="region">Classer par région</option>
                   <option value="ville">Classer par conseils ville</option>
