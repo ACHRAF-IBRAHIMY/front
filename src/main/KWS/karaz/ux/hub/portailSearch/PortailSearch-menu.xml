@@ -188,6 +188,13 @@
        <menu relId="RightAside" label="Right Aside" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/RightAside</resource>
        </menu>
+       <menu relId="RightAside" label="statistiuqesSearch" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/StatistiuqesSearch</resource>
+       </menu>
+       <menu relId="RightAside" label="dbLeftSide" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/DbLeftSide</resource>
+       </menu>
+       
     </menu>
   </menu>
 </menus>

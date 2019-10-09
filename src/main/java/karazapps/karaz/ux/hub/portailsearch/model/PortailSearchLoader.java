@@ -107,6 +107,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DashletsArchitectSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DashletsArchitectSearch.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DbLeftSide", "karazapps/karaz/ux/hub/portailsearch/model/search-DbLeftSide.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DetailsActivitySearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DetailsActivitySearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DownloadConsultation", "karazapps/karaz/ux/hub/portailsearch/model/search-DownloadConsultation.xml");
@@ -171,6 +173,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/SimulatorRokhasCMS", "karazapps/karaz/ux/hub/portailsearch/model/search-SimulatorRokhasCMS.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/StatistiuqesSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-StatistiuqesSearch.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/UserSearchOLAP", "karazapps/karaz/ux/hub/portailsearch/model/search-UserSearchOLAP.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/VisioConferenceFrame", "karazapps/karaz/ux/hub/portailsearch/model/search-VisioConferenceFrame.xml");
@@ -183,13 +187,9 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/contactUs", "karazapps/karaz/ux/hub/portailsearch/model/search-contactUs.xml");
 
-		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/dbLeftSide", "karazapps/karaz/ux/hub/portailsearch/model/search-dbLeftSide.xml");
-
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/proceduresEconomique", "karazapps/karaz/ux/hub/portailsearch/model/search-proceduresEconomique.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/proceduresUrbanisme", "karazapps/karaz/ux/hub/portailsearch/model/search-proceduresUrbanisme.xml");
-
-		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/statistiuqesSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-statistiuqesSearch.xml");
 		
 		try {
 			RootMenu.addMenus("karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-menu.xml");
