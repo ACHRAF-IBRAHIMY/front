@@ -3,6 +3,7 @@
 var simulator_index_qr = "simulator_index_qr";
 var simulator_index_docs = "simulator_index_docs";
 var simulator_index_steps = "simulator_index_steps";
+var faq_index = "faq_index";
 
 var searchParams = new URLSearchParams(window.location.search)
 var param = searchParams.get('lang');
@@ -12,6 +13,7 @@ if(param!=undefined){
             simulator_index_qr = "simulator_index_qrs_ar"; 
             simulator_index_docs = "simulator_index_docs_ar";
             simulator_index_steps = "simulator_index_steps_ar";
+            faq_index = "faq_index_ar";
         }
 }
 
@@ -366,18 +368,18 @@ return vec.join('');
 }
 
 function completeArrayMatrix(ar1,ar2,size){
-console.log(ar1);
-console.log(ar2);
-var list = [];  
-  for(var i=0;i<size;i++){
-      if(ar1.indexOf(i.toString())!=-1){
-        list.push(ar2[ar1.indexOf(i.toString())]);
-      }else{
-        list.push(0);
-      }
-  }
- console.log(list); 
-return list;
+    console.log(ar1);
+    console.log(ar2);
+    var list = [];  
+    for(var i=0;i<size;i++){
+        if(ar1.indexOf(i.toString())!=-1){
+            list.push(ar2[ar1.indexOf(i.toString())]);
+        }else{
+            list.push(0);
+        }
+    }
+    console.log(list); 
+    return list;
 }
 
 function createArrayPredict(size){

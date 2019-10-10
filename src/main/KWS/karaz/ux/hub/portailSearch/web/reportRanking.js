@@ -89,6 +89,126 @@ $.ajax({
 
 };
 
+
+function restGetAllarrondissement(filters,sortBy,rev,size,from,type){
+
+    var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
+    
+    console.log(JSON.stringify(obj));
+    
+    $.ajax({
+          type: "post",
+          url: URL_SEARCH + "/ranking_index_arr/_search",
+          datatype: "application/json",
+          contentType: "application/json",
+          data: JSON.stringify(obj),
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader("Authorization", AUTH);
+          },
+          success: function (result) {
+              console.log(result);
+            
+    
+            
+    
+            if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
+                var dec = true;
+                var str = "";
+                var trims = filters[1][0].split("-");
+                if(trims[0]=="1"){
+                    str += "1er trimestre "+trims[1];
+                }else if(trims[0]=="2"){
+                    str += "2éme trimestre "+trims[1];
+                }else if(trims[0]=="3"){
+                    str += "3éme trimestre "+trims[1];
+                }else if(trims[0]=="4"){
+                    str += "4éme trimestre "+trims[1];
+                }
+                dataReportRk.trim = str;
+                dataReportRk.data = [];
+            }
+    
+    
+            switch (type){
+                case 0 : createCommuneTable(result,dec);break;
+                case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
+                case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
+                case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
+                case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
+                case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
+                case 6 : createBarTop10(result,".ranking-bar10-U","scoreU");break;  
+                case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+            }
+               
+    
+          },
+          error: function (error) {
+              console.log(error);
+          }
+      })
+    
+    };
+
+    function restGetAllCommune1(filters,sortBy,rev,size,from,type){
+
+        var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
+        
+        console.log(JSON.stringify(obj));
+        
+        $.ajax({
+              type: "post",
+              url: URL_SEARCH + "/ranking_index_cmm/_search",
+              datatype: "application/json",
+              contentType: "application/json",
+              data: JSON.stringify(obj),
+              beforeSend: function (xhr) {
+                  xhr.setRequestHeader("Authorization", AUTH);
+              },
+              success: function (result) {
+                  console.log(result);
+                
+        
+                
+        
+                if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
+                    var dec = true;
+                    var str = "";
+                    var trims = filters[1][0].split("-");
+                    if(trims[0]=="1"){
+                        str += "1er trimestre "+trims[1];
+                    }else if(trims[0]=="2"){
+                        str += "2éme trimestre "+trims[1];
+                    }else if(trims[0]=="3"){
+                        str += "3éme trimestre "+trims[1];
+                    }else if(trims[0]=="4"){
+                        str += "4éme trimestre "+trims[1];
+                    }
+                    dataReportRk.trim = str;
+                    dataReportRk.data = [];
+                }
+        
+        
+                switch (type){
+                    case 0 : createCommuneTable(result,dec);break;
+                    case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
+                    case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
+                    case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
+                    case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
+                    case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
+                    case 6 : createBarTop10(result,".ranking-bar10-U","scoreU");break;  
+                    case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+                }
+                   
+        
+              },
+              error: function (error) {
+                  console.log(error);
+              }
+          })
+        
+        };
+    
+
 function restGetAllPrefecture(filters,sortBy,rev,size,from,type){
 
 var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
@@ -205,7 +325,7 @@ $.ajax({
 
 function sortByRanking(tabs,classe,val,type){
 
-if(val=="commune"){
+if(val=="commune" || val=="commune1" || val=="arrondissement" ){
     var newTabs = tabs;
 }else if(val=="prefecture"){
    var newTabs = [];
@@ -232,6 +352,34 @@ if(val=="commune"){
         restGetAllCommue(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
       }else if(classe=="sp-td"){
         restGetAllCommue(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+      }
+  }else if(val=="commune1"){
+        if(classe=="rank-dl"){
+            restGetAllCommune1(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+          }else if(classe=="rank-dg"){
+            restGetAllCommune1(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+          }else if(classe=="rank-at"){
+            restGetAllCommune1(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+          }else if(classe=="rank-es"){
+            restGetAllCommune1(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+          }else if(classe=="rank-fs"){
+            restGetAllCommune1(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+          }else if(classe=="sp-td"){
+            restGetAllCommune1(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+          }
+  }else if(val=="arrondissement"){
+    if(classe=="rank-dl"){
+        restGetAllarrondissement(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+      }else if(classe=="rank-dg"){
+        restGetAllarrondissement(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+      }else if(classe=="rank-at"){
+        restGetAllarrondissement(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+      }else if(classe=="rank-es"){
+        restGetAllarrondissement(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+      }else if(classe=="rank-fs"){
+        restGetAllarrondissement(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+      }else if(classe=="sp-td"){
+        restGetAllarrondissement(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
       }
   }else if(val=="prefecture"){
     if(classe=="rank-dl"){
@@ -463,6 +611,11 @@ function createCommuneTable(result,dec){
     //$("#ranking-table tr:not(.first-tr)").remove();
     $("#ranking-table2 tr:not(.first-tr)").remove();
 
+    if(results.length==0){
+        tableHtml.html("<span style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
+    }else{
+        tableHtml.html("");
+    }
 
     for(var i=0;i<results.length;i++){
         var tr = $(document.createElement("tr"));
@@ -483,8 +636,13 @@ function createCommuneTable(result,dec){
         tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
         $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span>"+rankStr+"</span></td></tr>");
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
+        if(results[i]._source.indecators.delaiPpV==-1){
+            var titleText = `Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
+        }else{
+            var titleText = `Grand projets : `+(1/results[i]._source.indecators.delaiPpV).toFixed(2) +` jours - Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
+        }
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
-        tr.html(tr.html()+`<td class="rm" title=" Grand projets : `+(1/results[i]._source.indecators.delaiPpV).toFixed(2) +` jours - Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours">`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
+        tr.html(tr.html()+`<td class="rm" title="`+titleText+`">`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
         tr.html(tr.html()+`<td class="rm" title="`+results[i]._source.indecators.attractiviteUV+` Dossiers traités">`+Math.floor(results[i]._source.indecators.attractivite)+`</td>`);
         tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
         tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
@@ -500,7 +658,11 @@ function createCommuneTableP(result){
 
     //$("#ranking-table tr:not(.first-tr)").remove();
     $("#ranking-table2 tr:not(.first-tr)").remove();
-
+    if(results.length==0){
+        tableHtml.html("<span style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">Ce critère ne dispose pas de résultats assemblées</span>");
+    }else{
+        tableHtml.html("");
+    }
     for(var i=0;i<results.length;i++){
         var tr = $(document.createElement("tr"));
         var rankCom = results[i]._source.rankComp;
@@ -533,6 +695,12 @@ var tableHtml = $("#ranking-table2");
 
 //$("#ranking-table tr:not(.first-tr)").remove();
     $("#ranking-table2 tr:not(.first-tr)").remove();
+
+    if(results.length==0){
+        tableHtml.html("<span style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">Ce critère ne dispose pas de résultats assemblées</span>");
+    }else{
+        tableHtml.html("");
+    }
 
 for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
@@ -567,7 +735,11 @@ var tableHtml = $("#ranking-table2");
 
 //$("#ranking-table tr:not(.first-tr)").remove();
     $("#ranking-table2 tr:not(.first-tr)").remove();
-
+    if(results.length==0){
+        tableHtml.html("<span style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">Ce critère ne dispose pas de résultats assemblées</span>");
+    }else{
+        tableHtml.html("");
+    }
 for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
@@ -712,9 +884,15 @@ function createSelectRanking(result,idHtml,filter){
       }else{
           str = elms[i].key;
       }
+
     option.innerHTML = str;
     option.setAttribute("value",elms[i].key);
-    select.append(option);
+    if(str=="COMMUNE CASABLANCA"){
+
+    }else{
+        select.append(option);
+    }
+     
   }
 
   if(idHtml=="#period"){  

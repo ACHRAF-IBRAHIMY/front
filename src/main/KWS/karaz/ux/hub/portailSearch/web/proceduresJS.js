@@ -534,9 +534,9 @@ function NQF_save_QR(type,root,target) {
         if(categ=="Vimeo"){
             $.ajax({
                 type:'GET',
-                url: 'http://vimeo.com/api/v2/video/' + video_id + '.json',
+                url: 'https://vimeo.com/api/v2/video/' + video_id + '.json',
                 jsonp: 'callback',
-                dataType: 'jsonp',
+                dataType: 'jsonp', 
                 success: function(data){
                     var thumbnail_src = data[0].thumbnail_large;
                     req.img_url = thumbnail_src;
@@ -820,7 +820,7 @@ function NQF_add_question(quest, id, cls, type,target) {
         span2.setAttribute("class","far fa-times-circle NFQ-close-quest");
         span2.addEventListener("click",function(){
             getQsFaq(id,0,clas,target);
-            removeQuestionNFQ(id,"/faq_index/qr/")
+            removeQuestionNFQ(id,"/"+faq_index+"/qr/")
         });
         var hr = document.createElement("hr");
         hr.setAttribute("class","NQF-horizontal-line");
@@ -884,7 +884,7 @@ function updateQuestionNQF(id, obj,target) {
     $.ajax({
         type: "post",
 
-        url: URL_SEARCH + "/faq_index/qr/" + newID,
+        url: URL_SEARCH + "/"+faq_index+"/qr/" + newID,
         datatype: "application/json",
         data: JSON.stringify(obj),
         contentType: "application/json",
@@ -1358,6 +1358,7 @@ function NQF_edit_av(type,dataroot,ctx,clas,target) {
         ctx.formRender.notifyObservers("playlist");
         ctx.formRender.notifyObservers("categ");
         ctx.formRender.notifyObservers("description");
+        ctx.formRender.notifyObservers("tag");
 
         $("."+clas+" .NQF-edit-modif").show();
         $("."+clas+" .NQF-btn-alg").hide();
