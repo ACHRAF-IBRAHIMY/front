@@ -502,15 +502,15 @@ function generateRequestFaqSearch(prefix,type,from,size,visi){
 
 if(visi!=undefined)   {
     if(prefix.trim()!=""){
-        var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}},{\"match_phrase\": {\"visibility\": \"USER\" }}]}}}\n";
+        var str = "{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}},{\"match_phrase\": {\"visibility\": \"USER\" }}]}}}\n";
     }else{
-        var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }},{\"match\":{ \"visibility\":\""+visi+"\" }}]}}}\n";    
+        var str ="{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }},{\"match\":{ \"visibility\":\""+visi+"\" }}]}}}\n";    
     }
 }else{
     if(prefix.trim()!=""){
-        var str = "{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+        var str = "{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
     }else{
-        var str ="{ \"index\": \"faq_index\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
+        var str ="{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"match\":{ \"type\":\""+type+"\" }}}\n";
     }
 }
 
@@ -840,7 +840,7 @@ if(type==null){
             }
 
             console.log(result);
-            $("").html("");
+            a.html("");
             var results = result.hits.hits;
 
             
@@ -1868,7 +1868,7 @@ target.find("."+cls+" .NQF-edit-modif").hide();
 
 $.ajax({
     type: "get",
-    url: URL_SEARCH+"/faq_index/qr/" + id,
+    url: URL_SEARCH+"/"+faq_index+"/qr/" + id,
     datatype: "application/json",
     beforeSend: function (xhr) {
         xhr.setRequestHeader("Authorization",AUTH);
@@ -3680,37 +3680,37 @@ if(ref.trim()==""){
 var prefixList = [["AMN","PCT","GRP","LOT","MDF","MRC","ELV"],["PH"],["ODP-AP"],["EC"],["ODP-AN"],["ODP"],["SD"]];
 var autListId = [
 {
-    "url":"http://91.121.57.204:8080/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction",
+    "url":"https://urbanisme.karaz.org/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction",
     "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-    "url_id":"http://91.121.57.204:8080/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction",
+    "url_id":"https://urbanisme.karaz.org/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction",
 },
 {
-    "url":"http://91.121.57.204:8080/karazortal/access/rest/kdata/search/urbanisme_permishabiter_search_AllPermishabiterHabitation",
+    "url":"https://urbanisme.karaz.org/karazortal/access/rest/kdata/search/urbanisme_permishabiter_search_AllPermishabiterHabitation",
     "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-    "url_id":"http://91.121.57.204:8080/karazortal/access/rest/kdata/object/karazapps.urbanisme.permishabiter.model.PermishabiterHabitation"
+    "url_id":"https://urbanisme.karaz.org/karazortal/access/rest/kdata/object/karazapps.urbanisme.permishabiter.model.PermishabiterHabitation"
 },
 {
-    "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationafp_search_AllAutorisationAFP",
+    "url":"https://91.121.60.221/karazortal/access/rest/kdata/search/autorisations_autorisationafp_search_AllAutorisationAFP",
     "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-    "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationafp.model.AutorisationAFP"
+    "url_id":"https://91.121.60.221/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationafp.model.AutorisationAFP"
 },
 {
-    "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationec_search_AllAutorisationEC",
+    "url":"https://91.121.60.221/karazortal/access/rest/kdata/search/autorisations_autorisationec_search_AllAutorisationEC",
     "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-    "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationec.model.AutorisationEC"
+    "url_id":"https://91.121.60.221/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationec.model.AutorisationEC"
 },
 {
-    "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationoan_search_AllAutorisationOAN",
+    "url":"https://91.121.60.221/karazortal/access/rest/kdata/search/autorisations_autorisationoan_search_AllAutorisationOAN",
     "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-    "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationoan.model.AutorisationOAN"
+    "url_id":"https://91.121.60.221/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationoan.model.AutorisationOAN"
 },{
-    "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationodp_search_AllAutorisationODPTelecom",
+    "url":"https://91.121.60.221/karazortal/access/rest/kdata/search/autorisations_autorisationodp_search_AllAutorisationODPTelecom",
     "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-    "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationodp.model.AutorisationODP"
+    "url_id":"https://91.121.60.221/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationodp.model.AutorisationODP"
 },{
-    "url":"http://91.121.60.221:8080/karazortal/access/rest/kdata/search/autorisations_autorisationsd_search_AllAutorisationSD",
+    "url":"https://91.121.60.221/karazortal/access/rest/kdata/search/autorisations_autorisationsd_search_AllAutorisationSD",
     "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-    "url_id":"http://91.121.60.221:8080/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationsd.model.AutorisationSD"
+    "url_id":"https://91.121.60.221/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationsd.model.AutorisationSD"
 }
 
 ];

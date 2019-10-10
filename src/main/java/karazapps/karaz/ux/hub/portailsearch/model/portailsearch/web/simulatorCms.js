@@ -1638,12 +1638,12 @@ $.ajax({
 function getMatrixColumns(list,obj,idChild){
 var array = [];
 var str = "";
-array.push(eval("obj"+str+"[\"text\"][\"question_id\"]"))
+array.push(eval("obj"+str+"[\"text\"][\"question_id\"].toString()"))
 if(list[0]!=""){
     for (var i = 0; i < list.length; i++) {
         str += "[\"children\"][" + list[i] + "]";
         console.log("srrrrrrrrr",str);
-        array.push(eval("obj"+str+"[\"text\"][\"question_id\"]"));
+        array.push(eval("obj"+str+"[\"text\"][\"question_id\"].toString()"));
     }
 }
 console.log(array);
@@ -2469,7 +2469,7 @@ var obj = {"size":5,"query":
 }
 }};
 
-if(index=="faq_index"){
+if(index==faq_index){
     obj =   {"size":5,"query": 
     {
     "bool":{
@@ -2502,7 +2502,7 @@ $.ajax({
     },
     success: function (result) {
         console.log(result);
-        if(index=="faq_index"){
+        if(index==faq_index){
             createListeRes(inp,result.hits.hits,req,0);
         }else if(index=="videos_index"){
             createListeResVideo(inp,result.hits.hits,req,1);
