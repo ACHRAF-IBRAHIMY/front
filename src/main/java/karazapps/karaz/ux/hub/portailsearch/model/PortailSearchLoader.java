@@ -173,6 +173,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/SimulatorRokhasCMS", "karazapps/karaz/ux/hub/portailsearch/model/search-SimulatorRokhasCMS.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/StatistiuqesArchitecteSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-StatistiuqesArchitecteSearch.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/StatistiuqesSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-StatistiuqesSearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/UserSearchOLAP", "karazapps/karaz/ux/hub/portailsearch/model/search-UserSearchOLAP.xml");
