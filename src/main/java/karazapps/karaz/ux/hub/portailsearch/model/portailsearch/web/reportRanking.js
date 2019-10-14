@@ -304,14 +304,14 @@ $.ajax({
           console.log(result);
 
         switch (type){
-            case 0 : createCommuneTableV(result);break;
-            case 1 : createBarTop3V(result,".ranking-bar3-dl","delai");break;   
-            case 2 : createBarTop3V(result,".ranking-bar3-at","attractivite");break;   
-            case 3 : createBarTop3V(result,".ranking-bar3-dg","digital");break;   
-            case 4 : createBarTop3V(result,".ranking-bar3-es","ecosystem");break;   
-            case 5 : createBarTop3V(result,".ranking-bar3-fs","fiscalite");break; 
-            case 6 : createBarTop10V(result,".ranking-bar10-U","score");break;  
-            case 7 : createBarTop10V(result,".ranking-bar10-E","scoreE");break;  
+            case 0 : createCommuneTable(result);break;
+            case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
+            case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
+            case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
+            case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
+            case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
+            case 6 : createBarTop10(result,".ranking-bar10-U","score");break;  
+            case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
         }
            
 
