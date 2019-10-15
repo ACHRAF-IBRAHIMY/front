@@ -188,14 +188,14 @@
        <menu relId="RightAside" label="Right Aside" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/RightAside</resource>
        </menu>
-       <menu relId="RightAside" label="statistiuqesSearch" icone="search">
+       <menu relId="StatistiuqesSearch" label="statistiuqesSearch" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/StatistiuqesSearch</resource>
        </menu>
        <menu relId="DbLeftSide" label="dbLeftSide" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/DbLeftSide</resource>
        </menu>
-       <menu relId="StatistiuqesArchitecteSearch" label="Statistiuqes Architecte" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/StatistiuqesArchitecteSearch</resource>
+       <menu relId="StatistiquesArchitecteSearch" label="Statistiques Architecte" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesArchitecteSearch</resource>
        </menu>
        
     </menu>
