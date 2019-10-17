@@ -6,27 +6,36 @@
       <search />
       <idObject />
       <parentP />
+      <filterRef>TOUS</filterRef>
     </query>
     <collapsed>false</collapsed>
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true">
-                  profilesT = profiles;
+      <script onLoad="true">
+          console.log(root.query.filterRef);
+          if(root.query.filterRef=="ECONOMIQUE"){
+            root.query.filterRef = "ÉCONOMIQUE";
+            context.formRender.notifyObservers("query.filterRef");
+          }
 
-            $(".classSearch-1 .searchbuttun").click();
-                    
-		   
+          if( !(root.query.filterRef=="URBANISME" || root.query.filterRef=="ÉCONOMIQUE" || root.query.filterRef=="AUTRE" || root.query.filterRef=="TOUS")){
+            root.query.filterRef = "TOUS";
+            context.formRender.notifyObservers("query.filterRef");
+          }
+      </script>
+      <script postLoad="true" delay="1000">
+            profilesT = profiles;
+
+            context.formRender.targetPanel.find(".classSearch-1 .searchbuttun").click();
 		    
-		
-		    
-            document.querySelector(".classSearch-1 .div-full-search-bar .ow-field-input").addEventListener("keydown", function (e) {
+            context.formRender.targetPanel.find(".classSearch-1 .div-full-search-bar .ow-field-input").get(0).addEventListener("keydown", function (e) {
                     var x =  document.querySelector(".classSearch-1 #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x,1,"classSearch-1");
             }); 
           
-            document.querySelector(".classSearch-1 .div-full-search-bar .ow-field-input").addEventListener("input", function () {
+            context.formRender.targetPanel.find(".classSearch-1 .div-full-search-bar .ow-field-input").get(0).addEventListener("input", function () {
                     var a, b, i;
                     var inp = this;
                     var val = inp.value.toLowerCase();
@@ -38,7 +47,8 @@
                     currentFocus = -1;
                     //close any already open lists of autocompleted values
                     closeAllLists();
-                    restAutoComplete(inp,val,true);
+                    restAutoComplete2(inp,val,"reglementation_index","title");
+                    //restAutoComplete(inp,val,true);
             });
 
             PCD_headerfieldset_color(".NFQ-quest-title");
@@ -54,14 +64,48 @@
             // header color
             PCD_headerfieldset_color(".pcd-ha-color");
 
-            RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",2)
-            RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",2)
-            RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
-            RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",2)
-            RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
-            RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)</script>
+        //    RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",2)
+        //    RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",2)
+        //    RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
+         //   RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",2)
+         //   RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
+         //   RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)
+        </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
+        <style>
+        .classSearch-1 .hp-search_field .ow-field-input-line{
+          border-right: none;
+          border-radius: 15px 0 0 15px
+        }
+
+        .classSearch-1 .filterRef-class .ow-field-input-line{
+            height: 32px;
+            border-radius: 0 15px 15px 0;
+            border: 4px solid #3388aa;
+        }
+
+        .hp-search_field .ow-field-input-side,.filterRef-class .ow-field-input-side{
+          padding : 0px;
+        }
+
+        .filterRef-class .ow-field-input-select{
+              color: #fff !important;
+              background: #38A !important;
+              font-size: 16px;
+              line-height: 21px !important;
+        }
+
+        .filterRef-class .ow-field-input-select:before{
+          color:#fff !important;
+          line-height: 24px !important;
+        }
+ 
+        .filterRef-class .ow-field-assistance{
+          text-align: left;
+        }
+
+        </style>
       </html>
       <vbox columns="70% 30%" className="classSearch-1">
         <vbox className="hp-box hp-small divSearch">
@@ -77,17 +121,25 @@
               <div style="height: 50px;" />
             </html>
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-              <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
+              <vbox columns="75% 25%">
+                <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
+                <field className="filterRef-class"  widget="select" xpath="query.filterRef">
+                  <option value="TOUS" label="TOUS" ></option>
+                  <option value="ÉCONOMIQUE" label="ÉCONOMIQUE" ></option>
+                  <option value="URBANISME" label="URBANISME" ></option>
+                  <option value="AUTRE" label="AUTRE" ></option>
+                </field>
+              </vbox>
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
-                <postChange>var prefix = $(".classSearch-1 .div-full-search-bar .hp-search_field input").val();
-                                currentPage=0;
-                                var pp=root.query.parentP;
-                                if(pp==1){
-                                    pp=0;
-                                }
-                                restFullSearchList(prefix,0,false,pp,"classSearch-1",context.formRender.targetPanel);
-                                root.query.parentP=0;</postChange>
+                <postChange>
+                  var prefix = context.formRender.targetPanel.find(".classSearch-1 .div-full-search-bar .hp-search_field input").val();
+                  currentPage=0;
+                  var pp=root.query.filterRef;
+                  restFullSearchList(prefix.substring(0,247),0,false,pp,"classSearch-1",context.formRender.targetPanel);
+                  root.query.parentP=0;
+                </postChange>
               </button>
+              
             </vbox>
             <html>
               <div style="height: 70px;" /> 
@@ -105,7 +157,7 @@
             </html>
           </vbox>
         </vbox>
-                          <search searchQN="karaz/ux/hub/portailsearch/search/RightAside?query.height=1100px" /> 
+                  <search searchQN="karaz/ux/hub/portailsearch/search/RightAside?query.height=1100px" /> 
 
       </vbox>
       <html>

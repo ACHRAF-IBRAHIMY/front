@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="StatistiquesArchitecteSearch" label="Statistiques">
 
-    <query>
-                <architecte>AWM ARCHITECTES URBANISTES</architecte>
-
-    </query>
     <data>
         <query>
             <search />
@@ -71,7 +67,7 @@
             <div><p style="text-align: justify;font-size: 16px;color: #666;">
 Votre tableau de bord est une représentation visuelle des informations les plus importantes liées à vos procédures effectuées sur Rokhas.ma.
 <br /> Cette représentation est un outil d'évaluation de votre travail, constitué de plusieurs indicateurs de performance à des moments donnés ou sur des périodes données.
-<br />Les indicateurs ont pour but de mesurer votre performance, d'avoir une vision globale sur votre écosystème (Administration) et de vous aider à prendre les décisions relatives aux objectifs et résultats.</p></div>
+<br />Les indicateurs ont pour but de mesurer votre performance, d'avoir une vision statistique sur votre relation avec administration et de vous aider à prendre les décisions relatives aux objectifs et résultats.</p></div>
           </html>
         </vbox>            
       </vbox>
