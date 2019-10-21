@@ -35,11 +35,6 @@ public class PortailSearchLoader {
     
     @PostConstruct
     public void load() {
-//automatique importation statement
-				try { RootMenu.addMenusBE("karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-importation-menu.xml"); } catch (Exception e) { System.out.println("Erreur lors de chargement de menu  importation pour PortailSearch"  ); }	 
-			ModelCache.addUsePath("karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-importation", "karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-importation-view.xml");
-		//automatique importation statement
-
     
        	ModelCache.addXsdPath("karazapps.karaz.ux.hub.portailsearch.model.PortailSearch", "karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-model.xsd");
 		ModelCache.addXml0Path("karazapps.karaz.ux.hub.portailsearch.model.PortailSearch", "karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-ini.xml");
