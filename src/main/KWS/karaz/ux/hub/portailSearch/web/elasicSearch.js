@@ -111,7 +111,8 @@ target.find("."+cls+" .no-result-v").hide();
 
 
 typePage = Number(cls.split("-")[1]);
-
+console.log(typePage+" "+from+" "+prev+" "+parent+" "+cls);
+console.log(target);
 
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -148,7 +149,7 @@ xhttp.onreadystatechange = function() {
         }else{
             if(currentPage==0){
             totalPage = Math.ceil(res.hits.total.value/4);
-            createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,cls,target);
+            createPaginationBar(Math.min(totalPage,10),0,prefix,1,false,cls,target,parent);
             if(totalPage!=0){
                 currentPage=1;
                 currentLPage=1;
@@ -156,9 +157,9 @@ xhttp.onreadystatechange = function() {
         }else if(currentPage%10==0){
             currentLPage = (currentPage/10)+1;
             console.log("begin: "+currentPage+"lpage: "+currentLPage);
-            createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,cls,target);
+            createPaginationBar(Number(Math.min(10,totalPage-currentPage))+Number(currentPage),currentPage-1,prefix,1,false,cls,target,parent);
         }else if(prev==true){
-            createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,cls,target);
+            createPaginationBar(currentPage+1,Math.max(0,(Number(currentPage))-10),prefix,1,true,cls,target,parent);
         }}
         
         
