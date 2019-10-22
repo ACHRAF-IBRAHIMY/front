@@ -142,7 +142,7 @@
               
             </vbox>
             <html>
-              <div style="height: 70px;" /> 
+              <div style="height: 45px;" /> 
             </html>
             <html>
               <div class="searchGif">
@@ -157,7 +157,7 @@
             </html>
           </vbox>
         </vbox>
-                  <search searchQN="karaz/ux/hub/portailsearch/search/RightAside?query.height=1100px" /> 
+                          <search searchQN="karaz/ux/hub/portailsearch/search/RightAside?query.height=1100px" /> 
 
       </vbox>
       <html>

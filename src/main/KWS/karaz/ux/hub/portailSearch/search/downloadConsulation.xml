@@ -21,25 +21,30 @@
         $(".classSearch-12 .searchbuttun").click();
 
                 
-		   
-		    
-		
-		    
+		        context.formRender.targetPanel.find(".classSearch-12 .div-full-search-bar .ow-field-input").get(0).addEventListener("keydown", function (e) {
+                    var x =  document.querySelector(".classSearch-12 #autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,1,"classSearch-12");
+            }); 
 
-        Array.from(document.querySelectorAll(".classSearch-12 .divSearchBar .hp-search_field input")).forEach(function(elm){
-            autoCompleteSim(elm,"attachements_index","title");
-            Array.from(document.querySelectorAll(".classSearch-12 .div-full-search-bar .ow-field-input")).forEach(function(elm){
-            elm.addEventListener("keydown", function (e) {
-            var x = document.querySelector(".classSearch-12 #autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
-              moveKey(e,x,1,"classSearch-12");
-            })
-          });
-        });
+            context.formRender.targetPanel.find(".classSearch-12 .div-full-search-bar .ow-field-input").get(0).addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = this;
+                    var val = inp.value.toLowerCase();
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    console.log(val); 
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete2(inp,val,"attachements_index","title"); 
+            });
 
       </script>
       <html id="hSeparator">
-        <div style="height: 30px;" />
+        <div style="height: 0px;" />
       </html>
       <vbox columns="70% 30%" className="classSearch-12">
         <vbox className="hp-box hp-small divSearch">
@@ -60,7 +65,7 @@
                           currentPage=0;
                           $(".classSearch-12 .consultation-video").hide();
                           $(".classSearch-12 .search-video").show();
-                          restFullSearchList(prefix,0,false,0,"classSearch-12",context.formRender.targetPanel);
+                          restFullSearchList(prefix,0,false,0,"classSearch-12",context.formRender.targetPanel,0);
                       </postChange>
               </button>
             </vbox>
@@ -76,7 +81,7 @@
                     Aucun résultat trouvé. 
                     Essayez d'autres mots clés
               </div>
-              <div class="pagination pagination-second" />
+              <div style="margin-top:65px" class="pagination pagination-second" />
             </html>
             <html class="loadGifVid">
               <div class="searchGif2">

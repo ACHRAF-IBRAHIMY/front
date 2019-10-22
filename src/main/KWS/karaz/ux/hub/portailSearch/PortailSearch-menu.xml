@@ -188,7 +188,7 @@
        <menu relId="RightAside" label="Right Aside" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/RightAside</resource>
        </menu>
-       <menu relId="StatistiuqesSearch" label="statistiuqesSearch" icone="search">
+       <menu relId="StatistiuqesSearch" label="Statisiques Membre commission" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/StatistiuqesSearch</resource>
        </menu>
        <menu relId="DbLeftSide" label="dbLeftSide" icone="search">
@@ -197,7 +197,9 @@
        <menu relId="StatistiquesArchitecteSearch" label="Statistiques Architecte" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesArchitecteSearch</resource>
        </menu>
-       
+       <menu relId="StatistiquesMembreSecr" label="Statistiques Secretaire commission" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesMembreSecr</resource>
+       </menu>
     </menu>
   </menu>
 </menus>
