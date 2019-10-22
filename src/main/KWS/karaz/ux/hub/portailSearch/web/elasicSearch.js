@@ -111,8 +111,7 @@ target.find("."+cls+" .no-result-v").hide();
 
 
 typePage = Number(cls.split("-")[1]);
-console.log(typePage+" "+from+" "+prev+" "+parent+" "+cls);
-console.log(target);
+
 
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

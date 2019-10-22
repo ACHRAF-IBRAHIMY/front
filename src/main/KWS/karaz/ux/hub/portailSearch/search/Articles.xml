@@ -30,26 +30,25 @@
                 getMostPopularArticle(3,"A LA UNE",".fieldser-article-2 .vbox-articles .ow-vl-inner");
 //                getMostPopularArticle(3,"A VENIR",".fieldser-article-3 .vbox-articles .ow-vl-inner");
         
-            document.querySelector(".classSearch-81 .search-input-articles .ow-field-input").addEventListener("keydown", function (e) {
+            context.formRender.targetPanel.find(".classSearch-81 .div-full-search-bar .ow-field-input").get(0).addEventListener("keydown", function (e) {
                     var x =  document.querySelector(".classSearch-81 #autocomplete-list");
                     if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x,1,"classSearch-81");
             }); 
-          
-            document.querySelector(".classSearch-81 .search-input-articles .ow-field-input").addEventListener("input", function () {
+
+            context.formRender.targetPanel.find(".classSearch-81 .div-full-search-bar .ow-field-input").get(0).addEventListener("input", function () {
                     var a, b, i;
                     var inp = this;
-
                     var val = inp.value.toLowerCase();
                     if (!val) {
                         closeAllLists();
-                        return false;  
+                        return false;
                     }
-                    console.log(val);
+                    console.log(val); 
                     currentFocus = -1;
                     //close any already open lists of autocompleted values
                     closeAllLists();
-                    restAutoComplete(inp,val,true);
+                    restAutoComplete2(inp,val,"articles_index","title"); 
             });
 
             </script>
@@ -87,12 +86,13 @@
                     <vbox columns="90% 10%" className="stay-grid search-input-articles div-full-search-bar" columns-small="80% 20%" contentAlign="center">
                   <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés." />
               
-                  <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                  <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessingX="search()" separator="!!">
                     <postChange>
-                          ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.text="+root.query.search, "search", "Articles", {});
+                         let val = context.formRender.targetPanel.find(".classSearch-81 .div-full-search-bar .ow-field-input").val();
+                          ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticlesListe?query.text="+val, "search", "Articles", {});
                     </postChange>
                   </button>
-
+ 
                 </vbox>
                 <html>
               <div style="height: 50px;" />

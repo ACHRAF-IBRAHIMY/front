@@ -27,27 +27,7 @@
       }     
           profilesT = profiles;
           
-            document.querySelector(".classSearch-80 .div-full-search-bar .ow-field-input").addEventListener("keydown", function (e) {
-                    var x =  document.querySelector(".classSearch-80 #autocomplete-list");
-                    if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,1,"classSearch-80");
-            }); 
-          
-            document.querySelector(".classSearch-80 .div-full-search-bar .ow-field-input").addEventListener("input", function () {
-                    var a, b, i;
-                    var inp = this;
-                    var val = inp.value.toLowerCase();
-                    if (!val) {
-                        closeAllLists();
-                        return false;
-                    }
-                    console.log(val); 
-                    currentFocus = -1;
-                    //close any already open lists of autocompleted values
-                    closeAllLists();
-                    restAutoComplete(inp,val,true);
-            });
-
+            
             PCD_headerfieldset_color(".NFQ-quest-title");
             context.formRender.targetPanel.find(".NFQ-quest-title .ow-label-pl").css('text-transform','upperCase');
                
@@ -79,10 +59,32 @@
 
         </script>
         <script postLoad="true" delay="200">
+
+            context.formRender.targetPanel.find(".classSearch-80 .div-full-search-bar .ow-field-input").get(0).addEventListener("keydown", function (e) {
+                    var x =  document.querySelector(".classSearch-80 #autocomplete-list");
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,1,"classSearch-80");
+            }); 
+
+            context.formRender.targetPanel.find(".classSearch-80 .div-full-search-bar .ow-field-input").get(0).addEventListener("input", function () {
+                    var a, b, i;
+                    var inp = this;
+                    var val = inp.value.toLowerCase();
+                    if (!val) {
+                        closeAllLists();
+                        return false;
+                    }
+                    console.log(val); 
+                    currentFocus = -1;
+                    //close any already open lists of autocompleted values
+                    closeAllLists();
+                    restAutoComplete2(inp,val,"articles_index","title"); 
+            });
+
             context.formRender.targetPanel.find(".classSearch-80 .searchbuttun").click();
         </script>
       <html id="hSeparator">
-        <div style="height: 30px;" />
+        <div style="height: 0px;" />
       </html>
       <vbox columns="70% 30%" className="classSearch-80 search-article">
         <vbox className="hp-box hp-small divSearch">
