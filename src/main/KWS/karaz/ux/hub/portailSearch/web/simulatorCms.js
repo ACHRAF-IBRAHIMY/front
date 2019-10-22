@@ -2506,6 +2506,8 @@ $.ajax({
             createListeRes(inp,result.hits.hits,req,0);
         }else if(index=="videos_index"){
             createListeResVideo(inp,result.hits.hits,req,1);
+        }else if(index=="attachements_index" || index=="articles_index" || index=="reglementation_index" ){
+            createListeRes(inp,result.hits.hits,req,2);
         }else{
             createListeRes(inp,result.hits.hits,req,1);
         }
@@ -2600,11 +2602,14 @@ for (i = 0; i < arr.length; i++) {
     /*create a DIV element for each matching element:*/
     var b = document.createElement("DIV");
     /*make the matching letters bold:*/
-    if(type!=0){
+    if(type==1){
         var str = arr[i]._source.question;
-    }else{
+    }else if(type==0){
         var str = arr[i]._source.QUESTIONS;
+    }else if(type==2){
+        var str = arr[i]._source.title;
     }
+
     b.setAttribute("title",str);
     if(val==""){
         b.innerHTML=str.toLowerCase();
@@ -2612,7 +2617,7 @@ for (i = 0; i < arr.length; i++) {
         b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
     }
  
-    if(type!=0){
+    if(type==1){
         /*insert a input field that will hold the current array item's value:*/
         var input = document.createElement("input");
         input.setAttribute("type","hidden");
