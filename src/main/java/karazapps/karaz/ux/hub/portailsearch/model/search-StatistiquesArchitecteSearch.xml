@@ -130,7 +130,7 @@ Votre tableau de bord est une représentation visuelle des informations les plus
           </html>
         </vbox>            
       </vbox>
-               <vbox className="div-stat-3" columns="33% 33% 33%">
+               <vbox className="div-stat-3" columns="33% 34% 33%">
                   <vbox className="div-stat-bord">
                      <html>
                         <div style="display:grid;grid-template-columns:6px auto 6px">
