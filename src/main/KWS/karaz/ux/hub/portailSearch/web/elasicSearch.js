@@ -10,10 +10,11 @@ var diff = 0;
 var p=0;
 
 //var AUTH = "Basic cm9raGFzX3VzZXI6YWRtaW4x";
+var AUTH = "Basic cmVhZGFsbDpyZWFkYWxs";
 var ADMIN_AUTH = "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6" ;
 var URL_SEARCH = "https://elasticdata.karaz.org:9200";
 //var URL_SEARCH = "https://localhost:9200";
-var AUTH = "Basic cmVhZGFsbDpyZWFkYWxs";
+
 
 function removeLastRootPage(userName){
 var rootElms = $("#root-content-frame-manager .ow-cfm .ow-cfm-core > div.navigation-multiTab");
@@ -21,7 +22,7 @@ if(rootElms.length>1 && userName=="Guest"){
     var elm = rootElms.eq(rootElms.length-2);
     elm.remove();        
 }else{
-
+ 
 }
 
 }
@@ -575,11 +576,20 @@ if(parent==0){
 function generateRequestFaqSearch(prefix,type,from,size,visi){
 
 if(visi!=undefined)   {
-    if(prefix.trim()!=""){
-        var str = "{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}},{\"match_phrase\": {\"visibility\": \"USER\" }}]}}}\n";
+    if(visi=="ALL") {
+        if(prefix.trim()!=""){
+            var str = "{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+        }else{
+            var str ="{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }}]}}}\n";    
+        }
     }else{
-        var str ="{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }},{\"match\":{ \"visibility\":\""+visi+"\" }}]}}}\n";    
+        if(prefix.trim()!=""){
+            var str = "{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}},{\"match_phrase\": {\"visibility\": \""+visi+"\" }}]}}}\n";
+        }else{
+            var str ="{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"bool\":{ \"must\":[ {\"match\":{ \"type\":\""+type+"\" }},{\"match\":{ \"visibility\":\""+visi+"\" }}]}}}\n";    
+        }
     }
+    
 }else{
     if(prefix.trim()!=""){
         var str = "{ \"index\": \""+faq_index+"\", \"type\": \"qr\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
@@ -2451,6 +2461,11 @@ var str ="";
 if(cls==undefined){
     cls = "ow-view";
 }
+
+
+if(profilesT.indexOf("ADMIN_FAQ")!=-1){
+    typee =  "ALL";
+}
 $("."+cls+" .faq-vbox .no-response-find").hide();
 if(type==0){
     $("."+cls+" .faq-fieldset").hide();
@@ -2459,7 +2474,10 @@ if(type==0){
     str+=generateRequestFaqSearch(prefix,"DOCUMENT",page,size,typee); 
     str+=generateRequestFaqSearch(prefix,"PLATEFORME",page,size,typee); 
     str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size,typee); 
-    str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,typee);     
+    str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,typee);
+    if(profilesT.indexOf("ADMIN_FAQ")!=-1){
+        str+=generateRequestFaqSearch(prefix,"INTERNE",page,size,typee);
+    }     
 }else if(type==1){
     str+=generateRequestFaqSearch(prefix,"E-SIGN",page,size,typee); 
 }else if(type==2){
@@ -2472,6 +2490,8 @@ if(type==0){
     str+=generateRequestFaqSearch(prefix,"ARCHITECTE",page,size,typee); 
 }else if(type==6){
     str+=generateRequestFaqSearch(prefix,"ADMINISTRATION",page,size,typee); 
+}else if(type==7){
+    str+=generateRequestFaqSearch(prefix,"INTERNE",page,size,typee); 
 }
 
 console.log(str);
@@ -3854,9 +3874,10 @@ $.ajax({
 
 function begEndSteps(tab){
 var beg = 0;
-var end = tab.length-1;  
+var end = tab.length-1; 
+var maxSize = 7; 
 if(tab.indexOf("active")!=-1){
-if(tab.length<=10){
+if(tab.length<=maxSize){
     return {"begin":beg,"end":end};    
 }else if(tab.indexOf("active") < tab.length-3 && tab.indexOf("active") > 3){
     return {"begin":tab.indexOf("active")-3,"end":tab.indexOf("active")+3};
@@ -3868,10 +3889,10 @@ if(tab.length<=10){
   }
 }
 }else{
-  if(tab.length>=10){
+  if(tab.length>=maxSize){
     if(tab[0]=="active"){
        return {"begin":end-6,"end":end};
-    }else{
+    }else{ 
       return {"begin":beg,"end":beg+6}
     }
   }else{
@@ -3966,63 +3987,63 @@ var historiquesGlo = [];
 var refer = "";
 function arrayHistoricGenratedDiv(historiques,ref,begEnd){
 
-historiquesGlo = historiques;
-refer = ref;
+    historiquesGlo = historiques;
+    refer = ref;
+    var maxSize = 7;
 
-var divGlo = $(".folder-feature .folder-feature-body .progressbar");
-divGlo.html("");
-$(".folder-feature .folder-feature-header div span").html(ref);
+    var divGlo = $(".folder-feature .folder-feature-body .progressbar");
+    divGlo.html("");
+    $(".folder-feature .folder-feature-header div span").html(ref);
 
-var leng =  (begEnd.end-begEnd.begin+1);
+    var leng =  (begEnd.end-begEnd.begin+1);
 
-proc = 100/leng;
+    proc = 100/leng;
 
-if(historiques[0].length>10){
-    $(".folder-feature .folder-feature-body i.fa-caret-right,.folder-feature .folder-feature-body i.fa-caret-left").show();
-}
-
-totalStep = historiques[0].length-1;
-
-for(var i=0;i<historiques[0].length;i++){
-    var label = historiques[0][i];
-    var date = historiques[1][i];
-    var status = historiques[2][i];
-    var li = document.createElement("li");
-    
-    beginStep = begEnd.begin;
-    endStep = begEnd.end;
-
-    if( (i>=begEnd.begin && i<=begEnd.end) || !testWidth($(window).width(),640) ){
-        li.setAttribute("style","width:"+(proc-1)+"%");
-    }else{
-        li.setAttribute("style","visibility:hidden;width:0;height:0");
+    if(historiques[0].length>maxSize){
+        $(".folder-feature .folder-feature-body i.fa-caret-right,.folder-feature .folder-feature-body i.fa-caret-left").show();
     }
-    
-    if(status =="done"){
-        if(i==begEnd.begin){
-            li.setAttribute("class","bf-active first-step");
-        }else{
-            li.setAttribute("class","bf-active");
-        }
-        li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\">"+date.split(" ")[0]+"</span>";
-    }else if(status =="active"){
-        if(i==begEnd.begin){
-            li.setAttribute("class","active first-step");
-        }else{
-            li.setAttribute("class","active");
-        }
-        li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\"></span>";
-    }else{
-        if(i==begEnd.begin){
-            li.setAttribute("class","first-step");
-        }else{
-            li.setAttribute("class","");
-        }
-        li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\"></span>";
-    }
-    divGlo.append(li);        
-}
 
+    totalStep = historiques[0].length-1;
+
+    for(var i=0;i<historiques[0].length;i++){
+        var label = historiques[0][i];
+        var date = historiques[1][i];
+        var status = historiques[2][i];
+        var li = document.createElement("li");
+        
+        beginStep = begEnd.begin;
+        endStep = begEnd.end;
+
+        if( (i>=begEnd.begin && i<=begEnd.end) || !testWidth($(window).width(),640) ){
+            li.setAttribute("style","width:"+(proc-1)+"%");
+        }else{
+            li.setAttribute("style","visibility:hidden;width:0;height:0");
+        }
+        
+        if(status =="done"){
+            if(i==begEnd.begin){
+                li.setAttribute("class","bf-active first-step");
+            }else{
+                li.setAttribute("class","bf-active");
+            }
+            li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\">"+date.split(" ")[0]+"</span>";
+        }else if(status =="active"){
+            if(i==begEnd.begin){
+                li.setAttribute("class","active first-step");
+            }else{
+                li.setAttribute("class","active");
+            }
+            li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\"></span>";
+        }else{
+            if(i==begEnd.begin){
+                li.setAttribute("class","first-step");
+            }else{
+                li.setAttribute("class","");
+            }
+            li.innerHTML= "<span class=\"step-title\">"+label+"</span><span class=\"step-date\"></span>";
+        }
+        divGlo.append(li);        
+    }
 }
 
 function arrayHistoricGenrated(historiques){
