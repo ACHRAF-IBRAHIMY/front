@@ -24,12 +24,21 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+    <html>
+      <style>
+        #toolbarsec .ql-editor{
+          height: 500px !important;
+          overflow: auto !important;
+        }
+      </style>
+    </html>
     <script onLoad="true">
       root.NQFauthor = userName;
       context.formRender.notifyObservers("NQFauthor");
     </script>
       <script postLoad="true">
               profilesT = profiles;
+              console.log("root.articleCms",root.articleCms);
 
               
 
@@ -65,7 +74,32 @@
         if(root.query.idObject.trim()!=''){
             getArticle(root.query.idObject,0,"classSearch-99",context.formRender.targetPanel,root);
         }
+
+        var toolbarOptions = [
+          [{ 'font': [] }, { 'size': [] }],
+          [ 'bold', 'italic', 'underline', 'strike' ],
+          [{ 'color': [] }, { 'background': [] }],
+          [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block' ],
+          [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
+          [ 'direction', { 'align': [] }],
+          [ 'link', 'image', 'video'],
+        ];
+
+        var ddv = context.formRender.targetPanel.find("#toolbarsec").get(0);
+        var quill = new Quill(ddv, {
+          modules: {
+            toolbar: toolbarOptions
+          },
+          theme: 'snow'
+        });
       </script> 
+      <script postLoad="true" delai="700">
+        var icon = document.createElement("i");
+        icon.setAttribute("class","fas fa-table");
+        icon.setAttribute("style","vertical-align: -2px;color: #555;");
+        context.formRender.targetPanel.find(".ql-toolbar.ql-snow").append(icon);
+        
+      </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
         <style>
@@ -80,6 +114,7 @@
             <vbox className="NQF-new-quest-btn">
               <button label="Nouvel article" style="" className="NQF-btn-new">
                 <postChange>
+                     root.articleCms = "";
                      context.formRender.targetPanel.find(".classSearch-99 .NQF-id").val("");
                     
                       context.formRender.targetPanel.find('.classSearch-99 .ow-field-input[data-xpath="NQFtitle"]').val("");
@@ -116,8 +151,8 @@
                   <field label="Titre" widget="text" labelAlign="float" xpath="NQFtitle" />
                   <vbox contentAlign="center" columns="30% 30% 30% 1% 0% 9%" className="NQF-edit-select-float">
                     <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
-                      <option value="1" label="Article Normal" />
-                      <option value="2" label="Top" />
+                      <option value="Article Normal" label="Article Normal" />
+                      <option value="Top" label="Top" />
                     </field> 
                     <field widget="select" label="Catégorie" labelAlign="float" xpath="NQFcategorie">
                       <option value="PRATIQUE" label="PRATIQUE" />
@@ -153,7 +188,9 @@
                 </vbox>
               </fieldset>
               <fieldset label="TEXTE" className="NQF-shadow">
-                <field widget="htmlEditor" xpath="NQFtext" />
+                <html>
+                  <div id="toolbarsec"></div>
+                </html>
               </fieldset>
               <vbox columns="auto 45%" className="DC-box-btn-filtrer">
                 <hx />
@@ -163,6 +200,8 @@
                   </button>
                   <button label="Nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
                       <postChange>
+                      root.articleCms = "";
+
                       context.formRender.targetPanel.find(".classSearch-99 .NQF-id").val("");
                     
                       context.formRender.targetPanel.find('.classSearch-99 .ow-field-input[data-xpath="NQFtitle"]').val("");
@@ -180,8 +219,20 @@
                       context.formRender.notifyObservers("urlRef");  
                       context.formRender.notifyObservers("attachementArImg");
 
-                      root.NQFauthor = userName;
+                      root.NQFauthor = userName; 
+                      root.urlRef = "";
+                      root.NQFtype = "";
+                      root.NQFdesc = "";
+                      root.NQFtext = "";
+                      root.NQFtags = "";
+
                       context.formRender.notifyObservers("NQFauthor");
+                      context.formRender.notifyObservers("urlRef");
+                      context.formRender.notifyObservers("NQFtype");
+                      context.formRender.notifyObservers("NQFdesc");
+                      context.formRender.notifyObservers("NQFtext");
+                      context.formRender.notifyObservers("NQFtags");
+
 
                       context.formRender.targetPanel.find(".classSearch-99 .NFQ-all-quest").hide();
                       context.formRender.targetPanel.find(".classSearch-99 .NQF-edit-modif").show();

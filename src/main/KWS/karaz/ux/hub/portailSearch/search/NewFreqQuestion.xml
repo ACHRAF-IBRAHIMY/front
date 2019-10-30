@@ -6,6 +6,7 @@
       <search />
       <idObject />
       <parentP />
+      <classId />
     </query>
     <collapsed>false</collapsed>
     <nfqresponse />
@@ -15,6 +16,19 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+    <html>
+      <style>
+        #toolbarsec2 .ql-editor{
+          height: 500px;
+           overflow: auto;
+        }
+      </style>
+    </html>
+      <script onLoad="true">
+        root.query.classId=new Date().getTime();
+        root.query.classId="2";
+
+      </script>
       <script postLoad="true">
         
         profilesT = profiles;
@@ -69,6 +83,25 @@
                 if(root.query.idObject.trim()!=''){
                     getQsFaq(root.query.idObject,0,"classSearch-5",context.formRender.targetPanel);
                 }
+
+              var toolbarOptions = [
+                        [{ 'font': [] }, { 'size': [] }],
+                        [ 'bold', 'italic', 'underline', 'strike' ],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block' ],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
+                        [ 'direction', { 'align': [] }],
+                        [ 'link', 'image', 'video'],
+                      ];
+        var clasIdVar = '#toolbarsec'+root.query.classId;
+        var ddv = context.formRender.targetPanel.find('#toolbarsec'+root.query.classId).get(0);
+        var quill = new Quill(ddv, {
+          modules: {
+            toolbar: toolbarOptions
+          },
+          theme: 'snow'
+        });
+
       </script> 
       <html id="hSeparator">
         <div style="height: 30px;" />
@@ -85,7 +118,7 @@
             <html className="NFQ-load-img">
               <img src="img/load-text.gif" />
             </html>
-            <vbox className="NQF-edit-modif">
+            <vbox className="NQF-edit-modif" xpath="query.classId" >
               <fieldset label="DONNÉES QUESTION" className="NQF-shadow">
                 <vbox className="DC-Customized-fields-NQF NQF-edit-float">
                   <field label="Question" widget="text" labelAlign="float" xpath="question" />
@@ -97,6 +130,7 @@
                       <option value="DOCUMENT" label="Document" />
                       <option value="PLATEFORME" label="Plateforme" />
                       <option value="ADMINISTRATION" label="Administration" />
+                      <option value="INTERNE" label="INTERNE" />
                     </field>
                     <field label="Visibilité" widget="select" labelAlign="float" searchQN="frontal/uxhub/portailSearch/visibility" xpath="visibility">
                       
@@ -105,8 +139,10 @@
                   </vbox>
                 </vbox>
               </fieldset>
-              <fieldset label="DONNÉES RÉPONSE" className="NQF-shadow">
-                <field noLabel="true" widget="htmlEditor" xpath="nfqresponse" />
+              <fieldset label="DONNÉES RÉPONSE" className="NQF-shadow" >
+                <html xpath="query.classId">
+                  <div id="toolbarsec${query.classId}"></div>
+                </html>              
               </fieldset>
               <vbox columns="auto 45%" className="DC-box-btn-filtrer">
                 <hx />

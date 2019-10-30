@@ -132,7 +132,7 @@
                 </vbox>
                 -->
           <vbox columns="100%">
-            <vbox columns="33% 34% 33%" className="stat-div">
+            <vbox columns="25% 25% 25% 25%" className="stat-div">
               <html> 
                 <div class="stat ow-vbox hp-box">
                   <i class="fas fa-file-alt" />
@@ -157,6 +157,15 @@
                   <div>
                     <span>0</span>
                     <span>Membres</span>
+                  </div>
+                </div>
+              </html>
+              <html>
+                <div onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextClassification','search','Text Classification',{});" style="cursor:pointer" class="stat ow-vbox hp-box">
+                  <i class="fas fa-th-large"></i>
+                  <div>
+                    <span>0</span>
+                    <span>Clusters</span>
                   </div>
                 </div>
               </html>

@@ -28,7 +28,7 @@
 
                 getMostPopularArticle(3,"PRATIQUE",".fieldser-article-1 .vbox-articles .ow-vl-inner");
                 getMostPopularArticle(3,"A LA UNE",".fieldser-article-2 .vbox-articles .ow-vl-inner");
-//                getMostPopularArticle(3,"A VENIR",".fieldser-article-3 .vbox-articles .ow-vl-inner");
+//              getMostPopularArticle(3,"A VENIR",".fieldser-article-3 .vbox-articles .ow-vl-inner");
         
             context.formRender.targetPanel.find(".classSearch-81 .div-full-search-bar .ow-field-input").get(0).addEventListener("keydown", function (e) {
                     var x =  document.querySelector(".classSearch-81 #autocomplete-list");
@@ -63,7 +63,7 @@
                 }
 
                 .classSearch-81 .full-div{
-                    margin-bottom: 63px !important;
+                    margin-bottom: 13px !important;
                     height: auto !important;
                 }
 
@@ -117,6 +117,9 @@
                             </html>
                         </vbox>
                     </fieldset>
+                    <vbox id="editorv2">
+                    
+                    </vbox>
                     
                 </vbox>
                 

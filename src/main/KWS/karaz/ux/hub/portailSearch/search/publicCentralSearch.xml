@@ -19,6 +19,7 @@
     </query>
     <newUser>false</newUser>
     <forgetPass>false</forgetPass>
+    <signup>non</signup>
   </data>
   <view>
     /********************************************************/
@@ -194,7 +195,7 @@
         <vbox columns="30% 70%" className="global-div-temp classSearch-home">
           <vbox className="height-auto-vbox-first">
             <vbox className="hp-box last-log hp-small div1f">
-              <vbox columns="20% 80%">
+              <vbox columns="20% 80%" test="{signup},=,oui" separator=",">
                 <html>
                   <div class="hp-box-icon fas fa-user" />
                 </html>
@@ -202,10 +203,18 @@
                   <div class="hp-box-small-title class-traduction" tcode="EP00" style="font-size:1.3rem">Espace privé</div>
                 </html>
               </vbox>
+              <vbox columns="20% 80%" test="{signup},!=,oui" separator=",">
+                <html>
+                  <div style="transform: rotate(14deg);" class="hp-box-icon fab fa-ello" />
+                </html>
+                <html>
+                  <div class="hp-box-small-title class-traduction" tcode="EP00" style="font-size:1.3rem">Espace autorisations</div>
+                </html>
+              </vbox>
               <html>
                 <div style="height: 10px;" />
               </html>
-              <vbox>
+              <vbox test="{signup},=,oui" separator=",">
                 <html>
                   <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');">
                     <i class="fas fa-unlock" />
@@ -217,7 +226,7 @@
                   </div>
                 </html>
               </vbox>
-              <vbox>
+              <vbox test="{signup},=,oui" separator=",">
                 <html>
                   <div style="height: 20px;" />
                   <div class="hp-sbox-text" onclick="javascript:ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');">
@@ -229,6 +238,19 @@
                   <div style="height: 26px;" />
                 </html>
               </vbox>
+               <vbox test="{signup},=,non" separator=",">
+                <html>
+                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
+                    <i style="font-size:45px;" class="fas fa-map-marker-alt" />
+                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SC00">Accés urbanisme</span>
+                  </div>
+                  <div class="yb-btn-home"  onclick="javascript: ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
+                    <i style="font-size:45px" class="fas fa-cog" />
+                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SG00">Accés économique</span>
+                  </div>
+                </html>
+              </vbox>
+              
             </vbox>
             <vbox className="relative-position">
               <vbox className="hp-box last-log  hp-small">
@@ -531,7 +553,7 @@
           <cms-topicSeparator />
         </html>
         <vbox columns="20% 20% 20% 20% 20%">
-          <html>
+          <html test="{signup},=,oui" separator=",">
             <box-card style="    height: 210px !important;padding: 15px;">
               <html>
                 <span class="main-number">1</span>
@@ -540,6 +562,15 @@
               <button class="main-btn class-traduction-ct" tcode="PCD1" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
             </box-card>
           </html>
+          <html test="{signup},=,non" separator=",">
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">1</span>
+              </html>
+              <box-small-title class="class-traduction-ct" tcode="VV01">Créer votre espace privé sur rokhas.ma</box-small-title>
+            </box-card>
+          </html>
+          
           <html>
             <box-card style="    height: 210px !important;padding: 15px;">
               <html>

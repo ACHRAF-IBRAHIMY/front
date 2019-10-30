@@ -134,7 +134,7 @@
             </html>
           </vbox> 
         </vbox>
-        <fieldset header="ARTICLES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset NQF-freq-quest">
+        <fieldset header="ARTICLES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset ">
           <!-- start modification -->
           <html>
             <div class="">
@@ -146,13 +146,6 @@
             </div>
           </html>
 
-          <fieldset header="Les plus populaires" className="NFQ-quest-title NFQ-type-general ">
-            <html>
-              <div class="NFQ-quest-type-popular NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
           <fieldset header="Les plus récents" className="NFQ-quest-title NFQ-type-plat ">
             <html>
               <div class="NFQ-quest-type-recent NFQ-fieldset">
@@ -160,6 +153,15 @@
               </div>
             </html>
           </fieldset>
+          
+          <fieldset header="Les plus populaires" className="NFQ-quest-title NFQ-type-general ">
+            <html>
+              <div class="NFQ-quest-type-popular NFQ-fieldset">
+                <!-- Les questions s'affiche ici                                  -->
+              </div>
+            </html>
+          </fieldset>
+          
           <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-document ">
             <html>
               <div class="NFQ-quest-type-liked NFQ-fieldset">

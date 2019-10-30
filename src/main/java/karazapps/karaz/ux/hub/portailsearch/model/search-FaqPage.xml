@@ -340,6 +340,39 @@
                   </div>
                 </html>
               </fieldset>
+              <fieldset label="INTERNE" className="faq-fieldset">
+                <html>
+                  <div class="faq-qr full-search-list" />
+                  <div class="searchGif2" style="display:none">
+                    <img src="img/search-move.gif" />
+                  </div>
+                  <div class="pagination-new-style">
+                    <div class="pagination-1">
+                      <i class="fas fa-angle-double-left" />
+                      <i class="fas fa-angle-left" />
+                      <span>
+                        Page
+                        <span class="num-span">1</span>
+                        Sur
+                        <span>20</span>
+                      </span>
+                      <i class="fas fa-angle-right" />
+                      <i class="fas fa-angle-double-right" />
+                      <i class="fas fa-sync-alt" />
+                    </div>
+                    <div class="pagination-2">
+                      <span>
+                        Page
+                        <span>1</span> 
+                        -
+                        <span>10</span>
+                        /
+                        <span>43</span>
+                      </span>
+                    </div>
+                  </div>
+                </html>
+              </fieldset>
             </vbox>
           </vbox>
         </vbox>

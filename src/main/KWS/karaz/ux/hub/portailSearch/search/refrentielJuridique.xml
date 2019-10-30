@@ -83,6 +83,8 @@
             height: 32px;
             border-radius: 0 15px 15px 0;
             border: 4px solid #3388aa;
+            overflow: hidden;
+            background: #38A
         }
 
         .hp-search_field .ow-field-input-side,.filterRef-class .ow-field-input-side{
@@ -123,11 +125,11 @@
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <vbox columns="75% 25%">
                 <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
-                <field className="filterRef-class"  widget="select" xpath="query.filterRef">
-                  <option value="TOUS" label="TOUS" ></option>
-                  <option value="ÉCONOMIQUE" label="ÉCONOMIQUE" ></option>
-                  <option value="URBANISME" label="URBANISME" ></option>
-                  <option value="AUTRE" label="AUTRE" ></option>
+                <field className="filterRef-class" widget="select" xpath="query.filterRef">
+                  <option value="TOUS" label="TOUS" />
+                  <option value="ÉCONOMIQUE" label="ÉCONOMIQUE" />
+                  <option value="URBANISME" label="URBANISME" />
+                  <option value="AUTRE" label="AUTRE" />
                 </field>
               </vbox>
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
@@ -139,7 +141,6 @@
                   root.query.parentP=0;
                 </postChange>
               </button>
-              
             </vbox>
             <html>
               <div style="height: 45px;" /> 
@@ -157,7 +158,7 @@
             </html>
           </vbox>
         </vbox>
-                          <search searchQN="karaz/ux/hub/portailsearch/search/RightAside?query.height=1100px" /> 
+                          <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
 
       </vbox>
       <html>

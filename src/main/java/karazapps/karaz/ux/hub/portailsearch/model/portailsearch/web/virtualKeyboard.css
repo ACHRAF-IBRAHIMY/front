@@ -1,3 +1,4 @@
+
 #keyboardInputMaster {
     position:absolute;
     border:2px groove #eee;
@@ -6,6 +7,11 @@
     text-align:left;
     z-index:1000000;
     width:auto;
+    direction: initial;
+    left: unset !important;
+    right: unset !important;
+    bottom: unset !important;
+    top: unset !important;
   }
   
   #keyboardInputMaster thead tr th {
@@ -27,9 +33,13 @@
   }
   #keyboardInputMaster thead tr td span {
     padding:1px 4px;
-    font:bold 11px Arial,sans-serif;
-    border:1px outset #aaaaaa;
-    background-color:#cccccc;
+    font:bold 11px Roboto;
+    border-top: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    border-left: 1px solid #e5e5e5;
+    background-color: white;
+    border-radius: 5px;
     cursor:pointer;
   }
   #keyboardInputMaster thead tr td span.pressed {
@@ -61,16 +71,17 @@
     margin:0px auto;
   }
   #keyboardInputMaster tbody tr td div#keyboardInputLayout table tbody tr td {
-    vertical-align:middle;
-    padding:3px 7px 3px 7px;
-    white-space:pre;
-    font:normal 15px 'Lucida Console',monospace;
-    border-top:1px solid #e5e5e5;
-    border-right:1px solid #5d5d5d;
-    border-bottom:1px solid #5d5d5d;
-    border-left:1px solid #e5e5e5;
-    background-color:#eeeeee;
-    cursor:default;
+    vertical-align: middle;
+    padding: 3px 7px 3px 7px;
+    white-space: pre;
+    font: bold 9px Droid Arabic Kufi, sans-serif;
+    border-top: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    border-left: 1px solid #e5e5e5;
+    background-color: white;
+    border-radius: 5px;
+    cursor: default;
   }
   #keyboardInputMaster tbody tr td div#keyboardInputLayout table tbody tr td.last {
     width:99%;
