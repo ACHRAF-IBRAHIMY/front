@@ -75,13 +75,19 @@
 }
 
 .simulator .simulator-qr{
-    margin-left: 10px !important;
     position: relative;
+    margin: 10px auto !important;
     height: auto !important;
+    width: 95%;
 }
 
 .size955{
-    width: 97.5%;
+    width: 95%;
+    margin: auto;
+}
+
+.size955 .ow-pl{
+    margin: auto;
 }
 
 .simulator .simulator-qr .qr{
