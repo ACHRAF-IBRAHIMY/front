@@ -932,7 +932,7 @@ $.ajax({
     data: JSON.stringify(obj),
     contentType: "application/json",
     beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhr.setRequestHeader("Authorization", AUTH);
     },
     success: function (result) {
         $(".NQF-id").val(result._id);
@@ -961,7 +961,7 @@ $.ajax({
     data: JSON.stringify(obj),
     contentType: "application/json",
     beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhr.setRequestHeader("Authorization", AUTH);
     },
     success: function (result) {
         voidRestSearch("",0,7,0,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],0,target);
@@ -1026,7 +1026,7 @@ $.ajax({
     data: JSON.stringify(obj),
     contentType: "application/json",
     beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhr.setRequestHeader("Authorization", AUTH);
     },
     success: function (result) {
         //voidRestSearch("",0,7,0,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],0);
@@ -1055,7 +1055,7 @@ $.ajax({
     data: JSON.stringify(obj),
     contentType: "application/json",
     beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhr.setRequestHeader("Authorization", AUTH);
     },
     success: function (result) {
         
@@ -1083,7 +1083,7 @@ $.ajax({
     data: JSON.stringify(obj),
     contentType: "application/json",
     beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+        xhr.setRequestHeader("Authorization", AUTH);
     },
     success: function (result) {
         //voidRestSearch("",0,7,0,[".NFQ-quest-type-eco",".NFQ-quest-type-urba"],0);
@@ -1278,7 +1278,7 @@ if (window.confirm(str)) {
         //url: "http://localhost:9200/index_classification_cluster/avis/_search",
         contentType: "application/json",
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+            xhr.setRequestHeader("Authorization", AUTH);
         },
         success: function (result) {
             console.log(result);

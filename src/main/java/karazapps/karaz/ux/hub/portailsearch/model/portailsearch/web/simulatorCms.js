@@ -664,7 +664,7 @@ type: "delete",
 url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+simulator_index_qr+"/qrs/"+id,
 contentType: "application/json",
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+     xhr.setRequestHeader("Authorization",AUTH);
 },
 success: function (result) {
     console.log(result);
@@ -826,7 +826,7 @@ datatype: "application/json",
 data:JSON.stringify(obj),
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
     console.log(result);
@@ -1070,7 +1070,7 @@ datatype: "application/json",
 data:JSON.stringify(treeObject),
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
     $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button span").removeClass("active");
@@ -1104,7 +1104,7 @@ datatype: "application/json",
 data:JSON.stringify(treeObject),
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
     console.log(result);
@@ -1137,7 +1137,7 @@ datatype: "application/json",
 contentType: "application/x-ndjson",
 data:bulks,
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {    
     console.log(result);
@@ -1614,7 +1614,7 @@ datatype: "application/json",
 data:JSON.stringify(objectJson),
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+    xhr.setRequestHeader("Authorization", AUTH);
 },
 success:function (result) {
         console.log(result);
@@ -1886,7 +1886,7 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+index+id,
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+     xhr.setRequestHeader("Authorization", AUTH);
 },
 data: JSON.stringify(doc),
 success: function (result) {
@@ -2038,7 +2038,7 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+index+id,
 //url: "http://localhost:9200/index_classification_cluster/avis/_search",
 contentType: "application/json",
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", "Basic YWRtaW46RWxhc3RpY19tdTFUaGFlVzRhX0s0cmF6");
+     xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
     console.log(result);
