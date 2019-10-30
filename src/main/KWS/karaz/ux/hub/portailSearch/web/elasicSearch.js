@@ -3618,7 +3618,7 @@ for(i=0;i<results.length;i++){
         var setting = getColIcon(typeAt);
         var b = document.createElement("div");
         b.setAttribute("class","hp-box full-search-list-item");
-        b.setAttribute("style","height: 173px;");
+        b.setAttribute("style","height: 192px;");
         var c = document.createElement("div");
         c.setAttribute("class","c-path");
         // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
@@ -3673,7 +3673,7 @@ for(i=0;i<results.length;i++){
         d.appendChild(g);
         var title = document.createElement("div");
         title.setAttribute("class","item-title");
-        title.setAttribute("style","background:"+setting.color);
+        title.setAttribute("style","background:"+setting.color+";width: 192px;top: 64px;right: 105px;");
         title.setAttribute("title",typeAt);
         title.innerHTML=subLong(typeAt);
         title.addEventListener("click",function(){
