@@ -6,6 +6,7 @@
       <search />
       <idObject />
       <parentP />
+      <filterRef>Tous</filterRef>
     </query>
     <collapsed>false</collapsed>
   </data>
@@ -62,29 +63,56 @@
            PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
            PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
           
-           PCD_header_style_quest_type(".NFQ-type-document" , "far fa-file-pdf")
-           PCD_header_style_quest_type(".NFQ-type-plat" , "fab fa-simplybuilt")
-           PCD_header_style_quest_type(".NFQ-type-archit" , "fas fa-user")
-           PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-users-cog")
 
            // header color
            PCD_headerfieldset_color(".pcd-ha-color");
-
-            RestSearchFaqSec("",0,5,4,".NFQ-quest-type-esign",2)
-            RestSearchFaqSec("",0,5,3,".NFQ-quest-type-general",2)
-            RestSearchFaqSec("",0,5,1,".NFQ-quest-type-document",2)
-            RestSearchFaqSec("",0,5,2,".NFQ-quest-type-plat",2)
-            RestSearchFaqSec("",0,5,5,".NFQ-quest-type-archit",2)
-            RestSearchFaqSec("",0,5,6,".NFQ-quest-type-adminis",2)
-            
-            var clcc = document.querySelector("button.fa-keyboard");
-            var inpp = document.querySelectorAll(".hp-search_field input");
-            VKI_buildKeyboardInputs(inpp,clcc);
-            
             
             </script>
       <html id="hSeparator">
         <div class="height-mobile-10" style="height: 30px;" />
+        <style>
+          .classSearch-0 .hp-search_field .ow-field-input-line{
+            border-right: none;
+            border-radius: 15px 0 0 15px
+          }
+  
+          .classSearch-0 .filterRef-class .ow-field-input-line{
+              height: 32px;
+              border-radius: 0 15px 15px 0;
+              border: 4px solid #3388aa;
+              overflow: hidden;
+              background: #38A
+          }
+  
+          .hp-search_field .ow-field-input-side,.filterRef-class .ow-field-input-side{
+            padding : 0px;
+          }
+  
+          .filterRef-class .ow-field-input-select{
+                color: #fff !important;
+                background: #38A !important;
+                font-size: 16px;
+                line-height: 21px !important;
+          }
+  
+          .filterRef-class .ow-field-input-select:before{
+            color:#fff !important;
+            line-height: 24px !important;
+          }
+   
+          .filterRef-class .ow-field-assistance{
+            text-align: left;
+          }
+
+          .filterRef-class .ow-field-input-select{
+            font-size: 13px;
+            font-size: 1vw !important;
+            padding-top: 6px;
+            padding-right: 5px;
+            padding-left: 0;
+          }
+  
+          </style>
       </html>
       <vbox columns="70% 30%" className="classSearch-0">
         <vbox className="hp-box hp-small divSearch">
@@ -102,29 +130,44 @@
                 <span class="prefix" style="color:#f93;" />
                 . Vous pouvez l'affiner en saisissant de nouveaux mot-clés.
               </div>
-              <div class="height-mobile-20" style="height: 50px;" />
+              <div class="height-mobile-20" style="height: 30px;" />
             </html>
-            <vbox columns="80% 8% 8%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-              <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-              <!-- <button className="hp-search_field_icon fas fa-keyboard" label="" title="clavier Arabic" postProcessing="search()" separator="!!">
-                <postChange />
-              </button> -->
-              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+              <vbox columns="68% 32%">
+                <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+                <field className="filterRef-class" widget="select" xpath="query.filterRef">
+                  <option value="Tous" label="Tous" />
+                  <option value="Établissement classé" label="Établissement classé" />
+                  <option value="Simple déclaration" label="Simple déclaration" />
+                  <option value="Occupation domaine public" label="Occupation domaine public" />
+                  <option value="Activité courante" label="Activité courante" />
+                  <option value="Autorisations urbanisme" label="Autorisations urbanisme" />
+                </field>
+              </vbox>
+              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="">
                 <postChange>
-                          var prefix = $(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
-                          currentPage=0;
-                          var pp=root.query.parentP;
-                          if(pp==1){
-                            pp=0;  
-                          }
-                          console.log(pp);
-                          restFullSearchList(prefix,0,false,pp,"classSearch-0",context.formRender.targetPanel);
-                          root.query.parentP=0;</postChange>
+                    var prefix = $(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
+                    currentPage=0;
+                    var pp=root.query.parentP;
+                    if(pp==1){
+                      pp=0;  
+                    }
+                    console.log("pp",root.query.filterRef);
+
+                    if(root.query.filterRef=="Tous"){
+                      pp = 0;
+                      console.log("pp",pp);
+                    }else{
+                      pp = root.query.filterRef;
+                    }
+                    restFullSearchList(prefix,0,false,pp,"classSearch-0",context.formRender.targetPanel);
+                    root.query.parentP=0;
+                </postChange>
               </button>
             </vbox>
             
             <html>
-              <div class="height-mobile-20" style="height: 70px;" />
+              <div class="height-mobile-20" style="height: 40px;" />
             </html>
             <html>
               <div class="searchGif">
@@ -137,7 +180,7 @@
           <vbox> 
           </vbox>
         </vbox>
-        <search searchQN="karaz/ux/hub/portailsearch/search/RightAside?query.height=1100px" /> 
+        <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
 
       </vbox>
       <html>

@@ -15,9 +15,7 @@
         <screen labelWidth="80" label="My Dashboard" noToolBar="true">
             <script postLoad="true">
              
-    $(".Header-signup .Header-signup-logo .Header-signup-min .menu-bar-icon i").click(function(){
-        $(".header-div-toggle").toggle("fast"); 
-    });
+    
 
                  
    
@@ -26,7 +24,7 @@
 
             </script>
     <html>
-        <iframe src="https://dataurba.ma?noHF=true" class="openUrlIframe" onload="if(typeof openUrlIFrameOnload !== 'undefined') {openUrlIFrameOnload(this);} " style="height: 100vh;width: 100%;"></iframe>
+        <iframe src="https://dataurba.ma?noHF=true" class="openUrlIframe" onload="if(typeof openUrlIFrameOnload !== 'undefined') {openUrlIFrameOnload(this);} " style="height: 100vh;width: 100%;" />
     </html>
         </screen>
 

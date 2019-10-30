@@ -26,9 +26,9 @@
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
     <html>
       <style>
-        .toolbarsec{
-          height: 500px;
-           overflow: auto;
+        #toolbarsec .ql-editor{
+          height: 500px !important;
+          overflow: auto !important;
         }
       </style>
     </html>

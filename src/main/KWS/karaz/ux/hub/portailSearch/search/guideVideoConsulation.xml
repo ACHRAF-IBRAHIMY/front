@@ -6,6 +6,7 @@
       <search />
       <idObject />
       <parentP />
+      <filterRef>Tous</filterRef>
     </query>
     <collapsed>false</collapsed>
   </data>
@@ -28,6 +29,49 @@
             });</script>
       <html id="hSeparator">
         <div style="height: 30px;" />
+        <style>
+          .classSearch-7 .hp-search_field .ow-field-input-line{
+            border-right: none;
+            border-radius: 15px 0 0 15px
+          }
+  
+          .classSearch-7 .filterRef-class .ow-field-input-line{
+              height: 32px;
+              border-radius: 0 15px 15px 0;
+              border: 4px solid #3388aa;
+              overflow: hidden;
+              background: #38A
+          }
+  
+          .hp-search_field .ow-field-input-side,.filterRef-class .ow-field-input-side{
+            padding : 0px;
+          }
+  
+          .filterRef-class .ow-field-input-select{
+                color: #fff !important;
+                background: #38A !important;
+                font-size: 16px;
+                line-height: 21px !important;
+          }
+  
+          .filterRef-class .ow-field-input-select:before{
+            color:#fff !important;
+            line-height: 24px !important;
+          }
+   
+          .filterRef-class .ow-field-assistance{
+            text-align: left;
+          }
+
+          .filterRef-class .ow-field-input-select{
+            font-size: 13px;
+            font-size: 1vw !important;
+            padding-top: 6px;
+            padding-right: 5px;
+            padding-left: 0;
+          }
+  
+          </style>
       </html>
       <vbox columns="70% 30%" className="classSearch-7">
         <vbox className="hp-box hp-small divSearch">
@@ -46,16 +90,32 @@ Vous trouverez ici tous les tutoriels et vidéos nécessaires pour vous familiar
               </div>
             </html>
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-              <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Rechercher une vidéo" />
-              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+              <vbox columns="68% 32%">
+                <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Rechercher une vidéo" />
+                <field className="filterRef-class" widget="select" xpath="query.filterRef">
+                  <option value="Tous" label="Tous" />
+                  <option value="ROKHAS ECONOMIQUE" label="Rokhas économique" />
+                  <option value="ROKHAS URBANISTIQUE" label="Rokhas urbanistique" />
+                  <option value="Général" label="Général" />
+                  <option value="Karaz GIS" label="Karaz GIS" />
+                </field>
+              </vbox>
+              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="">
                 <postChange>
-                        var prefix = $(".classSearch-7 .div-full-search-bar .search-video-input input").val();
-                        currentPage=0;
-                        $(".classSearch-7 .consultation-video").hide();
-                        $(".classSearch-7 .search-video").show();
-                        restFullSearchList(prefix,0,false,0,"classSearch-7",context.formRender.targetPanel);</postChange>
+                  var prefix = $(".classSearch-7 .div-full-search-bar .search-video-input input").val();
+                  currentPage=0;
+                  $(".classSearch-7 .consultation-video").hide();
+                  $(".classSearch-7 .search-video").show();
+                  if(root.query.filterRef=="Tous"){
+                    var pp = 0;
+                  }else{
+                    var pp = root.query.filterRef;
+                  }
+                  restFullSearchList(prefix,0,false,pp,"classSearch-7",context.formRender.targetPanel);
+                </postChange>
               </button>
-            </vbox> 
+            </vbox>
+            
             <html>
               <div style="height: 30px;" /> 
             </html>

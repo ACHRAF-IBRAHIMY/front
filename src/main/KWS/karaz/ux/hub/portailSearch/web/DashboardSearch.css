@@ -1,3 +1,4 @@
+
 .div-det-acc > .ow-vbox > .ow-vl-inner{
     height: calc(100% - 19.5px);
 }
@@ -346,7 +347,7 @@
 }
 
 .search-article .full-search-list{
-    height: 820px;
+    height: 1230px;
 }
 
 .search-video .full-search-list-item {
@@ -1014,7 +1015,13 @@ box-card:hover{
 }
 
 
-.searchGif,.searchGif2{
+.searchGif{
+    text-align: center;
+    display: none;
+    line-height: 74;
+}
+
+.searchGif2{
     text-align: center;
     display: none;
     line-height: 50;
@@ -1341,7 +1348,7 @@ box-card:hover{
 
 
 .full-search-list{
-    height: 780px;
+    height: 1180px;
 }
 
 .full-search-list-item{
@@ -1693,6 +1700,10 @@ box-card:hover{
     font-size: 14px !important;
 }
 
+#kwebContainer{
+    max-width: 1700px;
+    margin: auto;
+}
 
 .stat-dashbord{
     margin: auto;
