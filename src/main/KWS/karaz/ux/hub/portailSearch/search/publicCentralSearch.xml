@@ -378,7 +378,7 @@
                 <vbox>
                   <html className="res-div-height">
                     <div class="main-icon-title t3">
-                      <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
+                      <div class="full-grid-small" style="display:grid;grid-template-columns:21% 79%;margin:auto;width:80%">
                         <i class="fas fa-map-marker-alt" />
                         <span class="class-traduction" tcode="AU00">Autorisations urbanistiques</span>
                       </div>
@@ -389,7 +389,7 @@
                   </html>
                   <html className="res-div-height">
                     <div class="main-icon-title t4">
-                      <div class="full-grid-small" style="display:grid;grid-template-columns:20% 80%;margin:auto;width:80%">
+                      <div class="full-grid-small" style="display:grid;grid-template-columns:21% 79%;margin:auto;width:80%">
                         <i class="fas fa-cog" />
                         <span class="class-traduction" tcode="AE00">Autorisations économiques</span>
                       </div>

@@ -1,0 +1,34 @@
+@media screen and (min-width: 1900px) {
+
+    .item-body p{
+        font-size:13px !important; 
+    }
+
+    .item-body .item-body-title{
+        font-size:15px !important; 
+    }
+
+    .ow-field-input-select[data-xpath="query.filterRef"]{
+        font-size:15px !important; 
+    }
+
+    .divSearch-article .det-div .ow-gbox{
+        font-size:17px !important; 
+    }
+
+    .last-log .hp-box-icon{
+        font-size: 45px !important;
+    }
+
+    .main-icon-title i{
+        font-size: 42px;
+    }
+
+    .main-icon-title-bx .par i {
+        font-size: 42px;
+    }
+
+    .last-log-info {
+        font-size: 14px;
+    }
+}
