@@ -16,30 +16,30 @@
       	    
       	   profilesT = profiles;
           
-           $(".classSearch-0 .searchbuttun").click();
+           context.formRender.targetPanel.find(".classSearch-0 .searchbuttun").click();
            
-           $(".div-full-search-bar .full-search-list .full-search-list-item .p").click(function(){
+           context.formRender.targetPanel.find(".div-full-search-bar .full-search-list .full-search-list-item .p").click(function(){
                currentPage=0;
-               $(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
+               context.formRender.targetPanel.find(".div-full-search-bar .hp-search_field input").val($(this).html().toLowerCase());
                 if($(this).attr("class").split(' ')[1]==="p1"){
-                   restFullSearchList($(this).html(),0,false,1,"classSearch-0");
+                   restFullSearchList($(this).html(),0,false,1,"classSearch-0",context.formRender.targetPanel);
                 }else if($(this).attr("class").split(' ')[1]==="p2"){
-                    restFullSearchList($(this).html(),0,false,2,"classSearch-0");
+                    restFullSearchList($(this).html(),0,false,2,"classSearch-0",context.formRender.targetPanel);
                 }else if($(this).attr("class").split(' ')[1]==="p3"){
-                    restFullSearchList($(this).html(),0,false,3,"classSearch-0");
+                    restFullSearchList($(this).html(),0,false,3,"classSearch-0",context.formRender.targetPanel);
                 }else{
-                   restFullSearchList($(this).html(),0,false,1,"classSearch-0");
+                   restFullSearchList($(this).html(),0,false,1,"classSearch-0",context.formRender.targetPanel);
                 }
            });
            
-           $(".classSearch-0 .div-full-search-bar .full-search-list .full-search-list-item .item-body-button").click(function(){
+           context.formRender.targetPanel.find(".classSearch-0 .div-full-search-bar .full-search-list .full-search-list-item .item-body-button").click(function(){
                 var id= $(this).children("input").val(); 
                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
            });
            
-            document.querySelector(".classSearch-0 .div-full-search-bar .ow-field-input").addEventListener("input", function () {
+            context.formRender.targetPanel.find(".classSearch-0 .div-full-search-bar .ow-field-input").get(0).addEventListener("input", function () {
                 var a, b, i;
-                var inp = document.querySelector(".classSearch-0 .div-full-search-bar .ow-field-input");
+                var inp = context.formRender.targetPanel.find(".classSearch-0 .div-full-search-bar .ow-field-input").get(0);
                 var val = inp.value.toLowerCase();
                 if (!val) {
                     closeAllLists();
@@ -52,14 +52,14 @@
                 restAutoComplete(inp,val,true);
             });
 
-          document.querySelector(".div-full-search-bar .ow-field-input").addEventListener("keydown", function (e) {
-                    var x = document.querySelector(".classSearch-0 #autocomplete-list");
+          context.formRender.targetPanel.find(".div-full-search-bar .ow-field-input").get(0).addEventListener("keydown", function (e) {
+                    var x = context.formRender.targetPanel.find(".classSearch-0 #autocomplete-list").get(0);
                     if (x) x = x.getElementsByTagName("div");
                     moveKey(e,x,1,"classSearch-0");
           }); 
            
            PCD_headerfieldset_color(".NFQ-quest-title");
-           $(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
+           context.formRender.targetPanel.find(".NFQ-quest-title .ow-label-pl").css('text-transform','capitalize');
            PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
            PCD_header_style_quest_type(".NFQ-type-general" , "far fa-question-circle")
           
@@ -142,11 +142,14 @@
                   <option value="Occupation domaine public" label="Occupation domaine public" />
                   <option value="Activité courante" label="Activité courante" />
                   <option value="Autorisations urbanisme" label="Autorisations urbanisme" />
+                  <postChange>
+                      context.formRender.targetPanel.find(".classSearch-0 .searchbuttun").click(); 
+                  </postChange>
                 </field>
               </vbox>
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="">
                 <postChange>
-                    var prefix = $(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
+                    var prefix = context.formRender.targetPanel.find(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
                     currentPage=0;
                     var pp=root.query.parentP;
                     if(pp==1){
@@ -160,6 +163,7 @@
                     }else{
                       pp = root.query.filterRef;
                     }
+                    console.log("cntx = ",context.formRender.targetPanel.attr("data-tabtag"));
                     restFullSearchList(prefix,0,false,pp,"classSearch-0",context.formRender.targetPanel);
                     root.query.parentP=0;
                 </postChange>

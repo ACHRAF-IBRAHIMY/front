@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="CouvertureGeo" label="Couverture géographique">
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+        </query>
+        <collapsed>false</collapsed>
+
+        <numDossier />
+        <numCommission />
+        <login />
+        <visualizer>0</visualizer>
+    </data>
+    <view>
+        <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
+            <script onLoad="true">
+            // root.login=userQN;
+             //context.formRender.notifyObservers("login");
+            </script>
+            <html>
+                <style>
+
+                </style>
+            </html>
+            <vbox className="hp-box" >
+                    <html>
+                            <div class="vpanel-title">
+                              <div class="vpanel-title">
+                              <span style="display:grid;grid-template-columns:50% 50%">
+                                <span>Couverture géographique</span>
+                              </span>
+                                <hr class="header-create-account-horizontal-line hr-hub" />
+                              </div>
+                              <div class="hp-sbox-text">
+                              </div>
+                            </div>
+                          </html>
+                    <vbox style="height:800px" >
+                            <search mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0080" />
+
+                    </vbox>
+                </vbox>            
+      </screen>
+    </view>
+</search>

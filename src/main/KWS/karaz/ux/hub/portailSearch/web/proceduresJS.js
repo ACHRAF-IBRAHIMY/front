@@ -1201,7 +1201,7 @@ $(".faq-fieldset .searchGif2").eq(type - 1).show();
 $.ajax({
 type: "post",
 //url: "http://localhost:9200/_msearch",
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/_msearch?pretty",
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/_msearch",
 datatype: "application/json",
 contentType: "application/x-ndjson",
 data: str,

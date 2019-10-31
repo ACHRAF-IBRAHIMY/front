@@ -604,51 +604,51 @@ trim : ""
 };
 
 function createCommuneTable(result,dec){
-var results = result.hits.hits;
-var tableHtml = $("#ranking-table2");
+    var results = result.hits.hits;
+    var tableHtml = $("#ranking-table2");
 
 
-//$("#ranking-table tr:not(.first-tr)").remove();
-$("#ranking-table2 tr:not(.first-tr)").remove();
-
-if(results.length==0){
-    tableHtml.html("<span style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
-}else{
-    tableHtml.html("");
-}
-
-for(var i=0;i<results.length;i++){
-    var tr = $(document.createElement("tr"));
-    var rankCom = results[i]._source.rankComp;
-    var rankStr = "";
-    
-    if(dec == true){
-        dataReportRk.data.push(results[i]._source);
-    }
-
-    if(rankCom>0){
-        rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
-    }else if(rankCom<0){
-        rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+    //$("#ranking-table tr:not(.first-tr)").remove();
+    $("#ranking-table2 tr:not(.first-tr)").remove();
+    $("#ranking-table2 .err-msg-rk").remove();
+    if(results.length==0){
+        tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
     }else{
-        rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+        $("#ranking-table2 tr:not(.first-tr)").remove();
     }
-    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
-    $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span>"+rankStr+"</span></td></tr>");
-    tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
-    if(results[i]._source.indecators.delaiPpV==-1){
-        var titleText = `Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
-    }else{
-        var titleText = `Grand projets : `+(1/results[i]._source.indecators.delaiPpV).toFixed(2) +` jours - Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
+
+    for(var i=0;i<results.length;i++){
+        var tr = $(document.createElement("tr"));
+        var rankCom = results[i]._source.rankComp;
+        var rankStr = "";
+        
+        if(dec == true){
+            dataReportRk.data.push(results[i]._source);
+        }
+
+        if(rankCom>0){
+            rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
+        }else if(rankCom<0){
+            rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+        }else{
+            rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+        }
+        tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
+        $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span>"+rankStr+"</span></td></tr>");
+        tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
+        if(results[i]._source.indecators.delaiPpV==-1){
+            var titleText = `Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
+        }else{
+            var titleText = `Grand projets : `+(1/results[i]._source.indecators.delaiPpV).toFixed(2) +` jours - Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
+        }
+        tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
+        tr.html(tr.html()+`<td class="rm" title="`+titleText+`">`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
+        tr.html(tr.html()+`<td class="rm" title="`+results[i]._source.indecators.attractiviteUV+` Dossiers traités">`+Math.floor(results[i]._source.indecators.attractivite)+`</td>`);
+        tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
+        tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
+        tr.html(tr.html()+`<td class="rm" title="`+(1/(Number(results[i]._source.indecators.fiscaliteUV)*1000000)).toFixed(2)+` Dhs/m²">`+Math.floor(results[i]._source.indecators.fiscalite)+`</td>`);
+        tableHtml.append(tr);
     }
-    tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
-    tr.html(tr.html()+`<td class="rm" title="`+titleText+`">`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
-    tr.html(tr.html()+`<td class="rm" title="`+results[i]._source.indecators.attractiviteUV+` Dossiers traités">`+Math.floor(results[i]._source.indecators.attractivite)+`</td>`);
-    tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
-    tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
-    tr.html(tr.html()+`<td class="rm" title="`+(1/(Number(results[i]._source.indecators.fiscaliteUV)*1000000)).toFixed(2)+` Dhs/m²">`+Math.floor(results[i]._source.indecators.fiscalite)+`</td>`);
-    tableHtml.append(tr);
-}
 
 }
 
@@ -659,9 +659,9 @@ var tableHtml = $("#ranking-table2");
 //$("#ranking-table tr:not(.first-tr)").remove();
 $("#ranking-table2 tr:not(.first-tr)").remove();
 if(results.length==0){
-    tableHtml.html("<span style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">Ce critère ne dispose pas de résultats assemblées</span>");
+    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
 }else{
-    tableHtml.html("");
+    $("#ranking-table2 tr:not(.first-tr)").remove();
 }
 for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
@@ -697,9 +697,9 @@ var tableHtml = $("#ranking-table2");
 $("#ranking-table2 tr:not(.first-tr)").remove();
 
 if(results.length==0){
-    tableHtml.html("<span style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">Ce critère ne dispose pas de résultats assemblées</span>");
+    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
 }else{
-    tableHtml.html("");
+    $("#ranking-table2 tr:not(.first-tr)").remove();
 }
 
 for(var i=0;i<results.length;i++){
@@ -736,9 +736,9 @@ var tableHtml = $("#ranking-table2");
 //$("#ranking-table tr:not(.first-tr)").remove();
 $("#ranking-table2 tr:not(.first-tr)").remove();
 if(results.length==0){
-    tableHtml.html("<span style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">Ce critère ne dispose pas de résultats assemblées</span>");
+    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
 }else{
-    tableHtml.html("");
+    $("#ranking-table2 tr:not(.first-tr)").remove();
 }
 for(var i=0;i<results.length;i++){
 var tr = $(document.createElement("tr"));
