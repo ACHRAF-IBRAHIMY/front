@@ -1157,7 +1157,7 @@ box-card:hover{
 
 
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
 	
 	.back-end-menu{
         height: auto;
@@ -2490,7 +2490,7 @@ box-card:hover{
     
 
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
     
     .last-log-info{
         font-size: 10px;

@@ -79,8 +79,16 @@
                  var spNumber = $(this).attr("class").split(" ")[2];
                  if(spNumber=="sp3"){
                      updateChart(chartG,4,null);
+                     $(".chart-container").show();
+                     $(".word-cloud-container").hide();
                  }else if(spNumber=="sp4"){
                      updateChart(chartG,3,null);
+                     $(".chart-container").show();
+                     $(".word-cloud-container").hide();
+                 }else if(spNumber=="sp5"){
+                     $(".chart-container").hide();
+                     $(".word-cloud-container").show();
+                     updateChart(chartG,7,$(".word-cloud-container"));
                  }
                  
                });
@@ -98,7 +106,9 @@
                         ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),selectval);  
                       }
                    $(".stat-dashbord .dashbord-right .d1 .config-bar span.chart-type").removeClass("sp-active");
-                    $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp3").addClass("sp-active");
+                    $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp5").addClass("sp-active");
+                    $(".chart-container").hide();
+                     $(".word-cloud-container").show();
                 });
                 
                 $(".stat-dashbord .dashbord-right .d1 .config-bar select.s2").change(function(){
@@ -112,7 +122,9 @@
                         ESCall(parseInt($(".stat-dashbord .dashbord-right .d1 .config-bar select.s1 option:selected").val()),selectval);
                     }
                     $(".stat-dashbord .dashbord-right .d1 .config-bar span.chart-type").removeClass("sp-active");
-                    $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp3").addClass("sp-active");
+                    $(".stat-dashbord .dashbord-right .d1 .config-bar span.sp5").addClass("sp-active");
+                    $(".chart-container").hide();
+                     $(".word-cloud-container").show();
                 });                
                 
                 $(".extract-notes-button").click(function(){
@@ -189,12 +201,15 @@
                           <option value="null">TOUS LES MEMBRES</option>
                         </select>
                         <span class="separate-span" />
-                        <span class="chart-type sp sp3 fas fa-chart-bar sp-active" />
+                        <span class="chart-type sp sp3 fas fa-chart-bar" />
                         <span class="chart-type sp sp4 fas fa-chart-pie" />
-                        <span class="sp sp5 fas fa-redo-alt" />
+                        <span class="chart-type sp sp5 fas fa-sitemap  sp-active" />
                       </div>
-                      <div class="chart-container" style="position: relative;width:95%;height: 619px;">
+                      <div class="chart-container" style="position: relative;width:95%;height: 619px;display:none;">
                         <canvas id="myChart" width="400" height="400" />
+                      </div>
+                      <div id="demo" class="word-cloud-container" style="position: relative;width:95%;height: 619px;display:block">
+                        
                       </div>
                     </div>
                   </html>

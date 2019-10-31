@@ -1,4 +1,3 @@
-/* from file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js  */
 var currentPage = 0;
 var currentLPage =0;
 var totalPage = 0;
@@ -13,43 +12,45 @@ var p=0;
 var AUTH = "";
 var ADMIN_AUTH = "" ;
 var URL_SEARCH = contextPath+"/kas/DataSynchronise";
-var URL_COMMUNE = "http://91.121.57.204:8080/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
-var URL_WS_1 = "https://urbarokhas.karaz.org:8080";
+var URL_COMMUNE = "https://urbarokhas.karaz.org/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
+var URL_WS_1 = "https://urbarokhas.karaz.org";
 var URL_WS_SEARCH_ALL_AUTORISATION = URL_WS_1+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction";
 var URL_WS_KDATA_OBJECT = URL_WS_1+"/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction/";
+var URL_WS_FE = "https://urbarokhas.karaz.org";
+var URL_WS_FE2 = "https://preprodrokhas.karaz.org:8181";
 var autListId = [
 	{
-	"url":"https://urbarokhas.karaz.org/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction",
+	"url":URL_WS_FE+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction",
 	"apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-	"url_id":"https://urbarokhas.karaz.org/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction",
+	"url_id":URL_WS_FE + "/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction",
 	},
 	{
-	"url":"https://urbarokhas.karaz.org/karazortal/access/rest/kdata/search/urbanisme_permishabiter_search_AllPermishabiterHabitation",
+	"url":URL_WS_FE + "/karazortal/access/rest/kdata/search/urbanisme_permishabiter_search_AllPermishabiterHabitation",
 	"apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-	"url_id":"https://urbarokhas.karaz.org/karazortal/access/rest/kdata/object/karazapps.urbanisme.permishabiter.model.PermishabiterHabitation"
+	"url_id":URL_WS_FE + "/karazortal/access/rest/kdata/object/karazapps.urbanisme.permishabiter.model.PermishabiterHabitation"
 	},
 	{
-	"url":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/search/autorisations_autorisationafp_search_AllAutorisationAFP",
+	"url":URL_WS_FE2 + "/karazortal/access/rest/kdata/search/autorisations_autorisationafp_search_AllAutorisationAFP",
 	"apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-	"url_id":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationafp.model.AutorisationAFP"
+	"url_id":URL_WS_FE2 + "/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationafp.model.AutorisationAFP"
 	},
 	{
-	"url":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/search/autorisations_autorisationec_search_AllAutorisationEC",
+	"url":URL_WS_FE2 + "/karazortal/access/rest/kdata/search/autorisations_autorisationec_search_AllAutorisationEC",
 	"apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-	"url_id":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationec.model.AutorisationEC"
+	"url_id":URL_WS_FE2 + "/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationec.model.AutorisationEC"
 	},
 	{
-	"url":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/search/autorisations_autorisationoan_search_AllAutorisationOAN",
+	"url":URL_WS_FE2 + "/karazortal/access/rest/kdata/search/autorisations_autorisationoan_search_AllAutorisationOAN",
 	"apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-	"url_id":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationoan.model.AutorisationOAN"
+	"url_id":URL_WS_FE2 + "/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationoan.model.AutorisationOAN"
 	},{
-	"url":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/search/autorisations_autorisationodp_search_AllAutorisationODPTelecom",
+	"url":URL_WS_FE2 + "/karazortal/access/rest/kdata/search/autorisations_autorisationodp_search_AllAutorisationODPTelecom",
 	"apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-	"url_id":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationodp.model.AutorisationODP"
+	"url_id":URL_WS_FE2 + "/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationodp.model.AutorisationODP"
 	},{
-	"url":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/search/autorisations_autorisationsd_search_AllAutorisationSD",
+	"url":URL_WS_FE2 + "/karazortal/access/rest/kdata/search/autorisations_autorisationsd_search_AllAutorisationSD",
 	"apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
-	"url_id":"https://preprodrokhas.karaz.org/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationsd.model.AutorisationSD"
+	"url_id":URL_WS_FE2 + "/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationsd.model.AutorisationSD"
 	}
 
 	];
@@ -143,19 +144,19 @@ return width > nbr;
 
 //Search results and redirect to activity model
 function restFullSearchList(prefix,from,prev,parent,cls,target) {
-var result = [];
-var xhttp = new XMLHttpRequest();
-removeFullListSearch(cls,target);
-target.find("."+cls+" .searchGif").show();
-target.find("."+cls+" .no-result-v").hide();
+    var result = [];
+    var xhttp = new XMLHttpRequest();
+    removeFullListSearch(cls,target);
+    target.find("."+cls+" .searchGif").show();
+    target.find("."+cls+" .no-result-v").hide();
 
 
-typePage = Number(cls.split("-")[1]);
-var sizeliste = 4;
+    typePage = Number(cls.split("-")[1]);
+    var sizeliste = 4;
 
-if(typePage==0 || typePage==80 || typePage==1 ){
-    sizeliste = 6;
-} 
+    if(typePage==0 || typePage==80 || typePage==1 ){
+        sizeliste = 6;
+    } 
 
 
 xhttp.onreadystatechange = function() {
@@ -3171,7 +3172,7 @@ for (var i = 0; i < x.length; i++) {
 }
 }
 
-function moveKey(e,x,type,cls){
+function moveKey(e,x,type,cls,target){
 if (e.keyCode == 40) {
     /*If the arrow DOWN key is pressed,
     increase the currentFocus variable:*/
@@ -3193,9 +3194,17 @@ if (e.keyCode == 40) {
     }else{
         console.log(currentFocus);
         if(type==0){
-            $("."+cls+" .divSearchBar .search_button").click();    
+            if(target==undefined){
+                $("."+cls+" .divSearchBar .search_button").click();    
+            }else{
+                target.find("."+cls+" .divSearchBar .search_button").click();    
+            }
         }else{
-            $("."+cls+" .div-full-search-bar .search_button").click();                        
+            if(target==undefined){
+                $("."+cls+" .div-full-search-bar .search_button").click();                        
+            }else{
+                target.find("."+cls+" .div-full-search-bar .search_button").click();                        
+            }
         }
         
     }
@@ -3227,65 +3236,69 @@ $(".searchListD .fa-bars").click(function(){
 
 function createPaginationBar(param){
 
-var nbrPage = param.nbrPage;
-var begin = param.begin;
-var prefix = param.prefix;
-var type = param.type;
-var prev = param.prev;
-var cls = param.cls;
-var target = param.target;
-var parent = param.parent;
-var size = param.size;
+    var nbrPage = param.nbrPage;
+    var begin = param.begin;
+    var prefix = param.prefix;
+    var type = param.type;
+    var prev = param.prev;
+    var cls = param.cls;
+    var target = param.target;
+    var parent = param.parent;
+    var size = param.size;
 
-var p = target.find("."+cls+" .pagination");
-p.html("");
-var a = document.createElement("a");
-        a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
-        a.addEventListener("click",function(){
-            console.log("!next");
-            previousPage({"prefix":prefix,"type":type,"cls":cls,"target":target,"parent":parent,"size":size});
-            event.preventDefault();
-        });
-        p.append(a);
+    var p = target.find("."+cls+" .pagination");
+    console.log(p.html());
+    console.log("tttt == "+"."+cls+" .pagination");
+    p.html("");
+    console.log(p.html());
 
-for(var i=begin;i<nbrPage;i++){
-    if(i==begin){
-        a = document.createElement("a");
-        a.innerHTML=begin+1;
-        if(prev==false){
-            a.setAttribute("class","active");                
+    var a = document.createElement("a");
+            a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
+            a.addEventListener("click",function(){
+                console.log("!next");
+                previousPage({"prefix":prefix,"type":type,"cls":cls,"target":target,"parent":parent,"size":size});
+                event.preventDefault();
+            });
+    p.append(a);
+
+    for(var i=begin;i<nbrPage;i++){
+        if(i==begin){
+            a = document.createElement("a");
+            a.innerHTML=begin+1;
+            if(prev==false){
+                a.setAttribute("class","active");                
+            }
+            a.addEventListener("click",function(){
+                event.preventDefault();
+                console.log("1");
+                getPage({"page":begin+1,"prefix":prefix,"type":type,"prev":false,"cls":cls,"target":target,"parent":parent,"size":size});
+            });
+
+            p.append(a);
+        }else{
+            a = document.createElement("a");
+            if(prev==true && i==nbrPage-2){
+            a.setAttribute("class","active");
+            }
+            var j=i+1;
+            a.innerHTML=(j);
+            a.addEventListener("click",function(event){
+                event.preventDefault();
+                console.log(this.innerHTML+" "+prefix+" "+type);
+                getPage({"page":Number(this.innerHTML),"prefix":prefix,"type":type,"prev":false,"cls":cls,"target":target,"parent":parent,"size":size});
+                
+            });
+            p.append(a);        
         }
-        a.addEventListener("click",function(){
-            event.preventDefault();
-            console.log("1");
-            getPage({"page":begin+1,"prefix":prefix,"type":type,"prev":false,"cls":cls,"target":target,"parent":parent,"size":size});
-        });
-
-        p.append(a);
-    }else{
-        a = document.createElement("a");
-        if(prev==true && i==nbrPage-2){
-          a.setAttribute("class","active");
-        }
-        var j=i+1;
-        a.innerHTML=(j);
-        a.addEventListener("click",function(event){
-            event.preventDefault();
-            console.log(this.innerHTML+" "+prefix+" "+type);
-            getPage({"page":Number(this.innerHTML),"prefix":prefix,"type":type,"prev":false,"cls":cls,"target":target,"parent":parent,"size":size});
-            
-        });
-        p.append(a);        
     }
-}
-a = document.createElement("a");
-a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
-a.addEventListener("click",function(){
-   event.preventDefault();
-    console.log("next");
-    nextPage({"prefix":prefix,"type":type,"cls":cls,"target":target,"parent":parent,"size":size});
-});        
-p.append(a);
+    a = document.createElement("a");
+    a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
+    a.addEventListener("click",function(){
+    event.preventDefault();
+        console.log("next");
+        nextPage({"prefix":prefix,"type":type,"cls":cls,"target":target,"parent":parent,"size":size});
+    });        
+    p.append(a);
 }
 
 
@@ -3308,26 +3321,26 @@ if(1<currentPage){
 }
 
 function getPage(param){
-currentPage=param.page;
-closeSearchList();
-console.log("param",param);
+    currentPage=param.page;
+    closeSearchList();
+    console.log("param",param);
 
-if(param.type==0){
-    restSearchList(param.prefix,(param.page-1)*param.size,param.prev); 
-    var elm = $("."+param.cls+" .searchList .pagination a");
-}else{
-    restFullSearchList(param.prefix,(param.page-1)*param.size,param.prev,param.parent,param.cls,param.target);
-    var elm = param.target.find("."+param.cls+" .pagination-second a");
-}
+    if(param.type==0){
+        restSearchList(param.prefix,(param.page-1)*param.size,param.prev); 
+        var elm = $("."+param.cls+" .searchList .pagination a");
+    }else{
+        restFullSearchList(param.prefix,(param.page-1)*param.size,param.prev,param.parent,param.cls,param.target);
+        var elm = param.target.find("."+param.cls+" .pagination-second a");
+    }
 
-if(param.prev==true){
-    currentLPage--;
-}
-
-
+    if(param.prev==true){
+        currentLPage--;
+    }
 
 
-activePageBar(elm);
+
+
+    activePageBar(elm);
 }
 
 function activePageBar(elm){
@@ -3990,12 +4003,12 @@ var prefix = ref.split("-")[0];
 if(prefix=="ODP"){
 if(ref.split("-")[1]=="AN"){
     prefix+="-AN";
-}else if(ref.split("-")[1]=="AN"){
+}else if(ref.split("-")[1]=="AP"){
     prefix+="-AP";
 }
 }
 
-for(var i=0;i<prefixList.length;i++){
+for(var i=0;i<URL_WS_FE2.length;i++){
 if(prefixList[i].indexOf(prefix)!=-1){
     break;
 }

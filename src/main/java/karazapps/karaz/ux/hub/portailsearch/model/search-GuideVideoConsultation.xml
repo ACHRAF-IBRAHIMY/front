@@ -98,6 +98,9 @@ Vous trouverez ici tous les tutoriels et vidéos nécessaires pour vous familiar
                   <option value="ROKHAS URBANISTIQUE" label="Rokhas urbanistique" />
                   <option value="Général" label="Général" />
                   <option value="Karaz GIS" label="Karaz GIS" />
+                  <postChange>
+                      context.formRender.targetPanel.find(".classSearch-7 .searchbuttun").click(); 
+                  </postChange>
                 </field>
               </vbox>
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="">

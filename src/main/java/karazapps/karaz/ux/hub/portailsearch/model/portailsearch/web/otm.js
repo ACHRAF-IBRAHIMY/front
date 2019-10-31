@@ -1,7 +1,8 @@
 var chartG = null;
 
-function ESCall(size, membre) {
+function ESCall(size, membre,decision) {
 
+    
 var obj = {
     "aggs": {
         "genres": {
@@ -129,6 +130,10 @@ canvas.onclick = function (evt) {
 
     }
 };
+
+updateChart(chartG,7,$(".word-cloud-container"));
+
+
 }
 
 
@@ -598,10 +603,35 @@ switch (type) {
         listTab[posT].getElementsByTagName("td")[4].style.display = "none";
         listTab[posT].getElementsByTagName("td")[3].style.display = "block";
         break;
+    case 7:
+        var words = [
+            {text: "Lorem", weight: 13},
+            {text: "Ipsum", weight: 10.5},
+            {text: "Dolor", weight: 9.4},
+            {text: "Sit", weight: 8},
+            {text: "Amet", weight: 6.2},
+            {text: "Consectetur", weight: 5},
+            {text: "Adipiscing", weight: 5}
+        ];
+        console.log(chart);
+        var word2 = [];
+        for(var i=0;i<chart.data.labels.length;i++){
+            var obj = {
+                "text":chart.data.labels[i],
+                "weight":chart.data.datasets[0].data[i]
+            }
+            word2.push(obj);
+        }
+        setTimeout(function(){loadWordCloud(key,word2)},100);
+    break;    
 }
 
 }
 
+function loadWordCloud(div,words){
+    div.jQCloud("destroy");
+    div.jQCloud(words);
+}
 
 function searchWordListDataset(boucle, key) {
 var search = null;

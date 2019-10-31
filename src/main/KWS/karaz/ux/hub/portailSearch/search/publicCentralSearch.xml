@@ -98,9 +98,9 @@
               
               
              
-            document.querySelector(".classSearch-home .divSearchBar input").addEventListener("input", function () {
+      context.formRender.targetPanel.find(".classSearch-home .divSearchBar input").get(0).addEventListener("input", function () {
             var a, b, i;
-            var inp = document.querySelector(".classSearch-home .divSearchBar input");
+            var inp = context.formRender.targetPanel.find(".classSearch-home .divSearchBar input").get(0);
             var val = inp.value.toLowerCase();
             if (!val) {
                 closeAllLists();
@@ -110,75 +110,76 @@
             currentFocus = -1;
             //close any already open lists of autocompleted values
             closeAllLists();
+            console.log("a");
             restAutoComplete(inp,val,true);
       });
         
-      document.querySelector(".divSearchBar input").addEventListener("keydown", function (e) {
-                    var x = document.querySelector(".classSearch-home #autocomplete-list");
+      context.formRender.targetPanel.find(".divSearchBar input").get(0).addEventListener("keydown", function (e) {
+                    var x = context.formRender.targetPanel.find(".classSearch-home #autocomplete-list").get(0);
                     if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,0,"classSearch-home");
+                    moveKey(e,x,0,"classSearch-home",context.formRender.targetPanel);
       });
                           
     document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
           document.getElementsByClassName("ow-field-input")[2].value=""; 
-          $(".divSearchBar").show();
-          $(".searchList").hide();
+          context.formRender.targetPanel.find(".divSearchBar").show();
+          context.formRender.targetPanel.find(".searchList").hide();
     });
             
-    $(".searchList .second-search-bar i.fa-eraser").click(function(){
-	  $(".searchList .second-search-bar input").val("");
+    context.formRender.targetPanel.find(".searchList .second-search-bar i.fa-eraser").click(function(){
+	  context.formRender.targetPanel.find(".searchList .second-search-bar input").val("");
    });
 
-    $(".searchList .second-search-bar i.fa-search").click(function(){
+    context.formRender.targetPanel.find(".searchList .second-search-bar i.fa-search").click(function(){
         getTimeCounter();
         closeSearchList();
         currentPage=0;
-       restSearchList($(".searchList .second-search-bar input").val(),0); 
+       restSearchList(context.formRender.targetPanel.find(".searchList .second-search-bar input").val(),0); 
     });
        
-   $(".divSearch .divSearchBar .t3").click(function(){
+   context.formRender.targetPanel.find(".divSearch .divSearchBar .t3").click(function(){
        ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresUrbanisme", "search", "Procedures Urbanisme", {});
     });
         
-    $(".divSearch .divSearchBar .t4").click(function(){
+    context.formRender.targetPanel.find(".divSearch .divSearchBar .t4").click(function(){
        ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresEconomique", "search", "Procedures Economique", {});
     });    
          
           
-    $(".to-simulator").click(function(){
+    context.formRender.targetPanel.find(".to-simulator").click(function(){
         ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
     });
 
 
-    $(".folder-feature .folder-feature-header i").click(function(){
+    context.formRender.targetPanel.find(".folder-feature .folder-feature-header i").click(function(){
         if(testWidth($(window).width(),640)){
-            $(".folder-feature").find("div").hide("fast");
-            $(".folder-feature").animate({'width':'hide'});
+            context.formRender.targetPanel.find(".folder-feature").find("div").hide("fast");
+            context.formRender.targetPanel.find(".folder-feature").animate({'width':'hide'});
         }else{
-            $(".folder-feature").slideUp();
+            context.formRender.targetPanel.find(".folder-feature").slideUp();
         }
     });
 
-    $(".reglementation-card").click(function(){
+    context.formRender.targetPanel.find(".reglementation-card").click(function(){
         ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{})
     });
 
-    $(".faq-card").click(function(){
+    context.formRender.targetPanel.find(".faq-card").click(function(){
         ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
     });
 
-    $(".last-log input").keydown(function(ev){
+    context.formRender.targetPanel.find(".last-log input").keydown(function(ev){
         if ( event.which == 13 ) {
-            $(".check-ref").click();  
+            context.formRender.targetPanel.find(".check-ref").click();  
         }
     });
 
 
-    $(".folder-feature .folder-feature-body i.fa-caret-right").click(function(){
+    context.formRender.targetPanel.find(".folder-feature .folder-feature-body i.fa-caret-right").click(function(){
         nextGeneratedDiv();
     });
 
-    $(".folder-feature .folder-feature-body i.fa-caret-left").click(function(){
+    context.formRender.targetPanel.find(".folder-feature .folder-feature-body i.fa-caret-left").click(function(){
         prevGeneratedDiv();    
     });
 
@@ -242,11 +243,11 @@
                 <html>
                   <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
                     <i style="font-size:45px;" class="fas fa-map-marker-alt" />
-                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SC00">Accés urbanisme</span>
+                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SC00">Accès urbanisme</span>
                   </div>
-                  <div class="yb-btn-home"  onclick="javascript: ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
+                  <div class="yb-btn-home" onclick="javascript: ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
                     <i style="font-size:45px" class="fas fa-cog" />
-                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SG00">Accés économique</span>
+                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SG00">Accès économique</span>
                   </div>
                 </html>
               </vbox>
@@ -347,9 +348,12 @@
               </html>
               <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
                 <field className="hp-search_field wg-class-traduction wg-tcode-RP00" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ..." />
-                <button className="hp-search_field_icon fas fa-search search_button" label="" postProcessing="search()" separator="!!">
-                  <postChange>prefix= $(".hp-search_field input").val();
-                                ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});</postChange>
+                <button className="hp-search_field_icon fas fa-search search_button" label=""  separator="!!">
+                    <postChange>
+                          console.log("context.formRender.targetPanel");
+                          var prefix= context.formRender.targetPanel.find(".hp-search_field input").val();
+                          ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                    </postChange>
                 </button>
               </vbox>
               <html className="link-div-ref" style="visibility:hidden">
@@ -521,7 +525,7 @@
         -->
         <vbox columns="25% 25% 25% 25%">
           <html>
-            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/CouvertureGeo','search','Couverture géographique',{});">
               <box-icon class="fas fa-university h-icon" />
               <box-big-title class="class-traduction-ct" tcode="CH00">Couverture géographique</box-big-title>
             </box-card>

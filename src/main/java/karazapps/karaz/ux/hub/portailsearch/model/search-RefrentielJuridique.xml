@@ -130,6 +130,9 @@
                   <option value="ÉCONOMIQUE" label="ÉCONOMIQUE" />
                   <option value="URBANISME" label="URBANISME" />
                   <option value="AUTRE" label="AUTRE" />
+                  <postChange>
+                      context.formRender.targetPanel.find(".classSearch-1 .searchbuttun").click(); 
+                  </postChange>
                 </field>
               </vbox>
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">

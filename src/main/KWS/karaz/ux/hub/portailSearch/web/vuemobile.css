@@ -1,4 +1,4 @@
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 900px) {
 
     .mobile-height-0{
         height: 0px !important;
@@ -241,6 +241,28 @@
 	
 	.divSearch-article .content-article{
 		text-align:left !important;
-	}
+    }
+    
+    .filterRef-class.ow-field-core.labelAlign-float{
+             margin-top: 0px; 
+             margin-left: 0px;
+    }
+
+    .classSearch-0 .ow-vl-inner .stay-grid .ow-gbox-small .ow-vbox .ow-gbox,.classSearch-1 .ow-vl-inner .stay-grid .ow-gbox-small .ow-vbox .ow-gbox,.classSearch-12 .ow-vl-inner .stay-grid .ow-gbox-small .ow-vbox .ow-gbox {
+        grid-template-columns: 67% 39% !important;
+    }
+ 
+    .filterRef-class .ow-field-input-select{
+        font-size: 7px !important;
+    }
+
+    .ranking-fieldset .ow-btn-container{
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    #ranking-table2 .err-msg-rk{
+        position: absolute;
+    }
 
 }
