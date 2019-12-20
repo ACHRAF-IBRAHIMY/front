@@ -44,18 +44,9 @@
 									 <button className="k-btn-icon" noLabel="true" icon="fas fa-search" postProcessing="search()">
 										<postChange>
                                       
-											setShowProgressSearch("gobalTaskModelSearch"+root.searchId,"listTask","loadiing_task"+root.searchId);
 										//forceClickElement("gobalTaskModelSearch"+root.searchId,"listTask","ow-pagination-reload");
 										setPaganateSizeValueById("gobalTaskModelSearch"+root.searchId,"listTask",root.pageSize,500);
-											setTimeout(function(){ 
-																	 if(root.task=="" || !root.task ){
-																	 hideLoadingElement("loadiing_task"+root.searchId);
-																	}
-															if(root.listObject=="" || !root.listObject ){
-																	 hideLoadingElement("loadiing_object"+root.searchId);
-																		 // alert("hideLoadingElement loadiing_object"+root.searchId);
-																	}
-																 }, 1000);
+										
 									</postChange>
 									 </button>
 									 <button className="k-btn-icon" noLabel="true" icon="fas fa-filter" visible="{mode},=,reduit" separator=",">
@@ -87,10 +78,7 @@
 									 <!-- <field label="Jour" widget="date" xpath="query.day.min" /> -->
 								 </vbox>
                <vbox columns="auto" contentJustify="center">
-                <html xpath="searchId">
-                   <div id="loadiing_task${searchId}"><img src="img/load-text.gif" alt="" />
-                   </div>
-               </html> 
+                
                 </vbox>
                 <objectList id="listTask" name="ArchetectTask" label="My Tasks" displayMode="thumbnail" searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask" collectionName="task" columns="33% 33% 33%">
              <field label="Reference" index="stringIndex1" widget="text" name="reference" />
@@ -128,10 +116,14 @@
 													<div style="margin-left: 25px;">
 														<span style="color: var(--form-button-fg);font-size: 12px;">Date affectation</span>
 													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;"> Il y a ${task[$i].creationTime | duration now 4 4 } (${task[$i].creationTime})
+													<div style="margin-left: 26px;" class="fs-info-tooltip accessibility-afs-3">
+														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;"> Il y a ${task[$i].creationTime | duration now 4 4 } 
 														</span>
+														<span class="fs-item-bag fas fa-clock" style="color: #646464;" />
+                            <span class="fs-info-tooltiptext" style="width: max-content;padding: 2px 4px;left: 20px;" tooltip-content="(${task[$i].creationTime})" />
 													</div>
+
+													
 
 													<div style="margin-left: 25px;">
 														<span style="color: var(--form-button-fg);font-size: 12px;">Processus</span>
@@ -172,11 +164,7 @@
 										</div>
 									</html>
                                 <script onLoad="true">
-                                    console.log("task root********onLoad",root);
-
-                                      if(root.task[$i]){
-                                     hideLoadingElement("loadiing_task"+root.searchId);
-                                       }
+                                   
 
                                      </script> 
 									<!--/test -->
@@ -194,8 +182,7 @@ console.log("root********onLoad",root);
 var dvid="gobalTaskModelSearch"+root.searchId;
 $("#gobalTaskModelSearch").attr("id", dvid);
 setPaganateSizeValueById("gobalTaskModelSearch"+root.searchId,"listTask",root.pageSize);
-setProgressSearch("gobalTaskModelSearch"+root.searchId,"listTask","loadiing_task"+root.searchId);
-setProgressSearch("gobalTaskModelSearch"+root.searchId,"listObject","loadiing_object"+root.searchId);
+
 //$("#gobalModelSearch .gobalModelSearch_Button).unbind('click');
 
 
@@ -203,14 +190,7 @@ setProgressSearch("gobalTaskModelSearch"+root.searchId,"listObject","loadiing_ob
 <script postLoad="true" delay="6000">
                                                           
 
-				hideLoadingElement("loadiing_task"+root.searchId); 
-
-
-				console.log(root.task);
-                                if(!root.task[0]){
-									   //alert("task root********onLoad"+root.listTask[0]);
-                                      hideLoadingElement("loadiing_task"+root.searchId); 
-                                }
+			
 
 </script>   
           
