@@ -29,7 +29,7 @@
                             </vbox>
                 </framedPanel>
 <framedPanel label="Indicateurs de performance" collapsible="false">
-
+		<search searchQN="karaz/ux/hub/portailsearch/search/DbLeftSide" /> 
  </framedPanel>
 
             </vbox>
