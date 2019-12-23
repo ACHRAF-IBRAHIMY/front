@@ -6,22 +6,22 @@ var typeClassification = 0
 function getAllNotesClass(){
 var obj = {"size":1000,"query":{"match_all":{}}};
 $.ajax({
-    type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_classification_cluster/avis/_search",
-    //url: "http://localhost:9200/index_classification_cluster/avis/_search",
-    datatype: "application/json",
-    contentType: "application/json",
-    beforeSend: function (xhr) {
-         xhr.setRequestHeader("Authorization", AUTH);
-    },
-    data: JSON.stringify(obj),
-    success: function (result) {
-        console.log(result['hits']['hits']);
-        getAllNotesClassDiv(result['hits']['hits'])
-    },
-    error: function (error) {
-        console.log(error.responseText);
-    }
+type: "post",
+url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_classification_cluster/avis/_search",
+//url: "http://localhost:9200/index_classification_cluster/avis/_search",
+datatype: "application/json",
+contentType: "application/json",
+beforeSend: function (xhr) {
+     xhr.setRequestHeader("Authorization", AUTH);
+},
+data: JSON.stringify(obj),
+success: function (result) {
+    console.log(result['hits']['hits']);
+    getAllNotesClassDiv(result['hits']['hits'])
+},
+error: function (error) {
+    console.log(error.responseText);
+}
 });
 }
 
@@ -32,43 +32,43 @@ $(".cf .cf-1 .menu-config .item .index-name").html(data[0]["_index"]);
 $(".cf .cf-1 .menu-config .item .size-match-all").html(data.length);
 
 for(var i=0;i<data.length;i++){
-    var divG = document.createElement("div");
-    divG.setAttribute("class","item");
-    
-    var div1 = document.createElement("div");
-    div1.setAttribute("class","check");
-    
-    var inp = document.createElement("input");
-    inp.setAttribute("type","checkbox");
-    
-    div1.appendChild(inp);
-    
-    var div2 = document.createElement("div");
-    div2.setAttribute("class","note");
-    div2.innerHTML = data[i]["_source"]["Avis"];
-    
-    var inpH = document.createElement("input");
-    inpH.setAttribute("type","hidden");
-    inpH.setAttribute("class","id-note");
-    inpH.setAttribute("value",data[i]["_id"]);
-    
-    var inpH2 = document.createElement("input");
-    inpH2.setAttribute("type","hidden");
-    inpH2.setAttribute("class","cluster-km-note");
-    inpH2.setAttribute("value",data[i]["_source"]["cluster_km"]);
-    
-    var inpH3 = document.createElement("input");
-    inpH3.setAttribute("type","hidden");
-    inpH3.setAttribute("class","cluster-note");
-    inpH3.setAttribute("value",data[i]["_source"]["cluster"]);
-    
-    divG.appendChild(div1);
-    divG.appendChild(div2);
-    divG.appendChild(inpH);
-    divG.appendChild(inpH2);
-    divG.appendChild(inpH3);
-    
-    tab.appendChild(divG);
+var divG = document.createElement("div");
+divG.setAttribute("class","item");
+
+var div1 = document.createElement("div");
+div1.setAttribute("class","check");
+
+var inp = document.createElement("input");
+inp.setAttribute("type","checkbox");
+
+div1.appendChild(inp);
+
+var div2 = document.createElement("div");
+div2.setAttribute("class","note");
+div2.innerHTML = data[i]["_source"]["Avis"];
+
+var inpH = document.createElement("input");
+inpH.setAttribute("type","hidden");
+inpH.setAttribute("class","id-note");
+inpH.setAttribute("value",data[i]["_id"]);
+
+var inpH2 = document.createElement("input");
+inpH2.setAttribute("type","hidden");
+inpH2.setAttribute("class","cluster-km-note");
+inpH2.setAttribute("value",data[i]["_source"]["cluster_km"]);
+
+var inpH3 = document.createElement("input");
+inpH3.setAttribute("type","hidden");
+inpH3.setAttribute("class","cluster-note");
+inpH3.setAttribute("value",data[i]["_source"]["cluster"]);
+
+divG.appendChild(div1);
+divG.appendChild(div2);
+divG.appendChild(inpH);
+divG.appendChild(inpH2);
+divG.appendChild(inpH3);
+
+tab.appendChild(divG);
 }
 
 }
@@ -81,47 +81,47 @@ var cluster = "cluster";
 var url = "http://localhost:9200/index_classification_cluster/avis/_search";
 
 if(typeClass != 0){
-    cluster = "cluster_km";
+cluster = "cluster_km";
 }else{
-    cluster = "cluster";
+cluster = "cluster";
 }
 
 
 var obj = { "aggs" : {"classes" : {"terms" : { "field" : cluster,"size":100 }}}};
 $.ajax({
-    type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_classification_cluster/avis/_search",
-    //url: url,
-    datatype: "application/json",
-    contentType: "application/json",
-    beforeSend: function (xhr) {
-         xhr.setRequestHeader("Authorization", AUTH);
-    },
-    data: JSON.stringify(obj),
-    success: function (result) {
-        var clusters_var = [];
-        for(var i=0;i<result["aggregations"]["classes"]["buckets"].length;i++){
-            clusters_var.push(result["aggregations"]["classes"]["buckets"][i]["key"]);
-        }
-        
-        if(draw != true){
-            if(typeClass == 0){
-                clusters = clusters_var;
-                console.log(clusters.length)
-            }else{
-                clustersKm = clusters_var;
-                console.log(clustersKm.length)
-            }
-        }else{
-            console.log("draw");
-            getAllClustersDiv(result["aggregations"]["classes"]["buckets"]);
-            findByCluster(result["aggregations"]["classes"]["buckets"][0]["key"]);
-        }
-            
-    },
-    error: function (error) {
-        console.log(error.responseText);
+type: "post",
+url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_classification_cluster/avis/_search",
+//url: url,
+datatype: "application/json",
+contentType: "application/json",
+beforeSend: function (xhr) {
+     xhr.setRequestHeader("Authorization", AUTH);
+},
+data: JSON.stringify(obj),
+success: function (result) {
+    var clusters_var = [];
+    for(var i=0;i<result["aggregations"]["classes"]["buckets"].length;i++){
+        clusters_var.push(result["aggregations"]["classes"]["buckets"][i]["key"]);
     }
+    
+    if(draw != true){
+        if(typeClass == 0){
+            clusters = clusters_var;
+            console.log(clusters.length)
+        }else{
+            clustersKm = clusters_var;
+            console.log(clustersKm.length)
+        }
+    }else{
+        console.log("draw");
+        getAllClustersDiv(result["aggregations"]["classes"]["buckets"]);
+        findByCluster(result["aggregations"]["classes"]["buckets"][0]["key"]);
+    }
+        
+},
+error: function (error) {
+    console.log(error.responseText);
+}
 }); 
 }
 
@@ -133,10 +133,10 @@ var select = document.getElementsByClassName("cf")[0].getElementsByClassName("cf
 document.getElementsByClassName("cf")[0].getElementsByClassName("cf-2")[0].getElementsByClassName("sp4")[0].innerHTML = data.length;
 select.innerHTML = "";
 for(var i =0 ; i<data.length;i++){
-    var option = document.createElement("option");
-    option.setAttribute("value",data[i]["key"]);
-    option.innerHTML = data[i]["key"];
-    select.appendChild(option);
+var option = document.createElement("option");
+option.setAttribute("value",data[i]["key"]);
+option.innerHTML = data[i]["key"];
+select.appendChild(option);
 }
 }
 
@@ -144,27 +144,27 @@ function findByCluster(cluster){
 
 var obj = {"size": 1000, "query": {"match": {"cluster": cluster}}};
 if(typeClassification == 0){
-    url = "http://localhost:9200/index_classification_cluster/avis/_search";
+url = "http://localhost:9200/index_classification_cluster/avis/_search";
 }else{
-    url = "http://localhost:9200/index_classification_cluster_km/avis/_search";        
+url = "http://localhost:9200/index_classification_cluster_km/avis/_search";        
 }
- $.ajax({
-    type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_classification_cluster/avis/_search",
-    //url: url,
-    datatype: "application/json",
-    contentType: "application/json",
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", AUTH);
-    },
-    data: JSON.stringify(obj),
-    success: function (result) {
-        console.log(result["hits"]["hits"]);
-        findByClusterDiv(result['hits']['hits'],cluster);
-    },
-    error: function (error) {
-        console.log(error.responseText);
-    }
+$.ajax({
+type: "post",
+url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_classification_cluster/avis/_search",
+//url: url,
+datatype: "application/json",
+contentType: "application/json",
+beforeSend: function (xhr) {
+    xhr.setRequestHeader("Authorization", AUTH);
+},
+data: JSON.stringify(obj),
+success: function (result) {
+    console.log(result["hits"]["hits"]);
+    findByClusterDiv(result['hits']['hits'],cluster);
+},
+error: function (error) {
+    console.log(error.responseText);
+}
 });
 }
 
@@ -177,63 +177,63 @@ $(".cf .cf-2 .menu-config .item .index-name").html(cluster);
 $(".cf .cf-2 .menu-config .item .size-match-all").html(data.length);
 
 for(var i=0;i<data.length;i++){
-    var divG = document.createElement("div");
-    divG.setAttribute("class","item");
-    
-    var div1 = document.createElement("div");
-    div1.setAttribute("class","check");
-    
-    var inp = document.createElement("input");
-    inp.setAttribute("type","checkbox");
-    
-    div1.appendChild(inp);
-    
-    var div2 = document.createElement("div");
-    div2.setAttribute("class","note");
-    div2.innerHTML = data[i]["_source"]["Avis"];
-    
-    var inpH = document.createElement("input");
-    inpH.setAttribute("type","hidden");
-    inpH.setAttribute("class","id-note");
-    inpH.setAttribute("value",data[i]["_id"]);
-    
-    divG.appendChild(div1);
-    divG.appendChild(div2);
-    divG.appendChild(inpH);
-    
-    tab.appendChild(divG);
+var divG = document.createElement("div");
+divG.setAttribute("class","item");
+
+var div1 = document.createElement("div");
+div1.setAttribute("class","check");
+
+var inp = document.createElement("input");
+inp.setAttribute("type","checkbox");
+
+div1.appendChild(inp);
+
+var div2 = document.createElement("div");
+div2.setAttribute("class","note");
+div2.innerHTML = data[i]["_source"]["Avis"];
+
+var inpH = document.createElement("input");
+inpH.setAttribute("type","hidden");
+inpH.setAttribute("class","id-note");
+inpH.setAttribute("value",data[i]["_id"]);
+
+divG.appendChild(div1);
+divG.appendChild(div2);
+divG.appendChild(inpH);
+
+tab.appendChild(divG);
 }
 }
 
 function colorClusterFunc(type){
 if(type=="mlt"){
-        var clusterColor = [clusters,colorCluster.slice(0,clusters.length)];
+    var clusterColor = [clusters,colorCluster.slice(0,clusters.length)];
 }else{
-        var clusterColor = [clustersKm,colorCluster.slice(0,clustersKm.length)];
+    var clusterColor = [clustersKm,colorCluster.slice(0,clustersKm.length)];
 
 }
 
 var elements = $(".cf .cf-1 .tab .item");
 var color = "#ffffff";
 for(var i=0;i<elements.length;i++){
-    if(type=="mlt"){
-        var colorIndex = clusterColor[0].indexOf(elements.eq(i).children(".cluster-note").val());
-        color = clusterColor[1][colorIndex]+"44";
-    }else if(type=="km"){
-        var colorIndex = clusterColor[0].indexOf(elements.eq(i).children(".cluster-km-note").val());
-        color = clusterColor[1][colorIndex]+"44";
-    }
-    elements.eq(i).css("background-color",color);
+if(type=="mlt"){
+    var colorIndex = clusterColor[0].indexOf(elements.eq(i).children(".cluster-note").val());
+    color = clusterColor[1][colorIndex]+"44";
+}else if(type=="km"){
+    var colorIndex = clusterColor[0].indexOf(elements.eq(i).children(".cluster-km-note").val());
+    color = clusterColor[1][colorIndex]+"44";
+}
+elements.eq(i).css("background-color",color);
 }
 }
 
 function doColorCluster(val,active){
-    if(val == "mlt" && active!=true ){
-         colorClusterFunc("mlt");
-     }else if( val == "km" && active!=true ){
-         colorClusterFunc("km");
-     }else{
-         $(".cf .cf-1 .menu .acc span").removeClass("active");
-         colorClusterFunc("bl");
-     }
+if(val == "mlt" && active!=true ){
+     colorClusterFunc("mlt");
+ }else if( val == "km" && active!=true ){
+     colorClusterFunc("km");
+ }else{
+     $(".cf .cf-1 .menu .acc span").removeClass("active");
+     colorClusterFunc("bl");
+ }
 }

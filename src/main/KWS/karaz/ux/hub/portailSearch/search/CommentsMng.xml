@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="CommentsMng" label="Gestion de commentaires">
+    <query>
+    </query>
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+        </query>
+        <collapsed>false</collapsed>
+
+        <numDossier />
+        <numCommission />
+        <login />
+        <visualizer>0</visualizer>
+    </data>
+    <view>
+        <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
+            <script onLoad="true">
+            // root.login=userQN;
+             //context.formRender.notifyObservers("login");
+            </script>
+            <script postLoad="true">
+                var obj = {
+                    "size" : 10,
+                    "from":0,
+                    "context":context,
+                    "root":root
+                };
+
+                getArticlesCms(obj);
+                getCommtsCms(obj);
+
+            </script>
+            <html>
+                <style>
+                    .hp-box.hp-cmmt{
+                        padding: 0.9rem;
+                        text-align:left;
+                        margin : 10px;
+                    }
+                    
+                    .hp-box.hp-cmmt .article-elm{
+                        padding: 5px;
+                        border: 1px solid #ddd;
+                        background: #fAfAfA;
+                        margin: 2px 0px;
+                        color:#666;
+                        cursor:pointer;
+                    }
+
+                    .hp-box.hp-cmmt .article-elm:hover{
+                        background: #eee;
+                    }
+
+                    .hp-box.hp-cmmt .article-elm .articles-title{
+                        font-size : 16px;
+                        color:#666;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: block;
+                        
+                    }
+
+                    .hp-box.hp-cmmt .article-elm i{
+                        margin-left : 5px;
+                    }
+                    
+                </style>
+            </html>
+            <vbox columns="50% 50%" >
+                <fieldSet header="Articles" className="hp-box hp-small hp-cmmt" collapsible="false"   >
+                    <html className="articles">
+                        <div class="articles-list">
+
+                        </div>
+                        <div class="articles-pagination">
+                        
+                        </div>
+                    </html>
+                    <html className="cmmts-notif">
+                    
+                    </html>
+                    <html className="article-cmmts">
+                    
+                    </html>
+                </fieldSet>
+                <fieldSet header="Commentaires récents" className="hp-box hp-small hp-cmmt" collapsible="false">
+                    <html className="notif-glo-cmmt">
+                    
+                    </html>
+                    <html>
+                        <div style="color:#38a;font-size:14px;margin-top: 8px;text-align: center;">
+                            <span style="cursor:pointer">Afficher plus...</span>
+                        </div>
+                    </html>
+                </fieldSet>
+            </vbox>            
+      </screen>
+    </view>
+</search>
+

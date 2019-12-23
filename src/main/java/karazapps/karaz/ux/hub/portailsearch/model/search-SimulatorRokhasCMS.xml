@@ -298,7 +298,7 @@
                 <div class="container-steps" />
               </html>
             </vbox>
-            <vbox className="container-4">
+            <vbox className="container-4" style="overflow: auto;">
               <html>
                 <table class="tab-matrix" />
               </html>

@@ -140,7 +140,6 @@
                   <option value="Établissement classé" label="Établissement classé" />
                   <option value="Simple déclaration" label="Simple déclaration" />
                   <option value="Occupation domaine public" label="Occupation domaine public" />
-                  <option value="Activité courante" label="Activité courante" />
                   <option value="Autorisations urbanisme" label="Autorisations urbanisme" />
                   <postChange>
                       context.formRender.targetPanel.find(".classSearch-0 .searchbuttun").click(); 

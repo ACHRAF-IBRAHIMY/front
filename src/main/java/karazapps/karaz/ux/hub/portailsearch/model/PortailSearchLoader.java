@@ -100,6 +100,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/CertificatReceptionProjets", "karazapps/karaz/ux/hub/portailsearch/model/search-CertificatReceptionProjets.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/CommentsMng", "karazapps/karaz/ux/hub/portailsearch/model/search-CommentsMng.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/CouvertureGeo", "karazapps/karaz/ux/hub/portailsearch/model/search-CouvertureGeo.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DashletsArchitectSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DashletsArchitectSearch.xml");
@@ -249,6 +251,7 @@ public class PortailSearchLoader {
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/vueLarge.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/vuemobile.css");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/articles.js");
+    			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/comments.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/globalSearch.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otc.js");

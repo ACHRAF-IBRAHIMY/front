@@ -8,7 +8,9 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true"> 
-		  
+      
+          startTranslation(context);
+          
                var mem = null;
                document.getElementsByClassName("back-div")[0].addEventListener("click",function(){
                     callLoadGif();
@@ -132,7 +134,7 @@
                 });
                 paginationReset();
                 getMembers();
-                ESCall(12,null);</script>
+                ESCall(140,null);</script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
@@ -150,7 +152,7 @@
                   <i class="fas fa-file-alt" />
                   <div>
                     <span>0</span>
-                    <span>Remarques</span>
+                    <span class="class-traduction" tcode="SC00">Remarques</span>
                   </div>
                 </div>
               </html>
@@ -159,7 +161,7 @@
                   <i class="fas fa-comment-alt" />
                   <div>
                     <span>0</span>
-                    <span>Avis</span>
+                    <span class="class-traduction" tcode="SC00">Avis</span>
                   </div>
                 </div>
               </html>
@@ -168,7 +170,7 @@
                   <i class="fas fa-users" />
                   <div>
                     <span>0</span>
-                    <span>Membres</span>
+                    <span class="class-traduction" tcode="SC00">Membres</span>
                   </div>
                 </div>
               </html>
@@ -177,7 +179,7 @@
                   <i class="fas fa-th-large" />
                   <div>
                     <span>0</span>
-                    <span>Clusters</span>
+                    <span class="class-traduction" tcode="SC00">Clusters</span>
                   </div>
                 </div>
               </html>
@@ -189,11 +191,13 @@
                     <div class="content">
                       <div class="config-bar">
                         <span class="sp sp1 fas fa-sort-numeric-up" />
-                        <select class="s1">
+                        <select style="width: 55px;" class="s1">
                           <option value="12">12</option>
                           <option value="20">20</option>
                           <option value="40">40</option>
                           <option value="60">60</option>
+                          <option value="100">100</option>
+                          <option value="140" selected="selected">140</option>
                         </select>
                         <span class="separate-span" />
                         <span class="sp sp2 fas fa-users" />
@@ -203,7 +207,7 @@
                         <span class="separate-span" />
                         <span class="chart-type sp sp3 fas fa-chart-bar" />
                         <span class="chart-type sp sp4 fas fa-chart-pie" />
-                        <span class="chart-type sp sp5 fas fa-sitemap  sp-active" />
+                        <span class="chart-type sp sp5 fas fa-cloud  sp-active" />
                       </div>
                       <div class="chart-container" style="position: relative;width:95%;height: 619px;display:none;">
                         <canvas id="myChart" width="400" height="400" />

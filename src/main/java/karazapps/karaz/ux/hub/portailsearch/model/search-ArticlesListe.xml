@@ -23,7 +23,7 @@
       }else if(root.query.typeArticle==2){
        context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("A LA UNE");
       }else if(root.query.typeArticle==3){
-        context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("A VENIR");
+        context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("REVUE DE PRESSE");
       }     
           profilesT = profiles;
           
@@ -142,6 +142,7 @@
                 <li class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">Tous les articles <span style="color:#f90" /> | </li>
                 <li class="li-2" style="cursor:pointer;margin-right:4px;display:inline-block">Pratique <span style="color:#f90" /> | </li>
                 <li class="li-3" style="cursor:pointer;margin-right:4px;display:inline-block">A la une <span style="color:#f90" /> </li>
+                <li class="li-4" style="cursor:pointer;margin-right:4px;display:inline-block">Revue de presse <span style="color:#f90" /> </li>
               </ul>
             </div>
           </html>

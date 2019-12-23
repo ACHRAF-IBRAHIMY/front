@@ -32,72 +32,72 @@
       }else if(root.forgetPass=="true"){
         ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');
       }
+      else if(root.toFicheUser=="true"){
+        ApplicationManager.run('data/donnees/user/ficheuser/process/GestionFicheuserProcess','launchProcess','fiche Utilisateur');
+      }
         </script>
       <script postLoad="true">var currentFocus;
              
-            var searchParams = new URLSearchParams(window.location.search)
-            var param = searchParams.get('lang');
+          var searchParams = new URLSearchParams(window.location.search)
+          var param = searchParams.get('lang');
 
-            if(param!=undefined){
-                $.each($(".class-traduction"),function(key,value){
-                    $(value).html(transMap[$(value).attr("tcode")]);
-                    if(param=="ar"){
-                      $(value).css("text-align","right");
-                      $(value).css("font-family","Droid Arabic Kufi, sans-serif");
+          if(param!=undefined){
+              $.each($(".class-traduction"),function(key,value){
+                  $(value).html(transMap[$(value).attr("tcode")]);
+                  if(param=="ar"){
+                    $(value).css("text-align","right");
+                    $(value).css("font-family","Droid Arabic Kufi, sans-serif");
+                  }
+              })
+          }
+
+          if(param!=undefined){
+              $.each($(".class-traduction-ct"),function(key,value){
+                  $(value).html(transMap[$(value).attr("tcode")]);
+                  if(param=="ar"){
+                    $(value).css("font-family","Droid Arabic Kufi, sans-serif");
+                  }
+              })
+          }
+
+          if(param!=undefined){
+              $.each($(".wg-class-traduction"),function(key,value){
+                  var tcodel = $(value).attr("class").split(" ");
+                  var valuet = "";
+
+                  tcodel.forEach(function(elm){
+                    if(/wg-tcode-/.test(elm)){
+                      valuet = elm.split("-")[2];
                     }
-                })
-            }
+                  });
+                  if(valuet!=""){
 
-            if(param!=undefined){
-                $.each($(".class-traduction-ct"),function(key,value){
-                    $(value).html(transMap[$(value).attr("tcode")]);
-                    if(param=="ar"){
-                      $(value).css("font-family","Droid Arabic Kufi, sans-serif");
-                    }
-                })
-            }
-
-            if(param!=undefined){
-                $.each($(".wg-class-traduction"),function(key,value){
-                    var tcodel = $(value).attr("class").split(" ");
-                    var valuet = "";
-
-                    tcodel.forEach(function(elm){
-                      if(/wg-tcode-/.test(elm)){
-                        valuet = elm.split("-")[2];
-                      }
-                    });
-                    if(valuet!=""){
-
-                    $(value).find("input").attr("placeholder",transMap[valuet]);
-                    $(value).find("input").css("text-align","right");      
-                    }        
-                })
-            }
+                  $(value).find("input").attr("placeholder",transMap[valuet]);
+                  $(value).find("input").css("text-align","right");      
+                  }        
+              })
+          }
 
 /*
-            if(param!=undefined){
-                $.each($(".wg-class-traduction"),function(key,value){
-                    var tcodel = $(value).attr("class").split(" ");
-                    var valuet = "";
+          if(param!=undefined){
+              $.each($(".wg-class-traduction"),function(key,value){
+                  var tcodel = $(value).attr("class").split(" ");
+                  var valuet = "";
 
-                    tcodel.forEach(function(elm){
-                      if(/err-tcode-/.test(elm)){
-                        valuet = elm.split("-")[2];
-                      }
-                    });
-
-                    if(valuet!=""){
-                      $(value).find(".errorMessage").html(transMap[valuet]);
-                      $(value).find(".errorMessage").css("text-align","right");
+                  tcodel.forEach(function(elm){
+                    if(/err-tcode-/.test(elm)){
+                      valuet = elm.split("-")[2];
                     }
+                  });
 
-                                  
-                })
-            }*/
-              
-              
-             
+                  if(valuet!=""){
+                    $(value).find(".errorMessage").html(transMap[valuet]);
+                    $(value).find(".errorMessage").css("text-align","right");
+                  }
+
+                                
+              })
+          }*/             
       context.formRender.targetPanel.find(".classSearch-home .divSearchBar input").get(0).addEventListener("input", function () {
             var a, b, i;
             var inp = context.formRender.targetPanel.find(".classSearch-home .divSearchBar input").get(0);
@@ -225,7 +225,7 @@
                     <i class="fas fa-user-plus" />
                     <span class="class-traduction" tcode="SG00">S'enregistrer</span>
                   </div>
-                </html>
+                </html> 
               </vbox>
               <vbox test="{signup},=,oui" separator=",">
                 <html>

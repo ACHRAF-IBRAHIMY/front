@@ -10,21 +10,21 @@ sizblingSeparation:  60,
 nodeAlign: "BOTTOM",
 node: { HTMLclass: "evolution-tree" },
 connectors: {
-    type: "step",
-    style: {
-        "stroke-width": 2,
-        "stroke": "#ccc",
-        "stroke-dasharray": "--", //"", "-", ".", "-.", "-..", ". ", "- ", "--", "- .", "--.", "--.."
-        "arrow-end": "classic-wide-long"
-    }
+type: "step",
+style: {
+    "stroke-width": 2,
+    "stroke": "#ccc",
+    "stroke-dasharray": "--", //"", "-", ".", "-.", "-..", ". ", "- ", "--", "- .", "--.", "--.."
+    "arrow-end": "classic-wide-long"
+}
 }
 },
 nodeStructure: {
 text: {
-    name: "Root",
-    question_id: "1",
-    question:"Quelle est la nature de votre demande d'autorisation ?",
-    id:""
+name: "Root",
+question_id: "1",
+question:"Quelle est la nature de votre demande d'autorisation ?",
+id:""
 },
 children: []
 }
@@ -46,13 +46,13 @@ var newId = length;
 
 var obj = {
 text: {
-    name: "Child "+(length+1),
-    question_id: "-1",
-    question:"Quel est votre question ?",
-    status:0,
-    id: newId,
-    columns_idB : {},
-    rep_size:0
+name: "Child "+(length+1),
+question_id: "-1",
+question:"Quel est votre question ?",
+status:0,
+id: newId,
+columns_idB : {},
+rep_size:0
 },
 children: []
 };
@@ -113,9 +113,9 @@ console.log(nbrChild);
 if(node != 0 && nbrChild > 1 && id != ""){
 console.log(list);
 if(list.length==0){
-    var id2 = (Number(node)-1).toString();
+var id2 = (Number(node)-1).toString();
 }else{
-    var id2 = list.join("-")+"-"+(Number(node)-1); 
+var id2 = list.join("-")+"-"+(Number(node)-1); 
 }
 var stockNode = getContentSubTree(id); 
 var stockNode2 = getContentSubTree(id2);    
@@ -128,9 +128,9 @@ reduitAll();
 refrechTreant();
 }else if( node ==0 && nbrChild > 1 && id != ""){
 if(list.length==0){
-    var id2 = (Number(nbrChild)-1).toString();
+var id2 = (Number(nbrChild)-1).toString();
 }else{
-    var id2 = list.join("-")+"-"+(Number(nbrChild)-1); 
+var id2 = list.join("-")+"-"+(Number(nbrChild)-1); 
 }
 var stockNode = getContentSubTree(id); 
 var stockNode2 = getContentSubTree(id2);    
@@ -157,9 +157,9 @@ console.log(nbrChild);
 if(node != nbrChild-1 && nbrChild > 1 && id != ""){
 console.log(list);
 if(list.length==0){
-    var id2 = (Number(node)+1).toString();
+var id2 = (Number(node)+1).toString();
 }else{
-    var id2 = list.join("-")+"-"+(Number(node)+1); 
+var id2 = list.join("-")+"-"+(Number(node)+1); 
 }
 
 console.log("*****replace "+id +" By"+id2);
@@ -174,9 +174,9 @@ reduitAll();
 refrechTreant();
 }else if( node ==nbrChild-1 && nbrChild > 1 && id != ""){
 if(list.length==0){
-    var id2 = "0"; 
+var id2 = "0"; 
 }else{
-    var id2 = list.join("-")+"-0"; 
+var id2 = list.join("-")+"-0"; 
 }
 var stockNode = getContentSubTree(id); 
 var stockNode2 = getContentSubTree(id2);    
@@ -293,10 +293,10 @@ var list = nodeStructures[i].node_id.split("-");
 var str = getParentPath(list);
 var obj = findSubTreeById(nodeStructures[i].node_id,0);
 try{
-    eval("tempNodeStructures" + str + "[\"children\"]=obj.subTree.tree");
+eval("tempNodeStructures" + str + "[\"children\"]=obj.subTree.tree");
 }
 catch(e){
-    continue;
+continue;
 }
 
 }
@@ -322,19 +322,19 @@ reduitNode(nodeStructureTemp[i],1);
 function findSubTreeById(id,type){
 if(type==0){
 for(var i=0;i<nodeStructures.length;i++){
-    if(nodeStructures[i].node_id == id){
-        return { "subTree":nodeStructures[i],"index":i};
-    }
+if(nodeStructures[i].node_id == id){
+    return { "subTree":nodeStructures[i],"index":i};
+}
 }
 }else{
 var arr = [];
 for(var i=0;i<nodeStructures.length;i++){
-    if(nodeStructures[i].node_id.startsWith(id)){
-        var array = [];
-        array = JSON.stringify(nodeStructures[i]);
-        var ar = { "nodeStructure":JSON.parse(array)};
-        arr.push(ar);
-    }
+if(nodeStructures[i].node_id.startsWith(id)){
+    var array = [];
+    array = JSON.stringify(nodeStructures[i]);
+    var ar = { "nodeStructure":JSON.parse(array)};
+    arr.push(ar);
+}
 }
 return arr;
 }
@@ -350,7 +350,7 @@ if(list.length==0)return str;
 if(list[0]!=""){
 console.log("list***"+list[0]);
 for (var i = 0; i < list.length; i++) {
-    str += "[\"children\"][" + list[i] + "]";
+str += "[\"children\"][" + list[i] + "]";
 }
 }
 return str;
@@ -368,7 +368,7 @@ var removeMtrixCLass = false;
 function showUpdate(id){
 $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").show();
 $(".cms-form .body-cms-form .class-question .link-sim-cms span.update").hide();
-    
+
 $(".simulator-cms .side-bar .div-1").show();
 $(".simulator-cms .side-bar .div-2").hide();
 removeMtrixCLass = false;
@@ -401,8 +401,8 @@ icon.setAttribute("class","fa fa-close");
 icon.setAttribute("style","cursor: pointer;color: red;margin: auto 5px;");
 icon.setAttribute("title","Annuler la classification");
 icon.addEventListener("click",function(){
-    removeMtrixCLass = true;
-    $(".cms-form .body-cms-form .class-oid span.classee").html("Non Classé");
+removeMtrixCLass = true;
+$(".cms-form .body-cms-form .class-oid span.classee").html("Non Classé");
 });
 $(".cms-form .body-cms-form .class-oid span.classee").append(icon);
 }
@@ -418,12 +418,12 @@ input.setAttribute("type","hidden");
 span.setAttribute("class","link-sim-cms");
 span.innerHTML = obj.children[i].text.name;
 span.addEventListener("click",function(){
-    if(id==""){
-        var newId = this.parentNode.getElementsByClassName("index")[0].value;
-    }else{
-        var newId = id+"-"+this.parentNode.getElementsByClassName("index")[0].value;
-    }
-    showUpdate(newId);
+if(id==""){
+    var newId = this.parentNode.getElementsByClassName("index")[0].value;
+}else{
+    var newId = id+"-"+this.parentNode.getElementsByClassName("index")[0].value;
+}
+showUpdate(newId);
 });
 doc.appendChild(input);
 doc.appendChild(span);
@@ -444,7 +444,7 @@ var qstList = [];
 function loadQuestionsFromEs(){
 var obj = {
 "size":4000,"query":{
-    "match_all": {}
+"match_all": {}
 }
 };
 
@@ -454,23 +454,23 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+simulator_index_qr+"/qrs/_s
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 data: JSON.stringify(obj),
 success: function (result) {
-    qstList = [];
-    for(var i=0;i<result.hits.hits.length;i++){
-        var qstObj = {
-            "id":result.hits.hits[i]._id,
-            "question":result.hits.hits[i]._source.question,
-            "rep":result.hits.hits[i]._source.response.content,
-            "type_rep":result.hits.hits[i]._source.response.type
-        };
-        qstList.push(qstObj);
-    }
+qstList = [];
+for(var i=0;i<result.hits.hits.length;i++){
+    var qstObj = {
+        "id":result.hits.hits[i]._id,
+        "question":result.hits.hits[i]._source.question,
+        "rep":result.hits.hits[i]._source.response.content,
+        "type_rep":result.hits.hits[i]._source.response.type
+    };
+    qstList.push(qstObj);
+}
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -478,7 +478,7 @@ error: function (error) {
 function indexOfQst(id,list){
 for(var i =0 ; i<list.length;i++){
 if(id.toString()==list[i].id.toString()){
-    return i;
+return i;
 }
 }
 return -1;
@@ -508,7 +508,7 @@ var clms = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_id
 
 
 for(var i = 0; i < Object.keys(clms).length;i++){
-    deleted.push(clms[Object.keys(clms)[i]]);
+deleted.push(clms[Object.keys(clms)[i]]);
 }
 
 eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
@@ -575,7 +575,7 @@ var type=results._source.response.type;
 
 for(var j=0;j<$(".cms-form .body-cms-form .class-type-question select option").length;j++){
 if($(".cms-form .body-cms-form .class-type-question select option").eq(j).val()==results._source.response.type){
-    $(".cms-form .body-cms-form .class-type-question select option").eq(j).prop("selected",true); 
+$(".cms-form .body-cms-form .class-type-question select option").eq(j).prop("selected",true); 
 }
 }
 
@@ -598,16 +598,16 @@ $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").show()
 $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val("");
 $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide(); 
 $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").show();
-       
+   
 }
 
 if(type=="location"){
 $(".simulator-cms .side-bar .body .div-2 .cms-form  .class-responses-q").hide();                
 $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q").hide();
 for(var j=0;j<$(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option").length;j++){
-    if($(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option").eq(j).val()==results._source.response.content){
-        $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option").eq(j).prop("selected",true); 
-    }
+if($(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option").eq(j).val()==results._source.response.content){
+    $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q select option").eq(j).prop("selected",true); 
+}
 }                
 $(".simulator-cms .side-bar .body .div-2 .cms-form .class-placeholder-q input").val("");
 $(".simulator-cms .side-bar .body .div-2 .cms-form .class-location-q").show();
@@ -642,13 +642,13 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+simulator_index_qr+"/qrs/" 
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-        showQuestion(result);            
+    showQuestion(result);            
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -664,26 +664,26 @@ type: "delete",
 url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+simulator_index_qr+"/qrs/"+id,
 contentType: "application/json",
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization",AUTH);
+ xhr.setRequestHeader("Authorization",AUTH);
 },
 success: function (result) {
-    console.log(result);
-    loadQuestionsFromEs();
-    var title = $(".cms-form .header-cms-form span").html();
-    var idsec = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
-    var list = idsec.split("-");
-    var str  = getParentPath(list);
-    var questionId =  "-1";
-    var question =  "Quel est votre question ?";   
-    console.log(questionId+"****"+question);
-    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
-    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
-    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title"); 
-    refrechTreant();
-    showUpdate(idsec);       
+console.log(result);
+loadQuestionsFromEs();
+var title = $(".cms-form .header-cms-form span").html();
+var idsec = $(".simulator-cms .side-bar .body .div-1 .cms-form input.class-id").val();
+var list = idsec.split("-");
+var str  = getParentPath(list);
+var questionId =  "-1";
+var question =  "Quel est votre question ?";   
+console.log(questionId+"****"+question);
+eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question_id\"]=questionId"); 
+eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"question\"]=question"); 
+eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"name\"]=title"); 
+refrechTreant();
+showUpdate(idsec);       
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -754,7 +754,7 @@ var content = [];
 if(type != "input" && type != "location" ){
 var listt = $(".cms-form-2 .body-cms-form .class-responses-q .responses-sim-cms input").val();
 for(var i=0;i<listt.split("//").length;i++){
-    content.push(listt.split("//")[i]);
+content.push(listt.split("//")[i]);
 }
 }
 
@@ -799,18 +799,18 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+simulator_index_qr+"/qrs/_s
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 data: JSON.stringify(obj),
 success: function (result) {
-    objectUp["id"]=result.hits.hits.length;   
-    updateQuestionCms(result.hits.hits.length,objectUp);
-    $(".simulator-cms .side-bar .body .div-3").hide();
+objectUp["id"]=result.hits.hits.length;   
+updateQuestionCms(result.hits.hits.length,objectUp);
+$(".simulator-cms .side-bar .body .div-3").hide();
 
-    
+
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -826,14 +826,14 @@ datatype: "application/json",
 data:JSON.stringify(obj),
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    console.log(result);
-    loadQuestionsFromEs();
+console.log(result);
+loadQuestionsFromEs();
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 }); 
 }
@@ -851,28 +851,28 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+simulator_index_qr+"/qrs/_s
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 data: JSON.stringify(obj),
 success: function (result) {   
-    for(var i=0;i<result.hits.hits.length;i++){
-        var option = document.createElement("option");
-        option.setAttribute("value",result.hits.hits[i]._source.id);
-        option.innerHTML = result.hits.hits[i]._source.question ;
-        select.appendChild(option);
+for(var i=0;i<result.hits.hits.length;i++){
+    var option = document.createElement("option");
+    option.setAttribute("value",result.hits.hits[i]._source.id);
+    option.innerHTML = result.hits.hits[i]._source.question ;
+    select.appendChild(option);
+}
+
+for(var j=0;j<select.getElementsByTagName("option").length;j++){
+    if(select.getElementsByTagName("option")[j].value==id){
+        console.log(id);
+        select.getElementsByTagName("option")[j].selected = true;
     }
-    
-    for(var j=0;j<select.getElementsByTagName("option").length;j++){
-        if(select.getElementsByTagName("option")[j].value==id){
-            console.log(id);
-            select.getElementsByTagName("option")[j].selected = true;
-        }
-    }
-    
-    select.style.display = "inline"
+}
+
+select.style.display = "inline"
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -908,40 +908,40 @@ var histoRaw = [[],[]];
 function conevertTo(tree,array,newObj){
 for(var i=0;i<tree.children.length;i++){
 if(tree.children[i].text.status==1){
-    var list = tree.children[i].text.id.split("-");
-    var obj = simple_chart_config.nodeStructure;    
-    var culumns = getMatrixColumns(list,obj);
-    var matrixColumn = getMatrixColumns(list,obj);
-    var reps = [];
-    for(var j=0;j<list.length;j++){
-        reps.push(Number(list[j])+1);
+var list = tree.children[i].text.id.split("-");
+var obj = simple_chart_config.nodeStructure;    
+var culumns = getMatrixColumns(list,obj);
+var matrixColumn = getMatrixColumns(list,obj);
+var reps = [];
+for(var j=0;j<list.length;j++){
+    reps.push(Number(list[j])+1);
+}
+
+var column = Object.keys(tree.children[i].text.columns_idB);
+console.log("======"+column);
+for(var j = 0;j<column.length;j++){
+    var bulk = {
+        "id":tree.children[i].text.columns_idB[column[j]],
+        "list":matrixColumn,
+        "list_rep": parcourirTreeReps(tree.children[i].text.id,Number(column[j]))
     }
 
-    var column = Object.keys(tree.children[i].text.columns_idB);
-    console.log("======"+column);
-    for(var j = 0;j<column.length;j++){
-        var bulk = {
-            "id":tree.children[i].text.columns_idB[column[j]],
-            "list":matrixColumn,
-            "list_rep": parcourirTreeReps(tree.children[i].text.id,Number(column[j]))
-        }
-
-        if(histoIds.indexOf(tree.children[i].text.columns_idB[column[j]])==-1){
-            histoIds.push(tree.children[i].text.columns_idB[column[j]]);
+    if(histoIds.indexOf(tree.children[i].text.columns_idB[column[j]])==-1){
+        histoIds.push(tree.children[i].text.columns_idB[column[j]]);
+        histoRaw[0].push(tree.children[i].text.columns_idB[column[j]]);
+        histoRaw[1].push([parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-")]);
+    }else{
+        if(histoRaw[0].indexOf(tree.children[i].text.columns_idB[column[j]])==-1){
             histoRaw[0].push(tree.children[i].text.columns_idB[column[j]]);
             histoRaw[1].push([parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-")]);
         }else{
-            if(histoRaw[0].indexOf(tree.children[i].text.columns_idB[column[j]])==-1){
-                histoRaw[0].push(tree.children[i].text.columns_idB[column[j]]);
-                histoRaw[1].push([parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-")]);
-            }else{
-                var index = histoRaw[0].indexOf(tree.children[i].text.columns_idB[column[j]]);
-                if(histoRaw[1][index].indexOf(parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-"))==-1)
-                histoRaw[1][index].push(parcourirTreeReps(tree.children[i].text.id,Number(column[j])));
-            }
+            var index = histoRaw[0].indexOf(tree.children[i].text.columns_idB[column[j]]);
+            if(histoRaw[1][index].indexOf(parcourirTreeReps(tree.children[i].text.id,Number(column[j])).join("-"))==-1)
+            histoRaw[1][index].push(parcourirTreeReps(tree.children[i].text.id,Number(column[j])));
         }
-        matrixBulk.push(bulk);
     }
+    matrixBulk.push(bulk);
+}
 
 }
 
@@ -965,16 +965,16 @@ array[0].pop();
 array[1].pop();
 }
 
-    var tepmRaw = [[],[]];
+var tepmRaw = [[],[]];
 
-    for(var k=0;k<histoRaw[0].length;k++){
-        if(histoRaw[1][k].length!=1){
-            tepmRaw[0].push(histoRaw[0][k]);
-            tepmRaw[1].push(histoRaw[1][k])
-        }
+for(var k=0;k<histoRaw[0].length;k++){
+    if(histoRaw[1][k].length!=1){
+        tepmRaw[0].push(histoRaw[0][k]);
+        tepmRaw[1].push(histoRaw[1][k])
     }
-    
-    histoRaw = tepmRaw;
+}
+
+histoRaw = tepmRaw;
 
 return newObj;
 }
@@ -985,11 +985,11 @@ for(var i=0;i<tree.children.length;i++){
 
 console.log(tree.children[i].text);
 if(tree.children[i].text.red==1){
- newObj.push(tree.children[i].text.id);
+newObj.push(tree.children[i].text.id);
 }
 
 var sousTree = tree.children[i];
-      
+  
 array.push(i);
 
 if(tree.children[i].text.children!=0){
@@ -1070,20 +1070,20 @@ datatype: "application/json",
 data:JSON.stringify(treeObject),
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    $(".simulator-cms .container-sim-cms .container-1 .button-upload-es button span").removeClass("active");
-    $(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide").show();
-    var bulks = createBulkRequestMatrix();
-    var bulks2 = deleteBulkRequest(deleted);
-    sendRequestBulkMatrix(bulks);
-    sendRequestBulkMatrix(bulks2);
-    deleted = [];
-    reduitAll();
+$(".simulator-cms .container-sim-cms .container-1 .button-upload-es button span").removeClass("active");
+$(".simulator-cms .container-sim-cms .container-1 .button-upload-es span.valide").show();
+var bulks = createBulkRequestMatrix();
+var bulks2 = deleteBulkRequest(deleted);
+sendRequestBulkMatrix(bulks);
+sendRequestBulkMatrix(bulks2);
+deleted = [];
+reduitAll();
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 }); 
 }
@@ -1104,13 +1104,13 @@ datatype: "application/json",
 data:JSON.stringify(treeObject),
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    console.log(result);
+console.log(result);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 }); 
 }
@@ -1137,13 +1137,13 @@ datatype: "application/json",
 contentType: "application/x-ndjson",
 data:bulks,
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {    
-    console.log(result);
+console.log(result);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 })
 };
@@ -1161,25 +1161,25 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/simulator_index_tree/tree/2",
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-   if(type==0){
-        console.log(simple_chart_config);
-        simple_chart_config.nodeStructure = result._source.treeComp;
-        reduitAll();
-        startTreant();
-        loadQuestionsFromEs();
-        deleted = [];
-   }else if(type==1){
-        tree = result._source.treeSimp;
-        tree2 = result._source.treeComp;
-        firstEsTreeCall();
-        //restGetAllLocalite(0,100,0);
-   }
+if(type==0){
+    console.log(simple_chart_config);
+    simple_chart_config.nodeStructure = result._source.treeComp;
+    reduitAll();
+    startTreant();
+    loadQuestionsFromEs();
+    deleted = [];
+}else if(type==1){
+    tree = result._source.treeSimp;
+    tree2 = result._source.treeComp;
+    firstEsTreeCall();
+    //restGetAllLocalite(0,100,0);
+}
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -1199,15 +1199,15 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+url,
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", AUTH);
+ xhr.setRequestHeader("Authorization", AUTH);
 },
 data: JSON.stringify(obj),
 success: function (result) {
-    console.log(hiddenList);
-    callback(result['hits']['hits'],0,hiddenList,sortList);
+console.log(hiddenList);
+callback(result['hits']['hits'],0,hiddenList,sortList);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -1229,9 +1229,9 @@ i1.setAttribute("class","fas fa-file");
 var i2 = document.createElement("i");
 i2.setAttribute("class","fas fa-plus");
 i2.addEventListener("click",function(){
-    var index = this.parentNode.querySelector("input.index").value;
-    console.log(index);
-    addDocItemToDocAdded(index);
+var index = this.parentNode.querySelector("input.index").value;
+console.log(index);
+addDocItemToDocAdded(index);
 });
 var span = document.createElement("span");
 span.innerHTML = response[i]._source.title;
@@ -1257,14 +1257,14 @@ console.log(JSON.stringify(hiddenList));
 
 if(sortList != undefined){
 for(var j=0;j<sortList.length;j++){
-    var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((sortList[j]).toString())];
-    addDocItemToDocAdded(index);
+var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((sortList[j]).toString())];
+addDocItemToDocAdded(index);
 }
 }else{
 for(var j=0;j<hiddenList.length;j++){
-    var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((hiddenList[j]+1).toString())];
-    console.log(index);
-    addDocItemToDocAdded(index);
+var index = arrayOfdivTabs[1][arrayOfdivTabs[0].indexOf((hiddenList[j]+1).toString())];
+console.log(index);
+addDocItemToDocAdded(index);
 }
 }
 
@@ -1287,23 +1287,23 @@ i12.setAttribute("class","fas fa-caret-down");
 i11.addEventListener("click",function(){
 var index = Array.from(document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")).indexOf(this.parentNode);
 if(index != 0){
-    var indexRep = this.parentNode.querySelector("input").value;
-    var textRep = this.parentNode.querySelector("span").innerHTML;
-    this.parentNode.querySelector("input").value = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("input").value;
-    this.parentNode.querySelector("span").innerHTML = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("span").innerHTML;
-    document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("input").value = indexRep;
-    document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("span").innerHTML = textRep;
+var indexRep = this.parentNode.querySelector("input").value;
+var textRep = this.parentNode.querySelector("span").innerHTML;
+this.parentNode.querySelector("input").value = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("input").value;
+this.parentNode.querySelector("span").innerHTML = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("span").innerHTML;
+document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("input").value = indexRep;
+document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index-1].querySelector("span").innerHTML = textRep;
 }
 });
 i12.addEventListener("click",function(){
 var index = Array.from(document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")).indexOf(this.parentNode);
 if(index < document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item").length-1){
-    var indexRep = this.parentNode.querySelector("input").value;
-    var textRep = this.parentNode.querySelector("span").innerHTML;
-    this.parentNode.querySelector("input").value = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("input").value;
-    this.parentNode.querySelector("span").innerHTML = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("span").innerHTML;
-    document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("input").value = indexRep;
-    document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("span").innerHTML = textRep;
+var indexRep = this.parentNode.querySelector("input").value;
+var textRep = this.parentNode.querySelector("span").innerHTML;
+this.parentNode.querySelector("input").value = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("input").value;
+this.parentNode.querySelector("span").innerHTML = document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("span").innerHTML;
+document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("input").value = indexRep;
+document.querySelectorAll(".simulator-cms .side-bar .body1 .docs-in .docs-added .doc-item")[index+1].querySelector("span").innerHTML = textRep;
 }
 });
 var i2 = document.createElement("i");
@@ -1388,30 +1388,30 @@ span.setAttribute("index",i);
 var span1 = document.createElement("span");
 span1.innerHTML=childs[i];
 span1.addEventListener("click",function(){
-    afterChildClass(this.parentNode.getAttribute("index"));
+afterChildClass(this.parentNode.getAttribute("index"));
 });
 
 span.append(span1);
 
 if( eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]")!=undefined){
 if( Object.keys(clms).indexOf(i.toString()) !=-1 ){
-    var ic = document.createElement("i");
-    ic.setAttribute("class","fas fa-close");
-    ic.setAttribute("index",i);
-    ic.addEventListener("click",function(){
-        if(window.confirm("SUPPRIMER !!")){
-            deleted.push(clms[this.getAttribute("index").toString()]);
-            this.style.display = "none";
-            eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]["+this.getAttribute("index").toString()+"]");
-            
-            if(Object.keys(eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]")).length==0){
-                eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
-                eval("delete simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]");
-            }
-
+var ic = document.createElement("i");
+ic.setAttribute("class","fas fa-close");
+ic.setAttribute("index",i);
+ic.addEventListener("click",function(){
+    if(window.confirm("SUPPRIMER !!")){
+        deleted.push(clms[this.getAttribute("index").toString()]);
+        this.style.display = "none";
+        eval("delete simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]["+this.getAttribute("index").toString()+"]");
+        
+        if(Object.keys(eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]")).length==0){
+            eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=0");
+            eval("delete simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]");
         }
-    });
-    span.append(ic);
+
+    }
+});
+span.append(ic);
 
 }}
 
@@ -1426,22 +1426,22 @@ console.log(id)
 if(type==0){
 console.log(objectJsonMatrixColumns+" "+Object.keys(objectJsonMatrixColumns).length);
 if(Object.keys(objectJsonMatrixColumns).length==0){
-    
-    objectJsonMatrixColumns = makeMatrixClass(id,ident);
-    getAllCms(0,createAllCms,[]);
+
+objectJsonMatrixColumns = makeMatrixClass(id,ident);
+getAllCms(0,createAllCms,[]);
 }else{
-    objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id,ident)["docs_requis"];
-    objectJsonMatrixColumns["docSort"] = getListStepsAdded();
-    
-    if(objectJsonMatrixColumns["docs_comp"]!=undefined){
-        list = bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"]));
-        sortedList = objectJsonMatrixColumns["docsCompSort"];
-    } 
+objectJsonMatrixColumns["docs_requis"]= makeMatrixClass(id,ident)["docs_requis"];
+objectJsonMatrixColumns["docSort"] = getListStepsAdded();
 
-    getAllCms(0,createAllCms,list,sortedList);        
+if(objectJsonMatrixColumns["docs_comp"]!=undefined){
+    list = bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"]));
+    sortedList = objectJsonMatrixColumns["docsCompSort"];
+} 
 
-    console.log("else :"+JSON.stringify(objectJsonMatrixColumns));
-    //getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
+getAllCms(0,createAllCms,list,sortedList);        
+
+console.log("else :"+JSON.stringify(objectJsonMatrixColumns));
+//getAllCms(0,createAllCms,bin2vec(int2bin(objectJsonMatrixColumns["docs_comp"])));
 }
 $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
 $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
@@ -1454,8 +1454,8 @@ objectJsonMatrixColumns["docsCompSort"] = getListStepsAdded();
 var list = [];
 var sortedList = [];
 if(objectJsonMatrixColumns["steps"]!=undefined){
-    list = bin2vec(int2bin(objectJsonMatrixColumns["steps"]));
-    sortedList = objectJsonMatrixColumns["stepSort"];
+list = bin2vec(int2bin(objectJsonMatrixColumns["steps"]));
+sortedList = objectJsonMatrixColumns["stepSort"];
 } 
 getAllCms(1,createAllCms,list,sortedList);        
 $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
@@ -1470,8 +1470,8 @@ objectJsonMatrixColumns["stepSort"] = getListStepsAdded();
 var list = [];
 var sortedList = [];
 if(objectJsonMatrixColumns["docs_fac"]!=undefined){
-    list = bin2vec(int2bin(objectJsonMatrixColumns["docs_fac"]));
-    sortedList = objectJsonMatrixColumns["docFacSort"];
+list = bin2vec(int2bin(objectJsonMatrixColumns["docs_fac"]));
+sortedList = objectJsonMatrixColumns["docFacSort"];
 } 
 
 getAllCms(0,createAllCms,list,sortedList);        
@@ -1489,12 +1489,12 @@ objectJsonMatrixColumns["docFacSort"] = getListStepsAdded();
 var list = [];
 var sortedList = [];
 
-    if(objectJsonMatrixColumns["docs_sortie"]!=undefined){
-        list = bin2vec(int2bin(objectJsonMatrixColumns["docs_sortie"]));
-        sortedList = objectJsonMatrixColumns["docSortSort"];
-    } 
+if(objectJsonMatrixColumns["docs_sortie"]!=undefined){
+    list = bin2vec(int2bin(objectJsonMatrixColumns["docs_sortie"]));
+    sortedList = objectJsonMatrixColumns["docSortSort"];
+} 
 
-    getAllCms(0,createAllCms,list,sortedList);        
+getAllCms(0,createAllCms,list,sortedList);        
 
 $(".simulator-cms .side-bar .body1 .docs-in .docs-list").html("");
 $(".simulator-cms .side-bar .body1 .docs-in .docs-added").html("");
@@ -1547,12 +1547,12 @@ var objStatus = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"statu
 
 if(objStatus!=0){
 var columns_idB = eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"]");
-    if(Object.keys(columns_idB).indexOf(childId.toString())==-1){
-        getAllCms(0,createAllCms,[]);    
-    }else{
-        console.log(columns_idB);
-        readMatrixCms(columns_idB[childId.toString()]);
-    }
+if(Object.keys(columns_idB).indexOf(childId.toString())==-1){
+    getAllCms(0,createAllCms,[]);    
+}else{
+    console.log(columns_idB);
+    readMatrixCms(columns_idB[childId.toString()]);
+}
 }else{
 getAllCms(0,createAllCms,[]);    
 }
@@ -1567,21 +1567,21 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/simulator_index_matrix/column
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    objectJsonMatrixColumns = result._source;
-    objectJsonMatrixColumns["id"] = result._id;
-    var list = [];
-    var sortedList = [];
-    if(objectJsonMatrixColumns["docs_requis"]!=undefined){
-        list = bin2vec(int2bin(objectJsonMatrixColumns["docs_requis"]));
-        sortedList = objectJsonMatrixColumns["docSort"];
-    }     
-    getAllCms(0,createAllCms,list,sortedList);
+objectJsonMatrixColumns = result._source;
+objectJsonMatrixColumns["id"] = result._id;
+var list = [];
+var sortedList = [];
+if(objectJsonMatrixColumns["docs_requis"]!=undefined){
+    list = bin2vec(int2bin(objectJsonMatrixColumns["docs_requis"]));
+    sortedList = objectJsonMatrixColumns["docSort"];
+}     
+getAllCms(0,createAllCms,list,sortedList);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 }); 
 }
@@ -1614,22 +1614,22 @@ datatype: "application/json",
 data:JSON.stringify(objectJson),
 contentType: "application/json",
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success:function (result) {
-        console.log(result);
-        $(".simulator-cms .side-bar .body1").hide();
-        $(".simulator-cms .side-bar .body").show();
-        var list = id.split("-");
-        var str  = getParentPath(list);
-        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=1");
-        eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"][\""+ident+"\"]=result._id");
-        eval("simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]=\"classe-evo\"");
-        showUpdate(id);
-        refrechTreant();             
+    console.log(result);
+    $(".simulator-cms .side-bar .body1").hide();
+    $(".simulator-cms .side-bar .body").show();
+    var list = id.split("-");
+    var str  = getParentPath(list);
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"status\"]=1");
+    eval("simple_chart_config.nodeStructure"+str+"[\"text\"][\"columns_idB\"][\""+ident+"\"]=result._id");
+    eval("simple_chart_config.nodeStructure"+str+"[\"HTMLclass\"]=\"classe-evo\"");
+    showUpdate(id);
+    refrechTreant();             
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 }); 
 }
@@ -1641,9 +1641,9 @@ var str = "";
 array.push(eval("obj"+str+"[\"text\"][\"question_id\"].toString()"))
 if(list[0]!=""){
 for (var i = 0; i < list.length; i++) {
-    str += "[\"children\"][" + list[i] + "]";
-    console.log("srrrrrrrrr",str);
-    array.push(eval("obj"+str+"[\"text\"][\"question_id\"].toString()"));
+str += "[\"children\"][" + list[i] + "]";
+console.log("srrrrrrrrr",str);
+array.push(eval("obj"+str+"[\"text\"][\"question_id\"].toString()"));
 }
 }
 console.log(array);
@@ -1693,7 +1693,7 @@ console.log(newId);
 eval("simple_chart_config.nodeStructure"+str+"[\"children\"][i][\"text\"][\"id\"]= newId");
 var new_child = eval("simple_chart_config.nodeStructure"+str+"[\"children\"][i][\"children\"]")
 if(new_child.length!=0){         
-  setIdTree(new_list,new_child);                     
+setIdTree(new_list,new_child);                     
 }
 }
 }
@@ -1714,15 +1714,15 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+index,
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-   xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 data: JSON.stringify(obj),
 success: function (result) {
-  console.log(result['hits']['hits']);
-  getAllDocsClassDiv(result['hits']['hits'],type,root);
+console.log(result['hits']['hits']);
+getAllDocsClassDiv(result['hits']['hits'],type,root);
 },
 error: function (error) {
-  console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -1747,16 +1747,16 @@ div1.setAttribute("class","fas fa-file");
 
 
 if(data[i]["_source"]["attachementImg"]!=undefined){
-  if(data[i]["_source"]["attachementImg"]!=""){
-    div1.setAttribute("style","color:green");
-  }else{
-      var ind1 = data[i]["_source"]["attachementImg"].indexOf("gedId");
-      var ind2 = data[i]["_source"]["attachementImg"].indexOf("&amp;",ind1);
-      var strr = data[i]["_source"]["attachementImg"].substring(ind1+6,ind2);
-      if(strr==""){
-        div1.setAttribute("style","color:yellow");
-      }
+if(data[i]["_source"]["attachementImg"]!=""){
+div1.setAttribute("style","color:green");
+}else{
+  var ind1 = data[i]["_source"]["attachementImg"].indexOf("gedId");
+  var ind2 = data[i]["_source"]["attachementImg"].indexOf("&amp;",ind1);
+  var strr = data[i]["_source"]["attachementImg"].substring(ind1+6,ind2);
+  if(strr==""){
+    div1.setAttribute("style","color:yellow");
   }
+}
 }else{
 div1.setAttribute("style","color:red");
 }
@@ -1776,13 +1776,13 @@ div3.setAttribute("class","fas fa-bars");
 div3.setAttribute("style","cursor:pointer");
 div3.addEventListener("click",function(){
 if(type==0){
-    var id = this.parentElement.getElementsByClassName("id-note")[0].value;
-    showDivManager(4);
-    getDocClass(type,id,root);
+var id = this.parentElement.getElementsByClassName("id-note")[0].value;
+showDivManager(4);
+getDocClass(type,id,root);
 }else{
-    var id = this.parentElement.getElementsByClassName("id-note")[0].value;
-    showDivManager(5);
-    getDocClass(type,id,root);
+var id = this.parentElement.getElementsByClassName("id-note")[0].value;
+showDivManager(5);
+getDocClass(type,id,root);
 }        
 });
 
@@ -1793,7 +1793,7 @@ div4.addEventListener("click",function(){
 var id = this.parentElement.getElementsByClassName("id-note")[0].value;
 this.parentElement.style.display = "none";
 if(window.confirm("Supprimer")){
-    removeDocObject(type,id);
+removeDocObject(type,id);
 }
 });
 
@@ -1818,12 +1818,12 @@ $(".simulator-cms .side-bar .body .div-5").hide();
 $(".simulator-cms .side-bar .body .div-6").hide();
 $(".simulator-cms .side-bar .body .div-7").hide();
 root.attachementImg = {
-    fileId:"",
-    gedId:"",
-    fileName:"",
-    fileSignature:"",
-    fileSize:"",
-    fileTime:""
+fileId:"",
+gedId:"",
+fileName:"",
+fileSignature:"",
+fileSize:"",
+fileTime:""
 };
 }else if(type==2){
 $(".simulator-cms .side-bar .body .div-4").hide();
@@ -1874,9 +1874,9 @@ var index = ""+simulator_index_steps+"/steps/";
 var id = null;
 
 if(doc.id == undefined){
-  id ="";
+id ="";
 }else{
-  id = doc.id;
+id = doc.id;
 }
 
 $.ajax({
@@ -1886,16 +1886,16 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+index+id,
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", AUTH);
+ xhr.setRequestHeader("Authorization", AUTH);
 },
 data: JSON.stringify(doc),
 success: function (result) {
-    setTimeout(getAllDocsClass(type,root),2000);
-    console.log(result);
-    //getAllDocsClassDiv(result['hits']['hits'],type);
+setTimeout(getAllDocsClass(type,root),2000);
+console.log(result);
+//getAllDocsClassDiv(result['hits']['hits'],type);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -1904,48 +1904,48 @@ function getModifyObject(type,root){
 var obj = {};
 switch(type){
 case 0: obj.title = $(".simulator-cms .side-bar .body .div-4 .class-question-q input").val();
-        obj.type = $(".simulator-cms .side-bar .body .div-4 .class-type-question select option:selected").val();
-        var gedId = root.attachementImg.gedId;
-        var krn = gedId.split("/")[0];
-        obj.attachementImg = "/karazal/DownloadFile?gedId="+gedId+"&amp;krn="+krn+"&amp;thumbnail=large&amp;or=img/no-file.svg";
-        break;
+    obj.type = $(".simulator-cms .side-bar .body .div-4 .class-type-question select option:selected").val();
+    var gedId = root.attachementImg.gedId;
+    var krn = gedId.split("/")[0];
+    obj.attachementImg = "/karazal/DownloadFile?gedId="+gedId+"&amp;krn="+krn+"&amp;thumbnail=large&amp;or=img/no-file.svg";
+    break;
 case 1: obj.title = $(".simulator-cms .side-bar .body .div-5 .class-question-q input").val();
-        obj.description = $(".simulator-cms .side-bar .body .div-5 .class-desc-q input").val();
-        obj.membres = $(".simulator-cms .side-bar .body .div-5 .class-membre-q input").val().split("-");
-        break;
+    obj.description = $(".simulator-cms .side-bar .body .div-5 .class-desc-q input").val();
+    obj.membres = $(".simulator-cms .side-bar .body .div-5 .class-membre-q input").val().split("-");
+    break;
 case 2: obj.id = $(".simulator-cms .side-bar .body .div-6 .input-id").val();
-        obj.title = $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val();
-        obj.type = $(".simulator-cms .side-bar .body .div-6 .class-type-question select option:selected").val();
-        
-        var removeAtt = $(".simulator-cms .side-bar .body .div-6 .class-img").attr("remove");
+    obj.title = $(".simulator-cms .side-bar .body .div-6 .class-question-q input").val();
+    obj.type = $(".simulator-cms .side-bar .body .div-6 .class-type-question select option:selected").val();
+    
+    var removeAtt = $(".simulator-cms .side-bar .body .div-6 .class-img").attr("remove");
 
-        if(removeAtt=="false"){
-            if(root.attachementImg.gedId!=""){
-                var gedId = root.attachementImg.gedId;
-                var krn = gedId.split("/")[0];
-                obj.attachementImg = "/karazal/DownloadFile?gedId="+gedId+"&amp;krn="+krn+"&amp;thumbnail=large&amp;or=img/no-file.svg";    
-            }else{
-                obj.attachementImg = $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val();
-            }
+    if(removeAtt=="false"){
+        if(root.attachementImg.gedId!=""){
+            var gedId = root.attachementImg.gedId;
+            var krn = gedId.split("/")[0];
+            obj.attachementImg = "/karazal/DownloadFile?gedId="+gedId+"&amp;krn="+krn+"&amp;thumbnail=large&amp;or=img/no-file.svg";    
+        }else{
+            obj.attachementImg = $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val();
         }
-        
-        break;
+    }
+    
+    break;
 case 3: obj.id = $(".simulator-cms .side-bar .body .div-7 .input-id").val();
-        obj.title = $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val();
-        obj.description = $(".simulator-cms .side-bar .body .div-7 .class-desc-q input").val();
-        obj.membress = $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val().split("-");
+    obj.title = $(".simulator-cms .side-bar .body .div-7 .class-question-q input").val();
+    obj.description = $(".simulator-cms .side-bar .body .div-7 .class-desc-q input").val();
+    obj.membress = $(".simulator-cms .side-bar .body .div-7 .class-membre-q input").val().split("-");
 
-        var copies = [];
-        obj.membress.forEach(function(elm){ 
-            if(elm.indexOf("***")!=-1){
-                copies.push({"membre":elm.split("***")[0],"type":elm.split("***")[1]});
-            }else{
-                copies.push({"membre":elm,"type":"A"});
-            }
-        });
-        obj.membress = copies;
+    var copies = [];
+    obj.membress.forEach(function(elm){ 
+        if(elm.indexOf("***")!=-1){
+            copies.push({"membre":elm.split("***")[0],"type":elm.split("***")[1]});
+        }else{
+            copies.push({"membre":elm,"type":"A"});
+        }
+    });
+    obj.membress = copies;
 
-        break;
+    break;
 }
 return obj;
 }
@@ -1960,33 +1960,33 @@ $(".simulator-cms .side-bar .body .div-6 .class-type-question select").val(resul
 $(".simulator-cms .side-bar .body .div-6 .class-img").attr("remove","false");
 
 if(result._source.attachementImg!=undefined){
-    $(".simulator-cms .side-bar .body .div-6").css("height","auto");
-    $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val(result._source.attachementImg);
-    
-    var deleteButt = document.createElement("button");
-    deleteButt.innerHTML = "Supprimer l'image";
-    deleteButt.setAttribute("style","margin:auto;margin-top:10px;color:#fff;background:red;border:none;display:block;");
-    deleteButt.addEventListener("click",function(){
-        this.parentNode.setAttribute("remove","true");
-        this.parentNode.innerHTML="No file";
-    });
-    
-    $(".simulator-cms .side-bar .body .div-6 .class-img").html("<img style=\"    display: block;height: 300px;margin: auto;margin-top: 15px;\" src=\""+result._source.attachementImg+"\" />");
-    $(".simulator-cms .side-bar .body .div-6 .class-img").append(deleteButt);
+$(".simulator-cms .side-bar .body .div-6").css("height","auto");
+$(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val(result._source.attachementImg);
+
+var deleteButt = document.createElement("button");
+deleteButt.innerHTML = "Supprimer l'image";
+deleteButt.setAttribute("style","margin:auto;margin-top:10px;color:#fff;background:red;border:none;display:block;");
+deleteButt.addEventListener("click",function(){
+    this.parentNode.setAttribute("remove","true");
+    this.parentNode.innerHTML="No file";
+});
+
+$(".simulator-cms .side-bar .body .div-6 .class-img").html("<img style=\"    display: block;height: 300px;margin: auto;margin-top: 15px;\" src=\""+result._source.attachementImg+"\" />");
+$(".simulator-cms .side-bar .body .div-6 .class-img").append(deleteButt);
 
 }else{
-    $(".simulator-cms .side-bar .body .div-6").css("height","360px");
-    $(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val("");
-    $(".simulator-cms .side-bar .body .div-6 .class-img").html("No file");
+$(".simulator-cms .side-bar .body .div-6").css("height","360px");
+$(".simulator-cms .side-bar .body .div-6 .class-type-question input.att").val("");
+$(".simulator-cms .side-bar .body .div-6 .class-img").html("No file");
 }
 
 root.attachementImg = {
-    fileId : "",
-    gedId : "", 
-    fileName : "",
-    fileSize : "",
-    fileSignature : "",
-    fileTime : ""
+fileId : "",
+gedId : "", 
+fileName : "",
+fileSize : "",
+fileSignature : "",
+fileTime : ""
 };
 
 }else if(type==1){
@@ -2012,15 +2012,15 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+index+id,
 //url: "http://localhost:9200/index_classification_cluster/avis/_search",
 contentType: "application/json",
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", AUTH);
+ xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    console.log(result);
-    detailsDocObject(result,type,root);
-    //getAllDocsClassDiv(result['hits']['hits'],type);
+console.log(result);
+detailsDocObject(result,type,root);
+//getAllDocsClassDiv(result['hits']['hits'],type);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -2038,14 +2038,14 @@ url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/"+index+id,
 //url: "http://localhost:9200/index_classification_cluster/avis/_search",
 contentType: "application/json",
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", AUTH);
+ xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    console.log(result);
-    setTimeout(getAllDocsClass(type),2000);
+console.log(result);
+setTimeout(getAllDocsClass(type),2000);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -2053,7 +2053,7 @@ error: function (error) {
 function getMaxDocsClass(type,object,root){
 var obj = {
 "aggs" : {
-    "max_id" : { "max" : { "field" : "id" } }
+"max_id" : { "max" : { "field" : "id" } }
 }
 };
 if(type==0){
@@ -2070,16 +2070,16 @@ contentType: "application/json",
 datatype:"application/json",
 data: JSON.stringify(obj),
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", AUTH);
+ xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    console.log(Number(result.aggregations.max_id.value)+1);
-    object.id = Number(result.aggregations.max_id.value)+1;
-    updateDocClass(type,object,root);
-    //getAllDocsClass(type);
+console.log(Number(result.aggregations.max_id.value)+1);
+object.id = Number(result.aggregations.max_id.value)+1;
+updateDocClass(type,object,root);
+//getAllDocsClass(type);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });
 }
@@ -2096,59 +2096,59 @@ datatype: "application/json",
 contentType: "application/x-ndjson",
 data:bulk,
 beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", AUTH);
+xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {    
-    console.log(result);
-    var columns = result.responses[0].hits.hits;
-    var columnsMatrix = result.responses[1].hits.hits;
-    columns.sort(function(a, b) {
-        return Number(a._id) - Number(b._id);
-    });
+console.log(result);
+var columns = result.responses[0].hits.hits;
+var columnsMatrix = result.responses[1].hits.hits;
+columns.sort(function(a, b) {
+    return Number(a._id) - Number(b._id);
+});
 
-    console.log(columns);
-    var arrayQst = [[],[]];
-    for(var i=0;i<columns.length;i++){
-        var str = "Q"+columns[i]._id;
-        console.log(str.toString());
-        arrayQst[0].push(str);
-        arrayQst[1].push(columns[i]._source.question);
+console.log(columns);
+var arrayQst = [[],[]];
+for(var i=0;i<columns.length;i++){
+    var str = "Q"+columns[i]._id;
+    console.log(str.toString());
+    arrayQst[0].push(str);
+    arrayQst[1].push(columns[i]._source.question);
+}
+arrayQst[0].push("Docs Requis");
+arrayQst[1].push("Docs Requis");
+arrayQst[0].push("Docs Comp");
+arrayQst[1].push("Docs Comp");
+arrayQst[0].push("Steps");
+arrayQst[1].push("Steps");
+var size = columnsMatrix.length;
+console.log(size);
+createColumns(0,arrayQst);
+
+for(var i=0;i<size;i++){
+    var listQr = columnsMatrix[i]._source.list;
+    var listRep = columnsMatrix[i]._source.list_rep;
+
+    var arrayReps = [];
+    
+    for(var j = 0 ;j< columns.length;j++){
+        arrayReps.push(0);
     }
-    arrayQst[0].push("Docs Requis");
-    arrayQst[1].push("Docs Requis");
-    arrayQst[0].push("Docs Comp");
-    arrayQst[1].push("Docs Comp");
-    arrayQst[0].push("Steps");
-    arrayQst[1].push("Steps");
-    var size = columnsMatrix.length;
-    console.log(size);
-    createColumns(0,arrayQst);
     
-    for(var i=0;i<size;i++){
-        var listQr = columnsMatrix[i]._source.list;
-        var listRep = columnsMatrix[i]._source.list_rep;
-    
-        var arrayReps = [];
-        
-        for(var j = 0 ;j< columns.length;j++){
-            arrayReps.push(0);
-        }
-        
-        for(var j=0;j<listQr.length;j++){
-            arrayReps[Number(listQr[j])]= listRep[j];
-        }
-
-        arrayReps.push(columnsMatrix[i]._source.docs_requis);
-        arrayReps.push(columnsMatrix[i]._source.docs_comp);
-        arrayReps.push(columnsMatrix[i]._source.steps);
-
-        createColumns(1,arrayReps);
+    for(var j=0;j<listQr.length;j++){
+        arrayReps[Number(listQr[j])]= listRep[j];
     }
 
-    
+    arrayReps.push(columnsMatrix[i]._source.docs_requis);
+    arrayReps.push(columnsMatrix[i]._source.docs_comp);
+    arrayReps.push(columnsMatrix[i]._source.steps);
+
+    createColumns(1,arrayReps);
+}
+
+
 },
 error: function (error){
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 })
 
@@ -2159,24 +2159,24 @@ var divGlobal = document.querySelector(".simulator-cms .container-sim-cms .conta
 if(type==0){
 var tr = document.createElement("tr");
 for(var i=0;i<arrayQst[0].length;i++){
-    var td = document.createElement("th");
-    td.innerHTML = arrayQst[0][i];
-    td.setAttribute("title",arrayQst[1][i]);
-    tr.appendChild(td);
+var td = document.createElement("th");
+td.innerHTML = arrayQst[0][i];
+td.setAttribute("title",arrayQst[1][i]);
+tr.appendChild(td);
 }
 
 divGlobal.appendChild(tr);
 }else if(type==1){
 var tr = document.createElement("tr");
 for(var i=0;i<arrayQst.length;i++){
-    var td = document.createElement("td");
-    if(arrayQst[i]==-1){
-        td.innerHTML = "All";
-    }else{
-        td.innerHTML = arrayQst[i];
-    }
-    
-    tr.appendChild(td);
+var td = document.createElement("td");
+if(arrayQst[i]==-1){
+    td.innerHTML = "All";
+}else{
+    td.innerHTML = arrayQst[i];
+}
+
+tr.appendChild(td);
 }
 divGlobal.appendChild(tr);
 }
@@ -2188,11 +2188,11 @@ var obj = {};
 obj[tree.text.question_id]=[];
 var array = [[],[]]; 
 if(tree.text.status==1){
-    var clms = tree.text.columns_idB;
-        for(var i = 0; i < Object.keys(clms).length;i++){
-            deleted.push(clms[Object.keys(clms)[i]]);
-        }
-    
+var clms = tree.text.columns_idB;
+    for(var i = 0; i < Object.keys(clms).length;i++){
+        deleted.push(clms[Object.keys(clms)[i]]);
+    }
+
 
 }  
 return deletedCol(tree,array,newObj);
@@ -2202,12 +2202,12 @@ var deleted = [];
 
 function deletedCol(tree,array,newObj){
 for(var i=0;i<tree.children.length;i++){
-  if(tree.children[i].text.status==1){
-      var clms = tree.text.columns_idB;
-        for(var j = 0; j < Object.keys(clms).length;j++){
-            deleted.push(clms[Object.keys(clms)[j]]);
-        }
-  }
+if(tree.children[i].text.status==1){
+  var clms = tree.text.columns_idB;
+    for(var j = 0; j < Object.keys(clms).length;j++){
+        deleted.push(clms[Object.keys(clms)[j]]);
+    }
+}
 
 var obj = {};
 var sousTree = tree.children[i];
@@ -2239,18 +2239,18 @@ var obj = {"size":5,"query":
 {
 "bool":{
 "must":[{
-    "query_string": {
-        "fields":["content.intituleFr"],
-        "query":"*"+req+"*",
-        "minimum_should_match": "100%"                   
-    }
+"query_string": {
+    "fields":["content.intituleFr"],
+    "query":"*"+req+"*",
+    "minimum_should_match": "100%"                   
+}
 },{
-        "term": {
-            "content.categorie.keyword": {
-                "value": "Intitulé Activité"
-            }
+    "term": {
+        "content.categorie.keyword": {
+            "value": "Intitulé Activité"
         }
-    
+    }
+
 }]
 }
 }
@@ -2265,23 +2265,23 @@ contentType: "application/json",
 datatype:"application/json",
 data: JSON.stringify(obj),
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", AUTH);
+ xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    var arr = [];
-    var arrObj = [];
-    for(var i=0;i<result.hits.hits.length;i++){
-        arr.push(result.hits.hits[i]._source);
-    };
+var arr = [];
+var arrObj = [];
+for(var i=0;i<result.hits.hits.length;i++){
+    arr.push(result.hits.hits[i]._source);
+};
 
-    for(var i=0;i<result.hits.hits.length;i++){
-        arrObj.push(result.hits.hits[i]._id);
-    };
+for(var i=0;i<result.hits.hits.length;i++){
+    arrObj.push(result.hits.hits[i]._id);
+};
 
-    createListeResAc(inp,arr,arrObj,req,2);
+createListeResAc(inp,arr,arrObj,req,2);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });    
 }
@@ -2290,12 +2290,79 @@ error: function (error) {
 /* auto complete */
 function autoCompleteSim(inp,index,field,type){
 if(type==0){      
+inp.addEventListener("input",function(){
+  var val = this.value;
+  var arr = searching(val,index);
+  createListeResLoc(this,arr,val,2);
+},false);
+
+inp.addEventListener("keydown", function(e) {
+  var x = document.getElementById("autocomplete-list");
+  if (x) x = x.getElementsByTagName("div");
+
+  if (e.keyCode == 40) {
+      /*If the arrow DOWN key is pressed,
+      increase the currentFocus variable:*/
+      currentFocus++;
+      /*and and make the current item more visible:*/
+      addActive(x);
+  } else if (e.keyCode == 38) { //up
+      /*If the arrow UP key is pressed,
+      decrease the currentFocus variable:*/
+      currentFocus--;
+      /*and and make the current item more visible:*/
+      addActive(x);
+  } else if (e.keyCode == 13) {
+      /*If the ENTER key is pressed, prevent the form from being submitted,*/
+      e.preventDefault();
+      if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+      }
+  }
+},false);
+}else if(type==5){
+
+
+inp.addEventListener("input",function(){
+var val = this.value;
+restAutoComplete3(inp,val,"activite_economique","intituleFr");
+});
+
+
+inp.addEventListener("keydown", function(e) {
+var x = document.getElementById("autocomplete-list");
+if (x) x = x.getElementsByTagName("div");
+
+if (e.keyCode == 40) {
+    /*If the arrow DOWN key is pressed,
+    increase the currentFocus variable:*/
+    currentFocus++;
+    /*and and make the current item more visible:*/
+    addActive(x);
+} else if (e.keyCode == 38) { //up
+    /*If the arrow UP key is pressed,
+    decrease the currentFocus variable:*/
+    currentFocus--;
+    /*and and make the current item more visible:*/
+    addActive(x);
+} else if (e.keyCode == 13) {
+    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+    e.preventDefault();
+    if (currentFocus > -1) {
+        /*and simulate a click on the "active" item:*/
+        if (x) x[currentFocus].click();
+    }
+}
+});
+
+}else{
   inp.addEventListener("input",function(){
-      var val = this.value;
-      var arr = searching(val,index);
-      createListeResLoc(this,arr,val,2);
-  },false);
+      var req = inp.value;
+      restAutoComplete2(inp,req,index,field);
+  });
   
+if(index==simulator_index_qr){
   inp.addEventListener("keydown", function(e) {
       var x = document.getElementById("autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
@@ -2321,74 +2388,7 @@ if(type==0){
           }
       }
   },false);
-}else if(type==5){
-
-
-inp.addEventListener("input",function(){
-    var val = this.value;
-    restAutoComplete3(inp,val,"activite_economique","intituleFr");
-});
-
-
-inp.addEventListener("keydown", function(e) {
-    var x = document.getElementById("autocomplete-list");
-    if (x) x = x.getElementsByTagName("div");
-
-    if (e.keyCode == 40) {
-        /*If the arrow DOWN key is pressed,
-        increase the currentFocus variable:*/
-        currentFocus++;
-        /*and and make the current item more visible:*/
-        addActive(x);
-    } else if (e.keyCode == 38) { //up
-        /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
-        currentFocus--;
-        /*and and make the current item more visible:*/
-        addActive(x);
-    } else if (e.keyCode == 13) {
-        /*If the ENTER key is pressed, prevent the form from being submitted,*/
-        e.preventDefault();
-        if (currentFocus > -1) {
-            /*and simulate a click on the "active" item:*/
-            if (x) x[currentFocus].click();
-        }
-    }
-});
-
-}else{
-      inp.addEventListener("input",function(){
-          var req = inp.value;
-          restAutoComplete2(inp,req,index,field);
-      });
-      
-  if(index==simulator_index_qr){
-      inp.addEventListener("keydown", function(e) {
-          var x = document.getElementById("autocomplete-list");
-          if (x) x = x.getElementsByTagName("div");
-  
-          if (e.keyCode == 40) {
-              /*If the arrow DOWN key is pressed,
-              increase the currentFocus variable:*/
-              currentFocus++;
-              /*and and make the current item more visible:*/
-              addActive(x);
-          } else if (e.keyCode == 38) { //up
-              /*If the arrow UP key is pressed,
-              decrease the currentFocus variable:*/
-              currentFocus--;
-              /*and and make the current item more visible:*/
-              addActive(x);
-          } else if (e.keyCode == 13) {
-              /*If the ENTER key is pressed, prevent the form from being submitted,*/
-              e.preventDefault();
-              if (currentFocus > -1) {
-                  /*and simulate a click on the "active" item:*/
-                  if (x) x[currentFocus].click();
-              }
-          }
-      },false);
-  }
+}
 }
 }
 
@@ -2413,9 +2413,9 @@ var str = arr[i].content.intituleFr;
 b.setAttribute("title",str);
 
 if(val==""){
-    b.innerHTML=str.toUpperCase();
+b.innerHTML=str.toUpperCase();
 }else{
-    b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
+b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
 }
 
 
@@ -2433,14 +2433,15 @@ b.setAttribute("natureAct",arr[i].parents.NatureActivite);
 /*execute a function when someone clicks on the item value (DIV element):*/
 
 b.addEventListener("click", function(e) {
-    inp.value = this.getElementsByTagName("input")[0].value;
-    inp.setAttribute("idd",this.getAttribute("idd"));
-    inp.setAttribute("typeAct",this.getAttribute("typeAct"));
-    inp.setAttribute("typeAut",this.getAttribute("typeAut"));
-    inp.setAttribute("natureAct",this.getAttribute("natureAct"));
-    inp.setAttribute("disabled","disabled");
-    inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
-    closeAllListsSim(1);
+inp.value = this.getElementsByTagName("input")[0].value;
+inp.setAttribute("idd",this.getAttribute("idd"));
+inp.setAttribute("typeAct",this.getAttribute("typeAct"));
+inp.setAttribute("typeAut",this.getAttribute("typeAut"));
+inp.setAttribute("natureAct",this.getAttribute("natureAct"));
+inp.setAttribute("disabled","disabled");
+$(".simulator .simulator-qr .next-button button.next-rq").removeClass("stopped");
+inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
+closeAllListsSim(1);
 });
 a.appendChild(b);
 }
@@ -2454,17 +2455,17 @@ var obj = {"size":5,"query":
 {
 "bool":{
 "must":[{
-    "query_string": {
-        "fields":[field],
-        "query": "*"+req+"*",
-        "fuzziness": "AUTO",
-        "minimum_should_match": "100%"
-    }
+"query_string": {
+    "fields":[field],
+    "query": "*"+req+"*",
+    "fuzziness": "AUTO",
+    "minimum_should_match": "100%"
+}
 }],
 "should":[{
-    "match_phrase_prefix":{
-        "value":req
-    }
+"match_phrase_prefix":{
+    "value":req
+}
 }]
 }
 }};
@@ -2473,18 +2474,18 @@ if(index==faq_index){
 obj =   {"size":5,"query": 
 {
 "bool":{
-    "must":[{
-        "query_string": {
-            "fields":[field+".completion"],
-            "query":"*"+req+"*",
-            "minimum_should_match": "100%"                   
-        }
-    }],
-    "should":[{
-        "match_phrase_prefix":{
-            "value":req
-        }
-    }]
+"must":[{
+    "query_string": {
+        "fields":[field+".completion"],
+        "query":"*"+req+"*",
+        "minimum_should_match": "100%"                   
+    }
+}],
+"should":[{
+    "match_phrase_prefix":{
+        "value":req
+    }
+}]
 }
 }
 };
@@ -2498,22 +2499,22 @@ contentType: "application/json",
 datatype:"application/json",
 data: JSON.stringify(obj),
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", AUTH);
+ xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    console.log(result);
-    if(index==faq_index){
-        createListeRes(inp,result.hits.hits,req,0);
-    }else if(index=="videos_index"){
-        createListeResVideo(inp,result.hits.hits,req,1);
-    }else if(index=="attachements_index" || index=="articles_index" || index=="reglementation_index" ){
-        createListeRes(inp,result.hits.hits,req,2);
-    }else{
-        createListeRes(inp,result.hits.hits,req,1);
-    }
+console.log(result);
+if(index==faq_index){
+    createListeRes(inp,result.hits.hits,req,0);
+}else if(index==""+videos_index+""){
+    createListeResVideo(inp,result.hits.hits,req,1);
+}else if(index=="attachements_index" || index=="articles_index" || index=="reglementation_index" ){
+    createListeRes(inp,result.hits.hits,req,2);
+}else{
+    createListeRes(inp,result.hits.hits,req,1);
+}
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 });    
 }
@@ -2522,8 +2523,8 @@ error: function (error) {
 
 function getAllCmsQuestion(inp,index){
 var obj = {
-    "size":50,"query":{
-    "match_all":{}
+"size":50,"query":{
+"match_all":{}
 }
 };
 
@@ -2536,16 +2537,16 @@ contentType: "application/json",
 datatype:"application/json",
 data: JSON.stringify(obj),
 beforeSend: function (xhr) {
-     xhr.setRequestHeader("Authorization", AUTH);
+ xhr.setRequestHeader("Authorization", AUTH);
 },
 success: function (result) {
-    console.log("test");
-    console.log(result);
+console.log("test");
+console.log(result);
 
-    createListeRes(inp,result.hits.hits,"",1);
+createListeRes(inp,result.hits.hits,"",1);
 },
 error: function (error) {
-    console.log(error.responseText);
+console.log(error.responseText);
 }
 }); 
 }
@@ -2566,20 +2567,20 @@ var b = document.createElement("DIV");
 var str = arr[0][i];
 b.setAttribute("title",str);
 if(val==""){
-    b.innerHTML=str.toLowerCase();
+b.innerHTML=str.toLowerCase();
 }else{
-    b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
+b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
 }
 var input = document.createElement("input");
 input.setAttribute("type","hidden");
 input.setAttribute("value",arr[1][i]);
 b.appendChild(input);
 b.addEventListener("click", function(e) {
-    /*insert the value for the autocomplete text field:*/
-    inp.value = this.getAttribute("title");
-    /*close the list of autocompleted values,
-    (or any other open lists of autocompleted values:*/
-    closeAllListsSim(0);
+/*insert the value for the autocomplete text field:*/
+inp.value = this.getAttribute("title");
+/*close the list of autocompleted values,
+(or any other open lists of autocompleted values:*/
+closeAllListsSim(0);
 });
 b.appendChild(input);
 a.appendChild(b);
@@ -2603,49 +2604,49 @@ for (i = 0; i < arr.length; i++) {
 var b = document.createElement("DIV");
 /*make the matching letters bold:*/
 if(type==1){
-    var str = arr[i]._source.question;
+var str = arr[i]._source.question;
 }else if(type==0){
-    var str = arr[i]._source.QUESTIONS;
+var str = arr[i]._source.QUESTIONS;
 }else if(type==2){
-    var str = arr[i]._source.title;
+var str = arr[i]._source.title;
 }
 
 b.setAttribute("title",str);
 if(val==""){
-    b.innerHTML=str.toLowerCase();
+b.innerHTML=str.toLowerCase();
 }else{
-    b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
+b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
 }
 
 if(type==1){
-    /*insert a input field that will hold the current array item's value:*/
-    var input = document.createElement("input");
-    input.setAttribute("type","hidden");
-    input.setAttribute("value",arr[i]._id);
-    b.appendChild(input);
-    /*execute a function when someone clicks on the item value (DIV element):*/
+/*insert a input field that will hold the current array item's value:*/
+var input = document.createElement("input");
+input.setAttribute("type","hidden");
+input.setAttribute("value",arr[i]._id);
+b.appendChild(input);
+/*execute a function when someone clicks on the item value (DIV element):*/
 
-    b.addEventListener("click", function(e) {
+b.addEventListener("click", function(e) {
+/*insert the value for the autocomplete text field:*/
+inp.value = this.getElementsByTagName("input")[0].value;
+$(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html(this.getAttribute("title"));    
+$(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",this.getElementsByTagName("input")[0].value); 
+$(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").show();
+$(".cms-form .body-cms-form .class-question .link-sim-cms span.update").hide();
+$(".cms-form .body-cms-form .class-question .link-sim-cms .fa-edit").show();
+$(".cms-form .body-cms-form .class-question .link-sim-cms .fa-plus").hide();
+/*close the list of autocompleted values,
+(or any other open lists of autocompleted values:*/
+closeAllListsSim(1);
+});
+}else{
+b.addEventListener("click", function(e) {
     /*insert the value for the autocomplete text field:*/
-    inp.value = this.getElementsByTagName("input")[0].value;
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").html(this.getAttribute("title"));    
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").attr("title",this.getElementsByTagName("input")[0].value); 
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span.qst").show();
-    $(".cms-form .body-cms-form .class-question .link-sim-cms span.update").hide();
-    $(".cms-form .body-cms-form .class-question .link-sim-cms .fa-edit").show();
-    $(".cms-form .body-cms-form .class-question .link-sim-cms .fa-plus").hide();
+    inp.value = this.getAttribute("title");
     /*close the list of autocompleted values,
     (or any other open lists of autocompleted values:*/
     closeAllListsSim(1);
-    });
-}else{
-    b.addEventListener("click", function(e) {
-        /*insert the value for the autocomplete text field:*/
-        inp.value = this.getAttribute("title");
-        /*close the list of autocompleted values,
-        (or any other open lists of autocompleted values:*/
-        closeAllListsSim(1);
-    });
+});
 }
 a.appendChild(b);
 }
@@ -2671,19 +2672,19 @@ var str = arr[i]._source.title;
 
 b.setAttribute("title",str);
 if(val==""){
-    b.innerHTML=str.toLowerCase();
+b.innerHTML=str.toLowerCase();
 }else{
-    b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
+b.innerHTML=addSpansHL(val.toLowerCase(),str.toLowerCase());
 }
 
 
-    b.addEventListener("click", function(e) {
-        /*insert the value for the autocomplete text field:*/
-        inp.value = this.getAttribute("title");
-        /*close the list of autocompleted values,
-        (or any other open lists of autocompleted values:*/
-        closeAllListsSim(1);
-    });
+b.addEventListener("click", function(e) {
+    /*insert the value for the autocomplete text field:*/
+    inp.value = this.getAttribute("title");
+    /*close the list of autocompleted values,
+    (or any other open lists of autocompleted values:*/
+    closeAllListsSim(1);
+});
 
 a.appendChild(b);
 }
@@ -2710,9 +2711,9 @@ var str = arr[i];
 b.setAttribute("title",str);
 
 if(val==""){
-    b.innerHTML=str.toUpperCase();
+b.innerHTML=str.toUpperCase();
 }else{
-    b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
+b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
 }
 
 
@@ -2724,10 +2725,10 @@ b.appendChild(input);
 /*execute a function when someone clicks on the item value (DIV element):*/
 
 b.addEventListener("click", function(e) {
-    inp.value = this.getElementsByTagName("input")[0].value;
-    inp.setAttribute("disabled","disabled");
-    inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
-    closeAllListsSim(1);
+inp.value = this.getElementsByTagName("input")[0].value;
+inp.setAttribute("disabled","disabled");
+inp.parentElement.getElementsByTagName("i")[0].style.display = "inline-block";
+closeAllListsSim(1);
 });
 a.appendChild(b);
 }
@@ -2741,12 +2742,12 @@ currentFocus = -1;
 if(type!=0){
 var x = document.getElementsByClassName("autocomplete-items");
 for (var i = 0; i < x.length; i++) {
-    x[i].parentNode.removeChild(x[i]);
+x[i].parentNode.removeChild(x[i]);
 }
 }else{
 var y = document.getElementsByClassName("autocomplete-items");
 for (var i = 0; i < y.length; i++) {
-    y[i].parentNode.removeChild(y[i]);
+y[i].parentNode.removeChild(y[i]);
 }
 }
 
@@ -2762,33 +2763,33 @@ type: "get",
 url: "http://91.121.57.204:8080/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset="+offset+"&limit="+limit+"&sortInfo=id=ASC",
 datatype: "application/json",
 success: function (result) {
-    var data = result.data;
-    localiteLib = [];
-    Array.from(document.querySelectorAll(".simulator-qr .rep img.loadGif")).forEach(function(elm){
-        elm.style.display = "none";
-    });
-    if(type==0){
-        for(var i=0;i<localiteType.length;i++){
-            localiteLib.push([]);   
-        }
+var data = result.data;
+localiteLib = [];
+Array.from(document.querySelectorAll(".simulator-qr .rep img.loadGif")).forEach(function(elm){
+    elm.style.display = "none";
+});
+if(type==0){
+    for(var i=0;i<localiteType.length;i++){
+        localiteLib.push([]);   
     }
-    
-    for(var i=0;i<data.length;i++){
-        var indexLocaliteType =  localiteType.indexOf(data[i].stringIndex13);
-        if(indexLocaliteType != -1 ){
-            localiteLib[indexLocaliteType].push(data[i].stringIndex1);
-        }else{
-            localiteType.push(data[i].stringIndex13);    
-            localiteLib.push([]);
-            localiteLib[localiteLib.length-1].push(data[i].stringIndex1);
-        }
+}
+
+for(var i=0;i<data.length;i++){
+    var indexLocaliteType =  localiteType.indexOf(data[i].stringIndex13);
+    if(indexLocaliteType != -1 ){
+        localiteLib[indexLocaliteType].push(data[i].stringIndex1);
+    }else{
+        localiteType.push(data[i].stringIndex13);    
+        localiteLib.push([]);
+        localiteLib[localiteLib.length-1].push(data[i].stringIndex1);
     }
-    console.log(localiteLib);
+}
+console.log(localiteLib);
 
 },
 error: function (error) {
-    console.log(error.responseText);
-    alert("Error dans le chargement des localités..!");
+console.log(error.responseText);
+alert("Error dans le chargement des localités..!");
 }
 });
 }
@@ -2796,13 +2797,13 @@ error: function (error) {
 function searching(val,i){
 if(i==-1){
 return localiteLib.join(",").split(",").filter(result => {
-    const regex = new RegExp(val,'gi')
-    return result.match(regex) ;
+const regex = new RegExp(val,'gi')
+return result.match(regex) ;
 });
 }else{
 return localiteLib[i].filter(result => {
-    const regex = new RegExp(val,'gi')
-    return result.match(regex) ;
+const regex = new RegExp(val,'gi')
+return result.match(regex) ;
 });
 }
 }

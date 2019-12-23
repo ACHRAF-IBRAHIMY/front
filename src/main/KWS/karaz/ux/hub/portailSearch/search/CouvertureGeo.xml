@@ -26,7 +26,7 @@
 
                 </style>
             </html>
-            <vbox className="hp-box" >
+            <vbox className="hp-box">
                     <html>
                             <div class="vpanel-title">
                               <div class="vpanel-title">
@@ -39,9 +39,8 @@
                               </div>
                             </div>
                           </html>
-                    <vbox style="height:800px" >
-                            <search mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0080" />
-
+                    <vbox style="height:800px">
+                            <search mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=81" />
                     </vbox>
                 </vbox>            
       </screen>
