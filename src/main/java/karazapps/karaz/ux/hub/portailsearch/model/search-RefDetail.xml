@@ -47,11 +47,23 @@
             <html>
               <div class="vpanel-title">
                 <div class="vpanel-title">
+                  
+                  <div>
                   <span>
                     RÉFÉRENTIEL JURIDIQUE |
-                    <span class="blue-small" style="color: #38a;" />
+                    <span class="blue-small" style="color: orange;font-size: 14px;" />
                   </span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
+                  
+                  </div>
+                  <div>
+                  <hr class="header-create-account-horizontal-line hr-hub" />      
+                  <div style="display:grid;grid-template-columns: 50% 50%;margin-top:15px">
+                    <span />
+                    <span style="text-align:right;margin-left: 25px;">
+                                    <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique', 'search', 'Ref', {})">Retour au référentiel juridique </a>
+                   </span>
+                  </div>            
+                  </div>
                 </div>
               </div>
             </html>
@@ -72,7 +84,6 @@
                   <iframe src="" frameborder="0" style="width: 100%;height: 800px;" />
                 </div>
                 <div class="link-footer">
-                  <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique', 'search', 'Ref', {})">Retour au référentiels juridiques </a>
                 </div>
               </html>
             </vbox>

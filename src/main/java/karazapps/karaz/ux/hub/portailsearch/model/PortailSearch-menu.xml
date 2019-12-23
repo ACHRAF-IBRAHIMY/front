@@ -178,6 +178,9 @@
         <menu relId="NewArticle" label="Nouveau Article" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/NewArticle</resource>
         </menu>
+        <menu relId="CommentsMng" label="Gestion de commentaires" icone="search">
+          <resource type="search">karaz/ux/hub/portailsearch/search/CommentsMng</resource>
+        </menu>
       </menu>
       <menu relId="RankingDigitalRemp" label="Ranking Digitalite" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/RankingDigitalRemp</resource>

@@ -50,7 +50,16 @@
             $(".classSearch-82 .reseau-ss .like").click(function(){
               if($(this).hasClass("active-like")){
                 if(userQN=="anonymous@karaz"){
-                  removeLike(root,userQN+";"+JSON.parse(document.cookie).userRef,context.formRender.targetPanel);
+                  
+                  try{
+                    removeLike(root,userQN+";"+JSON.parse(document.cookie).userRef,context.formRender.targetPanel);
+                  }catch(e){
+                      var a = document.cookie;
+                      var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1);
+                      removeLike(root,userQN+";"+JSON.parse(b).userRef,context.formRender.targetPanel);
+                  }
+
+
                 }else{
                   removeLike(root,userQN+";20191919",context.formRender.targetPanel);
                 }
@@ -67,12 +76,13 @@
           context.formRender.targetPanel.find(".comment-form span.rep-comment").attr("idd","");
       });
 
-      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-share").click(function(){
+      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share .clicked-art").click(function(){
         context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share").css("display","grid");
       }); 
 
-      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-close").click(function(){
-        context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share").css("display","none");
+      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-close").get(0).addEventListener("click",function(){
+        var closeDiv = context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share").get(0);
+        closeDiv.style.display = "none";
       });
 
       context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-copy").click(function(){
@@ -168,7 +178,12 @@
       .classSearch-82 .content-article p{
         margin-top: 12px;
         margin-bottom: 12px;
+        font-family:Droid Arabic Kufi, sans-serif;
       }
+
+          .article-title,.article-desc{
+            font-family:Droid Arabic Kufi, sans-serif;
+          }
 
       </style>
       </html>
@@ -208,10 +223,10 @@
                 </div>
               </html>
 
-              <vbox className="det-div" columns="auto 110px 95px auto">
+              <vbox className="det-div" columns="auto auto auto auto">
                 <html>
                   <div class="dd author-pub">
-                    Publié par <span style="font-weight: 600;">FRIKI Doha</span>
+                    Publié par <span style="font-weight: 600;" />
                   </div>
                 </html>
                 <html>
@@ -229,7 +244,7 @@
                 <div class="dd reseau-ss" style="text-align:right">
                   <span class="like" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i class="fas fa-thumbs-up" /> J'aime </span>
                   <span class="comment" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i style="color:#999" class="fas fa-comment" /> Commenter</span>
-                  <span class="share" style="margin-right: 3px;margin-left: 3px;cursor:pointer;position:relative"> <i class="fas fa-share" /> Partager <span class="url-share" style="border: 1px solid #666;padding: 3px 6px;position: absolute;right: 0;top: 29px;background: #fefefe;width: 58vw;overflow: hidden;display: grid;grid-template-columns: 87% 9% 4%;display:none;"><textArea readonly="readonly" style="word-wrap: break-word;cursor: default;resize:none;" class="url-text" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-copy" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-close" /></span> </span>
+                  <span class="share" style="margin-right: 3px;margin-left: 3px;cursor:pointer;position:relative">  <span class="clicked-art"><i class="fas fa-share" /> Partager</span> <span class="url-share" style="border: 1px solid #ccc;padding: 3px 6px;position: absolute;right: 0;top: 29px;background: #fefefe;width: 58vw;overflow: hidden;display: grid;grid-template-columns: 87% 9% 4%;display:none;z-index=3"><textArea readonly="readonly" style="word-wrap: break-word;cursor: default;resize:none;border: 1px solid #ccc" class="url-text" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-copy" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-close" /></span> </span>
                 </div> 
                 </html>
               </vbox>
@@ -248,7 +263,7 @@
 
     
 
-              <html className="content-article">
+              <html className="content-article ql-editor">
 
               </html>
               

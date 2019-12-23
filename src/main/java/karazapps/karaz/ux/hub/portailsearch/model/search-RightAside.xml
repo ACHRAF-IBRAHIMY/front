@@ -58,6 +58,8 @@
                 <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">Tous les articles <span style="color:#f90" /> | </li>
                 <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-2" style="cursor:pointer;margin-right:4px;display:inline-block">Pratique <span style="color:#f90" /> | </li>
                 <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-3" style="cursor:pointer;margin-right:4px;display:inline-block">A la une <span style="color:#f90" /> </li>
+                <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-4" style="cursor:pointer;margin-right:4px;display:inline-block">Revue de presse <span style="color:#f90" /> </li>
+
               </ul>
             </div>
           </html>

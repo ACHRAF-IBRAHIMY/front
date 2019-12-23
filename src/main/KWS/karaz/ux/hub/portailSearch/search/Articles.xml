@@ -28,7 +28,7 @@
 
                 getMostPopularArticle(3,"PRATIQUE",".fieldser-article-1 .vbox-articles .ow-vl-inner");
                 getMostPopularArticle(3,"A LA UNE",".fieldser-article-2 .vbox-articles .ow-vl-inner");
-//              getMostPopularArticle(3,"A VENIR",".fieldser-article-3 .vbox-articles .ow-vl-inner");
+                getMostPopularArticle(3,"REVUE DE PRESSE",".fieldser-article-3 .vbox-articles .ow-vl-inner");
         
             context.formRender.targetPanel.find(".classSearch-81 .div-full-search-bar .ow-field-input").get(0).addEventListener("keydown", function (e) {
                     var x =  document.querySelector(".classSearch-81 #autocomplete-list");
@@ -117,9 +117,17 @@
                             </html>
                         </vbox>
                     </fieldset>
-                    <vbox id="editorv2">
+                    <fieldset className="fieldset-articles fieldser-article-3" header="REVUE DE PRESSE">
+                            <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
+                           
+                            </vbox>
+                            <vbox className="fieldset-footer fieldset-footer-2">
+                                <html>
+                                    <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | REVUE DE PRESSE</div>
+                                </html>
+                            </vbox>
+                        </fieldset>
                     
-                    </vbox>
                     
                 </vbox>
                 
