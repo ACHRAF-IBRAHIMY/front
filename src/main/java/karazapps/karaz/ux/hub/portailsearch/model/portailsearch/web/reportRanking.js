@@ -599,8 +599,8 @@ $(".ranking-fieldset > .ow-pl-toolbar .ow-label-pl").append("<span style=\"color
 }
 
 var dataReportRk = {
-date : [],
-trim : ""
+    date : [],
+    trim : ""
 };
 
 function createCommuneTable(result,dec){
@@ -658,6 +658,7 @@ var tableHtml = $("#ranking-table2");
 
 //$("#ranking-table tr:not(.first-tr)").remove();
 $("#ranking-table2 tr:not(.first-tr)").remove();
+$("#ranking-table2 .err-msg-rk").remove();
 if(results.length==0){
 tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
 }else{
@@ -695,6 +696,7 @@ var tableHtml = $("#ranking-table2");
 
 //$("#ranking-table tr:not(.first-tr)").remove();
 $("#ranking-table2 tr:not(.first-tr)").remove();
+$("#ranking-table2 .err-msg-rk").remove();
 
 if(results.length==0){
 tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
@@ -735,6 +737,8 @@ var tableHtml = $("#ranking-table2");
 
 //$("#ranking-table tr:not(.first-tr)").remove();
 $("#ranking-table2 tr:not(.first-tr)").remove();
+$("#ranking-table2 .err-msg-rk").remove();
+
 if(results.length==0){
 tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
 }else{
@@ -986,53 +990,16 @@ return {"query" : {
 function drawRadarRegion(trim){
 
 var obj = {
-"query" : {
-"term":{
-"trim.keyword":trim
-}
-},
-"aggregations": {
-"region_ind": {
-  "aggregations": {
-     "score": {
-        "avg": {
-           "field": "indecators.score"
-        }
-     },
-      "delai": {
-        "avg": {
-           "field": "indecators.delai"
-        }
-        },"attractivite": {
-        "avg": {
-           "field": "indecators.attractivite"
-        }
-        },"digital": {
-        "avg": {
-           "field": "indecators.digital"
-        }
-        },"ecosystem": {
-        "avg": {
-           "field": "indecators.ecosystem"
-        }
-        },"fiscalite": {
-        "avg": {
-           "field": "indecators.fiscalite"
-        }
-        }
-        }
-     ,"terms": {
-        "field": "région.keyword",
-        "order": {
-            "score": "desc"
-        }
- }
-}}
-};
+    "query" : {
+    "term":{
+    "trim.keyword":trim
+    }
+}};
+
 
 $.ajax({
 type: "post", 
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index/_search",
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index_region/_search",
 datatype: "application/json",
 contentType: "application/json",
 data: JSON.stringify(obj),
@@ -1042,8 +1009,10 @@ xhr.setRequestHeader("Authorization", AUTH);
 success: function (result) {
 console.log(result);
 
-var dataset = result.aggregations.region_ind.buckets;
+var dataset = result.hits.hits;
 var datasets = [];
+
+console.log("dataset"+dataset);
 
 var legendDiv = $(".legend-region .lg");
 legendDiv.html("");
@@ -1054,23 +1023,23 @@ for(var i = 0;i<dataset.length;i++){
         borderColor : region_color[i],
         pointBackgroundColor : region_color[i],
         data: [
-            dataset[i].delai.value.toFixed(2),
-            dataset[i].attractivite.value.toFixed(2),
-            dataset[i].digital.value.toFixed(2),
-            dataset[i].ecosystem.value.toFixed(2),
-            dataset[i].fiscalite.value.toFixed(2)
+            dataset[i]._source.delai.toFixed(2),
+            (dataset[i]._source.attractivite/5).toFixed(2),
+            dataset[i]._source.digital.toFixed(2),
+            dataset[i]._source.ecosystem.toFixed(2),
+            dataset[i]._source.fiscalite.toFixed(2)
         ]
-    };
+    }; 
 
     datasets.push(dtobj);
-    legendDiv.append("<div><hr style=\"background: "+region_color[i]+"\"><span>"+dataset[i].key.replace("REGION DE ","").replace("REGION ","")+"</span></div>");
+    legendDiv.append("<div><hr style=\"background: "+region_color[i]+"\"><span>"+dataset[i]._source.region.replace("REGION DE ","").replace("REGION ","")+"</span></div>");
 }
 
 
 var config = {
     type: 'radar',
     data: {
-        labels: ['Délai', 'Attractivité', 'Digital', 'Ecosystème', 'Fiscalité'],
+        labels: ['Délai', 'Attractivité-N', 'Digital', 'Ecosystème', 'Fiscalité'],
         datasets: datasets
         }
     ,
@@ -1080,7 +1049,7 @@ var config = {
         },
         title: {
             display: false,
-            text: 'Radar'
+            text: 'Radar' 
         },
         scale: {
             ticks: {

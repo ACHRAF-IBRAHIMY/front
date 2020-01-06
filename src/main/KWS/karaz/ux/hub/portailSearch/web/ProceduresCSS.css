@@ -227,6 +227,11 @@ button.ow-button.PCD-button-signup-header:hover{
     height: 1077px;
     overflow: auto;
 }
+
+.det-article-fieldset2.NQF-freq-quest > .ow-pl-inner{
+	height:auto !important;
+}
+
 /*added */
 .NQF-new-quest-btn{
     text-align: center !important ;

@@ -583,6 +583,12 @@ return result;
 }
 
 function getObjectToSendArticle(parent,prefix,lang,from,size){
+    if(lang==true){
+        var ll = "rebuilt_arabic";
+        }else{
+        var ll = "rebuilt_french";
+        }
+
 if(parent==0){
 if(prefix.trim()!=""){
 return {
@@ -592,7 +598,7 @@ return {
             "must": [
                 { "multi_match": {
                     "query": prefix,
-                    "fields": ["title","descreption","content"],
+                    "fields": ["title.keywordsString","descreption","content"],
                     "analyzer": ll,
                     "fuzziness": "AUTO",
                     "minimum_should_match": "70%"
@@ -601,7 +607,7 @@ return {
             "should": [
                 {
                     "match": {
-                        "title": prefix
+                        "title.keywordsString": prefix
                     }
                 }
             ]
@@ -628,11 +634,7 @@ var type = "A LA UNE";
 var type = "REVUE DE PRESSE";
 }
 
-if(lang==true){
-var ll = "rebuilt_arabic";
-}else{
-var ll = "rebuilt_french";
-}
+
 
 return {
 "from":from,"size":size,
@@ -641,7 +643,7 @@ return {
         "must": [
             { "multi_match": {
                 "query": prefix,
-                "fields": ["title","descreption","content"],
+                "fields": ["title.keywordsString","descreption","content"],
                 "analyzer": ll,
                 "fuzziness": "AUTO",
                 "minimum_should_match": "70%"
@@ -654,7 +656,7 @@ return {
         "should": [
             {
                 "match": {
-                    "title": prefix
+                    "title.keywordsString": prefix
                 }
             }
         ]
@@ -1348,54 +1350,84 @@ div.setAttribute("style","display:grid;grid-template-columns:35% 65%;margin-bott
 
 target.find("."+clas+" "+ cls + "").append(div);
 
-} else if(type==3){
-var div = document.createElement("div");
-if(src.lang=="Ar"){
+    } else if(type==3){
+    var div = document.createElement("div");
+    if(src.lang=="Ar"){
 
-div.innerHTML = `<div style="display:grid;grid-template-columns:35% 65%;direction: rtl;" ><div class="video-img" style="padding: 3px 1px 1px 7px;">
-<img style="width:100%;height: 68px;" src="`+imgUrl+` alt="">
-</div>
-<div>
-<span style="display: block;font-size: 14px;text-align: right;font-family: Droid Arabic Kufi, sans-serif;direction: rtl;color: #666;">`+subLong(quest,50)+`</span>
-<p style="font-size: 12px;text-align: right;font-family: Droid Arabic Kufi, sans-serif;direction: rtl;margin: auto;">`+subLong(desc.desc,70)+`</p>
-</div></div>
-<p style="font-size: 11px;text-align: right;margin: auto;margin-top: 4px;color:#666">
-    <span ><i class="fas fa-calendar-alt"></i> `+desc.date+`</span>  <span style="margin-left: 5px;"><i class="fas fa-heart"></i> `+desc.like+`</span>
-    <span style="margin-left: 5px;" ><i class="fas fa-user"></i> `+desc.author+`</span>
-</p>
-`;
-}else{
-    div.innerHTML = `<div style="display:grid;grid-template-columns:35% 65%;" ><div class="video-img" style="padding: 3px 7px 1px 1px;">
-<img style="width:100%;height: 68px;" src="`+imgUrl+` alt="">
-</div>
-<div>
-<span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
-<p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc.desc,70)+`</p>
-</div></div>
-<p style="font-size: 12px;text-align: left;margin: auto;margin-top: 4px;color:#666">
-    <span ><i class="fas fa-calendar-alt"></i> `+desc.date+`</span>  <span style="margin-left: 5px;"><i class="fas fa-heart"></i> `+desc.like+`</span>
-    <span style="margin-left: 5px;" ><i class="fas fa-user"></i> `+desc.author+`</span>
-</p>
-`;
-}
-div.addEventListener("click",function(){
- if(profilesT.match(/ADMIN_FAQ/)!='ADMIN_FAQ'){ 
-     if(src.type=="REVUE DE PRESSE"){
-        window.open(src.link);
-     }else{
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "article", {});
-     }
- }else{
-    ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Cms article", {});
-} 
-});
+        div.innerHTML = `<div style="display:grid;grid-template-columns:35% 65%;direction: rtl;" ><div class="video-img" style="padding: 3px 1px 1px 7px;">
+        <img style="width:100%;height: 68px;" src="`+imgUrl+` alt="">
+        </div>
+        <div>
+        <span style="display: block;font-size: 14px;text-align: right;font-family: Droid Arabic Kufi, sans-serif;direction: rtl;color: #666;">`+subLong(quest,50)+`</span>
+        <p style="font-size: 12px;text-align: right;font-family: Droid Arabic Kufi, sans-serif;direction: rtl;margin: auto;">`+subLong(desc.desc,70)+`</p>
+        </div></div>
+        <p style="font-size: 11px;text-align: right;margin: auto;margin-top: 4px;color:#666">
+            <span ><i class="fas fa-calendar-alt"></i> `+desc.date+`</span>  <span style="margin-left: 5px;"><i class="fas fa-heart"></i> `+desc.like+`</span>
+            <span style="margin-left: 5px;" ><i class="fas fa-user"></i> `+desc.author+`</span>
+        </p>
+        `;
+    }else{
+        div.innerHTML = `<div style="display:grid;grid-template-columns:35% 65%;" ><div class="video-img" style="padding: 3px 7px 1px 1px;">
+        <img style="width:100%;height: 68px;" src="`+imgUrl+` alt="">
+        </div>
+        <div>
+        <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+        <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc.desc,70)+`</p>
+        </div></div>
+        <p style="font-size: 12px;text-align: left;margin: auto;margin-top: 4px;color:#666">
+            <span ><i class="fas fa-calendar-alt"></i> `+desc.date+`</span>  <span style="margin-left: 5px;"><i class="fas fa-heart"></i> `+desc.like+`</span>
+            <span style="margin-left: 5px;" ><i class="fas fa-user"></i> `+desc.author+`</span>
+        </p>
+        `;
+    }
 
-div.setAttribute("idd",id);
-div.setAttribute("class","video-list-item");
-div.setAttribute("style","margin-bottom: 15px;cursor:pointer")
+    if(src.type=="REVUE DE PRESSE" && src.lang=="Ar"){
 
-$("."+clas+" "+ cls + "").append(div);
-}
+        div.innerHTML = `<div style="display:grid;grid-template-columns:35% 65%;direction: rtl;" ><div class="video-img" style="padding: 3px 1px 1px 7px;">
+        <img style="width:100%;height: 68px;" src="`+imgUrl+` alt="">
+        </div>
+        <div>
+        <span style="display: block;font-size: 14px;text-align: right;font-family: Droid Arabic Kufi, sans-serif;direction: rtl;color: #666;">`+subLong(quest,50)+`</span>
+        <p style="font-size: 12px;text-align: right;font-family: Droid Arabic Kufi, sans-serif;direction: rtl;margin: auto;">`+subLong(desc.desc,70)+`</p>
+        </div></div>
+        <p style="font-size: 11px;text-align: right;margin: auto;margin-top: 4px;color:#666">
+            <span ><i class="fas fa-calendar-alt"></i> `+desc.date+`</span>
+            <span style="margin-left: 5px;" ><i class="far fa-newspaper"></i> `+src.source+`</span>
+        </p>
+        `;
+    }else if(src.type=="REVUE DE PRESSE" && src.lang!="Ar"){
+        div.innerHTML = `<div style="display:grid;grid-template-columns:35% 65%;" ><div class="video-img" style="padding: 3px 7px 1px 1px;">
+        <img style="width:100%;height: 68px;" src="`+imgUrl+` alt="">
+        </div>
+        <div>
+        <span style="display: block;text-align: left;color: #666;">`+subLong(quest,50)+`</span>
+        <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc.desc,70)+`</p>
+        </div></div>
+        <p style="font-size: 12px;text-align: left;margin: auto;margin-top: 4px;color:#666">
+            <span ><i class="fas fa-calendar-alt"></i> `+desc.date+`</span>
+            <span style="margin-left: 5px;" ><i class="far fa-newspaper"></i> `+src.source+`</span>
+        </p>
+        `;
+    }
+
+        div.addEventListener("click",function(){
+            if(profilesT.match(/ADMIN_FAQ/)!='ADMIN_FAQ'){ 
+                if(src.type=="REVUE DE PRESSE"){
+                    window.open(src.link);
+                }else{
+                    ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "article", {});
+                }
+            }else{
+                ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Cms article", {});
+            }    
+        });
+
+        div.setAttribute("idd",id);
+        div.setAttribute("class","video-list-item");
+        div.setAttribute("style","margin-bottom: 15px;cursor:pointer")
+
+        $("."+clas+" "+ cls + "").append(div);
+    }
 }
 
 
@@ -3633,10 +3665,12 @@ d.appendChild(tgg);
 var g = document.createElement("a");
 g.addEventListener("click",function(){
     var id=$(this).children("input").val();
+    var typee=$(this).children("input").attr("idd");
+
     if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
         ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Article CMS", {});
     }else{
-        if(type=="REVUE DE PRESSE"){
+        if(typee=="REVUE DE PRESSE"){
             window.open(id);
         }else{
             ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "DetailsActivitySearch", {});
@@ -3645,18 +3679,18 @@ g.addEventListener("click",function(){
 });
 
 if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
-    g.innerHTML="Modifier <input type=\"hidden\" value=\""+id+"\" > ";
+    g.innerHTML="Modifier <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
     g.setAttribute("style","color:#38a;border: none;text-decoration: underline;display: block;width: 100%;position: inherit;text-align: right;");
 }else{
     if(type=="REVUE DE PRESSE"){
-        g.innerHTML=results[i]._source.source+" <input type=\"hidden\" value=\""+link+"\" > ";
-        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;display: block;width: 100%;position: inherit;text-align: right;font-size:17px");
+        g.innerHTML="Consulter sur <b>"+results[i]._source.source+"</b><input type=\"hidden\" value=\""+link+"\" idd=\""+type+"\" > ";
+        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;display: block;width: 100%;position: inherit;text-align: right;font-size:14px");
 
     }else{
-        g.innerHTML="Lire la suite <input type=\"hidden\" value=\""+id+"\" > ";
-        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;display: block;width: 100%;position: inherit;text-align: right;");
-    }
-} 
+        g.innerHTML="Lire la suite <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
+        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;display: block;width: 100%;position: inherit;text-align: right;font-size:14px");
+    }  
+}  
 
 
 

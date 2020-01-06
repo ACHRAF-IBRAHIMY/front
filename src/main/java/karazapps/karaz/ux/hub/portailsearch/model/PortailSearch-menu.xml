@@ -89,28 +89,25 @@
         </menu>
         <menu label="Procédures Economiques" xcstt="x" relId="search" icone="">
           <menu icone="search" label="Etablissement Classé catégorie 3" relId="EtablissementClasse">
-          	          <resource type="search">karaz/ux/hub/portailsearch/search/EtablissementClasse</resource>
-          	</menu>
-          	
-          <menu icone="search" label="Etablissement Classé catégorie 2" relId="EtablissementClasse2" >
-          	<resource type="search">karaz/ux/hub/portailsearch/search/EtablissementClasse2</resource>
+            <resource type="search">karaz/ux/hub/portailsearch/search/EtablissementClasse</resource>
           </menu>
-          	
+          <menu icone="search" label="Etablissement Classé catégorie 2" relId="EtablissementClasse2">
+            <resource type="search">karaz/ux/hub/portailsearch/search/EtablissementClasse2</resource>
+          </menu>
           <menu icone="search" label="Affichage publicitaire" relId="AffichagePub">
-          	<resource type="search">karaz/ux/hub/portailsearch/search/AffichagePub</resource>
+            <resource type="search">karaz/ux/hub/portailsearch/search/AffichagePub</resource>
           </menu>
-          
           <menu icone="search" label="Occupation domaine public" relId="OccupationDomainPub">
-			<resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPub</resource>
+            <resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPub</resource>
           </menu>
           <menu icone="search" label="Occupation domaine public RT" relId="OccupationDomainPubRT">
-			<resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPubRT</resource>
+            <resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPubRT</resource>
           </menu>
           <menu icone="search" label="Occupation domaine public RP" relId="OccupationDomainPubRP">
-			<resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPubRP</resource>
+            <resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPubRP</resource>
           </menu>
           <menu icone="search" label="Occupation domaine public UC" relId="OccupationDomainPupUC">
-			<resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPupUC</resource>
+            <resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPupUC</resource>
           </menu>
         </menu>
       </menu>
@@ -164,8 +161,7 @@
           <resource type="search">karaz/ux/hub/portailsearch/search/DownloadEdit</resource>
         </menu>
       </menu>
-      
-      <menu relId="ModuleArticle" label="Module article">
+      <menu relId="ModuleArticle" label="Module article" xcstt="x">
         <menu relId="Articles" label="Articles" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/Articles</resource>
         </menu>
@@ -178,31 +174,31 @@
         <menu relId="NewArticle" label="Nouveau Article" icone="search">
           <resource type="search">karaz/ux/hub/portailsearch/search/NewArticle</resource>
         </menu>
-        <menu relId="CommentsMng" label="Gestion de commentaires" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/CommentsMng</resource>
+        <menu relId="CommentsMng" label="Gestion de commentaires" icone="search" xcstt="x">
+          <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/CommentsMng]]></resource>
         </menu>
       </menu>
       <menu relId="RankingDigitalRemp" label="Ranking Digitalite" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/RankingDigitalRemp</resource>
-       </menu>
-       <menu relId="CalculIndex" label="Calcul des index" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/CalculIndex</resource>
-       </menu>
-       <menu relId="RightAside" label="Right Aside" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/RightAside</resource>
-       </menu>
-       <menu relId="StatistiuqesSearch" label="Statisiques Membre commission" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/StatistiuqesSearch</resource>
-       </menu>
-       <menu relId="DbLeftSide" label="dbLeftSide" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/DbLeftSide</resource>
-       </menu>
-       <menu relId="StatistiquesArchitecteSearch" label="Statistiques Architecte" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesArchitecteSearch</resource>
-       </menu>
-       <menu relId="StatistiquesMembreSecr" label="Statistiques Secretaire commission" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesMembreSecr</resource>
-       </menu>
+        <resource type="search">karaz/ux/hub/portailsearch/search/RankingDigitalRemp</resource>
+      </menu>
+      <menu relId="CalculIndex" label="Calcul des index" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/CalculIndex</resource>
+      </menu>
+      <menu relId="RightAside" label="Right Aside" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/RightAside</resource>
+      </menu>
+      <menu relId="StatistiuqesSearch" label="Statisiques Membre commission" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/StatistiuqesSearch</resource>
+      </menu>
+      <menu relId="DbLeftSide" label="dbLeftSide" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/DbLeftSide</resource>
+      </menu>
+      <menu relId="StatistiquesArchitecteSearch" label="Statistiques Architecte" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesArchitecteSearch</resource>
+      </menu>
+      <menu relId="StatistiquesMembreSecr" label="Statistiques Secretaire commission" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesMembreSecr</resource>
+      </menu>
     </menu>
   </menu>
 </menus>

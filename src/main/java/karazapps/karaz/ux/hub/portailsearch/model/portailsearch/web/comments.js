@@ -27,25 +27,40 @@ function getArticlesCms(params){
     });
 }
 
+var listComments = [];
+
 function createArticlesCms(results,context){
    var container = context.formRender.targetPanel.find(".articles-list");
+   var modal = context.formRender.targetPanel.find("#myModal");
+
    for(var i=0;i<results.length;i++){
        var div = document.createElement("div");
        div.setAttribute("class","article-elm");
        var divP = document.createElement("div");
        var span = document.createElement("span");
        span.setAttribute("class","articles-title");
+       span.setAttribute("xid",i);
        span.innerHTML = results[i]._source.title;
        var div2 = document.createElement("div");
        div2.setAttribute("style","font-size: 14px;");
        divP.append(span);
        div2.innerHTML="<i class='fas fa-eye'></i> "+results[i]._source.vue+" <i class='fas fa-heart'></i> "+results[i]._source.like+" <i class='fas fa-comment'></i> "+countCmmnt(results[i]._source.comments);
+       listComments.push(results[i]._source);
        divP.append(span);
        div.append(divP);
-       div.append(div2); 
+       div.append(div2);
+       div.addEventListener("click",function(){
+           createModelDesc(modal,listComments[Number($(this).attr("xid"))]);
+       }); 
        container.append(div);
 
     }
+}
+
+function createModelDesc(modal,source){
+    modal.find(".article-modal-content .title").html(source.title);
+    modal.find(".article-modal-content .description").html(source.description);
+    modal.get(0).style.display = "block";
 }
 
 function getCommtsCms(params){
@@ -74,9 +89,28 @@ function getCommtsCms(params){
     }).done(function(result){
         console.log("results :",result.hits.hits);
         var commentsList = extarctCmmt(result.hits.hits,context);
-        createCmtCms(commentsList,context);
+        createCmtCms(sortCommentsByDate(commentsList),context);
 
     });
+}
+
+function sortCommentsByDate(comments){
+    comments.sort(function (a, b) {
+        var time1 = new Date(a.date);
+        var time2 = new Date(b.date);
+
+
+        if (time1 > time2) {
+            return -1;
+        }
+
+        if (time1 > time2) {
+            return 1;
+        }
+
+        return 0;
+    });
+    return comments;
 }
 
 function createCmtCms(results,context){
@@ -99,6 +133,7 @@ function createCmtCms(results,context){
      }
  }
 
+// Extract comments form articles
 function extarctCmmt(results,context){
     var commentsList = [];
     for(var i=0;i<results.length;i++){
@@ -137,6 +172,7 @@ function extarctCmmt(results,context){
     return commentsList;
 }
 
+// create pagination articles
 function createPaginationArticleCms(params){
     var currentPage = params.currentPage;
     var nbrPage = params.nombrePage;
@@ -145,6 +181,7 @@ function createPaginationArticleCms(params){
     var cls = params.cls;
 }
 
+// count number of comments in article
 function countCmmnt(comments){
     var sum = 0;
     console.log(comments);
@@ -159,4 +196,3 @@ function countCmmnt(comments){
     }
     return sum;
 }
-

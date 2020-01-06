@@ -21,7 +21,7 @@
             <script onLoad="true">
             // root.login=userQN;
              //context.formRender.notifyObservers("login");
-             root.visioURL =  visioUrl;
+             root.visioURL =  visoUrl;
              context.formRender.notifyObservers("visioURL");
             </script>
             
