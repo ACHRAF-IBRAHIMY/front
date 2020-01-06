@@ -582,10 +582,13 @@ span3.innerHTML = '<i style="color:#ce1515" class="fas fa-heart"></i> '+elm._sou
 
 var span4 = document.createElement("span");
 span4.innerHTML = '<i class="fas fa-eye"></i> '+elm._source.vue;
-
 div7.appendChild(span2);
-div7.appendChild(span3);
-div7.appendChild(span4);
+
+if(elm._source.type!="REVUE DE PRESSE"){
+    div7.appendChild(span3);
+    div7.appendChild(span4);
+}
+
 
 div2.appendChild(div3);
 div2.appendChild(div4);
@@ -622,13 +625,30 @@ var obj = {
 
 
 if(type==""){
-obj = {
-"size":size,"query":{
-    "match_all":{}
-
-},"sort":[{ "datePr" : {"order" : "desc"}}]
- 
-};
+    obj = {
+        "size":size,"query": {
+          "bool" : {
+            "must" : {
+              "match_all":{}
+            },
+            "must_not" : {
+              "bool":{
+                  "must" :[ {
+                      "term":{
+                          "type.keyword":"REVUE DE PRESSE"
+                      }},{"range":{
+                          "datePr":{
+                              "lte":"now-7d/d"
+                          }
+                      }
+                  }]		
+              }
+              
+            }
+          }
+        },
+        "sort":[{ "datePr" : {"order" : "desc"}}]
+      };
 }
 
 $.ajax({
@@ -768,3 +788,4 @@ target.find(".divSearch-article .div-fsb-details .fsb-container").show();
 target.find(".classSearch-82 .reseau-ss .url-share textArea").html(window.location.href+"index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+results._id+"//search");
 });
 }
+

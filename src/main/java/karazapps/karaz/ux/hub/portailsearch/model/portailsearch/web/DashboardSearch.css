@@ -3011,3 +3011,154 @@ box-card:hover{
     width: 300px;
     height: 300px;
 }
+
+@media screen and (max-width: 1300px) {
+    .pagination-otm a, .pagination-otm-search a, .pagination-word-list a{
+        padding: 8px 7px !important;
+    }
+
+    .dashbord-right .d2 .word-list-div {
+    }
+
+    .stat-dashbord .d1 .config-bar span {
+        width: 28px;
+    }
+
+    .stat-dashbord .d1 .config-bar select.s2 {
+        width: 247px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .classSearch-4 .hp-sec.qst-faq .vpanel-title div{
+        display:block !important;
+        margin-top: auto;
+    }
+
+    .classSearch-4 .hp-sec.qst-faq .vpanel-title div span{
+        margin-left: 0 !important;
+    }
+
+    .classSearch-4 .div-det-acc{
+        padding: 0 !important;
+    }
+
+}
+
+.item-body-title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+@media (min-width: 900px) and (max-width:1200px) {
+    .ow-view  .hp-box{
+        margin: 10px 1% !important;
+    }
+
+    .ow-view .yb-btn-home ,.ow-view .buttonLog ,.ow-view .support-html{
+        font-size: 13px !important;
+    }
+
+    .ow-view .yb-btn-home{
+        padding: 9px 10px;
+    }
+
+    .ow-view .support-time span{
+        font-size: 9.5px !important;
+    }
+
+    .ow-view .simulator-sub .hp-box{
+        margin: auto !important;
+    }
+
+    .height-mobile-10{
+        height: 10px;
+    }
+
+    .height-mobile-10{
+        height: 20px;
+    }
+
+    .ow-view .buttonLog{
+        padding: 3px;
+        width: auto !important;
+        height: 31px !important;
+    }
+    
+    box-card{
+        padding: 13px !important;
+        margin: 10px 2% !important;
+    }
+
+    .fieldset-articles .article img {
+        height: 130px;
+    }
+
+    .NFQ-fieldset{
+        padding: 8px;
+    }
+
+    .NFQ-fieldset .video-list-item img,.NFQ-fieldset img{
+        height: 50px !important;
+    }
+
+    .type-demande i {
+        font-size: 26px;
+    }
+
+    .type-demande{
+        width: auto !important;
+    }
+
+    .size955{
+        margin-top: 10px !important;
+    }
+
+    .simulator-qr .rep-check{
+        font-size: 14px;
+        margin-left: 6px;
+    }
+
+    .simulator .simulator-qr .next-button button{
+        width: 105px;
+        font-size: 14px;
+        height: 33px;
+    }
+
+    .divSearch-article {
+        color: #333 !important;
+        padding: 10px !important;
+    }
+
+    .divSearch-article .content-article {
+        font-size: 14px;
+    }
+}
+
+.divSearch-article .content-article img{
+    max-width: 100%;
+} 
+
+
+@media screen and (max-width: 900px) {
+    .contact-us-div .type-div ,.contact-us-div .type-div div,.contact-us-div .type-div div span{
+        display: block !important;
+        height: auto;
+        font-size: 15px !important;
+    }
+
+    .contact-us-div .type-div div i{
+        display: block !important;
+    }
+
+    .contact-us-div .type-div i{
+        font-size: 35px !important;
+    }
+
+}
+
+.NQF-prev-resp img,.response-body img{ 
+    max-width: 100%;
+}
