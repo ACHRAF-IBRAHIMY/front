@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="AllTaskGlobalModelSearch" label="AllGlobalTAskSearch">
-<query> 
-</query> 
-<data>
+	<query />
+	<data>
 		<query> 
 			<keys />
 			<model />
@@ -13,7 +12,6 @@
 			<document>true</document>  
 			<annotation>true</annotation>  
 			<others>true</others>
-            
             <userLogin />
             <userPassword />
             <searchModel>
@@ -23,181 +21,162 @@
             <returnMode>manualTask</returnMode>
             <qmodelName>%</qmodelName>
 		</query>
-      <pageSize>10</pageSize>
-	<searchId /> 
-	<mode>reduit</mode>
+      	<pageSize>10</pageSize>
+		<searchId /> 
+		<mode>reduit</mode>
 	</data>
-  <view>
-  <screen id="dashboardMain" noToolBar="true">
-<script onLoad="true">
-	console.log("root********onLoad",root);
-	root.searchId=new Date().getTime();
-	context.formRender.notifyObservers("searchId");
-	
-	
-</script>
-    <vbox id="gobalTaskModelSearch">
-<test expression="{query.returnMode},=,manualTask" separator=",">
-               <!-- <objectList targetScreen="autorisationViewer" displayMode="thumbnail" searchQN="AllArrondAutorisationConstruction"> -->
-								<vbox columns="30% 40px 40px auto" labelAlign="float" usage="nocritere:N,search:R"> 
-									<field xpath="query.keys" label="Mots clé : N°, Consistance, Nom, ..." widget="text" />
-									 <button className="k-btn-icon" noLabel="true" icon="fas fa-search" postProcessing="search()">
-										<postChange>
-                                      
-										//forceClickElement("gobalTaskModelSearch"+root.searchId,"listTask","ow-pagination-reload");
-										setPaganateSizeValueById("gobalTaskModelSearch"+root.searchId,"listTask",root.pageSize,500);
-										
-									</postChange>
-									 </button>
-									 <button className="k-btn-icon" noLabel="true" icon="fas fa-filter" visible="{mode},=,reduit" separator=",">
-											 <postChange>
-													 root.mode="extra";
-													 context.formRender.notifyObservers("mode");
-												 </postChange> 
-									 </button>
-									 <button className="k-btn-icon" noLabel="true" icon="fas fa-eye-slash" visible="{mode},=,extra" separator=",">
-										 <postChange>
-													 root.mode="reduit";
-													 context.formRender.notifyObservers("mode");
-													 context.formRender.notifyObservers("query");
-												 </postChange> 
-									 </button>
-									<vbox columns="auto" contentJustify="end">
-										<field xpath="query.qmodelName" label="Trier par" widget="select">
-											<option value="%AutorisationConstruction%" label="Permis de Construire" />
-											<option value="%PermishabiterHabitation%" label="Permis d'habiter" />
-											<option value="%Impressionplan%" label="Impression plan" />
-											<option value="%" label="Tous les modèles" />
-											<postChange>
-												root.query.model=root.query.qmodelName;
-												context.formRender.notifyObservers("query.model");
-										 </postChange>
-										 </field>
-									</vbox>
+  	<view>
+  		<screen id="dashboardMain" noToolBar="true">
+  			<script onLoad="true">
+				console.log("root********onLoad",root);
+				root.searchId=new Date().getTime();
+				context.formRender.notifyObservers("searchId");
+			</script>
 
-									 <!-- <field label="Jour" widget="date" xpath="query.day.min" /> -->
-								 </vbox>
-               <vbox columns="auto" contentJustify="center">
-                
-                </vbox>
-                <objectList id="listTask" name="ArchetectTask" label="My Tasks" displayMode="thumbnail" searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask" collectionName="task" columns="33% 33% 33%">
-             <field label="Reference" index="stringIndex1" widget="text" name="reference" />
-								<field label="Statut" index="stringIndex2" widget="text" name="statut" />
-								<field label="Description" index="stringIndex3" widget="text" name="description" />
-								<field label="d4" index="stringIndex4" widget="text" name="detail4" />
-								<field label="d5" index="stringIndex5" widget="text" name="detail5" />
-								<field label="d6" index="stringIndex6" widget="text" name="detail6" />
-								<field label="d7" index="stringIndex7" widget="text" name="detail7" />
-								<field label="d8" index="stringIndex8" widget="text" name="detail8" />
-								<field label="d9" index="stringIndex9" widget="text" name="detail9" />
-								<field label="d10" index="stringIndex10" widget="text" name="detail10" />
-								<field label="d11" index="stringIndex11" widget="text" name="detail11" />
-								<field label="d12" index="stringIndex12" widget="text" name="detail12" />
-								<field label="manualTaskId" index="manualTaskId" widget="text" name="manualTaskId" />
-								<field label="creationTime" index="creationTime" widget="text" name="creationTime" />
-								<field label="affected" index="affected" widget="text" name="affected" />
-								<field label="activityName" index="activityName" widget="text" name="activityName" />
-								<field label="Processus" index="processName" name="processName" />
-								<field label="ProcessusQN" index="processQN" name="processQN" />
-								<field label="modelQN" index="modelQN" name="modelQN" />
-								<field label="aiId" index="id" name="aiId" />
-								<field label="objectId" index="objectId" name="objectId" />
-								<vbox>
-									<html>
-										<div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold">
-											<div class="ow-pl-toolbar">
-												${task[$i].reference}
-												<span class="actions">
+			<vbox id="gobalTaskModelSearch">
+				<test expression="{query.returnMode},=,manualTask" separator=",">
+					<!-- <objectList targetScreen="autorisationViewer" displayMode="thumbnail" searchQN="AllArrondAutorisationConstruction"> -->
+					<vbox columns="35% 5% 5% 35% 20%" labelAlign="float" usage="nocritere:N,search:R"> 
+						<field xpath="query.keys" label="Mots clé : N°, Consistance, Nom, ..." widget="text" postEnter="search()" />
+						<button className="k-serach_Buttons" noLabel="true" icon="fas fa-search" postProcessing="search()" style="width:10px">
+						 	<postChange>
+						 		setPaganateSizeValueById("gobalTaskModelSearch"+root.searchId,"listTask",root.pageSize,500);
+						 	</postChange>
+						</button>
+						<button id="reset_filters" nolabel="true" className="k-serach_Buttons" icon="fas fa-sync" postProcessingX="search()" tooltip="Réinitialiser filtres">
+			              	<postChange>
+				                try{
+				                
+				                  //console.log("context dataInitial********",context.formRender.xmlInitial);
+				                  root.query= JSON.parse('{"keys":"","model":"","from":"","to":"","task":"true","object":"true","document":"true","annotation":"true","others":"true","userLogin":"","userPassword":"","searchModel":{"searchQN":"cug/cri/urbanisme/autorisation/search/PermisConstruireSerachGlobal"},"returnMode":"manualTask","qmodelName":"%"}');
+				                  console.log("query=="+root.query);
+				                  context.formRender.notifyObservers("query"); 
+				                  context.formRender.search();
+				                  
+				                }catch(e){
+				                   console.log("e==",e); 
+				                }
+			              	</postChange>
+			            </button>
+			            <vbox />
+						<vbox columnsx="auto" contentJustifyx="end">
+							<field xpath="query.qmodelName" label="Filtrer par" widget="select">
+								<option value="%AutorisationConstruction%" label="Permis de Construire" />
+								<option value="%PermishabiterHabitation%" label="Permis d'habiter" />
+								<!-- <option value="%Impressionplan%" label="Impression plan" /> -->
+								<option value="%RefectionHabitation%" label="Permis de réfection" />
+								<option value="%Receptionequipements%" label="Réception" />
+								<option value="%" label="Tous" />
+								<postChange>
+									root.query.model=root.query.qmodelName;
+									context.formRender.notifyObservers("query.model");
+							 	</postChange>
+							</field>
+						</vbox>
+						<!-- <field label="Jour" widget="date" xpath="query.day.min" /> -->
+					</vbox>
+					<vbox columns="auto" contentJustify="center">
+					</vbox>
+
+					<objectList id="listTask" name="ArchetectTask" label="My Tasks" displayMode="thumbnail" searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask" collectionName="task" columns="33% 33% 33%">
+						<field label="Reference" index="stringIndex1" widget="text" name="reference" />
+						<field label="Statut" index="stringIndex2" widget="text" name="statut" />
+						<field label="Description" index="stringIndex3" widget="text" name="description" />
+						<field label="d4" index="stringIndex4" widget="text" name="detail4" />
+						<field label="d5" index="stringIndex5" widget="text" name="detail5" />
+						<field label="d6" index="stringIndex6" widget="text" name="detail6" />
+						<field label="d7" index="stringIndex7" widget="text" name="detail7" />
+						<field label="d8" index="stringIndex8" widget="text" name="detail8" />
+						<field label="d9" index="stringIndex9" widget="text" name="detail9" />
+						<field label="d10" index="stringIndex10" widget="text" name="detail10" />
+						<field label="d11" index="stringIndex11" widget="text" name="detail11" />
+						<field label="d12" index="stringIndex12" widget="text" name="detail12" />
+						<field label="manualTaskId" index="manualTaskId" widget="text" name="manualTaskId" />
+						<field label="creationTime" index="creationTime" widget="text" name="creationTime" />
+						<field label="affected" index="affected" widget="text" name="affected" />
+						<field label="activityName" index="activityName" widget="text" name="activityName" />
+						<field label="Processus" index="processName" name="processName" />
+						<field label="ProcessusQN" index="processQN" name="processQN" />
+						<field label="modelQN" index="modelQN" name="modelQN" />
+						<field label="aiId" index="id" name="aiId" />
+						<field label="objectId" index="objectId" name="objectId" />
+
+						<vbox>
+							<html>
+								<style>
+									.ow-thumbnail-action.mine{
+										display: block !important;
+									}
+								</style>
+								<div class="ow-pl expanded no-collapse ow-tabpanel-flex NoUnderlineField fieldSetHeaderBold">
+									<div class="ow-pl-toolbar">
+										${task[$i].reference}
+										<span class="actions">
+										</span>
+									</div>
+									<div class="ow-pl-inner">
+										<div class="ow-html">
+											<div style="margin-left: 25px;">
+												<span style="color: var(--form-button-fg);font-size: 12px;">Date affectation</span>
+											</div>
+											<div style="margin-left: 26px;" class="fs-info-tooltip accessibility-afs-3">
+												<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;"> Il y a ${task[$i].creationTime | duration now 4 4 } 
+												</span>
+												<span class="fs-item-bag fas fa-clock" style="color: #646464;" />
+												<span class="fs-info-tooltiptext" style="width: max-content;padding: 2px 4px;left: 20px;" tooltip-content="(${task[$i].creationTime})" />
+											</div>
+											<div style="margin-left: 25px;">
+												<span style="color: var(--form-button-fg);font-size: 12px;">Processus</span>
+											</div>
+											<div style="margin-left: 26px;" class="accessibility-afs-3">
+												<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].processName|translate}  </span>
+											</div>
+											<div style="margin-left: 25px;">
+												<span style="color: var(--form-button-fg);font-size: 12px;">Etape</span>
+											</div>
+											<div style="margin-left: 26px;" class="accessibility-afs-3">
+												<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">
+													${task[$i].activityName|translate }</span>
+											</div>
+											<div style="margin-left: 25px;">
+												<span style="color: var(--form-button-fg);font-size: 12px;">Statut</span>
+											</div>
+											<div style="margin-left: 26px;" class="accessibility-afs-3">
+												<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].stringIndex2}
 												</span>
 											</div>
-											<div class="ow-pl-inner">
-												<div class="ow-html">
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Date affectation</span>
-													</div>
-													<div style="margin-left: 26px;" class="fs-info-tooltip accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;"> Il y a ${task[$i].creationTime | duration now 4 4 } 
-														</span>
-														<span class="fs-item-bag fas fa-clock" style="color: #646464;" />
-                            <span class="fs-info-tooltiptext" style="width: max-content;padding: 2px 4px;left: 20px;" tooltip-content="(${task[$i].creationTime})" />
-													</div>
-
-													
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Processus</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].processName|translate
-															}  </span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Etape</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">
-															${task[$i].activityName|translate }</span>
-													</div>
-
-													<div style="margin-left: 25px;">
-														<span style="color: var(--form-button-fg);font-size: 12px;">Statut</span>
-													</div>
-													<div style="margin-left: 26px;" class="accessibility-afs-3">
-														<span class="ow-field-input" style="padding-right: 0px;padding-left: 0px;">${task[$i].stringIndex2}
-														</span>
-													</div>
-													<div style="margin-top:10px;display:flex;">
-														<span class="ow-thumbnail-action  fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;">
-														</span>
-														<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${task[$i].objectId}, '${task[$i].modelQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;">
-														</span>
-														<span class="ow-thumbnail-action  fas fa-user-cog" onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )" style="display: unset;margin-right: 0px;margin-right: 0px;">
-														</span>
-														<div class="affectation ${task[$i].owt_state} subLong" title="${task[$i].owt_state_message|translate} ${task[$i].Lockedby}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message|translate} ${task[$i].Lockedby} </div>
-													</div>
-												</div>
-												<div style="clear:both">
-												</div>
+											<div style="margin-top:10px;display:flex; margin-left: 5%;">
+												<span class="ow-thumbnail-action ${task[$i].owt_state}  fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;display: none;">
+												</span>
+												<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${task[$i].objectId}, '${task[$i].modelQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;">
+												</span>
+												<span class="ow-thumbnail-action  fas fa-user-cog" onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )" style="display: unset;margin-right: 0px;margin-right: 0px;">
+												</span>
+												<div class="affectation ${task[$i].owt_state} subLong" title="${task[$i].owt_state_message|translate} ${task[$i].Lockedby}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message|translate} ${task[$i].Lockedby} </div>
 											</div>
 										</div>
-									</html>
-                                <script onLoad="true">
-                                   
+										<div style="clear:both" />
+									</div>
+								</div>
+							</html>
+							<script onLoad="true">
 
-                                     </script> 
-									<!--/test -->
-								</vbox>
-             </objectList>
-              
-               
-            
-					
-</test>
+							</script> 
+							<!--/test -->
+						</vbox>
+					</objectList>
+				</test>
+			</vbox>
+			<script onLoad="true" delay="500">
+				console.log("root********onLoad",root);
+				var dvid="gobalTaskModelSearch"+root.searchId;
+				$("#gobalTaskModelSearch").attr("id", dvid);
+				setPaganateSizeValueById("gobalTaskModelSearch"+root.searchId,"listTask",root.pageSize);
 
-            </vbox>
-<script onLoad="true" delay="500">
-console.log("root********onLoad",root);
-var dvid="gobalTaskModelSearch"+root.searchId;
-$("#gobalTaskModelSearch").attr("id", dvid);
-setPaganateSizeValueById("gobalTaskModelSearch"+root.searchId,"listTask",root.pageSize);
-
-//$("#gobalModelSearch .gobalModelSearch_Button).unbind('click');
-
-
-</script>      
-<script postLoad="true" delay="6000">
-                                                          
-
-			
-
-</script>   
-          
-
-</screen>
-
-  </view>
-    
-    
- </search>
+				//$("#gobalModelSearch .gobalModelSearch_Button).unbind('click');
+			</script>
+			<script postLoad="true" delay="6000">
+			</script>   
+		</screen>
+	</view>
+</search>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="AllGlobalTAskSearch" label="AllGlobalTAskSearch">
-<query> 
-</query> 
-<data>
+	<query /> 
+	<data>
 		<query> 
 			<keys />
 			<model />
@@ -12,34 +11,30 @@
 			<object>true</object>  
 			<document>true</document>  
 			<annotation>true</annotation>  
-			<others>true</others>
-            
+			<others>true</others>        
             <userLogin />
             <userPassword />             
 		</query>
-
 	</data>
-  <view>
-  <screen id="dashboardMain" noToolBar="true">
+	<view>
+		<screen id="dashboardMain" noToolBar="true">
+			<vbox id="globalTaskdivId" columns="auto 30%">
+				<vbox>
+					<framedPanel label="Taches a faire" collapsible="false">
+                		<vbox>
+                			<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=9" />
+                		</vbox>
+                	</framedPanel>
+                	<vbox />
+                </vbox>
 
-    <vbox id="globalTaskdivId" columns="auto 30%">
-                <framedPanel label="Taches a faire" collapsible="false">
                 <vbox>
-							<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=9" />
-                            </vbox>
-                </framedPanel>
-<framedPanel label="Indicateurs de performance" collapsible="false">
-		<search searchQN="karaz/ux/hub/portailsearch/search/DbLeftSide" /> 
- </framedPanel>
-
+                	<framedPanel label="Indicateurs de performance" collapsible="false">
+                		<search searchQN="karaz/ux/hub/portailsearch/search/DbLeftSide" /> 
+                	</framedPanel>
+                	<vbox />
+                </vbox>
             </vbox>
-        
-
-           
-
-</screen>
-
-  </view>
-    
-    
- </search>
+        </screen>
+    </view>
+</search>
