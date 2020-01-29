@@ -12,12 +12,12 @@ var p=0;
 var AUTH = "";
 var ADMIN_AUTH = "" ;
 var URL_SEARCH = contextPath+"/kas/DataSynchronise";
-var URL_COMMUNE = "https://urbarokhas.karaz.org/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
-var URL_WS_1 = "https://urbarokhas.karaz.org";
+var URL_COMMUNE = "https://bkurba.rokhas.ma/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
+var URL_WS_1 = "https://bkurba.rokhas.ma";
 var URL_WS_SEARCH_ALL_AUTORISATION = URL_WS_1+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction";
 var URL_WS_KDATA_OBJECT = URL_WS_1+"/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction/";
-var URL_WS_FE = "https://urbarokhas.karaz.org";
-var URL_WS_FE2 = "https://preprodrokhas.karaz.org:8181";
+var URL_WS_FE = "https://bkurba.rokhas.ma";
+var URL_WS_FE2 = "https://bkp.rokhas.ma";
 var autListId = [
 {
 "url":URL_WS_FE+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction",

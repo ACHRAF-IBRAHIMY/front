@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="DocumentsSortieSearch" label="PublicCentralSearch">
+  <query />
+  <data>
+    <query>
+      <keys />
+      <model />
+      <from />
+      <to />
+      <task>true</task>
+      <object>true</object>
+      <document>true</document>
+      <annotation>true</annotation>
+      <others>true</others>
+      <userLogin />
+      <userPassword />
+      <demandeId />
+      <CIN />
+    </query>
+    <newUser>false</newUser>
+    <forgetPass>false</forgetPass>
+    <signup>non</signup>
+  </data>
+  <view>
+    /********************************************************/
+    /*      START :: #MFB :: grid Rokhas 3.0 Home page      */
+    /********************************************************/
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script onLoad="true">
+      if(root.newUser=="true"){
+        ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
+      }else if(root.forgetPass=="true"){
+        ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');
+      }
+      else if(root.toFicheUser=="true"){
+        ApplicationManager.run('data/donnees/user/ficheuser/process/GestionFicheuserProcess','launchProcess','fiche Utilisateur');
+      }
+        </script>
+      <script postLoad="true">var currentFocus;
+             
+          var searchParams = new URLSearchParams(window.location.search)
+          var param = searchParams.get('lang');
+
+          if(param!=undefined){
+              $.each($(".class-traduction"),function(key,value){
+                  $(value).html(transMap[$(value).attr("tcode")]);
+                  if(param=="ar"){
+                    $(value).css("text-align","right");
+                    $(value).css("font-family","Droid Arabic Kufi, sans-serif");
+                  }
+              })
+          }
+
+          if(param!=undefined){
+              $.each($(".class-traduction-ct"),function(key,value){
+                  $(value).html(transMap[$(value).attr("tcode")]);
+                  if(param=="ar"){
+                    $(value).css("font-family","Droid Arabic Kufi, sans-serif");
+                  }
+              })
+          }
+
+          if(param!=undefined){
+              $.each($(".wg-class-traduction"),function(key,value){
+                  var tcodel = $(value).attr("class").split(" ");
+                  var valuet = "";
+
+                  tcodel.forEach(function(elm){
+                    if(/wg-tcode-/.test(elm)){
+                      valuet = elm.split("-")[2];
+                    }
+                  });
+                  if(valuet!=""){
+
+                  $(value).find("input").attr("placeholder",transMap[valuet]);
+                  $(value).find("input").css("text-align","right");      
+                  }        
+              })
+          }
+
+/*
+          if(param!=undefined){
+              $.each($(".wg-class-traduction"),function(key,value){
+                  var tcodel = $(value).attr("class").split(" ");
+                  var valuet = "";
+
+                  tcodel.forEach(function(elm){
+                    if(/err-tcode-/.test(elm)){
+                      valuet = elm.split("-")[2];
+                    }
+                  });
+
+                  if(valuet!=""){
+                    $(value).find(".errorMessage").html(transMap[valuet]);
+                    $(value).find(".errorMessage").css("text-align","right");
+                  }
+
+                                
+              })
+          }*/             
+      context.formRender.targetPanel.find(".classSearch-home .divSearchBar input").get(0).addEventListener("input", function () {
+            var a, b, i;
+            var inp = context.formRender.targetPanel.find(".classSearch-home .divSearchBar input").get(0);
+            var val = inp.value.toLowerCase();
+            if (!val) {
+                closeAllLists();
+                return false;
+            }
+            console.log(val);
+            currentFocus = -1;
+            //close any already open lists of autocompleted values
+            closeAllLists();
+            console.log("a");
+            restAutoComplete(inp,val,true);
+      });
+        
+      context.formRender.targetPanel.find(".divSearchBar input").get(0).addEventListener("keydown", function (e) {
+                    var x = context.formRender.targetPanel.find(".classSearch-home #autocomplete-list").get(0);
+                    if (x) x = x.getElementsByTagName("div");
+                    moveKey(e,x,0,"classSearch-home",context.formRender.targetPanel);
+      });
+                          
+    document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
+          document.getElementsByClassName("ow-field-input")[2].value=""; 
+          context.formRender.targetPanel.find(".divSearchBar").show();
+          context.formRender.targetPanel.find(".searchList").hide();
+    });
+            
+    context.formRender.targetPanel.find(".searchList .second-search-bar i.fa-eraser").click(function(){
+	  context.formRender.targetPanel.find(".searchList .second-search-bar input").val("");
+   });
+
+    context.formRender.targetPanel.find(".searchList .second-search-bar i.fa-search").click(function(){
+        getTimeCounter();
+        closeSearchList();
+        currentPage=0;
+       restSearchList(context.formRender.targetPanel.find(".searchList .second-search-bar input").val(),0); 
+    });
+       
+   context.formRender.targetPanel.find(".divSearch .divSearchBar .t3").click(function(){
+       ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresUrbanisme", "search", "Procedures Urbanisme", {});
+    });
+        
+    context.formRender.targetPanel.find(".divSearch .divSearchBar .t4").click(function(){
+       ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresEconomique", "search", "Procedures Economique", {});
+    });    
+         
+          
+    context.formRender.targetPanel.find(".to-simulator").click(function(){
+        ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
+    });
+
+
+    context.formRender.targetPanel.find(".folder-feature .folder-feature-header i").click(function(){
+        if(testWidth($(window).width(),640)){
+            context.formRender.targetPanel.find(".folder-feature").find("div").hide("fast");
+            context.formRender.targetPanel.find(".folder-feature").animate({'width':'hide'});
+        }else{
+            context.formRender.targetPanel.find(".folder-feature").slideUp();
+        }
+    });
+
+    context.formRender.targetPanel.find(".reglementation-card").click(function(){
+        ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{})
+    });
+
+    context.formRender.targetPanel.find(".faq-card").click(function(){
+        ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
+    });
+
+    context.formRender.targetPanel.find(".last-log input").keydown(function(ev){
+        if ( event.which == 13 ) {
+            context.formRender.targetPanel.find(".check-ref").click();  
+        }
+    });
+
+
+    context.formRender.targetPanel.find(".folder-feature .folder-feature-body i.fa-caret-right").click(function(){
+        nextGeneratedDiv();
+    });
+
+    context.formRender.targetPanel.find(".folder-feature .folder-feature-body i.fa-caret-left").click(function(){
+        prevGeneratedDiv();    
+    });
+
+    //getCountCommune();
+
+    //scrollChiffreFunction();
+    
+    </script>
+    <script postLoad="true" delay="500">
+            getMostPopularArticle(4,"",".classSearch-home-glo .fieldser-article-1 .vbox-articles .ow-vl-inner");      
+    </script>
+      <vbox usage="embedded:N" className="classSearch-home-glo " xcstt="x">
+        
+        <vbox columns="30% 70%" className="global-div-temp classSearch-home">
+          <vbox className="height-auto-vbox-first">
+            <vbox className="hp-box last-log hp-small div1f">
+              <vbox columns="20% 80%" test="{signup},=,oui" separator=",">
+                <html>
+                  <div class="hp-box-icon fas fa-user" />
+                </html>
+                <html>
+                  <div class="hp-box-small-title class-traduction" tcode="EP00" style="font-size:1.3rem">Espace privé</div>
+                </html>
+              </vbox>
+              <vbox columns="20% 80%" test="{signup},!=,oui" separator=",">
+                <html>
+                  <div style="transform: rotate(14deg);" class="hp-box-icon fab fa-ello" />
+                </html>
+                <html>
+                  <div class="hp-box-small-title class-traduction" tcode="EP00" style="font-size:1.3rem">Espace autorisations</div>
+                </html>
+              </vbox>
+              <html>
+                <div style="height: 10px;" />
+              </html>
+              <vbox test="{signup},=,oui" separator=",">
+                <html>
+                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');">
+                    <i class="fas fa-unlock" />
+                    <span class="class-traduction" tcode="SC00">Se Connecter</span>
+                  </div>
+                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">
+                    <i class="fas fa-user-plus" />
+                    <span class="class-traduction" tcode="SG00">S'enregistrer</span>
+                  </div>
+                </html> 
+              </vbox>
+              <vbox test="{signup},=,oui" separator=",">
+                <html>
+                  <div style="height: 20px;" />
+                  <div class="hp-sbox-text" onclick="javascript:ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');">
+                    <a>
+                      <i class="fas fa-user-times" />
+                      <span class="class-traduction" tcode="MO00">Mot de passe oublié ?</span>  
+                    </a>
+                  </div>
+                  <div style="height: 26px;" />
+                </html>
+              </vbox>
+               <vbox test="{signup},=,non" separator=",">
+                <html>
+                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
+                    <i style="font-size:45px;" class="fas fa-map-marker-alt" />
+                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SC00">Accès urbanisme</span>
+                  </div>
+                  <div class="yb-btn-home" onclick="javascript: ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
+                    <i style="font-size:45px" class="fas fa-cog" />
+                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SG00">Accès économique</span>
+                  </div>
+                </html>
+              </vbox>
+              
+            </vbox>
+            <vbox className="relative-position">
+              <vbox className="hp-box last-log  hp-small">
+                <vbox columns="20% 65% 15%">
+                  <html>
+                    <div class="hp-box-icon fas fa-folder" />
+                  </html>
+                  <html>
+                    <div class="hp-box-small-title class-traduction" tcode="ED00" style="font-size:1.3rem">Etat dossier</div>
+                  </html>
+                  <html>
+                    <div class="mobile-height-auto" style="height:50px">
+                      <img src="img/loadgif3.gif" style="width:50px;display:none;" class="loadGif" />
+                    </div>
+                  </html>
+                </vbox>
+                <html>
+                  <div class="mobile-height-0" style="height: 10px;" />
+                </html>
+                <vbox>
+                  <field widget="text" className="hp-text-input wg-class-traduction wg-tcode-VD00 err-tcode-VE00" xpath="demandeId" emptyText="Votre référence dossier" noLabel="true" width="80%">
+                    <bag position="leading" className="hp-bag-input fas fa-folder-open" />
+                    <validation type="required" errorMessage="Veuillez saisir votre référence dossier !" />
+                  </field>
+                  <html>
+                    <div class="last-log-info">
+                      <span class="class-traduction" tcode="SR00">
+                        <span>Saisissez la référence du dossier recherché telle qu'elle figure sur la demande soumise.</span> 
+                        <span class="">Exemple : PCT-PANF-MRF-456/2020</span>
+                      </span>
+                    </div>
+                  </html>
+                  <button className="hp-box-btn HomePageLoginButton2 buttonLog check-ref" label="Vérifier">
+                    <postChange>
+                    
+                        let ref = root.demandeId;
+
+                        
+ 
+                        if(ref==undefined){
+                            ref="";
+                        }
+
+
+                        getFolderId(ref,"");
+                        
+                        /*
+                        if(testWidth($(window).width(),640)){
+                            $(".folder-feature").find("div:not(.no-response)").show("fast");
+                            $(".folder-feature").animate({'width':'show'},function(){});
+                        }else{
+                            $(".folder-feature").find("div").show("fast");
+                            $(".folder-feature").slideDown();
+                        }
+                        */</postChange>
+                  </button>
+                </vbox>
+              </vbox>
+              <vbox className="folder-feature ">
+                <html>
+                  <div class="folder-feature-header">
+                    <div>
+                      <span />
+                      <i class="fas fa-close" />
+                    </div>
+                    <hr />
+                  </div>
+                  <div class="folder-feature-body">
+                    <div>
+                      <i class="fas fa-caret-left" />
+                    </div>
+                    <div class="folder-steps">
+                      <ul class="progressbar" />
+                      <div class="no-response">
+                        La référence du dossier
+                        <span class="ref" style="font-weight: 700;" />
+                        n’existe pas. Veuillez renseigner la référence du dossier telle qu’elle figure sur la demande soumise.
+                      </div>
+                    </div>
+                    <div>
+                      <i class="fas fa-caret-right" />
+                    </div>
+                  </div>
+                </html>
+              </vbox>
+            </vbox>
+          </vbox>
+          <vbox className="hp-box hp-small divSearch height-986">
+            <vbox className="hp-box divSearchBar">
+              <html>
+                <div class="hp-sbox-big-title class-traduction" style="color: var(--fg0);" tcode="PU00">Pont de confiance Usager / Administration</div>
+                <div class="hp-sbox-text class-traduction" tcode="UD00">Un parcours d'autorisation 100% digital, 100% traçable avec Zéro papier déposé et Zéro papier délivré.</div>
+                <div class="height-mobile-20" style="height: 50px;" />
+              </html>
+              <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+                <field className="hp-search_field wg-class-traduction wg-tcode-RP00" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ..." />
+                <button className="hp-search_field_icon fas fa-search search_button" label="" separator="!!">
+                    <postChange>
+                          console.log("context.formRender.targetPanel");
+                          var prefix= context.formRender.targetPanel.find(".hp-search_field input").val();
+                          ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                    </postChange>
+                </button>
+              </vbox>
+              <html className="link-div-ref" style="visibility:hidden">
+                <a class="title class-traduction" tcode="AU00">Référentiel des activités</a>
+              </html>
+              <html>
+                <div class="height-mobile-10" style="height: 70px;" />
+              </html>
+              <vbox columns="66% 34%" className="div-main-icons">
+                <html>
+                  <div class="main-icon-title-bx t1">
+                    <div class="title class-traduction" tcode="QV00">Quelle procédure suivre ?</div>
+                    <div class="par full-grid-small">
+                      <i class="fas fa-map-signs" />
+                      <span class="class-traduction" tcode="RM00">Répondez à quelques questions pour être mieux orienté.</span>
+                    </div>
+                    <div style="text-align:right;">
+                      <button class="main-icon-button to-simulator class-traduction" tcode="DT00">DÉMARRER SIMULATION</button>
+                    </div>
+                  </div>
+                </html>
+                <vbox>
+                  <html className="res-div-height">
+                    <div class="main-icon-title t3">
+                      <div class="full-grid-small" style="display:grid;grid-template-columns:21% 79%;margin:auto;width:80%">
+                        <i class="fas fa-map-marker-alt" />
+                        <span class="class-traduction" tcode="AU00">Autorisations urbanistiques</span>
+                      </div>
+                    </div>
+                  </html>
+                  <html className="res-sep-height">
+                    <div style="height:25px" />
+                  </html>
+                  <html className="res-div-height">
+                    <div class="main-icon-title t4">
+                      <div class="full-grid-small" style="display:grid;grid-template-columns:21% 79%;margin:auto;width:80%">
+                        <i class="fas fa-cog" />
+                        <span class="class-traduction" tcode="AE00">Autorisations économiques</span>
+                      </div>
+                    </div>
+                  </html>
+                </vbox>
+              </vbox>
+              <vbox columns="40% 0% 40% 13%" className="support">
+                <html className="support-html full-grid-small">
+                  <i class="fas fa-paper-plane" />
+                  <span>Support@rokhas.ma</span>
+                </html>
+                <html />
+                <html className="support-html full-grid-small">
+                  <i class="fas fa-phone" />
+                  <span>+212 (0) 5 22 23 23 44</span>
+                </html>
+                <html className="support-time">
+                  <span style="font-size:12px;" class="class-traduction" tcode="LV00">Lundi au Vendredi de 08:30 à 18:30</span>
+                </html>
+              </vbox>
+            </vbox>
+            <html>
+              <div class="searchList">
+                <div class="second-search-bar">
+                  <span class="back-span">
+                    <i class="fas fa-chevron-left" />
+                    Retour
+                  </span>
+                  <input type="text" />
+                  <i class="fas fa-eraser" />
+                  <i class="fas fa-search" />
+                </div>
+                <p class="nbrRes">
+                  Environs
+                  <span>0</span>
+                  résultats (
+                  <span>0.21</span>
+                  second)
+                </p>
+                <div class="searchListD">
+                  <div class="searchGif">
+                    <img src="img/search-move.gif" />
+                  </div>
+                </div>
+                <div class="pagination" />
+              </div>
+            </html>
+          </vbox>
+        </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle class="class-traduction-ct" tcode="HP01">Actualités</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <vbox className="fieldset-articles fieldser-article-1">
+                        <vbox className="vbox-articles" columns="25% 25% 25% 25%">
+                           
+                        </vbox>
+                        <vbox className="fieldset-footer-home">
+                            <html>
+                                <div style="text-align:right;" class="class-traduction" tcode="APA1" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher plus d'articles...</div>
+                            </html>
+                        </vbox>
+                </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle class="class-traduction-ct" tcode="EEN1">Rokhas en Chiffres</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <!-- <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-university" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Commune</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Couverture géographique
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-folder" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Dossier traité / jour</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Performance par commune
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-user-tie" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Fonctionnaire</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
+                  Rokhas Machine Learning
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+          <html>
+            <box-card class="card-bx">
+              <box-icon class="fas fa-users" />
+              <box-big-title>0</box-big-title>
+              <box-small-title>Utilisateur</box-small-title>
+              <box-h-sep />
+              <box-text>
+                <a>
+                  Question fréquentes
+                  <i class="fas fa-external-link-alt" />
+                </a>
+              </box-text>
+            </box-card>
+          </html>
+        </vbox>
+        -->
+        <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/CouvertureGeo','search','Couverture géographique',{});">
+              <box-icon class="fas fa-university h-icon" />
+              <box-big-title class="class-traduction-ct" tcode="CH00">Couverture géographique</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ReportRanking','search','Rokhas Ranking',{});">
+              <box-icon class="fas fa-trophy h-icon" />
+              <box-big-title class="class-traduction-ct" tcode="CN00">Classement national</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
+              <box-icon class="fas fa-users-cog h-icon" />
+              <box-big-title class="class-traduction-ct" tcode="RLO00">Machine Learning</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpendataFrame','search','Open Data',{});">
+              <box-icon class="fas fa-chart-pie h-icon" />
+              <box-big-title class="class-traduction-ct" tcode="OP00">Open Data</box-big-title>
+            </box-card>
+          </html>
+        </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle class="class-traduction-ct" tcode="CM00">COMMENT CA MARCHE ?</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <vbox columns="20% 20% 20% 20% 20%">
+          <html test="{signup},=,oui" separator=",">
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">1</span>
+              </html>
+              <box-small-title class="class-traduction-ct" tcode="VV01">Créer votre espace privé sur rokhas.ma</box-small-title>
+              <button class="main-btn class-traduction-ct" tcode="PCD1" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
+            </box-card>
+          </html>
+          <html test="{signup},=,non" separator=",">
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">1</span>
+              </html>
+              <box-small-title class="class-traduction-ct" tcode="VV01">Créer votre espace privé sur rokhas.ma</box-small-title>
+            </box-card>
+          </html>
+          
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">2</span>
+              </html>
+              <box-small-title class="class-traduction-ct" tcode="SD00">Saisissez votre demande en ligne</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">3</span>
+              </html>
+              <box-small-title class="class-traduction-ct" tcode="AJ00">Attachez vos pièces justificatives</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">4</span>
+              </html>
+              <box-small-title class="class-traduction-ct" tcode="SL00">Suivez le traitement du dossier en ligne</box-small-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="    height: 210px !important;padding: 15px;">
+              <html>
+                <span class="main-number">5</span>
+              </html>
+              <box-small-title class="class-traduction-ct" tcode="DE00">Recevez votre document e-signé</box-small-title>
+            </box-card>
+          </html>
+        </vbox>
+        <html>
+          <div style="height: 30px;" />
+        </html>
+        <html>
+          <cms-topicTitle class="class-traduction-ct" tcode="PR00">RESSOURCES PRATIQUES</cms-topicTitle>
+          <cms-topicSeparator />
+        </html>
+        <vbox columns="25% 25% 25% 25%">
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="video-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
+              <box-icon class="fas fa-video h-icon" />
+              <box-big-title class="class-traduction-ct" tcode="GD00">Guides vidéos</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="faq-card">
+              <box-icon class="fas fa-question-circle h-icon" />
+              <box-big-title class="class-traduction-ct" tcode="QF00">Questions fréquentes</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="reglementation-card">
+              <box-icon class="fas fa-gavel h-icon" />
+              <box-big-title class="class-traduction-ct" tcode="RE00">Réglementation</box-big-title>
+            </box-card>
+          </html>
+          <html>
+            <box-card style="height:178px;cursor:pointer" class="download-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/DownloadConsultation','search','Attachement',{});">
+              <box-icon class="fas fa-download h-icon" />
+              <box-big-title class="class-traduction-ct" tcode="TG00">Téléchargements</box-big-title>
+            </box-card>
+          </html>
+        </vbox>
+        
+        
+        <html>
+          <div style="height: 30px;" />
+        </html>
+      </vbox>
+    </screen>
+    /********************************************************/
+    /*      END :: #MFB :: grid Rokhas 3.0 Home page        */
+    /********************************************************/
+  </view>
+</search>

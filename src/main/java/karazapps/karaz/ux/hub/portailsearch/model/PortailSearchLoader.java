@@ -110,6 +110,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DetailsActivitySearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DetailsActivitySearch.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DocumentsSortieSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-DocumentsSortieSearch.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DownloadConsultation", "karazapps/karaz/ux/hub/portailsearch/model/search-DownloadConsultation.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/DownloadEdit", "karazapps/karaz/ux/hub/portailsearch/model/search-DownloadEdit.xml");
