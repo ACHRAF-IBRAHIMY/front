@@ -5,6 +5,9 @@
       <menu relId="VisioConferenceFrame" label="Visio Conférence" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/VisioConferenceFrame</resource>
       </menu>
+       <menu relId="DocumentsSortieSearch" label="Recherche Documents" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/DocumentsSortieSearch</resource>
+      </menu>
       <menu relId="RetageProdHomePage" label="Rotage Home PAGE" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/RetageProdHomePage</resource>
       </menu>
