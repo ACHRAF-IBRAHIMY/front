@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="AllGlobalTAskSearch" label="AllGlobalTAskSearch">
-	<query></query> 
+	<query /> 
 	<data>
 		<query> 
 			<keys />
@@ -15,6 +15,7 @@
             <userLogin />
             <userPassword />             
 		</query>
+		<affected />
 	</data>
 	<view>
 		<screen id="dashboardMain" noToolBar="true">
@@ -22,17 +23,16 @@
 				<vbox>
 					<framedPanel label="Taches a faire" collapsible="false">
                 		<vbox>
-                			<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;pageSize=9" />
+                			<search searchQN="karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch?query.returnMode=manualTask&amp;query.affected={affected}&amp;pageSize=9" />
                 		</vbox>
                 	</framedPanel>
-                	<vbox/>
+                	<vbox />
                 </vbox>
-
                 <vbox>
                 	<framedPanel label="Indicateurs de performance" collapsible="false">
                 		<search searchQN="karaz/ux/hub/portailsearch/search/DbLeftSide" /> 
                 	</framedPanel>
-                	<vbox/>
+                	<vbox />
                 </vbox>
             </vbox>
         </screen>
