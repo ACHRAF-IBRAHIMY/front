@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="AllTaskGlobalModelSearch" label="AllGlobalTAskSearch">
-	<query></query>
+	<query />
 	<data>
 		<query> 
 			<keys />
@@ -20,6 +20,7 @@
             </searchModel>   
             <returnMode>manualTask</returnMode>
             <qmodelName>%</qmodelName>
+            <affected />
 		</query>
       	<pageSize>10</pageSize>
 		<searchId /> 
@@ -58,7 +59,7 @@
 				                }
 			              	</postChange>
 			            </button>
-			            <vbox/>
+			            <vbox />
 						<vbox columnsx="auto" contentJustifyx="end">
 							<field xpath="query.qmodelName" label="Filtrer par" widget="select">
 								<option value="%AutorisationConstruction%" label="Permis de Construire" />
@@ -146,16 +147,25 @@
 												</span>
 											</div>
 											<div style="margin-top:10px;display:flex; margin-left: 5%;">
-												<span class="ow-thumbnail-action ${task[$i].owt_state}  fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;display: none;">
-												</span>
-												<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${task[$i].objectId}, '${task[$i].modelQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;">
-												</span>
-												<span class="ow-thumbnail-action  fas fa-user-cog" onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )" style="display: unset;margin-right: 0px;margin-right: 0px;">
-												</span>
+												<div class="fs-tooltip">
+													<span class="ow-thumbnail-action ${task[$i].owt_state} fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;display: none;">
+														<span class="fs-tooltiptext">Traiter</span>
+													</span>
+												</div>
+												<div class="fs-tooltip">
+													<span class="ow-thumbnail-action  fa fa-eye" onclick="ApplicationManager.displayObject(${task[$i].objectId}, '${task[$i].modelQN}', '${task[$i].activityName}')" style="margin-right: 0px;">
+														<span class="fs-tooltiptext">Visualiser</span>
+													</span>
+												</div>
+												<div class="fs-tooltip">
+													<span class="ow-thumbnail-action  fas fa-user-cog" onclick="ApplicationManager.delegateTask(${task[$i].aiId}, ${task[$i].objectId},  '${task[$i].processQN}', '${task[$i].whoIsForMe}', '${task[$i].affected}', '${task[$i].manualTaskId}' )" style="margin-right: 0px;margin-right: 0px;">
+														<span class="fs-tooltiptext">Déléguer</span>
+													</span>
+												</div>
 												<div class="affectation ${task[$i].owt_state} subLong" title="${task[$i].owt_state_message|translate} ${task[$i].Lockedby}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message|translate} ${task[$i].Lockedby} </div>
 											</div>
 										</div>
-										<div style="clear:both"></div>
+										<div style="clear:both" />
 									</div>
 								</div>
 							</html>
