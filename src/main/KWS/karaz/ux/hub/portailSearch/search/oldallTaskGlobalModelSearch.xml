@@ -148,7 +148,7 @@
 											</div>
 											<div style="margin-top:10px;display:flex; margin-left: 5%;">
 												<div class="fs-tooltip">
-													<span class="ow-thumbnail-action ${task[$i].owt_state} fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].processQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;display: none;">
+													<span class="ow-thumbnail-action ${task[$i].owt_state} fa fa-edit" onclick="ApplicationManager.loadTask(${task[$i].aiId}, '${task[$i].modelQN}', '${task[$i].activityName}')" style="display: unset;margin-right: 0px;display: none;">
 														<span class="fs-tooltiptext">Traiter</span>
 													</span>
 												</div>
