@@ -36,7 +36,7 @@
             
             <vbox test="{visualizer},=,0" separator=",">
                 <html >
-                    <iframe id="visio" src="${visioURL}/conference/${numDossier}/${numCommission}?login=${login}&amp;profiles={profiles}&amp;userId={userId}&amp;userName={userName}" style="height: 100vh;width: 100%;" allow="microphone; camera"/>
+                    <iframe id="visio" src="${visioURL}/conference/${numDossier}/${numCommission}?login=${login}&amp;profiles=${profiles}&amp;userId=${userId}&amp;userName=${userName}" style="height: 100vh;width: 100%;" allow="microphone; camera"/>
                 </html>
             </vbox>
             <vbox test="{visualizer},=,1" separator=",">
