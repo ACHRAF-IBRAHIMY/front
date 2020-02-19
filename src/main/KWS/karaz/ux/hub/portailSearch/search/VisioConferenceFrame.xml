@@ -32,8 +32,7 @@
              context.formRender.notifyObservers("userName");
              root.visioURL =  visoUrl;
              context.formRender.notifyObservers("visioURL");
-            </script>
-            
+            </script> 
             <vbox test="{visualizer},=,0" separator=",">
                 <html >
                     <iframe id="visio" src="${visioURL}/conference/${numDossier}/${numCommission}?login=${login}&amp;profiles=${profiles}&amp;userId=${userId}&amp;userName=${userName}" style="height: 100vh;width: 100%;" allow="microphone; camera"/>
