@@ -162,7 +162,7 @@
 														<span class="fs-tooltiptext">Déléguer</span>
 													</span>
 												</div>
-												<div class="affectation ${task[$i].owt_state} subLong" title="${task[$i].owt_state_message|translate} ${task[$i].Lockedby}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;">${task[$i].owt_state_message|translate} ${task[$i].Lockedby} </div>
+												<div class="affectation ${task[$i].owt_state} subLong" title="${task[$i].owt_state_message|translate} ${task[$i].Lockedby}" style="width: 180px;height: 24px;margin-left: 10px;margin-top: 10px;overflow: hidden;">${task[$i].owt_state_message|translate} ${task[$i].Lockedby} </div>
 											</div>
 										</div>
 										<div style="clear:both" />
