@@ -14,8 +14,12 @@
       <menu relId="AcceptabiliteProjets" label="Acceptabilite Projets" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/AcceptabiliteProjets</resource>
       </menu>
+      
       <menu relId="AccesAuFoncier" label="Acces Au Foncier" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/AccesAuFoncier</resource>
+      </menu>
+      <menu relId="AllMembres" label="All membres" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AllMembres</resource>
       </menu>
       <menu relId="AllKarazuxresults" label="All Karazuxresults" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/AllKarazuxresults</resource>
