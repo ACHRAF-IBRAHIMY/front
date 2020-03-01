@@ -8,9 +8,7 @@
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <script postLoad="true"> 
-      
-          startTranslation(context);
-          
+                
                var mem = null;
                document.getElementsByClassName("back-div")[0].addEventListener("click",function(){
                     callLoadGif();
