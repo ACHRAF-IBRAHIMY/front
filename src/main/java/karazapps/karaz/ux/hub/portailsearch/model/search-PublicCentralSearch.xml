@@ -227,7 +227,7 @@
                   </div>
                 </html> 
               </vbox>
-              <vbox test="{signup},=,oui" separator=",">
+              <vbox testxx="{signup},=,oui" separator=",">
                 <html>
                   <div style="height: 20px;" />
                   <div class="hp-sbox-text" onclick="javascript:ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');">
@@ -239,7 +239,7 @@
                   <div style="height: 26px;" />
                 </html>
               </vbox>
-               <vbox test="{signup},=,non" separator=",">
+               <!-- <vbox test="{signup},=,non" separator=",">
                 <html>
                   <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
                     <i style="font-size:45px;" class="fas fa-map-marker-alt" />
@@ -250,7 +250,7 @@
                     <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SG00">Accès économique</span>
                   </div>
                 </html>
-              </vbox>
+              </vbox> -->
               
             </vbox>
             <vbox className="relative-position">
