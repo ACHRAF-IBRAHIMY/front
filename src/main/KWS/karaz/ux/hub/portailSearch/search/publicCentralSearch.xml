@@ -19,7 +19,7 @@
     </query>
     <newUser>false</newUser>
     <forgetPass>false</forgetPass>
-    <signup>non</signup>
+    <signup>oui</signup>
   </data>
   <view>
     /********************************************************/
