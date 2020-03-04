@@ -23,7 +23,12 @@ public class PortailTools {
 			AbstractKarazUser user = new AbstractKarazUser.SystemKarazUser(entity);
 			   
 			TreeMap<String, String> ctxp=new TreeMap<String, String>();
-			TreeMap<String, Object> rs = BackEndEJBContext.getKarazQuery(resourceQN).runQuery(xmlQuery, ofsset, limit, user, ctxp);
+			 KarazQuery qs = BackEndEJBContext.getKarazQuery(resourceQN);
+			 if(qs==null){
+				 return ret;
+			 }
+			
+			TreeMap<String, Object> rs = qs.runQuery(xmlQuery, ofsset, limit, user, ctxp);
 			logger.debug("Strat getIdsFromSearch !"+rs.keySet()+" resvalue.."+rs.values());
 
 			ArrayList<TreeMap<String, String>>  aliste =(ArrayList<TreeMap<String, String>>) rs.get(KarazQuery.Result);
@@ -49,7 +54,11 @@ public class PortailTools {
 			
 			   
 			TreeMap<String, String> ctxp=new TreeMap<String, String>();
-			TreeMap<String, Object> rs = BackEndEJBContext.getKarazQuery(resourceQN).runQuery(xmlQuery, ofsset, limit, user, ctxp);
+			 KarazQuery qs = BackEndEJBContext.getKarazQuery(resourceQN);
+			 if(qs==null){
+				 return ret;
+			 }
+			TreeMap<String, Object> rs = qs.runQuery(xmlQuery, ofsset, limit, user, ctxp);
 			logger.debug("Strat getIdsFromSearch !"+rs.keySet()+" resvalue.."+rs.values());
 			return rs;
 		} catch (Exception e) {
