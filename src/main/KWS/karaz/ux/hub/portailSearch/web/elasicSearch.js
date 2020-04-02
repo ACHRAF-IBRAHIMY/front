@@ -3486,6 +3486,48 @@ typePage = type;
 
 
 function fullSearchList(results,cls,typePage,target){
+	
+	if(procedureList==undefined){
+		var procedureList = [[
+			"Simple Déclaration",
+            "Établissement classé;Classe 2",
+            "Établissement classé;Classe 3",
+            "Occupation Domaine Public;Travaux Publics",
+            "Occupation Domaine Public;Télécom",
+            "Occupation Domaine Public;Affichage Publicitaire",
+            "Occupation Domaine Public;Activité Normale",
+            "Occupation Domaine Public;Stationnement Réservé",
+            "Autorisations urbanisme;Projets de construction de groupes d'habitation",
+            "Autorisations urbanisme;Projet de lotissement",
+            "Autorisations urbanisme;Modifications de constructions existantes",
+            "Autorisations urbanisme;Projet de morcellement",
+            "Autorisations urbanisme;Projet de construction d'équipement à usage public",
+            "Autorisations urbanisme;Projet de construction à usage d'habitation",
+            "Autorisations urbanisme;Projet de construction d'institution à caractère industriel",
+            "Autorisations urbanisme;Projet de construction à usage mixte",
+            "Autorisations urbanisme;Equipements commerciaux",
+            "Autorisations urbanisme;Projet de construction d'équipement à usage commercial"],
+            ["SimpleDeclaration",
+            "EtablissementClasse2",
+            "EtablissementClasse",
+            "OccupationDomainPubRp",
+            "OccupationDomainPubRT",
+            "AffichagePub",
+            "OccupationDomainPubUC",
+            "OccupationDomainPubUC",
+            "autorusationConstructionGroupesHabitations",
+            "autorusationLotissement",
+            "",
+            "autorisationMorcellement",
+            "AutorisationsConstructionGrandsProjets",
+            "AutorisationsConstructionGrandsProjets",                 
+            "AutorisationsConstructionGrandsProjets",
+            "AutorisationsConstructionGrandsProjets",
+            "AutorisationsConstructionGrandsProjets",
+            "AutorisationsConstructionGrandsProjets"                  
+            ]];
+	}
+	
 var a = target.find("."+cls+" .full-search-list");
 if(typePage== 1){
 console.log(results)
@@ -3805,7 +3847,8 @@ for(i=0;i<results.length;i++){
 }
 }
 
-var procedureList = [["Simple Déclaration",
+var procedureList = [[
+			"Simple Déclaration",
             "Établissement classé;Classe 2",
             "Établissement classé;Classe 3",
             "Occupation Domaine Public;Travaux Publics",
