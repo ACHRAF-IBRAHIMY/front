@@ -730,7 +730,7 @@ if(root.articleCms != ""){
     var attachement = root.attachementArImg;
 
     if(attachement.gedId.trim()!=""){
-        var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
+        var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId;
     }else{
         var urlV = "";
     }
@@ -755,7 +755,7 @@ if(root.articleCms != ""){
     var description = target.find('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
     var attachement = root.attachementArImg;
     if(attachement.gedId.trim()!=""){
-        var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
+        var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId;
     }else{
         var urlV = "";
     }
@@ -909,7 +909,7 @@ target.find(cls + ":not(:has(>.NFQ-end))").append(div);
 
 } else if (type == 2 || type ==3) {
 
- if(profilesT.match(/ADMIN_FAQ/)=='ADMIN_FAQ'){
+ if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
     var str = `toModifyFaq("${id}")`; 
 }else{
     var str = `ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject=${id}","search", "FaqDetail", {});`
