@@ -69,9 +69,15 @@ console.log("ERROR in Javascript function isValidEmail(value) .......");
 }        
 }
 
+
+function htmlToString(xml){
+    return xml.replace(/<[^>]*>?/gm, '');
+}
+
 function addComment(root,target,context){
 
-
+    var text = context.formRender.targetPanel.find("#toolbarsecCom .ql-editor").html();
+    root["articleComment"] = text;
 
 if(root["articleCommentName"].trim()==""){
 target.find(".classSearch-82 .err-msg").html("Veuillez saisir votre nom");
@@ -89,7 +95,7 @@ target.find(".classSearch-82 .err-msg").html("Veuillez saisir votre email valide
 return ;
 }
 
-if(root["articleComment"].trim()==""){
+if(htmlToString(root["articleComment"]).trim()==""){
 target.find(".classSearch-82 .err-msg").html("Veuillez saisir votre commentaire");
 return ;
 }
@@ -105,6 +111,8 @@ var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datet
 // var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
 
 var formatted_date = dateYear + "/" + dateMonths + "/" + dateDays;
+
+
 
 if(target.find(".comment-form span.rep-comment").attr("idd")==""){
 var comment = {
@@ -266,59 +274,61 @@ if(elm.comments!=undefined){
 
 
 function addCommentRest(root,target,comment,context,type){
-if(type==-1){
-var obj = {
-    "script" : {
-        "source": "ctx._source.comments.add(params.comment)",
-        "lang": "painless",
-        "params" : {
-            "comment" : comment
-        }
-    }
-};
-}else{
-var obj = {
-    "script" : {
-        "source": "ctx._source.comments[params.index].comments.add(params.comment)",
-        "lang": "painless",
-        "params" : {
-            "comment" : comment,
-            "index":type
-        }
-    }
-};
+	if(type==-1){
+	var obj = {
+	    "script" : {
+	        "source": "ctx._source.comments.add(params.comment)",
+	        "lang": "painless",
+	        "params" : {
+	            "comment" : comment
+	        }
+	    }
+	};
+	}else{
+	var obj = {
+	    "script" : {
+	        "source": "ctx._source.comments[params.index].comments.add(params.comment)",
+	        "lang": "painless",
+	        "params" : {
+	            "comment" : comment,
+	            "index":type
+	        }
+	    }
+	};
+	}
+
+
+	$.ajax({
+	type: "post",
+	url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/_update/"+root.article._id,
+	datatype: "application/json",
+	contentType: "application/json",
+	data:JSON.stringify(obj),
+	beforeSend: function (xhr) {
+	    xhr.setRequestHeader("Authorization", ADMIN_AUTH);
+	},
+	success: function(){
+
+
+	    root.articleCommentName = "";
+	    root.articleCommentLastName = "";
+	    root.articleCommentEmail = "";
+	    root.articleComment = "";
+	    context.formRender.targetPanel.find("#toolbarsecCom .ql-editor").html("");
+
+	    context.formRender.notifyObservers("articleCommentName");
+	    context.formRender.notifyObservers("articleCommentLastName");
+	    context.formRender.notifyObservers("articleCommentEmail");
+	    context.formRender.notifyObservers("articleComment");
+
+	    getObjectArticle(root.query.idObject,root,target);
+
+//	     target.find(".classSearch-82 .reseau-ss .like").removeClass("active-like");
+//	     target.find(".classSearch-82 .date-det span.like-span").html(Number(target.find(".classSearch-82 .date-det span.like-span").html())-1);
+	}
+	});
 }
 
-
-$.ajax({
-type: "post",
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/_update/"+root.article._id,
-datatype: "application/json",
-contentType: "application/json",
-data:JSON.stringify(obj),
-beforeSend: function (xhr) {
-    xhr.setRequestHeader("Authorization", ADMIN_AUTH);
-},
-success: function(){
-
-
-    root.articleCommentName = "";
-    root.articleCommentLastName = "";
-    root.articleCommentEmail = "";
-    root.articleComment = "";
-
-    context.formRender.notifyObservers("articleCommentName");
-    context.formRender.notifyObservers("articleCommentLastName");
-    context.formRender.notifyObservers("articleCommentEmail");
-    context.formRender.notifyObservers("articleComment");
-
-    getObjectArticle(root.query.idObject,root,target);
-
-//     target.find(".classSearch-82 .reseau-ss .like").removeClass("active-like");
-//     target.find(".classSearch-82 .date-det span.like-span").html(Number(target.find(".classSearch-82 .date-det span.like-span").html())-1);
-}
-});
-}
 
 function verifierLike(user,array){
 var userName = user.split(";")[0];
