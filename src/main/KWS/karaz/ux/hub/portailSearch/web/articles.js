@@ -1,3 +1,4 @@
+
 function addLike(user,id,target){
 var obj = {
 "script" : {
@@ -657,7 +658,8 @@ var obj = {
 "term":{
     "type.keyword":type
 }
-},"sort":[{ "vue" : {"order" : "desc"}}]
+},"sort":[{ "datePr" : {"order" : "desc"}}]
+
 
 };
 
@@ -794,12 +796,12 @@ createDivComments(obj.comments,target);
 
 target.find(".classSearch-82 .vpanel-title .title-2x").html(obj.type);
 target.find(".classSearch-82 .vpanel-title .title-2x").click(function(e){
-    if(obj.type="PRATIQUE"){
-        var typeArt = 1;
-    }else if(obj.type="A LA UNE"){
-        var typeArt = 2;
-    }else if(obj.type="REVUE DE PRESSE"){
-        var typeArt = 3;
+    if(obj.type=="PRATIQUE"){
+        typeArt = 1;
+    }else if(obj.type=="A LA UNE"){
+        typeArt = 2;
+    }else if(obj.type=="REVUE DE PRESSE"){
+        typeArt = 3;
     }
     ApplicationManager.run('karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle='+typeArt,'search','Articles',{});
 });
