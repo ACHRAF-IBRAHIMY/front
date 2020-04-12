@@ -97,13 +97,13 @@
                 <html>
               <div style="height: 50px;" />
             </html>
-                    <fieldset className="fieldset-articles fieldser-article-1" header="PRATIQUE">
+                    <fieldset className="fieldset-articles fieldser-article-1" header="LES PLUS RÉCENTS">
                         <vbox className="vbox-articles" columns="33.3% 33.3% 33.3%">
                            
                         </vbox>
                         <vbox className="fieldset-footer fieldset-footer-1">
                             <html>
-                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | PRATIQUE</div>
+                                <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher tous les articles | LES PLUS RÉCENTS</div>
                             </html>
                         </vbox>
                     </fieldset>

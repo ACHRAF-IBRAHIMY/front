@@ -192,6 +192,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/autorusationLotissement", "karazapps/karaz/ux/hub/portailsearch/model/search-autorusationLotissement.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/commentsGb", "karazapps/karaz/ux/hub/portailsearch/model/search-commentsGb.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/contactUs", "karazapps/karaz/ux/hub/portailsearch/model/search-contactUs.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/proceduresEconomique", "karazapps/karaz/ux/hub/portailsearch/model/search-proceduresEconomique.xml");
