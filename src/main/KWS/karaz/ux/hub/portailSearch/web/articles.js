@@ -828,3 +828,20 @@ target.find(".divSearch-article .div-fsb-details .fsb-container").show();
 target.find(".classSearch-82 .reseau-ss .url-share textArea").html(window.location.href+"index.jsp#search//karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+results._id+"//search");
 });
 }
+
+function getObjectArticleCmt(id,root,target){
+    target.find(".divSearch-article .search-details-icon img").show();
+    $.ajax({
+    type: "get",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/comments_index/_doc/"+id,
+    datatype: "application/json",
+    contentType: "application/json",
+    beforeSend: function (xhr) {
+        xhr.setRequestHeader("Authorization", AUTH);
+    }
+    }).done(function(results){
+        var obj = results._source; 
+    createDivComments(obj.comments,target); 
+    });
+    
+}

@@ -150,7 +150,7 @@
                   <i class="fas fa-file-alt" />
                   <div>
                     <span>0</span>
-                    <span class="class-traduction" tcode="SC00" >Remarques</span>
+                    <span class="class-traduction" tcode="SC00">Remarques</span>
                   </div>
                 </div>
               </html>
@@ -159,7 +159,7 @@
                   <i class="fas fa-comment-alt" />
                   <div>
                     <span>0</span>
-                    <span class="class-traduction" tcode="SC00" >Avis</span>
+                    <span class="class-traduction" tcode="SC00">Avis</span>
                   </div>
                 </div>
               </html>
@@ -168,7 +168,7 @@
                   <i class="fas fa-users" />
                   <div>
                     <span>0</span>
-                    <span class="class-traduction" tcode="SC00" >Membres</span>
+                    <span class="class-traduction" tcode="SC00">Membres</span>
                   </div>
                 </div>
               </html>
@@ -193,8 +193,8 @@
                           <option value="12">12</option>
                           <option value="20">20</option>
                           <option value="40">40</option>
-                          <option value="60"  >60</option>
-                          <option value="100" >100</option>
+                          <option value="60">60</option>
+                          <option value="100">100</option>
                           <option value="140" selected="selected">140</option>
                         </select>
                         <span class="separate-span" />
@@ -311,6 +311,8 @@
           </vbox>
         </vbox>
       </vbox>
+      <search searchQN="karaz/ux/hub/portailsearch/search/commentsGb?query.idObject=20202" />
+
       <html>
         <div style="height: 30px;" />
       </html>

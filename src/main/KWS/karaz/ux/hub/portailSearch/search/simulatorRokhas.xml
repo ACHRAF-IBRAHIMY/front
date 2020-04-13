@@ -241,6 +241,9 @@
           </html>
         </vbox>
       </vbox>
+
+      <search searchQN="karaz/ux/hub/portailsearch/search/commentsGb?query.idObject=20204" />
+
       <html>
         <div style="height: 30px;" />
       </html>

@@ -505,10 +505,10 @@
           <vbox className="legend-region">
             <html>
               <div style="height:500px">
-                  <div class="lg" style="display:grid;grid-template-columns:33% 34% 33%;"></div>
+                  <div class="lg" style="display:grid;grid-template-columns:33% 34% 33%;" />
               </div>
               <div style="margin:auto;margin-top: 40px;font-size: 13px;display: grid;grid-template-columns: 50px auto;width:95%">
-                  <i class="fas fa-exclamation-triangle" style="font-size: 26px;margin-top: 4px;color: orange;"></i>
+                  <i class="fas fa-exclamation-triangle" style="font-size: 26px;margin-top: 4px;color: orange;" />
                   <span>En raison d’importantes différences d’échelle sur le nombre de dossiers traités par les régions, l’indicateur <b>Attractivité</b> à été divisé par un facteur de 5 et intitulé <b>Attractivité-N</b> afin d’améliorer la lisibilité du graphe. 
                     Le score réel de l’indicateur <b>Attractivité</b> doit donc être lu comme <b>Attractivité-N</b> * 5 </span>
                   
@@ -518,9 +518,7 @@
           <vbox />
         </vbox>
       </fieldSet>
-      
-      
-  
+      <search searchQN="karaz/ux/hub/portailsearch/search/commentsGb?query.idObject=20201" />
       <html>
         <div style="height: 30px;" />
       </html>

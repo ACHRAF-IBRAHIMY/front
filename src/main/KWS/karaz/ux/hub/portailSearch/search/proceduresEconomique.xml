@@ -202,6 +202,8 @@
                   <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
 
       </vbox>
+      <search searchQN="karaz/ux/hub/portailsearch/search/commentsGb?query.idObject=20203" />
+
       <html>
         <div style="height: 30px;" />
       </html>
