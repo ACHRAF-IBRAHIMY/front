@@ -891,10 +891,9 @@ if(trims[0]=="1"){
 
 option.innerHTML = str;
 option.setAttribute("value",elms[i].key);
-if(str=="COMMUNE CASABLANCA"){
 
-}else{
-select.append(option);
+if(!str.includes("COMMUNE")){
+ select.append(option);
 }
 
 }
