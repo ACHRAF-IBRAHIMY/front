@@ -3,10 +3,20 @@
   <query />
   <data>
     <query>
-      <search />
+      <keys />
       <idObject />
-      <parentP />
+      <redirectArt />
     </query>
+    <article>
+    </article>
+    <articleCommentName>
+    </articleCommentName>
+    <articleCommentLastName>
+    </articleCommentLastName>
+    <articleCommentEmail>
+    </articleCommentEmail>
+    <articleComment>
+    </articleComment>
     <collapsed>false</collapsed>
   </data>
   <view>
@@ -32,6 +42,13 @@
           },
           theme: 'snow'
         });
+
+        context.formRender.targetPanel.find(".annuler-rep-comment").click(function(){
+          context.formRender.targetPanel.find(".comment-form h1.add-comment").show();
+          context.formRender.targetPanel.find(".comment-form span.rep-comment").hide(); 
+          context.formRender.targetPanel.find(".comment-form span.rep-comment").attr("idd","");
+      });
+
       </script>
       <html id="hSeparator">
           <style>
@@ -154,7 +171,7 @@
     
           </style>
       </html>
-      <vbox className="hp-box hp-small classSearch-comments">
+      <vbox className="hp-box hp-small classSearch-comments classSearch-82">
         <html>
           <span style="display:grid;grid-template-columns:100%;text-align:left">
             <span>
@@ -243,7 +260,7 @@
               <vbox>
                 <button className="send-comment" label="ENVOYER">
                   <postChange>
-                    addComment(root,context.formRender.targetPanel,context);
+                    addComment(root,context.formRender.targetPanel,context,true);
                   </postChange>
                 </button>
               </vbox>                  
