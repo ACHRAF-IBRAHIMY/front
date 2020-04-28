@@ -11,6 +11,7 @@
     <NQFtitle />
     <NQFtype />
     <NQFdesc />
+    <NQFtypeRef />
     <attachementRef>
           <fileId />
           <fileName />
@@ -19,6 +20,15 @@
           <fileTime />
           <gedId />
     </attachementRef>
+    <attachementRefAr>
+      <fileId />
+      <fileName />
+      <fileSize />
+      <fileSignature />
+      <fileTime />
+      <gedId />
+    </attachementRefAr>
+    
     <urlRef />
   </data>
   <view>
@@ -49,9 +59,17 @@
                 $(".close1-ref").click();
             });
 
+            $(".ref-form .fa-close-2").click(function(){
+              $(".close2-ref").click();
+          });
+
             $(".ref-form .fa-upload-1-ref").click(function(){
-                $(".ref-form button.upload").click();
+                $(".ref-form .cls1 button.upload").click();
             });
+
+            $(".ref-form .fa-upload-2-ref").click(function(){
+              $(".ref-form .cls2 button.upload2").click();
+          });
 
             
       </script>
@@ -79,13 +97,15 @@
 
                     root.attachementRef.fileId = "";
                     root.attachementRef.gedId = "";
+                    root.attachementRefAr.fileId = "";
+                    root.attachementRefAr.gedId = "";
                     root.urlRef = "";
                     context.formRender.notifyObservers("urlRef");  
                     context.formRender.notifyObservers("attachementRef");
-                   
+                    context.formRender.notifyObservers("attachementRefAr");
                     $(".classSearch-3 .NFQ-all-quest").hide();
                     $(".classSearch-3 .NQF-edit-modif").show();
-                    NQF_new_QR(2,"classSearch-3");
+                    NQF_new_QR(2,"classSearch-3",context.formRender.targetPanel);
 
                 </postChange>
               </button>
@@ -99,11 +119,12 @@
                   <field label="Intitulé texte juridique" widget="text" labelAlign="float" xpath="NQFtitle" />
                   <vbox contentAlign="center" columns="40% 49% 1% 0% 10%" className="NQF-edit-select-float">
                     <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
-                      <option value="2" label="Urbanisme" />
-                      <option value="1" label="Economique" />
+                      <option value="Urbanisme" label="Urbanisme" />
+                      <option value="Economique" label="Economique" />
+                      <option value="Autre" option="Autre" /> 
                     </field>
                     <field label="URL Attachement" widget="text" labelAlign="float" className="url-vue" xpath="urlRef" />
-                    <field xpath="attachementRef" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
+                    <field xpath="attachementRef" className="cls1" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
                     <button className="k-btn-transparent hidden close1-ref" icon="fas fa-close" usage="visualisation=R">
                        <postChange>
                         var attachement = root.attachementRef;
@@ -123,6 +144,38 @@
                       </html>
                     <vbox />
                   </vbox>
+                  <vbox contentAlign="center" columns="40% 49% 1% 0% 10%" className="NQF-edit-select-float">
+                    <field widget="select" label="Catégorie" labelAlign="float" xpath="NQFtypeRef">
+                      <option value="Arrêté" label="Arrêté" />
+                      <option value="Circulaire" label="Circulaire" />
+                      <option value="Dahir" label="Dahir" />
+                      <option value="Décret" label="Décret" />
+                      <option value="description" label="description" />
+                      <option value="Loi" label="Loi" />
+                      <option value="Autre" label="Autre" />
+                      <option value="Cahier de charge" label="Cahier de charge" />
+                    </field>
+                    <field label="URL Attachement Ar" widget="text" labelAlign="float" className="url-vue" xpath="urlRef" />
+                    <field xpath="attachementRefAr" className="cls2" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher version Arabe" widget="fileUpload" />
+                    <button className="k-btn-transparent hidden close2-ref" icon="fas fa-close" usage="visualisation=R">
+                       <postChange>
+                        var attachement = root.attachementRefAr;
+                        console.log("Emptyyyyyyyyyyy:"+JSON.stringify(attachement));
+                        root.attachementRefAr.fileId = "";
+                        root.attachementRefAr.gedId = "";
+                        root.urlRef = "";
+                        context.formRender.notifyObservers("attachementRefAr");
+                        context.formRender.notifyObservers("urlRef");
+                        attachement = root.attachementRefAr;
+                        console.log(attachement);
+                       </postChange>
+                    </button>
+                      <html className="att-icons">
+                        <i class="fas fa-upload fa-upload-2-ref" title="Attacher un fichier (moins de 15 mb)" style="color:#38A;font-size=13px" />
+                        <i class="fas fa-close fa-close-2-ref" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;" />
+                      </html>
+                    <vbox />
+                  </vbox>
                   <field widget="textArea" xpath="NQFdesc" label="description" labelAlign="float" className="NFQ-desc-refjuridique" />
                 </vbox>
               </fieldset>
@@ -133,13 +186,13 @@
                 <hx />
                 <vbox columns="33% 33% auto" style="margin-right: 2em;">
                   <button label="Prévisualiser " className="DC-btn-filtrer-NQF NQF-btn-filtrer-color NQF-btn-color-blue NQF-btn-color">
-                    <postChange>NQF_preview_QR(2,"classSearch-3");</postChange>
+                    <postChange>NQF_preview_QR(2,"classSearch-3",context.formRender.targetPanel);</postChange>
                   </button>
                   <button label="Nouveau" style="" className="DC-btn-filtrer-NQF  NQF-btn-color-normal">
-                    <postChange>NQF_new_QR(2,"classSearch-3");</postChange>
+                    <postChange>NQF_new_QR(2,"classSearch-3",context.formRender.targetPanel);</postChange>
                   </button>
                   <button label="Enregistrer" className="DC-btn-filtrer-NQF NQF-btn-check NQF-btn-color-normal">
-                    <postChange>NQF_save_QR(2,root);</postChange>
+                    <postChange>NQF_save_QR(2,root,context.formRender.targetPanel);</postChange>
                   </button>
                 </vbox>
               </vbox>
