@@ -355,528 +355,534 @@ return vr;
 }
 
 function NQF_save_QR(type,root,target) {
-if (type == 1) {
-var clas = "classSearch-5";
-
-let question = target.find("."+clas+' .ow-field-input[data-xpath="question"]').val();
-let categ = target.find("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
-let resp = target.find("."+clas+'  .ql-editor').html()
-let ID = target.find("."+clas+" .NQF-id").val();
-let visibility = root.visibility;
-
-if(visibility.trim()==""){
-    visibility = "ADMIN";
-}
-
-
-target.find("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
-target.find("."+clas+" .NQF-prev-resp").html(resp);
-
-var req = {
-    "QUESTIONS": "",
-    "REPONSES": "",
-    "type": "",
-    "visibility":""
-}
-
-req.QUESTIONS = question;
-req.REPONSES = resp;
-req.type = categ;
-req.visibility = visibility;
-
-// type
-if (categ == "Signature électronique") {
-    req.type = "E-SIGN";
-} else if (categ == "Général") {
-    req.type = "GENERAL";
-} else if (categ == "Document") {
-    req.type = "DOCUMENT";
-} else if (categ == "Plateforme") {
-    req.type = "PLATEFORME";
-} else if (categ == "Architecte") {
-    req.type = "ARCHITECTE";
-} else if (categ == "Administration") {
-    req.type = "ADMINISTRATION";
-}
-
-//
-console.log(req, ID);
-if (req.QUESTIONS != "" && req.REPONSES != "" && req.type != "") {
-
-    console.log(req, ID);
-    updateQuestionNQF(ID, req,target);
-    
-    if (target.find("."+clas+" .ow-btn-container:has(> i)").length == 0) {
-        target.find("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
-    }
-    
-    setTimeout(function () {
-        target.find("."+clas+" .ow-btn-container i.fa-check").remove()
-        target.find("."+clas+" .NQF-edit-modif").hide()
-        target.find("."+clas+" .NQF-new-quest-btn").show();
-        target.find("."+clas+" .NQF-vue-question").show();
-    }, 2000);
-    
-    
-} else {
-    alert("verifier que tout les champs sont bien remplis");
-    target.find("."+clas+" .NQF-vue-question").hide();
-}
-
-} else if(type == 2){
-
-var clas = "classSearch-3";
-
-// let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
-// let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
-// let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
-// let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtypeRef"]').text();
-// let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
-
-let title = root.NQFtitle;
-let categ = root.NQFtype;
-let texte = root.NQFtext;
-let typee = root.NQFtypeRef;
-let description = target.find('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
-
-var attachement = root.attachementRef;
-if(attachement.gedId.trim()!=""){ 
-    var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
-}else{
-    var urlV = "";
-}
-
-var attachement2 = root.attachementRefAr;
-if(attachement2.gedId.trim()!=""){
-    var urlV2 = "/karazal/DownloadFile?gedId="+attachement2.gedId+"&krn="+attachement2.gedId.split("/")[0];
-}else{
-    var urlV2 = "";
-}
-
-console.log(title, categ, texte, description)
-var T = 0;
-if(categ == "Urbanisme"){
-    T = 2; 
-} else if(categ == "Economique"){
-    T = 1;
-} else if(categ=="Autre"){
-    T = 3;
-}
-let id = "";
-id = $("."+clas+" .NQF-id-ref").val();
-$("."+clas+" .NQF-title-ref").text(title);
-$("."+clas+" .NQF-desc-ref").text(description);
-$("."+clas+" .NQF-text-ref").html(texte);
-
-var req = {
-    "title": "",
-    "type": "",
-    "content": "",
-    "desc":"",
-    "attachementRef":"",
-    "urlV":"",
-    "attachementRefAr":"",
-    "urlV2":"",
-    "typeRef":""
-};
-
-req.title = title;
-req.type = T.toString();
-req.content = texte;
-req.desc = description;
-req.urlV = urlV;
-req.urlV2 = urlV2;
-req.attachementRef = attachement;
-req.attachementRefAr = attachement2;
-req.typeRef = typee;
-
-console.log(req, id);
-
-//
-if (target.find("."+clas+" .ow-btn-container:has(> i)").length == 0) {
-    target.find("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
-}
-setTimeout(function () {
-    target.find("."+clas+" .ow-btn-container i.fa-check").remove()
-    target.find("."+clas+" .NQF-edit-modif").hide()
-    target.find("."+clas+" .NQF-new-quest-btn").show();
-    target.find("."+clas+" .NQF-vue-ref").show();
-    target.find("."+clas+" .NQF-btn-alg").hide();
-}, 2000);
-
-updateReglementation(id,req,target);
-}else if(type==3){
-var clas = "classSearch-6";
-let title = $('.'+clas+' .ow-field-input[data-xpath="title"]').val();
-let categ = $('.'+clas+' .ow-field-input-select[data-xpath="categ"]').text();
-let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
-let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
-let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
-let tag = $('.'+clas+' .ow-field-input-select[data-xpath="tag"]').text();
-
-if(categ=="Vimeo"){
-    var video_id = urlV.match(/\/\d+/)[0].replace(/\//g,""); 
-}else if(categ=="Youtube"){
-    var video_id = urlV.match(/v=\w+[&]*/)[0].replace("v=",'');; 
-}
-
-if(playlist.trim()==""){
-    playlist = "Général";
-}
-
-if(tag.trim()==""){
-    tag = "without_tag";
-}
-
-var current_datetime = new Date();
-
-var dateYear = current_datetime.getFullYear();
-var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
-var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
-
-var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
-var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
-var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
-
-var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
-
-var req = {
-    "title": title,
-    "plateforme": categ,
-    "url": urlV,
-    "playlist":playlist,
-    "description":description,
-    "video_id":video_id,
-    "img_url":"",
-    "tag":tag,
-    "date": formatted_date,
-};
-
-let id = "";
-id = $(".NQF-id-ref").val();
-if(categ=="Vimeo"){
-    $.ajax({
-        type:'GET',
-        url: 'https://vimeo.com/api/v2/video/' + video_id + '.json',
-        jsonp: 'callback',
-        dataType: 'jsonp', 
-        success: function(data){
-            var thumbnail_src = data[0].thumbnail_large;
-            req.img_url = thumbnail_src;
-            if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
-                $("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
-            }
-
-            
-            var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
-            console.log(urlemb);
-            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-            $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
-            $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
-            
-            setTimeout(function () {
-                $("."+clas+" .ow-btn-container i.fa-check").remove()
-                $("."+clas+" .NQF-edit-modif").hide()
-                $("."+clas+" .NQF-new-quest-btn").show();
-                $("."+clas+" .NQF-vue-ref").show();
-                $("."+clas+" .NQF-btn-alg").hide();
-                $("."+clas+" .NQF-vue-question").show();
-                
-                getAllplayLists(1,100,clas);
-
-            }, 2000);
-            
-            updateVideo(req.video_id,req);
-        }
-    });
-
-}else if(categ=="Youtube"){
-    
-    
-            req.img_url = "https://img.youtube.com/vi/"+req.video_id+"/0.jpg";
-            
-            if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
-                $("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
-            }
-
-            
-            var urlemb = "https://www.youtube.com/embed/"+req.video_id;
-            console.log(urlemb);
-            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-            $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
-            $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
-            
-            setTimeout(function () {
-                $("."+clas+" .ow-btn-container i.fa-check").remove()
-                $("."+clas+" .NQF-edit-modif").hide()
-                $("."+clas+" .NQF-new-quest-btn").show();
-                $("."+clas+" .NQF-vue-ref").show();
-                $("."+clas+" .NQF-btn-alg").hide();
-                $("."+clas+" .NQF-vue-question").show();
-                
-                getAllplayLists(1,100,clas);
-
-            }, 2000);
-            
-            updateVideo(req.video_id,req);
-}
-
-
-}else if(type==4){
-var clas = "classSearch-11";
-let title = $('.'+clas+' .ow-field-input[data-xpath="title"]').val();
-let categ = $('.'+clas+' .ow-field-input-select[data-xpath="categ"]').text();
-let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
-let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
-let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
-let text = $('.'+clas+' .ql-editor').html();
-var imgUrl = $('.'+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
-console.log("root.attachement== "+root.attachement);
-var attachement = root.attachement;
-var attachementImg = root.attachementImg;
-console.log("saveeeeeeeeee : "+attachement);
-
-if(attachementImg.gedId!=""){
-    imgUrl = "/karazal/DownloadFile?gedId="+attachementImg.gedId+"&thumbnail=small&krn="+attachementImg.gedId.split("/")[0]+"&or=img/no-file.svg"
-}
-
-if(playlist.trim()==""){
-    playlist = "Général";
-}
-
-
-var current_datetime = new Date();
-
-var dateYear = current_datetime.getFullYear();
-var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
-var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
-
-var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
-var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
-var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
-
-var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
-
-var req = {
-    "title": title,
-    "plateforme": categ,
-    "url": urlV,
-    "playlist":playlist,
-    "description":description,
-    "img_url":imgUrl,
-    "date": formatted_date,
-    "attachement":attachement,
-    "attachementImg": attachementImg,
-    "text":text
-};
-
-if(attachement.gedId==""){    
-    if(imgUrl.trim()!=""){
-        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-    }else{
-        if(categ=="DOC"){
-            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
-        }else if(categ=="INSTALL"){
-                $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
-        }
-    }
-}else{
-    var krn = attachement.gedId.split("/")[0];
-    var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="'+contextPath+'/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="'+contextPath+'/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
-}
-
-let id = "";
-id = $("."+clas+" .NQF-id").val();
-
-$("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
-$("."+clas+" .NQF-vue-question .vue-video-description").html(description);
-setTimeout(function () {
-    $("."+clas+" .ow-btn-container i.fa-check").remove()
-    $("."+clas+" .NQF-edit-modif").hide()
-    $("."+clas+" .NQF-new-quest-btn").show();
-    $("."+clas+" .NQF-vue-ref").show();
-    $("."+clas+" .NQF-btn-alg").hide();
-    $("."+clas+" .NQF-vue-question").show();
-    
-    getAllplayListsD(1,100,clas,target);
-
-}, 2000);
-
-updatePlaylist(id,req);
-
-}else if(type==7){
-var clas = "classSearch-99";
-
-// let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
-// let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
-// let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFcategorie"]').text();
-// let author = $('.'+clas+' .ow-field-input[data-xpath="NQFauthor"]').val();
-// let tags = $('.'+clas+' .ow-field-input[data-xpath="NQFtags"]').val();
-// let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
-// let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
-
-if(root.articleCms != ""){
-    console.log("articleCms!=null");
-    var title = root.NQFtitle;
-    var typee = root.NQFtype;
-    var categ = root.NQFcategorie;
-    var author = root.NQFauthor;
-    var tags = root.NQFtags;
-    var lang = root.NQFlang;
-    var source = root.NQFsource;
-    var link = root.NQFlink;
-    var texte = target.find('.'+clas+'  .ql-editor').html();
-    var description = target.find('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
-    var attachement = root.attachementArImg;
-
-    if(attachement.gedId.trim()!=""){
-        var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId;
-    }else{
-        var urlV = "";
-    }
-
-    var formatted_date = root.articleCms.datePr;
-    var vue = root.articleCms.vue;
-    var like=root.articleCms.like;
-    var comments=root.articleCms.comments;
-    var list_vue=root.articleCms.list_vue;
-    var liste_like=root.articleCms.liste_like;
-
-}else{
-    var title = root.NQFtitle;
-    var typee = root.NQFtype;
-    var categ = root.NQFcategorie;
-    var lang = root.NQFlang;
-    var author = root.NQFauthor;
-    var tags = root.NQFtags;
-    var source = root.NQFsource;
-    var link = root.NQFlink;
-    var texte = target.find('.'+clas+'  .ql-editor').html();
-    var description = target.find('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
-    var attachement = root.attachementArImg;
-    if(attachement.gedId.trim()!=""){
-        var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId;
-    }else{
-        var urlV = "";
-    }
-
-    var current_datetime = new Date();
-
-    var dateYear = current_datetime.getFullYear();
-    var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
-    var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
-
-    var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
-    var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
-    var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
-    
-    var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
-
-    var vue = 0;
-    var like=0;
-    var comments=[];
-    var list_vue=[];
-    var liste_like=[];
-
-}
-
-
-
-
-
-
-
-
-console.log(title, categ, texte, description)
-
-let id = "";
-
-id = target.find("."+clas+" .NQF-id").val();
-
-/*$("."+clas+" .NQF-title-ref").text(title);
-$("."+clas+" .NQF-desc-ref").text(description);
-$("."+clas+" .NQF-text-ref").html(texte);
-*/
-
-var req = {
-    "title": "",
-    "type": "",
-    "content": "",
-    "description":"",
-    "attachementRef":"",
-    "imgP":"",
-    "datePr":"",
-    "categorie":"",
-    "author":"",
-    "tags":"",
-    "tagsText":"",
-    "vue":0,
-    "like":0,
-    "comments":[],
-    "list_vue":[],
-    "liste_like":[],
-    "source":"",
-    "link":"",
-    "lang":""
-};
-
-
-
-req.title = title;
-req.type = categ;
-req.content = texte;
-req.description = description;
-req.imgP = urlV;
-req.attachementRef = attachement;
-req.categorie = typee;
-req.datePr = formatted_date;
-req.author = author;
-req.tagsText = tags;
-req.vue= vue;
-req.like= like;
-req.source = source;
-req.link = link;
-req.comments= comments;
-req.list_vue= list_vue;
-req.liste_like= liste_like;
-req.lang=lang;
-
-var ttg = tags.split("//"); 
-var tagsArr = [];
-
-ttg.forEach(function(elm){
-    var tagObj = {
-        "tag":elm,
-        "id":""
-    };
-    tagsArr.push(tagObj);
-})
-
-req.tags = tagsArr;
-
-target.find("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+urlV+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
-target.find("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
-target.find("."+clas+" .NQF-vue-question .vue-video-description").html(description);
-            
-
-console.log(req, id);
-
-//
-if (target.find("."+clas+" .ow-btn-container:has(> i)").length == 0) {
-    target.find("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
-}
-
-setTimeout(function () {
-    target.find("."+clas+" .ow-btn-container i.fa-check").remove()
-    target.find("."+clas+" .NQF-edit-modif").hide()
-    target.find("."+clas+" .NQF-new-quest-btn").show();
-    target.find("."+clas+" .NQF-vue-video").show();
-    target.find("."+clas+" .NQF-btn-alg").hide();
-}, 2000);
-console.log(req);
-updateArticle(id,req,target,root);
-}
-}
+	if (type == 1) {
+	var clas = "classSearch-5";
+
+	let question = target.find("."+clas+' .ow-field-input[data-xpath="question"]').val();
+	let categ = target.find("."+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+	let resp = target.find("."+clas+'  .ql-editor').html()
+	let ID = target.find("."+clas+" .NQF-id").val();
+	let visibility = root.visibility;
+
+	if(visibility.trim()==""){
+	    visibility = "ADMIN";
+	}
+
+
+	target.find("."+clas+" .NQF-vue-question .NQF-prev-quest >b").text(question);
+	target.find("."+clas+" .NQF-prev-resp").html(resp);
+
+	var req = {
+	    "QUESTIONS": "",
+	    "REPONSES": "",
+	    "type": "",
+	    "visibility":""
+	}
+
+	req.QUESTIONS = question;
+	req.REPONSES = resp;
+	req.type = categ;
+	req.visibility = visibility;
+
+	// type
+	if (categ == "Signature électronique") {
+	    req.type = "E-SIGN";
+	} else if (categ == "Général") {
+	    req.type = "GENERAL";
+	} else if (categ == "Document") {
+	    req.type = "DOCUMENT";
+	} else if (categ == "Plateforme") {
+	    req.type = "PLATEFORME";
+	} else if (categ == "Architecte") {
+	    req.type = "ARCHITECTE";
+	} else if (categ == "Administration") {
+	    req.type = "ADMINISTRATION";
+	}
+
+	//
+	console.log(req, ID);
+	if (req.QUESTIONS != "" && req.REPONSES != "" && req.type != "") {
+
+	    console.log(req, ID);
+	    updateQuestionNQF(ID, req,target);
+	    
+	    if (target.find("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+	        target.find("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+	    }
+	    
+	    setTimeout(function () {
+	        target.find("."+clas+" .ow-btn-container i.fa-check").remove()
+	        target.find("."+clas+" .NQF-edit-modif").hide()
+	        target.find("."+clas+" .NQF-new-quest-btn").show();
+	        target.find("."+clas+" .NQF-vue-question").show();
+	    }, 2000);
+	    
+	    
+	} else {
+	    alert("verifier que tout les champs sont bien remplis");
+	    target.find("."+clas+" .NQF-vue-question").hide();
+	}
+
+	} else if(type == 2){
+
+	var clas = "classSearch-3";
+
+	// let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
+	// let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
+	// let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
+	// let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtypeRef"]').text();
+	// let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+
+	let title = root.NQFtitle;
+	let categ = root.NQFtype;
+	let texte = root.NQFtext;
+	let typee = root.NQFtypeRef;
+	let description = target.find('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+
+	if(title.trim()=="" || categ.trim()=="" || typee.trim()=="" ){
+	    alert("verifier que tout les champs sont bien remplis");
+	    return; 
+	}
+
+	var attachement = root.attachementRef;
+	if(attachement.gedId.trim()!=""){ 
+	    var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId+"&krn="+attachement.gedId.split("/")[0];
+	}else{
+	    var urlV = "";
+	}
+
+	var attachement2 = root.attachementRefAr;
+	if(attachement2.gedId.trim()!=""){
+	    var urlV2 = "/karazal/DownloadFile?gedId="+attachement2.gedId+"&krn="+attachement2.gedId.split("/")[0];
+	}else{
+	    var urlV2 = "";
+	}
+
+	console.log(title, categ, texte, description)
+	var T = 0;
+	if(categ == "Urbanisme"){
+	    T = 2; 
+	} else if(categ == "Economique"){
+	    T = 1;
+	} else if(categ=="Autre"){
+	    T = 3;
+	}
+	let id = "";
+	id = $("."+clas+" .NQF-id-ref").val();
+	$("."+clas+" .NQF-title-ref").text(title);
+	$("."+clas+" .NQF-desc-ref").text(description);
+	$("."+clas+" .NQF-text-ref").html(texte);
+
+	var req = {
+	    "title": "",
+	    "type": "",
+	    "content": "",
+	    "desc":"",
+	    "attachementRef":"",
+	    "urlV":"",
+	    "attachementRefAr":"",
+	    "urlV2":"",
+	    "typeRef":""
+	};
+
+	req.title = title;
+	req.type = T.toString();
+	req.content = texte;
+	req.desc = description;
+	req.urlV = urlV;
+	req.urlV2 = urlV2;
+	req.attachementRef = attachement;
+	req.attachementRefAr = attachement2;
+	req.typeRef = typee;
+
+	console.log(req, id);
+
+	//
+	if (target.find("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+	    target.find("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+	}
+	setTimeout(function () {
+	    target.find("."+clas+" .ow-btn-container i.fa-check").remove()
+	    target.find("."+clas+" .NQF-edit-modif").hide()
+	    target.find("."+clas+" .NQF-new-quest-btn").show();
+	    target.find("."+clas+" .NQF-vue-ref").show();
+	    target.find("."+clas+" .NQF-btn-alg").hide();
+	}, 2000);
+
+	updateReglementation(id,req,target);
+	}else if(type==3){
+	var clas = "classSearch-6";
+	let title = $('.'+clas+' .ow-field-input[data-xpath="title"]').val();
+	let categ = $('.'+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+	let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
+	let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
+	let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
+	let tag = $('.'+clas+' .ow-field-input-select[data-xpath="tag"]').text();
+
+	if(categ=="Vimeo"){
+	    var video_id = urlV.match(/\/\d+/)[0].replace(/\//g,""); 
+	}else if(categ=="Youtube"){
+	    var video_id = urlV.match(/v=\w+[&]*/)[0].replace("v=",'');; 
+	}
+
+	if(playlist.trim()==""){
+	    playlist = "Général";
+	}
+
+	if(tag.trim()==""){
+	    tag = "without_tag";
+	}
+
+	var current_datetime = new Date();
+
+	var dateYear = current_datetime.getFullYear();
+	var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
+	var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
+
+	var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
+	var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
+	var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
+
+	var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
+
+	var req = {
+	    "title": title,
+	    "plateforme": categ,
+	    "url": urlV,
+	    "playlist":playlist,
+	    "description":description,
+	    "video_id":video_id,
+	    "img_url":"",
+	    "tag":tag,
+	    "date": formatted_date,
+	};
+
+	let id = "";
+	id = $(".NQF-id-ref").val();
+	if(categ=="Vimeo"){
+	    $.ajax({
+	        type:'GET',
+	        url: 'https://vimeo.com/api/v2/video/' + video_id + '.json',
+	        jsonp: 'callback',
+	        dataType: 'jsonp', 
+	        success: function(data){
+	            var thumbnail_src = data[0].thumbnail_large;
+	            req.img_url = thumbnail_src;
+	            if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+	                $("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+	            }
+
+	            
+	            var urlemb = "https://player.vimeo.com/video/"+urlV.match(/\/\d+/)[0].replace(/\//g,"");
+	            console.log(urlemb);
+	            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+	            $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+	            $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
+	            
+	            setTimeout(function () {
+	                $("."+clas+" .ow-btn-container i.fa-check").remove()
+	                $("."+clas+" .NQF-edit-modif").hide()
+	                $("."+clas+" .NQF-new-quest-btn").show();
+	                $("."+clas+" .NQF-vue-ref").show();
+	                $("."+clas+" .NQF-btn-alg").hide();
+	                $("."+clas+" .NQF-vue-question").show();
+	                
+	                getAllplayLists(1,100,clas);
+
+	            }, 2000);
+	            
+	            updateVideo(req.video_id,req);
+	        }
+	    });
+
+	}else if(categ=="Youtube"){
+	    
+	    
+	            req.img_url = "https://img.youtube.com/vi/"+req.video_id+"/0.jpg";
+	            
+	            if ($("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+	                $("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+	            }
+
+	            
+	            var urlemb = "https://www.youtube.com/embed/"+req.video_id;
+	            console.log(urlemb);
+	            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<iframe src="+urlemb+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+	            $("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+	            $("."+clas+" .NQF-vue-question .vue-video-description").html(description);
+	            
+	            setTimeout(function () {
+	                $("."+clas+" .ow-btn-container i.fa-check").remove()
+	                $("."+clas+" .NQF-edit-modif").hide()
+	                $("."+clas+" .NQF-new-quest-btn").show();
+	                $("."+clas+" .NQF-vue-ref").show();
+	                $("."+clas+" .NQF-btn-alg").hide();
+	                $("."+clas+" .NQF-vue-question").show();
+	                
+	                getAllplayLists(1,100,clas);
+
+	            }, 2000);
+	            
+	            updateVideo(req.video_id,req);
+	}
+
+
+	}else if(type==4){
+	var clas = "classSearch-11";
+	let title = $('.'+clas+' .ow-field-input[data-xpath="title"]').val();
+	let categ = $('.'+clas+' .ow-field-input-select[data-xpath="categ"]').text();
+	let urlV  = $('.'+clas+' .ow-field-input[data-xpath="url"]').val();
+	let description = $('.'+clas+' .ow-field-input-line textarea[data-xpath="description"]').val(); 
+	let playlist = $('.'+clas+' .ow-field-input-select[data-xpath="playlist"]').text();
+	let text = $('.'+clas+' .ql-editor').html();
+	var imgUrl = $('.'+clas+' .ow-field-input[data-xpath="imgUrl"]').val();
+	console.log("root.attachement== "+root.attachement);
+	var attachement = root.attachement;
+	var attachementImg = root.attachementImg;
+	console.log("saveeeeeeeeee : "+attachement);
+
+	if(attachementImg.gedId!=""){
+	    imgUrl = "/karazal/DownloadFile?gedId="+attachementImg.gedId+"&thumbnail=small&krn="+attachementImg.gedId.split("/")[0]+"&or=img/no-file.svg"
+	}
+
+	if(playlist.trim()==""){
+	    playlist = "Général";
+	}
+
+
+	var current_datetime = new Date();
+
+	var dateYear = current_datetime.getFullYear();
+	var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
+	var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
+
+	var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
+	var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
+	var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
+
+	var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
+
+	var req = {
+	    "title": title,
+	    "plateforme": categ,
+	    "url": urlV,
+	    "playlist":playlist,
+	    "description":description,
+	    "img_url":imgUrl,
+	    "date": formatted_date,
+	    "attachement":attachement,
+	    "attachementImg": attachementImg,
+	    "text":text
+	};
+
+	if(attachement.gedId==""){    
+	    if(imgUrl.trim()!=""){
+	        $("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+imgUrl+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+	    }else{
+	        if(categ=="DOC"){
+	            $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-file-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+	        }else if(categ=="INSTALL"){
+	                $("."+clas+" .NQF-vue-question .vue-video-frame").html("<i class=\"fas fa-download\" style=\"font-size: 9VW;padding-top: 28px;padding-bottom: 28px;color: #38A;\"></i>")
+	        }
+	    }
+	}else{
+	    var krn = attachement.gedId.split("/")[0];
+	    var str = '<div class="docthumbnail"><img class="smallThumbnailImg" src="'+contextPath+'/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="'+contextPath+'/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
+	}
+
+	let id = "";
+	id = $("."+clas+" .NQF-id").val();
+
+	$("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+	$("."+clas+" .NQF-vue-question .vue-video-description").html(description);
+	setTimeout(function () {
+	    $("."+clas+" .ow-btn-container i.fa-check").remove()
+	    $("."+clas+" .NQF-edit-modif").hide()
+	    $("."+clas+" .NQF-new-quest-btn").show();
+	    $("."+clas+" .NQF-vue-ref").show();
+	    $("."+clas+" .NQF-btn-alg").hide();
+	    $("."+clas+" .NQF-vue-question").show();
+	    
+	    getAllplayListsD(1,100,clas,target);
+
+	}, 2000);
+
+	updatePlaylist(id,req);
+
+	}else if(type==7){
+	var clas = "classSearch-99";
+
+	// let title = $('.'+clas+' .ow-field-input[data-xpath="NQFtitle"]').val();
+	// let typee = $('.'+clas+' .ow-field-input-select[data-xpath="NQFtype"]').text();
+	// let categ = $('.'+clas+' .ow-field-input-select[data-xpath="NQFcategorie"]').text();
+	// let author = $('.'+clas+' .ow-field-input[data-xpath="NQFauthor"]').val();
+	// let tags = $('.'+clas+' .ow-field-input[data-xpath="NQFtags"]').val();
+	// let texte = $('.'+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html();
+	// let description = $('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+
+	if(root.articleCms != ""){
+	    console.log("articleCms!=null");
+	    var title = root.NQFtitle;
+	    var typee = root.NQFtype;
+	    var categ = root.NQFcategorie;
+	    var author = root.NQFauthor;
+	    var tags = root.NQFtags;
+	    var lang = root.NQFlang;
+	    var source = root.NQFsource;
+	    var link = root.NQFlink;
+	    var texte = target.find('.'+clas+'  .ql-editor').html();
+	    var description = target.find('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+	    var attachement = root.attachementArImg;
+
+	    if(attachement.gedId.trim()!=""){
+	        var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId;
+	    }else{
+	        var urlV = "";
+	    }
+
+	    var formatted_date = root.articleCms.datePr;
+	    var vue = root.articleCms.vue;
+	    var like=root.articleCms.like;
+	    var comments=root.articleCms.comments;
+	    var list_vue=root.articleCms.list_vue;
+	    var liste_like=root.articleCms.liste_like;
+
+	}else{
+	    var title = root.NQFtitle;
+	    var typee = root.NQFtype;
+	    var categ = root.NQFcategorie;
+	    var lang = root.NQFlang;
+	    var author = root.NQFauthor;
+	    var tags = root.NQFtags;
+	    var source = root.NQFsource;
+	    var link = root.NQFlink;
+	    var texte = target.find('.'+clas+'  .ql-editor').html();
+	    var description = target.find('.'+clas+' .NFQ-desc-refjuridique textarea').val(); 
+	    var attachement = root.attachementArImg;
+	    if(attachement.gedId.trim()!=""){
+	        var urlV = "/karazal/DownloadFile?gedId="+attachement.gedId;
+	    }else{
+	        var urlV = "";
+	    }
+
+	    var current_datetime = new Date();
+
+	    var dateYear = current_datetime.getFullYear();
+	    var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
+	    var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
+
+	    var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
+	    var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
+	    var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
+	    
+	    var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
+
+	    var vue = 0;
+	    var like=0;
+	    var comments=[];
+	    var list_vue=[];
+	    var liste_like=[];
+
+	}
+
+
+
+
+
+
+
+
+	console.log(title, categ, texte, description)
+
+	let id = "";
+
+	id = target.find("."+clas+" .NQF-id").val();
+
+	/*$("."+clas+" .NQF-title-ref").text(title);
+	$("."+clas+" .NQF-desc-ref").text(description);
+	$("."+clas+" .NQF-text-ref").html(texte);
+	*/
+
+	var req = {
+	    "title": "",
+	    "type": "",
+	    "content": "",
+	    "description":"",
+	    "attachementRef":"",
+	    "imgP":"",
+	    "datePr":"",
+	    "categorie":"",
+	    "author":"",
+	    "tags":"",
+	    "tagsText":"",
+	    "vue":0,
+	    "like":0,
+	    "comments":[],
+	    "list_vue":[],
+	    "liste_like":[],
+	    "source":"",
+	    "link":"",
+	    "lang":""
+	};
+
+
+
+	req.title = title;
+	req.type = categ;
+	req.content = texte;
+	req.description = description;
+	req.imgP = urlV;
+	req.attachementRef = attachement;
+	req.categorie = typee;
+	req.datePr = formatted_date;
+	req.author = author;
+	req.tagsText = tags;
+	req.vue= vue;
+	req.like= like;
+	req.source = source;
+	req.link = link;
+	req.comments= comments;
+	req.list_vue= list_vue;
+	req.liste_like= liste_like;
+	req.lang=lang;
+
+	var ttg = tags.split("//"); 
+	var tagsArr = [];
+
+	ttg.forEach(function(elm){
+	    var tagObj = {
+	        "tag":elm,
+	        "id":""
+	    };
+	    tagsArr.push(tagObj);
+	})
+
+	req.tags = tagsArr;
+
+	target.find("."+clas+" .NQF-vue-question .vue-video-frame").html("<img src="+urlV+" width=\"100%\" height=\"100%\" frameborder=\"0\" ></iframe>");
+	target.find("."+clas+" .NQF-vue-question .vue-video-title b").html(title);
+	target.find("."+clas+" .NQF-vue-question .vue-video-description").html(description);
+	            
+
+	console.log(req, id);
+
+	//
+	if (target.find("."+clas+" .ow-btn-container:has(> i)").length == 0) {
+	    target.find("."+clas+" .ow-btn-container:has(> .NQF-btn-check)").prepend('<i  class="fas fa-check fa-lg" style="color:green"></i>')
+	}
+
+	setTimeout(function () {
+	    target.find("."+clas+" .ow-btn-container i.fa-check").remove()
+	    target.find("."+clas+" .NQF-edit-modif").hide()
+	    target.find("."+clas+" .NQF-new-quest-btn").show();
+	    target.find("."+clas+" .NQF-vue-video").show();
+	    target.find("."+clas+" .NQF-btn-alg").hide();
+	}, 2000);
+	console.log(req);
+	updateArticle(id,req,target,root);
+	}
+	}
+ 
 
 function NQF_add_question(quest, id, cls, type,target) {
 var clas = "classSearch-5";
