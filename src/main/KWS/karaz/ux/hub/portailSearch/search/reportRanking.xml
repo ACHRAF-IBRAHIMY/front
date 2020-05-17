@@ -254,6 +254,110 @@
       <html>
         <style>
 
+          .rank-search-repo .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: none;
+            font-family: "Font Awesome 5 Free" !important;
+            color: #666;
+            cursor: pointer;
+          }
+          
+          .rank-search-repo .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 230px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            /* bottom: -3px; */
+            top: -5px;
+            bottom: auto;
+            left: 110%;
+            right: 1px;
+            margin-left: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-family: Roboto;
+            font-weight: 100;
+            font-size: 15px;
+          }
+
+          .rank-search-repo .tooltip .tooltiptext-rt {
+            visibility: hidden;
+            width: 230px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            /* bottom: -3px; */
+            top: -5px;
+            bottom: auto;
+            left: -234px;
+            right: 1px;
+            margin-left: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-family: Roboto;
+            font-weight: 100;
+            font-size: 15px;
+          }
+          
+          .rank-search-repo .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 7px;
+            right: 100%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent #555 transparent
+          }
+
+          .rank-search-repo .tooltip .tooltiptext-rt::after {
+            content: "";
+            position: absolute;
+            top: 7px;
+            left: 102%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent transparent #555;
+          }
+
+          .rank-search-repo .tooltip .tooltiptext::before {
+            content: "";
+            position: absolute;
+            top: 7px;
+            right: 100%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: none;
+            border-color: transparent #555 transparent
+          }
+
+          .rank-search-repo .tooltip .tooltiptext-rt::before {
+            content: "";
+            position: absolute;
+            top: 7px;
+            right: 100%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: none;
+            border-color: transparent #555 transparent
+          }
+          
+          .rank-search-repo .tooltip:hover .tooltiptext,.rank-search-repo .tooltip:hover .tooltiptext-rt {
+            visibility: visible;
+            opacity: 1;
+          }
+
           .self-align-vb{
             align-self: center;
           }
@@ -275,7 +379,7 @@
 
         </style>
       </html>
-      <vbox columns="20% 80%" className="hp-box hp-small">
+      <vbox columns="20% 80%" className="hp-box hp-small ">
         <vbox className="self-align-vb">
           <html>
             <img style="width: 140px;" src="img/logo_rokhas_ranking_u1286.png" alt="" />
@@ -298,7 +402,7 @@
             </html>
         </vbox>            
       </vbox>
-      <fieldSet className="hp-box ranking-fieldset hp-small" label="CLASSEMENT TRIMESTRIEL GLOBAL">
+      <fieldSet className="hp-box ranking-fieldset hp-small rank-search-repo" label="CLASSEMENT TRIMESTRIEL GLOBAL">
         <html> 
           <div style="padding-left: 23px;">
                  Classement global des collectivités territoriales à base de leur score dans chacun
