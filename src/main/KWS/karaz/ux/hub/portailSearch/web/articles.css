@@ -6,6 +6,10 @@
  .fieldset-articles{
 
   }
+  
+  .comment-det img{
+  	max-width:90%;
+  }
 
   .fieldset-articles .article{
     padding: 7px;
