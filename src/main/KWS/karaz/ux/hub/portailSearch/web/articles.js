@@ -163,10 +163,10 @@ addCommentRest(root,target,comment,context,Number(target.find(".comment-form spa
 }
 }
 
+
 function createDivComments(comments,target){
-
-    commentsDr = sortCommentsByDateGb(comments);
-
+    var commentsDr = sortCommentsByDateGb(comments).comments;
+    var cmmIndex = sortCommentsByDateGb(comments).cmmIndex;
 
     var i = 0;
     target.find(".comments-list > .ow-vl-inner").html("");
@@ -205,7 +205,7 @@ function createDivComments(comments,target){
     div9.innerHTML = elm.text;
     var div10 = document.createElement("div");
     div10.setAttribute("class","div-date");
-    div10.setAttribute("index",i);
+    div10.setAttribute("index",cmmIndex[i]);
     var span = document.createElement("span");
     span.innerHTML = elm.date+ " | ";
     span.setAttribute("style","font-size: 14px;display: inline-block;margin-right: 8px;")

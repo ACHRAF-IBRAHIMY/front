@@ -232,7 +232,7 @@
           <h1 style="color: #666;font-size: 20px;text-align: left;" class="add-comment">AJOUTER VOTRE COMMENTAIRE</h1>
           <span class="rep-comment" idd="" style="display:none;">
             <span style="display:grid;grid-template-columns: 50% 50%;">
-              <span style="color: #666;font-size: 20px;text-align: left;margin-bottom: 5px;">REPONDRE AU COMMANTAIRE</span>
+              <span style="color: #666;font-size: 20px;text-align: left;margin-bottom: 5px;">REPONDRE AU COMMENTAIRE</span>
               <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close" /> Annuler la réponse</span>  
             </span>
           </span>

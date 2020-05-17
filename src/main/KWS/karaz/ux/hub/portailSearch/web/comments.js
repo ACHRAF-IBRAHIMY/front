@@ -141,19 +141,23 @@ function sortCommentsByDateGb(comments){
     for(var i=0;i<comm.length;i++){
         var obj = {
             "date": getMaxDate(comm[i]),
-            "comment": comm[i]
+            "comment": comm[i],
+            "index": i
         }
         commVar.push(obj);
     }
     sortCommentsByDate(commVar);
 
     var commentsVar = [];
+    var commentsIndex = [];
+
     for(var i=0;i<commVar.length;i++){
         commentsVar.push(commVar[i].comment);
+        commentsIndex.push(commVar[i].index);
     }
     console.log("sortCommentsByDate commVar",commVar);
 
-    return commentsVar;
+    return {"comments":commentsVar,"cmmIndex":commentsIndex};
 
 }
 
