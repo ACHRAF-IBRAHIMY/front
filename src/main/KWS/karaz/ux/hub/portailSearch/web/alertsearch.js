@@ -32,13 +32,16 @@ function createAlertObject(context,root){
             "background":bgColorAlrt,
             "color":colorAlrt
         });
-        console.log(textGl);
+
+        console.log("textGl == ",textGl);
 
         var obj = {
             "active":root.statut,
             "type":type,
-            "text": textGl            
+            "text": textGl          
         }
+
+        console.log("***",obj);
 
         return obj;
 
@@ -50,7 +53,7 @@ function createAlertObject(context,root){
 
 function saveAlertMsg(context,root){
     var obj = createAlertObject(context,root);
-    updateAlert("",context,root);
+    updateAlert("",obj,context);
 }
 
 function loadAllAlerts(context){
@@ -58,6 +61,8 @@ function loadAllAlerts(context){
 }
 
 function updateAlert(id,obj,context){
+
+    console.log(JSON.stringify(obj));
 
     $.ajax({
     type: "post",
@@ -71,10 +76,10 @@ function updateAlert(id,obj,context){
     },
     success: function (result) {
         //voidRestSearch("",0,7,0,[".vv1 .NFQ-quest-type-eco1",".vv1 .NFQ-quest-type-urba1"],0);
+        console.log("result",result);
         setTimeout(function(){
             refrechListalert(context);
         },2000);
-        console.log(result);
     },
     error: function (error) {
         console.log(error.responseText);
@@ -84,7 +89,7 @@ function updateAlert(id,obj,context){
 
 function refrechListalert(context){
     var  obj = {
-            "size":100,"match_all": {}
+            "size":100,"query":{"match_all": {}}
         };
 
 $.ajax({
@@ -97,11 +102,24 @@ beforeSend: function (xhr) {
 xhr.setRequestHeader("Authorization", AUTH);
 }
 }).done(function(result){
+    	console.log("result$$",result);
+
     createAlertsHtml(context,result.hits.hits);
 });
 
 }
-
+ 
 function createAlertsHtml(context,liste){
-    
+    context.formRender.targetPanel.find(".list-nb-cnt").html("");
+
+liste.forEach(function(elm){
+var hmlt=  `<div class="ow-html visual-nbnb" style="margin-top:3pxdisplay:grid;">  
+        <marquee>
+        `+elm._source.text+`
+        </marquee>
+        <button idd="${elm._id}">Modifier</button>
+      </div>`;
+var htmlRender = context.formRender.targetPanel.find(".list-nb-cnt").html();
+context.formRender.targetPanel.find(".list-nb-cnt").html(htmlRender+" - "+hmlt);
+});
 }

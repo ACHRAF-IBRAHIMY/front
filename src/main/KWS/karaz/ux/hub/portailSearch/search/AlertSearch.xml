@@ -54,11 +54,12 @@
           }
       </css>
       <script postLoad="true" xcstt="x"> 
+        refrechListalert(context);
     </script>
       <html id="hSeparator">
         <div style="height: 30px;" xcstt="x" />
       </html>
-      <vbox labelAlign="float" >
+      <vbox labelAlign="float">
         <vbox columns="50% 50%">
           <vbox className="list-nb-cnt hp-box-nbnb" style="text-align:left !important;">
 
@@ -76,13 +77,13 @@
               </field>
             </vbox>
             <vbox visible="'{typeAlrt}'=='Customize',expr,boolean" columns="33% 33% 33%">
-              <field label="Fa icon" xpath="iconAlrt"></field>
-              <field label="Backgournd color" xpath="bgColorAlrt"></field>
-              <field label="Color" xpath="colorAlrt"></field>
+              <field label="Fa icon" xpath="iconAlrt" />
+              <field label="Backgournd color" xpath="bgColorAlrt" />
+              <field label="Color" xpath="colorAlrt" />
             </vbox>
             <vbox>
               <html style="margin-top:20px;margin-bottom:20px">
-                <div id="toolbarNBNB"></div>
+                <div id="toolbarNBNB" style="color:#666" />
               </html>
             </vbox>
             <vbox columns="100px 100px">
@@ -94,16 +95,19 @@
                 </postChange>
               </button>
               <button label="Enregistrer">
+                <postChange>
+                saveAlertMsg(context,root);
+              </postChange>
 
               </button>
               
             </vbox>
-            <vbox visible="'{visual}'=='oui',expr,boolean">
+            <!-- <vbox visible="'{visual}'=='oui',expr,boolean"> -->
               <html className="visual-nbnb" style="margin-top:20px">
                 <marquee>
                 </marquee>
               </html>
-            </vbox>
+            <!-- </vbox> -->
           </vbox>
         </vbox>
       </vbox>
