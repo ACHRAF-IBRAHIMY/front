@@ -453,7 +453,8 @@ if(prefix.trim()==""){
                 "from":from,"size":sizeliste,
                 "query": {
                          "match_all": {}
-                        }
+                        },
+                        "sort":[{ "date_pub" : {"order" : "desc"}}]
             }));
     }else if(parent=="ÉCONOMIQUE"){
         numberRef = "1";
@@ -465,7 +466,9 @@ if(prefix.trim()==""){
         obj = {
             "from":from,
             "size":sizeliste,
-            "query":obj
+            "query":obj,
+            "sort":[{ "date_pub" : {"order" : "desc"}}]
+
         }
         xhttp.send(JSON.stringify(obj));
        
@@ -479,7 +482,9 @@ if(prefix.trim()==""){
         obj = {
             "from":from,
             "size":sizeliste,
-            "query":obj
+            "query":obj,
+            "sort":[{ "date_pub" : {"order" : "desc"}}]
+
         }
         xhttp.send(JSON.stringify(obj));
     }else if(parent=="AUTRE"){
@@ -492,7 +497,8 @@ if(prefix.trim()==""){
         obj = {
             "from":from,
             "size":sizeliste,
-            "query":obj
+            "query":obj,
+            "sort":[{ "date_pub" : {"order" : "desc"}}]
         }
         xhttp.send(JSON.stringify(obj));
     }
