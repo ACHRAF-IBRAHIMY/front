@@ -513,7 +513,7 @@ if(testLanguage.test(prefix)){
 var musts = [
     { "multi_match": {
         "query": prefix,
-        "fields": ["title.keywordsString","desc.keywordsString"],
+        "fields": ["title.keywordsString","desc"],
         "analyzer": analyzerRef,
         "fuzziness": "AUTO",
         "minimum_should_match": "70%"
