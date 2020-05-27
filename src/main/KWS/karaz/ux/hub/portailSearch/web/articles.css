@@ -7,6 +7,10 @@
 
   }
   
+  .comment-det .ql-align-right{
+  	text-align : right !important;
+  }
+  
   .comment-det img{
   	max-width:90%;
   }
