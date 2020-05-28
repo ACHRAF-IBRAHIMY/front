@@ -27,7 +27,7 @@
               var elms = result.aggregations.genres.buckets;
               elms = triPeriods(elms);
               tabInd=[elms[0].key];
-              restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",60,0,0);
+              restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",200,0,0);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.delai","desc",3,0,1);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.attractivite","desc",3,0,2);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.digital","desc",3,0,3);
