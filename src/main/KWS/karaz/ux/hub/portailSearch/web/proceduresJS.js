@@ -1360,6 +1360,8 @@ let desc  = refObject.desc;
 let text  = refObject.content;
 let type  = refObject.type;
 let typeRef = refObject.typeRef;
+let lang = refObject.lang;
+
 
 if(refObject.urlV != undefined){ 
     var urlV = refObject.urlV;
@@ -1415,12 +1417,14 @@ dataroot.NQFdesc=desc;
 dataroot.urlRef =urlV;
 dataroot.urlRef2=urlV2;
 dataroot.NQFtypeRef=typeRef; 
+dataroot.NQFLang=lang; 
 
 ctx.formRender.notifyObservers("NQFtitle");
 ctx.formRender.notifyObservers("NQFtype");
 ctx.formRender.notifyObservers("NQFtypeRef");
 ctx.formRender.notifyObservers("NQFdesc");
 ctx.formRender.notifyObservers("urlRef");
+ctx.formRender.notifyObservers("NQFLang");
 
 $("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').empty();
 $("."+clas+' .ow-field-htmleditor[data-xpath="NQFtext"] .ql-editor').html(text)
@@ -1557,4 +1561,20 @@ target.find("."+clas+" .NQF-edit-modif").show();
 target.find("."+clas+" .NQF-btn-alg").hide();
 
 }
+}
+
+function getFormatedDate(date){
+    var current_datetime = date;
+
+    var dateYear = current_datetime.getFullYear();
+    var dateMonths = (current_datetime.getMonth() + 1).toString().length==1?"0"+(current_datetime.getMonth() + 1):(current_datetime.getMonth() + 1);
+    var dateDays = current_datetime.getDate().toString().length==1?"0"+current_datetime.getDate():current_datetime.getDate();
+
+    var hours = current_datetime.getHours().toString().length==1?"0"+current_datetime.getHours():current_datetime.getHours();
+    var minutes = current_datetime.getMinutes().toString().length==1?"0"+current_datetime.getMinutes():current_datetime.getMinutes();
+    var seconds = current_datetime.getSeconds().toString().length==1?"0"+current_datetime.getSeconds():current_datetime.getSeconds();
+    
+    var formatted_date = dateYear + "-" + dateMonths + "-" + dateDays + " " + hours + ":" + minutes + ":" + seconds+"";
+
+    return formatted_date;
 }

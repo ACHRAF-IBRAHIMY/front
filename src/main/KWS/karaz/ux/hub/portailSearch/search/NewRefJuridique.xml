@@ -11,6 +11,7 @@
     <NQFtitle />
     <NQFtype />
     <NQFdesc />
+    <NQFLang/>
     <NQFtypeRef />
     <attachementRef>
           <fileId />
@@ -28,7 +29,7 @@
       <fileTime />
       <gedId />
     </attachementRefAr>
-    
+    <date_pub></date_pub>
     <urlRef />
   </data>
   <view>
@@ -116,7 +117,14 @@
             <vbox className="NQF-edit-modif ref-form">
               <fieldset label="DONNÉES RÉFÉRENTIEL JURIDIQUE" className="NQF-shadow">
                 <vbox className="DC-Customized-fields-NQF NQF-edit-float">
+                  <vbox contentAlign="center" columns="80% 20%" className="NQF-edit-select-float">
+
                   <field label="Intitulé texte juridique" widget="text" labelAlign="float" xpath="NQFtitle" />
+                  <field widget="select" label="Lang" labelAlign="float" xpath="NQFLang">
+                    <option value="Arabe" label="Arabe" />
+                    <option value="Français" label="Français" />
+                  </field>
+                  </vbox>
                   <vbox contentAlign="center" columns="40% 49% 1% 0% 10%" className="NQF-edit-select-float">
                     <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
                       <option value="Urbanisme" label="Urbanisme" />
@@ -124,7 +132,8 @@
                       <option value="Autre" option="Autre" /> 
                     </field>
                     <field label="URL Attachement" widget="text" labelAlign="float" className="url-vue" xpath="urlRef" />
-                    <field xpath="attachementRef" className="cls1" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
+                    <field xpath="attachementRef" className="cls1" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload">
+                    </field>
                     <button className="k-btn-transparent hidden close1-ref" icon="fas fa-close" usage="visualisation=R">
                        <postChange>
                         var attachement = root.attachementRef;
@@ -176,6 +185,7 @@
                       </html>
                     <vbox />
                   </vbox>
+                  
                   <field widget="textArea" xpath="NQFdesc" label="description" labelAlign="float" className="NFQ-desc-refjuridique" />
                 </vbox>
               </fieldset>
