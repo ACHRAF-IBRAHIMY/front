@@ -505,19 +505,23 @@ if(prefix.trim()==""){
 }else{
 
 var numberRef = "";
+
 if(testLanguage.test(prefix)){
     var analyzerRef = "rebuilt_arabic";
+    var fields = ["title.arabe","desc","decsCnt.arabe"];
 }else{
     var analyzerRef = "rebuilt_french";
+    var fields = ["title.keywordsString","desc","decsCnt.keywordsString"];
 };
+
 var musts = [
     { "multi_match": {
         "query": prefix,
-        "fields": ["title.keywordsString","desc"],
+        "fields": fields,
         "analyzer": analyzerRef,
         "fuzziness": "AUTO",
         "minimum_should_match": "70%"
-    }}
+    }} 
 ];
 
 if(parent=="TOUS"){
