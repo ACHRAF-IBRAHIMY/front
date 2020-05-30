@@ -493,7 +493,11 @@ function NQF_save_QR(type,root,target) {
 	req.urlV2 = urlV2;
 	req.attachementRef = attachement;
 	req.attachementRefAr = attachement2;
-	req.typeRef = typee;
+    req.typeRef = typee;
+    try{
+        req.decsCnt = htmlToString(texte);
+    }catch(e){
+    }
 
 	console.log(req, id);
 
