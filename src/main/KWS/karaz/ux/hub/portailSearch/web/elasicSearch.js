@@ -599,7 +599,6 @@ function getObjectToSendArticle(parent,prefix,lang,from,size){
         }else{
         var ll = "rebuilt_french";
         }
-
 if(parent==0){
 if(prefix.trim()!=""){
 return {
@@ -631,12 +630,11 @@ return {
         "size":size,
         "query": {
                  "match_all": {}
-                }
+                },
+                "sort":[{ "datePr" : {"order" : "desc"}}]
     };
 }
-
 }else if(parent!=0 && prefix.trim()!=""){
-
 if(parent==1){
 var type = "PRATIQUE";
 }else if(parent==2){
@@ -644,9 +642,6 @@ var type = "A LA UNE";
 }else if(parent==3){
 var type = "REVUE DE PRESSE";
 }
-
-
-
 return {
 "from":from,"size":size,
 "query": {
@@ -682,7 +677,6 @@ var type = "A LA UNE";
 }else if(parent==3){
 var type = "REVUE DE PRESSE";
 }
-
 return {
 "from":from,"size":size,
 "query": {
@@ -697,10 +691,11 @@ return {
             }
         ]
     }
-}
+},"sort":[{ "datePr" : {"order" : "desc"}}]
 };
 } 
-}
+} 
+
 
 function generateRequestFaqSearch(prefix,type,from,size,visi){
 
