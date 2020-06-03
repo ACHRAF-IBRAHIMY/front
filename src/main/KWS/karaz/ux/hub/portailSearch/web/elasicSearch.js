@@ -3490,363 +3490,376 @@ function loadPageBytype(type){
 typePage = type;
 } 
 
-
 function fullSearchList(results,cls,typePage,target){
-var a = target.find("."+cls+" .full-search-list");
-if(typePage== 1){
-console.log(results)
-for(i=0;i<results.length;i++){
+	var a = target.find("."+cls+" .full-search-list");
+	if(typePage== 1){
+	console.log(results)
+	for(i=0;i<results.length;i++){
 
-var id = results[i]._id;
-var titleTx = results[i]._source.title;
-var text = results[i]._source.desc;
-var type = results[i]._source.type;
-var typeTx = results[i]._source.typeRef;
+	var id = results[i]._id;
+	var titleTx = results[i]._source.title;
+	var text = results[i]._source.desc;
+	var type = results[i]._source.type;
+	var typeTx = results[i]._source.typeRef;
 
-if(type=="1"){
-    type="ÉCONOMIQUE";
-}else if(type=="2"){
-    type="URBANISME";
-}else if(type=="3"){
-    type="AUTRE";
-}
+	if(type=="1"){
+	    type="ÉCONOMIQUE";
+	}else if(type=="2"){
+	    type="URBANISME";
+	}else if(type=="3"){
+	    type="AUTRE";
+	}
 
-var b = document.createElement("div");
-b.setAttribute("class","hp-box full-search-list-item");
-b.setAttribute("style","grid-template-columns: 0% 100%;height: 173px;")
-var d = document.createElement("div");
-d.setAttribute("class","item-body");
-d.setAttribute("style","padding:0 40px");
-var e = document.createElement("div");
-e.setAttribute("class","item-body-title");
-e.setAttribute("style","font-size:16px");
-e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100).toUpperCase()+"</span>";
-var f = document.createElement("p");
-f.innerHTML = subLong(text,180)+"<span style=\"background:#777;color:#FFF;display: inline-block;border-radius: 2px;padding: 1px 3px;\">"+typeTx+"</span>";
-f.setAttribute("style","font-size: 0.955vw;text-align: left;width: 100%;color: #777;")
-d.appendChild(e);
-d.appendChild(f);
-var g = document.createElement("a");
-g.addEventListener("click",function(){
-    var id=$(this).children("input").val();
-    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewRefJuridique?query.idObject="+id,"search", "Référentiel juridique", {});
-    }else{
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefDetail?query.idObject="+id,"search", "Référentiel juridique", {});
-    } 
-});
-g.setAttribute("class","item-body-button");
-g.setAttribute("style","color:#38a;border: none;text-decoration: underline;text-align: right;width: 85%;display: block;");
-g.innerHTML="Texte intégral<input type=\"hidden\" value=\""+id+"\" > ";
-d.appendChild(g);
-var title = document.createElement("div");
-title.setAttribute("class","item-title");
-title.setAttribute("title",type);
-var style = "line-height:30px;top: 51px;height: 30px;right: 92px;";
+	var b = document.createElement("div");
+	b.setAttribute("class","hp-box full-search-list-item");
+	b.setAttribute("style","grid-template-columns: 0% 100%;height: 173px;")
+	var d = document.createElement("div");
+	d.setAttribute("class","item-body");
+	d.setAttribute("style","padding:0 40px");
+	var e = document.createElement("div");
+	e.setAttribute("class","item-body-title");
+	e.setAttribute("style","font-size:16px");
+	e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100).toUpperCase()+"</span>";
+	var f = document.createElement("p");
+	f.innerHTML = subLong(text,180)+"<span style=\"background:#777;color:#FFF;display: inline-block;border-radius: 2px;padding: 1px 3px;\">"+typeTx+"</span>";
+	f.setAttribute("style","font-size: 0.955vw;text-align: left;width: 100%;color: #777;")
+	d.appendChild(e);
+	d.appendChild(f);
+	var g = document.createElement("a");
+	g.addEventListener("click",function(){
+	    var id=$(this).children("input").val();
+	    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewRefJuridique?query.idObject="+id,"search", "Référentiel juridique", {});
+	    }else{
+	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefDetail?query.idObject="+id,"search", "Référentiel juridique", {});
+	    } 
+	});
+	g.setAttribute("class","item-body-button");
+	g.setAttribute("style","color:#38a;border: none;text-decoration: underline;text-align: right;width: 85%;display: block;");
+	g.innerHTML="Texte intégral<input type=\"hidden\" value=\""+id+"\" > ";
+	d.appendChild(g);
+	var title = document.createElement("div");
+	title.setAttribute("class","item-title");
+	title.setAttribute("title",type);
+	var style = "line-height:30px;top: 51px;height: 30px;right: 92px;";
 
-if(type=="URBANISME"){
-    style+="background:#38a";
-}else if(type=="INVESTISSEMENT"){
-    style+="background:#f90";
-}else if(type=="ÉCONOMIQUE"){
-    style+="background:#363";
-}else if(type=="AUTRE"){
-    style+="background:#f90";
-}
+	if(type=="URBANISME"){
+	    style+="background:#38a";
+	}else if(type=="INVESTISSEMENT"){
+	    style+="background:#f90";
+	}else if(type=="ÉCONOMIQUE"){
+	    style+="background:#363";
+	}else if(type=="AUTRE"){
+	    style+="background:#f90";
+	}
 
-title.setAttribute("style",style);
-title.innerHTML=subLong(type);
-b.appendChild(title);
-b.appendChild(d);
-a.append(b);
-}
-}else if(typePage == 2){
-var a1 = document.querySelectorAll("."+cls+" .faq-fieldset .full-search-list")[0];
-var a2 = document.querySelectorAll("."+cls+" .faq-fieldset .full-search-list")[1];
-for(i=0;i<results[0].content.length;i++){
-    var id = results[0].content[i]._id;
-    var titleTx = results[0].content[i].question;
-    var text = results[0].content[i].response;
-    var b = document.createElement("div");
-    b.setAttribute("class","hp-box full-search-list-item");
-    b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
-    var d = document.createElement("div");
-    d.setAttribute("class","item-body");
-    d.setAttribute("style","padding:0 18px");
-    var e = document.createElement("div");
-    e.setAttribute("class","item-body-title");
-    e.setAttribute("style","font-size:16px");
-    e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
-    var f = document.createElement("p");
-    f.innerHTML = text;
-    f.setAttribute("style","font-size: 14px;text-align:left");
-    d.appendChild(e);
-    d.appendChild(f);
-    var g = document.createElement("a");
-    g.addEventListener("click",function(){
-    var id=$(this).children("input").val();
-    //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
-    });
-    g.setAttribute("class","item-body-button");
-    g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
-    g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
-    d.appendChild(g);
-    b.appendChild(d);
-    a1.appendChild(b);
-}
+	title.setAttribute("style",style);
+	title.innerHTML=subLong(type);
+	b.appendChild(title);
+	b.appendChild(d);
+	a.append(b);
+	}
+	}else if(typePage == 2){
+	var a1 = document.querySelectorAll("."+cls+" .faq-fieldset .full-search-list")[0];
+	var a2 = document.querySelectorAll("."+cls+" .faq-fieldset .full-search-list")[1];
+	for(i=0;i<results[0].content.length;i++){
+	    var id = results[0].content[i]._id;
+	    var titleTx = results[0].content[i].question;
+	    var text = results[0].content[i].response;
+	    var b = document.createElement("div");
+	    b.setAttribute("class","hp-box full-search-list-item");
+	    b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+	    var d = document.createElement("div");
+	    d.setAttribute("class","item-body");
+	    d.setAttribute("style","padding:0 18px");
+	    var e = document.createElement("div");
+	    e.setAttribute("class","item-body-title");
+	    e.setAttribute("style","font-size:16px");
+	    e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+	    var f = document.createElement("p");
+	    f.innerHTML = text;
+	    f.setAttribute("style","font-size: 14px;text-align:left");
+	    d.appendChild(e);
+	    d.appendChild(f);
+	    var g = document.createElement("a");
+	    g.addEventListener("click",function(){
+	    var id=$(this).children("input").val();
+	    //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+	    });
+	    g.setAttribute("class","item-body-button");
+	    g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+	    g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
+	    d.appendChild(g);
+	    b.appendChild(d);
+	    a1.appendChild(b);
+	}
 
-for(i=0;i<results[1].content.length;i++){
-    var id = results[1].content[i]._id;
-    var titleTx = results[1].content[i].question;
-    var text = results[1].content[i].response;
-    var b = document.createElement("div");
-    b.setAttribute("class","hp-box full-search-list-item");
-    b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
-    var d = document.createElement("div");
-    d.setAttribute("class","item-body");
-    d.setAttribute("style","padding:0 18px");
-    var e = document.createElement("div");
-    e.setAttribute("class","item-body-title");
-    e.setAttribute("style","font-size:16px");
-    e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
-    var f = document.createElement("p");
-    f.innerHTML = text;
-    f.setAttribute("style","font-size: 14px;text-align:left;");
-    d.appendChild(e);
-    d.appendChild(f);
-    var g = document.createElement("a");
-    g.addEventListener("click",function(){
-    var id=$(this).children("input").val();
-    //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
-    });
-    g.setAttribute("class","item-body-button");
-    g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
-    g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
-    d.appendChild(g);
-    b.appendChild(d);
-    a2.appendChild(b);
-}
+	for(i=0;i<results[1].content.length;i++){
+	    var id = results[1].content[i]._id;
+	    var titleTx = results[1].content[i].question;
+	    var text = results[1].content[i].response;
+	    var b = document.createElement("div");
+	    b.setAttribute("class","hp-box full-search-list-item");
+	    b.setAttribute("style","grid-template-columns: 100%;box-shadow: none;border: none;padding:0;height:145px;margin-bottom:25px;");
+	    var d = document.createElement("div");
+	    d.setAttribute("class","item-body");
+	    d.setAttribute("style","padding:0 18px");
+	    var e = document.createElement("div");
+	    e.setAttribute("class","item-body-title");
+	    e.setAttribute("style","font-size:16px");
+	    e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100)+"</span>";
+	    var f = document.createElement("p");
+	    f.innerHTML = text;
+	    f.setAttribute("style","font-size: 14px;text-align:left;");
+	    d.appendChild(e);
+	    d.appendChild(f);
+	    var g = document.createElement("a");
+	    g.addEventListener("click",function(){
+	    var id=$(this).children("input").val();
+	    //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+	    });
+	    g.setAttribute("class","item-body-button");
+	    g.setAttribute("style","color:#38a;border: none;text-decoration: underline;font-size:13px;");
+	    g.innerHTML="Lire la suite ...<input type=\"hidden\" value=\""+id+"\" > ";
+	    d.appendChild(g);
+	    b.appendChild(d);
+	    a2.appendChild(b);
+	}
 
-}else if(typePage==80){
+	}else if(typePage==80){
 
-console.log(results)
-for(i=0;i<results.length;i++){
+	console.log(results)
+	for(i=0;i<results.length;i++){
 
-var id = results[i]._id;
-var titleTx = results[i]._source.title;
-var text = results[i]._source.description;
-var type = results[i]._source.type;
-var img = results[i]._source.imgP;
-var tags = results[i]._source.tags;
-var link = results[i]._source.link;
+	var id = results[i]._id;
+	var titleTx = results[i]._source.title;
+	var text = results[i]._source.description;
+	var type = results[i]._source.type;
+	var img = results[i]._source.imgP;
+	var tags = results[i]._source.tags;
+	var link = results[i]._source.link;
+	var lang = results[i]._source.lang;
 
-var b = document.createElement("div");
-b.setAttribute("class","hp-box full-search-list-item");
-b.setAttribute("style","grid-template-columns: 0% 35% 65%;height: 190px;"); 
+	var b = document.createElement("div");
+	b.setAttribute("class","hp-box full-search-list-item");
+	b.setAttribute("style","grid-template-columns: 0% 35% 65%;height: 190px;"); 
 
-var imgit = document.createElement("div");
-imgit.setAttribute("class","item-img");
-imgit.innerHTML="<img style=\"width: 93%;height: 170px;position: relative;    right: -9px;top: -11px;\" src=\""+img+"\"/>";
+	var imgit = document.createElement("div");
+	imgit.setAttribute("class","item-img");
+	imgit.innerHTML="<img style=\"width: 93%;height: 170px;position: relative;    right: -9px;top: -11px;\" src=\""+img+"\"/>";
 
-var d = document.createElement("div");
-d.setAttribute("class","item-body");
-d.setAttribute("style","padding:0 15px");
-var e = document.createElement("div");
-e.setAttribute("class","item-body-title");  
-e.setAttribute("style","font-size:16px");
-e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,60).toUpperCase()+"</span>";
-var f = document.createElement("p");
-f.innerHTML = subLong(text,200);
-f.setAttribute("style","font-size: 0.955vw;text-align: left;width: 100%;color: #777;")
-d.appendChild(e);
-d.appendChild(f);
+	var d = document.createElement("div");
+	d.setAttribute("class","item-body");
+	d.setAttribute("style","padding:0 15px");
+	var e = document.createElement("div");
+	e.setAttribute("class","item-body-title");
+	if(lang=="Ar"){
+	    e.setAttribute("style","font-size:16px;text-align: right;direction: rtl;font-family: Droid Arabic Kufi, sans-serif;");
 
-var tgg = document.createElement("div");
+	}else{
+	    e.setAttribute("style","font-size:16px");
+	}  
+	e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,60).toUpperCase()+"</span>";
+	var f = document.createElement("p");
+	f.innerHTML = subLong(text,200);
+	if(lang=="Ar"){
+	    f.setAttribute("style","font-size: 0.955vw;text-align: left;width: 100%;color: #777;text-align: right;direction: rtl;font-family: Droid Arabic Kufi, sans-serif;")
 
-tags.forEach(function(elm){
-    tgg.innerHTML += "<span style=\" background:#38a;color:#fff;padding: 0px 4px;margin: 4px;border-radius: 3px;cursor:pointer; \">"+elm.tag+"</span>";
-});
-d.appendChild(tgg);
+	}else{
+	    f.setAttribute("style","font-size: 0.955vw;text-align: left;width: 100%;color: #777;")
+	}
 
-var g = document.createElement("a");
-var g2 = null;
+	d.appendChild(e);
+	d.appendChild(f);
 
-if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
-    g2 = document.createElement("a");
-}
+	var tgg = document.createElement("div");
 
-g.addEventListener("click",function(){
-    var id=$(this).children("input").val();
-    var typee=$(this).children("input").attr("idd");
+	tags.forEach(function(elm){
+	    tgg.innerHTML += "<span style=\" background:#38a;color:#fff;padding: 0px 4px;margin: 4px;border-radius: 3px;cursor:pointer; \">"+elm.tag+"</span>";
+	});
+	d.appendChild(tgg);
 
-    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Article CMS", {});
-    }else{
-        if(typee=="REVUE DE PRESSE"){
-            window.open(id);
-        }else{
-            ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "DetailsActivitySearch", {});
-        }
-    } 
-});
+	var g = document.createElement("a");
+	var g2 = null;
 
-if(g2!=null){
-    g2.addEventListener("click",function(){
-        var id=$(this).children("input").val();
-        var typee=$(this).children("input").attr("idd");
-        if(typee=="REVUE DE PRESSE"){
-            window.open(id);
-        }else{
-            ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "DetailsActivitySearch", {});
-        }
-    });
-   
-    if(type=="REVUE DE PRESSE"){
-        g2.innerHTML="Ouvrir <input type=\"hidden\" value=\""+link+"\" idd=\""+type+"\" > ";
-        g2.setAttribute("style","color:#38a;border: none;text-decoration: underline;margin-right:8px;width: 100%;position: inherit;text-align: right;font-size:14px");
+	if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+	    g2 = document.createElement("a");
+	}
 
-    }else{
-        g2.innerHTML="Ouvrir <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
-        g2.setAttribute("style","color:#38a;border: none;text-decoration: underline;margin-right:8px;width: 100%;position: inherit;text-align: right;font-size:14px");
-    }
-}
+	g.addEventListener("click",function(){
+	    var id=$(this).children("input").val();
+	    var typee=$(this).children("input").attr("idd");
 
+	    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Article CMS", {});
+	    }else{
+	        if(typee=="REVUE DE PRESSE"){
+	            window.open(id);
+	        }else{
+	            ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "DetailsActivitySearch", {});
+	        }
+	    } 
+	});
 
+	if(g2!=null){
+	    g2.addEventListener("click",function(){
+	        var id=$(this).children("input").val();
+	        var typee=$(this).children("input").attr("idd");
+	        if(typee=="REVUE DE PRESSE"){
+	            window.open(id);
+	        }else{
+	            ApplicationManager.run("karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject="+id,"search", "DetailsActivitySearch", {});
+	        }
+	    });
+	   
+	    if(type=="REVUE DE PRESSE"){
+	        g2.innerHTML="Ouvrir <input type=\"hidden\" value=\""+link+"\" idd=\""+type+"\" > ";
+	        g2.setAttribute("style","color:#38a;border: none;text-decoration: underline;margin-right:8px;width: 100%;position: inherit;text-align: right;font-size:14px");
 
-if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
-    g.innerHTML="Modifier <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
-    g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;");
-}else{
-    if(type=="REVUE DE PRESSE"){
-        g.innerHTML="Consulter sur <b>"+results[i]._source.source+"</b><input type=\"hidden\" value=\""+link+"\" idd=\""+type+"\" > ";
-        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;font-size:14px");
-
-    }else{
-        g.innerHTML="Lire la suite <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
-        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;font-size:14px");
-    }  
-}  
-
-var l = document.createElement("div");
-l.setAttribute("style","color:#38a;border: none;text-decoration: underline;display: block;width: 100%;position: inherit;text-align: right;font-size:14px");
-
-g.setAttribute("class","item-body-button");
-
-if(g2!=null){
-    l.appendChild(g2);
-}
-
-l.appendChild(g);
-
-d.appendChild(l);
-
-var title = document.createElement("div");
-title.setAttribute("class","item-title");
-title.setAttribute("title",type);
-var style = "line-height:30px;top: 59px;height: 30px;right: 100px;width:190px;";
-
-if(type=="PRATIQUE"){
-    style+="background:#38a";
-}else if(type=="A LA UNE"){
-    style+="background:#f90";
-}else if(type=="REVUE DE PRESSE"){
-    style+="background:#363"; 
-}
-
-title.setAttribute("style",style);
-title.innerHTML = subLong(type);
-b.appendChild(title);
-b.appendChild(imgit);
-b.appendChild(d);
-a.append(b);
-}
+	    }else{
+	        g2.innerHTML="Ouvrir <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
+	        g2.setAttribute("style","color:#38a;border: none;text-decoration: underline;margin-right:8px;width: 100%;position: inherit;text-align: right;font-size:14px");
+	    }
+	}
 
 
-}else{
-for(i=0;i<results.length;i++){
-    var id = results[i]._id;
-    var intituleFr = results[i]._source.content.intituleFr;
-    var intituleAr = results[i]._source.content.intituleAr;
-    var typeAc = checkUndefined(results[i]._source.parents["TypeActivite"]);
-    var nature = checkUndefined(results[i]._source.parents["NatureActivite"]);
-    var typeAt = checkUndefined(results[i]._source.parents["TypeAutorisation"]);
-    var typeAG="Activités économiques";
-    var setting = getColIcon(typeAt);
-    var b = document.createElement("div");
-    b.setAttribute("class","hp-box full-search-list-item");
-    b.setAttribute("style","height: 192px;");
-    var c = document.createElement("div");
-    c.setAttribute("class","c-path");
-    // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
-    var s = document.createElement("span");
-    s.setAttribute("class","cl-orange");
-    s.innerHTML=" > ";
-    c.appendChild(addEventSpan("p1",typeAt,cls,target));
-    c.appendChild(s);
-    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-    c.appendChild(addEventSpan("p2",typeAc,cls,target));
-    s = document.createElement("span");
-    s.setAttribute("class","cl-orange");
-    s.innerHTML=" > ";
-    c.appendChild(s);
-    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-    c.appendChild(addEventSpan("p3",nature,cls,target));
-    var d = document.createElement("div");
-    d.setAttribute("class","item-body");
-    var e = document.createElement("div");
-    e.setAttribute("class","item-body-title");
-    e.innerHTML="<span title=\""+intituleFr+"\">"+subLong(intituleFr,60)+"</span>";
-    e.innerHTML+="<span class=\"complete-text\">"+intituleFr+"</span>";
-    var f = document.createElement("p");
-    //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
-    f.innerHTML = subLongAr(intituleAr,75);
-    f.setAttribute("title",intituleAr);
-    d.appendChild(c);
-    d.appendChild(e);
-    d.appendChild(f);
 
-    var typeAtts= "";
-    if(typeAt=="Établissement classé" || typeAt=="Occupation Domaine Public"){
-        typeAtts = typeAt+";"+typeAc;
-    }else if(typeAt=="Autorisations urbanisme"){
-        typeAtts = typeAt+";"+nature;
-    }else{
-        typeAtts = typeAt;
-    }
-    var indexProc = procedureList[0].indexOf(typeAtts);
-    var g = document.createElement("button");
-    g.setAttribute("procName",procedureList[1][indexProc]);
+	if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+	    g.innerHTML="Modifier <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
+	    g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;");
+	}else{
+	    if(type=="REVUE DE PRESSE"){
+	        g.innerHTML="Consulter sur <b>"+results[i]._source.source+"</b><input type=\"hidden\" value=\""+link+"\" idd=\""+type+"\" > ";
+	        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;font-size:14px");
 
-    g.addEventListener("click",function(){
-        var id=$(this).children("input").val();
-        var procName = $(this).attr("procName");
-        //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/"+procName, "search", `Procédure`, {});
-    });
-    g.setAttribute("class","item-body-button hp-sbox-btn");
-    g.innerHTML="Voire procédure<input type=\"hidden\" value=\""+id+"\" > ";
-    g.setAttribute("style","display: inline-block;color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
-    d.appendChild(g);
-    var title = document.createElement("div");
-    title.setAttribute("class","item-title");
-    title.setAttribute("style","background:"+setting.color+";width: 192px;top: 64px;right: 105px;");
-    title.setAttribute("title",typeAt);
-    title.innerHTML=subLong(typeAt);
-    title.addEventListener("click",function(){
-        currentPage=0;
-        $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
-        restFullSearchList($(this).html(),0,false,4,cls,target);
-    });
-    b.appendChild(title);
-    var icons = document.createElement("div");
-    icons.setAttribute("class","item-icon");
-    icons.innerHTML="<i class=\"far fa-file-image\" /><i class=\""+setting.icon+"\" />";
-    b.appendChild(icons);
-    b.appendChild(d);
-    a.append(b);
-}
-}
-}
+	    }else{
+	        g.innerHTML="Lire la suite <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
+	        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;font-size:14px");
+	    }  
+	}  
+
+	var l = document.createElement("div");
+	l.setAttribute("style","color:#38a;border: none;text-decoration: underline;display: block;width: 100%;position: inherit;text-align: right;font-size:14px");
+
+	g.setAttribute("class","item-body-button");
+
+	if(g2!=null){
+	    l.appendChild(g2);
+	}
+
+	l.appendChild(g);
+
+	d.appendChild(l);
+
+	var title = document.createElement("div");
+	title.setAttribute("class","item-title");
+	title.setAttribute("title",type);
+	var style = "line-height:30px;top: 59px;height: 30px;right: 100px;width:190px;";
+
+	if(type=="PRATIQUE"){
+	    style+="background:#38a";
+	}else if(type=="A LA UNE"){
+	    style+="background:#f90";
+	}else if(type=="REVUE DE PRESSE"){
+	    style+="background:#363"; 
+	}
+
+	title.setAttribute("style",style);
+	title.innerHTML = subLong(type);
+	b.appendChild(title);
+	b.appendChild(imgit);
+	b.appendChild(d);
+	a.append(b);
+	}
+
+
+	}else{
+	for(i=0;i<results.length;i++){
+	    var id = results[i]._id;
+	    var intituleFr = results[i]._source.content.intituleFr;
+	    var intituleAr = results[i]._source.content.intituleAr;
+	    var typeAc = checkUndefined(results[i]._source.parents["TypeActivite"]);
+	    var nature = checkUndefined(results[i]._source.parents["NatureActivite"]);
+	    var typeAt = checkUndefined(results[i]._source.parents["TypeAutorisation"]);
+	    var typeAG="Activités économiques";
+	    var setting = getColIcon(typeAt);
+	    var b = document.createElement("div");
+	    b.setAttribute("class","hp-box full-search-list-item");
+	    b.setAttribute("style","height: 192px;");
+	    var c = document.createElement("div");
+	    c.setAttribute("class","c-path");
+	    // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
+	    var s = document.createElement("span");
+	    s.setAttribute("class","cl-orange");
+	    s.innerHTML=" > ";
+	    c.appendChild(addEventSpan("p1",typeAt,cls,target));
+	    c.appendChild(s);
+	    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+	    c.appendChild(addEventSpan("p2",typeAc,cls,target));
+	    s = document.createElement("span");
+	    s.setAttribute("class","cl-orange");
+	    s.innerHTML=" > ";
+	    c.appendChild(s);
+	    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
+	    c.appendChild(addEventSpan("p3",nature,cls,target));
+	    var d = document.createElement("div");
+	    d.setAttribute("class","item-body");
+	    var e = document.createElement("div");
+	    e.setAttribute("class","item-body-title");
+	    e.innerHTML="<span title=\""+intituleFr+"\">"+subLong(intituleFr,60)+"</span>";
+	    e.innerHTML+="<span class=\"complete-text\">"+intituleFr+"</span>";
+	    var f = document.createElement("p");
+	    //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
+	    f.innerHTML = subLongAr(intituleAr,75);
+	    f.setAttribute("title",intituleAr);
+	    d.appendChild(c);
+	    d.appendChild(e);
+	    d.appendChild(f);
+
+	    var typeAtts= "";
+	    if(typeAt=="Établissement classé" || typeAt=="Occupation Domaine Public"){
+	        typeAtts = typeAt+";"+typeAc;
+	    }else if(typeAt=="Autorisations urbanisme"){
+	        typeAtts = typeAt+";"+nature;
+	    }else{
+	        typeAtts = typeAt;
+	    }
+	    var indexProc = procedureList[0].indexOf(typeAtts);
+	    var g = document.createElement("button");
+	    g.setAttribute("procName",procedureList[1][indexProc]);
+
+	    g.addEventListener("click",function(){
+	        var id=$(this).children("input").val();
+	        var procName = $(this).attr("procName");
+	        //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
+	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/"+procName, "search", `Procédure`, {});
+	    });
+	    g.setAttribute("class","item-body-button hp-sbox-btn");
+	    g.innerHTML="Voire procédure<input type=\"hidden\" value=\""+id+"\" > ";
+	    g.setAttribute("style","display: inline-block;color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
+	    d.appendChild(g);
+	    var title = document.createElement("div");
+	    title.setAttribute("class","item-title");
+	    title.setAttribute("style","background:"+setting.color+";width: 192px;top: 64px;right: 105px;");
+	    title.setAttribute("title",typeAt);
+	    title.innerHTML=subLong(typeAt);
+	    title.addEventListener("click",function(){
+	        currentPage=0;
+	        $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
+	        restFullSearchList($(this).html(),0,false,4,cls,target);
+	    });
+	    b.appendChild(title);
+	    var icons = document.createElement("div");
+	    icons.setAttribute("class","item-icon");
+	    icons.innerHTML="<i class=\"far fa-file-image\" /><i class=\""+setting.icon+"\" />";
+	    b.appendChild(icons);
+	    b.appendChild(d);
+	    a.append(b);
+	}
+	}
+	}
+
+
 
 var procedureList = [["Simple Déclaration",
             "Établissement classé;Classe 2",
