@@ -11,12 +11,12 @@ Job1:
     paths:
       - target/
   only:
-    - Master_CI
+    - master_geo_ci
 Job2:
   stage: deploy_dev
   script:
-    - scp -o stricthostkeychecking=no target/*.jar karaz@151.80.213.61:/home/karaz
-    - ssh -o stricthostkeychecking=no karaz@151.80.213.61 "unzip -o karaz-ux-hub-1.0.jar -d karaz-ux-hub-1.0/ && rm -rf /karaz/glassfish5/glassfish/domains/domain1/autodeploy/karazApp/karaz-ux-hub-1.0 && mv karaz-ux-hub-1.0 /karaz/glassfish5/glassfish/domains/domain1/autodeploy/karazApp/ "
-    - ssh -o stricthostkeychecking=no karaz@151.80.213.61 "/karaz/restart_glassfish.sh"
+    - scp -o stricthostkeychecking=no target/*.jar karaz@51.255.76.236:/home/karaz
+    - ssh -o stricthostkeychecking=no karaz@51.255.76.236 "unzip -o karaz-ux-hub-1.0.jar -d karaz-ux-hub-1.0/ && rm -rf /home/karaz/glassfish5/glassfish/domains/domain2/autodeploy/karazApp/karaz-ux-hub-1.0 && mv karaz-ux-hub-1.0 /home/karaz/glassfish5/glassfish/domains/domain2/autodeploy/karazApp"
+    - ssh -o stricthostkeychecking=no karaz@51.255.76.236 "home/karaz/restart_glassfish_domain2.sh"
   only:
-    - Master_CI
+    - master_geo_ci
