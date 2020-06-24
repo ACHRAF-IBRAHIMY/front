@@ -113,6 +113,54 @@ function sortCommentsByDate(comments){
     return comments;
 }
 
+function getMaxDate(comment){
+    console.log("getMaxDate comments size ",comment);
+    if(comment.comments.length==0){
+        console.log("getMaxDate comments date ",comment.date)
+        return comment.date;
+    }else{
+        var timeMax = comment.comments[0].date;
+        var timeCmpr = new Date(comment.comments[0].date);
+        var commentMax = {};
+        for(var i=1;i<comment.comments.length;i++){
+            var time1 = new Date(comment.comments[i].date);
+            if(time1 > timeCmpr){
+                timeCmpr = time1
+                timeMax = comment.comments[i].date;
+            }
+        }
+        console.log("getMaxDate comments date ",timeMax);
+        return timeMax;
+    }
+}
+
+function sortCommentsByDateGb(comments){
+    console.log("sortCommentsByDate comments",comments);
+    var comm = JSON.parse(JSON.stringify(comments));
+    var commVar = [];
+    for(var i=0;i<comm.length;i++){
+        var obj = {
+            "date": getMaxDate(comm[i]),
+            "comment": comm[i],
+            "index": i
+        }
+        commVar.push(obj);
+    }
+    sortCommentsByDate(commVar);
+
+    var commentsVar = [];
+    var commentsIndex = [];
+
+    for(var i=0;i<commVar.length;i++){
+        commentsVar.push(commVar[i].comment);
+        commentsIndex.push(commVar[i].index);
+    }
+    console.log("sortCommentsByDate commVar",commVar);
+
+    return {"comments":commentsVar,"cmmIndex":commentsIndex};
+
+}
+
 function createCmtCms(results,context){
     var container = context.formRender.targetPanel.find(".notif-glo-cmmt");
     for(var i=0;i<results.length;i++){
