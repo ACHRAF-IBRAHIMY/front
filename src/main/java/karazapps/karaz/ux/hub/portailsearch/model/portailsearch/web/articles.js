@@ -14,7 +14,7 @@ var obj = {
 
 $.ajax({
 type: "post",
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/_update/"+id,
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_update/"+id,
 datatype: "application/json",
 contentType: "application/json",
 data:JSON.stringify(obj),
@@ -42,7 +42,7 @@ var obj = {
 
 $.ajax({
 type: "post",
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/_update/"+root.article._id,
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_update/"+root.article._id,
 datatype: "application/json",
 contentType: "application/json",
 data:JSON.stringify(obj),
@@ -126,7 +126,7 @@ var comment = {
     "comments":[]
 };
 
-if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
     comment.admin = "true";
 }
 
@@ -147,7 +147,7 @@ var comment = {
     "date": formatted_date,
 };
 
-if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
     comment.admin = "true";
 }
 
@@ -197,7 +197,7 @@ function createDivComments(comments,target){
     div8.setAttribute("class","comment-user-name");
     div8.setAttribute("style","font-size: 17px;font-weight: 600;");
     div8.innerHTML = elm.nom + " " + elm.prenom;
-    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
         div8.innerHTML += " "+elm.email
     }
     var div9 = document.createElement("div");
@@ -269,7 +269,7 @@ function createDivComments(comments,target){
         div8.setAttribute("class","comment-user-name");
         div8.setAttribute("style","font-size: 17px;font-weight: 600;");
         div8.innerHTML = e.nom + " " + e.prenom;
-        if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+        if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
             div8.innerHTML += " "+elm.email
         }
         var div9 = document.createElement("div");
@@ -326,7 +326,7 @@ function addCommentRest(root,target,comment,context,type){
 
 	$.ajax({
 	type: "post",
-	url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/_update/"+root.article._id,
+	url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_update/"+root.article._id,
 	datatype: "application/json",
 	contentType: "application/json",
 	data:JSON.stringify(obj),
@@ -488,7 +488,7 @@ var obj = {
 
 $.ajax({
 type: "post",
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/_update/"+id,
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_update/"+id,
 datatype: "application/json",
 contentType: "application/json",
 data:JSON.stringify(obj),
@@ -770,7 +770,7 @@ if(type==""){
 
 $.ajax({
 type: "post",
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/article/_search",
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_doc/_search",
 datatype: "application/json",
 contentType: "application/json",
 data:JSON.stringify(obj),
@@ -817,7 +817,7 @@ if(type==-1){
 
 $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/_update/"+root.article._id,
+    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_update/"+root.article._id,
     datatype: "application/json",
     contentType: "application/json",
     data:JSON.stringify(obj),
@@ -849,7 +849,7 @@ function getObjectArticle(id,root,target){
 target.find(".divSearch-article .search-details-icon img").show();
 $.ajax({
 type: "get",
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/article/"+id,
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_doc/"+id,
 datatype: "application/json",
 contentType: "application/json",
 beforeSend: function (xhr) {

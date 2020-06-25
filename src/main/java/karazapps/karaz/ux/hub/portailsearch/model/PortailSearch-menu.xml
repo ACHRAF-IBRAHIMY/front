@@ -1,215 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <menus>
-  <menu absId="karaz/ux/hub/portailsearch" label="KRAZ UX HUB" icone="DashboardSearch_icon">
+  <menu absId="karaz/ux/hub/portailsearch" label="PortailSearch" icone="PortailSearch_icon">
+    <menu relId="process" label="Processus">
+      <menu relId="GestionDashboardSearchProcess" label="GestionDashboardSearchProcess" icone="process">
+        <resource type="launchProcess">karaz/ux/hub/portailsearch/process/GestionDashboardSearchProcess</resource>
+      </menu>
+    </menu>
+    <menu relId="pannier" label="Traitement">
+      <menu relId="GestionDashboardSearchProcess" label="GestionDashboardSearchProcess" icone="pannier" />
+    </menu>
     <menu relId="search" label="Recherche">
-      <menu relId="VisioConferenceFrame" label="Visio Conférence" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/VisioConferenceFrame</resource>
+      <menu relId="ArticlesListe" label="Liste d'articles" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/ArticlesListe</resource>
       </menu>
-       <menu relId="DocumentsSortieSearch" label="Recherche Documents" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/DocumentsSortieSearch</resource>
+      <menu relId="commentsGb" label="Commentaires" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/CommentsGb</resource>
       </menu>
-      <menu relId="RetageProdHomePage" label="Rotage Home PAGE" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/RetageProdHomePage</resource>
+      <menu relId="CommentsMng" label="Gestion de commentaires" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/CommentsMng</resource>
       </menu>
-      <menu relId="AcceptabiliteProjets" label="Acceptabilite Projets" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/AcceptabiliteProjets</resource>
+      <menu relId="contactUs" label="Calcul des Index" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/ContactUs</resource>
       </menu>
-      
-      <menu relId="AccesAuFoncier" label="Acces Au Foncier" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/AccesAuFoncier</resource>
+      <menu relId="HomePage" label="Home Page" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/HomePage</resource>
       </menu>
-      <menu relId="AllMembres" label="All membres" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/AllMembres</resource>
+      <menu relId="NewArticle" label="Nouvel article" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/NewArticle</resource>
       </menu>
-      <menu relId="AllKarazuxresults" label="All Karazuxresults" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/AllKarazuxresults</resource>
+      <menu relId="Organisation" label="Organisation" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/OrganisationSearch</resource>
       </menu>
-      <menu relId="DashletsArchitectSearch" label="Dashlets Architect Search" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/DashletsArchitectSearch</resource>
-      </menu>
-      <menu relId="DetailsActivitySearch" label="detais activity search" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/DetailsActivitySearch</resource>
-      </menu>
-      <menu relId="EtudeImpactEnvironemmental" label="Etude Impact Environemmental" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental</resource>
-      </menu>
-      <menu relId="AllGlobalTAskSearch" label="All Global TAsk Search" icone="search" xcstt="x">
-        <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch]]></resource>
-      </menu>
-      <menu relId="OpinionTextMining" label="Opinion TextMining" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextMining</resource>
-      </menu>
-      <menu relId="OpinionTextClassification" label="Opinion TextClassification" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/OpinionTextClassification</resource>
-      </menu>
-      <menu relId="PublicCentralSearch" label="Public Central Search" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/PublicCentralSearch</resource>
-      </menu>
-      <menu relId="SimulatorRokhas" label="Simulator Rokhas" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/SimulatorRokhas</resource>
-      </menu>
-      <menu relId="SimulatorRokhasCMS" label="Simulator Rokhas CMS" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/SimulatorRokhasCMS</resource>
-      </menu>
-      <menu relId="AllObjectGlobalModelSearch" label="All Global Model Search(object)" icone="search" xcstt="x">
-        <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch]]></resource>
-      </menu>
-      <menu relId="AllTaskGlobalModelSearch" label="All Global Model Search(Task)" icone="search" xcstt="x">
-        <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch]]></resource>
-      </menu>
-      <menu relId="search" label="procedures" xcstt="x">
-        <menu relId="proceduresUrbanisme" label="procedures Urbanisme" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/proceduresUrbanisme</resource>
-        </menu>
-        <menu relId="proceduresEconomique" label="procedures Economique" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/proceduresEconomique</resource>
-        </menu>
-        <menu relId="autorisationMorcellement" label="Autorisations de morcellement" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/autorisationMorcellement</resource>
-        </menu>
-        <menu relId="autorusationLotissement" label="Autorisations de Lotissement" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/autorusationLotissement</resource>
-        </menu>
-        <menu relId="autorusationConstructionGroupesHabitations" label="Autorisations de Construction de Groupes d'Habitations" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/autorusationConstructionGroupesHabitations</resource>
-        </menu>
-        <menu relId="AutorisationsConstructionGrandsProjets" label="Autorisations de Construction Grands Projets" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationsConstructionGrandsProjets</resource>
-        </menu>
-        <menu relId="AutorisationsConstructionPetitsProjets" label="Autorisations de Construction petits projets" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationsConstructionPetitsProjets</resource>
-        </menu>
-        <menu relId="CertificatReceptionProjets" label="Certificat de réception de projets" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/CertificatReceptionProjets</resource>
-        </menu>
-        <menu relId="PermisHabiterEtCertificatConformite" label="Permis d'habiter et certificat de conformité" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/PermisHabiterEtCertificatConformite</resource>
-        </menu>
-        <menu relId="AutorisationRefection" label="Autorisation de réfection" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationRefection</resource>
-        </menu>
-        <menu relId="AutorisationDemolition" label="Autorisation de démolition" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationDemolition</resource>
-        </menu>
-        <menu relId="AutorisationRegularisation" label="Autorisation de régularisation" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/AutorisationRegularisation</resource>
-        </menu>
-        <menu label="Procédures Economiques" xcstt="x" relId="search" icone="">
-          <menu icone="search" label="Etablissement Classé catégorie 3" relId="EtablissementClasse">
-            <resource type="search">karaz/ux/hub/portailsearch/search/EtablissementClasse</resource>
-          </menu>
-          <menu icone="search" label="Etablissement Classé catégorie 2" relId="EtablissementClasse2">
-            <resource type="search">karaz/ux/hub/portailsearch/search/EtablissementClasse2</resource>
-          </menu>
-          <menu icone="search" label="Affichage publicitaire" relId="AffichagePub">
-            <resource type="search">karaz/ux/hub/portailsearch/search/AffichagePub</resource>
-          </menu>
-          <menu icone="search" label="Occupation domaine public" relId="OccupationDomainPub">
-            <resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPub</resource>
-          </menu>
-          <menu icone="search" label="Occupation domaine public RT" relId="OccupationDomainPubRT">
-            <resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPubRT</resource>
-          </menu>
-          <menu icone="search" label="Occupation domaine public RP" relId="OccupationDomainPubRP">
-            <resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPubRP</resource>
-          </menu>
-          <menu icone="search" label="Occupation domaine public UC" relId="OccupationDomainPupUC">
-            <resource type="search">karaz/ux/hub/portailsearch/search/OccupationDomainPupUC</resource>
-          </menu>
-        </menu>
-      </menu>
-      <menu relId="OpendataFrame" label="Open data page" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/OpendataFrame</resource>
-      </menu>
-      <menu relId="BackEndPage" label="Back End Page" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/BackEndPage</resource>
-      </menu>
-      <menu relId="ReportRanking" label="Report Ranking" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/ReportRanking</resource>
-      </menu>
-      <menu relId="UserSearchOLAP" label="User Search OLAP" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/UserSearchOLAP</resource>
-      </menu>
-      <menu relId="ModuleFAQ" label="Module FAQ">
-        <menu relId="NewfreqQuestion" label="Nouvelle faq" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/NewfreqQuestion</resource>
-        </menu>
-        <menu relId="FaqPage" label="Faq Page" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/FaqPage</resource>
-        </menu>
-        <menu relId="FaqDetail" label="Faq Detail" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/FaqDetail</resource>
-        </menu>
-      </menu>
-      <menu relId="ModuleRef" label="Module Referentiel">
-        <menu relId="NewRefJuridique" label="Nouveau Référentiel Juridique" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/NewRefJuridique</resource>
-        </menu>
-        <menu relId="RefrentielJuridique" label="Refrentiel Juridique" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/RefrentielJuridique</resource>
-        </menu>
-        <menu relId="refDetail" label="Refrentiel Juridique" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/RefDetail</resource>
-        </menu>
-      </menu>
-      <menu relId="ModuleGuideVidéo" label="Module Guide Vidéo">
-        <menu relId="GuideVideoConsultation" label="Guide Video Consultation" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoConsultation</resource>
-        </menu>
-        <menu relId="GuideVideoEdit" label="Guide Video Edit" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/GuideVideoEdit</resource>
-        </menu>
-      </menu>
-      <menu relId="ModuleDownload" label="Module Attachement">
-        <menu relId="DownLoadConsultation" label="Attachement Consultation" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/DownloadConsultation</resource>
-        </menu>
-        <menu relId="DownloadEdit" label="Attachement Edit" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/DownloadEdit</resource>
-        </menu>
-      </menu>
-      <menu relId="ModuleArticle" label="Module article" xcstt="x">
-        <menu relId="Articles" label="Articles" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/Articles</resource>
-        </menu>
-        <menu relId="ArticlesListe" label="Liste d'articles" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/ArticlesListe</resource>
-        </menu>
-        <menu relId="ArticleConsultation" label="Article" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/ArticleConsultation</resource>
-        </menu>
-        <menu relId="NewArticle" label="Nouveau Article" icone="search">
-          <resource type="search">karaz/ux/hub/portailsearch/search/NewArticle</resource>
-        </menu>
-        <menu relId="CommentsMng" label="Gestion de commentaires" icone="search" xcstt="x">
-          <resource type="search"><![CDATA[karaz/ux/hub/portailsearch/search/CommentsMng]]></resource>
-        </menu>
-      </menu>
-      <menu relId="RankingDigitalRemp" label="Ranking Digitalite" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/RankingDigitalRemp</resource>
-      </menu>
-      <menu relId="CalculIndex" label="Calcul des index" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/CalculIndex</resource>
-      </menu>
-      <menu relId="RightAside" label="Right Aside" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/RightAside</resource>
-      </menu>
-      <menu relId="StatistiuqesSearch" label="Statisiques Membre commission" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/StatistiuqesSearch</resource>
-      </menu>
-      <menu relId="DbLeftSide" label="dbLeftSide" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/DbLeftSide</resource>
-      </menu>
-      <menu relId="StatistiquesArchitecteSearch" label="Statistiques Architecte" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesArchitecteSearch</resource>
-      </menu>
-      <menu relId="StatistiquesMembreSecr" label="Statistiques Secretaire commission" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesMembreSecr</resource>
-      </menu>
-      <menu relId="AlertSearch" label="Alert Search" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/AlertSearch</resource>
+      <menu relId="UrbanismeSearch" label="Documents d'urbanisme" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/UrbanismeSearch</resource>
       </menu>
     </menu>
   </menu>
 </menus>
-

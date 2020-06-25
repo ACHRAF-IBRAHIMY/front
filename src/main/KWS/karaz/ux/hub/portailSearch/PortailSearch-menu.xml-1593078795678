@@ -9,6 +9,9 @@
       <menu relId="GestionDashboardSearchProcess" label="GestionDashboardSearchProcess" icone="pannier" />
     </menu>
     <menu relId="search" label="Recherche">
+      <menu relId="AcceptabiliteProjets" label="Acceptabilite Projets" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AcceptabiliteProjets</resource>
+      </menu>
       <menu relId="ArticlesListe" label="Liste d'articles" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/ArticlesListe</resource>
       </menu>
@@ -26,12 +29,6 @@
       </menu>
       <menu relId="NewArticle" label="Nouvel article" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/NewArticle</resource>
-      </menu>
-      <menu relId="Organisation" label="Organisation" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/OrganisationSearch</resource>
-      </menu>
-      <menu relId="UrbanismeSearch" label="Documents d'urbanisme" icone="search">
-        <resource type="search">karaz/ux/hub/portailsearch/search/UrbanismeSearch</resource>
       </menu>
     </menu>
   </menu>

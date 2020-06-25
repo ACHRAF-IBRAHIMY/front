@@ -69,8 +69,6 @@ public class PortailSearchLoader {
 		ModelCache.addTaskListPath("karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:taskList-default", "karazapps/karaz/ux/hub/portailsearch/model/taskList-TLDashboardSearch.xml");
 		
 
-		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/AcceptabiliteProjets", "karazapps/karaz/ux/hub/portailsearch/model/search-AcceptabiliteProjets.xml");
-
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/ArticlesListe", "karazapps/karaz/ux/hub/portailsearch/model/search-ArticlesListe.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/CommentsMng", "karazapps/karaz/ux/hub/portailsearch/model/search-CommentsMng.xml");
@@ -78,6 +76,10 @@ public class PortailSearchLoader {
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/HomePage", "karazapps/karaz/ux/hub/portailsearch/model/search-HomePage.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/NewArticle", "karazapps/karaz/ux/hub/portailsearch/model/search-NewArticle.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/Organisation", "karazapps/karaz/ux/hub/portailsearch/model/search-Organisation.xml");
+
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/UrbanismeSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-UrbanismeSearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/commentsGb", "karazapps/karaz/ux/hub/portailsearch/model/search-commentsGb.xml");
 
@@ -134,7 +136,6 @@ public class PortailSearchLoader {
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/ProceduresCSS.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/vueLarge.css");
     			WebResourcer.addCssResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/vuemobile.css");
-    			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/alertsearch.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/articles.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/comments.js");
     			WebResourcer.addJSResource("karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js");

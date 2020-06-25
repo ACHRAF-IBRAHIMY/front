@@ -245,12 +245,12 @@ xhttp.open("POST",URL_SEARCH+"?operation=wselastic&shortUrl="+"/reglementation_i
 xhttp.setRequestHeader("Authorization",AUTH);
 xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 }else if(typePage==80){
-xhttp.open("POST",URL_SEARCH+"?operation=wselastic&shortUrl="+"/articles_index/article/_search");
+xhttp.open("POST",URL_SEARCH+"?operation=wselastic&shortUrl="+"/geo_article_index/_doc/_search");
 xhttp.setRequestHeader("Authorization",AUTH);
 xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 }
 
-
+ 
 var testLanguage = RegExp('[أ-ي]');
 if(typePage==0){
 
@@ -761,17 +761,17 @@ return str;
 
 function generateRequestArticleSearch(prefix,type,from,size,typeUse){
 if(typeUse==0){
-var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"datePr\" : {\"order\" : \"desc\"}}],\"query\":{ \"term\":{ \"type.keyword\":\""+type+"\" }}}\n";
+var str = "{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"datePr\" : {\"order\" : \"desc\"}}],\"query\":{ \"term\":{ \"type.keyword\":\""+type+"\" }}}\n";
 console.log(str);
 }else if(typeUse==1){
-var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"datePr\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{ }}}\n";
-str += "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"vue\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{  }}}\n";
-str += "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"like\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{ }}}\n";
+var str = "{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"datePr\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{ }}}\n";
+str += "{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"vue\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{  }}}\n";
+str += "{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"sort\":[{ \"like\" : {\"order\" : \"desc\"}}],\"query\":{ \"match_all\":{ }}}\n";
 }else{
 if(prefix.trim()!=""){
-var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
+var str = "{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\": {\"bool\":{\"must\": [{\"multi_match\":{\"query\": \""+prefix+"\",\"fields\": [\"QUESTIONS.keywordsString\"],\"analyzer\": \"rebuilt_french\",\"fuzziness\": \"auto\",\"minimum_should_match\": \"60%\"}},{\"match_phrase\": {\"type\": \""+type+"\"}}]}}}\n";
 }else{
-var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"term\":{ \"type.keyword\":\""+type+"\" }}}\n";
+var str = "{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{\"from\":"+from+",\"size\":"+size+",\"query\":{ \"term\":{ \"type.keyword\":\""+type+"\" }}}\n";
 }
 }
 
@@ -1131,7 +1131,7 @@ $.ajax({
             var g = document.createElement("button");
             g.addEventListener("click",function(){
                 var id=$(this).children("input").val();
-                if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+                if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
                     ApplicationManager.run("karaz/ux/hub/portailsearch/search/GuideVideoEdit?query.idObject="+id,"search", "video", {});
                 }else{
                     getVideo(id,1,clas);
@@ -1341,7 +1341,7 @@ if(src.lang=="Ar"){
 }
 
 div.addEventListener("click",function(){
-// if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+// if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
 //     ApplicationManager.run("karaz/ux/hub/portailsearch/search/GuideVideoEdit?query.idObject="+id,"search", "video", {});
 // }else{
 //     getArticle(id,1,clas);
@@ -1604,7 +1604,7 @@ success: function (result) {
         var g = document.createElement("button");
         g.addEventListener("click",function(){
             var id=$(this).children("input").val();
-            if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+            if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/DownloadEdit?query.idObject="+id,"search", "attachement", {});
 
             }else{
@@ -1773,7 +1773,7 @@ div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
 <p style="font-size: 13px;text-align: left;margin: auto;">`+subLong(desc,70)+`</p>
 </div>`;
 div.addEventListener("click",function(){
-if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
     ApplicationManager.run("karaz/ux/hub/portailsearch/search/GuideVideoEdit?query.idObject="+id,"search", "video", {});
 }else{
     getVideo(id,1,clas);
@@ -1863,7 +1863,7 @@ div.innerHTML = `<div class="video-img" style="padding: 3px 7px 1px 1px;">
 </div>`;
 
 div.addEventListener("click",function(){
-if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
     ApplicationManager.run("karaz/ux/hub/portailsearch/search/DownloadEdit?query.idObject="+id,"search", "attachement", {});
 
 }else{
@@ -1953,7 +1953,7 @@ function removereArticle(id,clas,target) {
 if (window.confirm("Voulez-vous vraiment supprimer cet article?")) {
 $.ajax({
 type: "delete",
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/article/" + id,
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_doc/" + id,
 //url: "http://localhost:9200/index_classification_cluster/avis/_search",
 contentType: "application/json",
 beforeSend: function (xhr) {
@@ -2383,7 +2383,7 @@ target.find("."+cls+" .NFQ-all-quest").hide();
 
 $.ajax({
 type: "get",
-url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/articles_index/article/" + id,
+url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/geo_article_index/_doc/" + id,
 datatype: "application/json",
 beforeSend: function (xhr) {
 xhr.setRequestHeader("Authorization",AUTH);
@@ -3528,7 +3528,7 @@ function fullSearchList(results,cls,typePage,target){
 	var g = document.createElement("a");
 	g.addEventListener("click",function(){
 	    var id=$(this).children("input").val();
-	    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+	    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
 	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewRefJuridique?query.idObject="+id,"search", "Référentiel juridique", {});
 	    }else{
 	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefDetail?query.idObject="+id,"search", "Référentiel juridique", {});
@@ -3682,7 +3682,7 @@ function fullSearchList(results,cls,typePage,target){
 	var g = document.createElement("a");
 	var g2 = null;
 
-	if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+	if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
 	    g2 = document.createElement("a");
 	}
 
@@ -3690,7 +3690,7 @@ function fullSearchList(results,cls,typePage,target){
 	    var id=$(this).children("input").val();
 	    var typee=$(this).children("input").attr("idd");
 
-	    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+	    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
 	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/NewArticle?query.idObject="+id,"search", "Article CMS", {});
 	    }else{
 	        if(typee=="REVUE DE PRESSE"){
@@ -3724,7 +3724,7 @@ function fullSearchList(results,cls,typePage,target){
 
 
 
-	if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+	if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
 	    g.innerHTML="Modifier <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
 	    g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;");
 	}else{

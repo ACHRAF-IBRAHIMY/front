@@ -14,7 +14,7 @@ function getArticlesCms(params){
     
     $.ajax({
         type: "post",
-        url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/article/_search",
+        url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_doc/_search",
         datatype: "application/json",
         contentType: "application/json",
         data:JSON.stringify(obj),
@@ -79,7 +79,7 @@ function getCommtsCms(params){
     
     $.ajax({
         type: "post",
-        url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/article/_search",
+        url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_doc/_search",
         datatype: "application/json",
         contentType: "application/json",
         data:JSON.stringify(obj),

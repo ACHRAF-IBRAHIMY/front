@@ -919,7 +919,7 @@ target.find(cls + ":not(:has(>.NFQ-end))").append(div);
 
 } else if (type == 2 || type ==3) {
 
- if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+ if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR' || profilesT.match(/ADMINISTRATEUR/)=='ADMINISTRATEUR'){
     var str = `toModifyFaq("${id}")`; 
 }else{
     var str = `ApplicationManager.run("karaz/ux/hub/portailsearch/search/FaqDetail?query.idObject=${id}","search", "FaqDetail", {});`
@@ -1020,7 +1020,7 @@ error: function (error) {
 
 function getCountArticles(cls){
 
-var str = "{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"match_all\": {}}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"PRATIQUE\" }}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"A LA UNE\" }}}\n{ \"index\": \"articles_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"REVUE DE PRESSE\" }}}\n";
+var str = "{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"match_all\": {}}}\n{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"PRATIQUE\" }}}\n{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"A LA UNE\" }}}\n{ \"index\": \"geo_article_index\", \"type\": \"article\" }\n{ \"size\":0,\"query\": { \"term\": { \"type.keyword\":\"REVUE DE PRESSE\" }}}\n";
 
 $.ajax({
 type: "post",
@@ -1065,7 +1065,7 @@ newID = id;
 $.ajax({
 type: "post",
 
-url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/article/" + newID,
+url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/geo_article_index/_doc/" + newID,
 datatype: "application/json",
 data: JSON.stringify(obj),
 contentType: "application/json",
