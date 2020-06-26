@@ -282,7 +282,7 @@
               </vbox>
               
             </vbox> 
-            <vbox height="450"  style="height:450px;background:#EEE" className="geoProtailBck">
+            <vbox height="450" style="height:450px;background:#EEE" className="geoProtailBck">
               <button icon="fas fa-expand" className="btn-reduire" visible="('{visiblerd}'=='oui'),expr,boolean" label="RÉDUIRE">
                 <postChange>
                   var mapBrws = context.formRender.targetPanel.find(".geoProtailBck");
@@ -298,7 +298,7 @@
                   context.formRender.notifyObservers("visiblerd");
                 </postChange>
               </button>
-              <search style="height:450px;"  mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0003" />
+              <search style="height:450px;" mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0003" />
             </vbox>
           </vbox>
         </vbox>
