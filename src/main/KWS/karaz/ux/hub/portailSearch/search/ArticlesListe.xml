@@ -142,6 +142,10 @@
 .classSearch-80 .item-body-title a{
   cursor:pointer;
 }
+
+.full-search-list-item .item-body a{
+  cursor:pointer;
+}
         </css>
       <html id="hSeparator">
         <div style="height: 0px;" />
