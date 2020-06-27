@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="UrbanismeSearch" label="Documents d'urbanisme">
+<search name="OrganisationSearch" label="Organisation">
   <query />
   <data>
     <query>
@@ -18,7 +18,7 @@
         <div style="height: 30px;" xcstt="x" />
       </html>
       <vbox columns="100%">
-        <search searchQN="gis/virtual/search/AllVirtual?searchName=docUrbanisme" />
+        <search searchQN="gis/virtual/search/AllVirtual?searchName=organization" />
       </vbox>
       <html>
         <div style="height: 30px;" />

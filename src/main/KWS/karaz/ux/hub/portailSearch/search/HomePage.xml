@@ -13,41 +13,12 @@
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
       <css>
 
-        .menu-geo-gis{
-          background: #38A;
-          padding:10px;
-          
-        }
-
-        .menu-geo-gis button.ow-button.float{
-          margin-top:0;
-        }
-
-
-        .menu-geo-gis .ow-btn-container{
-          text-align: center;
-        }
-
-        .menu-geo-gis .ow-btn-container button{
-          background:#38A;
-          color:#FFF;
-          text-transform:uppercase;
-        }
-
-        .menu-geo-gis .mon-space{
-          background: #FFF !important;
-          color: #444 !important;
-          border-radius: 23px !important;
-        }
-
-        .menu-geo-gis .header-logo .ow-vl-inner{
-          margin-top:-10px;
-        }
+        
 
         .body-geo-gis .geo-card{
           display: block;
           padding: 15px;
-          margin: 10px 1rem;
+          margin: 30px 1rem;
           color: var(--fg1);
           background-color: #EEE;
           border-radius: 2px;
@@ -61,13 +32,13 @@
         .body-geo-gis .geo-card-gb{
           display: block;
           padding: 15px; 
-          margin: 10px 1rem;
+          margin: 30px 1rem;
           color: var(--fg1);
           background-color: #EEE;
           border-radius: 2px;
           box-shadow: 3px 3px 3px #0004;
           border: 1px solid #DDD;
-          height: 560px;
+          height: 600px;
           box-sizing: border-box;
           text-align: left;
         }
@@ -192,64 +163,84 @@
       </css>
     <vbox style="background:#FFF;">
       <vbox labelAlign="float" style="background:#FFF;width:100%;height:auto;">
-        <vbox columns="auto 11% 11% 11% 11% 11% 11% 14%" className="menu-geo-gis">
-          <vbox className="header-logo" columns="70px auto">*
-            <html>
-              <img style="width:60px" src="img/maroc.png" />
-            </html>
-            <html style="color: #FFF;font-size: 14px;text-transform:uppercase;padding-top: 15px;">
-              GÉOPORTAIL NATIONAL DES
-              DOCUMENTS D’URBANISME              
-            </html>
-          </vbox>
-          <button label="ACCUEIL">
-          </button>
-          <button label="CARTOGRAPHIE">
-          </button>
-          <button label="ORGANISMES">
-          </button>
-          <button label="GÉO-SERVICES">
-          </button>
-          <button label="NOMENCLATURE">
-          </button>
-          <button label="ACTUALITÉS">
-          </button> 
-          <button className="mon-space" label="Mon Espace">
-          </button>
-        </vbox>
+        
         <vbox className="body-geo-gis">
           <vbox columns="33% 67%">
             <vbox>
               <vbox className="geo-card">
                 <html xpath="instanceId">
-                  <div id="home-gloAl-${instanceId}" class="geoPortPop" onclick="openGeoPopUp('home-gloAl-${instanceId}')">
-                    <div><span style="color: #666;font-size: 20px;">Comment ça marche ?</span></div>
-                    <div><span style="font-size: 15px;color: #666;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
-                    <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fab fa-youtube" /></div>
-                    <div id="myModal" class="modal">
-
-                      <div class="modal-content">
-                        <span class="close">x</span>
-                        <p>Some text in the Modal..</p>
-                      </div>
+                  <div class="geoPortPop" onclick="openGeoPopUp('home-gloAl-${instanceId}')">
+                    <div style="display:grid;grid-template-columns: 125px auto;">
+                      <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fab fa-youtube" /></div>
+                      <div>
+                          <div><span style="color: #666;font-size: 20px;">Comment ça marche ?</span></div>
+                          <div><span style="font-size: 14px;color: #666;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
+                          
+                          <div>
+                            <p style="font-size:11px;color:#666;text-align:justify;margin-top: 4px;">
+                              Découvrez ici le géoportail national des documents d’urbanisme. Dans cette vidéo de 3 mn vous aurez un premier aperçu sur la nature et la consistance des géo-données publiées sur le géoportail national, les fonctionnalités de navigation spatiale qu’il offre et les outils de recherche qu’il propose.
+                            </p>
+                          </div>
+                        </div>  
+                     
+                    </div>
                   
-                    </div>  
                   </div>
                 </html>
               
               </vbox> 
+
+              <html xpath="instanceId" className="geoPortPop">
+                <div id="home-gloAl-${instanceId}">
+                  <div id="myModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close" onclick="closeGeoPopUp('home-gloAl-${instanceId}')" >x</span>
+                      <p>Video..</p>
+                    </div>
+                  </div>
+                </div>
+                
+              </html>
+
+              
+
               <vbox className="geo-card">
                 <html>
-                  <div><span style="color: #666;font-size: 20px;color: #666;">Intéressé par une localité précise ?</span></div>
-                  <div><span style="font-size: 15px;color: #666;">Consultez les documents d’urbanisme par agence urbaine</span></div>
-                  <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-university" /></div>
+                  <div style="display:grid;grid-template-columns: 125px auto;">
+                    <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-university" /></div>
+                    <div>
+                      <div><span style="color: #666;font-size: 20px;color: #666;">Intéressé par une localité précise ?</span></div>
+                      <div><span style="font-size: 14px;color: #666;">Consultez les documents d’urbanisme par agence urbaine</span></div>
+                      <div>
+                        <p style="font-size:11px;color:#666;text-align:justify;margin-top: 4px;">
+                          Le territoire national est couvert par 30 agences urbaines dont chacune pilote la production des documents d’urbanisme pour un périmètre territorial prédéfini. Si vous êtes intéressés par une localité en particulier, vous pouvez accéder ici directement aux documents d’urbanisme produits par l’agence urbaine.
+
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </html>
               </vbox>
+
               <vbox className="geo-card">
                 <html>
-                  <div><span style="color: #666;font-size: 20px;color: #666;">Quelle réglementation de zone ?</span></div>
-                  <div><span style="font-size: 15px;color: #666;">Prenez connaissance de la nomenclature nationale</span></div>
-                  <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-map-marked-alt" /></div>
+                  <div style="display:grid;grid-template-columns: 125px auto;">
+                    <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-map-marked-alt" /></div>
+                    <div>
+                      <div>
+                        <span style="color: #666;font-size: 20px;color: #666;">Quelle réglementation de zone ?</span>
+                      </div>
+                      <div>
+                        <span style="font-size: 14px;color: #666;">Prenez connaissance de la nomenclature nationale</span>
+                      </div>
+                      <div>
+                        <p style="font-size:11px;color:#666;text-align:justify;margin-top: 4px;">
+                          Dans le but d’uniformiser les documents d’urbanisme publiés par les différentes agences urbaines et d’en faciliter l’exploitation par les administrations concernées, les professionnels de l’urbanisme et les citoyens, une nomenclature nationale standard a été publiée par le Ministère. Prenez-en connaissance à travers cet outil interactif.
+                        </p>
+                      </div>
+                    </div>
+                  </div> 
+                  
                 </html>
               </vbox>
             </vbox> 
@@ -282,7 +273,7 @@
               </vbox>
               
             </vbox> 
-            <vbox height="450" style="height:450px;background:#EEE" className="geoProtailBck">
+            <vbox height="520" style="height:450px;background:#EEE" className="geoProtailBck">
               <button icon="fas fa-expand" className="btn-reduire" visible="('{visiblerd}'=='oui'),expr,boolean" label="RÉDUIRE">
                 <postChange>
                   var mapBrws = context.formRender.targetPanel.find(".geoProtailBck");
@@ -305,31 +296,41 @@
       </vbox>
       
       </vbox>
+      <html>
+        <div style="height: 20px;" />
+      </html>
       <vbox className="classSearch-home-gloAl">
         <html>
-          <span style="margin-left: 24px;margin-top: 14px;font-size: 20px;color: #555;">
+          <span style="margin-left: 24px;margin-top: 14px;font-size: 21px;color: #555;">
             Derniers documents d’urbanisme publiés
           </span>
         </html>
         <html>
-          <div style="height: 20px;" />
         </html>
+        <vbox>
+          <search searchQN="gis/virtual/search/AllVirtual?searchName=docUrbanismeAcc" />
+          <vbox className="fieldset-footer-home">
+            <html>
+                <div style="text-align:right;width:99%;" class="class-traduction" tcode="APA1"><span style="background: #38A;color: #FFF;padding: 5px;border-radius: 2px;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Document d'urbanisme&quot;, {});">Tous les documents d’urbanisme</span></div>
+            </html>
+          </vbox>
+        </vbox>
         
         <html>
-          <span style="margin-left: 24px;margin-top: 14px;font-size: 20px;color: #555;">
-            Dernières actualités
+          <span style="margin-left: 24px;margin-top: 14px;font-size: 21px;color: #555;">
+            Dernières ressources publiées
           </span> 
         </html>
-        <html>
+        <html>  
           <div style="height: 20px;" />
         </html>
-        <vbox className="fieldset-articles fieldser-article-1">
+        <vbox className="fieldset-articles fieldser-article-1" style="width: 98.5%;margin: auto;">
           <vbox className="vbox-articles" columns="25% 25% 25% 25%">
              
           </vbox>
           <vbox className="fieldset-footer-home">
               <html>
-                  <div style="text-align:right;" class="class-traduction" tcode="APA1" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});"><span style="background: #38A;color: #FFF;padding: 5px;border-radius: 2px;">Toute l’actualité</span></div>
+                  <div style="text-align:right;" class="class-traduction" tcode="APA1" ><span style="background: #38A;color: #FFF;padding: 5px;border-radius: 2px;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Toute l’actualité</span></div>
               </html>
           </vbox>
         </vbox>
