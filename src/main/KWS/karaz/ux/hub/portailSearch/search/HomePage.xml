@@ -205,19 +205,19 @@
       <vbox labelAlign="float" style="background:#FFF;width:100%;height:auto;">
         
         <vbox className="body-geo-gis">
-          <vbox columns="33% 67%">
+          <vbox columns="35% 65%">
             <vbox>
               <vbox className="geo-card">
                 <html xpath="instanceId">
                   <div class="geoPortPop" onclick="openGeoPopUp('home-gloAl-${instanceId}')">
-                    <div style="display:grid;grid-template-columns: 125px auto;">
+                    <div style="display:grid;grid-template-columns: 110px auto;">
                       <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fab fa-youtube" /></div>
                       <div>
-                          <div><span style="color: #666;font-size: 20px;">Comment ça marche ?</span></div>
-                          <div><span style="font-size: 14px;color: #666;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
+                          <div><span style="color: #666;font-size: 1.3vw;">Comment ça marche ?</span></div>
+                          <div><span style="font-size: 1vw;color: #666;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
                           
                           <div>
-                            <p style="font-size:11px;color:#666;text-align:justify;margin-top: 4px;">
+                            <p style="font-size:0.7vw;color:#666;text-align:justify;margin-top: 4px;">
                               Découvrez ici le géoportail national des documents d’urbanisme. Dans cette vidéo de 3 mn vous aurez un premier aperçu sur la nature et la consistance des géo-données publiées sur le géoportail national, les fonctionnalités de navigation spatiale qu’il offre et les outils de recherche qu’il propose.
                             </p>
                           </div>
@@ -246,13 +246,13 @@
 
               <vbox className="geo-card">
                 <html>
-                  <div style="display:grid;grid-template-columns: 125px auto;">
+                  <div style="display:grid;grid-template-columns: 110px auto;">
                     <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-university" /></div>
                     <div>
-                      <div><span style="color: #666;font-size: 20px;color: #666;">Intéressé par une localité précise ?</span></div>
-                      <div><span style="font-size: 14px;color: #666;">Consultez les documents d’urbanisme par agence urbaine</span></div>
+                      <div><span style="color: #666;font-size: 1.3vw;color: #666;">Intéressé par une localité précise ?</span></div>
+                      <div><span style="font-size: 1vw;color: #666;">Consultez les documents d’urbanisme par agence urbaine</span></div>
                       <div>
-                        <p style="font-size:11px;color:#666;text-align:justify;margin-top: 4px;">
+                        <p style="font-size:0.7vw;color:#666;text-align:justify;margin-top: 4px;">
                           Le territoire national est couvert par 30 agences urbaines dont chacune pilote la production des documents d’urbanisme pour un périmètre territorial prédéfini. Si vous êtes intéressés par une localité en particulier, vous pouvez accéder ici directement aux documents d’urbanisme produits par l’agence urbaine.
 
                         </p>
@@ -264,17 +264,17 @@
 
               <vbox className="geo-card">
                 <html>
-                  <div style="display:grid;grid-template-columns: 125px auto;">
+                  <div style="display:grid;grid-template-columns: 110px auto;">
                     <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-map-marked-alt" /></div>
                     <div>
                       <div>
-                        <span style="color: #666;font-size: 20px;color: #666;">Quelle réglementation de zone ?</span>
+                        <span style="color: #666;font-size: 1.3vw;color: #666;">Quelle réglementation de zone ?</span>
                       </div>
                       <div>
-                        <span style="font-size: 14px;color: #666;">Prenez connaissance de la nomenclature nationale</span>
+                        <span style="font-size: 1vw;color: #666;">Prenez connaissance de la nomenclature nationale</span>
                       </div>
                       <div>
-                        <p style="font-size:11px;color:#666;text-align:justify;margin-top: 4px;">
+                        <p style="font-size: 0.7vw;color:#666;text-align:justify;margin-top: 4px;">
                           Dans le but d’uniformiser les documents d’urbanisme publiés par les différentes agences urbaines et d’en faciliter l’exploitation par les administrations concernées, les professionnels de l’urbanisme et les citoyens, une nomenclature nationale standard a été publiée par le Ministère. Prenez-en connaissance à travers cet outil interactif.
                         </p>
                       </div>
@@ -334,7 +334,7 @@
                   context.formRender.notifyObservers("visiblerd");
                 </postChange>
               </button>
-              <search height="570"  mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0003" />
+              <search height="570" mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0003" />
             </vbox>
           </vbox>
         </vbox>
