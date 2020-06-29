@@ -244,7 +244,7 @@
                           </div>
                           <div style="
                           text-align: right;
-                          font-size: 1vw;    
+                          font-size: 0.9vw;;    
                           color: #666;
                           cursor: pointer;
                           position: absolute;
@@ -252,8 +252,8 @@
                           bottom: 3px;
                       ">
                           <span onclick="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>
-                          <span> <i class="fas fa-info-circle"></i> À propos </span>
-                      </div>
+                          <span onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=wHhPAHMBDvwdgr5cTBJA&quot;, &quot;search&quot;, &quot;Article&quot;, {});"> <i class="fas fa-info-circle"  ></i> À propos </span>
+                        </div>
                         </div>  
                       
                     </div>
@@ -292,16 +292,17 @@
                       </div>
                       <div style="
                       text-align: right;
-                      font-size: 1vw;    
+                      font-size: 0.9vw;;    
                       color: #666;
                       cursor: pointer;
                       position: absolute;
                       right: 5px;
                       bottom: 3px;
                   ">
-                  <span onclickxx="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>
-                      <span> <i class="fas fa-info-circle"></i> À propos </span>
-                  </div>
+                  <span onclickxx="openGeoPopUp('home-gloAl-${instanceId}')" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Documents d'urbanisme&quot;, {});" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>
+                      <span onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});"> <i class="fas fa-info-circle"  ></i> À propos </span>
+
+                    </div>
                     </div>
                   </div>
                 </html>
@@ -324,17 +325,17 @@
                         </p>
                       </div>
                           <div style="
-                              text-align: right;
-                              font-size: 1vw;
+                              text-align: right; 
+                              font-size: 0.9vw;
                               color: #666;
                               cursor: pointer;
                               position: absolute;
                               right: 5px;
                               bottom: 3px;
                           ">
-                          <span onclickxx="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>  
-                          <span> <i class="fas fa-info-circle"></i> À propos </span>
-                          </div>
+                          <span onclick="openGeoPopUp('home-gloAl-header-popup2')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>  
+                          <span onclick="openGeoPopUp('home-gloAl-header-popup2')" > <i class="fas fa-info-circle"  onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});"></i> À propos </span>
+                        </div>
                     </div>
                   </div> 
                   
@@ -391,7 +392,7 @@
                   context.formRender.notifyObservers("visiblerd");
                 </postChange>
               </button>
-              <search height="570" mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0003" />
+              <search height="570" mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0002" />
             </vbox>
           </vbox>
         </vbox>
