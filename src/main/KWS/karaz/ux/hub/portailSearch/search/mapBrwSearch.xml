@@ -1,482 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="MapBrwSearch" label="Map browser">
-  <query />
-  <data>
     <query>
-      <keys />
-      <idObject />
-      <redirectArt />
     </query>
-    <article>
-    </article>
-    <articleCommentName>
-    </articleCommentName>
-    <articleCommentLastName>
-    </articleCommentLastName>
-    <articleCommentEmail>
-    </articleCommentEmail>
-    <articleComment>
-    </articleComment>
-    <collapsed>false</collapsed>
-  </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true" delay="500">
-        var id = root.query.idObject;
-        profilesT = profiles;
+    <data>
+        <query>
+            <search />
+            <idObject />
+            <parentP />
+            <mapId>0003</mapId>
+        </query>
+        <collapsed>false</collapsed>
 
-        context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .comment").click(function(){
-              var pos = context.formRender.targetPanel.find(".classSearch-82 .comment-form").offset().top;
-              $('html,body').animate(
-                     {
-                      scrollTop: pos - 150
-                 }, 
-                 'slow');    
-          });
-
-    
-        PCD_headerfieldset_color(".NFQ-quest-title");
-          $(".NFQ-quest-title .ow-label-pl").css('text-transform','upperCase');
-          PCD_header_style_quest_type(".NFQ-type-esign" , "far fa-edit")
-               
-            PCD_header_style_quest_type(".NFQ-type-document" , "fas fa-clock")
-            PCD_header_style_quest_type(".NFQ-type-plat" , "fas fa-clock")
-            PCD_header_style_quest_type(".NFQ-type-general" , "fas fa-eye")
-            PCD_header_style_quest_type(".NFQ-type-adminis" , "fas fa-heart")
-
-            // header color
-            PCD_headerfieldset_color(".pcd-ha-color");
-            
-            $(".classSearch-82 .reseau-ss .like").click(function(){
-              if($(this).hasClass("active-like")){
-                if(userQN=="anonymous@karaz"){
-                  
-                  try{
-                    removeLike(root,userQN+";"+JSON.parse(document.cookie).userRef,context.formRender.targetPanel);
-                  }catch(e){
-                      var a = document.cookie;
-                      var b = a.slice(a.indexOf("userRef")-2,a.indexOf("}",a.indexOf("userRef"))+1);
-                      removeLike(root,userQN+";"+JSON.parse(b).userRef,context.formRender.targetPanel);
-                  }
-
-
-                }else{
-                  removeLike(root,userQN+";20191919",context.formRender.targetPanel);
-                }
-                
-              }else{
-                likeArticle(root,userQN,userIp,context.formRender.targetPanel);
+        <numDossier />
+        <numCommission />
+        <login />
+        <visualizer>0</visualizer>
+    </data>
+    <view>
+        <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
+            <script onLoad="true">
+            // root.login=userQN;
+             //context.formRender.notifyObservers("login");
+            </script>
+            <css>
+              .header-create-account-title{
+                font-family: 'Roboto';
+                padding-top: 25px;
+                font-weight: 100;
+                margin-left: 3.6%;
+                margin-right: 3.6%;
               }
-            }); 
-
-      RestSearchArticleSec("", 0, 3, [""], 3, [".det-article-fieldset2 .NFQ-quest-type-recent",".det-article-fieldset2 .NFQ-quest-type-popular",".det-article-fieldset2 .NFQ-quest-type-liked"],0,"classSearch-82",context.formRender.targetPanel,root)
-      context.formRender.targetPanel.find(".annuler-rep-comment").click(function(){
-          context.formRender.targetPanel.find(".comment-form h1.add-comment").show();
-          context.formRender.targetPanel.find(".comment-form span.rep-comment").hide(); 
-          context.formRender.targetPanel.find(".comment-form span.rep-comment").attr("idd","");
-      });
-
-      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share .clicked-art").click(function(){
-        context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share").css("display","grid");
-      }); 
-
-      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-close").get(0).addEventListener("click",function(){
-        var closeDiv = context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share").get(0);
-        closeDiv.style.display = "none";
-      });
-
-      context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .share i.fa-copy").click(function(){
-        var toCopy = context.formRender.targetPanel.find(".classSearch-82 .reseau-ss .url-share .url-text").get(0);
-        toCopy.select();
-        document.execCommand( 'copy' );
-      });
-
-      </script>
-      <script postLoad="true" delay="500">
-              var id = root.query.idObject;
-              getObjectArticle(id,root,context.formRender.targetPanel);
-              
-              var toolbarOptions = [
-          [ 'bold', 'italic', 'underline', 'strike' ],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'header': '1' }, { 'header': '2' }],
-          [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
-          [ 'direction', { 'align': [] }],
-          ['image'],
-        ];
-
-              var ddv = context.formRender.targetPanel.find("#toolbarsecCom").get(0);
-              var quill = new Quill(ddv, {
-                modules: {
-                  toolbar: toolbarOptions
-                },
-                theme: 'snow'
-              });
-
-
-      </script>
-      
-      <html>
-      <style>
-
-        .reseau-ss .like.active-like{
-        color:#38A;
-        }
-
-        .divSearch-article{
-        color:#333 !important;
-        padding : 0 !important;
-        }
-
-        .divSearch-article .div-fsb-details .fsb-container {
-        padding-left: 0; 
-        }
-
-        .divSearch-article .det-div{
-          color:#333;
-        //border: 1px solid #ccc;
-        //background: #eee;
-          padding: 8px;
-          font-size:1vw;
-        }
-
-        .divSearch-article .article-img{
-        //border: 1px solid #ccc;
-        border-bottom:none;
-        background: #eee;
-        }
-
-        .divSearch-article .article-desc{
-        //background: #eee;
-        //border: 1px solid #ccc;
-        border-top: none;
-        padding-left : 5px;
-        padding-right : 5px;
-        color:#666;
-        }
-
-        .classSearch-82 .content-article{
-        color:#666;
-        }
-
-        .classSearch-82 .comment-form{
-        padding: 25px 20px;
-        border: 1px solid #eee;
-        background : #f5f5f5;
-        width: 95%;
-        margin:auto;
-        }
-
-        .classSearch-82 .comment-form .ow-field-input{
-        background: #f5f5f5;
-        }
-
-
-        .classSearch-82 .comment-form .ow-field-input-wrapper{
-        background: #f5f5f5;
-        }
-
-        .classSearch-82 .send-comment{
-        color: #fff;
-        background: #38A;
-        margin-top: 43px;
-        float: right;
-        margin-right: 14px;
-        font-size: 18px;
-        } 
-
-        .classSearch-82 .hp-box {
-          display: block;
-          padding: 1.25rem;
-          margin: 10px 2rem;
-          color: var(--fg1);
-          background-color: white;
-          border-radius: 2px;
-          box-shadow: 3px 3px 3px #0004;
-          border: 1px solid #DDD;
-          text-align: center;
-          height: 100%;
-          box-sizing: border-box;
-      }
-
-      .classSearch-82 .send-comment span{ font-size:17px;}
-
-      .classSearch-82 .comment-det{
-            text-align: left;
-            color: #333;
-            margin: 10px 2px;
-            padding: 3px 4px;
-      }
- 
-      .classSearch-82 .comment-det p,.classSearch-82 .comment-det li{
-          margin:1px;
-      }
-
-      .classSearch-82 .comment-det ul,.classSearch-82 .comment-det ol{
-        margin:2px;
-    }
-
-      .classSearch-82 .content-article p{
-        margin-top: 12px;
-        margin-bottom: 12px;
-        font-family:Droid Arabic Kufi, sans-serif;
-      }
-
-          .article-title,.article-desc{
-            font-family:Droid Arabic Kufi, sans-serif;
-          }
+            
+              .header-create-account-title1{
+                font-size: 14px;
+                color:#999999;
+              }
+            
+              .header-create-account-title2{
+                font-size:12px;
+                color:#FF9900;
+              }
+              .header-create-account-horizontal-line{
+                margin: 0px;
+                height: 1px;
+                border: none;
+                background-color: #e3e4e5;
+                flex: 1;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                margin-left: 3.6%;
+                margin-right: 3.6%;
+            }
+            .header-create-account-info{
+                font-family: 'Roboto';
+                margin-left: 3.6%;
+                margin-right: 3.6%;
+                float: right;
+            }
+            .create-account-consigne {
+                font-family: 'Roboto';
+                margin-top: 20px;
+                margin-left: 3.6%;
+                margin-right: 3.6%;
+            }
 
           
-          #toolbarsecCom{
-              height: 100px;
-              background: #fff;
-              color: #333;
-              font-size:15px;
-          }
+          .hp-box-geoCov {
+              display: block;
+              padding: 1.25rem;
+              margin: 10px 2rem;
+              color: var(--fg1);
+              background-color: white;
+              border-radius: 2px;
+              box-shadow: 3px 3px 3px #0004;
+              border: 1px solid #DDD;
+              height: 100%;
+              box-sizing: border-box; 
+              text-align: left;
+          }  
 
-          .htmlComb{
-            text-align: left;
-            width: 95%;
-            margin: auto;
-          }
+            </css>
+            <vbox className="hp-box-geoCov">
+                    <html>
+                            <div class="vpanel-title">
+                              <div class="vpanel-title">
+                              <span style="display:grid;grid-template-columns:50% 50%">
+                                <span>GÉOPORTAIL</span>
+                              </span>
+                                <hr class="header-create-account-horizontal-line hr-hub" />
+                              </div>
+                              <div class="hp-sbox-text">
+                                Les informations présentées sur le géoportail national sont fournies à titre indicatif.
+
+                              </div>
+                            </div>
+                          </html>
+                    <vbox style="height:800px">
+                            <search mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser={query.mapId}" />
+                    </vbox>
+                </vbox>  
           
-          
-
-      </style>
-      </html>
-      <html id="hSeparator">
-        <div style="height: 30px;" />
-      </html>
-      <vbox columns="70% 30%" className="classSearch-82">
-      <vbox>
-        <vbox className="hp-box hp-small divSearch divSearch-article">
-          <vbox className="hp-box divSearchBar hp-small div-full-search-bar div-fsb-details">
-            <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span style="display:grid;grid-template-columns:50% 50%">
-                    <span style="cursor:pointer">
-                      <span onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ArticlesListe','search','Articles',{});" class="">ARTICLES</span> |
-                      <span class="cl-orange title-2x">A LA UNE !</span>
-                    </span>
-                    <span style="color:#38A;cursor:pointer;text-align:right;" onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">
-                      Retour à la liste d'articles
-                    </span>  
-                  </span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                  <!--                       <img src="./img/u201.png" /> -->
-                </div>
-              </div>
-            </html>
-            <vbox className="hp-box divSearchBar div-full-search-bar search-details-icon">
-              <html>
-                <img style="display:none" src="./img/search-move.gif" alt="loading Gif" />
-              </html>
-            </vbox>
-            <vbox columns="100%" className="fsb-container">
-              <html>
-                <div class="article-title" style="color:#333;margin-bottom:30px"> 
-                  <h1>Le E-GOV, une affaire de Culture, de Lois et de Technologie.</h1>
-                </div>
-              </html>
-
-              <vbox className="det-div" columns="auto auto auto auto">
-                <html>
-                  <div class="dd author-pub">
-                    Publié par <span style="font-weight: 600;" />
-                  </div>
-                </html>
-                <html>
-                  <div class="dd date-pub">
-                    Publié le <span style="font-weight: 600;">20/10/2018</span>
-                  </div>
-                </html>
-                <html>
-                  <div class="dd date-det">
-                     <i class="fas fa-eye" /> <span class="vue-span">205</span> 
-                     <i style="color:#ce1515" class="fas fa-heart" /> <span class="like-span">23</span>   
-                  </div>
-                </html>
-                <html> 
-                <div class="dd reseau-ss" style="text-align:right">
-                  <span class="like" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i class="fas fa-thumbs-up" /> J'aime </span>
-                  <span class="comment" style="margin-right: 3px;margin-left: 3px;cursor:pointer"> <i style="color:#999" class="fas fa-comment" /> Commenter</span>
-                  <span class="share" style="margin-right: 3px;margin-left: 3px;cursor:pointer;position:relative">  <span class="clicked-art"><i class="fas fa-share" /> Partager</span> <span class="url-share" style="border: 1px solid #ccc;padding: 3px 6px;position: absolute;right: 0;top: 29px;background: #fefefe;width: 58vw;overflow: hidden;display: grid;grid-template-columns: 87% 9% 4%;display:none;z-index=3"><textArea readonly="readonly" style="word-wrap: break-word;cursor: default;resize:none;border: 1px solid #ccc" class="url-text" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-copy" /><i style="text-align:center;font-size: 22px;align-self: center;" class="fas fa-close" /></span> </span>
-                </div> 
-                </html>
-              </vbox>
-              <html className="article-desc">
-                <div>
-                  <p>
-                    La digitalisation des démarches administratives est désormais l’un des priorités autour desquelles s'articule la Stratégie Maroc Digital 2020, présentée le 27 juin 2016 par Moulay Hafid Elalamy.  Cette digitalisation permettra au royaume de s’inscrire dans l’économie digitale mondiale et garantira une transparence, une efficience et une confiance usager/administration. 
-                  </p>
-                </div>
-              </html>
-              <vbox className="article-img">
-                <html>
-                  <img style="width:100%" src="extensions/img/u7789.png" alt="" />
-                </html>
-              </vbox>  
-
-    
-
-              <html className="content-article ql-editor">
-
-              </html>
-              
-            </vbox>
-            <html>
-              <div style="height: 70px;" />
-            </html>
-            <html>
-              <div class="searchGif">
-                <img src="img/search-move.gif" />
-              </div>
-            </html>
-          </vbox>
-        </vbox>
-        
-        
-        
-        <vbox className="hp-box hp-small">
-          <html>
-            <span style="display:grid;grid-template-columns:100%;text-align:left">
-              <span>
-                COMMENTAIRES 
-              </span>
-            </span>
-            <hr class="header-create-account-horizontal-line hr-hub" />
-          </html>
-          <vbox className="comments-list">
-            <!-- <vbox columns="20% 80%">
-            <vbox className="comment-user-img">
-              <html>
-                <img src="" alt=""/>              
-              </html>
-            </vbox>
-            <vbox className="comment-det">
-              <html>
-                <div class="comment-user-name">
-                    Nom Prenom
-                </div>
-                <div class="comment-det">
-                  commentaire commentaire commentaire commentaire commentaire commentaire commentaire commentaire commentaire.
-                </div>
-                <div class="div-date">
-                  <span class="date">20/10/2019</span>
-                  <span>Répondre</span>
-                </div>
-              </html>
-            </vbox>
-          </vbox>
-<vbox columns="20% 80%">
-            <vbox className="comment-user-img">
-              <html>
-                <img src="" alt=""/>              
-              </html>
-            </vbox>
-            <vbox className="comment-det">
-              <html>
-                <div class="comment-user-name">
-                    Nom Prenom
-                </div>
-                <div class="comment-det">
-                  commentaire commentaire commentaire commentaire commentaire commentaire commentaire commentaire commentaire.
-                </div>
-                <div class="div-date">
-                  <span class="date">20/10/2019</span>
-                  <span>Répondre</span>
-                </div>
-              </html>
-            </vbox>
-          </vbox> -->
-
-          </vbox>
-          
-          
-          <vbox className="comment-form">
-          <html>
-            <h1 style="color: #666;font-size: 20px;text-align: left;" class="add-comment">AJOUTER VOTRE COMMENTAIRE</h1>
-            <span class="rep-comment" idd="" style="display:none;">
-              <span style="display:grid;grid-template-columns: 50% 50%;">
-                <span style="color: #666;font-size: 20px;text-align: left;margin-bottom: 5px;">REPONDRE AU COMMENTAIRE</span>
-                <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close" /> Annuler la réponse</span>  
-              </span>
-            </span>
-            <span style="color:#e08a08;text-align:left;font-size:14px;display: block;margin-bottom: 14px;">Votre adresse de messagerie ne sera pas publiée. Les champs obligatoires sont indiqués avec *</span>
-          </html>
-            <vbox columns="33% 33% 33%">
-                  <field label="NOM*" widget="text" labelAlign="float" xpath="articleCommentName" />
-                  <field label="PRENOM*" widget="text" labelAlign="float" xpath="articleCommentLastName" />
-                  <field label="EMAIL*" widget="text" labelAlign="float" xpath="articleCommentEmail" />
-            </vbox>
-            <vbox>
-                <!-- <field label="COMMENTAIRE" widget="textArea" labelAlign="float" xpath="articleComment" /> -->
-
-                <html className="htmlComb">
-                  <span style="display: block;margin-top: 8px;margin-left: 8px;margin-bottom: 5px;">COMMENTAIRE</span>
-                  <div id="toolbarsecCom" />
-                </html>
-            </vbox>
-            <vbox columns="80% 20%">
-                <vbox>
-                  <html>
-                    <span class="err-msg" style="color:red;font-size:13px;display:block;text-align:left;margin-top: 30px;margin-left: 23px;" />
-                  </html>
-                </vbox>
-                <vbox>
-                  <button className="send-comment" label="ENVOYER">
-                    <postChange>
-                      addComment(root,context.formRender.targetPanel,context);
-                    </postChange>
-                  </button>
-                </vbox>                  
-            </vbox>
-            <html>
-           
-            </html>
-          </vbox>
-        <vbox>
-        
-        </vbox>
-        
-        </vbox>
-        </vbox>
-                  <vbox>
-
-        <fieldset header="ARTICLES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset2 NQF-freq-quest">
-          <!-- start modification -->
-          <fieldset header="Les plus populaires" className="NFQ-quest-title NFQ-type-general ">
-            <html>
-              <div class="NFQ-quest-type-popular NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Les plus récents" className="NFQ-quest-title NFQ-type-document ">
-            <html>
-              <div class="NFQ-quest-type-recent NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-adminis ">
-            <html>
-              <div class="NFQ-quest-type-liked NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          
-          <!-- end modification -->
-        </fieldset>
-        <vbox>
-        </vbox>
-      </vbox></vbox>
-      <html>
-        <div style="height: 30px;" />
-      </html>
-    </screen>
-    <html />
-  </view>
+      </screen>
+    </view>
 </search>

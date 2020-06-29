@@ -3,9 +3,31 @@
   <query />
   <data>
     <query>
-      <search />
-      <idObject />
-      <parentP />
+      <unifiedCriteria />
+      <reference />
+      <type />
+      <owner />
+      <org>
+        <dataObjectId></dataObjectId>
+      </org>
+      <owner_description />
+      <statut />
+      <standard />
+      <homologation>
+        <min />
+        <max />
+      </homologation>
+      <title />
+      <data_description />
+      <progress />
+      <code />
+      <parentUrbaDoc />
+      <parentUrbaDoc_description />
+      <by />
+      <at>
+        <min />
+        <max />
+      </at>
     </query>
     <collapsed>false</collapsed>
   </data>

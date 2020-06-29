@@ -3132,3 +3132,17 @@ complete: function () {
 }
 });
 }
+
+function openGeoMap(text){
+    if(text==1063){
+        mapId="0004";
+    }else if(text==1084){
+        mapId="0005";
+    }else if(text==1090){
+        mapId="0006";
+    }else{
+        mapId="0002";
+
+    }
+    ApplicationManager.run("karaz/ux/hub/portailsearch/search/MapBrwSearch?query.mapId="+mapId, "search", "GÉOPORTAIL", {});
+}

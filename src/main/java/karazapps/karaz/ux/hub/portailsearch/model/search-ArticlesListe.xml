@@ -78,11 +78,75 @@
                     currentFocus = -1;
                     //close any already open lists of autocompleted values
                     closeAllLists();
-                    restAutoComplete2(inp,val,"articles_index","title"); 
+                    restAutoComplete2(inp,val,"geo_article_index","title"); 
             });
 
             context.formRender.targetPanel.find(".classSearch-80 .searchbuttun").click();
         </script>
+        <css>
+          .classSearch-80 .hp-box {
+            display: block;
+            padding: 1.25rem;
+            margin: 10px 2rem;
+            color: var(--fg1);
+            background-color: white;
+            border-radius: 2px;
+            box-shadow: 3px 3px 3px #0004;
+            border: 1px solid #DDD;
+            text-align: center;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+      
+        .classSearch-80 .hp-sbox-text {
+          font-size: 0.9rem;
+          display: block;
+          color: var(--fg1); 
+          margin-left: 1rem;
+          margin-right: 2rem;
+          text-align: left;
+          margin-top: 10px;
+      }
+
+      .classSearch-80 .div-full-search-bar .ow-button.hp-search_field_icon {
+        height: 45px;
+        width: 45px;    
+        border-radius: 15px;
+        font-weight: bold;
+        letter-spacing: 1.1px;
+        background: var(--form-button-fg);
+        color: white;
+        margin: 4px;
+    }
+
+    .classSearch-80 .hp-search_field .ow-field-input-line {
+      min-height: 20px;
+      border: 4px solid #3388aa;
+      height: 40px;
+      border-radius: 15px;
+      padding: 5px;
+      box-sizing: border-box;
+  }
+
+  .classSearch-80 .hp-search_field {
+    /* padding-left: 40px; */
+    width: 100%;
+    padding-left: 13%;
+  }
+
+  .classSearch-80 .ow-btn-container {
+    text-align: left;
+}
+
+.classSearch-80 .item-body-title a{
+  cursor:pointer;
+}
+
+.full-search-list-item .item-body a{
+  cursor:pointer;
+}
+        </css>
       <html id="hSeparator">
         <div style="height: 0px;" />
       </html>

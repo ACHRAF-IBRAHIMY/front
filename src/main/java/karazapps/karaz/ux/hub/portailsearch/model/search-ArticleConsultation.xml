@@ -185,6 +185,20 @@
         font-size: 18px;
         } 
 
+        .classSearch-82 .hp-box {
+          display: block;
+          padding: 1.25rem;
+          margin: 10px 2rem;
+          color: var(--fg1);
+          background-color: white;
+          border-radius: 2px;
+          box-shadow: 3px 3px 3px #0004;
+          border: 1px solid #DDD;
+          text-align: center;
+          height: 100%;
+          box-sizing: border-box;
+      }
+
       .classSearch-82 .send-comment span{ font-size:17px;}
 
       .classSearch-82 .comment-det{
@@ -225,6 +239,7 @@
             width: 95%;
             margin: auto;
           }
+          
           
 
       </style>
