@@ -27,7 +27,7 @@
           height: 200px;
           box-sizing: border-box;
           text-align: left;
-          cursor: pointer;        
+          position:relative;        
         }
 
         .body-geo-gis .geo-card-gb{
@@ -50,18 +50,25 @@
         }
 
         .body-geo-gis .btn-reduire{
-          position: absolute; 
-          right: 17px;
+          position: absolute;
+          right: 0px;
           background: #333;
           color: #EEE;
           z-index: 99;
-          margin-top: 13px !important;
-          padding: 8px 19px;
+          margin-top: 0px !important;
+          padding: 7.5px 19px;
+          border-radius: 0;
         }
 
         .geoProtailBck .kma-map{
           height: 400px !important;
         }
+
+        .fieldset-footer-home {
+        
+          font-weight: 100;
+        
+      }
       </css>
       <script postLoad="true">
 
@@ -100,7 +107,7 @@
       getMostPopularArticle(4,"",".classSearch-home-gloAl .fieldser-article-1 .vbox-articles .ow-vl-inner");      
     </script>
     <css>
-   .hp-box-nbnb{
+      .classSearch-home-gloAl .hp-box-nbnb{
             display: block;
           padding: 1rem;
         margin: 10px 1rem;
@@ -179,12 +186,25 @@
         overflow: hidden;
       }
 
+      .geo-card-gb.geo-grd  .kma-homeButton-container {
+        position: absolute;
+        left: 22px;
+        bottom: 0px;
+        top: 480px;
+        height: 100%;
+    }
+
       .geo-card-gb.geo-grd .HomeButton .home {
-        margin-bottom: 139px !important;
       }
       
       .geo-card-gb.geo-grd .esriScalebar{
-        bottom: 155px !important;
+        left: 25px;
+        height: 100%;
+        top: 518px;
+      }
+
+      .geo-card-gb.geo-grd .kma-homeButton-container{
+        bottom: 105px;
       }
 
       .geo-card-gb.geo-rdw .geoProtailBck,.geo-card-gb.geo-rdw .kma-side-right{
@@ -200,6 +220,7 @@
       }
       
 
+
       </css>
     <vbox style="background:#FFF;">
       <vbox labelAlign="float" style="background:#FFF;width:100%;height:auto;">
@@ -209,20 +230,32 @@
             <vbox>
               <vbox className="geo-card">
                 <html xpath="instanceId">
-                  <div class="geoPortPop" onclick="openGeoPopUp('home-gloAl-${instanceId}')">
+                  <div class="geoPortPop" >
                     <div style="display:grid;grid-template-columns: 110px auto;">
-                      <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fab fa-youtube" /></div>
+                      <div style="text-align:center;"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;line-height: 145px;" class="fab fa-youtube" /></div>
                       <div>
                           <div><span style="color: #666;font-size: 1.3vw;">Comment ça marche ?</span></div>
-                          <div><span style="font-size: 1vw;color: #666;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
+                          <div><span style="font-size: 0.9565vw;color: #666;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
                           
                           <div>
-                            <p style="font-size:0.7vw;color:#666;text-align:justify;margin-top: 4px;">
+                            <p style="font-size:0.7vw;color:#666;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
                               Découvrez ici le géoportail national des documents d’urbanisme. Dans cette vidéo de 3 mn vous aurez un premier aperçu sur la nature et la consistance des géo-données publiées sur le géoportail national, les fonctionnalités de navigation spatiale qu’il offre et les outils de recherche qu’il propose.
                             </p>
                           </div>
+                          <div style="
+                          text-align: right;
+                          font-size: 1vw;    
+                          color: #666;
+                          cursor: pointer;
+                          position: absolute;
+                          right: 5px;
+                          bottom: 3px;
+                      ">
+                          <span onclick="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>
+                          <span> <i class="fas fa-info-circle"></i> À propos </span>
+                      </div>
                         </div>  
-                     
+                      
                     </div>
                   
                   </div>
@@ -247,16 +280,28 @@
               <vbox className="geo-card">
                 <html>
                   <div style="display:grid;grid-template-columns: 110px auto;">
-                    <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-university" /></div>
+                    <div style="text-align:center;"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;line-height: 145px;" class="fas fa-university" /></div>
                     <div>
                       <div><span style="color: #666;font-size: 1.3vw;color: #666;">Intéressé par une localité précise ?</span></div>
-                      <div><span style="font-size: 1vw;color: #666;">Consultez les documents d’urbanisme par agence urbaine</span></div>
+                      <div><span style="font-size: 0.9565vw;color: #666;">Consultez les documents d’urbanisme par agence urbaine</span></div>
                       <div>
-                        <p style="font-size:0.7vw;color:#666;text-align:justify;margin-top: 4px;">
+                        <p style="font-size:0.7vw;color:#666;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
                           Le territoire national est couvert par 30 agences urbaines dont chacune pilote la production des documents d’urbanisme pour un périmètre territorial prédéfini. Si vous êtes intéressés par une localité en particulier, vous pouvez accéder ici directement aux documents d’urbanisme produits par l’agence urbaine.
 
                         </p>
                       </div>
+                      <div style="
+                      text-align: right;
+                      font-size: 1vw;    
+                      color: #666;
+                      cursor: pointer;
+                      position: absolute;
+                      right: 5px;
+                      bottom: 3px;
+                  ">
+                  <span onclickxx="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>
+                      <span> <i class="fas fa-info-circle"></i> À propos </span>
+                  </div>
                     </div>
                   </div>
                 </html>
@@ -265,19 +310,31 @@
               <vbox className="geo-card">
                 <html>
                   <div style="display:grid;grid-template-columns: 110px auto;">
-                    <div style="text-align:center"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-map-marked-alt" /></div>
+                    <div style="text-align:center;"><i style="width: 70px;line-height: 145px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-map-marked-alt" /></div>
                     <div>
                       <div>
                         <span style="color: #666;font-size: 1.3vw;color: #666;">Quelle réglementation de zone ?</span>
                       </div>
                       <div>
-                        <span style="font-size: 1vw;color: #666;">Prenez connaissance de la nomenclature nationale</span>
+                        <span style="font-size: 0.9565vw;color: #666;">Prenez connaissance de la nomenclature nationale</span>
                       </div>
                       <div>
-                        <p style="font-size: 0.7vw;color:#666;text-align:justify;margin-top: 4px;">
+                        <p style="font-size: 0.7vw;color:#666;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
                           Dans le but d’uniformiser les documents d’urbanisme publiés par les différentes agences urbaines et d’en faciliter l’exploitation par les administrations concernées, les professionnels de l’urbanisme et les citoyens, une nomenclature nationale standard a été publiée par le Ministère. Prenez-en connaissance à travers cet outil interactif.
                         </p>
                       </div>
+                          <div style="
+                              text-align: right;
+                              font-size: 1vw;
+                              color: #666;
+                              cursor: pointer;
+                              position: absolute;
+                              right: 5px;
+                              bottom: 3px;
+                          ">
+                          <span onclickxx="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>  
+                          <span> <i class="fas fa-info-circle"></i> À propos </span>
+                          </div>
                     </div>
                   </div> 
                   
@@ -298,7 +355,7 @@
                       var mapBrws = context.formRender.targetPanel.find(".geoProtailBck");
                       mapBrws.css({
                         "height": "100vh",
-                        "width":"100vw",
+                        "width":"100%",
                         "position":"fixed",
                         "left":0,
                         "top":0,

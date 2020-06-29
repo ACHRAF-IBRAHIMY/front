@@ -33,6 +33,9 @@
       <menu relId="UrbanismeSearch" label="Documents d'urbanisme" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/UrbanismeSearch</resource>
       </menu>
+      <menu relId="MapBrwSearch" label="Map Browser" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/MapBrwSearch</resource>
+      </menu>
     </menu>
   </menu>
 </menus>
