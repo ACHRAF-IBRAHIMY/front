@@ -19,12 +19,12 @@
           display: block;
           padding: 15px;
           margin: 30px 1rem;
-          color: var(--fg1);
+          color: #666;
           background-color: #EEE;
-          border-radius: 2px;
+          border-radius: 2px; 
           box-shadow: 3px 3px 3px #0004;
           border: 1px solid #DDD;
-          height: 200px;
+          height: 172px;
           box-sizing: border-box;
           text-align: left;
           position:relative;        
@@ -39,7 +39,7 @@
           border-radius: 2px;
           box-shadow: 3px 3px 3px #0004;
           border: 1px solid #DDD;
-          height: 660px;
+          height: 578px;
           box-sizing: border-box;
           text-align: left;
         }
@@ -172,7 +172,7 @@
       }
 
       .geo-card-gb.geo-grd .geoProtailBck{
-        height: 570px !important;
+        height: 485px !important;
         overflow: hidden !important;
 
       }
@@ -220,39 +220,86 @@
       }
       
 
+      .tooltip-geo1 .tooltiptext1,.tooltip-geo2 .tooltiptext2,.tooltip-geo3 .tooltiptext3 {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      
+      .tooltip-geo1 .tooltiptext1::after,.tooltip-geo2 .tooltiptext2::after,.tooltip-geo3 .tooltiptext3::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+      
+      .tooltip-geo1:hover .tooltiptext1,.tooltip-geo2:hover .tooltiptext2,.tooltip-geo3:hover .tooltiptext3 {
+        visibility: visible;
+        opacity: 1;
+      }
 
+      .agrandir-cls-btn .ow-btn-container{
+        margin: 0px 0px;
+        text-align: right;
+      }
+
+
+      .agrandir-cls-btn button.ow-button.float {
+        margin-top: 7px;
+    }
+
+
+    .classSearch-home-gloAl .fieldset-footer-home {
+      padding: 15px;
+      font-size: 17px;
+      width: 98%;
+      margin: auto;
+      border-radius: 2px;
+      margin-top: 13px;
+      cursor: pointer;
+  }
       </css>
     <vbox style="background:#FFF;">
       <vbox labelAlign="float" style="background:#FFF;width:100%;height:auto;">
         
         <vbox className="body-geo-gis">
-          <vbox columns="35% 65%">
+          <vbox columns="31% 69%">
             <vbox>
-              <vbox className="geo-card">
+              <vbox className="geo-card geoCard1">
                 <html xpath="instanceId">
-                  <div class="geoPortPop" >
-                    <div style="display:grid;grid-template-columns: 110px auto;">
-                      <div style="text-align:center;"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;line-height: 145px;" class="fab fa-youtube" /></div>
+                  <div class="geoPortPop">
+                    <div style="display:grid;grid-template-columns: 90px auto;">
+                      <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="fab fa-youtube" /></div>
                       <div>
-                          <div><span style="color: #666;font-size: 1.3vw;">Comment ça marche ?</span></div>
-                          <div><span style="font-size: 0.9565vw;color: #666;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
-                          
+                        <div class="">
+                          <div><span class="upgrade-1" style="font-size: 20px;">Comment ça marche ?</span></div>
+                          <div><span class="upgrade-1" style="font-size: 16px;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
                           <div>
-                            <p style="font-size:0.7vw;color:#666;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
-                              Découvrez ici le géoportail national des documents d’urbanisme. Dans cette vidéo de 3 mn vous aurez un premier aperçu sur la nature et la consistance des géo-données publiées sur le géoportail national, les fonctionnalités de navigation spatiale qu’il offre et les outils de recherche qu’il propose.
+                            <p class="upgrade-2" style="font-size:15px;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
+                              Dans cette vidéo de 3 mn vous aurez un premier aperçu sur la nature et la consistance des géo-données publiées sur le Géoportail national, les fonctionnalités de navigation spatiale et les outils de recherche qu’il propose.
                             </p>
                           </div>
-                          <div style="
-                          text-align: right;
-                          font-size: 0.9vw;;    
-                          color: #666;
-                          cursor: pointer;
-                          position: absolute;
-                          right: 5px;
-                          bottom: 3px;
-                      ">
-                          <span onclick="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>
-                          <span onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=wHhPAHMBDvwdgr5cTBJA&quot;, &quot;search&quot;, &quot;Article&quot;, {});"> <i class="fas fa-info-circle"  ></i> À propos </span>
+                        </div>
+                        
+                         
+                          <div style="text-align: right;font-size: 16px;cursor: pointer;position: absolute;right: 5px;bottom: 3px;right: 16px;bottom: 15px;">
+                          <span onclick="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-eye" /> Voir</span>
+                          <span onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=wHhPAHMBDvwdgr5cTBJA&quot;, &quot;search&quot;, &quot;Article&quot;, {});"> <i class="fas fa-info-circle" /> À propos </span>
                         </div>
                         </div>  
                       
@@ -277,64 +324,78 @@
 
               
 
-              <vbox className="geo-card">
+              <vbox className="geo-card geoCard2">
                 <html>
-                  <div style="display:grid;grid-template-columns: 110px auto;">
-                    <div style="text-align:center;"><i style="width: 70px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;line-height: 145px;" class="fas fa-university" /></div>
+                  <div style="display:grid;grid-template-columns: 90px auto;">
+                    <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="fas fa-university" /></div>
                     <div>
-                      <div><span style="color: #666;font-size: 1.3vw;color: #666;">Intéressé par une localité précise ?</span></div>
-                      <div><span style="font-size: 0.9565vw;color: #666;">Consultez les documents d’urbanisme par agence urbaine</span></div>
-                      <div>
-                        <p style="font-size:0.7vw;color:#666;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
-                          Le territoire national est couvert par 30 agences urbaines dont chacune pilote la production des documents d’urbanisme pour un périmètre territorial prédéfini. Si vous êtes intéressés par une localité en particulier, vous pouvez accéder ici directement aux documents d’urbanisme produits par l’agence urbaine.
+                      <div class=""> 
+                      <div><span class="upgrade-1" style="font-size: 20px;">Intéressé par une localité précise ?</span></div>
+                      <div><span class="upgrade-1" style="font-size: 16px;">Consultez les documents d’urbanisme par agence urbaine</span></div>
+                      <div class="">
+                        <p class="upgrade-2" style="font-size:15px;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
+                          Si vous êtes intéressés par une localité en particulier, vous pouvez accéder ici directement aux documents d’urbanisme produits par chaque agence urbaine du territoire national.
 
                         </p>
                       </div>
-                      <div style="
-                      text-align: right;
-                      font-size: 0.9vw;;    
-                      color: #666;
-                      cursor: pointer;
-                      position: absolute;
-                      right: 5px;
-                      bottom: 3px;
-                  ">
-                  <span onclickxx="openGeoPopUp('home-gloAl-${instanceId}')" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Documents d'urbanisme&quot;, {});" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>
-                      <span onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});"> <i class="fas fa-info-circle"  ></i> À propos </span>
+                      </div>
+                      <div style="                       text-align: right;                       font-size: 16px;;                                                  cursor: pointer;                       position: absolute;   right: 16px;bottom: 15px; ">
+                      <span onclickxx="openGeoPopUp('home-gloAl-${instanceId}')" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Documents d'urbanisme&quot;, {});" style="margin-right:5px"> <i class="fas fa-eye" /> Voir</span>
+                      <span onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});"> <i class="fas fa-info-circle" /> À propos </span>
 
                     </div>
-                    </div>
+                    </div> 
                   </div>
                 </html>
               </vbox>
 
-              <vbox className="geo-card">
+              <css>
+                .geo-card.geoCard1:hover,.geo-card.geoCard2:hover,.geo-card.geoCard3:hover{
+                  background:#666;
+                  color:#EEE;
+                  box-shadow: 3px 3px 3px #666;
+                  border: 1px solid #666;
+                  transition: 0.5s;
+                } 
+
+                .geo-card.geoCard1:hover .upgrade-2,.geo-card.geoCard2:hover .upgrade-2,.geo-card.geoCard3:hover .upgrade-2{
+                  display:block;
+                }
+
+                .geo-card.geoCard1 .upgrade-2,.geo-card.geoCard2 .upgrade-2,.geo-card.geoCard3 .upgrade-2{
+                  display:none;
+                }
+
+                .geo-card.geoCard1:hover .upgrade-1,.geo-card.geoCard2:hover .upgrade-1,.geo-card.geoCard3:hover .upgrade-1{
+                  display:none;
+                }
+
+                
+              </css>
+
+              <vbox className="geo-card geoCard3">
                 <html>
-                  <div style="display:grid;grid-template-columns: 110px auto;">
-                    <div style="text-align:center;"><i style="width: 70px;line-height: 145px;text-align: center;font-size: 65px;height: 65px;color: #666;margin-top: 10px;" class="fas fa-map-marked-alt" /></div>
+                  <div style="display:grid;grid-template-columns: 90px auto;">
+                    <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="fas fa-map-marked-alt" /></div>
                     <div>
+                      <div class="">
+
                       <div>
-                        <span style="color: #666;font-size: 1.3vw;color: #666;">Quelle réglementation de zone ?</span>
+                        <span class="upgrade-1" style="font-size: 20px;">Quelle réglementation de zone ?</span>
                       </div>
                       <div>
-                        <span style="font-size: 0.9565vw;color: #666;">Prenez connaissance de la nomenclature nationale</span>
+                        <span class="upgrade-1" style="font-size: 16px;">Prenez connaissance de la nomenclature nationale</span>
                       </div>
                       <div>
-                        <p style="font-size: 0.7vw;color:#666;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
-                          Dans le but d’uniformiser les documents d’urbanisme publiés par les différentes agences urbaines et d’en faciliter l’exploitation par les administrations concernées, les professionnels de l’urbanisme et les citoyens, une nomenclature nationale standard a été publiée par le Ministère. Prenez-en connaissance à travers cet outil interactif.
+                        <p class="upgrade-2" style="font-size: 15px;color:#EEE;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
+                          Dans le but d’uniformiser les documents d’urbanisme et d’en faciliter l’exploitation, une nomenclature nationale standard a été publiée par le Ministère. 
+                          Prenez-en connaissance à travers cet outil interactif.
                         </p>
                       </div>
-                          <div style="
-                              text-align: right; 
-                              font-size: 0.9vw;
-                              color: #666;
-                              cursor: pointer;
-                              position: absolute;
-                              right: 5px;
-                              bottom: 3px;
-                          ">
-                          <span onclick="openGeoPopUp('home-gloAl-header-popup2')" style="margin-right:5px"> <i class="fas fa-file"></i> Voir</span>  
-                          <span onclick="openGeoPopUp('home-gloAl-header-popup2')" > <i class="fas fa-info-circle"  onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});"></i> À propos </span>
+                      </div>
+                          <div style="text-align: right;font-size: 16px;cursor: pointer;position: absolute;right: 16px;bottom: 15px;">
+                          <span onclick="openGeoPopUp('home-gloAl-header-popup2')" style="margin-right:5px"> <i class="fas fa-eye" /> Voir</span>  
+                          <span onclick="openGeoPopUp('home-gloAl-header-popup2')"> <i class="fas fa-info-circle" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});" /> À propos </span>
                         </div>
                     </div>
                   </div> 
@@ -343,17 +404,17 @@
               </vbox>
             </vbox> 
             <vbox className="geo-card-gb geo-grd">
-              <vbox columns="auto 170px">
+              <vbox columns="auto 189px" style="margin-bottom: 10px;">
                 <vbox>
                   <html>
                     <div><span style="color: #666;font-size: 20px;color: #666;">Point d’accès unique à toute la donnée urbanistique</span></div>
                     <div><span style="font-size: 14px;color: #666;">En quelques clics, accédez instantanément à l’ensemble des documents d’urbanisme de tout le Royaume !</span></div>
                   </html>
                 </vbox>
-                <vbox> 
-                  <button icon="fas fa-expand" className="btn-agrandir" label="AGRANDIR">
+                <vbox className="agrandir-cls-btn"> 
+                  <button icon="fas fa-expand" className="btn-agrandir" label="Accéder au Géoportail">
                     <postChange>
-                      var mapBrws = context.formRender.targetPanel.find(".geoProtailBck");
+                      /* var mapBrws = context.formRender.targetPanel.find(".geoProtailBck");
                       mapBrws.css({
                         "height": "100vh",
                         "width":"100%",
@@ -366,7 +427,8 @@
                       context.formRender.targetPanel.find(".geo-card-gb").addClass("geo-rdw");
                       context.formRender.targetPanel.find(".geo-card-gb").removeClass("geo-grd");
 
-                      context.formRender.notifyObservers("visiblerd");
+                      context.formRender.notifyObservers("visiblerd"); */
+                      ApplicationManager.run("karaz/ux/hub/portailsearch/search/MapBrwSearch?query.mapId=0002", "search", "GÉOPORTAIL", {});
                     </postChange>
                   </button>
                 </vbox>
@@ -392,7 +454,11 @@
                   context.formRender.notifyObservers("visiblerd");
                 </postChange>
               </button>
-              <search height="570" mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=0002" />
+              <vbox>
+                <html>
+                 <img style="width: 100%;height: 485px;" src="extensions/img/GIF_GEOPORTAIL.gif"></img>
+                </html>
+              </vbox>
             </vbox>
           </vbox>
         </vbox>
@@ -414,7 +480,7 @@
           <search searchQN="gis/virtual/search/AllVirtual?searchName=docUrbanismeAcc" />
           <vbox className="fieldset-footer-home">
             <html>
-                <div style="text-align:right;width:99%;" class="class-traduction" tcode="APA1"><span style="background: #38A;color: #FFF;padding: 5px;border-radius: 2px;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Document d'urbanisme&quot;, {});">Tous les documents d’urbanisme</span></div>
+                <div style="text-align:right;width:99%;" class="class-traduction" tcode="APA1"><span style="background: #38A;color: #FFF;padding: 5px 10px;border-radius: 2px;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Document d'urbanisme&quot;, {});">Tous documents d’urbanisme</span></div>
             </html>
           </vbox>
         </vbox>
@@ -433,16 +499,14 @@
           </vbox>
           <vbox className="fieldset-footer-home">
               <html>
-                  <div style="text-align:right;" class="class-traduction" tcode="APA1"><span style="background: #38A;color: #FFF;padding: 5px;border-radius: 2px;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Toute l’actualité</span></div>
+                  <div style="text-align:right;" class="class-traduction" tcode="APA1"><span style="background: #38A;color: #FFF;padding: 5px 10px;border-radius: 2px;" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Toutes les ressources                  </span></div>
               </html>
           </vbox>
         </vbox>
 
       </vbox>
     </vbox>
-      <html>
-        <div style="height: 30px;" />
-      </html>
+     
     </screen>
   </view>
 </search>
