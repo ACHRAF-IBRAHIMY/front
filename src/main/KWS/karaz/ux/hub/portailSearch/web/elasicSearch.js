@@ -3146,3 +3146,16 @@ function openGeoMap(text){
     }
     ApplicationManager.run("karaz/ux/hub/portailsearch/search/MapBrwSearch?query.mapId="+mapId, "search", "GÉOPORTAIL", {});
 }
+
+function stopVideo(text){
+    var iframe = document.querySelector( text+' iframe');
+    console.log("close Video");
+    var video = document.querySelector( text+' video' );
+    if ( iframe !== null ) {
+        var iframeSrc = iframe.src;
+        iframe.src = iframeSrc;
+    }
+    if ( video !== null ) {
+        video.pause();
+    }
+}

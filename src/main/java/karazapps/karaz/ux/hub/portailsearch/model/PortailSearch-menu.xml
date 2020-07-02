@@ -30,6 +30,9 @@
       <menu relId="Organisation" label="Organisation" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/OrganisationSearch</resource>
       </menu>
+      <menu relId="NomenclatureSearch" label="Nomenclature" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/NomenclatureSearch</resource>
+      </menu>
       <menu relId="UrbanismeSearch" label="Documents d'urbanisme" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/UrbanismeSearch</resource>
       </menu>
