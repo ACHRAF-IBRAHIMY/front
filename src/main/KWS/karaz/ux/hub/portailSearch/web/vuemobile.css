@@ -303,3 +303,105 @@
     }
 }
 
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (max-width: 1460px) and (min-width: 800px) {
+    .geo-card-gb.geo-grd .geoProtailBck {
+        height: 482px !important;
+        overflow: hidden !important;
+    }
+
+    .menu-geo-gis .ow-button > span {
+        margin: 0.1rem 0.1rem !important;
+        font-size: 0.9vw !important; 
+    }
+
+    .menu-geo-gis button.ow-button {
+        padding: 0.25rem 1px;
+    } 
+    
+
+    .header-menu-geoprotail .mon-space{
+
+    }
+
+    #header-menu-geoprotail .header-grid{
+        
+        grid-template-columns: 280px 8% 10% 10% 11% 12% 10% auto !important;
+    }
+
+    #header-menu-geoprotail .header-logo img{
+        width: 55px;
+    }
+
+    #header-menu-geoprotail .mini-text-logo{
+        font-size: 7.5px !important;
+    }
+
+    #header-menu-geoprotail .text-logo{
+        font-size: 10px !important;
+    }
+
+    .geo-card .upgrade-2{
+        font-size: 13.5px !important;
+    }
+
+    .geo-card .upgrade-1-p{
+        font-size: 1vw !important;
+    }
+
+    .geo-card .upgrade-1-title{
+        font-size: 1.4vw !important;
+    }
+
+    .geo-card .respon-voir{
+        font-size: 1.1vw !important;
+    }
+
+    .geo-card.geoCard1:hover .upgrade-grid-geoCard,.geo-card.geoCard2:hover .upgrade-grid-geoCard,.geo-card.geoCard3:hover .upgrade-grid-geoCard{
+        grid-template-columns: 100% !important;
+    }
+
+    .geo-card .upgrade-icon{
+        font-size: 50px !important;
+        height: 65px !important;
+    }
+
+    .geo-card.geoCard1:hover .upgrade-icon,.geo-card.geoCard2:hover .upgrade-icon,.geo-card.geoCard3:hover .upgrade-icon{
+        display:none;
+    }
+
+     .upgrade-1-para-title{
+        font-size: 1.4vw !important;
+    }
+
+     .upgrade-1-para-p{
+        font-size: 0.9vw !important;
+    } 
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1430px) {
+    .menu-geo-gis .ow-button > span {
+        margin: 0.2rem 0.2rem;
+        font-size: 14px !important;
+        padding: 4px;
+    }
+    
+}
+

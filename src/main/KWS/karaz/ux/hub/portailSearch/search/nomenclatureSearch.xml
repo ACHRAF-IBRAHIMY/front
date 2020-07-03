@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="NomenclatureSearch" label="Nomenclature">
+  <query />
+  <data>
+    <query>
+      <search />
+      <idObject />
+      <parentP />
+    </query>
+    <collapsed>false</collapsed>
+  </data>
+  <view>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true" xcstt="x"> 
+            
+      </script>
+      <html id="hSeparator">
+        <div style="height: 30px;" xcstt="x" />
+      </html>
+      <vbox columns="100%">
+        <search searchQN="gis/virtual/search/AllVirtual?searchName=organization" />
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
+    </screen>
+  </view>
+</search>

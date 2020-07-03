@@ -11,6 +11,11 @@
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">
+        var slideIndex = 0;
+
+        
+      </script>
       <css>
 
         
@@ -100,6 +105,8 @@
         theme: 'snow'
       });
 
+      
+
     </script>
     <script postLoad="true" delay="500">
       console.log("context",context);
@@ -172,9 +179,7 @@
       }
 
       .geo-card-gb.geo-grd .geoProtailBck{
-        height: 485px !important;
-        overflow: hidden !important;
-
+        height: 485px ;
       }
       
       .geo-card-gb.geo-grd .kma-side-right{
@@ -273,6 +278,11 @@
       margin-top: 13px;
       cursor: pointer;
   }
+
+  .geoPortPop .modal2 .modal-content{
+    height: 90%;
+  }
+
       </css>
     <vbox style="background:#FFF;">
       <vbox labelAlign="float" style="background:#FFF;width:100%;height:auto;">
@@ -283,12 +293,12 @@
               <vbox className="geo-card geoCard1">
                 <html xpath="instanceId">
                   <div class="geoPortPop">
-                    <div style="display:grid;grid-template-columns: 90px auto;">
-                      <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="fab fa-youtube" /></div>
+                    <div class="upgrade-grid-geoCard" style="display:grid;grid-template-columns: 90px auto;">
+                      <div style="text-align:left;"><i  style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="upgrade-icon fab fa-youtube" /></div>
                       <div>
                         <div class="">
-                          <div><span class="upgrade-1" style="font-size: 20px;">Comment ça marche ?</span></div>
-                          <div><span class="upgrade-1" style="font-size: 16px;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
+                          <div><span class="upgrade-1 upgrade-1-title" style="font-size: 20px;">Comment ça marche ?</span></div>
+                          <div><span class="upgrade-1 upgrade-1-p" style="font-size: 16px;">Découvrez le géoportail national de l’urbanisme en 3 mn</span></div>
                           <div>
                             <p class="upgrade-2" style="font-size:15px;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
                               Dans cette vidéo de 3 mn vous aurez un premier aperçu sur la nature et la consistance des géo-données publiées sur le Géoportail national, les fonctionnalités de navigation spatiale et les outils de recherche qu’il propose.
@@ -297,13 +307,13 @@
                         </div>
                         
                          
-                          <div style="text-align: right;font-size: 16px;cursor: pointer;position: absolute;right: 5px;bottom: 3px;right: 16px;bottom: 15px;">
+                          <div class="respon-voir" style="text-align: right;font-size: 16px;cursor: pointer;position: absolute;right: 5px;bottom: 3px;right: 16px;bottom: 15px;">
                           <span onclick="openGeoPopUp('home-gloAl-${instanceId}')" style="margin-right:5px"> <i class="fas fa-eye" /> Voir</span>
                           <span onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=wHhPAHMBDvwdgr5cTBJA&quot;, &quot;search&quot;, &quot;Article&quot;, {});"> <i class="fas fa-info-circle" /> À propos </span>
                         </div>
                         </div>  
                       
-                    </div>
+                    </div> 
                   
                   </div>
                 </html>
@@ -312,10 +322,11 @@
 
               <html xpath="instanceId" className="geoPortPop">
                 <div id="home-gloAl-${instanceId}">
-                  <div id="myModal" class="modal">
+                  <div id="myModal" class="modal modal2">
                     <div class="modal-content">
                       <span class="close" onclick="closeGeoPopUp('home-gloAl-${instanceId}')">x</span>
-                      <p>Video..</p>
+                      <p></p>
+                      <iframe width="100%" height="90%" src="https://www.youtube.com/embed/vCXPkmv_bDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
                     </div>
                   </div>
                 </div>
@@ -326,12 +337,12 @@
 
               <vbox className="geo-card geoCard2">
                 <html>
-                  <div style="display:grid;grid-template-columns: 90px auto;">
-                    <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="fas fa-university" /></div>
+                  <div class="upgrade-grid-geoCard" style="display:grid;grid-template-columns: 90px auto;">
+                    <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="fas fa-university upgrade-icon" /></div>
                     <div>
                       <div class=""> 
-                      <div><span class="upgrade-1" style="font-size: 20px;">Intéressé par une localité précise ?</span></div>
-                      <div><span class="upgrade-1" style="font-size: 16px;">Consultez les documents d’urbanisme par agence urbaine</span></div>
+                      <div><span class="upgrade-1 upgrade-1-title" style="font-size: 20px;">Intéressé par une localité précise ?</span></div>
+                      <div><span class="upgrade-1 upgrade-1-p" style="font-size: 16px;">Consultez les documents d’urbanisme par agence urbaine</span></div>
                       <div class="">
                         <p class="upgrade-2" style="font-size:15px;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
                           Si vous êtes intéressés par une localité en particulier, vous pouvez accéder ici directement aux documents d’urbanisme produits par chaque agence urbaine du territoire national.
@@ -339,7 +350,7 @@
                         </p>
                       </div>
                       </div>
-                      <div style="                       text-align: right;                       font-size: 16px;;                                                  cursor: pointer;                       position: absolute;   right: 16px;bottom: 15px; ">
+                      <div class="respon-voir" style="                       text-align: right;                       font-size: 16px;;                                                  cursor: pointer;                       position: absolute;   right: 16px;bottom: 15px; ">
                       <span onclickxx="openGeoPopUp('home-gloAl-${instanceId}')" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Documents d'urbanisme&quot;, {});" style="margin-right:5px"> <i class="fas fa-eye" /> Voir</span>
                       <span onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});"> <i class="fas fa-info-circle" /> À propos </span>
 
@@ -375,16 +386,16 @@
 
               <vbox className="geo-card geoCard3">
                 <html>
-                  <div style="display:grid;grid-template-columns: 90px auto;">
-                    <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="fas fa-map-marked-alt" /></div>
+                  <div class="upgrade-grid-geoCard" style="display:grid;grid-template-columns: 90px auto;">
+                    <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="fas fa-map-marked-alt upgrade-icon" /></div>
                     <div>
                       <div class="">
 
                       <div>
-                        <span class="upgrade-1" style="font-size: 20px;">Quelle réglementation de zone ?</span>
+                        <span class="upgrade-1 upgrade-1-title" style="font-size: 20px;">Quelle réglementation de zone ?</span>
                       </div>
                       <div>
-                        <span class="upgrade-1" style="font-size: 16px;">Prenez connaissance de la nomenclature nationale</span>
+                        <span class="upgrade-1 upgrade-1-p" style="font-size: 16px;">Prenez connaissance de la nomenclature nationale</span>
                       </div>
                       <div>
                         <p class="upgrade-2" style="font-size: 15px;color:#EEE;text-align:justify;margin-top: 4px;margin-bottom: 5px;">
@@ -393,7 +404,7 @@
                         </p>
                       </div>
                       </div>
-                          <div style="text-align: right;font-size: 16px;cursor: pointer;position: absolute;right: 16px;bottom: 15px;">
+                          <div class="respon-voir" style="text-align: right;font-size: 16px;cursor: pointer;position: absolute;right: 16px;bottom: 15px;">
                           <span onclick="openGeoPopUp('home-gloAl-header-popup2')" style="margin-right:5px"> <i class="fas fa-eye" /> Voir</span>  
                           <span onclick="openGeoPopUp('home-gloAl-header-popup2')"> <i class="fas fa-info-circle" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});" /> À propos </span>
                         </div>
@@ -407,8 +418,8 @@
               <vbox columns="auto 189px" style="margin-bottom: 10px;">
                 <vbox>
                   <html>
-                    <div><span style="color: #666;font-size: 20px;color: #666;">Point d’accès unique à toute la donnée urbanistique</span></div>
-                    <div><span style="font-size: 14px;color: #666;">En quelques clics, accédez instantanément à l’ensemble des documents d’urbanisme de tout le Royaume !</span></div>
+                    <div><span class="upgrade-1-para-title" style="color: #666;font-size: 20px;color: #666;">Point d’accès unique à toute la donnée urbanistique</span></div>
+                    <div><span class="upgrade-1-para-p" style="font-size: 14px;color: #666;">En quelques clics, accédez instantanément à l’ensemble des documents d’urbanisme de tout le Royaume !</span></div>
                   </html>
                 </vbox>
                 <vbox className="agrandir-cls-btn"> 
@@ -436,7 +447,7 @@
               </vbox>
               
             </vbox> 
-            <vbox height="570" style="height:450px;background:#EEE" className="geoProtailBck">
+            <vbox style="height:450px;background:#EEE" className="geoProtailBck">
               <button icon="fas fa-expand" className="btn-reduire" visible="('{visiblerd}'=='oui'),expr,boolean" label="RÉDUIRE">
                 <postChange>
                   var mapBrws = context.formRender.targetPanel.find(".geoProtailBck");
@@ -456,7 +467,43 @@
               </button>
               <vbox>
                 <html>
-                 <img style="width: 100%;height: 485px;" src="extensions/img/GIF_GEOPORTAIL.gif"></img>
+                  <!-- <div class="gallery js-flickity">
+                    <div class="gallery-cell"></div>
+                    <div class="gallery-cell"></div>
+                    <div class="gallery-cell"></div>
+                    <div class="gallery-cell"></div>
+                    <div class="gallery-cell"></div>
+                  </div> -->
+                  <!-- <div class="clearfix" style="max-width:474px;">
+                    <ul id="lightSlider" class="gallery">
+                      <li data-thumb="extensions/img/imageSlide1.png"> <a href="#"> <img src="extensions/img/imageSlide1.png" /> </a> </li>
+                      <li data-thumb="extensions/img/imageSlide2.png"> <a href="#"> <img src="extensions/img/imageSlide2.png" /> </a> </li>
+                      <li data-thumb="extensions/img/imageSlide3.png"> <a href="#"> <img src="extensions/img/imageSlide3.png" /> </a> </li>
+                      <li data-thumb="extensions/img/imageSlide4.png"> <a href="#"> <img src="extensions/img/imageSlide4.png" /> </a> </li>
+                      <li data-thumb="extensions/img/imageSlide5.png"> <a href="#"> <img src="extensions/img/imageSlide5.png" /> </a> </li>
+                    </ul>
+                    </div> -->
+                      <!-- <img style="width: 100%;height: 485px;" src="extensions/img/GIF_GEOPORTAIL.gif"></img> -->
+                      <div class="simple-slider simple-slider-first">
+                        <div class="slider-wrapper">
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide1.png')">
+                          </div>
+                      
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide2.png')">
+                          </div>
+                      
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide3.png')">
+                          </div>
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide4.png')">
+                          </div>
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide5.png')">
+                            
+                          </div>
+                        </div>
+                        </div>
+                      <script>
+                        var slider = new simpleSlider('.simple-slider-first', {speed: 500});
+                      </script>
                 </html>
               </vbox>
             </vbox>
