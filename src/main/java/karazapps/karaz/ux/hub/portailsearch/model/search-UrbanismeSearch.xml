@@ -29,6 +29,7 @@
         <max />
       </at>
     </query>
+    <backOrg />
     <collapsed>false</collapsed>
   </data>
   <view>
@@ -40,7 +41,7 @@
         <div style="height: 30px;" xcstt="x" />
       </html>
       <vbox columns="100%">
-        <search searchQN="gis/virtual/search/AllVirtual?searchName=docUrbanisme" />
+        <search searchQN="gis/virtual/search/AllVirtual?searchName=docUrbanisme&amp;backOrg={backOrg}" />
       </vbox>
       <html>
         <div style="height: 30px;" />

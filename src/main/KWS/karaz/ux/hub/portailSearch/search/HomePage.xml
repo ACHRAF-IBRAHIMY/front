@@ -294,7 +294,7 @@
                 <html xpath="instanceId">
                   <div class="geoPortPop">
                     <div class="upgrade-grid-geoCard" style="display:grid;grid-template-columns: 90px auto;">
-                      <div style="text-align:left;"><i  style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="upgrade-icon fab fa-youtube" /></div>
+                      <div style="text-align:left;"><i style="width: 70px;text-align: left;font-size: 65px;height: 65px;" class="upgrade-icon fab fa-youtube" /></div>
                       <div>
                         <div class="">
                           <div><span class="upgrade-1 upgrade-1-title" style="font-size: 20px;">Comment ça marche ?</span></div>
@@ -325,8 +325,8 @@
                   <div id="myModal" class="modal modal2">
                     <div class="modal-content">
                       <span class="close" onclick="closeGeoPopUp('home-gloAl-${instanceId}')">x</span>
-                      <p></p>
-                      <iframe width="100%" height="90%" src="https://www.youtube.com/embed/vCXPkmv_bDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
+                      <p />
+                      <iframe width="100%" height="90%" src="https://www.youtube.com/embed/vCXPkmv_bDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true" />
                     </div>
                   </div>
                 </div>
@@ -405,8 +405,8 @@
                       </div>
                       </div>
                           <div class="respon-voir" style="text-align: right;font-size: 16px;cursor: pointer;position: absolute;right: 16px;bottom: 15px;">
-                          <span onclick="openGeoPopUp('home-gloAl-header-popup2')" style="margin-right:5px"> <i class="fas fa-eye" /> Voir</span>  
-                          <span onclick="openGeoPopUp('home-gloAl-header-popup2')"> <i class="fas fa-info-circle" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});" /> À propos </span>
+                          <span onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/NomenclatureSearch?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});" onclickxx="openGeoPopUp('home-gloAl-header-popup2')" style="margin-right:5px"> <i class="fas fa-eye" /> Voir</span>  
+                          <span onclickx="openGeoPopUp('home-gloAl-header-popup2')"> <i class="fas fa-info-circle" onClickx="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticleConsultation?query.idObject=y3iSAHMBDvwdgr5cvhKt&quot;, &quot;search&quot;, &quot;Article&quot;, {});" /> À propos </span>
                         </div>
                     </div>
                   </div> 
@@ -466,7 +466,7 @@
                 </postChange>
               </button>
               <vbox>
-                <html xpath="instanceId" >
+                <html xpath="instanceId">
                   <!-- <div class="gallery js-flickity">
                     <div class="gallery-cell"></div>
                     <div class="gallery-cell"></div>
