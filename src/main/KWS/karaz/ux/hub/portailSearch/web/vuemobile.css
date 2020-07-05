@@ -305,9 +305,40 @@
 
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
+    .simple-slider{
+        height: 200px !important;
+    }
+    
+    .body-geo-gis .geo-card-gb{
+        height: auto !important;
+    }
 
-}
+    .geo-card-gb.geo-grd .geoProtailBck {
+        height: auto !important;
+    }
+    .hp-box-geoCov{
+        margin: 0 !important;
+    }
+
+    .geoPortPop .modal-content {
+        width: 95% !important;
+    }
+
+    .search-global-organisme-urba .ow-objectlist .ow-form-body .main_search .ow-pl-toolbar{
+        display: block !important;
+        height: auto !important;
+    }
+
+    .search-global-organisme-urba .ow-objectlist .ow-form-body .main_search .ow-pl-toolbar > div {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .upgrade-2{
+        font-size:13px !important;
+    }
+} 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media (max-width: 1460px) and (min-width: 800px) {
@@ -332,7 +363,7 @@
 
     #header-menu-geoprotail .header-grid{
         
-        grid-template-columns: 280px 8% 10% 10% 11% 12% 10% auto !important;
+        grid-template-columns: 280px auto !important;
     }
 
     #header-menu-geoprotail .header-logo img{
@@ -404,4 +435,6 @@
     }
     
 }
+
+
 

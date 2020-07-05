@@ -1,4 +1,28 @@
+if($(window).width()<900){
 
+    $(".menu-body button").click(function(){
+        $(".menu-body").slideUp(); 
+    }); 
+    
+    
+    }
+    
+    
+    $(".header-logo .menu-bars").click(function(){
+      $(".menu-body").slideToggle(); 
+    });  
+
+    function toogleFieldSet(id){
+        if($("#"+id+" .ow-tabpanel-flex").hasClass("expanded")){
+            $("#"+id+" .ow-tabpanel-flex").removeClass("expanded");
+            $("#"+id+" .ow-body").hide();
+        }else{
+            $("#"+id+" .ow-tabpanel-flex").addClass("expanded");
+            $("#"+id+" .ow-body").show();
+        }
+        
+    }
+    
 function addLike(user,id,target){
 var obj = {
 "script" : {
