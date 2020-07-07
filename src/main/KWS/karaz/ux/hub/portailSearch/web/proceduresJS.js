@@ -1602,8 +1602,17 @@ function getFormatedDate(date){
 
 function closeGeoPopUp(id){
     var modal = $("#"+id+" #myModal").get(0);
+    var iframe = document.querySelector( "#"+id+" #myModal iframe");
+    var video = document.querySelector( "#"+id+" #myModal video" );
+    if ( iframe !== null ) {
+        var iframeSrc = iframe.src;
+        iframe.src = iframeSrc;
+    }
+    if ( video !== null ) {
+        video.pause();
+    }
     modal.style.display = "none";
-}
+} 
 
 function openGeoPopUp(id){
     var modal = $("#"+id+" #myModal").get(0);
