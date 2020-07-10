@@ -167,19 +167,25 @@ function createCmtCms(results,context){
         var div = document.createElement("div");
         div.setAttribute("class","article-elm");
         var divP = document.createElement("div");
+        var divPc = document.createElement("div");
         var span = document.createElement("span");
         span.setAttribute("class","articles-title");
         span.innerHTML = results[i].title;
+        var span1 = document.createElement("span");
+        span1.innerHTML = "<span>Répondre au commentaire</span> <span>Supprimer</span>"
         var div2 = document.createElement("div");
         div2.setAttribute("style","display:grid;grid-template-columns: 25% 75%;font-size: 14px;");
         divP.append(span);
         div2.innerHTML="<span><i class='fas fa-user'></i> "+results[i].nom+" "+results[i].prenom+"<br/><i class='fas fa-clock'></i> "+results[i].date+"</span><span><i class='fas fa-comment'></i> : "+results[i].text+"</span>";
         divP.append(span);
+        divPc.append(span1);
+        divPc.setAttribute("style","color:#38A");
         div.append(divP);
         div.append(div2); 
+        div.append(divPc); 
         container.append(div);
-     }
- }
+    }
+}
 
 // Extract comments form articles
 function extarctCmmt(results,context){

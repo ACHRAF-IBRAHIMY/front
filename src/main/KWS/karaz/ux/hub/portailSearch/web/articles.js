@@ -164,7 +164,7 @@ addCommentRest(root,target,comment,context,Number(target.find(".comment-form spa
 }
 
 
-function createDivComments(comments,target){
+function createDivComments(comments,target,root){
     var commentsDr = sortCommentsByDateGb(comments).comments;
     var cmmIndex = sortCommentsByDateGb(comments).cmmIndex;
 
@@ -224,8 +224,25 @@ function createDivComments(comments,target){
             'slow');   
     });
 
+    
+    var span2 = document.createElement("span");
+    span2.innerHTML = " | Supprimer";
+    span2.setAttribute("style","cursor:pointer;font-size: 15px;color: #38A;");
+    span2.addEventListener("click",function(){
+        var index = $(this).parent(".div-date").attr("index");
+        removeCommentsRest(root,target,Number(index),-1)
+    });
+    
+  
     div10.appendChild(span);
     div10.appendChild(span1);
+
+    if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+
+    div10.appendChild(span2);
+   
+    }
+     
     div7.appendChild(div8);
     div7.appendChild(div9);
     div7.appendChild(div10);
@@ -236,10 +253,10 @@ function createDivComments(comments,target){
     div1.appendChild(div2);
     div1.appendChild(div5);
     div.appendChild(div1);
-    i++;
 
     target.find(".comments-list > .ow-vl-inner").append(div);
     if(elm.comments!=undefined){
+        var j = 0;
     elm.comments.forEach(function(e){
         var div = document.createElement("div");
         div.setAttribute("class","ow-vl ow-vbox");
@@ -277,11 +294,28 @@ function createDivComments(comments,target){
         div9.innerHTML = e.text;
         var div10 = document.createElement("div");
         div10.setAttribute("class","div-date");
-        div10.setAttribute("index",i);
+        div10.setAttribute("index",cmmIndex[i]);
+        div10.setAttribute("sousindex",j);
+        j++;
         var span = document.createElement("span");
         span.innerHTML = e.date;
-        span.setAttribute("style","font-size: 14px;display: inline-block;margin-right: 8px;")
+        span.setAttribute("style","font-size: 14px;display: inline-block;margin-right: 8px;");
+         
+    var span2 = document.createElement("span");
+    span2.innerHTML = " | Supprimer";
+    span2.setAttribute("style","cursor:pointer;font-size: 15px;color: #38A;");
+    span2.addEventListener("click",function(){
+        var index = $(this).parent(".div-date").attr("index");
+        var sousindex = $(this).parent(".div-date").attr("sousindex");
+        removeCommentsRest(root,target,Number(index),Number(sousindex));
+
+    });
         div10.appendChild(span);
+        
+        if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
+            div10.appendChild(span2); 
+        }
+
         div7.appendChild(div8);
         div7.appendChild(div9);
         div7.appendChild(div10);
@@ -295,7 +329,51 @@ function createDivComments(comments,target){
         target.find(".comments-list > .ow-vl-inner").append(div);
     });
     };
+
+    i++;
+
 });
+}
+
+function removeCommentsRest(root,target,index,type){
+    if(type==-1){
+        var obj = {
+            "script" : {
+                "source": "ctx._source.comments.remove(params.ind)",
+                "lang": "painless",
+                "params" : {
+                    "ind" : index
+                }
+            }
+        };
+        }else{
+        var obj = {
+            "script" : {
+                "source": "ctx._source.comments[params.index].comments.remove(params.ind)",
+                "lang": "painless",
+                "params" : {
+                    "ind" : index,
+                    "index":type
+                }
+            }
+        };
+    }
+
+    $.ajax({
+        type: "post",
+        url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/articles_index/_update/"+root.article._id,
+        datatype: "application/json",
+        contentType: "application/json",
+        data:JSON.stringify(obj),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", ADMIN_AUTH);
+        },
+        success: function(){    
+            getObjectArticle(root.query.idObject,root,target);
+            
+        }
+    });
+
 }
 
 
@@ -869,7 +947,7 @@ if(!verifierLike(userQN+";"+userIp,root.article._source.liste_like)){
     target.find(".classSearch-82 .reseau-ss .like").addClass("active-like");
 }
 
-createDivComments(obj.comments,target); 
+createDivComments(obj.comments,target,root); 
 
 target.find(".classSearch-82 .vpanel-title .title-2x").html(obj.type);
 target.find(".classSearch-82 .vpanel-title .title-2x").click(function(e){
@@ -919,7 +997,7 @@ function getObjectArticleCmt(id,root,target){
     }).done(function(results){
         var obj = results._source; 
         root.article = results;
-    createDivComments(obj.comments,target); 
+    createDivComments(obj.comments,target,root); 
     });
     
 }
