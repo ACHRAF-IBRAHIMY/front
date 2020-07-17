@@ -7,7 +7,7 @@
       <model />
       <from />
       <to />
-      <task>true</task>
+      <task>true</task> 
       <object>true</object>
       <document>true</document>
       <annotation>true</annotation>
@@ -165,8 +165,9 @@
     });
 
     context.formRender.targetPanel.find(".faq-card").click(function(){
-        ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
-    });
+        //ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
+        window.location='https://support.ribatis.com/portal/fr/kb/rokhas';
+      });
 
     context.formRender.targetPanel.find(".last-log input").keydown(function(ev){
         if ( event.which == 13 ) {

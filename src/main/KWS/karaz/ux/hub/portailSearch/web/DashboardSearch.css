@@ -3162,3 +3162,19 @@ box-card:hover{
 .NQF-prev-resp img,.response-body img{ 
     max-width: 100%;
 }
+
+
+button.ow-button.button-signup-header {
+    background-color: #38A !important;
+    color: #FFF !important;
+    border: 1px solid var(--edit-button) !important;
+    border-radius: 2px !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    outline: none !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    margin-top: 8px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
