@@ -56,7 +56,7 @@
 			<plugin>
 				<groupId>karaz.tools</groupId>
 				<artifactId>kbuilder-maven-plugin</artifactId>
-				<version>5.1.4</version>
+				<version>5.2.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
