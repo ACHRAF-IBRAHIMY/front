@@ -146,24 +146,44 @@
 .full-search-list-item .item-body a{
   cursor:pointer;
 }
+
+.pagination-second{
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+
+.classSearch-80 .hp-box{
+  display: block;
+  box-shadow: none; 
+}
+
         </css>
+        <html>
+          <div class="slider-area2 slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center pt-50">
+                            <h2>Articles</h2>
+                            <p>
+                              Retrouvez ici les dernières nouveautés de votre plateforme : Nouveaux services digitaux, Nouvelles fonctionnalités, changements réglementaires ou procédurales, évènements planifiés, ...                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+      </html>
       <html id="hSeparator">
         <div style="height: 0px;" />
       </html>
       <vbox columns="70% 30%" className="classSearch-80 search-article">
-        <vbox className="hp-box hp-small divSearch">
-          <vbox className="hp-box divSearchBar div-full-search-bar">
+        <vbox className="hp-small divSearch">
+          <vbox className="divSearchBar div-full-search-bar">
             <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span style="cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/Articles','search','Articles',{});">ARTICLES |
-                      <span class="cl-orange title-2x">TOUS</span></span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                </div>
-              </div>
-              <div class="hp-sbox-text">
-                            Retrouvez ici les dernières nouveautés de votre plateforme : Nouveaux services digitaux, Nouvelles fonctionnalités, changements réglementaires ou procédurales, évènements planifiés, ...
-              </div>
+              
+              
               <div style="height: 50px;" />
             </html>
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">

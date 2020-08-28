@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="MapBrwSearch" label="Map browser">
+<search name="MapBrwChartSearch" label="Map browser">
     <query>
     </query>
     <data>
