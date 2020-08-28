@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <menus>
   <menu absId="karaz/ux/hub/portailsearch" label="PortailSearch" icone="PortailSearch_icon">
     <menu relId="process" label="Processus">
@@ -39,6 +40,10 @@
       <menu relId="MapBrwSearch" label="Map Browser" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/MapBrwSearch</resource>
       </menu>
+      <menu relId="MapBrwChartSearch" label="Map Browser Chart" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/MapBrwChartSearch</resource>
+      </menu>
     </menu>
   </menu>
 </menus>
+

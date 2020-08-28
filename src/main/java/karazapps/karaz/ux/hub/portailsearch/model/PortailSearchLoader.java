@@ -77,6 +77,8 @@ public class PortailSearchLoader {
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/HomePage", "karazapps/karaz/ux/hub/portailsearch/model/search-HomePage.xml");
 
+		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/MapBrwChartSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-MapBrwChartSearch.xml");
+
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/MapBrwSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-MapBrwSearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/NewArticle", "karazapps/karaz/ux/hub/portailsearch/model/search-NewArticle.xml");
@@ -84,8 +86,6 @@ public class PortailSearchLoader {
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/NomenclatureSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-NomenclatureSearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/OrganisationSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-OrganisationSearch.xml");
-
-		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/UrbanismeSearch", "karazapps/karaz/ux/hub/portailsearch/model/search-UrbanismeSearch.xml");
 
 		ModelCache.addDocumentListPath("karaz/ux/hub/portailsearch/search/commentsGb", "karazapps/karaz/ux/hub/portailsearch/model/search-commentsGb.xml");
 

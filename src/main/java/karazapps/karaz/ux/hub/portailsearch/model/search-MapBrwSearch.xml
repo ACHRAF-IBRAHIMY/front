@@ -80,17 +80,29 @@
           }  
 
             </css>
-            <vbox className="hp-box-geoCov">
+            <html>
+              <div class="slider-area2 slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center pt-50">
+                                <h2>GÉOPORTAIL</h2>
+                                <p>Les informations présentées sur le géoportail national sont fournies à titre indicatif.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </html>
+            <vbox className="">
+              
                     <html>
                             <div class="vpanel-title">
                               <div class="vpanel-title">
-                              <span style="display:grid;grid-template-columns:50% 50%">
-                                <span>GÉOPORTAIL</span>
-                              </span>
-                                <hr class="header-create-account-horizontal-line hr-hub" />
+                              
                               </div>
                               <div class="hp-sbox-text">
-                                Les informations présentées sur le géoportail national sont fournies à titre indicatif.
+                               
 
                               </div>
                             </div>

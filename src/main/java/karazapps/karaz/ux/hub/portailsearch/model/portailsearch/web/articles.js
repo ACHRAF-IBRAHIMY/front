@@ -771,20 +771,6 @@ if(type==""){
           "bool" : {
             "must" : {
               "match_all":{}
-            },
-            "must_not" : {
-              "bool":{
-                  "must" :[ {
-                      "term":{
-                          "type.keyword":"REVUE DE PRESSE"
-                      }},{"range":{
-                          "datePr":{
-                              "lte":"now-7d/d"
-                          }
-                      }
-                  }]		
-              }
-              
             }
           }
         },
