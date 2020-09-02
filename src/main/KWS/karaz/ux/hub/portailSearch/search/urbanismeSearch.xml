@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search name="OrganisationSearch" label="Organisation">
+<search name="UrbanismeSearch" label="Documents d'urbanisme">
   <query />
   <data>
     <query>
-      <search />
-      <idObject />
-      <parentP />
+      <unifiedCriteria />
+      <reference />
+      <type />
+      <owner />
+      <org>
+        <dataObjectId />
+      </org>
+      <owner_description />
+      <statut />
+      <standard />
+      <homologation>
+        <min />
+        <max />
+      </homologation>
+      <title />
+      <data_description />
+      <progress />
+      <code />
+      <parentUrbaDoc />
+      <parentUrbaDoc_description />
+      <by />
+      <at>
+        <min />
+        <max />
+      </at>
     </query>
+    <backOrg />
     <collapsed>false</collapsed>
   </data>
   <view>
     <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script postLoad="true" xcstt="x"> 
+      <script postLoad="true"> 
             
       </script>
-      <html>
-        <div class="slider-area2 slider-height2 d-flex align-items-center">
-          <div class="container">
-              <div class="row">
-                  <div class="col-xl-12">
-                      <div class="hero-cap text-center pt-50">
-                          <h2>Agences urbaines</h2>
-                          <p>
-                            Découvrez ici les agences urbaines exerçant au niveau national.
-                          </p>
-                      </div>
-                      
-                  </div>
-              </div>
-          </div>
-      </div>
-    </html>
-      <html id="hSeparator">
-        <div style="height: 30px;" xcstt="x" />
-      </html>
+      
       <vbox columns="100%">
-        <search searchQN="gis/virtual/search/AllVirtual?searchName=organization" />
+        <search searchQN="gis/virtual/search/AllVirtual?searchName=docUrbanisme&amp;backOrg={backOrg}" />
       </vbox>
       <html>
-        <div style="height: 30px;" />
+        <div style="height: 30px;"></div>
       </html>
     </screen>
   </view>
