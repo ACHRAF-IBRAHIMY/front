@@ -1,6 +1,6 @@
 stages :
    - build
-
+   - deploy_dev
 Build:
   
   stage: build
@@ -17,23 +17,7 @@ Build:
       - target/
   only:
     - Master_CI 
-
-
-# stages :
-#    - maven_build
-#    - deploy_dev
-
-# Job1:
-#   stage: maven_build
-#   script: 
-#      - mvn kbuilder:all
-#      - mvn clean install
-#   artifacts:
-#     paths:
-#       - target/
-#   only:
-#     - Master_CI
- Job2:
+Job2:
    stage: deploy_dev
    script:
      - scp -o stricthostkeychecking=no target/*.jar karaz@151.80.213.61:/home/karaz
