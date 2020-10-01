@@ -25,3 +25,4 @@ Job2:
      - ssh -o stricthostkeychecking=no karaz@151.80.213.61 "/karaz/restart_glassfish.sh"
    only:
      - Master_CI
+     
