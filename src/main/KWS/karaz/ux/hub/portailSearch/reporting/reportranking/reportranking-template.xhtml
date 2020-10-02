@@ -178,21 +178,28 @@ img.iconS{
             <tr>
                 #set($str = $xml.getValue($ch,"commune").substring(0, 1).toUpperCase() + $xml.getValue($ch,"commune").substring(1).toLowerCase())
                 #set($fiscalite=(1/($xml.getDouble($ch,"indecators.fiscaliteUV")*1000000)))
-                #set($gpv=1/$xml.getDouble($ch,"indecators.delaiGpV"))
-                #set($ppv=1/$xml.getDouble($ch,"indecators.delaiPpV"))
+                #set($gpv=(1/$xml.getDouble($ch,"indecators.delaiGpV")))
+                #set($ppv=(1/$xml.getDouble($ch,"indecators.delaiPpV")))
+               
 
                 <td style="font-size: 10px !important;text-align:left;" >$str</td>
                 <td style="font-size: 10px !important;" >$xml.getValue($ch,"rank")</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.score").intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.delai").intValue()</td>
+                #if($ppv.intValue()>-1)
                 <td style="font-size: 10px !important;width: 250px !important;" width="10%">$ppv.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end
                 <td style="font-size: 10px !important;width: 250px !important;" width="10%">$gpv.intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.attractivite").intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.attractiviteUV").intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.digital").intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.ecosystem").intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.fiscalite").intValue()</td>
-                <td style="font-size: 10px !important;" >$fiscalite.intValue()</td>
+                <td style="font-size: 10px !important;" >$fiscalite.intValue()</td> 
             </tr>
         #end
             </table>
