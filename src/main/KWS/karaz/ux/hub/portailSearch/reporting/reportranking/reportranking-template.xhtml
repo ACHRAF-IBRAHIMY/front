@@ -11,7 +11,7 @@
 
 @page { 
 margin-top:17mm;margin-bottom:17mm;
-size:A4; 
+size:A4 rotate; 
 @bottom-left{ content: "© $sdf.format($now).toString().split("/")[2] ROKHAS – Powered By Karaz"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
 @bottom-center { content: "Imprimé Le : $sdf.format($now)"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
 @bottom-right { content: "Page " counter(page) " / " counter(pages)  ; font-size:12px; font-family:Candara; color:#3C5F8D;}
@@ -21,7 +21,7 @@ table {    -fs-table-paginate: paginate;}
 tr{ page-break-inside:avoid;}
 
 .table5 {
-    width: 95%;
+    width: 100%;
     margin: auto;
     margin-top: 35px;
 }
@@ -29,7 +29,7 @@ tr{ page-break-inside:avoid;}
 .table5 td {
     padding-right: 2mm;
     height: 15px;
-    font-size: 12px;
+    font-size: 10px !important;
     font-family: Candara;
     text-align: left;
     margin: 0;
@@ -156,25 +156,50 @@ img.iconS{
     <table class="table3">
     
         <tr>
-            <th>Commune</th>
-            <th>Rang</th>
-            <th>Score</th>
-            <th>Délai</th>
-            <th>Attractivité</th>
-            <th>Digital</th>
-            <th>Ecosystème</th>
-            <th>Fiscalité</th>
+            <th style="font-size: 10px !important;text-align:center;" rowspan="2">Commune</th>
+            <th style="font-size: 10px !important;text-align:center;" rowspan="2">Rang</th>
+            <th style="font-size: 10px !important;text-align:center;" rowspan="2">Score</th>
+            <th style="font-size: 10px !important;text-align:center;" colspan="3">Délai</th>
+            <th style="font-size: 10px !important;text-align:center;" colspan="2">Attractivité</th>
+            <th style="font-size: 10px !important;text-align:center;" rowspan="2">Digital</th>
+            <th style="font-size: 10px !important;text-align:center;" rowspan="2">Ecosystème</th>
+            <th style="font-size: 10px !important;text-align:center;" colspan="2">Fiscalité</th>
+        </tr>
+        <tr>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Score</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Gpj (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Ppj (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Score</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Nombre dossiers</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Score</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Fiscalité Dhs/m²</th>
         </tr>
         #foreach($ch in $xml.getElements("dataReportRk.data"))
             <tr>
-                <td width="30%" style="text-align:left;font-size:14px" >$xml.getValue($ch,"commune")</td>
-                <td width="7%">$xml.getValue($ch,"rank")</td>
-                <td width="12%">$xml.getDouble($ch,"indecators.score").intValue()</td>
-                <td width="12%">$xml.getDouble($ch,"indecators.delai").intValue()</td>
-                <td width="13%">$xml.getDouble($ch,"indecators.attractivite").intValue()</td>
-                <td width="12%">$xml.getDouble($ch,"indecators.digital").intValue()</td>
-                <td width="12%">$xml.getDouble($ch,"indecators.ecosystem").intValue()</td>
-                <td width="12%">$xml.getDouble($ch,"indecators.fiscalite").intValue()</td>
+                #set($str = $xml.getValue($ch,"commune").substring(0, 1).toUpperCase() + $xml.getValue($ch,"commune").substring(1).toLowerCase())
+                #set($fiscalite=(1/($xml.getDouble($ch,"indecators.fiscaliteUV")*1000000)))
+                #set($gpv=(1/$xml.getDouble($ch,"indecators.delaiGpV")))
+                #set($ppv=(1/$xml.getDouble($ch,"indecators.delaiPpV")))
+               
+
+                <td style="font-size: 10px !important;text-align:left;" >$str</td>
+                <td style="font-size: 10px !important;" >$xml.getValue($ch,"rank")</td>
+                <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.score").intValue()</td>
+                <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.delai").intValue()</td>
+                #if($ppv.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$ppv.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$gpv.intValue()</td>
+                <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.attractivite").intValue()</td>
+                <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.attractiviteUV").intValue()</td>
+                <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.digital").intValue()</td>
+                <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.ecosystem").intValue()</td>
+                <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.fiscalite").intValue()</td>
+                <td style="font-size: 10px !important;" >$fiscalite.intValue()</td> 
             </tr>
         #end
             </table>
