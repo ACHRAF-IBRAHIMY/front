@@ -1,0 +1,9 @@
+{
+	"name" : "karazapps:karaz-ux-hub",
+	"label" : "karaz-ux-hub",
+	"versionTag" : "1.0",
+	"description": "${moduleDescription}" 
+	 
+}
+   
+ 

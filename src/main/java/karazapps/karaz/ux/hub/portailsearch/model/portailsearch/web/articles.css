@@ -6,6 +6,14 @@
  .fieldset-articles{
 
   }
+  
+  .comment-det .ql-align-right{
+  	text-align : right !important;
+  }
+  
+  .comment-det img{
+  	max-width:90%;
+  }
 
   .fieldset-articles .article{
     padding: 7px;

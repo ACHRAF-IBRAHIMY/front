@@ -42,7 +42,9 @@
                     <vbox style="height:800px">
                             <search mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=81" />
                     </vbox>
-                </vbox>            
+                </vbox>  
+                <search searchQN="karaz/ux/hub/portailsearch/search/commentsGb?query.idObject=20206" />
+          
       </screen>
     </view>
 </search>

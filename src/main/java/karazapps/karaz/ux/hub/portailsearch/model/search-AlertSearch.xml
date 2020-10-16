@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search name="AlertSearch" label="Alerts">
+  <query />
+  <data>
+    <query>
+      <search />
+      <idObject />
+      <parentP />
+    </query>
+    <alert>
+      <id />
+      <title />
+      <typeAlrt />
+      <iconAlrt />
+      <statut />
+      <bgColorAlrt />
+      <colorAlrt />
+    </alert>
+    
+    <collapsed>false</collapsed>
+    
+  </data>
+  <view>
+    <component name="boxButt">
+      <renderer name="default">
+        <vbox className="${instanceId}">
+          <button label="">
+              <postChange>
+                var idClass = $("."+root.instanceId+" button").attr("show");
+                console.log("resu==",idClass);
+                openAlertDiv(idClass,root,context);
+              </postChange>
+          </button>
+        </vbox>
+      </renderer>
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+      <script postLoad="true">
+          var toolbarOptions = [
+    [ 'bold', 'italic', 'underline', 'strike' ],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'header': '1' }, { 'header': '2' }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
+    [ 'direction', { 'align': [] }],
+    ['image'],
+  ];
+
+        var ddv = context.formRender.targetPanel.find("#toolbarNBNB").get(0);
+        var quill = new Quill(ddv, {
+          modules: {
+            toolbar: toolbarOptions
+          },
+          theme: 'snow'
+        });
+      </script>
+      <css>
+ 		.hp-box-nbnb{
+	            display: block;
+	    	    padding: 1rem;
+			    margin: 10px 1rem;
+			    color: var(--fg1);
+			    background-color: white;
+			    border-radius: 2px;
+			    box-shadow: 3px 3px 3px #0004;
+			    border: 1px solid #DDD;
+			    text-align: center;
+			    height: 100%;
+			    box-sizing: border-box;
+          }
+
+          #toolbarNBNB{
+            height: 130px;
+          }
+
+          .marquenbnb p{
+            display:inline; 
+            margin-left:5px;
+          }
+
+          .list-nb-cnt .visual-nbnb marquee{
+            border: 1px solid #333;
+            border-radius: 2px 0 0 2px;
+            background: #EEE;
+          }
+
+          .list-nb-cnt .visual-nbnb .marquenbnb{
+            padding: 5px 2px;
+          }
+
+          .list-nb-cnt {
+            padding-top:100px;
+          }
+
+          .list-nb-cnt .visual-nbnb:nth-child(even) {
+            background-color: #dddddd;
+          }
+
+          .list-nb-cnt .Active{
+            border: 1px solid green !important;
+            background: green !important;
+            color: #FFF !important;
+          }
+      </css>
+      <script onLoad="true"> 
+        refrechListalert(context,root);
+        root.alert.id="";
+        context.formRender.notifyObservers("alert");
+        var objarr = [{"al":"text"},{"al":"text"}];
+        root.array = objarr;
+        context.formRender.notifyObservers("array");
+        root.instanceId = context.formRender.instanceId;
+        context.formRender.notifyObservers("instanceId");
+      </script>
+   
+      <boxButt instanceId="${instanceId}" />
+      
+    
+
+      <html id="hSeparator">
+        <div style="height: 30px;" />
+      </html>
+      <vbox labelAlign="float">
+        <vbox columns="50% 50%">
+          <vbox className="list-nb-cnt hp-box-nbnb" style="text-align:left !important;">
+            
+          </vbox>
+          <vbox className="nb-editor hp-box-nbnb" style="text-align:left !important;">
+            <vbox className="toolbar-nb" columns="33% 33% 33%">
+              <field label="Titre d'alert" widget="text" required="true" xpath="alert.title" />
+              <field label="Type d'alert" required="true" widget="select" xpath="alert.typeAlrt">
+                <option label="Warning" value="Warning" />
+                <option label="Danger" value="Danger" />
+                <option label="Info" value="Info" />
+                <option label="Customize" value="Customize" />
+              </field>
+              <field label="Statut" required="true" widget="select" xpath="alert.statut">
+                <option label="Activé" value="Active" />
+                <option label="Désactivé" value="Desactive" />
+              </field>
+            </vbox>
+            <vbox visible="'{alert.typeAlrt}'=='Customize',expr,boolean" columns="33% 33% 33%">
+              <field label="Fa icon" xpath="alert.iconAlrt" />
+              <field label="Backgournd color" xpath="alert.bgColorAlrt" />
+              <field label="Color" xpath="alert.colorAlrt" />
+            </vbox>
+            <vbox>
+              <html style="margin-top:20px;margin-bottom:20px">
+                <div id="toolbarNBNB" style="color:#666" />
+              </html>
+            </vbox>
+            <vbox columns="100px 100px 100px 100px">
+              <button label="Visualiser">
+                <postChange>
+                  createAlertObject(context,root);
+                  root.visual = "oui";
+                  context.formRender.notifyObservers("visual");
+                </postChange>
+              </button>
+              <button label="Enregistrer">
+                <postChange>
+                saveAlertMsg(context,root);
+              </postChange>
+              </button>
+              <button label="Supprimer" visible="('{alert.id}'!=''),expr,boolean">
+                <postChange>
+                    deleteAlertMsg(root.alert.id,context,root);
+                </postChange>
+              </button>
+              <button label="Réinitialiser">
+                <postChange>
+                  initAlertMsg(context,root);
+                  root.visual = "non";
+                  context.formRender.notifyObservers("visual");
+                </postChange>
+              </button>
+              
+            </vbox>
+            <!-- <vbox visible="'{visual}'=='oui',expr,boolean"> -->
+              <html className="visual-nbnb" style="margin-top:20px">
+                
+              </html>
+            <!-- </vbox> -->
+          </vbox>
+        </vbox>
+      </vbox>
+      <html>
+        <div style="height: 30px;" />
+      </html>
+    </screen>
+  </view>
+</search>

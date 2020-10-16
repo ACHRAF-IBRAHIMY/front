@@ -8,6 +8,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.sax.SAXSource;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
+
 import ma.ribatis.karaz.model.IJXFactory;
 import ma.ribatis.karaz.server.BackEndEJBContext; 
 import ma.ribatis.karaz.server.persistance.DataObject;
@@ -71,9 +78,22 @@ public class JXFactory  implements IJXFactory {
 
 	public static PortailSearch getJXObject(String xmlData)  {
 		StringReader sr = new StringReader(xmlData);
+ 
 		try {
-			return (PortailSearch) getUnmarshaller().unmarshal(sr);
-		} catch (JAXBException e) { 
+			SAXParserFactory spf = SAXParserFactory.newInstance();
+			spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+	        spf.setFeature("http://xml.org/sax/features/validation", false);
+	        spf.setFeature( "http://apache.org/xml/features/disallow-doctype-decl",true); 
+	        spf.setFeature(  "http://xml.org/sax/features/external-general-entities" , false); 
+	        spf.setFeature( "http://xml.org/sax/features/external-parameter-entities", false); 
+	        spf.setXIncludeAware(false);  
+	        spf.setValidating(false);
+	        spf.setNamespaceAware(true);
+	        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+	        InputSource inputSource = new InputSource(sr);
+	        SAXSource source = new SAXSource(xmlReader, inputSource); 
+			return (PortailSearch) getUnmarshaller().unmarshal(source);
+		} catch (Exception e) { 
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {

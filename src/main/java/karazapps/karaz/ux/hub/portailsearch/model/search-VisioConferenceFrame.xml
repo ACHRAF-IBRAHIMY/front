@@ -10,16 +10,16 @@
             <parentP />
         </query>
         <collapsed>false</collapsed>
-        <numDossier></numDossier>
-        <numCommission></numCommission>
-        <login></login>
+        <numDossier />
+        <numCommission />
+        <login />
         <visualizer>0</visualizer>
-        <profiles></profiles>
-        <userId></userId>
-        <userName></userName>
+        <profiles />
+        <userId />
+        <userName />
     </data>
-    <view>
-        <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
+    <view transContext="portailSearch">
+        <screen labelWidth="80" label="Visio Conférence" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
             <script onLoad="true">
             // root.login=userQN;
              //context.formRender.notifyObservers("login");
@@ -32,15 +32,30 @@
              context.formRender.notifyObservers("userName");
              root.visioURL =  visoUrl;
              context.formRender.notifyObservers("visioURL");
+
+             root.userQN =  userQN;
+             context.formRender.notifyObservers("userQN");
             </script> 
+            <script postLoad="true">
+                window.addEventListener('message', function(e) {
+                  var iframe = document.getElementById("visio");
+                  var eventName = e.data[0];
+                  var data = e.data[1];
+                  switch(eventName) {
+                    case 'setStyle':
+                      iframe.style = data;
+                      break;
+                  }
+                }, false);
+            </script>
             <vbox test="{visualizer},=,0" separator=",">
-                <html >
-                    <iframe id="visio" src="${visioURL}/conference/${numDossier}/${numCommission}?login=${login}&amp;profiles=${profiles}&amp;userId=${userId}&amp;userName=${userName}" style="height: 100vh;width: 100%;" allow="microphone; camera"/>
+                <html>
+                    <iframe id="visio" src="${visioURL}/conference/${numDossier}/${numCommission}?login=${userQN}&amp;profiles=${profiles}&amp;userId=${userId}&amp;userName=${userName}" style="height: 100vh;width: 100%;" allow="microphone; camera" />
                 </html>
             </vbox>
             <vbox test="{visualizer},=,1" separator=",">
                 <html>
-                    <iframe id="visio" src="${visioURL}/conference/${numDossier}/${numCommission}/visualizer?profiles={profiles}&amp;userId={userId}&amp;userName={userName}" style="height: 100vh;width: 100%;" allow="microphone; camera"/>
+                    <iframe id="visio" src="${visioURL}/conference/${numDossier}/${numCommission}/visualizer?profiles={profiles}&amp;userId={userId}&amp;userName={userName}" style="height: 100vh;width: 100%;" allow="microphone; camera" />
                 </html>
             </vbox>
         </screen>

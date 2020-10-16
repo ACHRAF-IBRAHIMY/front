@@ -10,9 +10,9 @@ import ma.ribatis.jxbadapter.KFXGenericModel;
 
 
 /**
- * <p>Classe Java pour anonymous complex type.
+ * <p>Java class for anonymous complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -22,6 +22,7 @@ import ma.ribatis.jxbadapter.KFXGenericModel;
  *         &lt;element name="to" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="reference" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="userlang" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,7 +35,8 @@ import ma.ribatis.jxbadapter.KFXGenericModel;
 @XmlType(name = "", propOrder = {
     "to",
     "status",
-    "reference"
+    "reference",
+    "userlang"
 })
 @XmlRootElement(name = "PortailSearch")
 public class PortailSearch
@@ -47,9 +49,11 @@ public class PortailSearch
     protected String status;
     @XmlElement(required = true)
     protected String reference;
+    @XmlElement(required = true)
+    protected String userlang;
 
     /**
-     * Obtient la valeur de la propriété to.
+     * Gets the value of the to property.
      * 
      * @return
      *     possible object is
@@ -61,7 +65,7 @@ public class PortailSearch
     }
 
     /**
-     * Définit la valeur de la propriété to.
+     * Sets the value of the to property.
      * 
      * @param value
      *     allowed object is
@@ -73,7 +77,7 @@ public class PortailSearch
     }
 
     /**
-     * Obtient la valeur de la propriété status.
+     * Gets the value of the status property.
      * 
      * @return
      *     possible object is
@@ -85,7 +89,7 @@ public class PortailSearch
     }
 
     /**
-     * Définit la valeur de la propriété status.
+     * Sets the value of the status property.
      * 
      * @param value
      *     allowed object is
@@ -97,7 +101,7 @@ public class PortailSearch
     }
 
     /**
-     * Obtient la valeur de la propriété reference.
+     * Gets the value of the reference property.
      * 
      * @return
      *     possible object is
@@ -109,7 +113,7 @@ public class PortailSearch
     }
 
     /**
-     * Définit la valeur de la propriété reference.
+     * Sets the value of the reference property.
      * 
      * @param value
      *     allowed object is
@@ -118,6 +122,30 @@ public class PortailSearch
      */
     public void setReference(String value) {
         this.reference = value;
+    }
+
+    /**
+     * Gets the value of the userlang property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUserlang() {
+        return userlang;
+    }
+
+    /**
+     * Sets the value of the userlang property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUserlang(String value) {
+        this.userlang = value;
     }
 
 }

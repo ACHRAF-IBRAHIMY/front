@@ -7,7 +7,7 @@
       <model />
       <from />
       <to />
-      <task>true</task>
+      <task>true</task> 
       <object>true</object>
       <document>true</document>
       <annotation>true</annotation>
@@ -21,11 +21,11 @@
     <forgetPass>false</forgetPass>
     <signup>oui</signup>
   </data>
-  <view>
+  <view transContext="portailSearch">
     /********************************************************/
     /*      START :: #MFB :: grid Rokhas 3.0 Home page      */
     /********************************************************/
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
       <script onLoad="true">
       if(root.newUser=="true"){
         ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
@@ -165,8 +165,9 @@
     });
 
     context.formRender.targetPanel.find(".faq-card").click(function(){
-        ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
-    });
+        //ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
+        window.location='https://support.ribatis.com/portal/fr/kb/rokhas';
+      });
 
     context.formRender.targetPanel.find(".last-log input").keydown(function(ev){
         if ( event.which == 13 ) {
@@ -191,7 +192,7 @@
     <script postLoad="true" delay="500">
             getMostPopularArticle(4,"",".classSearch-home-glo .fieldser-article-1 .vbox-articles .ow-vl-inner");      
     </script>
-      <vbox usage="embedded:N" className="classSearch-home-glo " xcstt="x">
+      <vbox usage="embedded:N" className="classSearch-home-glo ">
         
         <vbox columns="30% 70%" className="global-div-temp classSearch-home">
           <vbox className="height-auto-vbox-first">
@@ -209,7 +210,7 @@
                   <div style="transform: rotate(14deg);" class="hp-box-icon fab fa-ello" />
                 </html>
                 <html>
-                  <div class="hp-box-small-title class-traduction" tcode="EP00" style="font-size:1.3rem">Espace autorisations</div>
+                  <div class="hp-box-small-title class-traduction" tcode="EA00" style="font-size:1.3rem">Espace autorisations</div>
                 </html>
               </vbox>
               <html>
@@ -397,20 +398,31 @@
                   </html>
                 </vbox>
               </vbox>
-              <vbox columns="40% 0% 40% 13%" className="support">
+              <vbox columns="33% 33% 34%" className="support">
                 <html className="support-html full-grid-small">
                   <i class="fas fa-paper-plane" />
-                  <span>Support@rokhas.ma</span>
+                  <span style="font-size:19px">Support@rokhas.ma</span>
                 </html>
-                <html />
                 <html className="support-html full-grid-small">
                   <i class="fas fa-phone" />
-                  <span>+212 (0) 5 22 23 23 44</span>
+                  <span style="font-size:19px">+212 (0) 5 22 23 23 44</span>
                 </html>
-                <html className="support-time">
-                  <span style="font-size:12px;" class="class-traduction" tcode="LV00">Lundi au Vendredi de 08:30 à 18:30</span>
-                </html>
+                <vbox className="support" style="margin-top: -5px;background: #38A;padding: 8px;border-radius: 2px;width:92%">
+                  <html className="support-html full-grid-small" style="cursor:pointer;font-size: 18px;                   color: #FFF;">
+                  <div onclick="window.location = 'https://reservation.rokhas.ma/portal-embed#/customer/rokhas'">
+                    <i class="fas fa-calendar-day" style="color: #FFF;font-size:16px" />
+                    <span style="font-weight: 100;font-size:16px" class="class-traduction" tcode="RV00">Réserver un rendez-vous</span>
+                  </div>
+                  
+                  </html>
+                </vbox>
               </vbox>
+              
+             
+                  <html className="support-time">
+                    <span style="font-size:12px;" class="class-traduction" tcode="LV00">Lundi au Vendredi de 08:30 à 18:30</span>
+                  </html>
+              
             </vbox>
             <html>
               <div class="searchList">
