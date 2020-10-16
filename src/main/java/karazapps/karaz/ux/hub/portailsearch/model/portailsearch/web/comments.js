@@ -113,25 +113,79 @@ function sortCommentsByDate(comments){
     return comments;
 }
 
+function getMaxDate(comment){
+    console.log("getMaxDate comments size ",comment);
+    if(comment.comments.length==0){
+        console.log("getMaxDate comments date ",comment.date)
+        return comment.date;
+    }else{
+        var timeMax = comment.comments[0].date;
+        var timeCmpr = new Date(comment.comments[0].date);
+        var commentMax = {};
+        for(var i=1;i<comment.comments.length;i++){
+            var time1 = new Date(comment.comments[i].date);
+            if(time1 > timeCmpr){
+                timeCmpr = time1
+                timeMax = comment.comments[i].date;
+            }
+        }
+        console.log("getMaxDate comments date ",timeMax);
+        return timeMax;
+    }
+}
+
+function sortCommentsByDateGb(comments){
+    console.log("sortCommentsByDate comments",comments);
+    var comm = JSON.parse(JSON.stringify(comments));
+    var commVar = [];
+    for(var i=0;i<comm.length;i++){
+        var obj = {
+            "date": getMaxDate(comm[i]),
+            "comment": comm[i],
+            "index": i
+        }
+        commVar.push(obj);
+    }
+    sortCommentsByDate(commVar);
+
+    var commentsVar = [];
+    var commentsIndex = [];
+
+    for(var i=0;i<commVar.length;i++){
+        commentsVar.push(commVar[i].comment);
+        commentsIndex.push(commVar[i].index);
+    }
+    console.log("sortCommentsByDate commVar",commVar);
+
+    return {"comments":commentsVar,"cmmIndex":commentsIndex};
+
+}
+
 function createCmtCms(results,context){
     var container = context.formRender.targetPanel.find(".notif-glo-cmmt");
     for(var i=0;i<results.length;i++){
         var div = document.createElement("div");
         div.setAttribute("class","article-elm");
         var divP = document.createElement("div");
+        var divPc = document.createElement("div");
         var span = document.createElement("span");
         span.setAttribute("class","articles-title");
         span.innerHTML = results[i].title;
+        var span1 = document.createElement("span");
+        span1.innerHTML = "<span>Répondre au commentaire</span> <span>Supprimer</span>"
         var div2 = document.createElement("div");
         div2.setAttribute("style","display:grid;grid-template-columns: 25% 75%;font-size: 14px;");
         divP.append(span);
         div2.innerHTML="<span><i class='fas fa-user'></i> "+results[i].nom+" "+results[i].prenom+"<br/><i class='fas fa-clock'></i> "+results[i].date+"</span><span><i class='fas fa-comment'></i> : "+results[i].text+"</span>";
         divP.append(span);
+        divPc.append(span1);
+        divPc.setAttribute("style","color:#38A");
         div.append(divP);
         div.append(div2); 
+        div.append(divPc); 
         container.append(div);
-     }
- }
+    }
+}
 
 // Extract comments form articles
 function extarctCmmt(results,context){

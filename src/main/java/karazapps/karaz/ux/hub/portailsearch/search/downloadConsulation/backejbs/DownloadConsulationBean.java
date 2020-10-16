@@ -14,9 +14,12 @@ import javax.persistence.TypedQuery;
 
 
 import ma.ribatis.karaz.organization.AbstractKarazUser;
+import ma.ribatis.karaz.server.BackEndEJBContext;
 import ma.ribatis.karaz.server.DynamicQueryBuilder;
 import ma.ribatis.karaz.server.KarazQuery;
 import ma.ribatis.karaz.server.ModelCache; 
+import ma.ribatis.karaz.server.WebFacadeRemote;
+import ma.ribatis.karaz.server.WebFacadeRemote.ViewDataDTO;
 import ma.ribatis.karaz.util.cache.EntityHelper;
 
 
@@ -72,12 +75,16 @@ public class DownloadConsulationBean implements KarazQuery {
 		if (context.containsKey(ORDER_SEQ) && context.get(ORDER_SEQ) != null && !context.get(ORDER_SEQ).contains("null")) {
 			ordering = context.get(ORDER_SEQ);
 		}
+		boolean loadXml = context.containsKey("loadXml") && "true".equals(context.get("loadXml")) ;
+		boolean loadFullObject = loadXml ||  context.containsKey("loadFullObject") && "true".equals(context.get("loadFullObject")) ;
+		
 		DynamicQueryBuilder dqb = new DynamicQueryBuilder(queryClause, queryData, "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch", ordering, indexationMap);
 		dqb.buildQuery();
 		Map<String, Object> paramMap = dqb.getParamMap();
 		String queryJPQL = dqb.getQueryJPQL().toString();
 		logger.info("runQuery start "+ queryJPQL);
 		String selectJQPL = " SELECT di.id, di.bi, di.sequence, di.owningSeq, di.modelName, di.creationTime, di.changeTime "
+				+ ( loadXml ? ", di.xmlData " : ", di.entity " )
 				+ queryJPQL;
 		String countJPQL = " SELECT count(di.id) " + queryJPQL;
 		TypedQuery<Object[]> query = em.createQuery(selectJQPL, Object[].class);
@@ -122,6 +129,7 @@ public class DownloadConsulationBean implements KarazQuery {
 		TreeMap<String, Object> ret = new TreeMap<String, Object>();
 		ret.put(KarazQuery.TotalCout, totalRowCount);
 		ArrayList<TreeMap<String, String>> aliste = new ArrayList<TreeMap<String, String>>();
+		WebFacadeRemote wfb = loadFullObject ? BackEndEJBContext.getWebFacade() : null; 
 		if (resulte != null) {
 			for (Object[] r : resulte) { 
 				TreeMap<String, String> dto = new TreeMap<String, String>();
@@ -132,6 +140,18 @@ public class DownloadConsulationBean implements KarazQuery {
 				dto.put("modelName", ""+ r[4]); 
 				dto.put("creationTime", r[5]!=null? sdf.format(r[5]): null) ; 
 				dto.put("changeTime",  r[6]!=null? sdf.format(r[6]): null); 
+				if(loadXml) {
+					dto.put("xmlData", "" + r[7] ) ;  
+				}
+				
+				if(loadFullObject) {
+					try {
+						ViewDataDTO vdd = wfb.getXmlViewForDisplay(user, Long.parseLong(""+ r[0]),  null); 
+						dto.put("objectAnnotationsCount", (vdd!=null && vdd.annotationList==null) ?"0" : ""+vdd.annotationList.size());
+					} catch(Exception ex) {
+						logger.error("Error in get Annotation counts ", ex);
+					}
+				}
 				aliste.add(dto);
 			}
 		}

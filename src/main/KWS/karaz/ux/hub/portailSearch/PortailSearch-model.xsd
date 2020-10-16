@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:tns="http://www.karaz.org/PortailSearch-model" jaxb:version="2.0" jaxb:extensionBindingPrefixes="xjc" targetNamespace="http://www.karaz.org/PortailSearch-model">
-  <annotation /> 
+  <annotation />
   <simpleType name="KFXTime">
     <annotation>
       <appinfo source="annotation0">
@@ -33,6 +33,9 @@
           <annotation>
             <appinfo source="indexed">1</appinfo>
           </annotation>
+        </element>
+        <element name="userlang" minOccurs="1" maxOccurs="1" type="string">
+          <annotation />
         </element>
       </sequence>
     </complexType>

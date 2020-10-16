@@ -14,6 +14,10 @@ public interface PortailSearchXpaths   {
 	* type=string  isMultple=false isOptionnel=false isIndexed=true
 	*/
 	public static final String reference="reference";
+	/** refere to userlang
+	* type=string  isMultple=false isOptionnel=false isIndexed=false
+	*/
+	public static final String userlang="userlang";
 
 	
 	

@@ -206,6 +206,9 @@
       <menu relId="StatistiquesMembreSecr" label="Statistiques Secretaire commission" icone="search">
         <resource type="search">karaz/ux/hub/portailsearch/search/StatistiquesMembreSecr</resource>
       </menu>
+      <menu relId="AlertSearch" label="Alert Search" icone="search">
+        <resource type="search">karaz/ux/hub/portailsearch/search/AlertSearch</resource>
+      </menu>
     </menu>
   </menu>
 </menus>

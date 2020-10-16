@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <view name="dashboardsearch" default="true">
-    <screen label="DashboardSearch" labelWidth="140" usage="cr:R,val:R" labelAlign="left" xcstt="x" />
+    <screen label="DashboardSearch" labelWidth="140" usage="cr:R,val:R" labelAlign="left" />
     <buttonBar />
     <statusBar indicator="Demande.state.indicator" type="historique" />
   </view>

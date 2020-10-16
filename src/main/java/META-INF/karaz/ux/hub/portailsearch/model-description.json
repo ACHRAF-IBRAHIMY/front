@@ -1,0 +1,535 @@
+{
+	"name" : "karazapps.karaz.ux.hub.portailsearch.model",
+	"label" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+	"description": "$modelDescription",
+	"reports" : [
+	{}],
+
+	"actions": [	
+{}],
+
+"menus" : [ 
+	
+	 	
+	{
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+		"name": "karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-menu.xml",
+		"type": "menu"
+	},
+	
+{}],
+ "resources": [
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-model.xsd",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "xsd"
+    }, 
+     { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-ini.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "ini"
+    }, 
+     { 	"name" :  "$attachFileAsPath",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "attach"
+    }, 
+     
+
+
+		{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/mypage-dashboard.xml",
+    	"resourceQN" : "karaz/ux/hub/dashboardSearch/mypage-dashboard",
+    	"type" : "dashboard"
+    }, 
+    	
+		{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/view-dashboardsearch.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-dashboardsearch",
+    	"type" : "view"
+    }, 
+		{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/view-dashboardsearch/view-dashboardsearch-LargeScreen-cr.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-dashboardsearch-LargeScreen-cr",
+    	"type" : "view"
+    }, 
+		{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/view-dashboardsearch/view-dashboardsearch-LargeScreen-val.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-dashboardsearch-LargeScreen-val",
+    	"type" : "view"
+    }, 
+		{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/view-dashboardsearch/view-dashboardsearch-SmallScreen-cr.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-dashboardsearch-SmallScreen-cr",
+    	"type" : "view"
+    }, 
+		{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/view-dashboardsearch/view-dashboardsearch-SmallScreen-val.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-dashboardsearch-SmallScreen-val",
+    	"type" : "view"
+    }, 
+		{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/view-dashboardsearch.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-default",
+    	"type" : "view"
+    }, 
+		{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-parametrages-view.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:view-parametrages",
+    	"type" : "view"
+    }, 
+
+
+
+		
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/taskList-TLDashboardSearch.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:taskList-TLDashboardSearch",
+    	"type" : "taskList"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/taskList-TLDashboardSearch.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch:taskList-default",
+    	"type" : "taskList"
+	}, 
+		
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AcceptabiliteProjets.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AcceptabiliteProjets",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AccesAuFoncier.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AccesAuFoncier",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AffichagePub.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AffichagePub",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AlertSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AlertSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AllGlobalTAskSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AllGlobalTAskSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AllKarazuxresults.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AllKarazuxresults",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AllMembres.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AllMembres",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AllObjectGlobalModelSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AllObjectGlobalModelSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AllTaskGlobalModelSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AllTaskGlobalModelSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-ArticleConsultation.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/ArticleConsultation",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-Articles.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/Articles",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-ArticlesListe.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/ArticlesListe",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationDemolition.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AutorisationDemolition",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationRefection.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AutorisationRefection",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationRegularisation.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AutorisationRegularisation",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationsConstructionGrandsProjets.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AutorisationsConstructionGrandsProjets",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-AutorisationsConstructionPetitsProjets.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/AutorisationsConstructionPetitsProjets",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-BackEndPage.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/BackEndPage",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-CalculIndex.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/CalculIndex",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-CertificatReceptionProjets.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/CertificatReceptionProjets",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-CommentsMng.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/CommentsMng",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-CouvertureGeo.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/CouvertureGeo",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-DashletsArchitectSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/DashletsArchitectSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-DbLeftSide.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/DbLeftSide",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-DefaultDashboard.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/DefaultDashboard",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-DetailsActivitySearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/DetailsActivitySearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-DocumentsSortieSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/DocumentsSortieSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-DownloadConsultation.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/DownloadConsultation",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-DownloadEdit.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/DownloadEdit",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-EtablissementClasse.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/EtablissementClasse",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-EtablissementClasse2.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/EtablissementClasse2",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-EtudeImpactEnvironemmental.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/EtudeImpactEnvironemmental",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-FaqDetail.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/FaqDetail",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-FaqPage.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/FaqPage",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-GuideVideoConsultation.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/GuideVideoConsultation",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-GuideVideoEdit.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/GuideVideoEdit",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-Handshake.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/Handshake",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-Hummer.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/Hummer",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-NewArticle.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/NewArticle",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-NewRefJuridique.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/NewRefJuridique",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-NewfreqQuestion.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/NewfreqQuestion",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubRT.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/OccupationDomainPubRT",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubRp.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/OccupationDomainPubRp",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-OccupationDomainPubUC.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/OccupationDomainPubUC",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-OpendataFrame.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/OpendataFrame",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-OpinionTextClassification.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/OpinionTextClassification",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-OpinionTextMining.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/OpinionTextMining",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-PermisHabiterEtCertificatConformite.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/PermisHabiterEtCertificatConformite",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-PublicCentralSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/PublicCentralSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-RankingDigitalRemp.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/RankingDigitalRemp",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-RefDetail.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/RefDetail",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-RefrentielJuridique.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/RefrentielJuridique",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-ReportRanking.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/ReportRanking",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-RetageProdHomePage.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/RetageProdHomePage",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-RightAside.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/RightAside",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-SimpleDeclaration.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/SimpleDeclaration",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-SimulatorRokhas.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/SimulatorRokhas",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-SimulatorRokhasCMS.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/SimulatorRokhasCMS",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-StatistiquesArchitecteSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/StatistiquesArchitecteSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-StatistiquesMembreSecr.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/StatistiquesMembreSecr",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-StatistiuqesSearch.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/StatistiuqesSearch",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-UserSearchOLAP.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/UserSearchOLAP",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-VisioConferenceFrame.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/VisioConferenceFrame",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-autorisationMorcellement.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/autorisationMorcellement",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-autorusationConstructionGroupesHabitations.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/autorusationConstructionGroupesHabitations",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-autorusationLotissement.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/autorusationLotissement",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-commentsGb.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/commentsGb",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-contactUs.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/contactUs",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-proceduresEconomique.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/proceduresEconomique",
+    	"type" : "search"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/search-proceduresUrbanisme.xml",
+    	"resourceQN" : "karaz/ux/hub/portailsearch/search/proceduresUrbanisme",
+    	"type" : "search"
+	}, 
+		
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/translation/DashboardSearch-i18n-fr.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "translation"
+	},  
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/translation/DashboardSearch-i18n-ar.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "translation"
+	},  
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/translation/DashboardSearch-i18n-en.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "translation"
+	},  
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-ar.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "translation"
+	},  
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-en.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "translation"
+	},  
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-fr.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "translation"
+	},  
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/translation/PortailSearch-i18n-l0.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "translation"
+	},  
+
+    	
+     
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/articles.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/DashboardSearch.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/globalSearch.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/mainDefault.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otc.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/ProceduresCSS.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulator.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulatorCms.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/Treant.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/virtualKeyboard.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/vueLarge.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+    { 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/vuemobile.css",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "css"
+	}, 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/alertsearch.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/articles.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/comments.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/elasicSearch.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/globalSearch.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/membresAU.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otc.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/otm.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/proceduresJS.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/reportRanking.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulator.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/simulatorCms.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/Treant.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/virtualKeyboard.js",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "js"
+	},   
+
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/resources/playList.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "dynamicList"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/resources/playListAttachement.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "dynamicList"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/resources/tag.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "dynamicList"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/resources/visibility.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "dynamicList"
+	},   
+
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/affectationProfiles/GestionDashboardSearch-assignation.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "profiles"
+	},   
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/affectationProfiles/GestionDashboardSearchFaq-assignation.properties",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "profiles"
+	},   
+
+
+	 
+	{ 	"name" :  "karazapps/karaz/ux/hub/portailsearch/model/PortailSearch-parametrages-ini.xml",
+    	"resourceQN" : "karazapps.karaz.ux.hub.portailsearch.model.PortailSearch",
+    	"type" : "modelParametrage"
+	}
+]
+}
+   
+ 

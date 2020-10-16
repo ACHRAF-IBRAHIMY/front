@@ -191,7 +191,7 @@
     <script postLoad="true" delay="500">
             getMostPopularArticle(4,"",".classSearch-home-glo .fieldser-article-1 .vbox-articles .ow-vl-inner");      
     </script>
-      <vbox usage="embedded:N" className="classSearch-home-glo " xcstt="x">
+      <vbox usage="embedded:N" className="classSearch-home-glo ">
         
         <vbox columns="30% 70%" className="global-div-temp classSearch-home">
           <vbox className="height-auto-vbox-first">

@@ -18,8 +18,8 @@
         <userId />
         <userName />
     </data>
-    <view>
-        <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
+    <view transContext="portailSearch">
+        <screen labelWidth="80" label="Visio Conférence" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
             <script onLoad="true">
             // root.login=userQN;
              //context.formRender.notifyObservers("login");

@@ -95,6 +95,25 @@
       <script postLoad="true" delay="500">
               var id = root.query.idObject;
               getObjectArticle(id,root,context.formRender.targetPanel);
+              
+              var toolbarOptions = [
+          [ 'bold', 'italic', 'underline', 'strike' ],
+          [{ 'color': [] }, { 'background': [] }],
+          [{ 'header': '1' }, { 'header': '2' }],
+          [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
+          [ 'direction', { 'align': [] }],
+          ['image'],
+        ];
+
+              var ddv = context.formRender.targetPanel.find("#toolbarsecCom").get(0);
+              var quill = new Quill(ddv, {
+                modules: {
+                  toolbar: toolbarOptions
+                },
+                theme: 'snow'
+              });
+
+
       </script>
       
       <html>
@@ -171,9 +190,17 @@
       .classSearch-82 .comment-det{
             text-align: left;
             color: #333;
-            margin: 15px 2px;
+            margin: 10px 2px;
             padding: 3px 4px;
       }
+ 
+      .classSearch-82 .comment-det p,.classSearch-82 .comment-det li{
+          margin:1px;
+      }
+
+      .classSearch-82 .comment-det ul,.classSearch-82 .comment-det ol{
+        margin:2px;
+    }
 
       .classSearch-82 .content-article p{
         margin-top: 12px;
@@ -184,6 +211,21 @@
           .article-title,.article-desc{
             font-family:Droid Arabic Kufi, sans-serif;
           }
+
+          
+          #toolbarsecCom{
+              height: 100px;
+              background: #fff;
+              color: #333;
+              font-size:15px;
+          }
+
+          .htmlComb{
+            text-align: left;
+            width: 95%;
+            margin: auto;
+          }
+          
 
       </style>
       </html>
@@ -342,7 +384,7 @@
             <h1 style="color: #666;font-size: 20px;text-align: left;" class="add-comment">AJOUTER VOTRE COMMENTAIRE</h1>
             <span class="rep-comment" idd="" style="display:none;">
               <span style="display:grid;grid-template-columns: 50% 50%;">
-                <span style="color: #666;font-size: 20px;text-align: left;margin-bottom: 5px;">REPONDRE AU COMMANTAIRE</span>
+                <span style="color: #666;font-size: 20px;text-align: left;margin-bottom: 5px;">REPONDRE AU COMMENTAIRE</span>
                 <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close" /> Annuler la réponse</span>  
               </span>
             </span>
@@ -354,7 +396,12 @@
                   <field label="EMAIL*" widget="text" labelAlign="float" xpath="articleCommentEmail" />
             </vbox>
             <vbox>
-                <field label="COMMENTAIRE" widget="textArea" labelAlign="float" xpath="articleComment" />
+                <!-- <field label="COMMENTAIRE" widget="textArea" labelAlign="float" xpath="articleComment" /> -->
+
+                <html className="htmlComb">
+                  <span style="display: block;margin-top: 8px;margin-left: 8px;margin-bottom: 5px;">COMMENTAIRE</span>
+                  <div id="toolbarsecCom" />
+                </html>
             </vbox>
             <vbox columns="80% 20%">
                 <vbox>

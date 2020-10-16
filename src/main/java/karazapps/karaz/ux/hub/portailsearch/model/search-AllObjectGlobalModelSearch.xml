@@ -27,7 +27,7 @@
       <currentUser />
       <draftStatus />
       <rejectStatus />
-      <architectlogin xcstt="x" />
+      <architectlogin />
       <unifiedCriteria />
       <tos />
     </query>
