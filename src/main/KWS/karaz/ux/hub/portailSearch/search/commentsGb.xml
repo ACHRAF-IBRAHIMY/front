@@ -24,7 +24,7 @@
         <component name="htmlTranslate">
             <renderer name="createAccount">
                 <html>
-                    <span style="display:grid;grid-template-columns:100%;text-align:left">
+                    <span style="display:grid;grid-template-columns:100%;">
                         <span>
                         ${code | translate} 
                         </span>
@@ -42,7 +42,7 @@
                         <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close" /> ${code3 | translate}</span>  
                         </span>
                     </span>
-                    <span style="color:#e08a08;text-align:left;font-size:14px;display: block;margin-bottom: 14px;">${code4 | translate}</span>
+                    <span style="color:#e08a08;font-size:14px;display: block;margin-bottom: 14px;">${code4 | translate}</span>
                     </html>
             </renderer>
 
@@ -167,7 +167,6 @@
           .classSearch-comments .send-comment span{ font-size:17px;}
     
           .classSearch-comments .comment-det{
-                text-align: left;
                 color: #333;
                 margin: 10px 2px;
                 padding: 3px 4px;
@@ -200,7 +199,6 @@
               }
     
               .htmlComb{
-                text-align: left;
                 width: 95%;
                 margin: auto;
               }
@@ -278,7 +276,7 @@
           <vbox columns="80% 20%">
               <vbox>
                 <html>
-                  <span class="err-msg" style="color:red;font-size:13px;display:block;text-align:left;margin-top: 30px;margin-left: 23px;" />
+                  <span class="err-msg" style="color:red;font-size:13px;display:block;margin-top: 30px;margin-left: 23px;" />
                 </html>
               </vbox>
               <vbox>

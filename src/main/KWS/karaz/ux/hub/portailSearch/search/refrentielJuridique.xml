@@ -151,7 +151,30 @@
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
             <htmlTranslate renderer="createAccountHub" code="RJ00" code1="RJ01" />
-            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+            <vbox columns="10% 90%" className="stay-grid search-input-articles div-full-search-bar" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='ar',expr,boolean">
+              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
+                <postChange>
+                  var prefix = context.formRender.targetPanel.find(".classSearch-1 .div-full-search-bar .hp-search_field input").val();
+                  currentPage=0;
+                  var pp=root.query.filterRef;
+                  restFullSearchList(prefix.substring(0,247),0,false,pp,"classSearch-1",context.formRender.targetPanel);
+                  root.query.parentP=0;
+                </postChange>
+              </button>
+              <vbox columns="25% 75%">
+                <field className="filterRef-class" widget="select" xpath="query.filterRef">
+                  <option value="TOUS" label="TOUS" />
+                  <option value="ÉCONOMIQUE" label="ÉCONOMIQUE" />
+                  <option value="URBANISME" label="URBANISME" />
+                  <option value="AUTRE" label="AUTRE" />
+                  <postChange>
+                      context.formRender.targetPanel.find(".classSearch-1 .searchbuttun").click(); 
+                  </postChange>
+                </field>
+                <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
+              </vbox>
+            </vbox>
+            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='fr',expr,boolean">
               <vbox columns="75% 25%">
                 <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Saisissez vos mots clés ici" />
                 <field className="filterRef-class" widget="select" xpath="query.filterRef">
