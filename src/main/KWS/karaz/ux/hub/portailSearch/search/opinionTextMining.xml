@@ -5,8 +5,174 @@
     <query />
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+        <component name="htmlTranslate">
+            <renderer name="divIDiv">
+                <html> 
+                <div class="stat ow-vbox hp-box">
+                  <i class="${iClass}" />
+                  <div>
+                    <span>0</span>
+                    <span >${code | translate}</span>
+                  </div>
+                </div>
+              </html>
+            </renderer>
+
+            <renderer name="divIDivClick">
+                <html>
+                <div onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextClassification','search','Text Classification',{});" style="cursor:pointer" class="stat ow-vbox hp-box">
+                  <i class="fas fa-th-large" />
+                  <div>
+                    <span>0</span>
+                    <span>${code | translate}</span>
+                  </div>
+                </div>
+              </html>
+            </renderer>
+
+            <renderer name="fieldSet1">
+                <fieldset header="${header | translate}" className="d1">
+                  <html>
+                    <div class="content">
+                      <div class="config-bar">
+                        <span class="sp sp1 fas fa-sort-numeric-up" />
+                        <select style="width: 55px;" class="s1">
+                          <option value="12">12</option>
+                          <option value="20">20</option>
+                          <option value="40">40</option>
+                          <option value="60">60</option>
+                          <option value="100">100</option>
+                          <option value="140" selected="selected">140</option>
+                        </select>
+                        <span class="separate-span" />
+                        <span class="sp sp2 fas fa-users" />
+                        <select class="s2">
+                          <option value="null">${code | translate}</option>
+                        </select>
+                        <span class="separate-span" />
+                        <span class="chart-type sp sp3 fas fa-chart-bar" />
+                        <span class="chart-type sp sp4 fas fa-chart-pie" />
+                        <span class="chart-type sp sp5 fas fa-cloud  sp-active" />
+                      </div>
+                      <div class="chart-container" style="position: relative;width:95%;height: 619px;display:none;">
+                        <canvas id="myChart" width="400" height="400" />
+                      </div>
+                      <div id="demo" class="word-cloud-container" style="position: relative;width:95%;height: 619px;display:block">
+                        
+                      </div>
+                    </div>
+                  </html>
+                </fieldset>
+            </renderer>
+
+            <renderer name="fieldSet2">
+                <fieldSet header="${header | translate}" className="search-box">
+                  <html>
+                    <div class="input-bar content">
+                      <input type="text" />
+                      <button class="b b1 active">${code1 | translate}</button>
+                      <button class="b b2">${code2 | translate}</button>
+                      <button class="fas fa-search" />
+                    </div>
+                  </html>
+                </fieldSet>
+            </renderer>
+
+            <renderer name="fieldSet3">
+                <fieldSet header="${header | translate}" className="d2">
+                  <html className="word-list-div word-list">
+                    <div class="content">
+                      <div class="div">
+                        <table class="exist-word-list tab" />
+                      </div>
+                    </div>
+                    <div class="pagination-word-list" style="margin-top: 30px;" />
+                  </html>
+                  <html className="word-list-div word-list-det">
+                    <div class="back-div">
+                      <span>
+                        <i class="fas fa-angle-double-left" />
+                        ${code1 | translate}
+                      </span>
+                    </div>
+                    <div class="content">
+                      <div class="div">
+                        <div class="div-d1">
+                          <h4>${code2 | translate}</h4>
+                          <div class="div-d1-det" />
+                        </div>
+                        <div class="div-d2">
+                          <h4>${code3 | translate}</h4>
+                          <table class="note-div-items tab" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pagination-otm" />
+                  </html>
+                  <html className="word-list-div word-list-load-gif">
+                    <img src="img/load-text.gif" alt="" />
+                  </html>
+                  <html className="word-list-div word-list-text-avis">
+                    <div class="content">
+                      <div class="avis-det-full">
+                        <span class="back-span">
+                          <i class="fas fa-angle-double-left" />
+                          ${code4 | translate}
+                        </span>
+                        <div class="avis-det-membre">
+                          ${code5 | translate}
+                          <span />
+                        </div>
+                        <div class="avis-det-avis">
+                          ${code6 | translate}
+                          <p />
+                        </div>
+                        <button class="extract-notes-button">${code7 | translate}</button>
+                        <div class="extract-notes" style="display:none" />
+                      </div>
+                    </div>
+                  </html>
+                  <html className="word-list-div mlt-search">
+                    <div class="back-div">
+                      <span>
+                        <i class="fas fa-angle-double-left" />
+                        ${code8 | translate}
+                      </span>
+                    </div>
+                    <div class="search-info">
+                      <div class="word">
+                        <span />
+                      </div>
+                      <div class="total-hits">
+                        <span />
+                        ${code9 | translate}
+                      </div>
+                    </div>
+                    <div class="content">
+                      <div style="margin:auto;color:#333;width:85%;margin-bottom:10px;font-size: 18px;">
+                        <span>${code10 | translate}</span>
+                      </div>
+                      <table class="note-div-items tab" />
+                    </div>
+                    <div class="pagination-otm-search" />
+                  </html>
+                </fieldSet>
+            </renderer>
+
+        </component>
+        
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+    
+        <script onLoad="true">
+                try{
+                    root.userlang=userLocal;
+                    context.formRender.notifyObservers("userlang");
+                }catch(e){
+                    console.log("ERROOOR",e);
+                }
+            </script>
       <script postLoad="true"> 
                 
                var mem = null;
@@ -145,167 +311,18 @@
                 -->
           <vbox columns="100%">
             <vbox columns="25% 25% 25% 25%" className="stat-div">
-              <html> 
-                <div class="stat ow-vbox hp-box">
-                  <i class="fas fa-file-alt" />
-                  <div>
-                    <span>0</span>
-                    <span class="class-traduction" tcode="SC00">Remarques</span>
-                  </div>
-                </div>
-              </html>
-              <html>
-                <div class="stat ow-vbox hp-box">
-                  <i class="fas fa-comment-alt" />
-                  <div>
-                    <span>0</span>
-                    <span class="class-traduction" tcode="SC00">Avis</span>
-                  </div>
-                </div>
-              </html>
-              <html>
-                <div class="stat ow-vbox hp-box">
-                  <i class="fas fa-users" />
-                  <div>
-                    <span>0</span>
-                    <span class="class-traduction" tcode="SC00">Membres</span>
-                  </div>
-                </div>
-              </html>
-              <html>
-                <div onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextClassification','search','Text Classification',{});" style="cursor:pointer" class="stat ow-vbox hp-box">
-                  <i class="fas fa-th-large" />
-                  <div>
-                    <span>0</span>
-                    <span class="class-traduction" tcode="SC00">Clusters</span>
-                  </div>
-                </div>
-              </html>
+              <htmlTranslate renderer="divIDiv" iClass="fas fa-file-alt" code="Remarques" />
+              <htmlTranslate renderer="divIDiv" iClass="fas fa-comment-alt" code="Avis" />
+              <htmlTranslate renderer="divIDiv" iClass="fas fa-users" code="Membres" />
+              <htmlTranslate renderer="divIDivClick" code="Clusters" />
             </vbox>
             <vbox columns="50% 50%" className="dashbord-right fieldSets">
               <vbox>
-                <fieldset header="OCCURRENCE DES MOTS DANS L'INDEX" className="d1">
-                  <html>
-                    <div class="content">
-                      <div class="config-bar">
-                        <span class="sp sp1 fas fa-sort-numeric-up" />
-                        <select style="width: 55px;" class="s1">
-                          <option value="12">12</option>
-                          <option value="20">20</option>
-                          <option value="40">40</option>
-                          <option value="60">60</option>
-                          <option value="100">100</option>
-                          <option value="140" selected="selected">140</option>
-                        </select>
-                        <span class="separate-span" />
-                        <span class="sp sp2 fas fa-users" />
-                        <select class="s2">
-                          <option value="null">TOUS LES MEMBRES</option>
-                        </select>
-                        <span class="separate-span" />
-                        <span class="chart-type sp sp3 fas fa-chart-bar" />
-                        <span class="chart-type sp sp4 fas fa-chart-pie" />
-                        <span class="chart-type sp sp5 fas fa-cloud  sp-active" />
-                      </div>
-                      <div class="chart-container" style="position: relative;width:95%;height: 619px;display:none;">
-                        <canvas id="myChart" width="400" height="400" />
-                      </div>
-                      <div id="demo" class="word-cloud-container" style="position: relative;width:95%;height: 619px;display:block">
-                        
-                      </div>
-                    </div>
-                  </html>
-                </fieldset>
+                <htmlTranslate renderer="fieldSet1" header="OMDI00" code="OMDI01" />
               </vbox>
               <vbox>
-                <fieldSet header="RECHERCHE DANS LES AVIS" className="search-box">
-                  <html>
-                    <div class="input-bar content">
-                      <input type="text" />
-                      <button class="b b1 active">KEY</button>
-                      <button class="b b2">MLT</button>
-                      <button class="fas fa-search" />
-                    </div>
-                  </html>
-                </fieldSet>
-                <fieldSet header="LISTE DES MOTS EXISTES" className="d2">
-                  <html className="word-list-div word-list">
-                    <div class="content">
-                      <div class="div">
-                        <table class="exist-word-list tab" />
-                      </div>
-                    </div>
-                    <div class="pagination-word-list" style="margin-top: 30px;" />
-                  </html>
-                  <html className="word-list-div word-list-det">
-                    <div class="back-div">
-                      <span>
-                        <i class="fas fa-angle-double-left" />
-                        Retour à la liste des mots
-                      </span>
-                    </div>
-                    <div class="content">
-                      <div class="div">
-                        <div class="div-d1">
-                          <h4>Les mots dérivés :</h4>
-                          <div class="div-d1-det" />
-                        </div>
-                        <div class="div-d2">
-                          <h4>Remarques :</h4>
-                          <table class="note-div-items tab" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="pagination-otm" />
-                  </html>
-                  <html className="word-list-div word-list-load-gif">
-                    <img src="img/load-text.gif" alt="" />
-                  </html>
-                  <html className="word-list-div word-list-text-avis">
-                    <div class="content">
-                      <div class="avis-det-full">
-                        <span class="back-span">
-                          <i class="fas fa-angle-double-left" />
-                          Retour
-                        </span>
-                        <div class="avis-det-membre">
-                          MEMBRE :
-                          <span />
-                        </div>
-                        <div class="avis-det-avis">
-                          AVIS :
-                          <p />
-                        </div>
-                        <button class="extract-notes-button">Extraire les remarques</button>
-                        <div class="extract-notes" style="display:none" />
-                      </div>
-                    </div>
-                  </html>
-                  <html className="word-list-div mlt-search">
-                    <div class="back-div">
-                      <span>
-                        <i class="fas fa-angle-double-left" />
-                        Retour à la liste des mots
-                      </span>
-                    </div>
-                    <div class="search-info">
-                      <div class="word">
-                        <span />
-                      </div>
-                      <div class="total-hits">
-                        <span />
-                        Avis Similaires
-                      </div>
-                    </div>
-                    <div class="content">
-                      <div style="margin:auto;color:#333;width:85%;margin-bottom:10px;font-size: 18px;">
-                        <span>AVIS :</span>
-                      </div>
-                      <table class="note-div-items tab" />
-                    </div>
-                    <div class="pagination-otm-search" />
-                  </html>
-                </fieldSet>
+                <htmlTranslate renderer="fieldSet2" header="RDA00" code1="RDA01" code2="RDA02" />
+                <htmlTranslate renderer="fieldSet3" header="LME00" code1="LME01" code2="LME02" code3="LME03" code4="LME04" code5="LME05" code6="LME06" code7="LME07" code8="LME08" code9="LME09" code10="LME10"/>
               </vbox>
             </vbox>
           </vbox>

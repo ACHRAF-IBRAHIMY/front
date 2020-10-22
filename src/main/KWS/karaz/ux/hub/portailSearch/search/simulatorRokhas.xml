@@ -15,8 +15,92 @@
 	  <dataReport>
 	  </dataReport>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+        <component name="htmlTranslate">
+            <renderer name="createAccountHub">
+                <html>
+                    <div class="vpanel-title">
+                    <div class="vpanel-title">
+                        <span>${code1 | translate}</span>
+                        <hr class="header-create-account-horizontal-line hr-hub" />
+                    </div> 
+                    </div>
+                    <div class="hp-sbox-text ">            
+                    ${code2 | translate}
+                    <span style="color:#f93;">*</span>
+                    , ${code3 | translate}
+                    </div>
+                    <div style="height: 50px;" />
+                </html>
+            </renderer>
+
+            <renderer name="panelFAQ">
+                <html>
+                <div class="vpanel-title">
+                  <div class="vpanel-title">
+                    <span>${code | translate}</span>
+                    <hr class="header-create-account-horizontal-line hr-hub" />
+                  </div>
+                </div>
+              </html>
+            </renderer>
+
+            <renderer name="Procedure">
+                <html>
+                <div class="qr">
+                  <img src="img/load-text.gif" style="margin: auto;display: block;height: 100px;" alt="" />
+                </div>
+                <div class="error-msg-sim error-msg-sim1">
+                  <div><i class="fas fa-exclamation-triangle" /></div>
+                  <p >${code1 | translate}
+                  <br />
+                     - ${code2 | translate}
+                    <br /> - ${code3 | translate}</p>
+                </div>
+                <div class="error-msg-sim error-msg-sim2">
+                  <div><i class="fas fa-exclamation-triangle" /></div>
+                  <p>
+                    ${code4 | translate}
+                  </p>
+                </div>
+                <div class="next-button" style="position:relative">
+                  <button class="back-rq stopped">${code5 | translate}</button>
+                  <button class="next-rq" >${code6 | translate}</button>
+                  <button class="next-report" style="background: #02a202;display: inline-block;margin-left: 20px;color: #fff;border: none;width:auto"><i class="fas fa-print" /> ${code7 | translate}</button>
+                </div>
+              </html>
+            </renderer>
+
+            <renderer name="htmlSpan">
+                <html>
+                    <span class="">
+                        <span >${code1 | translate}</span>  
+                        <br />
+                        <span >${code2 | translate} </span>
+                    </span>
+                    </html>
+            </renderer>
+
+            <renderer name="fieldSet">
+                <fieldSet header="${header | translate}" className="info-container-div">
+                    <html>
+                    <div class="info-container" />
+                    </html>
+                </fieldSet>
+            </renderer>
+
+        </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+      <script onLoad="true">
+                try{
+                    root.userlang=userLocal;
+                    context.formRender.notifyObservers("userlang");
+                }catch(e){
+                    console.log("ERROOOR",e);
+                }
+            </script>
       <script postLoad="true">
 
     $(".simulator .next-report").click(function(){
@@ -121,54 +205,12 @@
       <button label="print etat" visible="1,=,2" className="report-hiden" actionName="karaz/ux/hub/dashboardsearch/PrintReportSumilateurBeans" postProcessing="openFile,repport.gedId,none">
       </button>
         <vbox className="hp-box simulator-sub">
-          <html>
-            <div class="vpanel-title">
-              <div class="vpanel-title">
-                <span class="class-traduction" tcode="SI03">SIMULATEUR DES PROCÉDURES</span>
-                <hr class="header-create-account-horizontal-line hr-hub" />
-              </div> 
-            </div>
-            <div class="hp-sbox-text class-traduction" tcode="VA03">            
-              Vos réponses aux questions posées vous permettront d'obtenir des informations sur les documents requis
-              <span style="color:#f93;">*</span>
-              , les principales étapes de la procédure, les administrations concernées  ainsi que les documents qui vous seront délivrés au terme de la procédure.
-            </div>
-            <div style="height: 50px;" />
-          </html>
+          <htmlTranslate renderer="createAccountHub" code1="SI03" code2="VA03" code3="VA04" />
           <vbox columns="60% 40%">
           <vbox>
             <vbox className="hp-box simulator-qr">
-              <html>
-                <div class="vpanel-title">
-                  <div class="vpanel-title">
-                    <span class="class-traduction" tcode="ID03">QUESTIONS / RÈPONSES</span>
-                    <hr class="header-create-account-horizontal-line hr-hub" />
-                  </div>
-                </div>
-              </html>
-              <html>
-                <div class="qr">
-                  <img src="img/load-text.gif" style="margin: auto;display: block;height: 100px;" alt="" />
-                </div>
-                <div class="error-msg-sim error-msg-sim1">
-                  <div><i class="fas fa-exclamation-triangle" /></div>
-                  <p class="class-traduction" tcode="VE03">Cette procédure sera décrite et mise en ligne après entrée en vigueur des décrets :
-                  <br />
-                     - N° 2.18.475 précisant les modalités de délivrance des autorisations de réfection, de régularisation et de démolition.
-                    <br /> - N° 2.18.577 remplaçant le décret N° 2.13.424 du 24 Mai 2013 (Règlement général de construction)</p>
-                </div>
-                <div class="error-msg-sim error-msg-sim2">
-                  <div><i class="fas fa-exclamation-triangle" /></div>
-                  <p class="class-traduction" tcode="UP03">
-                    Pour tout projet d’investissement éligible au passage par la Commission Régionale Unifiée d’Investissement (CRUI), merci d’utiliser la plateforme CRI 2.0.   
-                  </p>
-                </div>
-                <div class="next-button" style="position:relative">
-                  <button class="back-rq stopped class-traduction-ct" tcode="PC03">Précédent</button>
-                  <button class="next-rq class-traduction-ct" tcode="VV03">Suivant</button>
-                  <button class="next-report class-traduction-ct" tcode="IP03" style="background: #02a202;display: inline-block;margin-left: 20px;color: #fff;border: none;width:auto"><i class="fas fa-print" /> Imprimer la procédure</button>
-                </div>
-              </html>
+            <htmlTranslate renderer="panelFAQ" code="ID03"/>
+            <htmlTranslate renderer="Procedure" code1="WX00" code2="1" code3="WX02" code4="WX03" code5="WX04" code6="WX05" code7="WX06" />
               <button visible="1,=,2" label="test button" className="chargement-btn">
                 <postChange>
 
@@ -179,46 +221,22 @@
               </button>
             </vbox>
                       <vbox className="size955">
-                      <fieldSet header="RÉCAPITULATIF DES CHOIX" className="info-container-div wg-class-traduction-hd wg-tcode-RG03">
-                <html>
-                  <div class="info-container" />
-                </html>
-             </fieldSet>
+                      <htmlTranslate renderer="fieldSet" header="RDC00" />
           </vbox>
 
             </vbox>
 
             <vbox className="docs-qr">   
-              <fieldSet header="DOCUMENTS REQUIS" className="docs-container-div wg-class-traduction-hd wg-tcode-BN03">
-                <html>
-                  <div class="docs-container" />
-                </html>
-              </fieldSet>
-              <fieldSet header="ÉTAPES CLÉS" className="wg-class-traduction-hd wg-tcode-TY03">
-                <html>
-                  <div class="steps-container" />
-                </html>
-              </fieldSet>
+              <htmlTranslate renderer="fieldSet" header="DR00" />
+              <htmlTranslate renderer="fieldSet" header="ECS00" />
               <!--
                 <fieldSet header="DOCUMENTS DÉLIVRÉS" />
                 <fieldSet header="COÛT ÉSTIMATIF" />
               -->
 
-              <fieldSet header="DOCUMENTS COMPLEMENTAIRES" className="wg-class-traduction-hd wg-tcode-TG03">
-                <html>
-                  <div class="docs-comp-container" />
-                </html>
-              </fieldSet>
-              <fieldSet header="DOCUMENTS FACULTATIFS" className="wg-class-traduction-hd wg-tcode-TW03">
-                <html>
-                  <div class="docs-fac-container" />
-                </html>
-              </fieldSet>
-              <fieldSet header="DOCUMENTS DÉLIVRÉS" className="wg-class-traduction-hd wg-tcode-BB03">
-                <html>
-                  <div class="docs-sort-container" />
-                </html>
-              </fieldSet>
+              <htmlTranslate renderer="fieldSet" header="DCS00" />
+              <htmlTranslate renderer="fieldSet" header="DFS00" />
+              <htmlTranslate renderer="fieldSet" header="DDS00" />
             </vbox>
           </vbox>
           <html>
@@ -228,13 +246,7 @@
             <html>
               <i class="fas fa-exclamation-triangle" />
             </html>
-            <html>
-              <span class="">
-                <span class="class-traduction" tcode="NN03">Des variations peuvent être constatées entre les informations fournies par le simulateur Rokhas.ma et le déroulement réel de la procédure lors du dépôt de la demande sur la plateforme.</span>  
-                <br />
-                <span class="class-traduction" tcode="GG03">Ces potentielles variations dépendent généralement de la nature particulière de certains dossiers, de l'évaluation de l'administration compétente et de la localisation du projet concerné </span>
-              </span>
-            </html>
+            <htmlTranslate renderer="htmlSpan" code1="WX07" code2="WX08" />
           </vbox>
           <html>
             <div style="height: 70px;" />

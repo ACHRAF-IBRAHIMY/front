@@ -19,8 +19,51 @@
     </articleComment>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+        <component name="htmlTranslate">
+            <renderer name="createAccount">
+                <html>
+                    <span style="display:grid;grid-template-columns:100%;text-align:left">
+                        <span>
+                        ${code | translate} 
+                        </span>
+                    </span>
+                    <hr class="header-create-account-horizontal-line hr-hub" />
+                </html>
+            </renderer>
+
+            <renderer name="crudComment">
+                <html>
+                    <h1 style="color: #666;font-size: 20px;" class="add-comment">${code1 | translate}</h1>
+                    <span class="rep-comment" idd="" style="display:none;">
+                        <span style="display:grid;grid-template-columns: 50% 50%;">
+                        <span style="color: #666;font-size: 20px;margin-bottom: 5px;">${code2 | translate}</span>
+                        <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close" /> ${code3 | translate}</span>  
+                        </span>
+                    </span>
+                    <span style="color:#e08a08;text-align:left;font-size:14px;display: block;margin-bottom: 14px;">${code4 | translate}</span>
+                    </html>
+            </renderer>
+
+            <renderer name="htmlComb">
+                <html className="htmlComb">
+                <span style="display: block;margin-top: 8px;margin-left: 8px;margin-bottom: 5px;">${code | translate}</span>
+                <div id="toolbarsecCom" />
+              </html>
+            </renderer>
+
+        </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+        <script onLoad="true">
+                try{
+                    root.userlang=userLocal;
+                    context.formRender.notifyObservers("userlang");
+                }catch(e){
+                    console.log("ERROOOR",e);
+                }
+            </script>
       <script postLoad="true"> 
         var id = root.query.idObject;
         profilesT = profiles;
@@ -172,14 +215,7 @@
           </style>
       </html>
       <vbox className="hp-box hp-small classSearch-comments classSearch-82">
-        <html>
-          <span style="display:grid;grid-template-columns:100%;text-align:left">
-            <span>
-              COMMENTAIRES 
-            </span>
-          </span>
-          <hr class="header-create-account-horizontal-line hr-hub" />
-        </html>
+        <htmlTranslate renderer="createAccount" code="COMM00" />
         <vbox className="comments-list">
           <!-- <vbox columns="20% 80%">
           <vbox className="comment-user-img">
@@ -228,16 +264,7 @@
         
         
         <vbox className="comment-form">
-        <html>
-          <h1 style="color: #666;font-size: 20px;text-align: left;" class="add-comment">AJOUTER VOTRE COMMENTAIRE</h1>
-          <span class="rep-comment" idd="" style="display:none;">
-            <span style="display:grid;grid-template-columns: 50% 50%;">
-              <span style="color: #666;font-size: 20px;text-align: left;margin-bottom: 5px;">REPONDRE AU COMMENTAIRE</span>
-              <span style="text-align:right;cursor:pointer" class="annuler-rep-comment"><i class="fas fa-close" /> Annuler la réponse</span>  
-            </span>
-          </span>
-          <span style="color:#e08a08;text-align:left;font-size:14px;display: block;margin-bottom: 14px;">Votre adresse de messagerie ne sera pas publiée. Les champs obligatoires sont indiqués avec *</span>
-        </html>
+        <htmlTranslate renderer="crudComment" code1="AVC00" code2="RAC00" code3="ALR00" code4="Comm-TEXT" />
           <vbox columns="33% 33% 33%">
                 <field label="NOM*" widget="text" labelAlign="float" xpath="articleCommentName" />
                 <field label="PRENOM*" widget="text" labelAlign="float" xpath="articleCommentLastName" />
@@ -246,10 +273,7 @@
           <vbox>
               <!-- <field label="COMMENTAIRE" widget="textArea" labelAlign="float" xpath="articleComment" /> -->
 
-              <html className="htmlComb">
-                <span style="display: block;margin-top: 8px;margin-left: 8px;margin-bottom: 5px;">COMMENTAIRE</span>
-                <div id="toolbarsecCom" />
-              </html>
+              <htmlTranslate renderer="htmlComb" code="COMM00" />
           </vbox>
           <vbox columns="80% 20%">
               <vbox>

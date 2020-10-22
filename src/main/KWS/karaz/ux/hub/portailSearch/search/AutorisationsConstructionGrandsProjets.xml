@@ -9,8 +9,544 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+        <component name="htmlTranslate">
+
+            
+
+            <renderer name="htmlRGC">
+                <html>
+                <p>
+                  ${code1 | translate}
+                  <u>${code2 | translate}</u>
+                  ${code3 | translate}
+                  <u>${code4 | translate}</u>
+                  ). ${code5 | translate}
+                </p>
+              </html>
+            </renderer>
+
+            <renderer name="HfieldSet1">
+              <fieldSet header="${header | translate}" className="fs1">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">1</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL05" />
+                    <button className="but-orange" label="Demandeur" />
+                    <htmlTranslate renderer="htmlP" code="AUDM41" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">2</span>
+                  </html>
+                  <vbox>
+                  <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL07" />
+                    <button className="but-orange" label="Demandeur" />
+                    <htmlTranslate renderer="htmlP" code="AUDL08" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">3</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL09" />
+                    <button className="but-orange" label="Demandeur" />
+                    <htmlTranslate renderer="htmlP" code="AUDL10" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">4</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL11" />
+                    <button className="but-orange" label="Demandeur" />
+                    <htmlTranslate renderer="htmlP" code="AUDL12" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">5</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL13" />
+                    <button className="but-blue" label="Commune" />
+                    <htmlTranslate renderer="htmlP" code="AUDL14" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">6</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL15" />
+                    <button className="but-blue" label="Membres commission" />
+                    <htmlTranslate renderer="htmlP" code="AUDL16" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">7</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL17" />
+                    <button className="but-blue" label="Secrétaire commission" />
+                    <button className="but-blue" label="Membres commission" />
+                    <htmlTranslate renderer="htmlP" code="AUDL18" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">8</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL19" />
+                    <button className="but-orange" label="Demandeur" />
+                    <htmlTranslate renderer="htmlP" code="AUDL20" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">9</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL21" />
+                    <button className="but-blue" label="Technicien commune" />
+                    <htmlTranslate renderer="htmlP" code="AUDL22" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">10</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL23" />
+                    <button className="but-blue" label="Président commune" />
+                    <button className="but-blue" label="Chef du guichet" />
+                    <htmlTranslate renderer="htmlP" code="AUDL24" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">11</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL25" />
+                    <button className="but-orange" label="Demandeur" />
+                    <button className="but-blue" label="Régisseur" />
+                    <htmlTranslate renderer="htmlP" code="AUDL26" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">12</span>
+                  </html>
+                  <vbox>
+                  <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL27" />
+                    <button className="but-blue" label="Secrétariat président commune" />
+                    <htmlTranslate renderer="htmlP" code="AUDL28" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">13</span>
+                  </html>
+                  <vbox>
+                  <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL29" />
+                    <button className="but-blue" label="Président commune" />
+                    <htmlTranslate renderer="htmlP" code="AUDL30" />
+                  </vbox>
+                </vbox>
+                <vbox className="scroll-top">
+                  <htmlTranslate renderer="haut" code="haut" />
+                </vbox>
+              </fieldSet>
+            </renderer>
+
+            <renderer name="HfieldSet2">
+              <fieldSet header="${header | translate}" className="fs2">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <!-- <vbox className="title-principale">
+                                    <html>
+                                        <span>Liste des pièces à fournir d’Etude d’Impact sur l’Environnement</span>
+                                    </html>
+                                </vbox> -->
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">1</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDM22" />
+                    <htmlTranslate renderer="htmlP" code="AUDM52" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-code" style="color:orange;" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">2</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDM23" />
+                    <htmlTranslate renderer="htmlP" code="AUDM53" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">3</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDM24" />
+                    <htmlTranslate renderer="htmlP" code="AUDM54" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">4</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP01" />
+                    <htmlTranslate renderer="htmlP" code="ACGP02" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">5</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGH04" />
+                    <htmlTranslate renderer="htmlP" code="ACGH05" />
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">6</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP03" />
+                    <htmlTranslate renderer="htmlP" code="ACGP04" />
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">7</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL41" />
+                    <htmlTranslate renderer="htmlP" code="AUDL42" />
+                  </vbox>
+                  <vbox className="doc-icon cl-orange">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox style="margin-left: 7vw;">
+                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-code" iStyle="color:orange;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
+                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-alt" iStyle="color:#666666;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
+                </vbox>
+                <vbox className="scroll-top">
+                  <htmlTranslate renderer="haut" code="haut" />
+                </vbox>
+              </fieldSet>
+            </renderer>
+
+            <renderer name="HfieldSet3">
+              <fieldSet header="${header | translate}" className="fs2">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">1</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP05" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-pdf" style="color:orange;" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">2</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP06" />
+                    <htmlTranslate renderer="htmlP" code="ACGP07" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">3</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP08" />
+                    <htmlTranslate renderer="htmlP" code="ACGP09" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt " />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">4</span>
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP10" />
+                    <htmlTranslate renderer="htmlP" code="ACGP11" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 80% 5% 5%">
+                  <html className="gen-num-html">
+                    <span class="gen-num">5</span>
+                  </html>
+                  <vbox>
+                  <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL47" />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html />
+                  </vbox>
+                  <vbox className="doc-icon">
+                    <html>
+                      <i class="far fa-file-alt" />
+                    </html>
+                  </vbox>
+                </vbox>
+                <vbox style="margin-left: 7vw;">
+                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-code" iStyle="color:orange;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
+                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-alt" iStyle="color:#666666;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
+                </vbox>
+                <vbox className="scroll-top">
+                  <htmlTranslate renderer="haut" code="haut" />
+                </vbox>
+              </fieldSet>
+            </renderer>
+
+            <renderer name="HfieldSet4">  
+              <fieldSet header="${header | translate}" className="fs3">
+                <html className="hr-fieldset">
+                  <hr />
+                </html>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDM31" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDM32" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                      <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDM33" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL48" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL49" />
+                  </vbox>
+                </vbox>
+                <vbox className="p-list-but" columns="10% 90%">
+                  <html className="gen-num-html">
+                    <span class="fas fa-user-circle" />
+                  </html>
+                  <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL50" />
+                  </vbox>
+                </vbox>
+                <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
+                  <html>
+                    <i class="fas fa-exclamation-triangle" />
+                  </html>
+                    <htmlTranslate renderer="htmlP" code="AUDL51" />
+                </vbox>
+                <vbox className="scroll-top">
+                  <htmlTranslate renderer="haut" code="haut" />
+                </vbox>
+              </fieldSet>
+            </renderer>
+            
+            <renderer name="autoMorcellement">
+                <html>
+                    <span style="text-align:left;color:#333;" class="title-4x b-title">
+                        <i class="far fa-object-ungroup" style="margin-right:10px" />
+                        ${code | translate}
+                    </span>
+                </html>
+            </renderer>
+
+            <renderer name="htmlP">
+                <html>
+                <p>${code | translate}</p>
+              </html>
+            </renderer>
+
+            <renderer name="htmlPSpan">  
+                <html>
+                <p>
+                  ${code1 | translate}
+                  <span style="text-decoration: underline;">${code2 | translate}</span>
+                  ${code3 | translate}
+                </p>
+              </html>
+            </renderer>
+
+            <renderer name="htmlTags">  
+                <html className="tags">
+                <a href="#fs1">${code1 | translate}</a>
+                |
+                <a href="#fs2">${code2 | translate}</a>
+                |
+                <a href="#fs3">${code3 | translate}</a>
+                |
+                <a href="#fs4">${code4 | translate}</a>
+                |
+                <a href="#fs5">${code5 | translate}</a>
+                |
+                <a href="#fs6">${code6 | translate}</a>
+              </html>
+            </renderer>
+
+            <renderer name="htmlSpan">
+                <html className="${htmlClassName}">
+                      <span>${code | translate}</span>
+                    </html>
+            </renderer>
+
+            <renderer name="haut">
+                <html columns="100%">
+                    <span class="scroll-top-sp">
+                      <i class="fas fa-angle-double-left" />
+                      <span>${code | translate}</span>
+                    </span>
+                  </html>
+            </renderer>
+
+            <renderer name="htmlISpan">
+                <html columns="100%">
+                    <i class="${iClass}" style="${iStyle}" />
+                    <span style="${spanStyle}">${code | translate}</span>
+                  </html>
+            </renderer>
+
+        </component>
+        
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+        <script onLoad="true">
+                try{
+                    root.userlang=userLocal;
+                    context.formRender.notifyObservers("userlang");
+                }catch(e){
+                    console.log("ERROOOR",e);
+                }
+            </script>
       <script postLoad="true"> 
           $(".rokhas-home").click(function(){
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
@@ -62,629 +598,24 @@
       <vbox columns="70% 30%">
         <fieldset label="AUTORISATIONS URBANISTIQUES" collapsible="false" className="pcd-header-ACGP div-det-acc PDC-hov-title">
           <vbox className="accp">
-            <html>
-              <span style="text-align:left;color:#333;" class="title-4x b-title">
-                <i class="far fa-building" style="margin-right:10px" />
-                Autorisations de construction grands projets
-              </span>
-            </html>
+            <htmlTranslate renderer="autoMorcellement" code="ACGP00" />
             <vbox className="desc">
-              <html>
-                <p>
-                  Le RGC (
-                  <u>Réglement général de construction</u>
-                  ) a précisé la liste des projets catégorisés entant que Grands projets 
-                                    (
-                  <u>Voire la liste</u>
-                  ). La procédure de délivrance du permis de construire pour ce type de projets met à contribution une commission élargie 
-                                    comptant notamment l'opérateur gestionnaire des réseaux publics (eaux, assainissement, électricité, ..) , des réseaux de télécommunication et la protection civile.
-                </p>
-              </html>
+              <htmlTranslate renderer="htmlRGC" code1="AUUR09" code2="AUUR10" code3="AUUR11" code4="AUUR12" code5="AUUR13" />
             </vbox>
             <vbox className="note-danger cl-orange PCD-gap-ic" columns="5% 95%">
               <html style="align-self: center;">
                 <i class="fas fa-exclamation-triangle" />
               </html>
-              <html>
-                <p>
-                  Notez que les démarches, documents requis et toute autre information indiqués par la plateforme Rokhas.ma sont à titre strictement indicatif. Il reste de la responsabilité du demandeur, de
-                  <span style="text-decoration: underline;">se renseigner auprès des administrations compétentes</span>
-                  sur toute modification réglementaire ou procédurale survenue.
-                </p>
-              </html>
+              <htmlTranslate renderer="htmlPSpan" code1="AUDL02" code2="AUDL03" code3="AUDL04" />
             </vbox>
             <vbox>
-              <html className="tags">
-                <a href="#fs1">Étapes clés</a>
-                |
-                <a href="#fs2">Documents requis</a>
-                |
-                <a href="#fs3">Membres commission</a>
-                |
-                <a href="#fs4">Résultat</a>
-                |
-                <a href="#fs5">Référentiel juridique</a>
-                |
-                <a href="#fs6">Informations complémentaires</a>
-              </html>
+            <htmlTranslate renderer="htmlTags" code1="AUDM05" code2="AUDM06" code3="AUDM07" code4="AUDM08" code5="AUDM09" code6="AUDM10" />
             </vbox>
             <vbox className="fieldSets">
-              <fieldSet header="Étapes clés" className="fs1">
-                <html className="hr-fieldset">
-                  <hr />
-                </html>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">1</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Saisie de la demande</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <html>
-                      <p>Saisie en ligne de la demande et chargement des documents justificatifs requis.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">2</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Attachement des documents requis</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <html>
-                      <p>Numérisation et attachement des documents requis et optionnellement des documents complémentaires apportant une information utile à l'instruction du dossier.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">3</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Signature électronique des documents</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <html>
-                      <p>Signature électronique des plans architecturaux par l'architecte et dans certains cas par les co-concepteurs du projet (Architecte en groupement, géomètre topographe, ...) ainsi que le cahier des charges associé au projet de lotissement.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">4</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Réservation du créneau commission</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <html>
-                      <p>Réservation du créneau souhaité pour le passage du dossier en commission (compte tenu du calendrier proposé par le guichet concerné) et paiement des frais de service de la plateforme.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">5</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Vérification du dossier numérique</span>
-                    </html>
-                    <button className="but-blue" label="Commune" />
-                    <html>
-                      <p>Vérification de la complétude sur le plan administratif des documents numériques soumis et rajout de membres occasionnels compte tenu de la nature du projet.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">6</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Instruction du dossier par les membres commission</span>
-                    </html>
-                    <button className="but-blue" label="Membres commission" />
-                    <html>
-                      <p>Instruction du dossier sous format numérique par rapport aux différents axes (Architectural, réglementaire, juridique, économique, ...) avant consignation des avis provisoires individuels.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">7</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Tenue commission</span>
-                    </html>
-                    <button className="but-blue" label="Secrétaire commission" />
-                    <button className="but-blue" label="Membres commission" />
-                    <html>
-                      <p>Réexamen en commission du dossier aboutissant à la confirmation ou modification puis signature électronique des avis individuels par chaque membre et prise de décision sur l'issue du dossier par le secrétaire de commission en préparation à la décision du Président de la commune.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">8</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Complément de dossier</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <html>
-                      <p>Préparation et attachement des documents complémentaires au format numérique et renseignement des données relatives au volet fiscal du projet. Le règlement des services rendus - quand ils sont applicables - doit également être effectué au plus tard à cette étape.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">9</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Vérifications des surfaces taxables</span>
-                    </html>
-                    <button className="but-blue" label="Technicien commune" />
-                    <html>
-                      <p>Calcul des surfaces assujetties aux taxes sur la construction et aux taxes sur l'occupation du domaine public.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">10</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Décision président</span>
-                    </html>
-                    <button className="but-blue" label="Président commune" />
-                    <button className="but-blue" label="Chef du guichet" />
-                    <html>
-                      <p>Examen des avis des membres et du fond de dossier avant de prendre une décision finale quant à l'issue du dossier.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">11</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Paiement des taxes</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <button className="but-blue" label="Régisseur" />
-                    <html>
-                      <p>Encaissement des montants des taxes de construction et taxes d'occupation du domaine public avant génération du numéro d'autorisation.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">12</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Contrôle des documents avant e-signature</span>
-                    </html>
-                    <button className="but-blue" label="Secrétariat président commune" />
-                    <html>
-                      <p>Vérification finale de documents à délivrer avant soumission au président de la commune pour signature électronique.</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">13</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>e-Signature des documents à délivrer</span>
-                    </html>
-                    <button className="but-blue" label="Président commune" />
-                    <html>
-                      <p>Signature des documents d'autorisation du projet (Voire section Documents délivrés).</p>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
-                </vbox>
-              </fieldSet>
-              <fieldSet header="Documents requis au dépôt" className="fs2">
-                <html className="hr-fieldset">
-                  <hr />
-                </html>
-                <!-- <vbox className="title-principale">
-                                    <html>
-                                        <span>Liste des pièces à fournir d’Etude d’Impact sur l’Environnement</span>
-                                    </html>
-                                </vbox> -->
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">1</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Demande d'autorisation signée</span>
-                    </html>
-                    <html>
-                      <p>La demande doit être signée par le pétitionnaire ou par le concepteur du projet ou toute autre personne dûment mandatée à cet effet</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-code" style="color:orange;" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">2</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Certificat de propriété</span>
-                    </html>
-                    <html>
-                      <p>Certificat délivré par l’Agence Nationale de la Conservation Foncière, du Cadastre et de la Cartographie attestant que le terrain à lotir est immatriculé ou en cours d'immatriculation et que, dans ce dernier cas, le délai fixé pour le dépôt des oppositions est expiré sans qu'aucune opposition n'ait été formulée</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">3</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Plan cadastral</span>
-                    </html>
-                    <html>
-                      <p>Plan délivré par l’Agence Nationale de la Conservation Foncière, du Cadastre et de la Cartographie précisant les limites de la propriété objet du lotissement.</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">4</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Plans architecturaux incluant un plan de situation</span>
-                    </html>
-                    <html>
-                      <p>plans d’architecture comprenant tous les niveaux de l’immeuble, le rez-de-chaussée ainsi que le sous-sol, les terrasses et les plafonds à une échelle qui ne peut être inférieure à 1/100. Ces plans doivent inclure plan de situation de la parcelle concernée, le cas échéant, et comportant l'orientation, les voies de desserte avec leur dénomination et les points de repère permettant de localiser le terrain.</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">5</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Ancien plan autorisé</span>
-                    </html>
-                    <html>
-                      <p>Ancien plan autorisé du groupe d’habitations lorsque la demande se rapporte à une modification des constructions au niveau du groupe d’habitations existant.</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon cl-orange">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">6</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Contrat entre le maître d'ouvrage et l'architecte</span>
-                    </html>
-                    <html>
-                      <p>Contrat d’architecte dans les cas où le recours à ce dernier est obligatoire conformément aux lois en vigueur.</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon cl-orange">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">7</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Cahier de chantier</span>
-                    </html>
-                    <html>
-                      <p>Cahier de chantier visé par l'ordre d'appartenance du maître d'oeuvre.</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon cl-orange">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox style="margin-left: 7vw;">
-                  <html columns="100%">
-                    <i class="far fa-file-code" style="color:orange;" />
-                    <span style="font-size:8px; color:#999999;">Document généré par Rokhas</span>
-                  </html>
-                  <html columns="100%">
-                    <i class="far fa-file-alt" style="color:#666666;" />
-                    <span style="font-size:8px; color:#999999;">Document à numériser et attacher</span>
-                  </html>
-                </vbox>
-                <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
-                </vbox>
-              </fieldSet>
-              <fieldSet header="DOCUMENTS COMPLEMENTAIRES A FOURNIR APRES AVIS FAVORABLE" className="fs2">
-                <html className="hr-fieldset">
-                  <hr />
-                </html>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">1</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Fiche de renseignements signée et légalisée par le pétitionnaire</span>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-pdf" style="color:orange;" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">2</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Dossier technique</span>
-                    </html>
-                    <html>
-                      <p>dossier technique afférent au raccordement des constructions au réseau général des télécommunications publiques, lorsqu’il s’agit d’immeuble, quel qu’en soit la nature ou l’usage,  comportant au moins quatre niveaux ou trois niveaux comprenant six logements, ou d’immeuble à usage commercial ou industriel d’une surface au sol égale ou supérieure à 500m².</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">3</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Plans techniques complémentaires</span>
-                    </html>
-                    <html>
-                      <p>Plans techniques réalisés par les ingénieurs spécialisés relatifs à la structure et à la stabilité des constructions et à leur solidité conformément aux règlements en vigueur (Communément appelé Plan de béton armé).</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt " />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">4</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Constat d'alignement</span>
-                    </html>
-                    <html>
-                      <p>Constat d’alignement si la construction est projetée en bordure d’une voie publique.</p>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 80% 5% 5%">
-                  <html className="gen-num-html">
-                    <span class="gen-num">5</span>
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Récépissé  d’acquittement des rémunérations pour services rendus</span>
-                    </html>
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html />
-                  </vbox>
-                  <vbox className="doc-icon">
-                    <html>
-                      <i class="far fa-file-alt" />
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox style="margin-left: 7vw;">
-                  <html columns="100%">
-                    <i class="far fa-file-code" style="color:orange;" />
-                    <span style="font-size:8px; color:#999999;">Document généré par Rokhas</span>
-                  </html>
-                  <html columns="100%">
-                    <i class="far fa-file-alt" style="color:#666666;" />
-                    <span style="font-size:8px; color:#999999;">Document à numériser et attacher</span>
-                  </html>
-                </vbox>
-                <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
-                </vbox>
-              </fieldSet>
-              <fieldSet header="MEMBRES DE COMMISSION" className="fs3">
-                <html className="hr-fieldset">
-                  <hr />
-                </html>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="fas fa-user-circle" />
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Préfecture ou de la province</span>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="fas fa-user-circle" />
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Commune</span>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="fas fa-user-circle" />
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Agence urbaine</span>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="fas fa-user-circle" />
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Protection civile</span>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="fas fa-user-circle" />
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Organismes chargés de la gestion des réseaux divers</span>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
-                  <html className="gen-num-html">
-                    <span class="fas fa-user-circle" />
-                  </html>
-                  <vbox>
-                    <html className="inline-html">
-                      <span>Organismes chargés de la gestion des réseaux de télécommunication</span>
-                    </html>
-                  </vbox>
-                </vbox>
-                <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
-                  <html>
-                    <i class="fas fa-exclamation-triangle" />
-                  </html>
-                  <html>
-                    <p>D'autres membres non permanents peuvent être convoqués dépendamment de la nature du projet</p>
-                  </html>
-                </vbox>
-                <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
-                </vbox>
-              </fieldSet>
+              <htmlTranslate renderer="HfieldSet1" header="ECS00"/>
+              <htmlTranslate renderer="HfieldSet2" header="AUDM06"/>
+              <htmlTranslate renderer="HfieldSet3" header="DCFAAF"/>
+              <htmlTranslate renderer="HfieldSet4" header="MMCOM"/>
               <fieldSet label="DOCUMENTS DÉLIVRÉS" className="fs4">
                 <html className="hr-fieldset">
                   <hr />
@@ -694,9 +625,7 @@
                     <span class="far fa-check-circle" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Décision d'autorisation signée par le président de la commune</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL52" />
                     <html />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
@@ -713,9 +642,7 @@
                     <span class="far fa-check-circle" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Plan architectural autorisé signé le président de la commune et portant l'avis conforme de l'agence urbaine</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGH10" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -731,9 +658,7 @@
                     <span class="far fa-check-circle" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Décision d'occupation du domaine public si applicable</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL54" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -745,12 +670,7 @@
                   </vbox>
                 </vbox>
                 <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
+                  <htmlTranslate renderer="haut" code="haut" />
                 </vbox>
               </fieldSet>
               <fieldSet label="RÉFÉRENTIEL JURIDIQUE" className="fs5">
@@ -762,9 +682,7 @@
                     <span class="fas fa-gavel" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Dahir n° 1-92-31 du 15 hija 1412 (17 juin 1992) portant promulgation de la loi n° 12-90 relative à l'urbanisme</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDM38" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -780,9 +698,7 @@
                     <span class="fas fa-gavel" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Loi N° 47-18 portant réforme des centres régionaux d'investissement et création des commissions régionales unifiées d'investissement</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDM39" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -798,9 +714,7 @@
                     <span class="fas fa-gavel" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Loi N° 66.12 relative au contrôle et à la répression des infractions dans le domaine de l'urbanisme et de la construction</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP12" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -816,9 +730,7 @@
                     <span class="fas fa-gavel" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Décret n° 2-13-424 approuvant le règlement général de construction</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP13" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -834,8 +746,9 @@
                     <span class="fas fa-gavel" />
                   </html>
                   <vbox>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="ACGP14" />
                     <html className="inline-html">
-                      <span>Arrêté N° 3214.13 fixant les pièces constituves des dossiers d'autorisations d'urbanisme</span>
+                      <span></span>
                     </html>
                   </vbox>
                   <vbox className="doc-icon cl-orange">
@@ -848,12 +761,7 @@
                   </vbox>
                 </vbox>
                 <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
+                  <htmlTranslate renderer="haut" code="haut" />
                 </vbox>
               </fieldSet>
             </vbox>
@@ -869,4 +777,3 @@
     <script onLoad="true" />
   </view>
 </search>
-

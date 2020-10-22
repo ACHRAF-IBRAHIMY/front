@@ -10,8 +10,62 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+        <component name="rightAside">
+            <renderer name="default">
+                <fieldset header="${header1 | translate}" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset NQF-freq-quest"> 
+                    <!-- start modification -->
+                    <html>
+                        <div class="">
+                        <ul class="article-categorie" style="list-style: none;text-align: center;padding: 0px 0px;font-size: 13px;color: #777;margin:auto;margin-top: 20px;margin-bottom: 20px;">
+                            <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">${code1 | translate} <span style="color:#f90" /> | </li>
+                            <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-2" style="cursor:pointer;margin-right:4px;display:inline-block">${code2 | translate} <span style="color:#f90" /> | </li>
+                            <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-3" style="cursor:pointer;margin-right:4px;display:inline-block">${code3 | translate} <span style="color:#f90" /> </li>
+                            <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-4" style="cursor:pointer;margin-right:4px;display:inline-block">${code4 | translate} <span style="color:#f90" /> </li>
+
+                        </ul>
+                        </div>
+                    </html>
+
+
+                    <fieldset header="${header2 | translate}" className="NFQ-quest-title NFQ-type-plat ">
+                        <html>
+                        <div class="NFQ-quest-type-recent NFQ-fieldset">
+                            <!-- Les questions s'affiche ici                                  -->
+                        </div>
+                        </html>
+                    </fieldset>
+
+                    <fieldset header="${header3 | translate}" className="NFQ-quest-title NFQ-type-general ">
+                        <html>
+                        <div class="NFQ-quest-type-popular NFQ-fieldset">
+                            <!-- Les questions s'affiche ici                                  -->
+                        </div>
+                        </html>
+                    </fieldset>
+                    
+                    <fieldset header="${header4 | translate}" className="NFQ-quest-title NFQ-type-document ">
+                        <html>
+                        <div class="NFQ-quest-type-liked NFQ-fieldset">
+                            <!-- Les questions s'affiche ici                                  -->
+                        </div>
+                        </html>
+                    </fieldset>
+                    <!-- end modification -->
+                </fieldset>
+            </renderer>
+        </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+        <script onLoad="true">
+                try{
+                    root.userlang=userLocal;
+                    context.formRender.notifyObservers("userlang");
+                }catch(e){
+                    console.log("ERROOOR",e);
+                }
+            </script>
+
       <script postLoad="true">
 
             getCountArticles("right-side");
@@ -50,46 +104,7 @@
       <vbox columns="0% 100%" className="right-side">
       <vbox>
         </vbox>
-      <fieldset header="ARTICLES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset NQF-freq-quest"> 
-          <!-- start modification -->
-          <html>
-            <div class="">
-              <ul class="article-categorie" style="list-style: none;text-align: center;padding: 0px 0px;font-size: 13px;color: #777;margin:auto;margin-top: 20px;margin-bottom: 20px;">
-                <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">Tous les articles <span style="color:#f90" /> | </li>
-                <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=1&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-2" style="cursor:pointer;margin-right:4px;display:inline-block">Pratique <span style="color:#f90" /> | </li>
-                <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=2&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-3" style="cursor:pointer;margin-right:4px;display:inline-block">A la une <span style="color:#f90" /> </li>
-                <li onclick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=3&quot;, &quot;search&quot;, &quot;Articles&quot;, {});" class="li-4" style="cursor:pointer;margin-right:4px;display:inline-block">Revue de presse <span style="color:#f90" /> </li>
-
-              </ul>
-            </div>
-          </html>
-
-
-          <fieldset header="Les plus récents" className="NFQ-quest-title NFQ-type-plat ">
-            <html>
-              <div class="NFQ-quest-type-recent NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-
-          <fieldset header="Les plus populaires" className="NFQ-quest-title NFQ-type-general ">
-            <html>
-              <div class="NFQ-quest-type-popular NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-         
-          <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-document ">
-            <html>
-              <div class="NFQ-quest-type-liked NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <!-- end modification -->
-        </fieldset>
+        <rightAside header1="AR00" header2="LPR00" header3="LPP00" header4="LPA00" code1="TA00" code2="PQ00" code3="ALU00" code4="RDP00" />
         <!-- <vbox>
         </vbox>
         <vbox className="right-vbox">

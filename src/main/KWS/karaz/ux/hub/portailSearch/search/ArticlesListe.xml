@@ -11,8 +11,91 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+        <component name="htmlTranslate">
+            <renderer name="articles">
+                <html>
+                    <div class="vpanel-title">
+                        <div class="vpanel-title">
+                        <span style="cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/Articles','search','Articles',{});">${code1 | translate} |
+                            <span class="cl-orange title-2x">${code2 | translate}</span></span>
+                        <hr class="header-create-account-horizontal-line hr-hub" />
+                        </div>
+                    </div>
+                    <div class="hp-sbox-text">
+                        ${code3 | translate}
+                    </div>
+                    <div style="height: 50px;" />
+                </html>
+            </renderer>
+
+            <renderer name="searchGif">
+                <html>
+                    <div class="searchGif">
+                        <img src="img/search-move.gif" />
+                    </div>
+                    <div class="no-result-v" style="display:none;line-height: 100px;">
+                            ${code | translate}
+                    </div>
+                    <div class="full-search-list" />
+                    <div class="pagination pagination-second" />
+                </html>
+            </renderer>
+
+            <renderer name="fieldSet">
+                <fieldset header="${header1 | translate}" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset ">
+                    <!-- start modification -->
+                    <html>
+                        <div class="">
+                        <ul class="article-categorie" style="list-style: none;text-align: center;padding: 0px 0px;font-size: 13px;color: #777;margin:auto;margin-top: 20px;margin-bottom: 20px;">
+                            <li class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">${code1 | translate} <span style="color:#f90" /> | </li>
+                            <li class="li-2" style="cursor:pointer;margin-right:4px;display:inline-block">${code2 | translate} <span style="color:#f90" /> | </li>
+                            <li class="li-3" style="cursor:pointer;margin-right:4px;display:inline-block">${code3 | translate} <span style="color:#f90" /> </li>
+                            <li class="li-4" style="cursor:pointer;margin-right:4px;display:inline-block">${code4 | translate} <span style="color:#f90" /> </li>
+                        </ul>
+                        </div>
+                    </html>
+
+                    <fieldset header="${header2 | translate}" className="NFQ-quest-title NFQ-type-plat ">
+                        <html>
+                        <div class="NFQ-quest-type-recent NFQ-fieldset">
+                            <!-- Les questions s'affiche ici                                  -->
+                        </div>
+                        </html>
+                    </fieldset>
+                    
+                    <fieldset header="${header3 | translate}" className="NFQ-quest-title NFQ-type-general ">
+                        <html>
+                        <div class="NFQ-quest-type-popular NFQ-fieldset">
+                            <!-- Les questions s'affiche ici                                  -->
+                        </div>
+                        </html>
+                    </fieldset>
+                    
+                    <fieldset header="${header4 | translate}" className="NFQ-quest-title NFQ-type-document ">
+                        <html>
+                        <div class="NFQ-quest-type-liked NFQ-fieldset">
+                            <!-- Les questions s'affiche ici                                  -->
+                        </div>
+                        </html>
+                    </fieldset>
+                    <!-- end modification -->
+                    </fieldset>
+            </renderer>
+
+        </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+      <script onLoad="true">
+                try{
+                    root.userlang=userLocal;
+                    context.formRender.notifyObservers("userlang");
+                }catch(e){
+                    console.log("ERROOOR",e);
+                }
+            </script>
+
       <script postLoad="true">
       getCountArticles("classSearch-80");
       removeFullListSearch("classSearch-80",context.formRender.targetPanel);
@@ -89,19 +172,7 @@
       <vbox columns="70% 30%" className="classSearch-80 search-article">
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
-            <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span style="cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/Articles','search','Articles',{});">ARTICLES |
-                      <span class="cl-orange title-2x">TOUS</span></span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                </div>
-              </div>
-              <div class="hp-sbox-text">
-                            Retrouvez ici les dernières nouveautés de votre plateforme : Nouveaux services digitaux, Nouvelles fonctionnalités, changements réglementaires ou procédurales, évènements planifiés, ...
-              </div>
-              <div style="height: 50px;" />
-            </html>
+            <htmlTranslate renderer="articles" code1="AR00" code2="TOUS" code3="Art-Text" />
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field" label="" xpath="query.text" widget="text" emptyText="Saisissez vos mots clés ici" />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
@@ -121,57 +192,10 @@
             <html>
               <div style="height: 30px;" />
             </html>
-            <html>
-              <div class="searchGif">
-                <img src="img/search-move.gif" />
-              </div>
-              <div class="no-result-v" style="display:none;line-height: 100px;">
-                    Aucun résultat trouvé. 
-                    Essayez d'autres mots clés
-              </div>
-              <div class="full-search-list" />
-              <div class="pagination pagination-second" />
-            </html>
+            <htmlTranslate renderer="searchGif" code="ARTEMC00" />
           </vbox> 
         </vbox>
-        <fieldset header="ARTICLES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color det-article-fieldset ">
-          <!-- start modification -->
-          <html>
-            <div class="">
-              <ul class="article-categorie" style="list-style: none;text-align: center;padding: 0px 0px;font-size: 13px;color: #777;margin:auto;margin-top: 20px;margin-bottom: 20px;">
-                <li class="li-1" style="cursor:pointer;margin-right:4px;display:inline-block">Tous les articles <span style="color:#f90" /> | </li>
-                <li class="li-2" style="cursor:pointer;margin-right:4px;display:inline-block">Pratique <span style="color:#f90" /> | </li>
-                <li class="li-3" style="cursor:pointer;margin-right:4px;display:inline-block">A la une <span style="color:#f90" /> </li>
-                <li class="li-4" style="cursor:pointer;margin-right:4px;display:inline-block">Revue de presse <span style="color:#f90" /> </li>
-              </ul>
-            </div>
-          </html>
-
-          <fieldset header="Les plus récents" className="NFQ-quest-title NFQ-type-plat ">
-            <html>
-              <div class="NFQ-quest-type-recent NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          
-          <fieldset header="Les plus populaires" className="NFQ-quest-title NFQ-type-general ">
-            <html>
-              <div class="NFQ-quest-type-popular NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          
-          <fieldset header="Les plus aimés" className="NFQ-quest-title NFQ-type-document ">
-            <html>
-              <div class="NFQ-quest-type-liked NFQ-fieldset">
-                <!-- Les questions s'affiche ici                                  -->
-              </div>
-            </html>
-          </fieldset>
-          <!-- end modification -->
-        </fieldset>
+        <htmlTranslate renderer="fieldSet" header1="AR00" header2="LPR00" header3="LPP00" header4="LPA00" code1="TA00" code2="PQ00" code3="ALU00" code4="RDP00" />
       </vbox>
       <html>
         <div style="height: 30px;" />

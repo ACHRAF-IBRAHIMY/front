@@ -15,8 +15,34 @@
         <login />
         <visualizer>0</visualizer>
     </data>
-    <view>
-        <screen labelWidth="80" label="Visio Conférence" noToolBar="true">
+    <view transContext="portailSearch">
+        <component name="htmlTranslate">
+            <renderer name="createAccountHub">
+                <html>
+                            <div class="vpanel-title">
+                              <div class="vpanel-title">
+                              <span style="display:grid;grid-template-columns:50% 50%">
+                                <span>${code | translate}</span>
+                              </span>
+                                <hr class="header-create-account-horizontal-line hr-hub" />
+                              </div>
+                              <div class="hp-sbox-text">
+                              </div>
+                            </div>
+                          </html>
+            </renderer>
+
+        </component>
+        <screen labelWidth="80" label="Visio Conférence" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+    
+        <script onLoad="true">
+                try{
+                    root.userlang=userLocal;
+                    context.formRender.notifyObservers("userlang");
+                }catch(e){
+                    console.log("ERROOOR",e);
+                }
+            </script>
             <script onLoad="true">
             // root.login=userQN;
              //context.formRender.notifyObservers("login");
@@ -27,18 +53,7 @@
                 </style>
             </html>
             <vbox className="hp-box">
-                    <html>
-                            <div class="vpanel-title">
-                              <div class="vpanel-title">
-                              <span style="display:grid;grid-template-columns:50% 50%">
-                                <span>Couverture géographique</span>
-                              </span>
-                                <hr class="header-create-account-horizontal-line hr-hub" />
-                              </div>
-                              <div class="hp-sbox-text">
-                              </div>
-                            </div>
-                          </html>
+              <htmlTranslate renderer="createAccountHub" code="CG00" />
                     <vbox style="height:800px">
                             <search mapIdPath="mapIdBrowser" searchQN="dataLoader:gis/service/providers/KGisMapDataLoader?use=search&amp;fromMapBrowser=81" />
                     </vbox>
