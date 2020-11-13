@@ -9,8 +9,93 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+    <component name="htmlTranslate">
+      
+      <renderer name="autoMorcellement">
+          <html>
+              <span style="text-align:left;color:#333;" class="title-4x b-title">
+                  <i class="far fa-object-ungroup" style="margin-right:10px" />
+                  ${code | translate}
+              </span>
+          </html>
+      </renderer>
+    
+      <renderer name="htmlP">
+          <html>
+          <p>${code | translate}</p>
+        </html>
+      </renderer>
+    
+      <renderer name="htmlPSpan">  
+          <html>
+          <p>
+            ${code1 | translate}
+            <span style="text-decoration: underline;">${code2 | translate}</span>
+            ${code3 | translate}
+          </p>
+        </html>
+      </renderer>
+    
+      <renderer name="htmlTags">  
+          <html className="tags">
+          <a href="#fs1">${code1 | translate}</a>
+          |
+          <a href="#fs2">${code2 | translate}</a>
+          |
+          <a href="#fs3">${code3 | translate}</a>
+          |
+          <a href="#fs4">${code4 | translate}</a>
+          |
+          <a href="#fs5">${code5 | translate}</a>
+          |
+          <a href="#fs6">${code6 | translate}</a>
+        </html>
+      </renderer>
+    
+      <renderer name="htmlSpan">
+          <html className="${htmlClassName}">
+                <span>${code | translate}</span>
+              </html>
+      </renderer>
+    
+      <renderer name="haut">
+          <html columns="100%">
+              <span class="scroll-top-sp">
+                <i class="fas fa-angle-double-left" />
+                <span>${code | translate}</span>
+              </span>
+            </html>
+      </renderer>
+    
+      <renderer name="htmlISpan">
+          <html columns="100%">
+              <i class="${iClass}" style="${iStyle}" />
+              <span style="${spanStyle}">${code | translate}</span>
+            </html>
+      </renderer>
+    
+      <renderer name="htmlPBr" >
+        <html>
+          <p>
+            ${code1 | translate}            
+            <br />
+            ${code2 | translate}
+          </p>
+        </html>
+      </renderer>
+    
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+      <script onLoad="true">
+              try{
+                  root.userlang=userLocal;
+                  context.formRender.notifyObservers("userlang");
+              }catch(e){
+                  console.log("ERROOOR",e);
+              }
+          </script>
       <script postLoad="true"> 
           $(".rokhas-home").click(function(){
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
@@ -76,47 +161,21 @@
       <vbox columns="70% 30%">
         <fieldset label="AUTORISATIONS ECONOMIQUES" collapsible="false" className="pcd-header-PHCC div-det-acc PDC-hov-title">
           <vbox className="accp">
-            <html>
-              <span style="text-align:left;color:#333;" class="title-4x b-title">
-                <i class="fas fa-industry" style="margin-right:10px" />
-Déclaration d'une activité classée-catégorie 2
-
-              </span>
-            </html>
+            <htmlTranslate renderer="autoMorcellement" code="DACCG00" />
             <vbox className="desc">
-              <html>
-<p>Les établissements classés en 2ème catégorie désignent les activités de commerce, de service ou de fabrication industrielle utilisant des procédés, des outils ou des équipements susceptibles de présenter des causes d'insalubrité, d'incommodité ou de danger. De tels établissements ne peuvent être ouverts à l'exploitation qu'après obtention d'une autorisation émanant des services communaux.
-</p>              </html>
+              <htmlTranslate renderer="htmlP" code="DACCG01" />
             </vbox>
             <vbox className="note-danger cl-orange PCD-gap-ic" columns="5% 95%">
               <html style="align-self: center;">
                 <i class="fas fa-exclamation-triangle" />
               </html>
-              <html>
-                <p>
-                  Notez que les démarches, documents requis et toute autre information indiqués par la plateforme Rokhas.ma sont à titre strictement indicatif. Il reste de la responsabilité du demandeur, de
-                  <span style="text-decoration: underline;">se renseigner auprès des administrations compétentes</span>
-                  sur toute modification réglementaire ou procédurale survenue.
-                </p>
-              </html>
+              <htmlTranslate renderer="htmlPSpan" code1="AUDL02" code2="AUDL03" code3="AUDL04" />
             </vbox>
             <vbox>
-              <html className="tags">
-                <a href="#fs1">Étapes clés</a>
-                |
-                <a href="#fs2">Documents requis</a>
-                |
-                <a href="#fs3">Membres commission</a>
-                |
-                <a href="#fs4">Résultat</a>
-                |
-                <a href="#fs5">Référentiel juridique</a>
-                |
-                <a href="#fs6">Informations complémentaires</a>
-              </html>
+              <htmlTranslate renderer="htmlTags" code1="AUDM05" code2="AUDM06" code3="AUDM07" code4="AUDM08" code5="AUDM09" code6="AUDM10" />
             </vbox>
             <vbox className="fieldSets">
-              <fieldSet header="Étapes clés" className="fs1">
+              <fieldSet label="Étapes clés" className="fs1">
                 <html className="hr-fieldset">
                   <hr />
                 </html>
@@ -125,13 +184,9 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">1</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Saisie de la demande</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <html>
-                      <p>Saisie en ligne de la demande en fournissant le données relatives au projet et au maitre d'ouvrage.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL05" />
+                    <button className="but-orange" label="Demandeur" />
+                    <htmlTranslate renderer="htmlP" code="CRPD02" />
                   </vbox>
                 </vbox>
                 <vbox className="p-list-but" columns="10% 90%">
@@ -139,13 +194,9 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">2</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Attachement des documents requis</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <html>
-                      <p>Numérisation et attachement des documents requis et optionnellement des documents complémentaires apportant une information utile à l'instruction du dossier.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL07" />
+                    <button className="but-orange" label="Demandeur" />
+                    <htmlTranslate renderer="htmlP" code="AUDL08" />
                   </vbox>
                 </vbox>
                 <vbox className="p-list-but" columns="10% 90%">
@@ -153,13 +204,9 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">3</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Vérification du dossier numérique</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL13" />
                     <button className="but-blue" label="Commune" />
-                    <html>
-                      <p>Vérification de la complétude sur le plan administratif des documents numériques et soumission au service économique si complet ou retour motivé au demandeur si pièce obligatoire manquante.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlP" code="DUACG02" />
                   </vbox>
                 </vbox>
                 <vbox className="p-list-but" columns="10% 90%">
@@ -167,13 +214,9 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">4</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Instruction du dossier</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC02" />
                     <button className="but-blue" label="Service économique" />
-                    <html>
-                      <p>Instruction du dossier sous format numérique et approbation de principe si dossier conforme.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlP" code="DANC03" />
                   </vbox>
                 </vbox>
                 <vbox className="p-list-but" columns="10% 90%">
@@ -181,13 +224,9 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">5</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Prise de rendez-vous pour dépôt du dossier physique</span>
-                    </html>
-                    <button className="but-orange" label="Demandeur " />
-                    <html>
-                      <p>Prise de rendez-vous pour le dépôt physique du dépôt, lequel doit être conforme au dossier numérique déposé à base duquel l'accord de principe a été donné.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC04" />
+                    <button className="but-orange" label="Demandeur" />
+                    <htmlTranslate renderer="htmlP" code="DANC05" />
                   </vbox>
                 </vbox>
                 <vbox className="p-list-but" columns="10% 90%">
@@ -195,13 +234,9 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">6</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Réception du dossier physique</span>
-                    </html>
-                    <button className="but-orange" label="Commune " />
-                    <html>
-                      <p>Réception du dossier physique et comparaison avec le dossier numérique à base duquel l'accord de principe a été fourni.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC06" />
+                    <button className="but-orange" label="Commune" />
+                    <htmlTranslate renderer="htmlP" code="DANC07" />
                   </vbox>
                 </vbox>
                 <vbox className="p-list-but" columns="10% 90%">
@@ -209,13 +244,9 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">7</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Contrôle des documents avant e-signature</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL27" />
                     <button className="but-blue" label="Secrétariat" />
-                    <html>
-                      <p>Vérification finale du recipicé de déclaration à délivrer avant soumission au président de la commune pour signature électronique.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlP" code="AUDL28" />
                   </vbox>
                 </vbox>
                 <vbox className="p-list-but" columns="10% 90%">
@@ -223,34 +254,22 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">8</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>e-Signature des documents à délivrer</span>
-                    </html>
-                    <button className="but-blue" label="Président commune" />
-                    <html>
-                      <p>Signature électronique du recipicé de déclaration.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL29" />
+                      <button className="but-blue" label="Président commune" />
+                      <htmlTranslate renderer="htmlP" code="DANC08" />
                   </vbox>
                 </vbox>
                 <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
                   <html>
                     <i class="fas fa-exclamation-triangle" />
                   </html>
-                  <html>
-<p>Une visite "A posteriori" du lieu de l'activité est opérée par une commission mixte quelques semaine après la délivrance de l'accusé de réception. Cette visite a pour objectif de vérifier la conformité de  l'activité exercée à l'objet de la déclaration déposée.
-
-</p>                  </html>
+                  <htmlTranslate renderer="htmlP" code="DACCG02" />
                 </vbox>
                 <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
+                  <htmlTranslate renderer="haut" code="haut" />
                 </vbox>
               </fieldSet>
-              <fieldSet header="Documents requis au dépôt" className="fs2">
+              <fieldSet label="Documents requis au dépôt" className="fs2">
                 <html className="hr-fieldset">
                   <hr />
                 </html>
@@ -264,13 +283,8 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">1</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Formulaire de la demande rempli et légalisé</span>
-                    </html>
-                    <html>
-<p>Demande adressée par le pétitionnaire au président de la commune, faisant office de déclaration de l'intention d'ouvrir un établissement pour l'exercice d'une activité classée - catégorie 2.
-
-</p>                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DUACG04" />
+                    <htmlTranslate renderer="htmlP" code="DACCG03" />
                   </vbox>
                   <vbox className="doc-icon">
                     <html />
@@ -286,12 +300,8 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">2</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Facture d'achat d'extincteurs</span>
-                    </html>
-                    <html>
-                      <p>Facture d'achat d'extincteurs établie au nom du pétitionnaire.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC11" />
+                    <htmlTranslate renderer="htmlP" code="DANC12" />
                   </vbox>
                   <vbox className="doc-icon">
                     <html />
@@ -307,12 +317,8 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">3</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Certificat de propriété récent</span>
-                    </html>
-                    <html>
-                      <p>Certificat de propriété du local destiné à accueillir l'activité. Le document doit être délivré depuis moins de 3 mois.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DUACG06" />
+                    <htmlTranslate renderer="htmlP" code="DUACG07" />
                   </vbox>
                   <vbox className="doc-icon">
                     <html />
@@ -328,12 +334,8 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">4</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Pièce d'identité</span>
-                    </html>
-                    <html>
-                      <p>Copie numérique d'une pièce d'identité du pétitionnaire (Carte nationale d'identité, passeport, carte de séjour, ...)</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC15" />
+                    <htmlTranslate renderer="htmlP" code="DANC16" />
                   </vbox>
                   <vbox className="doc-icon">
                     <html />
@@ -349,13 +351,8 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">5</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-<span>Copie certifiée conforme à l’original : du plan autorisé, d’aménagement ou cadastral du local
-
-</span>                    </html>
-                    <html>
-                      <p>Plan architectural d'aménagement du local destiné à accueillir l'activité déclarée</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DUACG08" />
+                    <htmlTranslate renderer="htmlP" code="DUACG09" />
                   </vbox>
                   <vbox className="doc-icon">
                     <html />
@@ -371,12 +368,8 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">6</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Statuts de la société en cas de personne morale</span>
-                    </html>
-                    <html>
-                      <p>Statuts de la société u de l'organisme dans le cas d'une personne morale accompagné d'un document prouvant le pouvoir accordés au représentant légal</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DUACG10" />
+                    <htmlTranslate renderer="htmlP" code="DUACG11" />
                   </vbox>
                   <vbox className="doc-icon">
                     <html />
@@ -392,12 +385,8 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="gen-num">7</span>
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Cahier des charges</span>
-                    </html>
-                    <html>
-                      <p>Certaines activités quoique soumises à la procédure de simple déclaration, requierent la signature par le pétitionnaire d'un cahier des charges précisant les pré-requis et les conditions d'exercice que l'établissement devra respecter.</p>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DUACG12" />
+                    <htmlTranslate renderer="htmlP" code="DUACG13" />
                   </vbox>
                   <vbox className="doc-icon">
                     <html />
@@ -409,25 +398,14 @@ Déclaration d'une activité classée-catégorie 2
                   </vbox>
                 </vbox>
                 <vbox style="margin-left: 7vw;">
-                  <html columns="100%">
-                    <i class="far fa-file-code" style="color:orange;" />
-                    <span style="font-size:8px; color:#999999;">Document généré par Rokhas</span>
-                  </html>
-                  <html columns="100%">
-                    <i class="far fa-file-alt" style="color:#666666;" />
-                    <span style="font-size:8px; color:#999999;">Document à numériser et attacher</span>
-                  </html>
+                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-code" iStyle="color:orange;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
+                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-alt" iStyle="color:#666666;" spanStyle="font-size:8px; color:#999999;" code="AUDM61" />
                 </vbox>
                 <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
+                  <htmlTranslate renderer="haut" code="haut" />
                 </vbox>
               </fieldSet>
-              <fieldSet header="MEMBRES DE COMMISSION" className="fs3">
+              <fieldSet label="MEMBRES DE COMMISSION" className="fs3">
                 <html className="hr-fieldset">
                   <hr />
                 </html>
@@ -436,26 +414,17 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="fas fa-user-circle" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Service communal en charge des autorisations économiques</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC23" />
                   </vbox>
                 </vbox>
                 <vbox className="note-danger-list-but cl-orange" columns="5% 95%">
                   <html>
                     <i class="fas fa-exclamation-triangle" />
                   </html>
-                  <html>
-                    <p>D'autres membres non permanents peuvent être convoqués dépendamment de la nature du projet</p>
-                  </html>
+                  <htmlTranslate renderer="htmlP" code="DANC24" />
                 </vbox>
                 <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
+                  <htmlTranslate renderer="haut" code="haut" />
                 </vbox>
               </fieldSet>
               <fieldSet label="DOCUMENTS DÉLIVRÉS" className="fs4">
@@ -467,9 +436,7 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="far fa-check-circle" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Récipicé de la déclaration d'ouverture d'une activité non classée signé par le président de la commune</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC25" />
                     <html />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
@@ -482,12 +449,7 @@ Déclaration d'une activité classée-catégorie 2
                   </vbox>
                 </vbox>
                 <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
+                  <htmlTranslate renderer="haut" code="haut" />
                 </vbox>
               </fieldSet>
               <fieldSet label="RÉFÉRENTIEL JURIDIQUE" className="fs5">
@@ -499,9 +461,7 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="fas fa-gavel" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Dahir 13 Octobre 1933 relatif aux établissements classés</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC26" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -517,9 +477,7 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="fas fa-gavel" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Dahir du 25 août 1914 portant réglementation des établissements classés</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC27" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -535,9 +493,7 @@ Déclaration d'une activité classée-catégorie 2
                     <span class="fas fa-gavel" />
                   </html>
                   <vbox>
-                    <html className="inline-html">
-                      <span>Loi organique N° 113-14 relative aux communes</span>
-                    </html>
+                    <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="DANC28" />
                   </vbox>
                   <vbox className="doc-icon cl-orange">
                     <html />
@@ -549,12 +505,7 @@ Déclaration d'une activité classée-catégorie 2
                   </vbox>
                 </vbox>
                 <vbox className="scroll-top">
-                  <html columns="100%">
-                    <span class="scroll-top-sp">
-                      <i class="fas fa-angle-double-left" />
-                      <span>Haut</span>
-                    </span>
-                  </html>
+                  <htmlTranslate renderer="haut" code="haut" />
                 </vbox>
               </fieldSet>
             </vbox>

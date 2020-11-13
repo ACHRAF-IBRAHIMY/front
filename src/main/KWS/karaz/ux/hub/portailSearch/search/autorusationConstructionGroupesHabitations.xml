@@ -355,7 +355,7 @@
                 </vbox>
                 <vbox style="margin-left: 7vw;">
                   <htmlTranslate renderer="htmlISpan" iClass="far fa-file-code" iStyle="color:orange;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
-                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-alt" iStyle="color:#666666;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
+                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-alt" iStyle="color:#666666;" spanStyle="font-size:8px; color:#999999;" code="AUDM61" />
                 </vbox>
                 <vbox className="scroll-top">
                   <htmlTranslate renderer="haut" code="haut" />
@@ -435,7 +435,7 @@
                 </vbox>
                 <vbox style="margin-left: 7vw;">
                   <htmlTranslate renderer="htmlISpan" iClass="far fa-file-code" iStyle="color:orange;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
-                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-alt" iStyle="color:#666666;" spanStyle="font-size:8px; color:#999999;" code="AUDM60" />
+                  <htmlTranslate renderer="htmlISpan" iClass="far fa-file-alt" iStyle="color:#666666;" spanStyle="font-size:8px; color:#999999;" code="AUDM61" />
                 </vbox>
                 <vbox className="scroll-top">
                   <htmlTranslate renderer="haut" code="haut" />
