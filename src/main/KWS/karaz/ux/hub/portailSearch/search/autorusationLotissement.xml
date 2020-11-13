@@ -579,7 +579,12 @@
           PCD_addtitle();
 
           // add style to main header
-          PCD_add_header_style_action(".pcd-header-AL", "AUTORISATIONS DE LOTISSEMENT");
+          if(root.userlang=="fr"){
+            PCD_add_header_style_action(".pcd-header-AL", "AUTORISATIONS DE LOTISSEMENT");
+          }
+          if(root.userlang=="ar"){
+            PCD_add_header_style_action(".pcd-header-AL", "تصاريح التقسيم");
+          }
 
           // header color 
           PCD_headerfieldset_color(".pcd-ha-color");
@@ -608,10 +613,10 @@
             <htmlTranslate renderer="htmlTags" code1="AUDM05" code2="AUDM06" code3="AUDM07" code4="AUDM08" code5="AUDM09" code6="AUDM10" />
             </vbox>
             <vbox className="fieldSets">
-              <htmlTranslate renderer="HfieldSet1" header="ECS00"/>
-              <htmlTranslate renderer="HfieldSet2" header="AUDM06"/>
-              <htmlTranslate renderer="HfieldSet3" header="DCFAAF"/>
-              <htmlTranslate renderer="HfieldSet4" header="MMCOM"/>
+              <htmlTranslate renderer="HfieldSet1" header="ECS00" />
+              <htmlTranslate renderer="HfieldSet2" header="AUDM06" />
+              <htmlTranslate renderer="HfieldSet3" header="DCFAAF" />
+              <htmlTranslate renderer="HfieldSet4" header="MMCOM" />
               <fieldSet label="DOCUMENTS DÉLIVRÉS" className="fs4">
                 <html className="hr-fieldset">
                   <hr />

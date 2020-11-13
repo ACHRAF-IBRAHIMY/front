@@ -478,7 +478,12 @@
           PCD_addtitle();
 
           // add style to main header
-          PCD_add_header_style_action(".pcd-header-AM", "AUTORISATIONS DE MORCELLEMENT");
+          if(root.userlang=="fr"){
+            PCD_add_header_style_action(".pcd-header-AM", "AUTORISATIONS DE MORCELLEMENT");
+          }
+          if(root.userlang=="ar"){
+            PCD_add_header_style_action(".pcd-header-AM", "تصاريح المشاركة");
+          }
 
           // header color 
           PCD_headerfieldset_color(".pcd-ha-color");
