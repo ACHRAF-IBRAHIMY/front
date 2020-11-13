@@ -5,8 +5,82 @@
     <query />
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+    <component name="htmlTranslate">
+
+      <renderer name="configMenu">
+        <html>
+          <div class="menu">
+            <div class="config">
+              <span>${code1 | translate}</span>
+            </div>
+            <div class="acc">
+              <i class="fas fa-palette" />
+              <span class="mlt">${code2 | translate}</span>
+              <span class="km">${code3 | translate}</span>
+            </div>
+          </div>
+          <div class="menu-config">
+            <div class="item">
+              ${code4 | translate} :
+              <span class="index-name" />
+              | ${code5 | translate} :
+              <span class="size-match-all" />
+            </div>
+          </div>
+          <div class="tab" />
+          <div class="menu-config-bottom" />
+        </html>
+      </renderer>
+    
+      <renderer name="cfMenu">
+        <html className="cf-menu" columns="50% 50%">
+          <div class="cf-type-butt div-1 active">
+            <span>${code1 | translate}</span>
+          </div>
+          <div class="cf-type-butt div-2">
+            <span>${code2 | translate}</span>
+          </div>
+        </html>
+      </renderer>
+    
+      <renderer name="clustersT">
+        <html className="clusters">
+          <i class="fas fa-layer-group sp1" />
+          <select name="Clusters" class="select-cluster sp2" id="" />
+          <span class="sp-sep" />
+          <span class="sp3">${code | translate}</span>
+          <span class="sp4">0</span>
+        </html>
+      </renderer>
+    
+      <renderer name="itemMenu">
+        <html>
+          <div class="menu-config">
+            <div class="item">
+              ${code1 | translate} :
+              <span class="index-name" />
+              | ${code2 | translate} :
+              <span class="size-match-all" />
+            </div>
+          </div>
+          <div class="tab" />
+          <div class="menu-config-bottom" />
+        </html>
+      </renderer>
+    
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+    
+      <script onLoad="true">
+              try{
+                  root.userlang=userLocal;
+                  context.formRender.notifyObservers("userlang");
+              }catch(e){
+                  console.log("ERROOOR",e);
+              }
+          </script>
       <script postLoad="true">
              removeLastRootPage(userName)
         	   typeClassification = 0
@@ -58,57 +132,12 @@
       </html>
       <vbox className="cf" columns="50% 50%">
         <fieldSet className="cf-1" label="Liste des remarques">
-          <html>
-            <div class="menu">
-              <div class="config">
-                <span>Modifier</span>
-              </div>
-              <div class="acc">
-                <i class="fas fa-palette" />
-                <span class="mlt">MLT</span>
-                <span class="km">Kmeans</span>
-              </div>
-            </div>
-            <div class="menu-config">
-              <div class="item">
-                Index :
-                <span class="index-name" />
-                | Size :
-                <span class="size-match-all" />
-              </div>
-            </div>
-            <div class="tab" />
-            <div class="menu-config-bottom" />
-          </html>
+          <htmlTranslate renderer="configMenu" code1="OTC00" code2="OTC01" code3="OTC02" code4="OTC03" code5="OTC04" />
         </fieldSet>
         <fieldSet className="cf-2" label="Classification">
-          <html className="cf-menu" columns="50% 50%">
-            <div class="cf-type-butt div-1 active">
-              <span>Classification par MLT</span>
-            </div>
-            <div class="cf-type-butt div-2">
-              <span>Clustring avec Kmeans</span>
-            </div>
-          </html>
-          <html className="clusters">
-            <i class="fas fa-layer-group sp1" />
-            <select name="Clusters" class="select-cluster sp2" id="" />
-            <span class="sp-sep" />
-            <span class="sp3">Taille</span>
-            <span class="sp4">0</span>
-          </html>
-          <html>
-            <div class="menu-config">
-              <div class="item">
-                Cluster :
-                <span class="index-name" />
-                | Size :
-                <span class="size-match-all" />
-              </div>
-            </div>
-            <div class="tab" />
-            <div class="menu-config-bottom" />
-          </html>
+          <htmlTranslate renderer="cfMenu" code1="OTC05" code2="OTC06" />
+          <htmlTranslate renderer="clustersT" code="OTC07" />
+          <htmlTranslate renderer="itemMenu" code1="OTC08" code12="OTC04" />
         </fieldSet>
       </vbox>
     </screen>
