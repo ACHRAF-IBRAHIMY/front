@@ -1,4 +1,3 @@
-
 function getAllCommuneObject(filters,sortBy,rev,size,from){
     var filtersObj = [];
     
@@ -64,7 +63,15 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         }else if(trims[0]=="4"){
             str += "4éme trimestre "+trims[1];
         }
-        dataReportRk.trim = str;
+        try{
+            if(transMap[str.replace(/ /g,"__")]!=undefined){
+            var strTrans = transMap[str.replace(/ /g,"__")];
+            }else{
+            var strTrans = str
+            }
+    
+            }catch(e){}
+        dataReportRk.trim = strTrans;
         dataReportRk.data = [];
     }
     
@@ -124,7 +131,15 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             }else if(trims[0]=="4"){
                 str += "4éme trimestre "+trims[1];
             }
-            dataReportRk.trim = str;
+            try{
+                if(transMap[str.replace(/ /g,"__")]!=undefined){
+                var strTrans = transMap[str.replace(/ /g,"__")];
+                }else{
+                var strTrans = str
+                }
+        
+                }catch(e){}
+            dataReportRk.trim = strTrans;
             dataReportRk.data = [];
         }
     
@@ -183,7 +198,15 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
                 }else if(trims[0]=="4"){
                     str += "4éme trimestre "+trims[1];
                 }
-                dataReportRk.trim = str;
+                try{
+                    if(transMap[str.replace(/ /g,"__")]!=undefined){
+                    var strTrans = transMap[str.replace(/ /g,"__")];
+                    }else{
+                    var strTrans = str
+                    }
+            
+                    }catch(e){}
+                dataReportRk.trim = strTrans;
                 dataReportRk.data = [];
             }
     
@@ -437,9 +460,27 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     bar.find(".div-bar-1 .bar2 .bottom-div").html("");
     bar.find(".div-bar-1 .bar3 .bottom-div").html("");
     
-    var cm1 = results[1]._source.commune.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
-    var cm2 = results[0]._source.commune.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
-    var cm3 = results[2]._source.commune.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    try{
+        if(transMap[results[0]._source.commune.replace(/ /g,"__")]!=undefined){
+            var communeTrans0 = transMap[results[0]._source.commune.replace(/ /g,"__")];
+        }else{
+            var communeTrans0 = results[0]._source.commune
+        }
+        if(transMap[results[1]._source.commune.replace(/ /g,"__")]!=undefined){
+            var communeTrans1 = transMap[results[1]._source.commune.replace(/ /g,"__")];
+        }else{
+            var communeTrans1 = results[1]._source.commune
+        }
+        if(transMap[results[2]._source.commune.replace(/ /g,"__")]!=undefined){
+            var communeTrans2 = transMap[results[2]._source.commune.replace(/ /g,"__")];
+        }else{
+            var communeTrans2 = results[2]._source.commune
+        }
+
+        }catch(e){}
+    var cm1 = communeTrans1.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm2 = communeTrans0.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm3 = communeTrans2.replace("COMMUNE DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
     
     var hg1 = results[1]._source.indecators[select];
     var hg2 = results[0]._source.indecators[select];
@@ -459,7 +500,15 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     var results = result.hits.hits;
     
     for(var i=0;i<results.length;i++){
-    bar.find(".div-1-top10").append("<span>"+results[i]._source.commune+"</span>");
+        try{
+            if(transMap[results[i]._source.commune.replace(/ /g,"__")]!=undefined){
+            var communeTrans = transMap[results[i]._source.commune.replace(/ /g,"__")];
+            }else{
+            var communeTrans = results[i]._source.commune
+            }
+    
+            }catch(e){}
+    bar.find(".div-1-top10").append("<span>"+communeTrans+"</span>");
     bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source.indecators[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span><br/>");
     }
     }  
@@ -530,7 +579,15 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     var results = result.hits.hits;
     
     for(var i=0;i<results.length;i++){
-    bar.find(".div-1-top10").append("<span>"+results[i]._source.region+"</span>");
+        try{
+            if(transMap[results[i]._source.region.replace(/ /g,"__")]!=undefined){
+            var regionTrans = transMap[results[i]._source.region.replace(/ /g,"__")];
+            }else{
+            var regionTrans = results[i]._source.region
+            }
+    
+            }catch(e){}
+    bar.find(".div-1-top10").append("<span>"+regionTrans+"</span>");
     bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
     }
     }
@@ -564,7 +621,15 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     var results = result.hits.hits;
     
     for(var i=0;i<results.length;i++){
-    bar.find(".div-1-top10").append("<span>"+results[i]._source.commune+"</span>");
+        try{
+            if(transMap[results[i]._source.commune.replace(/ /g,"__")]!=undefined){
+            var communeTrans = transMap[results[i]._source.commune.replace(/ /g,"__")];
+            }else{
+            var communeTrans = results[i]._source.commune
+            }
+    
+            }catch(e){}
+    bar.find(".div-1-top10").append("<span>"+communeTrans+"</span>");
     bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
     }
     }
@@ -586,16 +651,24 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }else if(trims[0]=="4"){
     str += "4éme trimestre "+trims[1];
     }
+    try{
+        if(transMap[str.replace(/ /g,"__")]!=undefined){
+        var strTrans = transMap[str.replace(/ /g,"__")];
+        }else{
+        var strTrans = str
+        }
+
+        }catch(e){}
     
     if(region != "default"){
-    str += " | "+region;
+        strTrans += " | "+region;
     }
     
     if(prefecture != "default"){
-    str += " | "+prefecture;
+        strTrans += " | "+prefecture;
     }
     
-    $(".ranking-fieldset > .ow-pl-toolbar .ow-label-pl").append("<span style=\"color:orange\"> "+str+"</span>");
+    $(".ranking-fieldset > .ow-pl-toolbar .ow-label-pl").append("<span style=\"color:orange\"> "+strTrans+"</span>");
     }
     
     var dataReportRk = {
@@ -633,8 +706,18 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         }else{
             rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
         }
-        tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+`<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\"`+results[i]._source.commune+`\"><span>`+(i+1)+`- `+subLong(results[i]._source.commune,30)+`</span> `+rankStr+`</span><span style="display: block;color: orange;font-size: 11px;    margin-top: 1px;margin-left: 19px;">`+results[i]._source.préfecture+`</span></td>`);        
-        $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span>"+rankStr+"</span></td></tr>");
+        try{
+            if(transMap[results[i]._source.commune.replace(/ /g,"__")]!=undefined){
+            var communeTrans = transMap[results[i]._source.commune.replace(/ /g,"__")];
+            var prefectureTrans = transMap[results[i]._source.préfecture.replace(/ /g,"__")];
+            }else{
+            var communeTrans = results[i]._source.commune
+            var prefectureTrans = results[i]._source.préfecture
+            }
+    
+            }catch(e){}
+        tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+`<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\"`+communeTrans+`\"><span>`+(i+1)+`- `+subLong(communeTrans,30)+`</span> `+rankStr+`</span><span style="display: block;color: orange;font-size: 11px;    margin-top: 1px;margin-left: 19px;">`+prefectureTrans+`</span></td>`);        
+        $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(communeTrans,30)+"</span>"+rankStr+"</span></td></tr>");
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
         if(results[i]._source.indecators.delaiPpV==-1){
             var titleText = `Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
@@ -717,7 +800,15 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }else{
     rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
     }
-    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.region+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.region,30)+"</span> "+rankStr+`</span></td>`);
+    try{
+        if(transMap[results[i]._source.region.replace(/ /g,"__")]!=undefined){
+        var regionTrans = transMap[results[i]._source.region.replace(/ /g,"__")];
+        }else{
+        var regionTrans = results[i]._source.region
+        }
+
+        }catch(e){}
+    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+regionTrans+"\"><span>"+(i+1)+"- "+subLong(regionTrans,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
     tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
     tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
@@ -757,7 +848,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }else{
     rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
     }
-    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.commune+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.commune,30)+"</span> "+rankStr+`</span></td>`);
+    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+communeTrans+"\"><span>"+(i+1)+"- "+subLong(communeTrans,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
     tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
     tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
@@ -888,11 +979,19 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }else{
       str = elms[i].key;
     }
+    try{
+        if(transMap[str.replace(/ /g,"__")]!=undefined){
+        var strTrans = transMap[str.replace(/ /g,"__")];
+        }else{
+        var strTrans = str
+        }
+
+        }catch(e){}
     
-    option.innerHTML = str;
+    option.innerHTML = strTrans;
     option.setAttribute("value",elms[i].key);
     
-    if(!str.includes("COMMUNE")){
+    if(!strTrans.includes("COMMUNE")){
      select.append(option);
     }
     
@@ -1029,16 +1128,54 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
                 dataset[i]._source.fiscalite.toFixed(2)
             ]
         }; 
+
+        try{
+            if(transMap[dataset[i]._source.region.replace(/ /g,"__")]!=undefined){
+            var regionTrans = transMap[dataset[i]._source.region.replace(/ /g,"__")];
+            }else{
+            var regionTrans = dataset[i]._source.region
+            }
+    
+            }catch(e){}
     
         datasets.push(dtobj);
-        legendDiv.append("<div><hr style=\"background: "+region_color[i]+"\"><span>"+dataset[i]._source.region.replace("REGION DE ","").replace("REGION ","")+"</span></div>");
+        legendDiv.append("<div><hr style=\"background: "+region_color[i]+"\"><span>"+regionTrans.replace("REGION DE ","").replace("REGION ","")+"</span></div>");
     }
+
+    try{
+        if(transMap['Délai']!=undefined){
+            var delaiTrans = transMap['Délai'];
+        }else{
+            var delaiTrans = 'Délai'
+        }
+        if(transMap['Attractivité-N']!=undefined){
+            var attrTrans = transMap['Attractivité-N'];
+        }else{
+            var attrTrans = 'Attractivité-N'
+        }
+        if(transMap['Digital']!=undefined){
+            var digitalTrans = transMap['Digital'];
+        }else{
+            var digitalTrans = 'Digital'
+        }
+        if(transMap['Ecosystème']!=undefined){
+            var ecosystemeTrans = transMap['Ecosystème'];
+        }else{
+            var ecosystemeTrans = 'Ecosystème'
+        }
+        if(transMap['Fiscalité']!=undefined){
+            var fiscaliteTrans = transMap['Fiscalité'];
+        }else{
+            var fiscaliteTrans = 'Fiscalité'
+        }
+
+        }catch(e){}
     
     
     var config = {
         type: 'radar',
         data: {
-            labels: ['Délai', 'Attractivité-N', 'Digital', 'Ecosystème', 'Fiscalité'],
+            labels: [delaiTrans, attrTrans, digitalTrans, ecosystemeTrans, fiscaliteTrans],
             datasets: datasets
             }
         ,

@@ -377,7 +377,7 @@
             </html>
       </renderer>
 
-      <renderer name="htmlPBr" >
+      <renderer name="htmlPBr">
         <html>
           <p>
             ${code1 | translate}            
@@ -433,7 +433,12 @@
           PCD_addtitle();
 
           // add style to main header
-          PCD_add_header_style_action(".pcd-header-PHCC", "PERMIS D'HABITER ET CERTIFICAT DE CONFORMITÉ");
+          if(root.userlang=="fr"){
+            PCD_add_header_style_action(".pcd-header-PHCC", "PERMIS D'HABITER ET CERTIFICAT DE CONFORMITÉ");
+          }
+          if(root.userlang=="ar"){
+            PCD_add_header_style_action(".pcd-header-PHCC", "تصريح الإقامة وشهادة المطابقة");
+          }
 
           // header color 
           PCD_headerfieldset_color(".pcd-ha-color");
@@ -463,10 +468,10 @@
               <htmlTranslate renderer="htmlTags" code1="AUDM05" code2="AUDM06" code3="AUDM07" code4="AUDM08" code5="AUDM09" code6="AUDM10" />
             </vbox>
             <vbox className="fieldSets">
-              <htmlTranslate renderer="HfieldSet1" header="ECS00"/>
-              <htmlTranslate renderer="HfieldSet2" header="CRPD20"/>
-              <htmlTranslate renderer="HfieldSet3" header="PHCC17"/>
-              <htmlTranslate renderer="HfieldSet4" header="MMCOM"/>
+              <htmlTranslate renderer="HfieldSet1" header="ECS00" />
+              <htmlTranslate renderer="HfieldSet2" header="CRPD20" />
+              <htmlTranslate renderer="HfieldSet3" header="PHCC17" />
+              <htmlTranslate renderer="HfieldSet4" header="MMCOM" />
               <fieldSet label="DOCUMENTS DÉLIVRÉS" className="fs4">
                 <html className="hr-fieldset">
                   <hr />
