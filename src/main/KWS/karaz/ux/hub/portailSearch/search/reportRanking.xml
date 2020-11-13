@@ -15,8 +15,110 @@
     </dataReportRk>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+    <component name="htmlTranslate">
+
+      <renderer name="introRanking">
+        <html>
+          <div><h3 style="text-align: left;color: #666;font-weight: 650;">${code1 | translate}</h3></div>
+          <div><p style="text-align: left;color: #666;margin-bottom:0">${code2 | translate}</p></div>
+          <div><p style="text-align: left;font-size: 14.5px;color: #666;">${code3 | translate} <b>${code4 | translate}</b></p></div>
+          <div>
+            <p style="text-align: left;font-size: 13.5px;color: #666;">
+              <strong>
+                ${code5 | translate}
+              </strong>
+            </p>
+          </div>
+          <div style="text-align: right;font-size: 15px;padding: 0 29px;"><span style="color:#38A;cursor:pointer" onClick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/CalculIndex&quot;, &quot;search&quot;, &quot;Méthodologie de calcul des index Ranking&quot;, {});" href="">${code6 | translate}</span></div>
+          
+          </html>
+      </renderer>
+    
+      <renderer name="htmlDiv">
+        <html> 
+          <div style="${divStyle}">
+              ${code | translate}
+          </div>
+        </html>
+      </renderer>
+    
+      <renderer name="htmlSelect">
+        <html>
+          <select name="${selectName}" id="${selectID}">
+            <option value="default">${code | translate}</option>
+          </select>
+        </html>
+      </renderer>
+    
+      <renderer name="divSpanB">
+        <html>
+          <div style="height:500px">
+              <div class="lg" style="display:grid;grid-template-columns:33% 34% 33%;" />
+          </div>
+          <div style="margin:auto;margin-top: 40px;font-size: 13px;display: grid;grid-template-columns: 50px auto;width:95%">
+              <i class="fas fa-exclamation-triangle" style="font-size: 26px;margin-top: 4px;color: orange;" />
+              <span>${code1 | translate} <b>${code2 | translate}</b> ${code3 | translate} <b>${code4 | translate}</b> ${code5 | translate} <b>${code2 | translate}</b> ${code6 | translate} <b>${code4 | translate}</b> * 5 </span>
+              
+          </div>
+        </html>
+      </renderer>
+    
+      <renderer name="selectOptions">
+        <html>
+          <select name="trierPar" id="rankBy">
+            <option value="commune">${code1 | translate}</option>
+            <option value="commune1">${code2 | translate}</option>
+            <option value="arrondissement">${code3 | translate}</option>
+            <option value="prefecture">${code4 | translate}</option>
+            <option value="region">${code5 | translate}</option>
+            <option value="ville">${code6 | translate}</option>
+          </select>
+        </html>
+      </renderer>
+    
+      <renderer name="rankingTable">
+        <html>
+          <table id="ranking-table">
+            <tr class="first-tr">
+              <td style="visibility:hidden;width: 28%" />
+              <td class="sp-td">${code1 | translate}  </td>
+              <td class="sp-td">${code2 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-dl">${code3 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-at">${code4 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-dg">${code5 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-es">${code6 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-fs">${code7 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+            </tr>  
+          </table>
+          <div style="height: 400px;overflow: overlay;">
+          <table id="ranking-table2">
+          <tr class="first-tr" style="display:none;">
+              <td class="dipslay-block" style="visibility:hidden;width: 165px !important;" />
+              <td class="sp-td">${code1 | translate}  </td>
+              <td class="sp-td">${code2 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-dl">${code3 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-at">${code4 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-dg">${code5 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-es">${code6 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+              <td class="rank-fs">${code7 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
+            </tr>
+          </table>
+          </div>
+        </html>
+      </renderer>
+    
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+    
+      <script onLoad="true">
+              try{
+                  root.userlang=userLocal;
+                  context.formRender.notifyObservers("userlang");
+              }catch(e){
+                  console.log("ERROOOR",e);
+              }
+          </script>
       <script postLoad="true" delay="3000">
           loadPageBytype(0);
           
@@ -386,36 +488,14 @@
           </html>
         </vbox>
         <vbox>
-          <html>
-            <div><h3 style="text-align: left;color: #666;font-weight: 650;">Index Rokhas pour la performance territoriale</h3></div>
-            <div><p style="text-align: left;color: #666;margin-bottom:0">Classement national de la performance des collectivités territoriales en matière de délivrance d'autorisations.</p></div>
-            <div><p style="text-align: left;font-size: 14.5px;color: #666;">L’index Rokhas classe les collectivités territoriales marocaines sur la base de leurs performance en matière de délivrance des autorisations. Il s’agit d’un classement totalement automatisé issu des données collectées en temps réel à travers la plateforme Rokhas.ma. L'index Rokhas est calculé à partir de l’évaluation de 5 sous-index dans les 2 domaines d’autorisations clés, à savoir l’activité urbanistique et l’activité économique : <b>Délai, Attractivité, Digital, Ecosystème, Fiscalité</b></p></div>
-            <div>
-              <p style="text-align: left;font-size: 13.5px;color: #666;">
-                <strong>
-                  NB : Seuls les territoires (Région, Province/Préfecture, Commune/Arrondissement) ayant délivré au moins Une autorisation à travers Rokhas.ma durant la période sélectionnée, apparaîtront dans ce rapport.
-                </strong>
-              </p>
-            </div>
-            <div style="text-align: right;font-size: 15px;padding: 0 29px;"><span style="color:#38A;cursor:pointer" onClick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/CalculIndex&quot;, &quot;search&quot;, &quot;Méthodologie de calcul des index Ranking&quot;, {});" href="">Détail de la méthodologie</span></div>
-            
-            </html>
+          <htmlTranslate renderer="introRanking" code1="RK00" code2="RK01" code3="RK02" code4="RK05" code5="RK03" code6="RK04" />
         </vbox>            
       </vbox>
       <fieldSet className="hp-box ranking-fieldset hp-small rank-search-repo" label="CLASSEMENT TRIMESTRIEL GLOBAL">
-        <html> 
-          <div style="padding-left: 23px;">
-                 Classement global des collectivités territoriales à base de leur score dans chacun
-                 des 5 sous-index clés.
-          </div>
-        </html>
+          <htmlTranslate renderer="htmlDiv" divStyle="padding-left: 23px;" code="CGCT00" />
         <vbox columns="18% 13% 21% 18% 18% 12%">
             <vbox>
-              <html>
-                <select name="period" id="period">
-                  <option value="default">Période</option>
-                </select>
-              </html>
+              <htmlTranslate renderer="htmlSelect" selectName="period" selectID="period" code="periode" />
             </vbox>
 
             <vbox />
@@ -426,32 +506,15 @@
             </vbox> -->
 
             <vbox>
-              <html>
-                <select name="trierPar" id="rankBy">
-                  <option value="commune">Classement global</option>
-                  <option value="commune1">Classer par commune</option>
-                  <option value="arrondissement">Classer par arrondissement</option>
-                  <option value="prefecture">Classer par préfecture</option>
-                  <option value="region">Classer par région</option>
-                  <option value="ville">Classer par conseils ville</option>
-                </select>
-              </html>
+              <htmlTranslate renderer="selectOptions" code1="rank01" code2="rank02" code3="rank03" code4="rank04" code5="rank05" code6="rank06" />
             </vbox>
 
             <vbox>
-              <html>
-                <select name="region" id="region">
-                    <option value="default">Par région</option>
-                </select>
-              </html>
+              <htmlTranslate renderer="htmlSelect" selectName="region" selectID="region" code="region" />
             </vbox>
 
             <vbox>
-              <html>
-                <select name="prefecture" id="prefecture">
-                  <option value="default">Par préfecture/province</option>
-                </select>
-              </html>
+              <htmlTranslate renderer="htmlSelect" selectName="prefecture" selectID="prefecture" code="prefecture" />
             </vbox>
 
             <vbox>
@@ -470,45 +533,14 @@
               
             </table>
           </html>
-          <html>
-            <table id="ranking-table">
-              <tr class="first-tr">
-                <td style="visibility:hidden;width: 28%" />
-                <td class="sp-td">Rang  </td>
-                <td class="sp-td">Score <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-dl">Délai <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-at">Attractivité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-dg">Digital <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-es">Ecosystème <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-fs">Fiscalité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-              </tr>  
-            </table>
-            <div style="height: 400px;overflow: overlay;">
-            <table id="ranking-table2">
-            <tr class="first-tr" style="display:none;">
-                <td class="dipslay-block" style="visibility:hidden;width: 165px !important;" />
-                <td class="sp-td">Rang  </td>
-                <td class="sp-td">Score <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-dl">Délai <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-at">Attractivité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-dg">Digital <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-es">Ecosystème <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-                <td class="rank-fs">Fiscalité <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
-              </tr>
-            </table>
-            </div>
-          </html>
+            <htmlTranslate renderer="rankingTable" code1="Rang" code2="Score" code3="delai" code4="Attractivite" code5="Digital" code6="Ecosysteme" code7="Fiscalite" />
            
               <button label="PRINT" visible="1,=,2" className="report-hiden-rk" actionName="karaz/ux/hub/dashboardsearch/PrintReportRankingBeans" postProcessing="openFile,repport.gedId,none" />
         
                </vbox>
       </fieldSet>
       <fieldSet className="hp-box ranking-fieldset hp-small" label="CHAMPIONS DES SOUS-INDEX">
-        <html> 
-          <div style="padding-left: 23px;">
-                 Les 3 champions dans chacun des 5 sous-index considérés.
-          </div>
-        </html>
+        <htmlTranslate renderer="htmlDiv" divStyle="padding-left: 23px;" code="CSIC00" />
         <vbox columns="33% 33% 33%">
           <fieldSet label="Délai de délivrance" className="ranking-bar3-dl">
             <html>
@@ -563,11 +595,7 @@
         </vbox>
       </fieldSet>
       <fieldSet className="hp-box ranking-fieldset hp-small" label="TOP 10 PAR DOMAINE">
-        <html> 
-          <div style="padding-left: 23px;">
-                 Les 10 Meilleurs classement dans les deux domaines d'autorisations.
-          </div>
-        </html>
+        <htmlTranslate renderer="htmlDiv" divStyle="padding-left: 23px;" code="CSIC01" />
         <vbox columns="50% 50%">
           <fieldSet label="Autorisations d'urbanisme" className="ranking-bar10-U">
             <html>
@@ -602,11 +630,7 @@
         </vbox>
       </fieldSet>
       <fieldSet className="hp-box ranking-fieldset hp-small" label="RADAR DES REGIONS">
-        <html> 
-          <div style="padding-left: 23px;">
-                 Comparatif de la performance des 12 régions au regard des 5 sous index clés.
-          </div>
-        </html>
+        <htmlTranslate renderer="htmlDiv" divStyle="padding-left: 23px;" code="CSIC02" />
         <vbox columns="50% 50%">
           <vbox className="radar-div">
             <html>
@@ -615,17 +639,7 @@
             </html>
           </vbox>
           <vbox className="legend-region">
-            <html>
-              <div style="height:500px">
-                  <div class="lg" style="display:grid;grid-template-columns:33% 34% 33%;" />
-              </div>
-              <div style="margin:auto;margin-top: 40px;font-size: 13px;display: grid;grid-template-columns: 50px auto;width:95%">
-                  <i class="fas fa-exclamation-triangle" style="font-size: 26px;margin-top: 4px;color: orange;" />
-                  <span>En raison d’importantes différences d’échelle sur le nombre de dossiers traités par les régions, l’indicateur <b>Attractivité</b> à été divisé par un facteur de 5 et intitulé <b>Attractivité-N</b> afin d’améliorer la lisibilité du graphe. 
-                    Le score réel de l’indicateur <b>Attractivité</b> doit donc être lu comme <b>Attractivité-N</b> * 5 </span>
-                  
-              </div>
-            </html>
+            <htmlTranslate renderer="divSpanB" code1="AZ00" code2="Attractivite" code3="AZ01" code4="AZ02" code5="AZ03" code6="AZ05" />
           </vbox>
           <vbox />
         </vbox>

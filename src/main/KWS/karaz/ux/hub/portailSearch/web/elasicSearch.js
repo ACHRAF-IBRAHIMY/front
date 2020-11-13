@@ -994,7 +994,30 @@ var str = ""
 
 if(type==null){
 
-if(typeUse=="ROKHAS ECONOMIQUE" || typeUse=="ROKHAS URBANISTIQUE" || typeUse=="Général" || typeUse=="Karaz GIS" ){
+try{
+    if(transMap["ROKHAS ECONOMIQUE".replace(/ /g,"__")]!=undefined){
+    	var economiqueTrans = transMap["ROKHAS ECONOMIQUE".replace(/ /g,"__")];
+    }else{
+    	var economiqueTrans = "ROKHAS ECONOMIQUE"
+    }
+    if(transMap["ROKHAS URBANISTIQUE".replace(/ /g,"__")]!=undefined){
+    	var urbanistiqueTrans = transMap["ROKHAS URBANISTIQUE".replace(/ /g,"__")];
+    }else{
+    	var urbanistiqueTrans = "ROKHAS URBANISTIQUE"
+    }
+    if(transMap["Général"]!=undefined){
+    	var generalTrans = transMap["Général"];
+    }else{
+    	var generalTrans = "Général"
+    }
+    if(transMap["Karaz GIS".replace(/ /g,"__")]!=undefined){
+    	var gisTrans = transMap["Karaz GIS".replace(/ /g,"__")];
+    }else{
+    	var gisTrans = "Karaz GIS"
+    }
+
+    }catch(e){}
+if(typeUse==economiqueTrans || typeUse==urbanistiqueTrans || typeUse==generalTrans || typeUse==gisTrans ){
     if(prefix.trim()!=""){
         var obj = {  
             "from":page,
@@ -1450,7 +1473,30 @@ function RestSearchDownload(prefix, page, size, type, typeUse, cls,prev,clas,tar
 var str = ""
 
 if(type==null){
-if(typeUse=="ROKHAS ECONOMIQUE" || typeUse=="ROKHAS URBANISTIQUE" || typeUse=="Général" || typeUse=="Karaz GIS" ){
+	try{
+	    if(transMap["ROKHAS ECONOMIQUE".replace(/ /g,"__")]!=undefined){
+	    	var economiqueTrans = transMap["ROKHAS ECONOMIQUE".replace(/ /g,"__")];
+	    }else{
+	    	var economiqueTrans = "ROKHAS ECONOMIQUE"
+	    }
+	    if(transMap["ROKHAS URBANISTIQUE".replace(/ /g,"__")]!=undefined){
+	    	var urbanistiqueTrans = transMap["ROKHAS URBANISTIQUE".replace(/ /g,"__")];
+	    }else{
+	    	var urbanistiqueTrans = "ROKHAS URBANISTIQUE"
+	    }
+	    if(transMap["Général"]!=undefined){
+	    	var generalTrans = transMap["Général"];
+	    }else{
+	    	var generalTrans = "Général"
+	    }
+	    if(transMap["Karaz GIS".replace(/ /g,"__")]!=undefined){
+	    	var gisTrans = transMap["Karaz GIS".replace(/ /g,"__")];
+	    }else{
+	    	var gisTrans = "Karaz GIS"
+	    }
+
+	    }catch(e){}
+	if(typeUse==economiqueTrans || typeUse==urbanistiqueTrans || typeUse==generalTrans || typeUse==gisTrans ){
 if(prefix.trim()!=""){
     var obj = {  
         "from":page,
