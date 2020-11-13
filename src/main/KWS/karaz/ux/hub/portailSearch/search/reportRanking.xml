@@ -20,17 +20,17 @@
 
       <renderer name="introRanking">
         <html>
-          <div><h3 style="text-align: left;color: #666;font-weight: 650;">${code1 | translate}</h3></div>
-          <div><p style="text-align: left;color: #666;margin-bottom:0">${code2 | translate}</p></div>
-          <div><p style="text-align: left;font-size: 14.5px;color: #666;">${code3 | translate} <b>${code4 | translate}</b></p></div>
+          <div><h3 style="color: #666;font-weight: 650;">${code1 | translate}</h3></div>
+          <div><p style="color: #666;margin-bottom:0">${code2 | translate}</p></div>
+          <div><p style="font-size: 14.5px;color: #666;">${code3 | translate} <b>${code4 | translate}</b></p></div>
           <div>
-            <p style="text-align: left;font-size: 13.5px;color: #666;">
+            <p style="font-size: 13.5px;color: #666;">
               <strong>
                 ${code5 | translate}
               </strong>
             </p>
           </div>
-          <div style="text-align: right;font-size: 15px;padding: 0 29px;"><span style="color:#38A;cursor:pointer" onClick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/CalculIndex&quot;, &quot;search&quot;, &quot;Méthodologie de calcul des index Ranking&quot;, {});" href="">${code6 | translate}</span></div>
+          <div style=";font-size: 15px;"><span style="color:#38A;cursor:pointer" onClick="javascript:ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/CalculIndex&quot;, &quot;search&quot;, &quot;Méthodologie de calcul des index Ranking&quot;, {});" href="">${code6 | translate}</span></div>
           
           </html>
       </renderer>

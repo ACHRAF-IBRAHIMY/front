@@ -140,7 +140,7 @@
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
             <htmlTranslate renderer="panelTitle" code1="GVC00" code2="GVC01" code3="GVC02" />
-            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='fr',expr,boolean">
               <vbox columns="68% 32%">
                 <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Rechercher une vidéo" />
                 <field className="filterRef-class" widget="select" xpath="query.filterRef">
@@ -168,6 +168,35 @@
                   restFullSearchList(prefix,0,false,pp,"classSearch-7",context.formRender.targetPanel);
                 </postChange>
               </button>
+            </vbox>
+            <vbox columns="10% 90%" className="stay-grid" columns-small="20% 80%" contentAlign="center" visible="'{userlang}'=='ar',expr,boolean">
+              <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="">
+                <postChange>
+                  var prefix = $(".classSearch-7 .div-full-search-bar .search-video-input input").val();
+                  currentPage=0;
+                  $(".classSearch-7 .consultation-video").hide();
+                  $(".classSearch-7 .search-video").show();
+                  if(root.query.filterRef=="Tous"){
+                    var pp = 0;
+                  }else{
+                    var pp = root.query.filterRef;
+                  }
+                  restFullSearchList(prefix,0,false,pp,"classSearch-7",context.formRender.targetPanel);
+                </postChange>
+              </button>
+              <vbox columns="25% 75%">
+                <field className="filterRef-class" widget="select" xpath="query.filterRef">
+                  <option value="Tous" label="Tous" />
+                  <option value="ROKHAS ECONOMIQUE" label="Rokhas économique" />
+                  <option value="ROKHAS URBANISTIQUE" label="Rokhas urbanistique" />
+                  <option value="Général" label="Général" />
+                  <option value="Karaz GIS" label="Karaz GIS" />
+                  <postChange>
+                      context.formRender.targetPanel.find(".classSearch-7 .searchbuttun").click(); 
+                  </postChange>
+                </field>
+                <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Rechercher une vidéo" />
+              </vbox>
             </vbox>
             
             <html>
