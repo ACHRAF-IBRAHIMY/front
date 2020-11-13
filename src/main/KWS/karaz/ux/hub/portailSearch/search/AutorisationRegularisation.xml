@@ -9,8 +9,51 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+    <component name="htmlTranslate">
+      
+      <renderer name="autoMorcellement">
+          <html>
+              <span style="text-align:left;color:#333;" class="title-4x b-title">
+                  <i class="far fa-object-ungroup" style="margin-right:10px" />
+                  ${code | translate}
+              </span>
+          </html>
+      </renderer>
+
+      <renderer name="htmlPBr" >
+        <html>
+          <p>
+            ${code1 | translate}            
+            <br />
+            ${code2 | translate}
+          </p>
+        </html>
+      </renderer>
+
+      <renderer name="htmlPULLI">
+        <html>
+          <p>
+            ${code1 | translate}
+            <ul class="dashed">
+              <li>${code2 | translate}</li>
+              <li>${code3 | translate}</li>
+            </ul>
+          </p>
+        </html>
+      </renderer>
+
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+      <script onLoad="true">
+              try{
+                  root.userlang=userLocal;
+                  context.formRender.notifyObservers("userlang");
+              }catch(e){
+                  console.log("ERROOOR",e);
+              }
+          </script>
       <script postLoad="true"> 
           $(".rokhas-home").click(function(){
                ApplicationManager.run("karaz/ux/hub/portailsearch/search/PublicCentralSearch","search", "PublicCentralSearch", {});
@@ -62,31 +105,15 @@
       <vbox columns="70% 30%">
         <fieldset label="AUTORISATIONS URBANISTIQUES" collapsible="false" className="pcd-header-AR div-det-acc PDC-hov-title">
           <vbox className="accp">
-            <html>
-              <span style="text-align:left;color:#333;" class="title-4x b-title">
-                <i class="fas fa-gavel" style="margin-right:10px" />
-                Autorisation de régularisation
-              </span>
-            </html>
+            <htmlTranslate renderer="autoMorcellement" code="ARG02" />
             <vbox className="desc">
-              <html>
-                <p>Cette procédure concerne particuliérement les constructions ayant été réalisées sans obtention préalable des autorisations nécessaires ou bien celles réalisées sans respecter les plans autorisés. 
-                                    Cette procédure n'est applicable que si la construction concernée n'a fait objet d'aucun procès-verbal d'infraction. L'autorisation de régularisation une fois délivrée fera office de permis d'habiter ou certificat de conformité.</p>
-              </html>
+              <htmlTranslate renderer="htmlPBr" code1="ARG00" code2="ARG01" />
             </vbox>
             <vbox className=" PCD-gap-ic PCD-not-described">
               <html style="align-self: center; text-align: center;">
                 <i class="fas fa-exclamation-triangle cl-orange" />
               </html>
-              <html>
-                <p>
-                  Cette procédure sera décrite et mise en ligne après publication au bulletin officiel des décrets :
-                  <ul class="dashed">
-                    <li>N° 2.18.475 précisant les modalités de délivrance des autorisations de réfection, de régularisation et de démolition.</li>
-                    <li>N° 2.18.577 remplaçant le décret N° 2.13.424 du 24 Mai 2013 (Règlement général de construction).</li>
-                  </ul>
-                </p>
-              </html>
+              <htmlTranslate renderer="htmlPULLI" code1="AR03" code2="AR04" code3="AR05" />
             </vbox>
           </vbox>
         </fieldset>
@@ -100,4 +127,3 @@
     <script onLoad="true" />
   </view>
 </search>
-

@@ -9,8 +9,170 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+    <component name="htmlTranslate">
+      <renderer name="default">
+        <fieldset header="${header | translate}" collapsible="false" className="div-det-acc pcd-ha-color ">
+          <vbox>
+            <vbox className="vpanel-body accp">
+              <vbox className="desc">
+                <html>
+                  <p class="PDC-prag-p">${code1 | translate}</p>
+                  <p class="PDC-prag-p">${code2 | translate}</p>
+                </html>
+                <vbox className="PDC-btn-container-right">
+                  <button label="Moteur de recherche d'activités" icon="fas fa-search" className="PCD-moteur-search">
+                    <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=", "search", "All Karazuxresults", {});</postChange>
+                  </button>
+                </vbox>
+              </vbox>
+              <vbox className="acc-titles">
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fa fa-shopping-basket" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">${code3 | translate}</span>
+                      <p>${code4 | translate}</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimpleDeclaration", "search", "Simple Decleration", {});</postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-cogs" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">${code5 | translate}</span>
+                      <p>${code6 | translate}</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtablissementClasse", "search", "Etablissement classé catégorie 3", {});
+                      </postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-industry" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">${code7 | translate}</span>
+                      <p>${code8 | translate}</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtablissementClasse2", "search", "Etablissement classé catégorie 2", {});
+                      </postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-map-signs" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">${code9 | translate}</span>
+                      <p>${code10 | translate}</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/AffichagePub", "search", "Affichage Publicitaire", {});
+                      </postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-signal" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">${code11 | translate}</span>
+                      <p>${code12 | translate}</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubRT", "search", "Occupation Domaine Public RT", {});
+                      </postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-road" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">${code13 | translate}</span>
+                      <p>${code14 | translate}</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubRp", "search", "Occupation Domaine Public RP", {});
+                      </postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+                <html>
+                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
+                </html>
+                <vbox columns="10% 90%">
+                  <html>
+                    <i class="fas fa-coffee" />
+                  </html>
+                  <vbox>
+                    <html>
+                      <span class="acc-title">${code15 | translate}</span>
+                      <p>${code16 | translate}</p>
+                    </html>
+                    <button className="det-but" label="Détail">
+                      <postChange>
+                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubUC", "search", "Occupation Domaine Public UC", {});
+                      </postChange>
+                    </button>
+                  </vbox>
+                </vbox>
+              </vbox>
+            </vbox>
+          </vbox>
+        </fieldset>
+      </renderer>
+
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+        <script onLoad="true">
+                try{
+                    root.userlang=userLocal;
+                    context.formRender.notifyObservers("userlang");
+                }catch(e){
+                    console.log("ERROOOR",e);
+                }
+            </script>
       <script postLoad="true"> 
                 
                 
@@ -35,170 +197,7 @@
         <div style="height: 30px;" />
       </html>
       <vbox columns="70% 30%">
-        <fieldset header="AUTORISATIONS D'EXPLOITATION ÉCONOMIQUE" collapsible="false" className="div-det-acc pcd-ha-color ">
-          <vbox>
-            <vbox className="vpanel-body accp">
-              <vbox className="desc">
-                <html>
-                  <p class="PDC-prag-p">Les autorisations économiques constituent l'aboutissement du processus administratif de tout projet et marque le démarrage effectif de l'activité économique. Plusieurs types d'autorisation sont concernées, 
-                                        lesquelles différent en termes de procédures applicables, de documents requis et d'entités responsables de leurs délivrance. 
-                                        Vous trouverez ci-après les démarches à suivre pour chaque procédure applicable.</p>
-                  <p class="PDC-prag-p">Pour ce type particulier d'autorisation, il est très important d'identifier de façon précise l'activité économique dont on souhaite obtenir l'autorisation avant de procéder.</p>
-                </html>
-                <vbox className="PDC-btn-container-right">
-                  <button label="Moteur de recherche d'activités" icon="fas fa-search" className="PCD-moteur-search">
-                    <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search=", "search", "All Karazuxresults", {});</postChange>
-                  </button>
-                </vbox>
-              </vbox>
-              <vbox className="acc-titles">
-                <vbox columns="10% 90%">
-                  <html>
-                    <i class="fa fa-shopping-basket" />
-                  </html>
-                  <vbox>
-                    <html>
-                      <span class="acc-title">Simples déclations</span>
-                      <p>L'ouverture des établissements accueillant des activités non classées est soumise à une procédures de déclaration préalable aboutissant à la délivrance par la commune ou l'arrondissement d'un recipicé. 
-                                            Ce recipicé permet au concerné d''ouvrir son activité à condition de se conformer aux cahiers des charges établis par la commune ainsi qu'à toute réglementation gérant son secteur d'activité. Une visite de contrôle "à posteriori" est effectuée par les services communaux après le début de l'exploitation de l'établissement.</p>
-                    </html>
-                    <button className="det-but" label="Détail">
-                      <postChange>ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimpleDeclaration", "search", "Simple Decleration", {});</postChange>
-                    </button>
-                  </vbox>
-                </vbox>
-                <html>
-                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
-                </html>
-                <vbox columns="10% 90%">
-                  <html>
-                    <i class="fas fa-cogs" />
-                  </html>
-                  <vbox>
-                    <html>
-                      <span class="acc-title">Etablissements de 3ème catégorie</span>
-                      <p>Les établissements classés en 3ème catégorie désignent les activités de commerce, de service ou de fabrication artisanale utilisant des procédés, des outils ou des équipements susceptibles de présenter des causes d'insalubrité, d'incommodité ou de danger. 
-                                                L'ouverture de tels établissements est soumis également à une procédure de déclaration préalable dont la délivrance du recipicé est conditionnée par l'avis favorable d'une commission mixte.</p>
-                    </html>
-                    <button className="det-but" label="Détail">
-                      <postChange>
-                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtablissementClasse", "search", "Etablissement classé catégorie 3", {});
-                      </postChange>
-                    </button>
-                  </vbox>
-                </vbox>
-                <html>
-                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
-                </html>
-                <vbox columns="10% 90%">
-                  <html>
-                    <i class="fas fa-industry" />
-                  </html>
-                  <vbox>
-                    <html>
-                      <span class="acc-title">Etablissements en 2ème catégorie</span>
-                      <p>Les établissements classés en 2ème catégorie désignent les activités de commerce, 
-                                                de service ou de fabrication industrielle utilisant des procédés, 
-                                                des outils ou des équipements susceptibles de présenter des causes d'insalubrité, d'incommodité ou de danger. De tels établissements ne peuvent être ouverts à l'exploitation qu'après obtention d'une autorisation émanant des services communaux.</p>
-                    </html>
-                    <button className="det-but" label="Détail">
-                      <postChange>
-                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/EtablissementClasse2", "search", "Etablissement classé catégorie 2", {});
-                      </postChange>
-                    </button>
-                  </vbox>
-                </vbox>
-                <html>
-                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
-                </html>
-                <vbox columns="10% 90%">
-                  <html>
-                    <i class="fas fa-map-signs" />
-                  </html>
-                  <vbox>
-                    <html>
-                      <span class="acc-title">Affichage publicitaire</span>
-                      <p>L'utilisation des dispositifs publicitaire dans ses différentes formats nécessite 
-                                                l'obtention de la part des services communaux des autorisations appropriées et 
-                                                le règlement de droits fiscaux institués par l'arrêté fiscal propre à chaque commune. 
-                                                L'autorisation obtenue possède généralement une durée de validité d'un an et doit être renouvelée ou annulée annuellement à l'initiative du demandeur.</p>
-                    </html>
-                    <button className="det-but" label="Détail">
-                      <postChange>
-                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/AffichagePub", "search", "Affichage Publicitaire", {});
-                      </postChange>
-                    </button>
-                  </vbox>
-                </vbox>
-                <html>
-                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
-                </html>
-                <vbox columns="10% 90%">
-                  <html>
-                    <i class="fas fa-signal" />
-                  </html>
-                  <vbox>
-                    <html>
-                      <span class="acc-title">Occupation du domaine public par les réseaux et équipements télécom</span>
-                      <p>L'utilisation du domaine public pour le déploiement de réseaux filaires ou l'installation 
-                                                d'équipements de télécommunication nécessite l'obtention préalable par l'opérateur concerné d'une autorisation appropriée. 
-                                                L'autorisation précise explicitement les  délimitations géographique des travaux, 
-                                                la nature des équipements à installer et les dates de réalisation de ces travaux.</p>
-                    </html>
-                    <button className="det-but" label="Détail">
-                      <postChange>
-                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubRT", "search", "Occupation Domaine Public RT", {});
-                      </postChange>
-                    </button>
-                  </vbox>
-                </vbox>
-                <html>
-                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
-                </html>
-                <vbox columns="10% 90%">
-                  <html>
-                    <i class="fas fa-road" />
-                  </html>
-                  <vbox>
-                    <html>
-                      <span class="acc-title">Occupation du domaine public par les réseaux publics</span>
-                      <p>Le déploiement et la maintenance des réseaux publics (Eau, Électricité, Assainissement, Éclairage public) 
-                                                nécessite généralement l'ouverture de tranchées au niveau des voies public. 
-                                                Ces interventions ne peuvent avois lieu qu'après obtention par la régie ou le concessionnaire d'une autorisation d'aoccupation du domaine public et 
-                                                le règlement des frais associées à la dégradation de la chaussée.</p>
-                    </html>
-                    <button className="det-but" label="Détail">
-                      <postChange>
-                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubRp", "search", "Occupation Domaine Public RP", {});
-                      </postChange>
-                    </button>
-                  </vbox>
-                </vbox>
-                <html>
-                  <hr class="header-create-account-horizontal-line  PCD-hr-acc" />
-                </html>
-                <vbox columns="10% 90%">
-                  <html>
-                    <i class="fas fa-coffee" />
-                  </html>
-                  <vbox>
-                    <html>
-                      <span class="acc-title">Occupation du domaine public pour des utilisations courantes</span>
-                      <p>Les activités économiques, sociales et culturelles permanentes ou occasionnelles font souvent appel à l'utilisation du domaine public (Terrasses de café, Bâches, Tournage, 
-                                                Stationnement réservé, ...). Cette exploitation de l'espace commun ne peut avoir lieu qu'après obtention d'une autorisation de la part des services communaux et l'acquittement par le bénéficiaire des droits associés, 
-                                                conformément à l'arrêté fiscal communal.</p>
-                    </html>
-                    <button className="det-but" label="Détail">
-                      <postChange>
-                         ApplicationManager.run("karaz/ux/hub/portailsearch/search/OccupationDomainPubUC", "search", "Occupation Domaine Public UC", {});
-                      </postChange>
-                    </button>
-                  </vbox>
-                </vbox>
-              </vbox>
-            </vbox>
-          </vbox>
-        </fieldset>
+        <htmlTranslate header="AEECO00" code1="AEECO01" code2="AEECO02" code3="AEECO03" code4="AEECO04" code5="AEECO05" code6="AEECO06" code7="AEECO07" code8="AEECO08" code9="AEECO09" code10="AEECO10" code11="AEECO11" code12="AEECO12" code13="AEECO13" code14="AEECO14" code15="AEECO15" code16="AEECO16" />
                   <search searchQN="karaz/ux/hub/portailsearch/search/RightAside" /> 
 
       </vbox>
