@@ -10,8 +10,71 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+    <component name="htmlTranslate">
+
+      <renderer name="panelTitle">
+        <html>
+          <div class="vpanel-title">
+            <div class="vpanel-title">
+            <span style="display:grid;grid-template-columns:50% 50%">
+              <span>${code1 | translate}</span>
+              <span style="text-align:right;color:#38A;cursor:pointer;font-size:13px" onclick="showListVideo('classSearch-7')">${code2 | translate}</span>
+            </span>
+              <hr class="header-create-account-horizontal-line hr-hub" />
+            </div>
+            <div class="hp-sbox-text">
+              ${code3 | translate}
+            </div>
+          </div>
+        </html>
+      </renderer>
+    
+      <renderer name="searchVideo">
+        <html className="search-video">
+          <div class="searchGif">
+            <img src="img/search-move.gif" />
+          </div>
+          <div class="full-search-list" />
+          <div class="no-result-v" style="display:none;height: 500px;">
+            ${code | translate}
+          </div>
+          <div class="pagination pagination-second" />
+        </html>
+      </renderer>
+    
+      <renderer name="consulationVideo">
+        <html className="consultation-video">
+          <span class="consultation-video-title">${code1 | translate}</span>
+          <div class="video-iframe">
+            <iframe src="https://player.vimeo.com/video/241206308?rel=0" width="100%" height="100%" frameborder="0" />
+          </div> 
+          <div class="video-description">${code2 | translate}</div>
+          <div class="next-prev" columns="50% 50%">
+            <div class="prev-video" style="">
+              <i class="fas fa-chevron-left" />
+              <span class="">${code3 | translate}</span>
+            </div>
+            <div class="next-video" style="">
+              <span class="">${code4 | translate}</span>
+              <i class="fas fa-chevron-right" />
+            </div>
+          </div>
+        </html>
+      </renderer>
+    
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+      <script onLoad="true">
+              try{
+                  root.userlang=userLocal;
+                  context.formRender.notifyObservers("userlang");
+              }catch(e){
+                  console.log("ERROOOR",e);
+              }
+          </script>
       <script postLoad="true">
             profilesT=profiles;
             getAllplayLists(2,1000,"classSearch-7",context.formRender.targetPanel);
@@ -76,19 +139,7 @@
       <vbox columns="70% 30%" className="classSearch-7">
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
-            <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                <span style="display:grid;grid-template-columns:50% 50%">
-                  <span>VIDÉOS DIDACTIQUES</span>
-                  <span style="text-align:right;color:#38A;cursor:pointer;font-size:13px" onclick="showListVideo('classSearch-7')">Retour à la liste des vidéos</span>
-                </span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                </div>
-                <div class="hp-sbox-text">
-Vous trouverez ici tous les tutoriels et vidéos nécessaires pour vous familiariser avec la plateforme Rokhas, de l'inscription , à la création d'une première demande et à la maîtrise des autres étapes et options avancées.                </div>
-              </div>
-            </html>
+            <htmlTranslate renderer="panelTitle" code1="GVC00" code2="GVC01" code3="GVC02" />
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <vbox columns="68% 32%">
                 <field className="hp-search_field search-video-input" label="" xpath="query.search" widget="text" emptyText="Rechercher une vidéo" />
@@ -122,42 +173,16 @@ Vous trouverez ici tous les tutoriels et vidéos nécessaires pour vous familiar
             <html>
               <div style="height: 30px;" /> 
             </html>
-            <html className="search-video">
-              <div class="searchGif">
-                <img src="img/search-move.gif" />
-              </div>
-              <div class="full-search-list" />
-              <div class="no-result-v" style="display:none;height: 500px;">
-                    Aucun résultat trouvé. 
-                    Essayez d'autres mots clés
-              </div>
-              <div class="pagination pagination-second" />
-            </html>
+            <htmlTranslate renderer="searchVideo" code="GVC03" />
             <html class="loadGifVid">
               <div class="searchGif2">
                 <img src="img/load-text.gif" />
               </div>
             </html>
-            <html className="consultation-video">
-              <span class="consultation-video-title">1-Création de couche -Layer V19072018</span>
-              <div class="video-iframe">
-                <iframe src="https://player.vimeo.com/video/241206308?rel=0" width="100%" height="100%" frameborder="0" />
-              </div> 
-              <div class="video-description">Vidéo didactique montrant le déroulement pas à pas de la création d'une couche -Layer. Opération primordiale dans le processus de partage des fichiers de données spatiales dans des cartes.</div>
-              <div class="next-prev" columns="50% 50%">
-                <div class="prev-video" style="">
-                  <i class="fas fa-chevron-left" />
-                  <span class="">Vidéo précedente</span>
-                </div>
-                <div class="next-video" style="">
-                  <span class="">Vidéo suivante</span>
-                  <i class="fas fa-chevron-right" />
-                </div>
-              </div>
-            </html>
+            <htmlTranslate renderer="consulationVideo" code1="GVC04" code2="GVC05" code3="GVC06" code4="GVC07" />
           </vbox>
         </vbox>
-        <fieldset header="VIDÉOS DIDACTIQUES RÉCENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation" />
+        <fieldset label="VIDÉOS DIDACTIQUES RÉCENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation" />
       </vbox>
       <html>
         <div style="height: 30px;" />
