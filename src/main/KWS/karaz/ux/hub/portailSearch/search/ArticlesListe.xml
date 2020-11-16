@@ -99,15 +99,28 @@
       <script postLoad="true">
       getCountArticles("classSearch-80");
       removeFullListSearch("classSearch-80",context.formRender.targetPanel);
-      if(root.query.typeArticle==""){
-        context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("TOUS");
-      }else if(root.query.typeArticle==1){
-        context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("PRATIQUE");
-      }else if(root.query.typeArticle==2){
-       context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("A LA UNE");
-      }else if(root.query.typeArticle==3){
-        context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("REVUE DE PRESSE");
-      }     
+      if(root.userlang=="fr"){
+        if(root.query.typeArticle==""){
+          context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("TOUS");
+        }else if(root.query.typeArticle==1){
+          context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("PRATIQUE");
+        }else if(root.query.typeArticle==2){
+         context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("A LA UNE");
+        }else if(root.query.typeArticle==3){
+          context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("REVUE DE PRESSE");
+        } 
+      }
+      if(root.userlang=="ar"){
+        if(root.query.typeArticle==""){
+          context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("الكل");
+        }else if(root.query.typeArticle==1){
+          context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("مناسب");
+        }else if(root.query.typeArticle==2){
+         context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("إلى الرئيسية");
+        }else if(root.query.typeArticle==3){
+          context.formRender.targetPanel.find(".classSearch-80 .vpanel-title .title-2x").html("قراءة في الصحافة");
+        } 
+      }    
           profilesT = profiles;
           
             
