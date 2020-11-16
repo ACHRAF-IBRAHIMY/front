@@ -862,9 +862,17 @@ success: function (result) {
     var playlistsClass = [];
     console.log(tab.length);
     for(var i=0;i<tab.length;i++){
-        var fieldset = '<div class="ow-pl ow-tabpanel-flex NFQ-quest-title NFQ-type-document expanded class-playlist'+i+'"> <div class="ow-pl-toolbar"><div class="ow-label-pl">'+tab[i].key+'</div> <span class="expand-collapse"> </span> <span class="actions"> </span>  </div><div class="ow-pl-inner"><div class="ow-html"> <div class="NFQ-quest-type-document det NFQ-fieldset" style="padding:0.25rem;"></div></div><div style="clear:both"> </div></div></div>';
+        try{
+            if(transMap[tab[i].key.replace(/ /g,"__")]!=undefined){
+            var keyTrans = transMap[tab[i].key.replace(/ /g,"__")];
+            }else{
+            var keyTrans = tab[i].key
+            }
+    
+        }catch(e){}
+        var fieldset = '<div class="ow-pl ow-tabpanel-flex NFQ-quest-title NFQ-type-document expanded class-playlist'+i+'"> <div class="ow-pl-toolbar"><div class="ow-label-pl">'+keyTrans+'</div> <span class="expand-collapse"> </span> <span class="actions"> </span>  </div><div class="ow-pl-inner"><div class="ow-html"> <div class="NFQ-quest-type-document det NFQ-fieldset" style="padding:0.25rem;"></div></div><div style="clear:both"> </div></div></div>';
         $("."+clas+" .NQF-freq-quest > .ow-pl-inner").append(fieldset);
-        playlists.push(tab[i].key);
+        playlists.push(keyTrans);
         playlistsClass.push(".class-playlist"+i);
     }
     RestSearchVideo("",0,size,playlists,type,playlistsClass,null,clas,target);
@@ -903,9 +911,17 @@ var playlists = [];
 var playlistsClass = [];
 console.log(tab.length);
 for(var i=0;i<tab.length;i++){
-    var fieldset = '<div class="ow-pl ow-tabpanel-flex NFQ-quest-title NFQ-type-document expanded class-playlist'+i+'"> <div class="ow-pl-toolbar"><div class="ow-label-pl">'+tab[i].key+'</div> <span class="expand-collapse"> </span> <span class="actions"> </span>  </div><div class="ow-pl-inner"><div class="ow-html"> <div class="NFQ-quest-type-document det NFQ-fieldset" style="padding:0.25rem;"></div></div><div style="clear:both"> </div></div></div>';
+    try{
+        if(transMap[tab[i].key.replace(/ /g,"__")]!=undefined){
+        var keyTrans = transMap[tab[i].key.replace(/ /g,"__")];
+        }else{
+        var keyTrans = tab[i].key
+        }
+
+    }catch(e){}
+    var fieldset = '<div class="ow-pl ow-tabpanel-flex NFQ-quest-title NFQ-type-document expanded class-playlist'+i+'"> <div class="ow-pl-toolbar"><div class="ow-label-pl">'+keyTrans+'</div> <span class="expand-collapse"> </span> <span class="actions"> </span>  </div><div class="ow-pl-inner"><div class="ow-html"> <div class="NFQ-quest-type-document det NFQ-fieldset" style="padding:0.25rem;"></div></div><div style="clear:both"> </div></div></div>';
     $("."+clas+" .NQF-freq-quest > .ow-pl-inner").append(fieldset);
-    playlists.push(tab[i].key);
+    playlists.push(keyTrans);
     playlistsClass.push(".class-playlist"+i);
 }
 RestSearchDownload("",0,size,playlists,type,playlistsClass,null,clas,target);
@@ -3742,15 +3758,24 @@ function fullSearchList(results,cls,typePage,target){
 	var img = results[i]._source.imgP;
 	var tags = results[i]._source.tags;
 	var link = results[i]._source.link;
-	var lang = results[i]._source.lang;
+    var lang = results[i]._source.lang;
+    
+    try{
+        if(transMap[type.replace(/ /g,"__")]!=undefined){
+        var typeTrans = transMap[type.replace(/ /g,"__")];
+        }else{
+        var typeTrans = type
+        }
+
+        }catch(e){}
 
 	var b = document.createElement("div");
 	b.setAttribute("class","hp-box full-search-list-item");
-	b.setAttribute("style","grid-template-columns: 0% 35% 65%;height: 190px;"); 
+    b.setAttribute("style","grid-template-columns: 0% 35% 65%;height: 190px;");
 
 	var imgit = document.createElement("div");
 	imgit.setAttribute("class","item-img");
-	imgit.innerHTML="<img style=\"width: 93%;height: 170px;position: relative;    right: -9px;top: -11px;\" src=\""+img+"\"/>";
+	imgit.innerHTML="<img style=\"width: 93%;height: 170px;position: relative;    right: -9px;top: -11px;margin-right: 40px;\" src=\""+img+"\"/>";
 
 	var d = document.createElement("div");
 	d.setAttribute("class","item-body");
@@ -3817,11 +3842,11 @@ function fullSearchList(results,cls,typePage,target){
 	    });
 	   
 	    if(type=="REVUE DE PRESSE"){
-	        g2.innerHTML="Ouvrir <input type=\"hidden\" value=\""+link+"\" idd=\""+type+"\" > ";
+	        g2.innerHTML="Ouvrir <input type=\"hidden\" value=\""+link+"\" idd=\""+typeTrans+"\" > ";
 	        g2.setAttribute("style","color:#38a;border: none;text-decoration: underline;margin-right:8px;width: 100%;position: inherit;text-align: right;font-size:14px");
 
 	    }else{
-	        g2.innerHTML="Ouvrir <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
+	        g2.innerHTML="Ouvrir <input type=\"hidden\" value=\""+id+"\" idd=\""+typeTrans+"\" > ";
 	        g2.setAttribute("style","color:#38a;border: none;text-decoration: underline;margin-right:8px;width: 100%;position: inherit;text-align: right;font-size:14px");
 	    }
 	}
@@ -3829,15 +3854,15 @@ function fullSearchList(results,cls,typePage,target){
 
 
 	if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
-	    g.innerHTML="Modifier <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
+	    g.innerHTML="Modifier <input type=\"hidden\" value=\""+id+"\" idd=\""+typeTrans+"\" > ";
 	    g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;");
 	}else{
 	    if(type=="REVUE DE PRESSE"){
-	        g.innerHTML="Consulter sur <b>"+results[i]._source.source+"</b><input type=\"hidden\" value=\""+link+"\" idd=\""+type+"\" > ";
+	        g.innerHTML="Consulter sur <b>"+results[i]._source.source+"</b><input type=\"hidden\" value=\""+link+"\" idd=\""+typeTrans+"\" > ";
 	        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;font-size:14px");
 
 	    }else{
-	        g.innerHTML="Lire la suite <input type=\"hidden\" value=\""+id+"\" idd=\""+type+"\" > ";
+	        g.innerHTML="Lire la suite <input type=\"hidden\" value=\""+id+"\" idd=\""+typeTrans+"\" > ";
 	        g.setAttribute("style","color:#38a;border: none;text-decoration: underline;width: 100%;position: inherit;text-align: right;font-size:14px");
 	    }  
 	}  
@@ -4217,8 +4242,17 @@ $(".div-fsb-details .fsb-container .c-path .p3").html(nature);
 
 function noResults(cls){
 var a = document.createElement("div");
+var text = "Aucune activité ne correspond aux termes de recherche spécifiés.<br/><br/>Suggestions :<br/>- Vérifiez l’orthographe des termes de recherche.<br/>- Essayez d'autres mots.<br/>- Utilisez des mots clés plus généraux.";
+try{
+    if(transMap[text.replace(/ /g,"__")]!=undefined){
+    var textTrans = transMap[text.replace(/ /g,"__")];
+    }else{
+    var textTrans = text
+    }
+
+    }catch(e){}
 a.setAttribute("style","text-align: left;width: 50;margin: auto;width: 60%;");
-a.innerHTML="Aucune activité ne correspond aux termes de recherche spécifiés.<br/><br/>Suggestions :<br/>- Vérifiez l’orthographe des termes de recherche.<br/>- Essayez d'autres mots.<br/>- Utilisez des mots clés plus généraux.";
+a.innerHTML=textTrans;
 $("."+cls+" .full-search-list").append(a);
 }
 
@@ -4669,4 +4703,112 @@ complete: function () {
 //alert('finished');
 }
 });
+}/* from file karazapps/karaz/ux/hub/portailsearch/model/portailsearch/web/globalSearch.js  */
+function setPaganateSizeValueById(divId,childId,size){
+try{
+console.log("setPaganateSizeValueById(divId,size) ......."+divId+"size=="+size ); 
+ if(size>=10){
+ return;
+ }  
+var v0=size;
+var v1=size*2;
+
+if( size<5){
+v1=size*3;
+}     
+var v2=parseInt(30/size)*size;
+var v3=parseInt(50/size)*size;
+var v4=parseInt(100/size)*size;
+var v5=parseInt(250/size)*size;
+var v6=parseInt(500/size)*size;
+var v7=parseInt(1000/size)*size;
+var optionsStr= '<option value="'+v0+'" selected="true">'+v0+'</option><option value="'+v1+'">'+v1+'</option><option value="'+v2+'">'+v2+'</option><option value="'+v3+'">'+v3+'</option><option value="'+v4+'">'+v4+'</option><option value="'+v5+'">'+v5+'</option> <option value="'+v6+'">'+v6+'</option><option value="'+v7+'">'+v7+'</option>';
+$("#"+divId+" #"+childId+" .ow-pagination-pageSize").each(function(i) {
+$(this).empty();
+$(this).html(optionsStr);
+$(this).val(v0).change();
+//alert("i======"+i); 
+});
+}catch(e){
+console.log("ERROR in Javascript function setPaganateSizeValueById(divId,size) ......."+e);
+}
+}
+function setProgressSearch(divId,childId,loadingId){
+try{
+console.log("setProgressSearch......." +divId+"childId=="+childId ); 
+$("#"+divId+" #"+childId+" .ow-pagination-navgroup").children().each(function(i) {
+var classNme=$(this).attr("class");
+//alert(classNme);
+if(!("ow-pagination-pageLabel"==classNme || "ow-pagination-pageNbrLable"==classNme || "ow-pagination-pageNbrValue"==classNme)){
+$(this).click(function(){
+console.dir($("#"+childId));
+    $("#"+loadingId).show();
+    var oftop=parseInt($("#"+childId).offset().top) - 250;
+    //alert($("#"+childId).offset().top);
+     $("#"+divId+" #"+childId+" .ow-vl-inner.list-wrapper").empty();
+      $('html').animate({
+scrollTop: oftop
+}, 1000);
+
+});
+}
+});
+$("#"+divId+" #"+childId+" .ow-pagination-pageSize").change(function(){
+          $("#"+loadingId).show();
+   $("#"+divId+" #"+childId+" .ow-vl-inner.ow-gbox.list-wrapper").empty();
+
+});     
+}catch(e){
+console.log("ERROR in Javascript function setProgressSearch ......."+e);
+}
+}
+
+function setShowProgressSearch(divId,childId,loadingId){
+try{
+console.log("setShowProgressSearch......." ); 
+$("#"+loadingId).show();
+     $("#"+divId+" #"+childId+" .ow-vl-inner.list-wrapper").empty();
+}catch(e){
+console.log("ERROR in Javascript function setShowProgressSearch ......."+e);
+}
+}
+function setPaganateSizeValueById(divId,childId,size,timeOut){
+try{
+console.log("setPaganateSizeValueById(divId,size) ......."+divId+"size=="+size ); 
+setTimeout(function(){ 
+if(size>=10){
+ return;
+ } 
+var v0=size;
+var v1=size*2;
+
+if( size<5){
+v1=size*3;
+}     
+var v2=parseInt(30/size)*size;
+var v3=parseInt(50/size)*size;
+var v4=parseInt(100/size)*size;
+var v5=parseInt(250/size)*size;
+var v6=parseInt(500/size)*size;
+var v7=parseInt(1000/size)*size;
+var optionsStr= '<option value="'+v0+'" selected="true">'+v0+'</option><option value="'+v1+'">'+v1+'</option><option value="'+v2+'">'+v2+'</option><option value="'+v3+'">'+v3+'</option><option value="'+v4+'">'+v4+'</option><option value="'+v5+'">'+v5+'</option> <option value="'+v6+'">'+v6+'</option><option value="'+v7+'">'+v7+'</option>';
+$("#"+divId+" #"+childId+" .ow-pagination-pageSize").each(function(i) {
+$(this).empty();
+$(this).html(optionsStr);
+$(this).val(v0).change();
+//alert("i======"+i); 
+});
+}, timeOut); 
+ 
+}catch(e){
+console.log("ERROR in Javascript function setPaganateSizeValueById(divId,size) ......."+e);
+}
+}
+
+function forceClickElement(divId,childId,fwkclass){
+$("#"+divId+" #"+childId+" ."+fwkclass).click();
+}
+function hideLoadingElement(loadingId){
+console.log("hideLoadingElement ......."+loadingId ); 
+$("#"+loadingId).hide();
 }
