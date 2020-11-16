@@ -1135,6 +1135,21 @@ $.ajax({
             var imgUrl= results[i]._source.img_url;
             var playlist = results[i]._source.playlist;
             var b = document.createElement("div");
+            
+            try{
+                if(transMap["Lire vidéo".replace(/ /g,"__")]!=undefined){
+                    var videoTrans = transMap["Lire vidéo".replace(/ /g,"__")];
+                }else{
+                    var videoTrans = "Lire vidéo"
+                }
+                if(transMap[playlist.replace(/ /g,"__")]!=undefined){
+                    var playlistTrans = transMap[playlist.replace(/ /g,"__")];
+                }else{
+                    var playlistTrans = playlist
+                }
+        
+                }catch(e){}
+
             b.setAttribute("class","hp-box full-search-list-item");
             b.setAttribute("style","height: 190px;");
             var c = document.createElement("div");
@@ -1142,7 +1157,7 @@ $.ajax({
            // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
             var s = document.createElement("span");
             s.setAttribute("class","cl-orange");
-            c.appendChild(addEventSpan("p1",playlist,clas,target));
+            c.appendChild(addEventSpan("p1",playlistTrans,clas,target));
             c.appendChild(s);
             // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
             // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
@@ -1170,14 +1185,14 @@ $.ajax({
                 //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
              });
             g.setAttribute("class","item-body-button hp-sbox-btn");
-            g.innerHTML="Lire vidéo<input type=\"hidden\" value=\""+id+"\" > ";
+            g.innerHTML=videoTrans;
             g.setAttribute("style","display: inline-block;float:right;position: relative; color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
             d.appendChild(g);
             var title = document.createElement("div");
             title.setAttribute("class","item-title");
-            title.setAttribute("title",playlist);
+            title.setAttribute("title",playlistTrans);
             title.setAttribute("style","width:190px;top: 63px;right: 104px;");
-            title.innerHTML=subLong(playlist);
+            title.innerHTML=subLong(playlistTrans);
             title.addEventListener("click",function(){
                 /*currentPage=0;
                     $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
@@ -1628,7 +1643,29 @@ success: function (result) {
             var str = '<div class="docthumbnail"><img style="max-width: 70%;max-height: 157px;" class="smallThumbnailImg" src="'+contextPath+'/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=small&amp;or=img/no-file.svg"><img class="largeThumbnailImg" src="'+contextPath+'/DownloadFile?gedId='+attachement.gedId+'&amp;thumbnail=large&amp;or=img/no-file.svg"></div>';
         }
         
-        
+        try{
+            if(transMap[playlist.replace(/ /g,"__")]!=undefined){
+                var playlistTrans = transMap[playlist.replace(/ /g,"__")];
+            }else{
+                var playlistTrans = playlist
+            }
+            if(transMap[title.replace(/ /g,"__")]!=undefined){
+                var titleTrans = transMap[title.replace(/ /g,"__")];
+            }else{
+                var titleTrans = title
+            }
+            if(transMap["Détails".replace(/ /g,"__")]!=undefined){
+                var detailsTrans = transMap["Détails".replace(/ /g,"__")];
+            }else{
+                var detailsTrans = "Détails"
+            }
+            if(transMap[description.replace(/ /g,"__")]!=undefined){
+                var descriptionTrans = transMap[description.replace(/ /g,"__")];
+            }else{
+                var descriptionTrans = description
+            }
+    
+            }catch(e){}
 
         var b = document.createElement("div");
         b.setAttribute("class","hp-box full-search-list-item");
@@ -1638,7 +1675,7 @@ success: function (result) {
        // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
         var s = document.createElement("span");
         s.setAttribute("class","cl-orange");
-        c.appendChild(addEventSpan("p1",playlist,clas,target));
+        c.appendChild(addEventSpan("p1",playlistTrans,clas,target));
         c.appendChild(s);
         // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
         // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
@@ -1647,11 +1684,11 @@ success: function (result) {
         var e = document.createElement("div");
         e.setAttribute("class","item-body-title");
         d.setAttribute("style","height: height: 150px;");
-        e.innerHTML="<span title=\""+title+"\">"+subLong(title,35)+"</span>";
+        e.innerHTML="<span title=\""+titleTrans+"\">"+subLong(titleTrans,35)+"</span>";
         var f = document.createElement("p");
         //f.innerHTML= "Etablissement dispensant des cours de stylisme et modélisme de vêtements modernes ou traditionnels. Etablissement dispensant des cours de stylisme et modélisme de ...";
-        f.innerHTML = subLong(description,150);
-        f.setAttribute("title",description);
+        f.innerHTML = subLong(descriptionTrans,150);
+        f.setAttribute("title",descriptionTrans);
         d.appendChild(c);
         d.appendChild(e);
         d.appendChild(f);
@@ -1666,14 +1703,14 @@ success: function (result) {
             } 
          });
         g.setAttribute("class","item-body-button hp-sbox-btn");
-        g.innerHTML="Détails<input type=\"hidden\" value=\""+id+"\" > ";
+        g.innerHTML=detailsTrans;
         g.setAttribute("style","display: inline-block;float:right;position: relative; color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
         d.appendChild(g);
         var title = document.createElement("div");
         title.setAttribute("class","item-title");
-        title.setAttribute("title",playlist);
+        title.setAttribute("title",playlistTrans);
         title.setAttribute("style","width:190px;top: 63px;right: 104px;");
-        title.innerHTML=subLong(playlist);
+        title.innerHTML=subLong(playlistTrans);
         title.addEventListener("click",function(){
             /*currentPage=0;
                 $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
@@ -3587,14 +3624,27 @@ function fullSearchList(results,cls,typePage,target){
 	    }else{
 	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/RefDetail?query.idObject="+id,"search", "Référentiel juridique", {});
 	    } 
-	});
+    });
+    try{
+        if(transMap["Texte intégral".replace(/ /g,"__")]!=undefined){
+            var tiTrans = transMap["Texte intégral".replace(/ /g,"__")];
+        }else{
+            var tiTrans = "Texte intégral"
+        }
+        if(transMap[type.replace(/ /g,"__")]!=undefined){
+            var typeTrans = transMap[type.replace(/ /g,"__")];
+        }else{
+            var typeTrans = type
+        }
+
+        }catch(e){}
 	g.setAttribute("class","item-body-button");
 	g.setAttribute("style","color:#38a;border: none;text-decoration: underline;text-align: right;width: 85%;display: block;");
-	g.innerHTML="Texte intégral<input type=\"hidden\" value=\""+id+"\" > ";
+	g.innerHTML=tiTrans;
 	d.appendChild(g);
 	var title = document.createElement("div");
 	title.setAttribute("class","item-title");
-	title.setAttribute("title",type);
+    title.setAttribute("title",typeTrans);
 	var style = "line-height:30px;top: 51px;height: 30px;right: 92px;";
 
 	if(type=="URBANISME"){
@@ -3845,17 +3895,35 @@ function fullSearchList(results,cls,typePage,target){
 	    // c.innerHTML="<span class=\"p p1\">"+typeAG+"</span>"+"<span class=\"cl-orange\"> > </span> <span class=\"p p2\">"+typeAc+"</span><span class=\"cl-orange\"> > </span> <span class=\"p p3\">"+nature+"</span>";
 	    var s = document.createElement("span");
 	    s.setAttribute("class","cl-orange");
-	    s.innerHTML=" > ";
-	    c.appendChild(addEventSpan("p1",typeAt,cls,target));
+        s.innerHTML=" > ";
+        try{
+            if(transMap[typeAt.replace(/ /g,"__")]!=undefined){
+                var typeAtTrans = transMap[typeAt.replace(/ /g,"__")];
+            }else{
+                var typeAtTrans = typeAt
+            }
+            if(transMap[typeAc.replace(/ /g,"__")]!=undefined){
+                var typeAcTrans = transMap[typeAc.replace(/ /g,"__")];
+            }else{
+                var typeAcTrans = typeAt
+            }
+            if(transMap[nature.replace(/ /g,"__")]!=undefined){
+                var natureTrans = transMap[nature.replace(/ /g,"__")];
+            }else{
+                var natureTrans = nature
+            }
+    
+            }catch(e){}
+	    c.appendChild(addEventSpan("p1",typeAtTrans,cls,target));
 	    c.appendChild(s);
 	    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-	    c.appendChild(addEventSpan("p2",typeAc,cls,target));
+	    c.appendChild(addEventSpan("p2",typeAcTrans,cls,target));
 	    s = document.createElement("span");
 	    s.setAttribute("class","cl-orange");
 	    s.innerHTML=" > ";
 	    c.appendChild(s);
 	    // c.innerHTML+="<span class=\"cl-orange\"> > </span>";
-	    c.appendChild(addEventSpan("p3",nature,cls,target));
+	    c.appendChild(addEventSpan("p3",natureTrans,cls,target));
 	    var d = document.createElement("div");
 	    d.setAttribute("class","item-body");
 	    var e = document.createElement("div");
@@ -3872,11 +3940,11 @@ function fullSearchList(results,cls,typePage,target){
 
 	    var typeAtts= "";
 	    if(typeAt=="Établissement classé" || typeAt=="Occupation Domaine Public"){
-	        typeAtts = typeAt+";"+typeAc;
+	        typeAtts = typeAtTrans+";"+typeAcTrans;
 	    }else if(typeAt=="Autorisations urbanisme"){
-	        typeAtts = typeAt+";"+nature;
+	        typeAtts = typeAtTrans+";"+natureTrans;
 	    }else{
-	        typeAtts = typeAt;
+	        typeAtts = typeAtTrans;
 	    }
 	    var indexProc = procedureList[0].indexOf(typeAtts);
 	    var g = document.createElement("button");
@@ -3887,16 +3955,24 @@ function fullSearchList(results,cls,typePage,target){
 	        var procName = $(this).attr("procName");
 	        //ApplicationManager.run("karaz/ux/hub/portailsearch/search/DetailsActivitySearch?query.idObject="+id,"search", "DetailsActivitySearch", {});
 	        ApplicationManager.run("karaz/ux/hub/portailsearch/search/"+procName, "search", `Procédure`, {});
-	    });
+        });
+        try{
+            if(transMap["Voire procédure".replace(/ /g,"__")]!=undefined){
+                var vpTrans = transMap["Voire procédure".replace(/ /g,"__")];
+            }else{
+                var vpTrans = "Voire procédure"
+            }
+    
+            }catch(e){}
 	    g.setAttribute("class","item-body-button hp-sbox-btn");
-	    g.innerHTML="Voire procédure<input type=\"hidden\" value=\""+id+"\" > ";
+	    g.innerHTML=vpTrans;
 	    g.setAttribute("style","display: inline-block;color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
 	    d.appendChild(g);
 	    var title = document.createElement("div");
 	    title.setAttribute("class","item-title");
-	    title.setAttribute("style","background:"+setting.color+";width: 192px;top: 64px;right: 105px;");
-	    title.setAttribute("title",typeAt);
-	    title.innerHTML=subLong(typeAt);
+        title.setAttribute("style","background:"+setting.color+";width: 192px;top: 64px;right: 105px;");
+        title.setAttribute("title",typeAtTrans);
+	    title.innerHTML=subLong(typeAtTrans);
 	    title.addEventListener("click",function(){
 	        currentPage=0;
 	        $(".div-full-search-bar .hp-search_field input").val($(this).attr("title").toLowerCase());
