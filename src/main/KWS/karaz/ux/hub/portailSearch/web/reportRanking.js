@@ -653,19 +653,29 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }
     try{
         if(transMap[str.replace(/ /g,"__")]!=undefined){
-        var strTrans = transMap[str.replace(/ /g,"__")];
+            var strTrans = transMap[str.replace(/ /g,"__")];
         }else{
-        var strTrans = str
+            var strTrans = str
+        }
+        if(transMap[region.replace(/ /g,"__")]!=undefined){
+            var regionTrans = transMap[region.replace(/ /g,"__")];
+        }else{
+            var regionTrans = region
+        }
+        if(transMap[prefecture.replace(/ /g,"__")]!=undefined){
+            var prefectureTrans = transMap[prefecture.replace(/ /g,"__")];
+        }else{
+            var prefectureTrans = prefecture
         }
 
         }catch(e){}
     
     if(region != "default"){
-        strTrans += " | "+region;
+        strTrans += " | "+regionTrans;
     }
     
     if(prefecture != "default"){
-        strTrans += " | "+prefecture;
+        strTrans += " | "+prefectureTrans;
     }
     
     $(".ranking-fieldset > .ow-pl-toolbar .ow-label-pl").append("<span style=\"color:orange\"> "+strTrans+"</span>");
@@ -685,7 +695,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     $("#ranking-table2 tr:not(.first-tr)").remove();
     $("#ranking-table2 .err-msg-rk").remove();
     if(results.length==0){
-        tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
+        tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">"+transMap["ACPP00"]+"</span>");
     }else{
         $("#ranking-table2 tr:not(.first-tr)").remove();
     }
@@ -743,7 +753,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     $("#ranking-table2 tr:not(.first-tr)").remove();
     $("#ranking-table2 .err-msg-rk").remove();
     if(results.length==0){
-    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
+    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">"+transMap["ACPP00"]+"</span>");
     }else{
     $("#ranking-table2 tr:not(.first-tr)").remove();
     }
@@ -782,7 +792,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     $("#ranking-table2 .err-msg-rk").remove();
     
     if(results.length==0){
-    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
+    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">"+transMap["ACPP00"]+"</span>");
     }else{
     $("#ranking-table2 tr:not(.first-tr)").remove();
     }
@@ -831,7 +841,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     $("#ranking-table2 .err-msg-rk").remove();
     
     if(results.length==0){
-    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">L'analyse choisie ne contient pas suffisamment de données sur la période sélectionnée !</span>");
+    tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">"+transMap["ACPP00"]+"</span>");
     }else{
     $("#ranking-table2 tr:not(.first-tr)").remove();
     }

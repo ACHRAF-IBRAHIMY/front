@@ -1,4 +1,3 @@
-
 function addLike(user,id,target){
 var obj = {
 "script" : {
@@ -210,7 +209,15 @@ function createDivComments(comments,target,root){
     span.innerHTML = elm.date+ " | ";
     span.setAttribute("style","font-size: 14px;display: inline-block;margin-right: 8px;")
     var span1 = document.createElement("span");
-    span1.innerHTML="Répondre à ce commentaire";
+    try{
+        if(transMap["Répondre à ce commentaire".replace(/ /g,"__")]!=undefined){
+            var repondreCommTrans = transMap["Répondre à ce commentaire".replace(/ /g,"__")];
+        }else{
+            var repondreCommTrans = "Répondre à ce commentaire"
+        }
+
+    }catch(e){}
+    span1.innerHTML=repondreCommTrans;
     span1.setAttribute("style","cursor:pointer;font-size: 15px;color: #38A;");
     span1.addEventListener("click",function(){
     target.find(".comment-form h1.add-comment").hide();
@@ -739,22 +746,31 @@ span.innerHTML = tags[i].tag;
 div5.appendChild(span);
 }
 
+try{
+    if(transMap["Publié par".replace(/ /g,"__")]!=undefined){
+        var pubparTrans = transMap["Publié par".replace(/ /g,"__")];
+    }else{
+        var pubparTrans = "Publié par"
+    }
+
+}catch(e){}
+
 var div6 = document.createElement("div");
 div6.setAttribute("class","pub-by");
 div6.setAttribute("style","color:#333;font-size:15px");
 try{
 if(elm._source.type=="REVUE DE PRESSE"){
-    div6.innerHTML = 'Publié par : <span style=""><span style="font-weight: 600;">'+elm._source.source+'</span></span>';
+    div6.innerHTML = pubparTrans +': <span style=""><span style="font-weight: 600;">'+elm._source.source+'</span></span>';
 }else{
-    div6.innerHTML = 'Publié par : <span style=""><span style="font-weight: 600;">'+elm._source.author.split("|")[0].trim()+'</span> <span style="">'+elm._source.author.split("|")[1].trim()+'</span></span>';
+    div6.innerHTML = pubparTrans+': <span style=""><span style="font-weight: 600;">'+elm._source.author.split("|")[0].trim()+'</span> <span style="">'+elm._source.author.split("|")[1].trim()+'</span></span>';
 }
 }
 
 catch(e){
 if(elm._source.type=="REVUE DE PRESSE"){
-    div6.innerHTML = 'Publié par : <span style=""><span style="font-weight: 600;">'+elm._source.source+'</span></span>';
+    div6.innerHTML = pubparTrans+': <span style=""><span style="font-weight: 600;">'+elm._source.source+'</span></span>';
 }else{
-    div6.innerHTML = 'Publié par : <span style=""><span style="font-weight: 600;">'+elm._source.author+'</span></span>';
+    div6.innerHTML = pubparTrans+': <span style=""><span style="font-weight: 600;">'+elm._source.author+'</span></span>';
 }
 
 }
