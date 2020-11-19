@@ -1,4 +1,3 @@
-
 var simulator_index_qr = "simulator_index_qr";
 var simulator_index_docs = "simulator_index_docs";
 var simulator_index_steps = "simulator_index_steps";
@@ -796,7 +795,7 @@ for(var i=0;i<result.responses.length;i++){
             var reponseTemp = qstio.response.content[Number(arrayVect[1][i])-1];   
          }
 
-        doc.innerHTML = "<div style=\"padding: 3px 35px; text-align:left; font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div style=\"padding: 3px 50px;text-align:left;color: #38A;\">"+reponseTemp+"</div>"
+        doc.innerHTML = "<div class=\"simulatorQuestion\" style=\"padding: 3px 35px; text-align:left; font-size: 15px;margin-top: 10px;\">"+qstio.question+"</div><div class=\"simulatorReponse\" style=\"padding: 3px 50px;text-align:left;color: #38A;\">"+reponseTemp+"</div>"
         $(".simulator .info-container").append(doc) ;
         var obj = {
             "question":qstio.question,
