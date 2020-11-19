@@ -350,9 +350,17 @@ $(".dashbord-right .d2 .word-list-load-gif").show();
 }
 
 function loadDiv(div, key, membre) {
+    try{
+        if(transMap["LISTE DES MOTS EXISTES".replace(/ /g,"__")]!=undefined){
+            var LMETrans = transMap["LISTE DES MOTS EXISTES".replace(/ /g,"__")];
+        }else{
+            var LMETrans = "LISTE DES MOTS EXISTES"
+        }
+
+    }catch(e){}
 switch (div) {
 case 1:
-    $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("LISTE DES MOTS EXISTES");
+    $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html(LMETrans);
     if (key != null){
         loadList(key[0], key[1], membre);
         createPaginationListWords(10,key[0].length);
