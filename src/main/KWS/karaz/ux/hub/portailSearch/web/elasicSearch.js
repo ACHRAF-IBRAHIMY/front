@@ -3615,7 +3615,16 @@ function fullSearchList(results,cls,typePage,target){
 	    type="URBANISME";
 	}else if(type=="3"){
 	    type="AUTRE";
-	}
+    }
+    
+    try{
+        if(transMap[typeTx.replace(/ /g,"__")]!=undefined){
+        var typeTxTrans = transMap[typeTx.replace(/ /g,"__")];
+        }else{
+        var typeTxTrans = typeTx
+        }
+
+        }catch(e){}
 
 	var b = document.createElement("div");
 	b.setAttribute("class","hp-box full-search-list-item");
@@ -3628,7 +3637,7 @@ function fullSearchList(results,cls,typePage,target){
 	e.setAttribute("style","font-size:16px");
 	e.innerHTML="<span title=\""+titleTx+"\">"+subLong(titleTx,100).toUpperCase()+"</span>";
 	var f = document.createElement("p");
-	f.innerHTML = subLong(text,180)+"<span style=\"background:#777;color:#FFF;display: inline-block;border-radius: 2px;padding: 1px 3px;\">"+typeTx+"</span>";
+    f.innerHTML = subLong(text,180)+"<span style=\"background:#777;color:#FFF;display: inline-block;border-radius: 2px;padding: 1px 3px;\">"+typeTxTrans+"</span>";
 	f.setAttribute("style","font-size: 0.955vw;text-align: left;width: 100%;color: #777;")
 	d.appendChild(e);
 	d.appendChild(f);
@@ -3674,7 +3683,7 @@ function fullSearchList(results,cls,typePage,target){
 	}
 
 	title.setAttribute("style",style);
-	title.innerHTML=subLong(type);
+	title.innerHTML=subLong(typeTrans);
 	b.appendChild(title);
 	b.appendChild(d);
 	a.append(b);
