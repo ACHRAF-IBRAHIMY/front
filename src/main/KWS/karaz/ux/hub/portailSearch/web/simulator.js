@@ -13,7 +13,7 @@ if(param=="ar"){
     simulator_index_docs = "simulator_index_docs_ar";
     simulator_index_steps = "simulator_index_steps_ar";
     faq_index = "faq_index_ar";
-    videos_index ="videos_index_ar";
+    videos_index ="videos_index";
 }
 }
 
