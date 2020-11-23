@@ -53,7 +53,7 @@
                 </div>
                 <div class="error-msg-sim error-msg-sim1">
                   <div><i class="fas fa-exclamation-triangle" /></div>
-                  <p >${code1 | translate}
+                  <p>${code1 | translate}
                   <br />
                      - ${code2 | translate}
                     <br /> - ${code3 | translate}</p>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="next-button" style="position:relative">
                   <button class="back-rq stopped">${code5 | translate}</button>
-                  <button class="next-rq" >${code6 | translate}</button>
+                  <button class="next-rq">${code6 | translate}</button>
                   <button class="next-report" style="background: #02a202;display: inline-block;margin-left: 20px;color: #fff;border: none;width:auto"><i class="fas fa-print" /> ${code7 | translate}</button>
                 </div>
               </html>
@@ -75,17 +75,17 @@
             <renderer name="htmlSpan">
                 <html>
                     <span class="">
-                        <span >${code1 | translate}</span>  
+                        <span>${code1 | translate}</span>  
                         <br />
-                        <span >${code2 | translate} </span>
+                        <span>${code2 | translate} </span>
                     </span>
                     </html>
             </renderer>
 
             <renderer name="fieldSet">
-                <fieldSet header="${header | translate}" className="info-container-div">
+                <fieldSet header="${header | translate}" className="${className}">
                     <html>
-                    <div class="info-container" />
+                    <div class="${class}" />
                     </html>
                 </fieldSet>
             </renderer>
@@ -209,7 +209,7 @@
           <vbox columns="60% 40%">
           <vbox>
             <vbox className="hp-box simulator-qr">
-            <htmlTranslate renderer="panelFAQ" code="ID03"/>
+            <htmlTranslate renderer="panelFAQ" code="ID03" />
             <htmlTranslate renderer="Procedure" code1="WX00" code2="1" code3="WX02" code4="WX03" code5="WX04" code6="WX05" code7="WX06" />
               <button visible="1,=,2" label="test button" className="chargement-btn">
                 <postChange>
@@ -221,22 +221,22 @@
               </button>
             </vbox>
                       <vbox className="size955">
-                      <htmlTranslate renderer="fieldSet" header="RDC00" />
+                      <htmlTranslate renderer="fieldSet" class="info-container" header="RDC00" className="info-container-div wg-class-traduction-hd wg-tcode-RG03" />
           </vbox>
 
             </vbox>
 
             <vbox className="docs-qr">   
-              <htmlTranslate renderer="fieldSet" header="DR00" />
-              <htmlTranslate renderer="fieldSet" header="ECS00" />
+              <htmlTranslate renderer="fieldSet" class="docs-container" header="DR00" className="docs-container-div wg-class-traduction-hd wg-tcode-BN03" />
+              <htmlTranslate renderer="fieldSet" class="steps-container" header="ECS00" className="wg-class-traduction-hd wg-tcode-TY03" />
               <!--
                 <fieldSet header="DOCUMENTS DÉLIVRÉS" />
                 <fieldSet header="COÛT ÉSTIMATIF" />
               -->
 
-              <htmlTranslate renderer="fieldSet" header="DCS00" />
-              <htmlTranslate renderer="fieldSet" header="DFS00" />
-              <htmlTranslate renderer="fieldSet" header="DDS00" />
+              <htmlTranslate renderer="fieldSet" class="docs-comp-container" header="DCS00" className="wg-class-traduction-hd wg-tcode-TG03" />
+              <htmlTranslate renderer="fieldSet" class="docs-fac-container" header="DFS00" className="wg-class-traduction-hd wg-tcode-TW03" />
+              <htmlTranslate renderer="fieldSet" class="docs-sort-container" header="DDS00" className="wg-class-traduction-hd wg-tcode-BB03" />
             </vbox>
           </vbox>
           <html>
