@@ -1719,7 +1719,7 @@ success: function (result) {
             } 
          });
         g.setAttribute("class","item-body-button hp-sbox-btn");
-        g.innerHTML=detailsTrans;
+        g.innerHTML=detailsTrans+"<input type=\"hidden\" value=\""+id+"\" > ";
         g.setAttribute("style","display: inline-block;float:right;position: relative; color: #333;background: #f5f5f5;border: 1.2px solid #333 !important;border-radius: 15px;");
         d.appendChild(g);
         var title = document.createElement("div");

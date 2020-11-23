@@ -20,7 +20,7 @@
             <div class="vpanel-title">
             <span style="display:grid;grid-template-columns:50% 50%">
               <span>${code1 | translate}</span>
-              <span style="text-align:right;color:#38A;cursor:pointer;font-size:13px" onclick="showListVideo('classSearch-7')">${code2 | translate}</span>
+              <span class="refJuridiqueClass" style="text-align:right;color:#38A;cursor:pointer;font-size:13px" onclick="showListVideo('classSearch-7')">${code2 | translate}</span>
             </span>
               <hr class="header-create-account-horizontal-line hr-hub" />
             </div>
