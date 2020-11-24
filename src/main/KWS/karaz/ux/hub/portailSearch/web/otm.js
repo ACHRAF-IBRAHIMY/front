@@ -943,7 +943,16 @@ var p = $(".d2 .pagination-otm");
 
 p.html(" ");
 var a = document.createElement("a");
-a.innerHTML = "<i class=\"fas fa-angle-double-left\"></i>";
+var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click", function () {
 previousPageOtm(word, membre,pagination);
 event.preventDefault();
@@ -994,7 +1003,17 @@ p.append(a);
 }
 
 a = document.createElement("a");
-a.innerHTML = "<i class=\"fas fa-angle-double-right\"></i>";
+a = document.createElement("a");
+var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click", function () {
 event.preventDefault();
 nextPageOtm(word, membre, Math.ceil(total / 5),pagination);
@@ -1150,7 +1169,16 @@ var p = $(".stat-dashbord .dashbord-right .d2 .word-list-div .pagination-word-li
 p.html("");
 var table = $(".stat-dashbord .dashbord-right .d2 .word-list .div table tr");
 var a = document.createElement("a");
-a.innerHTML = "<i class=\"fas fa-angle-double-left\"></i>";
+var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click", function () {
 previousPageLW(table);
 event.preventDefault();
@@ -1175,7 +1203,17 @@ p.append(a);
 }
 
 a = document.createElement("a");
-a.innerHTML = "<i class=\"fas fa-angle-double-right\"></i>";
+a = document.createElement("a");
+var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click", function () {
 event.preventDefault();
 nextPageLW(table);
