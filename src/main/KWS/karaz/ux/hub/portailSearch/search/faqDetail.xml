@@ -9,8 +9,66 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+    <component name="htmlTranslate">
+
+      <renderer name="panelTitle">
+        <html>
+          <div class="vpanel-title">
+            <div class="vpanel-title">
+              <span>
+                ${code | translate} |
+                <span class="blue-small" style="color: #38a;" />
+              </span>
+              <hr class="header-create-account-horizontal-line hr-hub" />
+            </div>
+          </div>
+        </html>
+      </renderer>
+    
+      <renderer name="qstBody">
+        <html>
+          <div class="qst-body" />
+          <div class="response-body" />
+          <div class="link-footer">
+            <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage', 'search', 'Faq', {})">${code | translate}</a>
+          </div>
+        </html>
+      </renderer>
+    
+      <renderer name="otherQST">
+        <html>
+          <div class="vpanel-title">
+            <div class="vpanel-title">
+              <span>
+                ${code | translate} |
+                <span class="blue-small" style="color: #38a;" />
+              </span>
+              <hr class="header-create-account-horizontal-line hr-hub" />
+            </div>
+          </div>
+          <div class="vpanel-body full-search-list" />
+          <div class="searchGif2" style="display:none;line-height: 0;">
+            <img src="img/search-move.gif" />
+          </div>
+          <div class="pagination-new-style">
+            <div class="pagination-1" />
+          </div>
+        </html>
+      </renderer>
+    
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+      <script onLoad="true">
+              try{
+                  root.userlang=userLocal;
+                  context.formRender.notifyObservers("userlang");
+              }catch(e){
+                  console.log("ERROOOR",e);
+              }
+          </script>
       <script postLoad="true"> 
                 profilesT = profiles;  
                 
@@ -41,94 +99,62 @@
                 RestSearchFaqSec("",0,5,0,[".NFQ-quest-type-document",".NFQ-quest-type-plat",".NFQ-quest-type-general",".NFQ-quest-type-esign",".NFQ-quest-type-archit",".NFQ-quest-type-adminis"],3,"USER",context.formRender.targetPanel);
 
                 // hide saisie info question
-                context.formRender.targetPanel.find(".NQF-edit-modif").hide()</script>
+                context.formRender.targetPanel.find(".NQF-edit-modif").hide()
+      </script>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
       <vbox columns="70% 30%" className="classSearch-4">
         <vbox className="hp-small div-det-acc">
           <vbox className="hp-box hp-sec qst-faq hp-small">
-            <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span>
-                    QUESTIONS FRÉQUENTES |
-                    <span class="blue-small" style="color: #38a;" />
-                  </span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                </div>
-              </div>
-            </html>
+            <htmlTranslate renderer="panelTitle" code="FAQ00" />
             <vbox className="vpanel-body text-align-left">
-              <html>
-                <div class="qst-body" />
-                <div class="response-body" />
-                <div class="link-footer">
-                  <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage', 'search', 'Faq', {})">Retour au référentiel des questions fréquentes</a>
-                </div>
-              </html>
+              <htmlTranslate renderer="qstBody" code="FAQ06" />
             </vbox>
           </vbox>
           <vbox className="hp-box hp-sec other-qst-faq faq-fieldset-det">
-            <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span>
-                    AUTRES QUESTIONS FRÉQUENTES DE LA CATÉGORIE |
-                    <span class="blue-small" style="color: #38a;" />
-                  </span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                </div>
-              </div>
-              <div class="vpanel-body full-search-list" />
-              <div class="searchGif2" style="display:none;line-height: 0;">
-                <img src="img/search-move.gif" />
-              </div>
-              <div class="pagination-new-style">
-                <div class="pagination-1" />
-              </div>
-            </html>
+            <htmlTranslate renderer="otherQST" code="FAQ07" />
           </vbox>
         </vbox>
         <vbox>
-          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
+          <fieldset label="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest">
             <!-- start modification -->
-            <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+            <fieldset label="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
               <html>
                 <div class="NFQ-quest-type-esign NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
+            <fieldset label="Général" className="NFQ-quest-title NFQ-type-general ">
               <html>
                 <div class="NFQ-quest-type-general NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+            <fieldset label="Document" className="NFQ-quest-title NFQ-type-document ">
               <html>
                 <div class="NFQ-quest-type-document NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
+            <fieldset label="Platforme" className="NFQ-quest-title NFQ-type-plat ">
               <html>
                 <div class="NFQ-quest-type-plat NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
+            <fieldset label="Architecte" className="NFQ-quest-title NFQ-type-archit ">
               <html>
                 <div class="NFQ-quest-type-archit NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
+            <fieldset label="Administration" className="NFQ-quest-title NFQ-type-adminis ">
               <html>
                 <div class="NFQ-quest-type-adminis NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->

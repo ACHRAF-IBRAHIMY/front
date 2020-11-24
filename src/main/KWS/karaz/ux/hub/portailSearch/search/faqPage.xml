@@ -9,8 +9,96 @@
     </query>
     <collapsed>false</collapsed>
   </data>
-  <view>
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
+  <view transContext="portailSearch">
+
+    <component name="htmlTranslate">
+
+      <renderer name="panelTitle">
+        <html>
+          <div class="vpanel-title">
+            <div class="vpanel-title">
+              <span>${code1 | translate}</span>
+              <hr class="header-create-account-horizontal-line hr-hub" />
+            </div>
+          </div>
+          <div class="hp-sbox-text">${code2 | translate}</div>
+          <div style="height: 50px;" />
+        </html>
+      </renderer>
+    
+      <renderer name="findResponse">
+        <html>
+          <div class="no-response-find" style="display:none;">
+            <span class="">${code1 | translate}</span>
+            <div>
+              <button class="btn-show-support-form">${code2 | translate}</button>
+            </div>
+            <div class="support-form-over">
+              <div class="support-form">
+                <div class="title-suport-faq">${code3 | translate}</div>
+                <div class="f f1">
+                  <input type="email" placeholder="Email" />
+                </div>
+                <div class="f f2"> 
+                  <input type="tel" placeholder="Tele" />
+                </div>
+                <div class="f f3">
+                  <textarea name="" id="" placeholder="Allez-y, on vous écoute" cols="30" rows="10" />
+                </div>
+                <div class="f f4">
+                  <button>${code4 | translate}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </html>
+      </renderer>
+    
+      <renderer name="pagination">
+        <html>
+          <div class="faq-qr full-search-list" />
+          <div class="searchGif2" style="display:none">
+            <img src="img/search-move.gif" />
+          </div>
+          <div class="pagination-new-style">
+            <div class="pagination-1">
+              <i class="fas fa-angle-double-left" />
+              <i class="fas fa-angle-left" />
+              <span>
+                ${code1 | translate}
+                <span class="num-span">1</span>
+                ${code2 | translate}
+                <span>20</span>
+              </span>
+              <i class="fas fa-angle-right" />
+              <i class="fas fa-angle-double-right" />
+              <i class="fas fa-sync-alt" />
+            </div>
+            <div class="pagination-2">
+              <span>
+                ${code1 | translate}
+                <span>1</span>
+                -
+                <span>10</span>
+                /
+                <span>43</span>
+              </span>
+            </div>
+          </div>
+        </html>
+      </renderer>
+    
+    </component>
+    <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+
+      <script onLoad="true">
+              try{
+                  root.userlang=userLocal;
+                  context.formRender.notifyObservers("userlang");
+              }catch(e){
+                  console.log("ERROOOR",e);
+              }
+          </script>
       <script postLoad="true">
       		profilesT = profiles;
                 loadPageBytype(2);
@@ -82,16 +170,7 @@
       <vbox columns="70% 30%" className="classSearch-2">
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
-            <html>
-              <div class="vpanel-title">
-                <div class="vpanel-title">
-                  <span>QUESTIONS FREQUENTES</span>
-                  <hr class="header-create-account-horizontal-line hr-hub" />
-                </div>
-              </div>
-              <div class="hp-sbox-text">Vous trouverez ici des réponses complètes aux questions les plus fréquemment posées par les usagers et par les fonctionnaires. Vous pouvez y accéder soit en consultant les rubriques questions/réponses, soit en saisissant vos mots clés dans la zone de recherche ci-dessous.</div>
-              <div style="height: 50px;" />
-            </html>
+            <htmlTranslate renderer="panelTitle" code1="FAQ00" code2="FAQ01" />
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Posez votre question ici ..." />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
@@ -117,304 +196,70 @@
                   <img src="img/search-move.gif" />
                 </div>
               </html>
-              <html>
-                <div class="no-response-find" style="display:none;">
-                  <span class="">Aucune question ne correspond aux termes de recherche spécifiés.</span>
-                  <div>
-                    <button class="btn-show-support-form">Envoyer votre question à notre support</button>
-                  </div>
-                  <div class="support-form-over">
-                    <div class="support-form">
-                      <div class="title-suport-faq">Contactez-nous</div>
-                      <div class="f f1">
-                        <input type="email" placeholder="Email" />
-                      </div>
-                      <div class="f f2"> 
-                        <input type="tel" placeholder="Tele" />
-                      </div>
-                      <div class="f f3">
-                        <textarea name="" id="" placeholder="Allez-y, on vous écoute" cols="30" rows="10" />
-                      </div>
-                      <div class="f f4">
-                        <button>Envoyer</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </html>
+              <htmlTranslate renderer="findResponse" code1="FAQ02" code2="FAQ03" code3="FAQ04" code4="FAQ05" />
               <fieldset label="E-SIGN" className="faq-fieldset">
-                <html>
-                  <div class="faq-qr full-search-list" />
-                  <div class="searchGif2" style="display:none">
-                    <img src="img/search-move.gif" />
-                  </div>
-                  <div class="pagination-new-style">
-                    <div class="pagination-1">
-                      <i class="fas fa-angle-double-left" />
-                      <i class="fas fa-angle-left" />
-                      <span>
-                        Page
-                        <span class="num-span">1</span>
-                        Sur
-                        <span>20</span>
-                      </span>
-                      <i class="fas fa-angle-right" />
-                      <i class="fas fa-angle-double-right" />
-                      <i class="fas fa-sync-alt" />
-                    </div>
-                    <div class="pagination-2">
-                      <span>
-                        Page
-                        <span>1</span>
-                        -
-                        <span>10</span>
-                        /
-                        <span>43</span>
-                      </span>
-                    </div>
-                  </div>
-                </html>
+                <htmlTranslate renderer="pagination" code1="Page" code2="Sur" />
               </fieldset>
               <fieldset label="GENERAL" className="faq-fieldset">
-                <html>
-                  <div class="faq-qr full-search-list" />
-                  <div class="searchGif2" style="display:none">
-                    <img src="img/search-move.gif" />
-                  </div>
-                  <div class="pagination-new-style">
-                    <div class="pagination-1">
-                      <i class="fas fa-angle-double-left" />
-                      <i class="fas fa-angle-left" />
-                      <span>
-                        Page
-                        <span class="num-span">1</span>
-                        Sur
-                        <span>20</span>
-                      </span>
-                      <i class="fas fa-angle-right" />
-                      <i class="fas fa-angle-double-right" />
-                      <i class="fas fa-sync-alt" />
-                    </div>
-                    <div class="pagination-2">
-                      <span>
-                        Page
-                        <span>1</span>
-                        -
-                        <span>10</span>
-                        /
-                        <span>43</span>
-                      </span>
-                    </div>
-                  </div>
-                </html>
+                <htmlTranslate renderer="pagination" code1="Page" code2="Sur" />
               </fieldset>
               <fieldset label="DOCUMENTS" className="faq-fieldset">
-                <html>
-                  <div class="faq-qr full-search-list" />
-                  <div class="searchGif2" style="display:none">
-                    <img src="img/search-move.gif" />
-                  </div>
-                  <div class="pagination-new-style">
-                    <div class="pagination-1">
-                      <i class="fas fa-angle-double-left" />
-                      <i class="fas fa-angle-left" />
-                      <span>
-                        Page
-                        <span class="num-span">1</span>
-                        Sur
-                        <span>20</span>
-                      </span>
-                      <i class="fas fa-angle-right" />
-                      <i class="fas fa-angle-double-right" />
-                      <i class="fas fa-sync-alt" />
-                    </div>
-                    <div class="pagination-2">
-                      <span>
-                        Page
-                        <span>1</span>
-                        -
-                        <span>10</span>
-                        /
-                        <span>43</span>
-                      </span>
-                    </div>
-                  </div>
-                </html>
+                <htmlTranslate renderer="pagination" code1="Page" code2="Sur" />
               </fieldset>
               <fieldset label="ACCES A LA PLATEFORME" className="faq-fieldset">
-                <html>
-                  <div class="faq-qr full-search-list" />
-                  <div class="searchGif2" style="display:none">
-                    <img src="img/search-move.gif" />
-                  </div>
-                  <div class="pagination-new-style">
-                    <div class="pagination-1">
-                      <i class="fas fa-angle-double-left" />
-                      <i class="fas fa-angle-left" />
-                      <span>
-                        Page
-                        <span class="num-span">1</span>
-                        Sur
-                        <span>20</span>
-                      </span>
-                      <i class="fas fa-angle-right" />
-                      <i class="fas fa-angle-double-right" />
-                      <i class="fas fa-sync-alt" />
-                    </div>
-                    <div class="pagination-2">
-                      <span>
-                        Page
-                        <span>1</span>
-                        -
-                        <span>10</span>
-                        /
-                        <span>43</span>
-                      </span>
-                    </div>
-                  </div>
-                </html>
+                <htmlTranslate renderer="pagination" code1="Page" code2="Sur" />
               </fieldset>
               <fieldset label="ARCHITECTE" className="faq-fieldset">
-                <html>
-                  <div class="faq-qr full-search-list" />
-                  <div class="searchGif2" style="display:none">
-                    <img src="img/search-move.gif" />
-                  </div>
-                  <div class="pagination-new-style">
-                    <div class="pagination-1">
-                      <i class="fas fa-angle-double-left" />
-                      <i class="fas fa-angle-left" />
-                      <span>
-                        Page
-                        <span class="num-span">1</span>
-                        Sur
-                        <span>20</span>
-                      </span>
-                      <i class="fas fa-angle-right" />
-                      <i class="fas fa-angle-double-right" />
-                      <i class="fas fa-sync-alt" />
-                    </div>
-                    <div class="pagination-2">
-                      <span>
-                        Page
-                        <span>1</span>
-                        -
-                        <span>10</span>
-                        /
-                        <span>43</span>
-                      </span>
-                    </div>
-                  </div>
-                </html>
+                <htmlTranslate renderer="pagination" code1="Page" code2="Sur" />
               </fieldset>
               <fieldset label="ADMINISTRATION" className="faq-fieldset">
-                <html>
-                  <div class="faq-qr full-search-list" />
-                  <div class="searchGif2" style="display:none">
-                    <img src="img/search-move.gif" />
-                  </div>
-                  <div class="pagination-new-style">
-                    <div class="pagination-1">
-                      <i class="fas fa-angle-double-left" />
-                      <i class="fas fa-angle-left" />
-                      <span>
-                        Page
-                        <span class="num-span">1</span>
-                        Sur
-                        <span>20</span>
-                      </span>
-                      <i class="fas fa-angle-right" />
-                      <i class="fas fa-angle-double-right" />
-                      <i class="fas fa-sync-alt" />
-                    </div>
-                    <div class="pagination-2">
-                      <span>
-                        Page
-                        <span>1</span>
-                        -
-                        <span>10</span>
-                        /
-                        <span>43</span>
-                      </span>
-                    </div>
-                  </div>
-                </html>
+                <htmlTranslate renderer="pagination" code1="Page" code2="Sur" />
               </fieldset>
               <fieldset label="INTERNE" className="faq-fieldset">
-                <html>
-                  <div class="faq-qr full-search-list" />
-                  <div class="searchGif2" style="display:none">
-                    <img src="img/search-move.gif" />
-                  </div>
-                  <div class="pagination-new-style">
-                    <div class="pagination-1">
-                      <i class="fas fa-angle-double-left" />
-                      <i class="fas fa-angle-left" />
-                      <span>
-                        Page
-                        <span class="num-span">1</span>
-                        Sur
-                        <span>20</span>
-                      </span>
-                      <i class="fas fa-angle-right" />
-                      <i class="fas fa-angle-double-right" />
-                      <i class="fas fa-sync-alt" />
-                    </div>
-                    <div class="pagination-2">
-                      <span>
-                        Page
-                        <span>1</span> 
-                        -
-                        <span>10</span>
-                        /
-                        <span>43</span>
-                      </span>
-                    </div>
-                  </div>
-                </html>
+                <htmlTranslate renderer="pagination" code1="Page" code2="Sur" />
               </fieldset>
             </vbox>
           </vbox>
         </vbox>
         <vbox>
-          <fieldset header="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest vv2 vv0">
+          <fieldset label="QUESTIONS FRÉQUENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest vv2 vv0">
             <!-- start modification -->
-            <fieldset header="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
+            <fieldset label="Signature électronique" className="NFQ-quest-title NFQ-type-esign ">
               <html>
                 <div class="NFQ-quest-type-esign NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Général" className="NFQ-quest-title NFQ-type-general ">
+            <fieldset label="Général" className="NFQ-quest-title NFQ-type-general ">
               <html>
                 <div class="NFQ-quest-type-general NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Document" className="NFQ-quest-title NFQ-type-document ">
+            <fieldset label="Document" className="NFQ-quest-title NFQ-type-document ">
               <html>
                 <div class="NFQ-quest-type-document NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Platforme" className="NFQ-quest-title NFQ-type-plat ">
+            <fieldset label="Platforme" className="NFQ-quest-title NFQ-type-plat ">
               <html>
                 <div class="NFQ-quest-type-plat NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Architecte" className="NFQ-quest-title NFQ-type-archit ">
+            <fieldset label="Architecte" className="NFQ-quest-title NFQ-type-archit ">
               <html>
                 <div class="NFQ-quest-type-archit NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->
                 </div>
               </html>
             </fieldset>
-            <fieldset header="Administration" className="NFQ-quest-title NFQ-type-adminis ">
+            <fieldset label="Administration" className="NFQ-quest-title NFQ-type-adminis ">
               <html>
                 <div class="NFQ-quest-type-adminis NFQ-fieldset">
                   <!-- Les questions s'affiche ici                                  -->

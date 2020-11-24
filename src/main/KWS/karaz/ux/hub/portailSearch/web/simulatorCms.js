@@ -1,4 +1,3 @@
-
 var simple_chart_config = {
 chart: {
 container: "#tree-simple",
@@ -2235,12 +2234,21 @@ return str;
 
 function restAutoComplete3(inp,req,index,field){
 
+var intitule = ["content.intituleFr"];
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var intitule = ["content.intituleAr"];
+}
+}
 var obj = {"size":5,"query": 
 {
 "bool":{
 "must":[{
 "query_string": {
-    "fields":["content.intituleFr"],
+    "fields":intitule,
     "query":"*"+req+"*",
     "minimum_should_match": "100%"                   
 }
@@ -2410,6 +2418,14 @@ var b = document.createElement("DIV");
 /*make the matching letters bold:*/
 var str = arr[i].content.intituleFr;
 
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var str = arr[i].content.intituleAr;
+}
+}
 b.setAttribute("title",str);
 
 if(val==""){
@@ -2422,7 +2438,7 @@ b.innerHTML=addSpansHL(val.toUpperCase(),str.toUpperCase());
 /*insert a input field that will hold the current array item's value:*/
 var input = document.createElement("input");
 input.setAttribute("type","hidden");
-input.setAttribute("value",arr[i].content.intituleFr);
+input.setAttribute("value",str);
 b.appendChild(input);
 b.setAttribute("idd",arrObj[i]);
 b.setAttribute("typeAct",arr[i].parents.TypeActivite);
