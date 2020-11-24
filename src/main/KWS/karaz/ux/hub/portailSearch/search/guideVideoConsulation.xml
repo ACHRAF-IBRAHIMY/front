@@ -53,12 +53,12 @@
           <div class="video-description">${code2 | translate}</div>
           <div class="next-prev" columns="50% 50%">
             <div class="prev-video" style="">
-              <i class="fas fa-chevron-left" />
+              <i class="${iClass1}" />
               <span class="">${code3 | translate}</span>
             </div>
             <div class="next-video" style="">
               <span class="">${code4 | translate}</span>
-              <i class="fas fa-chevron-right" />
+              <i class="${iClass2}" />
             </div>
           </div>
         </html>
@@ -208,7 +208,12 @@
                 <img src="img/load-text.gif" />
               </div>
             </html>
-            <htmlTranslate renderer="consulationVideo" code1="GVC04" code2="GVC05" code3="GVC06" code4="GVC07" />
+            <vbox visible="'{userlang}'=='fr',expr,boolean">
+            <htmlTranslate renderer="consulationVideo" iClass1="fas fa-chevron-left" iClass2="fas fa-chevron-right" code1="GVC04" code2="GVC05" code3="GVC06" code4="GVC07" />
+            </vbox>
+            <vbox visible="'{userlang}'=='ar',expr,boolean">
+            <htmlTranslate renderer="consulationVideo" iClass1="fas fa-chevron-right" iClass2="fas fa-chevron-left" code1="GVC04" code2="GVC05" code3="GVC06" code4="GVC07" />
+            </vbox>
           </vbox>
         </vbox>
         <fieldset label="VIDÉOS DIDACTIQUES RÉCENTES" collapsible="false" className="div-det-acc PCD-addtitle pcd-ha-color NQF-freq-quest v-consultation" />

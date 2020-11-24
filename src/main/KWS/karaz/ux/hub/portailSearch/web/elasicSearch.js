@@ -2116,7 +2116,17 @@ console.log(totalFaqPages[index]);
 var nbrPage = begin + Math.min(size+1,Math.ceil(totalFaqPages[index]/size)-(faqGlobalPages[index]-1)*(size+1));
 console.log("begin :"+begin+" nbrPage :"+nbrPage);
 var a = document.createElement("a");
-a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
+a = document.createElement("a");
+var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click",function(){
 if(faqPages[index]>1){
     faqPages[index]--;
@@ -2195,7 +2205,16 @@ if(typeUse==-1){
 }            }
 }
 a = document.createElement("a");
-a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
+var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click",function(){
 if(faqPages[index]<Math.ceil(totalFaqPages[index]/size)){
     faqPages[index]++;
@@ -2231,7 +2250,16 @@ console.log(totalFaqPages[index]);
 var nbrPage = begin + Math.min(3,Math.ceil(totalFaqPages[index]/2)-(faqGlobalPages[index]-1)*3);
 console.log("begin :"+begin+" nbrPage :"+nbrPage);
 var a = document.createElement("a");
-a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
+var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click",function(){
 if(faqPages[index]>1){
     faqPages[index]--;
@@ -2310,7 +2338,17 @@ if(typeUse==-1){
 }            }
 }
 a = document.createElement("a");
-a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
+a = document.createElement("a");
+var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click",function(){
 if(faqPages[index]<Math.ceil(totalFaqPages[index]/2)){
     faqPages[index]++;
@@ -3481,7 +3519,16 @@ p.html("");
 console.log(p.html());
 
 var a = document.createElement("a");
-        a.innerHTML="<i class=\"fas fa-angle-double-left\"></i>";
+var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+}
+}
+a.innerHTML=aiangle;
         a.addEventListener("click",function(){
             console.log("!next");
             previousPage({"prefix":prefix,"type":type,"cls":cls,"target":target,"parent":parent,"size":size});
@@ -3520,7 +3567,17 @@ for(var i=begin;i<nbrPage;i++){
     }
 }
 a = document.createElement("a");
-a.innerHTML="<i class=\"fas fa-angle-double-right\"></i>";
+a = document.createElement("a");
+var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+var searchParams = new URLSearchParams(window.location.search)
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+}
+}
+a.innerHTML=aiangle;
 a.addEventListener("click",function(){
 event.preventDefault();
     console.log("next");
