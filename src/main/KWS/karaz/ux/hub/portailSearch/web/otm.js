@@ -809,7 +809,15 @@ success: function (result) {
 function createSelect(array) {
 var s = $(".stat-dashbord .dashbord-right .d1 .config-bar select.s2");
 for (var i = 0; i < array.length; i++) {
-s.append("<option value=\"" + array[i] + "\">" + array[i] + "</option>");
+    try{
+        if(transMap[array[i].replace(/ /g,"__")]!=undefined){
+        var arrayTrans = transMap[array[i].replace(/ /g,"__")];
+        }else{
+        var arrayTrans = array[i]
+        }
+
+        }catch(e){}
+s.append("<option value=\"" + array[i] + "\">" + arrayTrans + "</option>");
 }
 }
 
