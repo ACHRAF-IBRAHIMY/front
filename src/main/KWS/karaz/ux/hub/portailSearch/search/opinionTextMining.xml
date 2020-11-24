@@ -14,7 +14,7 @@
                   <i class="${iClass}" />
                   <div>
                     <span>0</span>
-                    <span >${code | translate}</span>
+                    <span>${code | translate}</span>
                   </div>
                 </div>
               </html>
@@ -299,6 +299,18 @@
                 paginationReset();
                 getMembers();
                 ESCall(140,null);</script>
+
+                <css>
+                  .stat-dashbord .content {
+                    position : static;
+                    border:none;
+                    display:block;
+                    width : auto;
+                    height : auto;
+                    background: none;
+                    box-shadow:none;
+                  }
+                </css>
       <html id="hSeparator">
         <div style="height: 30px;" />
       </html>
@@ -322,7 +334,7 @@
               </vbox>
               <vbox>
                 <htmlTranslate renderer="fieldSet2" header="RDA00" code1="RDA01" code2="RDA02" />
-                <htmlTranslate renderer="fieldSet3" header="LME00" code1="LME01" code2="LME02" code3="LME03" code4="LME04" code5="LME05" code6="LME06" code7="LME07" code8="LME08" code9="LME09" code10="LME10"/>
+                <htmlTranslate renderer="fieldSet3" header="LME00" code1="LME01" code2="LME02" code3="LME03" code4="LME04" code5="LME05" code6="LME06" code7="LME07" code8="LME08" code9="LME09" code10="LME10" />
               </vbox>
             </vbox>
           </vbox>
