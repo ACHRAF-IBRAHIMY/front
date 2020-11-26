@@ -2818,7 +2818,7 @@ $(".qst-faq .vpanel-body .response-att").hide();
 
 function getTypeFaq(type){
 var types = ["E-SIGN","ADMINISTRATION","ARCHITECTE","DOCUMENT","PLATEFORME","GENERAL"];
-var listType = ["e-Signature","Administration","Architecte","Pieces requises","Plateforme","Général"];
+var listType = [transMap["e-Signature"],transMap["portailSearch/Administration"],transMap["portailSearch/Architecte"],transMap["PR00"],transMap["portailSearch/Plateforme"],transMap["portailSearch/Général"]];
 var index = types.indexOf(type);
 return listType[index];
 }

@@ -171,7 +171,7 @@
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
             <htmlTranslate renderer="panelTitle" code1="FAQ00" code2="FAQ01" />
-            <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
+            <vbox columns="90% 10%" className="stay-grid search-input-articles div-full-search-ba" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Posez votre question ici ..." />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
                 <postChange>var prefix = context.formRender.targetPanel.find(".classSearch-2 .div-full-search-bar .hp-search_field input").val();
