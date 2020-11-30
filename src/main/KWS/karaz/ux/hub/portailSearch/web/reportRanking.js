@@ -729,10 +729,33 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+`<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\"`+communeTrans+`\"><span>`+(i+1)+`- `+subLong(communeTrans,30)+`</span> `+rankStr+`</span><span style="display: block;color: orange;font-size: 11px;    margin-top: 1px;margin-left: 19px;">`+prefectureTrans+`</span></td>`);        
         $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(communeTrans,30)+"</span>"+rankStr+"</span></td></tr>");
         tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
+        try{
+            if(transMap["Petit projets : ".replace(/ /g,"__")]!=undefined){
+                var ppTrans = transMap["Petit projets : ".replace(/ /g,"__")];
+            }else{
+                var ppTrans = "Petit projets : "
+            }
+            if(transMap[" jours".replace(/ /g,"__")]!=undefined){
+                var joursTrans = transMap[" jours".replace(/ /g,"__")];
+            }else{
+                var joursTrans = " jours"
+            }
+            if(transMap["Grand projets : ".replace(/ /g,"__")]!=undefined){
+                var gpTrans = transMap["Grand projets : ".replace(/ /g,"__")];
+            }else{
+                var gpTrans = "Grand projets : "
+            }
+            if(transMap[" jours - Petit projets : ".replace(/ /g,"__")]!=undefined){
+                var jppTrans = transMap[" jours - Petit projets : ".replace(/ /g,"__")];
+            }else{
+                var jppTrans = " jours - Petit projets : "
+            }
+    
+            }catch(e){}
         if(results[i]._source.indecators.delaiPpV==-1){
-            var titleText = `Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
+            var titleText = ppTrans+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
         }else{
-            var titleText = `Grand projets : `+(1/results[i]._source.indecators.delaiPpV).toFixed(2) +` jours - Petit projets : `+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+` jours`;
+            var titleText = gpTrans+(1/results[i]._source.indecators.delaiPpV).toFixed(2) +jppTrans+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
         }
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
         tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.delai)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+titleText+`</span></i></td>`);
