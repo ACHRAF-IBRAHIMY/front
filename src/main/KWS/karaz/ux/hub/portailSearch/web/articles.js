@@ -80,24 +80,48 @@ function addComment(root,target,context,commentGb){
     var text = context.formRender.targetPanel.find("#toolbarsecCom .ql-editor").html();
     root["articleComment"] = text;
 
+    try{
+        if(transMap["Veuillez saisir votre nom".replace(/ /g,"__")]!=undefined){
+            var nomTrans = transMap["Veuillez saisir votre nom".replace(/ /g,"__")];
+        }else{
+            var nomTrans = "Veuillez saisir votre nom"
+        }
+        if(transMap["Veuillez saisir votre prénom".replace(/ /g,"__")]!=undefined){
+            var prenomTrans = transMap["Veuillez saisir votre prénom".replace(/ /g,"__")];
+        }else{
+            var prenomTrans = "Veuillez saisir votre prénom"
+        }
+        if(transMap["Veuillez saisir votre email valide".replace(/ /g,"__")]!=undefined){
+            var mailTrans = transMap["Veuillez saisir votre email valide".replace(/ /g,"__")];
+        }else{
+            var mailTrans = "Veuillez saisir votre email valide"
+        }
+        if(transMap["Veuillez saisir votre commentaire".replace(/ /g,"__")]!=undefined){
+            var commentaireTrans = transMap["Veuillez saisir votre commentaire".replace(/ /g,"__")];
+        }else{
+            var commentaireTrans = "Veuillez saisir votre commentaire"
+        }
+
+        }catch(e){}
+
 if(root["articleCommentName"].trim()==""){
-target.find(".classSearch-82 .err-msg").html("Veuillez saisir votre nom");
+target.find(".classSearch-82 .err-msg").html(nomTrans);
 return ;
 }
 
 if(root["articleCommentLastName"].trim()==""){
-target.find(".classSearch-82 .err-msg").html("Veuillez saisir votre prénom");
+target.find(".classSearch-82 .err-msg").html(prenomTrans);
 return ;
 
 }
 
 if(!isEmailValidArt(root["articleCommentEmail"])){
-target.find(".classSearch-82 .err-msg").html("Veuillez saisir votre email valide")
+target.find(".classSearch-82 .err-msg").html(mailTrans)
 return ;
 }
 
 if(htmlToString(root["articleComment"]).trim()==""){
-target.find(".classSearch-82 .err-msg").html("Veuillez saisir votre commentaire");
+target.find(".classSearch-82 .err-msg").html(commentaireTrans);
 return ;
 }
 
