@@ -186,6 +186,9 @@ addCommentRest(root,target,comment,context,Number(target.find(".comment-form spa
 }
 }
 
+function removeJStmt(str){
+	return str.replaceAll("confirm(","").replaceAll("alert(","").replaceAll("prompt(","").replaceAll("onError","").replaceAll("onerror","").replaceAll("onclick","").replaceAll("onClick","");
+	}
 
 function createDivComments(comments,target,root){
     var commentsDr = sortCommentsByDateGb(comments).comments;
@@ -219,13 +222,13 @@ function createDivComments(comments,target,root){
     var div8 = document.createElement("div");
     div8.setAttribute("class","comment-user-name");
     div8.setAttribute("style","font-size: 17px;font-weight: 600;");
-    div8.innerHTML = elm.nom + " " + elm.prenom;
+    div8.innerHTML = removeJStmt(elm.nom) + " " + removeJStmt(elm.prenom);
     if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
-        div8.innerHTML += " "+elm.email
+        div8.innerHTML += " "+removeJStmt(elm.email)
     }
     var div9 = document.createElement("div");
     div9.setAttribute("class","comment-det");
-    div9.innerHTML = elm.text;
+    div9.innerHTML = removeJStmt(elm.text);
     var div10 = document.createElement("div");
     div10.setAttribute("class","div-date");
     div10.setAttribute("index",cmmIndex[i]);
@@ -316,13 +319,13 @@ function createDivComments(comments,target,root){
         var div8 = document.createElement("div");
         div8.setAttribute("class","comment-user-name");
         div8.setAttribute("style","font-size: 17px;font-weight: 600;");
-        div8.innerHTML = e.nom + " " + e.prenom;
+        div8.innerHTML = removeJStmt(e.nom + " " + e.prenom);
         if(profilesT.match(/CONTENT_EDITOR/)=='CONTENT_EDITOR'){
-            div8.innerHTML += " "+elm.email
+            div8.innerHTML += " "+removeJStmt(elm.email)
         }
         var div9 = document.createElement("div");
         div9.setAttribute("class","comment-det");
-        div9.innerHTML = e.text;
+        div9.innerHTML = removeJStmt(e.text);
         var div10 = document.createElement("div");
         div10.setAttribute("class","div-date");
         div10.setAttribute("index",cmmIndex[i]);

@@ -176,9 +176,9 @@ function createCmtCms(results,context){
         var div2 = document.createElement("div");
         div2.setAttribute("style","display:grid;grid-template-columns: 25% 75%;font-size: 14px;");
         divP.append(span);
-        div2.innerHTML="<span><i class='fas fa-user'></i> "+results[i].nom+" "+results[i].prenom+"<br/><i class='fas fa-clock'></i> "+results[i].date+"</span><span><i class='fas fa-comment'></i> : "+results[i].text+"</span>";
+        div2.innerHTML=removeJStmt("<span><i class='fas fa-user'></i> "+results[i].nom+" "+results[i].prenom+"<br/><i class='fas fa-clock'></i> "+results[i].date+"</span><span><i class='fas fa-comment'></i> : "+results[i].text+"</span>");
         divP.append(span);
-        divPc.append(span1);
+        divPc.append(span1); 
         divPc.setAttribute("style","color:#38A");
         div.append(divP);
         div.append(div2); 
