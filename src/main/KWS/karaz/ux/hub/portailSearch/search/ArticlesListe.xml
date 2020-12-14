@@ -185,7 +185,7 @@
       <vbox columns="70% 30%" className="classSearch-80 search-article">
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
-            <htmlTranslate renderer="articles" code1="AR00" code2="TOUS" code3="Art-Text" />
+            <htmlTranslate renderer="articles" code1="AC00" code2="TOUS" code3="Art-Text" />
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
               <field className="hp-search_field" label="" xpath="query.text" widget="text" emptyText="Saisissez vos mots clés ici" />
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="" postProcessing="search()" separator="!!">
@@ -208,7 +208,7 @@
             <htmlTranslate renderer="searchGif" code="ARTEMC00" />
           </vbox> 
         </vbox>
-        <htmlTranslate renderer="fieldSet" header1="AR00" header2="LPR00" header3="LPP00" header4="LPA00" code1="TA00" code2="PQ00" code3="ALU00" code4="RDP00" />
+        <htmlTranslate renderer="fieldSet" header1="AC00" header2="LPR00" header3="LPP00" header4="LPA00" code1="TA00" code2="PQ00" code3="ALU00" code4="RDP00" />
       </vbox>
       <html>
         <div style="height: 30px;" />
