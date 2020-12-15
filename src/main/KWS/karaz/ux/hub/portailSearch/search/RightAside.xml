@@ -104,7 +104,7 @@
       <vbox columns="0% 100%" className="right-side">
       <vbox>
         </vbox>
-        <rightAside header1="AR00" header2="LPR00" header3="LPP00" header4="LPA00" code1="TA00" code2="PQ00" code3="ALU00" code4="RDP00" />
+        <rightAside header1="AC00" header2="LPR00" header3="LPP00" header4="LPA00" code1="TA00" code2="PQ00" code3="ALU00" code4="RDP00" />
         <!-- <vbox>
         </vbox>
         <vbox className="right-vbox">
