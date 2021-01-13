@@ -9,7 +9,7 @@
       <filterRef>Tous</filterRef>
     </query>
     <collapsed>false</collapsed>
-  </data>
+  </data> 
   <view transContext="portailSearch">
 
       <component name="htmlTranslate">
