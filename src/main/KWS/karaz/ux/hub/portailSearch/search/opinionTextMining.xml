@@ -72,8 +72,8 @@
                   <html>
                     <div class="input-bar content">
                       <input type="text" />
-                      <button class="b b1 active">${code1 | translate}</button>
-                      <button class="b b2">${code2 | translate}</button>
+                      <button class="b b1 active" style="width: 70px;">${code1 | translate}</button>
+                      <button class="b b2" style="width: 50px;">${code2 | translate}</button>
                       <button class="fas fa-search" />
                     </div>
                   </html>
