@@ -147,7 +147,20 @@
         <vbox className="hp-box hp-small divSearch">
           <vbox className="hp-box divSearchBar div-full-search-bar">
             <htmlTranslate renderer="vPanel" code1="RecherActivi" code2="ResPVR" code3="AffMotCles" />
-            <vbox columns="10% 90%" className="stay-grid search-input-articles div-full-search-bar" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='ar',expr,boolean">
+            <vbox columns="80% 20%" className="stay-grid" style="direction: ltr;" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='ar',expr,boolean">
+              <vbox columns="68% 32%">
+                <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+                <field className="filterRef-class" widget="select" xpath="query.filterRef">
+                  <option value="Tous" label="Tous" />
+                  <option value="Établissement classé" label="Établissement classé" />
+                  <option value="Simple déclaration" label="Simple déclaration" />
+                  <option value="Occupation domaine public" label="Occupation domaine public" />
+                  <option value="Autorisations urbanisme" label="Autorisations urbanisme" />
+                  <postChange>
+                      context.formRender.targetPanel.find(".classSearch-0 .searchbuttun").click(); 
+                  </postChange>
+                </field>
+              </vbox>
               <button className="hp-search_field_icon fas fa-search searchbuttun search_button" label="">
                 <postChange>
                     var prefix = context.formRender.targetPanel.find(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
@@ -169,19 +182,6 @@
                     root.query.parentP=0;
                 </postChange>
               </button>
-              <vbox columns="32% 68%">
-                <field className="filterRef-class" widget="select" xpath="query.filterRef">
-                  <option value="Tous" label="Tous" />
-                  <option value="Établissement classé" label="Établissement classé" />
-                  <option value="Simple déclaration" label="Simple déclaration" />
-                  <option value="Occupation domaine public" label="Occupation domaine public" />
-                  <option value="Autorisations urbanisme" label="Autorisations urbanisme" />
-                  <postChange>
-                      context.formRender.targetPanel.find(".classSearch-0 .searchbuttun").click(); 
-                  </postChange>
-                </field>
-                <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-              </vbox>
             </vbox>
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='fr',expr,boolean">
               <vbox columns="68% 32%">
