@@ -151,7 +151,7 @@ function htmlEncode(str){
 
 //Search results and redirect to activity model
 function restFullSearchList(prefix,from,prev,parent,cls,target) {
-    prefix = htmlEncode(prefix);  
+    // prefix = htmlEncode(prefix);  
 
 var result = [];
 var xhttp = new XMLHttpRequest();
