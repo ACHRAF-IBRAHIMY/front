@@ -4388,7 +4388,17 @@ try{
     }
 
     }catch(e){}
-a.setAttribute("style","text-align: left;width: 50;margin: auto;width: 60%;");
+var param = searchParams.get('lang');
+
+if(param!=undefined){
+if(param=="ar"){
+    var style="text-align: right;width: 50;margin: auto;width: 60%;";
+}
+else{
+    var style= "text-align: left;width: 50;margin: auto;width: 60%;";
+}
+}
+a.setAttribute("style",style);
 a.innerHTML=textTrans;
 $("."+cls+" .full-search-list").append(a);
 }
