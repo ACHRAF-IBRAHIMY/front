@@ -358,6 +358,14 @@ function loadDiv(div, key, membre) {
         }
 
     }catch(e){}
+    try{
+        if(transMap["RESULTATS".replace(/ /g,"__")]!=undefined){
+        var resultats = transMap["RESULTATS".replace(/ /g,"__")];
+        }else{
+        var resultats = "RESULTATS"
+        }
+
+        }catch(e){}
 switch (div) {
 case 1:
     $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html(LMETrans);
@@ -382,7 +390,7 @@ case 3:
     $(".dashbord-right .d2 .word-list-text-avis").show();
     break;
 case 4:
-    $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html("RESULTATS");
+    $(".stat-dashbord .dashbord-right .d2 .ow-label-pl ").html(resultats);
     searchMLTDiv(key,membre);
     createPagintionOtm(key.hits.total.value, 5, membre, null, activePage,1);
     $(".dashbord-right .d2 .word-list-load-gif").hide();
