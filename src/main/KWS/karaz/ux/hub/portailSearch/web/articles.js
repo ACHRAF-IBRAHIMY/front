@@ -187,8 +187,8 @@ addCommentRest(root,target,comment,context,Number(target.find(".comment-form spa
 }
 
 function removeJStmt(str){
-	return str.replaceAll("confirm(","").replaceAll("alert(","").replaceAll("prompt(","").replaceAll("onError","").replaceAll("onerror","").replaceAll("onclick","").replaceAll("onClick","");
-	}
+	return str.replaceAll(/[a,A][l,L][e,E][r,R][t,T]/g,"hnd").replaceAll(/[c,C][o,O][n,N][f,F][i,I][r,R][m,M]/g,"hnd").replaceAll(/[p,P][r,R][o,O][m,M][p,P][t,T]/g,"hnd").replaceAll(/[o,O][n,N][e,E][r,R][r,R][o,O][r,R]/g,"hnd").replaceAll(/[o,O][n,N][c,C][l,L][i,I][c,C][k,K]/g,"hnd").replaceAll(/<[s,S][c,C][r,R][i,I][p,P][t,T]/g,"<hnd").replaceAll(/<[s,S][c,C][r,R][i,I][p,P][t,T]>/g,"<hnd>");
+}
 
 function createDivComments(comments,target,root){
     var commentsDr = sortCommentsByDateGb(comments).comments;
@@ -1043,4 +1043,8 @@ function getObjectArticleCmt(id,root,target){
     createDivComments(obj.comments,target,root); 
     });
     
+}
+
+function xssHandlerFront(text){
+    return text.replaceAll(/[a,A][l,L][e,E][r,R][t,T]/g,"hnd").replaceAll(/[c,C][o,O][n,N][f,F][i,I][r,R][m,M]/g,"hnd").replaceAll(/[p,P][r,R][o,O][m,M][p,P][t,T]/g,"hnd").replaceAll(/[o,O][n,N][e,E][r,R][r,R][o,O][r,R]/g,"hnd").replaceAll(/[o,O][n,N][c,C][l,L][i,I][c,C][k,K]/g,"hnd").replaceAll(/<[s,S][c,C][r,R][i,I][p,P][t,T]/g,"<hnd").replaceAll(/<[s,S][c,C][r,R][i,I][p,P][t,T]>/g,"<hnd>"); 
 }
