@@ -143,15 +143,19 @@ function testWidth(width,nbr){
 return width > nbr;
 }
  
+//function htmlEncode(str){
+  //  return String(str).replace(/[^\w. ]/gi, function(c){
+    //   return '&#'+c.charCodeAt(0)+';';
+    //}).replace("javascript:","");
+//}
+
 function htmlEncode(str){
-    return String(str).replace(/[^\w. ]/gi, function(c){
-       return '&#'+c.charCodeAt(0)+';';
-    }).replace("javascript:","");
+    return xssHandlerFront(str).replaceAll("<","&lt;").replaceAll("<","&gt;").replaceAll("javascript","");
 }
 
 //Search results and redirect to activity model
 function restFullSearchList(prefix,from,prev,parent,cls,target) {
-    // prefix = htmlEncode(prefix);  
+    prefix = htmlEncode(prefix);  
 
 var result = [];
 var xhttp = new XMLHttpRequest();
