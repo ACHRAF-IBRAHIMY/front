@@ -106,3 +106,74 @@ function hideLoadingElement(loadingId){
 console.log("hideLoadingElement ......."+loadingId ); 
 $("#"+loadingId).hide();
 }
+
+function loadFunctionAN(){
+   
+
+// sidenav navbar nav
+    $(".button-collapse").sideNav();
+
+// Mixitube
+    $('#mixcontent').mixItUp({
+        animation: {
+            animateResizeContainer: false,
+            effects: 'fade rotateX(-45deg) translateY(-10%)'
+        }
+    });
+
+// MagnificPopup
+    $('.gallery-img').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true
+        },
+    });
+
+// Home slider
+    $('.slider').slider({full_width: true});
+
+// client slider
+    $('.carousel').carousel();
+
+// accordion
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function () {
+            this.classList.toggle("active");
+            this.nextElementSibling.classList.toggle("show");
+        }
+    }
+    
+// nav menu small menu
+    $(document).on("scroll", function () {
+        if ($(document).scrollTop() > 120) {
+            $("nav").addClass("small");
+        } else {
+            $("nav").removeClass("small");
+        }
+    });
+
+    
+//    featured slider
+var swiper = new Swiper('.swiper-container', {
+    //        pagination: '.swiper-pagination',
+            loop: true,
+            slidesPerView: 'auto',
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            spaceBetween: 30,
+            coverflow: {
+                rotate: 5,
+                stretch: 0,
+                depth: 100,
+                modifier: 3,
+                slideShadows: false
+            }
+        });
+}
