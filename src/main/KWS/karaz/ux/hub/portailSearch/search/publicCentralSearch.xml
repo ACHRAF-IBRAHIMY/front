@@ -1,668 +1,424 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <search name="PublicCentralSearch" label="PublicCentralSearch">
-  <query />
-  <data>
-    <query>
-      <keys />
-      <model />
-      <from />
-      <to />
-      <task>true</task> 
-      <object>true</object>
-      <document>true</document>
-      <annotation>true</annotation>
-      <others>true</others>
-      <userLogin />
-      <userPassword />
-      <demandeId />
-      <CIN />
-    </query>
-    <newUser>false</newUser>
-    <forgetPass>false</forgetPass>
-    <signup>oui</signup>
-  </data>
-  <view>
-    /********************************************************/
+   <query />
+   <data>
+      <query>
+         <keys />
+         <model />
+         <from />
+         <to />
+         <task>true</task>
+         <object>true</object>
+         <document>true</document>
+         <annotation>true</annotation>
+         <others>true</others>
+         <userLogin />
+         <userPassword />
+         <demandeId />
+         <CIN />
+      </query>
+      <newUser>false</newUser>
+      <forgetPass>false</forgetPass>
+      <signup>oui</signup>
+   </data>
+   <view transContext="portailSearch">
+      /********************************************************/
     /*      START :: #MFB :: grid Rokhas 3.0 Home page      */
     /********************************************************/
-    <screen labelWidth="80" label="My Dashboard" noToolBar="true">
-      <script onLoad="true">
-      if(root.newUser=="true"){
-        ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');
-      }else if(root.forgetPass=="true"){
-        ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');
-      }
-      else if(root.toFicheUser=="true"){
-        ApplicationManager.run('data/donnees/user/ficheuser/process/GestionFicheuserProcess','launchProcess','fiche Utilisateur');
-      }
-        </script>
-      <script postLoad="true">var currentFocus;
-             
-          var searchParams = new URLSearchParams(window.location.search)
-          var param = searchParams.get('lang');
+     
+      <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
+         <script onLoad="true">try{
+          </script>
+         <script onLoad="true"></script>
+         <script postLoad="true">
+            //new WOW().init();
+            $(".button-collapse").sideNav();
+            loadFunctionAN();
 
-          if(param!=undefined){
-              $.each($(".class-traduction"),function(key,value){
-                  $(value).html(transMap[$(value).attr("tcode")]);
-                  if(param=="ar"){
-                    $(value).css("text-align","right");
-                    $(value).css("font-family","Droid Arabic Kufi, sans-serif");
-                  }
-              })
-          }
-
-          if(param!=undefined){
-              $.each($(".class-traduction-ct"),function(key,value){
-                  $(value).html(transMap[$(value).attr("tcode")]);
-                  if(param=="ar"){
-                    $(value).css("font-family","Droid Arabic Kufi, sans-serif");
-                  }
-              })
-          }
-
-          if(param!=undefined){
-              $.each($(".wg-class-traduction"),function(key,value){
-                  var tcodel = $(value).attr("class").split(" ");
-                  var valuet = "";
-
-                  tcodel.forEach(function(elm){
-                    if(/wg-tcode-/.test(elm)){
-                      valuet = elm.split("-")[2];
-                    }
-                  });
-                  if(valuet!=""){
-
-                  $(value).find("input").attr("placeholder",transMap[valuet]);
-                  $(value).find("input").css("text-align","right");      
-                  }        
-              })
-          }
-
-/*
-          if(param!=undefined){
-              $.each($(".wg-class-traduction"),function(key,value){
-                  var tcodel = $(value).attr("class").split(" ");
-                  var valuet = "";
-
-                  tcodel.forEach(function(elm){
-                    if(/err-tcode-/.test(elm)){
-                      valuet = elm.split("-")[2];
-                    }
-                  });
-
-                  if(valuet!=""){
-                    $(value).find(".errorMessage").html(transMap[valuet]);
-                    $(value).find(".errorMessage").css("text-align","right");
-                  }
-
-                                
-              })
-          }*/             
-      context.formRender.targetPanel.find(".classSearch-home .divSearchBar input").get(0).addEventListener("input", function () {
-            var a, b, i;
-            var inp = context.formRender.targetPanel.find(".classSearch-home .divSearchBar input").get(0);
-            var val = inp.value.toLowerCase();
-            if (!val) {
-                closeAllLists();
-                return false;
-            }
-            console.log(val);
-            currentFocus = -1;
-            //close any already open lists of autocompleted values
-            closeAllLists();
-            console.log("a");
-            restAutoComplete(inp,val,true);
-      });
-        
-      context.formRender.targetPanel.find(".divSearchBar input").get(0).addEventListener("keydown", function (e) {
-                    var x = context.formRender.targetPanel.find(".classSearch-home #autocomplete-list").get(0);
-                    if (x) x = x.getElementsByTagName("div");
-                    moveKey(e,x,0,"classSearch-home",context.formRender.targetPanel);
-      });
-                          
-    document.getElementsByClassName("back-span")[0].addEventListener("click",function(){
-          document.getElementsByClassName("ow-field-input")[2].value=""; 
-          context.formRender.targetPanel.find(".divSearchBar").show();
-          context.formRender.targetPanel.find(".searchList").hide();
-    });
-            
-    context.formRender.targetPanel.find(".searchList .second-search-bar i.fa-eraser").click(function(){
-	  context.formRender.targetPanel.find(".searchList .second-search-bar input").val("");
-   });
-
-    context.formRender.targetPanel.find(".searchList .second-search-bar i.fa-search").click(function(){
-        getTimeCounter();
-        closeSearchList();
-        currentPage=0;
-       restSearchList(context.formRender.targetPanel.find(".searchList .second-search-bar input").val(),0); 
-    });
-       
-   context.formRender.targetPanel.find(".divSearch .divSearchBar .t3").click(function(){
-       ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresUrbanisme", "search", "Procedures Urbanisme", {});
-    });
-        
-    context.formRender.targetPanel.find(".divSearch .divSearchBar .t4").click(function(){
-       ApplicationManager.run("karaz/ux/hub/portailsearch/search/proceduresEconomique", "search", "Procedures Economique", {});
-    });    
-         
-          
-    context.formRender.targetPanel.find(".to-simulator").click(function(){
-        ApplicationManager.run("karaz/ux/hub/portailsearch/search/SimulatorRokhas", "search", "Simulator Rokhas", {});
-    });
-
-
-    context.formRender.targetPanel.find(".folder-feature .folder-feature-header i").click(function(){
-        if(testWidth($(window).width(),640)){
-            context.formRender.targetPanel.find(".folder-feature").find("div").hide("fast");
-            context.formRender.targetPanel.find(".folder-feature").animate({'width':'hide'});
-        }else{
-            context.formRender.targetPanel.find(".folder-feature").slideUp();
-        }
-    });
-
-    context.formRender.targetPanel.find(".reglementation-card").click(function(){
-        ApplicationManager.run('karaz/ux/hub/portailsearch/search/RefrentielJuridique','search','Refrentiel Juridique',{})
-    });
-
-    context.formRender.targetPanel.find(".faq-card").click(function(){
-        //ApplicationManager.run('karaz/ux/hub/portailsearch/search/FaqPage','search','Faq Page',{})
-        window.location='https://support.ribatis.com/portal/fr/kb/rokhas';
-      });
-
-    context.formRender.targetPanel.find(".last-log input").keydown(function(ev){
-        if ( event.which == 13 ) {
-            context.formRender.targetPanel.find(".check-ref").click();  
-        }
-    });
-
-
-    context.formRender.targetPanel.find(".folder-feature .folder-feature-body i.fa-caret-right").click(function(){
-        nextGeneratedDiv();
-    });
-
-    context.formRender.targetPanel.find(".folder-feature .folder-feature-body i.fa-caret-left").click(function(){
-        prevGeneratedDiv();    
-    });
-
-    //getCountCommune();
-
-    //scrollChiffreFunction();
-    
-    </script>
-    <script postLoad="true" delay="500">
-            getMostPopularArticle(4,"",".classSearch-home-glo .fieldser-article-1 .vbox-articles .ow-vl-inner");      
-    </script>
-      <vbox usage="embedded:N" className="classSearch-home-glo ">
-        
-        <vbox columns="30% 70%" className="global-div-temp classSearch-home">
-          <vbox className="height-auto-vbox-first">
-            <vbox className="hp-box last-log hp-small div1f">
-              <vbox columns="20% 80%" test="{signup},=,oui" separator=",">
-                <html>
-                  <div class="hp-box-icon fas fa-user" />
-                </html>
-                <html>
-                  <div class="hp-box-small-title class-traduction" tcode="EP00" style="font-size:1.3rem">Espace privé</div>
-                </html>
-              </vbox>
-              <vbox columns="20% 80%" test="{signup},!=,oui" separator=",">
-                <html>
-                  <div style="transform: rotate(14deg);" class="hp-box-icon fab fa-ello" />
-                </html>
-                <html>
-                  <div class="hp-box-small-title class-traduction" tcode="EP00" style="font-size:1.3rem">Espace autorisations</div>
-                </html>
-              </vbox>
-              <html>
-                <div style="height: 10px;" />
-              </html>
-              <vbox test="{signup},=,oui" separator=",">
-                <html>
-                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('/karazal/kas/loginSamlSP?newUser=true','openLinkLocal','openLinkLocal');">
-                    <i class="fas fa-unlock" />
-                    <span class="class-traduction" tcode="SC00">Se Connecter</span>
-                  </div>
-                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">
-                    <i class="fas fa-user-plus" />
-                    <span class="class-traduction" tcode="SG00">S'enregistrer</span>
-                  </div>
-                </html> 
-              </vbox>
-              <vbox testxx="{signup},=,oui" separator=",">
-                <html>
-                  <div style="height: 20px;" />
-                  <div class="hp-sbox-text" onclick="javascript:ApplicationManager.run('karaz/signup/actioncompte/process/GestionMotdePaseeOublieProcess','launchProcess','forgetPass');">
-                    <a>
-                      <i class="fas fa-user-times" />
-                      <span class="class-traduction" tcode="MO00">Mot de passe oublié ?</span>  
-                    </a>
-                  </div>
-                  <div style="height: 26px;" />
-                </html>
-              </vbox>
-               <!-- <vbox test="{signup},=,non" separator=",">
-                <html>
-                  <div class="yb-btn-home" onclick="javascript:ApplicationManager.run('http://urba.rokhas.ma','openLink','openLink');">
-                    <i style="font-size:45px;" class="fas fa-map-marker-alt" />
-                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SC00">Accès urbanisme</span>
-                  </div>
-                  <div class="yb-btn-home" onclick="javascript: ApplicationManager.run('http://eco.rokhas.ma','openLink','openLink');">
-                    <i style="font-size:45px" class="fas fa-cog" />
-                    <span class="class-traduction" style="align-self: center;text-transform: uppercase;" tcode="SG00">Accès économique</span>
-                  </div>
-                </html>
-              </vbox> -->
-              
-            </vbox>
-            <vbox className="relative-position">
-              <vbox className="hp-box last-log  hp-small">
-                <vbox columns="20% 65% 15%">
-                  <html>
-                    <div class="hp-box-icon fas fa-folder" />
-                  </html>
-                  <html>
-                    <div class="hp-box-small-title class-traduction" tcode="ED00" style="font-size:1.3rem">Etat dossier</div>
-                  </html>
-                  <html>
-                    <div class="mobile-height-auto" style="height:50px">
-                      <img src="img/loadgif3.gif" style="width:50px;display:none;" class="loadGif" />
-                    </div>
-                  </html>
-                </vbox>
-                <html>
-                  <div class="mobile-height-0" style="height: 10px;" />
-                </html>
-                <vbox>
-                  <field widget="text" className="hp-text-input wg-class-traduction wg-tcode-VD00 err-tcode-VE00" xpath="demandeId" emptyText="Votre référence dossier" noLabel="true" width="80%">
-                    <bag position="leading" className="hp-bag-input fas fa-folder-open" />
-                    <validation type="required" errorMessage="Veuillez saisir votre référence dossier !" />
-                  </field>
-                  <html>
-                    <div class="last-log-info">
-                      <span class="class-traduction" tcode="SR00">
-                        <span>Saisissez la référence du dossier recherché telle qu'elle figure sur la demande soumise.</span> 
-                        <span class="">Exemple : PCT-PANF-MRF-456/2020</span>
-                      </span>
-                    </div>
-                  </html>
-                  <button className="hp-box-btn HomePageLoginButton2 buttonLog check-ref" label="Vérifier">
-                    <postChange>
-                    
-                        let ref = root.demandeId;
-
-                        
- 
-                        if(ref==undefined){
-                            ref="";
-                        }
-
-
-                        getFolderId(ref,"");
-                        
-                        /*
-                        if(testWidth($(window).width(),640)){
-                            $(".folder-feature").find("div:not(.no-response)").show("fast");
-                            $(".folder-feature").animate({'width':'show'},function(){});
-                        }else{
-                            $(".folder-feature").find("div").show("fast");
-                            $(".folder-feature").slideDown();
-                        }
-                        */</postChange>
-                  </button>
-                </vbox>
-              </vbox>
-              <vbox className="folder-feature ">
-                <html>
-                  <div class="folder-feature-header">
-                    <div>
-                      <span />
-                      <i class="fas fa-close" />
-                    </div>
-                    <hr />
-                  </div>
-                  <div class="folder-feature-body">
-                    <div>
-                      <i class="fas fa-caret-left" />
-                    </div>
-                    <div class="folder-steps">
-                      <ul class="progressbar" />
-                      <div class="no-response">
-                        La référence du dossier
-                        <span class="ref" style="font-weight: 700;" />
-                        n’existe pas. Veuillez renseigner la référence du dossier telle qu’elle figure sur la demande soumise.
-                      </div>
-                    </div>
-                    <div>
-                      <i class="fas fa-caret-right" />
-                    </div>
-                  </div>
-                </html>
-              </vbox>
-            </vbox>
-          </vbox>
-          <vbox className="hp-box hp-small divSearch height-986">
-            <vbox className="hp-box divSearchBar">
-              <html>
-                <div class="hp-sbox-big-title class-traduction" style="color: var(--fg0);" tcode="PU00">Pont de confiance Usager / Administration</div>
-                <div class="hp-sbox-text class-traduction" tcode="UD00">Un parcours d'autorisation 100% digital, 100% traçable avec Zéro papier déposé et Zéro papier délivré.</div>
-                <div class="height-mobile-20" style="height: 50px;" />
-              </html>
-              <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center">
-                <field className="hp-search_field wg-class-traduction wg-tcode-RP00" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ..." />
-                <button className="hp-search_field_icon fas fa-search search_button" label="" separator="!!">
-                    <postChange>
-                          console.log("context.formRender.targetPanel");
-                          var prefix= context.formRender.targetPanel.find(".hp-search_field input").val();
-                          ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
-                    </postChange>
-                </button>
-              </vbox>
-              <html className="link-div-ref" style="visibility:hidden">
-                <a class="title class-traduction" tcode="AU00">Référentiel des activités</a>
-              </html>
-              <html>
-                <div class="height-mobile-10" style="height: 70px;" />
-              </html>
-              <vbox columns="66% 34%" className="div-main-icons">
-                <html>
-                  <div class="main-icon-title-bx t1">
-                    <div class="title class-traduction" tcode="QV00">Quelle procédure suivre ?</div>
-                    <div class="par full-grid-small">
-                      <i class="fas fa-map-signs" />
-                      <span class="class-traduction" tcode="RM00">Répondez à quelques questions pour être mieux orienté.</span>
-                    </div>
-                    <div style="text-align:right;">
-                      <button class="main-icon-button to-simulator class-traduction" tcode="DT00">DÉMARRER SIMULATION</button>
-                    </div>
-                  </div>
-                </html>
-                <vbox>
-                  <html className="res-div-height">
-                    <div class="main-icon-title t3">
-                      <div class="full-grid-small" style="display:grid;grid-template-columns:21% 79%;margin:auto;width:80%">
-                        <i class="fas fa-map-marker-alt" />
-                        <span class="class-traduction" tcode="AU00">Autorisations urbanistiques</span>
-                      </div>
-                    </div>
-                  </html>
-                  <html className="res-sep-height">
-                    <div style="height:25px" />
-                  </html>
-                  <html className="res-div-height">
-                    <div class="main-icon-title t4">
-                      <div class="full-grid-small" style="display:grid;grid-template-columns:21% 79%;margin:auto;width:80%">
-                        <i class="fas fa-cog" />
-                        <span class="class-traduction" tcode="AE00">Autorisations économiques</span>
-                      </div>
-                    </div>
-                  </html>
-                </vbox>
-              </vbox>
-              <vbox columns="33% 33% 34%" className="support">
-                <html className="support-html full-grid-small">
-                  <i class="fas fa-paper-plane" />
-                  <span style="font-size:19px">Support@rokhas.ma</span>
-                </html>
-                <html className="support-html full-grid-small">
-                  <i class="fas fa-phone" />
-                  <span style="font-size:19px" >+212 (0) 5 22 23 23 44</span>
-                </html>
-                <vbox className="support" style="margin-top: -5px;background: #38A;padding: 8px;border-radius: 2px;width:92%" >
-                  <html className="support-html full-grid-small"  style="cursor:pointer;font-size: 18px;
-                  color: #FFF;">
-                  <div onclick="window.location = 'https://reservation.rokhas.ma/portal-embed#/customer/rokhas'">
-                    <i class="fas fa-calendar-day" style="color: #FFF;font-size:16px" />
-                    <span style="font-weight: 100;font-size:16px">Réserver un rendez-vous</span>
-                  </div>
-                  
-                  </html>
-                </vbox>
-              </vbox>
-              
-             
-                  <html className="support-time">
-                    <span style="font-size:12px;" class="class-traduction" tcode="LV00">Lundi au Vendredi de 08:30 à 18:30</span>
-                  </html>
-              
-            </vbox>
+         </script>
+         <vbox>
             <html>
-              <div class="searchList">
-                <div class="second-search-bar">
-                  <span class="back-span">
-                    <i class="fas fa-chevron-left" />
-                    Retour
-                  </span>
-                  <input type="text" />
-                  <i class="fas fa-eraser" />
-                  <i class="fas fa-search" />
-                </div>
-                <p class="nbrRes">
-                  Environs
-                  <span>0</span>
-                  résultats (
-                  <span>0.21</span>
-                  second)
-                </p>
-                <div class="searchListD">
-                  <div class="searchGif">
-                    <img src="img/search-move.gif" />
+               <div data-spy="scroll" data-target=".navbar-desktop">
+                 
+          
+                  <nav class="navbar navbar-fixed-top navbar-light bg-faded">
+                      <!--Collapse button-->
+                      <div class="container">
+                          <a href="#" data-activates="mobile-menu" class="button-collapse right"><i class="fa fa-bars black-text"></i></a>
+          
+                          <!--Content for large and medium screens-->
+                          <div class="navbar-desktop">
+                              <!--Navbar Brand-->
+                              <a class="navbar-brand" href="#home"><img src="extensions/assets/img/Logo Rokhas Analytics - Blue.svg" style="width: 150px;" alt="" /></a>
+                              <!--Links-->
+                              <ul class="nav navbar-nav pull-right hidden-md-down text-uppercase">
+                                  
+                                  
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#service">Services</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="https://rokhas.ma/karazal/index.jsp#search//karaz/ux/hub/portailsearch/search/ReportRanking//search">Rokhas Ranking</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="https://support.ribatis.com/portal/fr/kb/rokhas/rokhas-analytics">Base de connaissances</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <button type="button" class="btn btn-danger waves-effect waves-red"><a style="color:#FFF" href="https://analytics.rokhas.ma/karazal/kas/login.jsp">Se connecter</a></button>
+                                  </li>
+                              </ul>
+                              
+                          </div>
+          
+                          <!-- Content for mobile devices-->
+                          <div class="navbar-mobile">
+          
+                              <ul class="side-nav" id="mobile-menu">
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#about">About</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#service">Service</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#portfolio">portfolio</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#newsletter">Support</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#!">Faq</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </nav>
+                  <!--/.Navbar-->
+          
+          
+                  <div id="home" class="slider">
+                      <ul class="slides">
+                          <li>
+                              <img src="extensions/assets/img/IMG2.png"/> <!-- random image -->
+                              <div class="caption center-align">
+                                  <div class="single_home">
+                                      <h1>Rokhas Analytics</h1>
+                                      <p>La plateforme Rokhas Analytics est un espace décisionnel Self-Service permettant aux analystes et décideurs d’accéder à un panel de tableaux de bords riches et interactifs.</p>
+                                      <button type="button" class="btn btn-danger m-t-3 waves-effect waves-red"><a style="color:#FFF" href="https://analytics.rokhas.ma/karazal/kas/login.jsp">Se connecter</a></button>
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <img src="extensions/assets/img/IMG2.png"/> <!-- random image -->
+                              <div class="caption center-align">
+                                  <div class="single_home">
+                                      <h1>Rokhas Analytics</h1>
+                                      <p>La plateforme Rokhas Analytics est un espace décisionnel Self-Service permettant aux analystes et décideurs d’accéder à un panel de tableaux de bords riches et interactifs.</p>
+                                      <button type="button" class="btn btn-danger m-t-3 waves-effect waves-red"><a style="color:#FFF" href="https://analytics.rokhas.ma/karazal/kas/login.jsp">Se connecter</a></button>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul>
                   </div>
-                </div>
-                <div class="pagination" />
+          
+          
+          
+          
+          
+          
+          
+                  <section id="about" class="about">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <div class="main_about_area">
+                                      <div class="head_title center m-y-3 wow fadeInUp">
+                                          <h2>Rokhas Analytics</h2>
+                                          <p>La plateforme Rokhas Analytics est un espace décisionnel Self-Service permettant aux analystes et décideurs d’accéder à un panel de tableaux de bords riches et interactifs.</p>
+                                      </div>
+          
+                                      <div class="main_about_content">
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <img src="extensions/assets/img/Logo Rokhas Analytics - Blue.svg" style="width: 95%;" alt="" />
+                                              </div>
+          
+                                              <div class="col-md-6">
+                                                  <p>Destiné prioritairement aux Walis, Gouverneurs, Présidents de Communes, Directeurs d’Agences Urbaines et ordres des architectes, Rokhas Analytics leurs permet de suivre les indicateurs clés de performance consolidés en temps quasi-réel.</p>
+                                                  <p>Les états statistiques et rapports analytiques permettent également d’identifier les goulots d’étranglement, les étapes et les acteurs consommateurs ainsi que les dossiers en souffrance.</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                     <br/>
+                     <hr />
+                  </section><!-- End of About Section-->
+          
+                  <section id="service" class="service">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <div class="main_service_area">
+                                      <div class="head_title center m-y-3 wow fadeInUp">
+                                          <h2>Services</h2>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              <div class="jumbotron single_service  wow fadeInLeft">
+                                                  <div class="service_icon center">
+                                                      <i class="fa fa-cog m-b-3"></i>
+                                                  </div>
+                                                  <div class="s_service_text text-sm-center text-xs-center">
+                                                      <h4>Rokhas Analytics</h4>
+                                                      <p>Un espace décisionnel Self-Service permettant aux analystes et décideurs d’accéder à un panel de tableaux de bords riches et interactifs.</p>
+                                                  </div>
+          
+                                                  <div class="service_btn center">
+                                                      <a href="https://analytics.rokhas.ma/karazal/kas/login.jsp" class="btn btn-danger waves-effect waves-red">Se  Connecter</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <div class="jumbotron single_service wow fadeInUp">
+                                                  <div class="service_icon center">
+                                                      <i class="fas fa-tachometer-alt m-b-3"></i>
+                                                  </div>
+                                                  <div class="s_service_text text-sm-center text-xs-center">
+                                                      <h4>Rokhas Ranking</h4>
+                                                      <p>L’index Rokhas classe les collectivités territoriales marocaines sur la base de leurs performance en matière de délivrance des autorisations.</p>
+                                                  </div>
+          
+                                                  <div class="service_btn center">
+                                                      <a href="https://rokhas.ma/karazal/index.jsp#search//karaz/ux/hub/portailsearch/search/ReportRanking//search" class="btn btn-danger waves-effect waves-red">Consulter</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <div class="jumbotron single_service wow fadeInRight">
+                                                  <div class="service_icon center">
+                                                      <i class="fa fa-plug m-b-3"></i>
+          
+                                                  </div>
+                                                  <div class="s_service_text text-sm-center  text-xs-center">
+                                                      <h4>Base de connaissances</h4>
+                                                      <p>Une base de connaissance enrichie en continu et permettant aux utilisateurs de gagner en autonomie sur la résolution des difficultés rencontrées.</p>
+                                                  </div>
+          
+                                                  <div class="service_btn center">
+                                                      <a href="https://support.ribatis.com/portal/fr/kb/rokhas/rokhas-analytics" class="btn btn-danger waves-effect waves-red">Consulter</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <hr />
+                  </section> <!-- End of service section -->
+          
+          
+          
+                  
+          
+          
+          
+          
+                  <section id="offer" class="offer">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="main_offer_area">
+                                      <div class="head_title center m-y-3  wow fadeInUp">
+                                          <h2>Points forts</h2>
+                                      </div>
+                                      <div class="main_offer_content m-b-3  wow fadeInUp">
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <div class="single_offer m-t-3">
+                                                      <div class="row">
+                                                          <div class="col-sm-3">
+                                                              <div class="single_offer_icon">
+                                                                  <i class="fa fa-cloud"></i>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-9">
+                                                              <div class="single_offer_text">
+                                                                  <h3>Plus direct</h3>
+                                                                  <p>une vue globale en temps réel de données.</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <div class="single_offer m-t-3">
+                                                      <div class="row">
+                                                          <div class="col-sm-3">
+                                                              <div class="single_offer_icon">
+                                                                  <i class="fa fa-cart-arrow-down"></i>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-9">
+                                                              <div class="single_offer_text">
+                                                                  <h3>Plus vite</h3>
+                                                                  <p>Un outil de décision qui accélère les performances.</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <div class="single_offer m-t-3">
+                                                      <div class="row">
+                                                          <div class="col-sm-3">
+                                                              <div class="single_offer_icon">
+                                                                  <i class="fa fa-line-chart"></i>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-9">
+                                                              <div class="single_offer_text">
+                                                                  <h3>Plus décisionnel</h3>
+                                                                  <p>Faciliter la prise de décision grâce à des indicateurs pertinents.</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <div class="single_offer m-t-3">
+                                                      <div class="row">
+                                                          <div class="col-sm-3">
+                                                              <div class="single_offer_icon">
+                                                                  <i class="fa fa-shopping-basket"></i>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-9">
+                                                              <div class="single_offer_text">
+                                                                  <h3>Plus cohérent</h3>
+                                                                  <p>Présenter de manière structurée et cohérente les informations.</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <hr />
+                  </section><!-- End of Offer Section -->
+          
+          
+          
+                
+          
+          
+                  <section id="portfolio" class="portfolio">
+                      <div class="container">
+                          <div class="row">
+                              <div class="main_drag roomy-50">
+                                  <div class="col-md-12">
+                                      <div class="head_title center m-y-3  wow fadeInUp">
+                                          <h2>                            Les tableaux de bord Rokhas
+                                          </h2>
+                                      </div>
+                                      <div class="swiper-container">
+                                          <div class="swiper-wrapper">
+                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/1.png"></img><h3>Indicateurs relatifs aux dossiers e-déposés
+                                              </h3><p>Nombre de dossiers e-déposés dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert par le CROA.</p></div>
+                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/2.png"></img><h3>Indicateurs relatifs aux dossiers e-déposés
+                                              </h3><p>Nombre de dossiers e-déposés dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert par le CROA.
+                                              Ce nombre est représenté par Préfecture/Province.</p></div>
+                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/3.png"></img><h3>Indicateurs relatifs aux dossiers instruit/en cours d’instruction</h3><p>Retard moyen d’émission d’avis concernant les dossiers dont la date de commission fait partie d’un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert par le CROA.</p></div>
+                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/4.png"></img><h3>Indicateurs relatifs aux autorisation délivrées</h3><p>Délai moyen de délivrance d’autorisations dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert par le CROA.
+          
+                                                  Ce délai est représenté par mois et par catégorie projet (Grand projet, Petit projet).
+                                                  </p></div>
+                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/5.png"></img><h3>Détail dossiers en cours</h3><p>Ce détail concerne un certain nombre d’informations dossier (Réf. dossier, Architecte, Maître d’ouvrage, Réf. foncière, Date étape, Durée étape, Nbre passages), regroupés par étape et par localité. </p></div>
+                                     
+                                          </div>
+                                          <!-- If we need navigation buttons -->
+                                          <div class="swiper-button-prev"></div>
+                                          <div class="swiper-button-next"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </section><!-- End of Portfolio Section -->
+          
+          
+          
+          
+          
+          
+          
+                  <section id="footer" class="footer">
+                      <div class="container">
+                          <div class="row">
+                              <div class="main_footer_area white-text p-b-3">
+                                  <div class="col-md-6">
+                                      <div class="single_f_widget p-t-3 wow fadeInUp">
+                                          <img src="extensions/assets/img/Logo Rokhas Analytics - Blue.svg" style="width: 135px;" alt="" />                                <div class="single_f_widget_text">
+                                              <p style="font-size: 17px;">Un espace décisionnel Self-Service permettant aux analystes et décideurs d’accéder à un panel de tableaux de bords riches et interactifs.</p>
+                                            
+                                          </div>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="col-md-3">
+                                      <div class="single_f_widget m-t-3 wow fadeInUp">
+                                          
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <div class="single_f_widget m-t-3 wow fadeInUp">
+                                          <h4 class="text-lowercase">Tags</h4>
+                                          <div class="single_f_widget_text f_tags">
+                                              <a href="#!">data</a>
+                                              <a href="#!">tableaux de bords</a>
+                                              <a href="#!">Analytics</a>
+                                              <a href="#!">indicateurs</a>
+                                              <a href="#!">Décision</a>
+                                              <a href="#!">Rokhas</a>
+                                              <a href="#!">business intelligence</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                      <div class="main_coppyright">
+                          <div class="container">
+                              <div class="row">
+                                  <div class="col-sm-6 col-xs-12">
+                                      <div class="copyright_text m-t-2 text-xs-center">
+                                          <p class="wow zoomIn" data-wow-duration="1s">© RIBATIS 2021 - Powered By <a target="_black" href=""> <img ></img></a> 2021. All Rights Reserved</p>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <div class="socail_coppyright text-sm-right m-t-2 text-xs-center wow zoomIn">
+                                         
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </section>
               </div>
             </html>
-          </vbox>
-        </vbox>
-        <html>
-          <div style="height: 30px;" />
-        </html>
-        <html>
-          <cms-topicTitle class="class-traduction-ct" tcode="HP01">Actualités</cms-topicTitle>
-          <cms-topicSeparator />
-        </html>
-        <vbox className="fieldset-articles fieldser-article-1">
-                        <vbox className="vbox-articles" columns="25% 25% 25% 25%">
-                           
-                        </vbox>
-                        <vbox className="fieldset-footer-home">
-                            <html>
-                                <div style="text-align:right;" class="class-traduction" tcode="APA1" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Afficher plus d'articles...</div>
-                            </html>
-                        </vbox>
-                </vbox>
-        <html>
-          <div style="height: 30px;" />
-        </html>
-        <html>
-          <cms-topicTitle class="class-traduction-ct" tcode="EEN1">Rokhas en Chiffres</cms-topicTitle>
-          <cms-topicSeparator />
-        </html>
-        <!-- <vbox columns="25% 25% 25% 25%">
-          <html>
-            <box-card class="card-bx">
-              <box-icon class="fas fa-university" />
-              <box-big-title>0</box-big-title>
-              <box-small-title>Commune</box-small-title>
-              <box-h-sep />
-              <box-text>
-                <a>
-                  Couverture géographique
-                  <i class="fas fa-external-link-alt" />
-                </a>
-              </box-text>
-            </box-card>
-          </html>
-          <html>
-            <box-card class="card-bx">
-              <box-icon class="fas fa-folder" />
-              <box-big-title>0</box-big-title>
-              <box-small-title>Dossier traité / jour</box-small-title>
-              <box-h-sep />
-              <box-text>
-                <a>
-                  Performance par commune
-                  <i class="fas fa-external-link-alt" />
-                </a>
-              </box-text>
-            </box-card>
-          </html>
-          <html>
-            <box-card class="card-bx">
-              <box-icon class="fas fa-user-tie" />
-              <box-big-title>0</box-big-title>
-              <box-small-title>Fonctionnaire</box-small-title>
-              <box-h-sep />
-              <box-text>
-                <a onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
-                  Rokhas Machine Learning
-                  <i class="fas fa-external-link-alt" />
-                </a>
-              </box-text>
-            </box-card>
-          </html>
-          <html>
-            <box-card class="card-bx">
-              <box-icon class="fas fa-users" />
-              <box-big-title>0</box-big-title>
-              <box-small-title>Utilisateur</box-small-title>
-              <box-h-sep />
-              <box-text>
-                <a>
-                  Question fréquentes
-                  <i class="fas fa-external-link-alt" />
-                </a>
-              </box-text>
-            </box-card>
-          </html>
-        </vbox>
-        -->
-        <vbox columns="25% 25% 25% 25%">
-          <html>
-            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/CouvertureGeo','search','Couverture géographique',{});">
-              <box-icon class="fas fa-university h-icon" />
-              <box-big-title class="class-traduction-ct" tcode="CH00">Couverture géographique</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/ReportRanking','search','Rokhas Ranking',{});">
-              <box-icon class="fas fa-trophy h-icon" />
-              <box-big-title class="class-traduction-ct" tcode="CN00">Classement national</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpinionTextMining','search','OTM',{});">
-              <box-icon class="fas fa-users-cog h-icon" />
-              <box-big-title class="class-traduction-ct" tcode="RLO00">Machine Learning</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/OpendataFrame','search','Open Data',{});">
-              <box-icon class="fas fa-chart-pie h-icon" />
-              <box-big-title class="class-traduction-ct" tcode="OP00">Open Data</box-big-title>
-            </box-card>
-          </html>
-        </vbox>
-        <html>
-          <div style="height: 30px;" />
-        </html>
-        <html>
-          <cms-topicTitle class="class-traduction-ct" tcode="CM00">COMMENT CA MARCHE ?</cms-topicTitle>
-          <cms-topicSeparator />
-        </html>
-        <vbox columns="20% 20% 20% 20% 20%">
-          <html test="{signup},=,oui" separator=",">
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">1</span>
-              </html>
-              <box-small-title class="class-traduction-ct" tcode="VV01">Créer votre espace privé sur rokhas.ma</box-small-title>
-              <button class="main-btn class-traduction-ct" tcode="PCD1" onclick="javascript:ApplicationManager.launchProcess('karaz/signup/gestioncompte/process/GestionGestioncompteProcess?step=step2','inscription','inscription');">Procéder</button>
-            </box-card>
-          </html>
-          <html test="{signup},=,non" separator=",">
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">1</span>
-              </html>
-              <box-small-title class="class-traduction-ct" tcode="VV01">Créer votre espace privé sur rokhas.ma</box-small-title>
-            </box-card>
-          </html>
-          
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">2</span>
-              </html>
-              <box-small-title class="class-traduction-ct" tcode="SD00">Saisissez votre demande en ligne</box-small-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">3</span>
-              </html>
-              <box-small-title class="class-traduction-ct" tcode="AJ00">Attachez vos pièces justificatives</box-small-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">4</span>
-              </html>
-              <box-small-title class="class-traduction-ct" tcode="SL00">Suivez le traitement du dossier en ligne</box-small-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="    height: 210px !important;padding: 15px;">
-              <html>
-                <span class="main-number">5</span>
-              </html>
-              <box-small-title class="class-traduction-ct" tcode="DE00">Recevez votre document e-signé</box-small-title>
-            </box-card>
-          </html>
-        </vbox>
-        <html>
-          <div style="height: 30px;" />
-        </html>
-        <html>
-          <cms-topicTitle class="class-traduction-ct" tcode="PR00">RESSOURCES PRATIQUES</cms-topicTitle>
-          <cms-topicSeparator />
-        </html>
-        <vbox columns="25% 25% 25% 25%">
-          <html>
-            <box-card style="height:178px;cursor:pointer" class="video-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/GuideVideoConsultation','search','Guide Vidéo',{});">
-              <box-icon class="fas fa-video h-icon" />
-              <box-big-title class="class-traduction-ct" tcode="GD00">Guides vidéos</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" class="faq-card">
-              <box-icon class="fas fa-question-circle h-icon" />
-              <box-big-title class="class-traduction-ct" tcode="QF00">Questions fréquentes</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" class="reglementation-card">
-              <box-icon class="fas fa-gavel h-icon" />
-              <box-big-title class="class-traduction-ct" tcode="RE00">Réglementation</box-big-title>
-            </box-card>
-          </html>
-          <html>
-            <box-card style="height:178px;cursor:pointer" class="download-card" onclick="javascript:ApplicationManager.run('karaz/ux/hub/portailsearch/search/DownloadConsultation','search','Attachement',{});">
-              <box-icon class="fas fa-download h-icon" />
-              <box-big-title class="class-traduction-ct" tcode="TG00">Téléchargements</box-big-title>
-            </box-card>
-          </html>
-        </vbox>
-        
-        
-        <html>
-          <div style="height: 30px;" />
-        </html>
-      </vbox>
-    </screen>
-    /********************************************************/
+         </vbox>
+
+      </screen>
+      /********************************************************/
     /*      END :: #MFB :: grid Rokhas 3.0 Home page        */
     /********************************************************/
-  </view>
+   </view>
 </search>
