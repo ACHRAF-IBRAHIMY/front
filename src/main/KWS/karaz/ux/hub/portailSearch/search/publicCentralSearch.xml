@@ -27,15 +27,35 @@
     /********************************************************/
      
       <screen labelWidth="80" label="My Dashboard" noToolBar="true" transContext="portailSearch" supportLangRedirection="true">
-         <script onLoad="true">try{
-          </script>
-         <script onLoad="true"></script>
-         <script postLoad="true">
-            //new WOW().init();
-            $(".button-collapse").sideNav();
-            loadFunctionAN();
+        <script postLoad="true">
+           $(".button-collapse").sideNav();
+var swiper = new Swiper('.swiper-container', {
+                //        pagination: '.swiper-pagination',
+                        loop: true,
+                        slidesPerView: 'auto',
+                        effect: 'coverflow',
+                        grabCursor: true,
+                        centeredSlides: true,
+                        nextButton: '.swiper-button-next',
+                        prevButton: '.swiper-button-prev',
+                        spaceBetween: 30,
+                        coverflow: {
+                            rotate: 5,
+                            stretch: 0,
+                            depth: 100,
+                            modifier: 3,
+                            slideShadows: false
+                        }
+                    });
 
-         </script>
+                // Home slider
+                $('.slider').slider({full_width: true});
+
+                // client slider
+                $('.carousel').carousel();
+       
+        </script>
+       
          <vbox>
             <html>
                <div data-spy="scroll" data-target=".navbar-desktop">
@@ -99,7 +119,7 @@
                   <div id="home" class="slider">
                       <ul class="slides">
                           <li>
-                              <img src="extensions/assets/img/IMG2.png"/> <!-- random image -->
+                              <img src="web/assets/img/IMG2.png"/> <!-- random image -->
                               <div class="caption center-align">
                                   <div class="single_home">
                                       <h1>Rokhas Analytics</h1>
@@ -109,7 +129,7 @@
                               </div>
                           </li>
                           <li>
-                              <img src="extensions/assets/img/IMG2.png"/> <!-- random image -->
+                              <img src="web/assets/img/IMG2.png"/> <!-- random image -->
                               <div class="caption center-align">
                                   <div class="single_home">
                                       <h1>Rokhas Analytics</h1>
@@ -140,7 +160,7 @@
                                       <div class="main_about_content">
                                           <div class="row">
                                               <div class="col-md-6">
-                                                  <img src="extensions/assets/img/Logo Rokhas Analytics - Blue.svg" style="width: 95%;" alt="" />
+                                                  <img src="web/assets/img/Logo Rokhas Analytics - Blue.svg" style="width: 95%;" alt="" />
                                               </div>
           
                                               <div class="col-md-6">
@@ -319,39 +339,40 @@
                 
           
           
-                  <section id="portfolio" class="portfolio">
-                      <div class="container">
-                          <div class="row">
-                              <div class="main_drag roomy-50">
-                                  <div class="col-md-12">
-                                      <div class="head_title center m-y-3  wow fadeInUp">
-                                          <h2>                            Les tableaux de bord Rokhas
-                                          </h2>
-                                      </div>
-                                      <div class="swiper-container">
-                                          <div class="swiper-wrapper">
-                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/1.png"></img><h3>Indicateurs relatifs aux dossiers e-déposés
-                                              </h3><p>Nombre de dossiers e-déposés dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert par le CROA.</p></div>
-                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/2.png"></img><h3>Indicateurs relatifs aux dossiers e-déposés
-                                              </h3><p>Nombre de dossiers e-déposés dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert par le CROA.
-                                              Ce nombre est représenté par Préfecture/Province.</p></div>
-                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/3.png"></img><h3>Indicateurs relatifs aux dossiers instruit/en cours d’instruction</h3><p>Retard moyen d’émission d’avis concernant les dossiers dont la date de commission fait partie d’un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert par le CROA.</p></div>
-                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/4.png"></img><h3>Indicateurs relatifs aux autorisation délivrées</h3><p>Délai moyen de délivrance d’autorisations dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert par le CROA.
-          
-                                                  Ce délai est représenté par mois et par catégorie projet (Grand projet, Petit projet).
-                                                  </p></div>
-                                              <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="extensions/assets/img/5.png"></img><h3>Détail dossiers en cours</h3><p>Ce détail concerne un certain nombre d’informations dossier (Réf. dossier, Architecte, Maître d’ouvrage, Réf. foncière, Date étape, Durée étape, Nbre passages), regroupés par étape et par localité. </p></div>
-                                     
-                                          </div>
-                                          <!-- If we need navigation buttons -->
-                                          <div class="swiper-button-prev"></div>
-                                          <div class="swiper-button-next"></div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </section><!-- End of Portfolio Section -->
+                  <section id="portfolio" class="portfolio" style="background:#EEE">
+                        <div class="container">
+                            <div class="row">
+                                <div class="main_drag roomy-50">
+                                    <div class="col-md-12">
+                                        <div class="head_title center m-y-3  wow fadeInUp">
+                                            <h2>                            Les tableaux de bord Rokhas
+                                            </h2>
+                                        </div>
+                                        <div class="swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="web/assets/img/1.png"></img><h3>Indicateurs relatifs aux dossiers e-déposés
+                                                </h3><p>Nombre de dossiers e-déposés dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert.</p></div>
+                                                <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="web/assets/img/2.png"></img><h3>Indicateurs relatifs aux dossiers e-déposés
+                                                </h3><p>Nombre de dossiers e-déposés dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert.
+                                                Ce nombre est représenté par Préfecture/Province.</p></div>
+                                                <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="web/assets/img/3.png"></img><h3>Indicateurs relatifs aux dossiers instruit/en cours d’instruction</h3><p>Retard moyen d’émission d’avis concernant les dossiers dont la date de commission fait partie d’un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert.</p></div>
+                                                <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="web/assets/img/4.png"></img><h3>Indicateurs relatifs aux autorisation délivrées</h3><p>Délai moyen de délivrance d’autorisations dans un intervalle de temps donné (6 derniers mois par défaut), dans le périmètre couvert.
+            
+                                                    Ce délai est représenté par mois et par catégorie projet (Grand projet, Petit projet).
+                                                    </p></div>
+                                                <div class="swiper-slide" style="display: block !important;background: #FFF !important;padding: 12px !important;"><img style="width: 100%;" src="web/assets/img/5.png"></img><h3>Détail dossiers en cours</h3><p>Ce détail concerne un certain nombre d’informations dossier (Réf. dossier, Architecte, Maître d’ouvrage, Réf. foncière, Date étape, Durée étape, Nbre passages), regroupés par étape et par localité. </p></div>
+                                       
+                                            </div>
+                                            <!-- If we need navigation buttons -->
+                                            <div class="swiper-button-prev"></div>
+                                            <div class="swiper-button-next"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section><!-- End of Portfolio Section -->
+<!-- End of Portfolio Section -->
           
           
           
