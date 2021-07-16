@@ -150,13 +150,20 @@
             <vbox columns="80% 20%" className="stay-grid" style="direction: ltr;" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='ar',expr,boolean">
               <vbox columns="68% 32%">
                 <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-                <field className="filterRef-class" widget="select" xpath="query.filterRef">
+                <field className="filterRef-class" widget="select" xpath="query.filterRefx">
                   <option value="Tous" label="Tous" />
                   <option value="Établissement classé" label="Établissement classé" />
-                  <option value="Simple déclaration" label="Simple déclaration" />
+                  <option value="Simple déclaration" label="Activité économique ou artisanale ou industruelle non réglementée" />
                   <option value="Occupation domaine public" label="Occupation domaine public" />
                   <option value="Autorisations urbanisme" label="Autorisations urbanisme" />
                   <postChange>
+				     if(root.query.filterRefx=="Simple déclaration"){
+					  root.query.filterRef="Activité économique ou artisanale ou industruelle non réglementée";
+					 
+					  }else{
+					   root.query.filterRef=''+root.query.filterRefx;
+					  }
+					   context.formRender.notifyObservers("query.filterRef");
                       context.formRender.targetPanel.find(".classSearch-0 .searchbuttun").click(); 
                   </postChange>
                 </field>
@@ -186,13 +193,20 @@
             <vbox columns="80% 20%" className="stay-grid" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='fr',expr,boolean">
               <vbox columns="68% 32%">
                 <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
-                <field className="filterRef-class" widget="select" xpath="query.filterRef">
+                <field className="filterRef-class" widget="select" xpath="query.filterRefx" >
                   <option value="Tous" label="Tous" />
                   <option value="Établissement classé" label="Établissement classé" />
-                  <option value="Simple déclaration" label="Simple déclaration" />
+                  <option value="Simple déclaration" label="Activité économique ou artisanale ou industruelle non réglementée" />
                   <option value="Occupation domaine public" label="Occupation domaine public" />
                   <option value="Autorisations urbanisme" label="Autorisations urbanisme" />
                   <postChange>
+				     if(root.query.filterRefx=="Simple déclaration"){
+					  root.query.filterRef="Activité économique ou artisanale ou industruelle non réglementée";
+					 
+					  }else{
+					   root.query.filterRef=''+root.query.filterRefx;
+					  }
+					   context.formRender.notifyObservers("query.filterRef");
                       context.formRender.targetPanel.find(".classSearch-0 .searchbuttun").click(); 
                   </postChange>
                 </field>
