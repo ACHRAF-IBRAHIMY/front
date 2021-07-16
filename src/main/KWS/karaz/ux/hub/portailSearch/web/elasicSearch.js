@@ -13,12 +13,12 @@ var AUTH = "";
 var ADMIN_AUTH = "" ;
 var URL_SEARCH = contextPath+"/kas/DataSynchronise";
 // var URL_SEARCH+"?operation=wselastic&shortUrl=" = "http://elasticformation.karaz.org:9200";
-var URL_COMMUNE = "https://sr3urba.rokhas.ma/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
-var URL_WS_1 = "https://sr3urba.rokhas.ma";
+var URL_COMMUNE = "https://r3urba.rokhas.ma/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
+var URL_WS_1 = "https://r3urba.rokhas.ma";
 var URL_WS_SEARCH_ALL_AUTORISATION = URL_WS_1+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction";
 var URL_WS_KDATA_OBJECT = URL_WS_1+"/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction/";
-var URL_WS_FE = "https://sr3urba.rokhas.ma";
-var URL_WS_FE2 = "https://bkp.rokhas.ma";
+var URL_WS_FE = "https://r3urba.rokhas.ma";
+var URL_WS_FE2 = "https://r4eco.rokhas.ma";
 var autListId = [
 {
 "url":URL_WS_FE+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction",
@@ -4105,7 +4105,7 @@ function fullSearchList(results,cls,typePage,target){
 	    d.appendChild(f);
 
 	    var typeAtts= "";
-	    if(typeAt=="Établissement classé" || typeAt=="Occupation Domaine Public"){
+	    if(typeAt=="Établissement classé" || typeAt=="Occupation Domaine Public" || "Activité économique ou artisanale ou industruelle non réglementée"){
 	        typeAtts = typeAt+";"+typeAc;
 	    }else if(typeAt=="Autorisations urbanisme"){
 	        typeAtts = typeAt+";"+nature;
@@ -4159,6 +4159,9 @@ function fullSearchList(results,cls,typePage,target){
 
 var procedureList = [["Simple Déclaration",
             "Établissement classé;Classe 2",
+			"Activité économique ou artisanale ou industruelle non réglementée;Déclaration préalable d'une activité non réglementée",
+			"Activité économique ou artisanale ou industruelle non réglementée;Permis d'exercer d'une activité non réglementée soumise à un cahier des charges",
+			"Activité économique ou artisanale ou industruelle non réglementée;Permis d'exercer d'une activité non réglementée soumise à une enquête commodo/Incommodo",
             "Établissement classé;Classe 3",
             "Occupation Domaine Public;Travaux Publics",
             "Occupation Domaine Public;Télécom",
@@ -4177,6 +4180,9 @@ var procedureList = [["Simple Déclaration",
             "Autorisations urbanisme;Projet de construction d'équipement à usage commercial"],
             ["SimpleDeclaration",
             "EtablissementClasse2",
+			"SimpleDeclaration",
+			"EtablissementClasse2",
+			"EtablissementClasse2",
             "EtablissementClasse",
             "OccupationDomainPubRp",
             "OccupationDomainPubRT",
@@ -4472,7 +4478,7 @@ function getWsLink(ref){
 var prefix = ref.split("-")[0];
 
 if(prefix=="ODP"){
-if(ref.split("-")[1]=="AN"){
+if(ref.split("-")[1]=="AN" || ref.split("-")[1]=="RNVLM"){
 prefix+="-AN";
 }else if(ref.split("-")[1]=="AP"){
 prefix+="-AP";
