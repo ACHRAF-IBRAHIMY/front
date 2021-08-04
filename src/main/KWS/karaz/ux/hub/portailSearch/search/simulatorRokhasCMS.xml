@@ -158,6 +158,7 @@
                 }else{
                     createChildClasses();
                     $(".simulator-cms .side-bar .body").hide();
+                    
                     $(".simulator-cms .side-bar .body1 .docs-in").hide();
                     $(".simulator-cms .side-bar .body1 .top-header-doc").show();
                     $(".simulator-cms .side-bar .body1").show();
