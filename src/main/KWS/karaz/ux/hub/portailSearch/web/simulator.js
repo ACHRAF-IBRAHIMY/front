@@ -66,6 +66,7 @@ response.setAttribute("style","display: grid;grid-template-columns: 50% 50%;")
 for(var i=0;i<size;i++){
 var resDiv = document.createElement("div");
 resDiv.setAttribute("class","type-demande");
+resDiv.setAttribute("id","bloc-bouton_"+(i+1));
 resDiv.setAttribute("idd",i+1);
 var input = document.createElement("input");
 input.setAttribute("type","hidden");
