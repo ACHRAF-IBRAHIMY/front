@@ -536,7 +536,14 @@
                   <vbox className="hp-box divSearchBar">
                      <htmlTranslate renderer="troisDiv" code1="PU00" code2="UD00" />
                     <vbox columns="90% 10%" className="stay-grid search-input-articles div-full-search-bar" columns-small="80% 20%" contentAlign="center">
-                        <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ..." />
+                        <field className="hp-search_field" label="" xpath="query.keys" widget="text" emptyText="Recherche par activité. Exemple : peinture, boulangerie, aluminium, ...">
+                           <postChange>
+                              context.formRender.targetPanel.find(".hp-search_field #autocomplete-list div").click(function(){
+                                 var prefix= context.formRender.targetPanel.find(".hp-search_field input").val();
+                                 ApplicationManager.run("karaz/ux/hub/portailsearch/search/AllKarazuxresults?query.search="+prefix+"&amp;query.parentP=0", "search", "All Karazuxresults", {});
+                              });
+                           </postChange>
+                        </field>
                         <button className="hp-search_field_icon fas fa-search search_button" label="" separator="!!">
                            <postChange>console.log("context.formRender.targetPanel");
                           var prefix= context.formRender.targetPanel.find(".hp-search_field input").val();
