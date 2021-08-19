@@ -149,7 +149,29 @@
             <htmlTranslate renderer="vPanel" code1="RecherActivi" code2="ResPVR" code3="AffMotCles" />
             <vbox columns="80% 20%" className="stay-grid" style="direction: ltr;" columns-small="80% 20%" contentAlign="center" visible="'{userlang}'=='ar',expr,boolean">
               <vbox columns="68% 32%">
-                <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" />
+                <field className="hp-search_field" label="" xpath="query.search" widget="text" emptyText="Mots clés. Exemples : aménager boulangerie" >
+                	<postChange>
+						context.formRender.targetPanel.find(".hp-search_field #autocomplete-list div").click(function(){
+							var prefix = context.formRender.targetPanel.find(".classSearch-0 .div-full-search-bar .hp-search_field input").val();
+							currentPage=0;
+							var pp=root.query.parentP;
+							if(pp==1){
+							  pp=0;  
+							}
+							console.log("pp",root.query.filterRef);
+
+							if(root.query.filterRef=="Tous"){
+							  pp = 0;
+							  console.log("pp",pp);
+							}else{
+							  pp = root.query.filterRef;
+							}
+							console.log("cntx = ",context.formRender.targetPanel.attr("data-tabtag"));
+							restFullSearchList(prefix,0,false,pp,"classSearch-0",context.formRender.targetPanel);
+							root.query.parentP=0;
+						});
+                    </postChange>
+				</field>
                 <field className="filterRef-class" widget="select" xpath="query.filterRefx">
                   <option value="Tous" label="Tous" />
                   <option value="Établissement classé" label="Établissement classé" />
