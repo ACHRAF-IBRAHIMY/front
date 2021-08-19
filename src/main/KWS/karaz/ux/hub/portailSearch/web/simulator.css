@@ -1,3 +1,7 @@
+.qr .rep .rep-pred.rep-type-0 #bloc-bouton_3, .qr .rep .rep-pred.rep-type-0 .type-demande[idd="3"] {
+    pointer-events: none;
+    background: #80808030;
+}
 
 .error-msg-sim{
     padding: 12px 15px;

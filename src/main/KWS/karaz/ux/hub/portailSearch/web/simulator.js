@@ -68,7 +68,6 @@ var resDiv = document.createElement("div");
 resDiv.setAttribute("class","type-demande");
 
 resDiv.setAttribute("id","bloc-bouton_"+(i+1));
-
 resDiv.setAttribute("idd",i+1);
 var input = document.createElement("input");
 input.setAttribute("type","hidden");
