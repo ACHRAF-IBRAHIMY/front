@@ -706,7 +706,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         var newRankCom = results[i]._source.newRankComp;
         var rankStr = "";
         
-        console.log(results[i]._source);
+        //console.log(results[i]._source);
         
         if(dec == true){
             dataReportRk.data.push(results[i]._source);
@@ -791,9 +791,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
+    var newRankCom = results[i]._source.newRankComp;
     var rankStr = "";
     
-    console.log(results[i]._source);
+    //console.log(results[i]._source);
     
     if(rankCom>0){
         rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
@@ -832,9 +833,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
+    var newRankCom = results[i]._source.newRankComp;
     var rankStr = "";
     
-    console.log(results[i]._source);
+    //console.log(results[i]._source);
     
     if(rankCom>0){
     rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
@@ -881,9 +883,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
+    var newRankCom = results[i]._source.newRankComp;
     var rankStr = "";
     
-    console.log(results[i]._source);
+    //console.log(results[i]._source);
     
     if(rankCom>0){
     rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
