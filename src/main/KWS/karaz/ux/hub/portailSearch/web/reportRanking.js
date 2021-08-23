@@ -703,7 +703,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
         var tr = $(document.createElement("tr"));
         var rankCom = results[i]._source.rankComp;
-        var newRankCom = results[i]._source.newRankComp;
+        var newRankComp = results[i]._source.newRankComp;
         var rankStr = "";
         
         //console.log(results[i]._source);
@@ -791,7 +791,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
-    var newRankCom = results[i]._source.newRankComp;
+    var newRankComp = results[i]._source.newRankComp;
     var rankStr = "";
     
     //console.log(results[i]._source);
@@ -833,7 +833,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
-    var newRankCom = results[i]._source.newRankComp;
+    var newRankComp = results[i]._source.newRankComp;
     var rankStr = "";
     
     //console.log(results[i]._source);
@@ -883,7 +883,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
-    var newRankCom = results[i]._source.newRankComp;
+    var newRankComp = results[i]._source.newRankComp;
     var rankStr = "";
     
     //console.log(results[i]._source);
