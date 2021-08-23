@@ -718,6 +718,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         	if(newRankComp == 1){
         		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
         	}
+        	rankStr += " T1";
         }
         try{
             if(transMap[results[i]._source.commune.replace(/ /g,"__")]!=undefined){
@@ -802,6 +803,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	if(newRankComp == 1){
     		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
     	}
+    	rankStr += " T2";
     }
     tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.prefecture+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.prefecture,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
@@ -844,6 +846,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	if(newRankComp == 1){
     		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
     	}
+    	rankStr += " T3";
     }
     try{
         if(transMap[results[i]._source.region.replace(/ /g,"__")]!=undefined){
@@ -894,6 +897,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	if(newRankComp == 1){
     		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
     	}
+    	rankStr += " T4";
     }
     tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+communeTrans+"\"><span>"+(i+1)+"- "+subLong(communeTrans,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
