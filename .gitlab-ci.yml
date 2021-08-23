@@ -16,7 +16,7 @@ Build:
     paths:
       - target/
   only:
-    - Master_CI_traduction 
+    - Master_CI_traduction
 Job2:
    stage: deploy_dev
    script:

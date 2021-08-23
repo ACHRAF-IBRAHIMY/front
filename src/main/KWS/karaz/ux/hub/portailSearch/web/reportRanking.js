@@ -703,6 +703,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
         var tr = $(document.createElement("tr"));
         var rankCom = results[i]._source.rankComp;
+        var newRankComp = results[i]._source.newRankComp;
         var rankStr = "";
         
         if(dec == true){
@@ -714,7 +715,13 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         }else if(rankCom<0){
             rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
         }else{
-            rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+        	if(results[i]._source.trim == "2-2021"){
+	        	if(newRankComp == 1 || newRankComp == 1){
+	        		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+	        	}
+        	}else{
+        		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+        	}
         }
         try{
             if(transMap[results[i]._source.commune.replace(/ /g,"__")]!=undefined){
@@ -788,15 +795,21 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
+    var newRankComp = results[i]._source.newRankComp;
     var rankStr = "";
-    
     
     if(rankCom>0){
         rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
     }else if(rankCom<0){
         rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
     }else{
-        rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+    	if(results[i]._source.trim == "2-2021"){
+	    	if(newRankComp == 1){
+	    		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+	    	}
+    	}else{
+    		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+    	}
     }
     tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.prefecture+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.prefecture,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
@@ -828,15 +841,21 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
+    var newRankComp = results[i]._source.newRankComp;
     var rankStr = "";
     
-    
     if(rankCom>0){
-    rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
+    	rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
     }else if(rankCom<0){
-    rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+    	rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
     }else{
-    rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+    	if(results[i]._source.trim == "2-2021"){
+	    	if(newRankComp == 1){
+	    		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+	    	}
+    	}else{
+    		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+    	}
     }
     try{
         if(transMap[results[i]._source.region.replace(/ /g,"__")]!=undefined){
@@ -876,15 +895,21 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
     var tr = $(document.createElement("tr"));
     var rankCom = results[i]._source.rankComp;
+    var newRankComp = results[i]._source.newRankComp;
     var rankStr = "";
     
-    
     if(rankCom>0){
-    rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
+    	rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
     }else if(rankCom<0){
-    rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+    	rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
     }else{
-    rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+    	if(results[i]._source.trim == "2-2021"){
+	    	if(newRankComp == 1){
+	    		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+	    	}
+    	}else{
+    		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+    	}
     }
     tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+communeTrans+"\"><span>"+(i+1)+"- "+subLong(communeTrans,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
