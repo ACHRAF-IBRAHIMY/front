@@ -14,7 +14,7 @@
       <script postLoad="true" xcstt="x"> 
             
       </script>
-      <html>
+    <!--   <html>
         <div class="slider-area2 slider-height2 d-flex align-items-center">
           <div class="container">
               <div class="row">
@@ -30,7 +30,7 @@
               </div>
           </div>
       </div>
-    </html>
+    </html> -->
       <html id="hSeparator">
         <div style="height: 30px;" xcstt="x" />
       </html>
