@@ -11,7 +11,7 @@ Job1:
     paths:
       - target/
   only:
-    - master_geo_ci
+    - mohamedkh
 Job2:
   stage: deploy_dev
   script:
@@ -19,4 +19,4 @@ Job2:
     - ssh -o stricthostkeychecking=no karaz@51.255.76.236 "unzip -o karaz-ux-hub-1.0.jar -d karaz-ux-hub-1.0/ && rm -rf /home/karaz/glassfish5/glassfish/domains/domain2/autodeploy/karazApp/karaz-ux-hub-1.0 && mv karaz-ux-hub-1.0 /home/karaz/glassfish5/glassfish/domains/domain2/autodeploy/karazApp"
     - ssh -o stricthostkeychecking=no karaz@51.255.76.236 "/home/karaz/restart_glassfish_domain2.sh"
   only:
-    - master_geo_ci
+    - mohamedkh
