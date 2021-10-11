@@ -300,14 +300,17 @@
                               </a> 
                           </div>
                           <div class="hero__caption">
-                              <span data-animation="fadeInUp" data-delay=".3s">Point d’accès unique à toute la donnée urbanistique</span>
+                              <span data-animation="fadeInUp" data-delay=".3s">Point d’accès unique à toute la donnée urbanistique </span>
                               <h1 data-animation="fadeInUp" data-delay=".3s">Géoportail national</h1>
                               <html>
                               <div class="row">
                                 <div class="span12" style="width:100%">
                                     <div id="custom-search-form" class="form-search form-horizontal">
                                         <div class="input-append span12 row autocomplete" style="margin-left: 16px;">
-                                            <input type="text" id="searchQr" style="margin-top:10px;margin-bottom:20px;margin-right: 12px;height:40px" class="search-query col-6" autocompletion="off" placeholder="Search"></input>
+                                            <input type="text" id="searchQr" 
+                                            style="margin-top:10px;margin-bottom:20px;margin-right: 12px;height:40px" 
+                                            class="search-query col-6" autocompletion="off"
+                                             placeholder="Search"></input>
                                             <button type="submit" onclick="searchBtn()" style="margin-top:10px;margin-bottom:20px;
                                             height: 30px;
                                             width: 30px;
