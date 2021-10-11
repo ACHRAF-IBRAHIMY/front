@@ -7090,7 +7090,7 @@ function hidegenloaging(t){
     console.log("the id is done: ",t)
     $("#imgLoading"+t).fadeOut(100);
 
-}
+} 
 
 function imgError(image) {
     image.onerror = "";
