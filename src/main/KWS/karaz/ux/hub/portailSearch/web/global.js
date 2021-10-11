@@ -7092,7 +7092,7 @@ function hidegenloaging(t){
 
 } 
 
-function imgError(image) {
+function imgError(image) { 
     image.onerror = "";
     image.src = "/karazal/extensions/img/maroc.png";
     image.style="height: 118px;margin-left: 50px;"
