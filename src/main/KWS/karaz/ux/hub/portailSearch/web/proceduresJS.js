@@ -6,7 +6,6 @@ $(".NQF-titre-quest > .ow-pl-toolbar .ow-label-pl").html(`QUESTIONS FREQUENTES`)
 function PCD_addtitle() {
 $(".PCD-addtitle> .ow-pl-toolbar .ow-label-pl:not(:has(>i))").append(`<i class="fas fa-info-circle PCD-tooltip" title="Il s'agit d'indicateurs contextuels représentants la performances relatifs au processus, à l'entité ou à l'utilisateur concerné"/>`)
 }
-
 function PCD_headerfieldset_color(pcdClasstype) {
 $(pcdClasstype + "> .ow-pl-toolbar .ow-label-pl").css("color","#999999");
 }

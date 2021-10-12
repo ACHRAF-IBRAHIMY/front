@@ -1,5 +1,4 @@
 if($(window).width()<900){
-
     $(".menu-body button").click(function(){
         $(".menu-body").slideUp(); 
     }); 

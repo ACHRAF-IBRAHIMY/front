@@ -2,11 +2,10 @@
 var historyPages = [];
 var indexOfHPage = 0;
 var checkMap = true;
-
 var homePage = {
     "path":"karaz/ux/hub/portailsearch/search/HomePage?query.typeArticle=0",
     "type":"search",
-    "label":"ACCUEIL",
+    "label":"ACCUEIL", 
     "obj":{}
 };
 

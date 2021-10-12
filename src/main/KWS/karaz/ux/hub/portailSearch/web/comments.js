@@ -1,4 +1,4 @@
-function getArticlesCms(params){
+function getArticlesCms(params){ 
     var size = params.size;
     var from = params.from;
     var context = params.context;

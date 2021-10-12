@@ -6,7 +6,7 @@ console.log("setPaganateSizeValueById(divId,size) ......."+divId+"size=="+size )
  }  
 var v0=size;
 var v1=size*2;
-
+ 
 if( size<5){
 v1=size*3;
 }     
