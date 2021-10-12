@@ -81,37 +81,22 @@
         console.log("instanceId",root.instanceId);
         context.formRender.notifyObservers("instanceId");
 
-        /*
-        $("#home-gloAl-"+root.instanceId+" .close").click(function(e){
-          var modal = $("#home-gloAl-"+root.instanceId+" #myModal").get(0);
-          model.style.display="none";
-        })
-        */
-
-        var toolbarOptions = [
-          [ 'bold', 'italic', 'underline', 'strike' ],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'header': '1' }, { 'header': '2' }],
-          [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
-          [ 'direction', { 'align': [] }],
-          ['image'],
-        ];
-
-      var ddv = context.formRender.targetPanel.find("#toolbarNBNB").get(0);
-      var quill = new Quill(ddv, {
-        modules: {
-          toolbar: toolbarOptions
-        },
-        theme: 'snow'
-      });
-
-      
+        root.idContainer = (new Date).getTime();
+        context.formRender.notifyObservers("idContainer");  
 
     </script>
     <script postLoad="true" delay="500">
+      
       console.log("context",context);
       getMostPopularArticle(4,"",".fieldser-article-1 .vbox-articles .ow-vl-inner");   
-      autocompleteGeo(context.formRender.targetPanel.find("#searchQr").get(0), countries);   
+      autocompleteGeo(context.formRender.targetPanel.find("#searchQr").get(0), "",null);   
+
+
+      context.formRender.targetPanel.find('#myCarousel'+root.idContainer).carousel({
+        interval: 3000,
+     })
+
+
     </script>
     <!-- <css>
       .classSearch-home-gloAl .hp-box-nbnb{
@@ -283,94 +268,100 @@
     height: 90%;
   }
 
-      </css> -->
+      </css> --> 
       
      <!--? Slider Area Start-->
-     <div class="slider-area">
-      <div class="slider-active dot-style">
-          <!-- Slider Single -->
-          <div class="single-slider d-flex align-items-center slider-height">
-              <div class="container">
-                  <div class="row align-items-center">
-                      <div class="col-xl-7 col-lg-8 col-md-10 ">
-                          <!-- Video icon -->
-                          <div class="video-icon">
-                              <a class="popup-video btn-icon" href="https://www.youtube.com/embed/vCXPkmv_bDk" data-animationxx="bounceIn" data-delay=".4s">
-                                  <i class="fas fa-play"></i>
-                              </a> 
-                          </div>
-                          <div class="hero__caption">
-                              <span data-animation="fadeInUp" data-delay=".3s">Point d’accès unique à toute la donnée urbanistique</span>
-                              <h1 data-animation="fadeInUp" data-delay=".3s">Géoportail national</h1>
-                              <html>
-                              <div class="row">
-                                <div class="span12" style="width:100%">
-                                    <div id="custom-search-form" class="form-search form-horizontal">
-                                        <div class="input-append span12 row autocomplete" style="margin-left: 16px;">
-                                            <input type="text" id="searchQr" style="margin-top:10px;margin-bottom:20px;margin-right: 12px;height:40px" class="search-query col-6" autocompletion="off" placeholder="Search"></input>
-                                            <button type="submit" onclick="searchBtn()" style="margin-top:10px;margin-bottom:20px;
-                                            height: 30px;
-                                            width: 30px;
-                                            background: #38A;
-                                            color: #FFF;
-                                            border: none;
-                                            width: 50px;
-                                            height: 44px;
-                                            border-radius: 20px;" class=""><i class="fas fa-search"></i></button>
-                                        </div>
-                                      </div>
-                                </div> 
-                          </div></html>
-                              <p data-animation="fadeInUp" data-delay=".6s">En quelques clics, accédez instantanément à l’ensemble des documents d’urbanisme de tout le Royaume !</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>   
-          <!-- Slider Single -->
-          <!-- <div class="single-slider d-flex align-items-center slider-height">
-              <div class="container">
-                  <div class="row align-items-center">
-                      <div class="col-xl-7 col-lg-8 col-md-10 ">
-                          <div class="video-icon">
-                              <a class="popup-video btn-icon" href="https://www.youtube.com/watch?v=1aP-TXUpNoU" data-animation="bounceIn" data-delay=".4s">
-                                  <i class="fas fa-play"></i>
-                              </a>
-                          </div>
-                          <div class="hero__caption">
-                              <span data-animation="fadeInUp" data-delay=".3s">We help to groom your pet</span>
-                              <h1 data-animation="fadeInUp" data-delay=".3s">We Care Your Pets.</h1>
-                              <p data-animation="fadeInUp" data-delay=".6s">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna sectetur adipisci.</p>
-                              <a href="#" class="hero-btn" data-animation="fadeInLeft" data-delay=".3s">Contact Now<i class="ti-arrow-right"></i> </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>    -->
-      </div>
-      <!-- slider Social -->
-      <div class="button-text d-none d-md-block">
-      <span>Scroll</span>
-      </div>
-  </div>
+<html>
 
+     
+</html>
+
+<html style="position:relative" xpath="idContainer">
+  <div>
+    <div id="custom-search-form " class="form-search form-horizontal left-position" style="position: absolute;
+    z-index: 100;
+    width: 800px;
+    top: 230px;
+    ">
+      <div class="input-append span12 row autocomplete" style="margin-left: 16px;">
+          <input type="text" id="searchQr" style=" margin-top: 30px;margin-bottom:20px;margin-right: 12px;height:40px" class="search-query col-6" autocomplete="off" placeholder="Mot clé"></input>
+      </div>
+    </div>
+  </div>
+  <div id="myCarousel${idContainer}" class="myCarousel carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="mask flex-center">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-7 col-12 order-md-1 order-2">
+                <h4>Géoportail national</h4>
+                <p>Point d’accès unique à toute la donnée urbanistique</p>
+                <div class="span12" style="width:100%;height:50px">
+                  
+                </div> 
+                <p data-animation="fadeInUp" data-delay=".6s">En quelques clics, accédez instantanément à l’ensemble des documents d’urbanisme de tout le Royaume !</p>
+                 </div>
+              <div class="col-md-5 col-12 order-md-2 order-1" style="height: 470px;"><img src="img/PAMD.png" class="mx-auto" alt="slide"/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="mask flex-center">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-7 col-12 order-md-1 order-2">
+                <h4>Géoportail national</h4>
+                <p>Point d’accès unique à toute la donnée urbanistique</p>
+                <div class="span12" style="width:100%;height:50px">
+                  
+                </div> 
+                <p data-animation="fadeInUp" data-delay=".6s">En quelques clics, accédez instantanément à l’ensemble des documents d’urbanisme de tout le Royaume !</p>
+                 </div>
+              <div class="col-md-5 col-12 order-md-2 order-1" style="height: 470px;"><img src="img/PAMD1.png" class="mx-auto" alt="slide"/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="mask flex-center">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-7 col-12 order-md-1 order-2">
+                <h4>Géoportail national</h4>
+                <p>Point d’accès unique à toute la donnée urbanistique</p>
+                <div class="span12" style="width:100%;height:50px">
+                  
+                </div> 
+                <p data-animation="fadeInUp" data-delay=".6s">En quelques clics, accédez instantanément à l’ensemble des documents d’urbanisme de tout le Royaume !</p>
+                 </div>
+              <div class="col-md-5 col-12 order-md-2 order-1" style="height: 470px;"><img onclick="displaySearchByHisto('gis/virtual/search/MapBoxSearch?query.mapId=0090', 'search', 'GÉOPORTAIL', {})" src="img/Image1.png" class="mx-auto" alt="slide"/></div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel${idContainer}" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#myCarousel${idContainer}" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
+  <!--slide end--> 
+</html>
 
   <!-- Slider Area End -->
-     <html>
-       <div class="geoPortPop"> 
-      <div id="home-gloAl-owfrm1598305797144_4629">
+     <html xpath="instanceId">
+       <div class="geoPortPop">  
+      <div id="home-gloAl-${instanceId}">
         <div id="myModal" style="height: 100%;
         padding-bottom: 30px;padding-top: 120px;" class="modal modal2">
           <div class="modal-content">
-            <span class="close" onclick="closeGeoPopUp('home-gloAl-owfrm1598305797144_4629')">x</span>
+            <span class="close" onclick="closeGeoPopUp('home-gloAl-${instanceId}')">x</span>
             <p></p>
             <iframe width="100%" height="90%" src="https://www.youtube.com/embed/vCXPkmv_bDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
           </div>
         </div>
       </div>
     </div>
-    <div class="our-services section-padding30">
-        <div class="container">
+    <div class="our-services section-padding30" style="padding:12px">
+        <div class="">
             <div class="row justify-content-sm-center">
                 <div class="cl-xl-7 col-lg-8 col-md-10">
                     <!-- Section Tittle -->
@@ -380,66 +371,53 @@
                 </div>
             </div>
             <div class="row">
-                <div class=" col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-services text-center mb-30" onclick="openGeoPopUp('home-gloAl-owfrm1598305797144_4629')">
+                <div class=" col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-services text-center mb-30" onclick="displaySearchByHisto('gis/virtual/search/MapBoxSearch?query.mapId=0090', 'search', 'GÉOPORTAIL', {})"  >
                         <div class="services-ion">
-                            <span class="fab fa-youtube"></span>
+                            <span class="fas fa-globe-africa"></span>
                         </div>
                         <div class="services-cap">
-                            <h5><a href="#">Tutoriel</a></h5>
-                            <p>Découvrez le géoportail national de l’urbanisme en 3 mn.</p>
+                            <h5><a>Géoportail</a></h5>
+                            <!-- <p>Découvrez le géoportail national de l’urbanisme en 3 mn.</p> -->
                         </div>
                     </div>
                 </div>
-                <div class=" col-lg-4 col-md-6 col-sm-6">
-                    <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Document d'urbanisme&quot;, {});" class="single-services text-center mb-30">
+                <div class=" col-lg-3 col-md-6 col-sm-6">
+                    <div onClick="displaySearchByHisto('gis/virtual/search/MapBoxSearch?query.mapId=0012&amp;query.operation=headerWidget&amp;query.toolbar=NT;SR', 'search', 'GÉOPORTAIL', {});" class="single-services text-center mb-30">
                         <div class="services-ion">
                             <span class="fas fa-file-alt"></span>
-                        </div>
+                        </div> 
                         <div class="services-cap">
-                            <h5><a href="#">Documents d'urbanisme</a></h5>
-                            <p>Les documents d’urbanisme publiés par les différentes agences urbaines.</p>
+                            <h5><a>Note indicative</a></h5>
+                            <!-- <p>Imprimez votre note de renseignement indicative instantanément.</p> -->
                         </div>
                     </div>
                 </div>
-                <div  class=" col-lg-4 col-md-6 col-sm-6">
-                    <div onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/OrganisationSearch?query.typeArticle=0&quot;, &quot;search&quot;, &quot;ORGANISMES&quot;, {});" class="single-services text-center mb-30">
-                        <div class="services-ion">
-                            <span class="fas fa-university"></span>
+                <div  class=" col-lg-3 col-md-6 col-sm-6">
+                  <div onClick="displaySearchByHisto('gis/virtual/search/MapBoxSearch?query.mapId=0089&amp;query.operation=headerWidget;chartWidget&amp;query.toolbar=CI;SR', 'search', 'GÉOPORTAIL', {});" class="single-services text-center mb-30">
+                    <div class="services-ion">
+                            <span class="fas fa-chart-pie"></span>
                         </div>
                         <div class="services-cap">
-                            <h5><a href="#">Agences urbaines</a></h5>
-                            <p>Découvrez ici les différentes agences urbaines exerçant au niveau national.</p>
+                            <h5><a>Géoportail investissement</a></h5>
+                            <!-- <p>Découvrez les opportunités d'investissements sur le territoire national.</p> -->
                         </div>
-                    </div>
+                    </div> 
                 </div>
+                <div class=" col-lg-3 col-md-6 col-sm-6">
+                  <div class="single-services text-center mb-30" onclick="openGeoPopUp('home-gloAl-${instanceId}')">
+                      <div class="services-ion">
+                          <span class="fab fa-youtube"></span>
+                      </div>
+                      <div class="services-cap">
+                          <h5><a>Tutoriel</a></h5>
+                          <!-- <p>Découvrez le géoportail national de l’urbanisme en 3 mn.</p> -->
+                      </div>
+                  </div>
+              </div>
             </div>
-        </div>
+        </div> 
     </div>
-</html>
-<html>
-  <div class="about-area fix">
-    <!--Right Contents  -->
-    <div class="about-img">
-        
-    </div>
-    <!-- left Contents -->
-    <div class="about-details">
-        <div class="right-caption">
-            <!-- Section Tittle -->
-            <div class="section-tittle mb-50">
-                <h2>Géoportail national</h2>
-            </div>
-            <div class="about-more">
-                <p class="pera-top">Point d’accès unique à toute la donnée urbanistique.</p>
-                <p class="mb-65 pera-bottom">
-                    En quelques clics, accédez instantanément à l’ensemble des documents d’urbanisme de tout le Royaume !
-                  </p>
-                <a onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/MapBrwSearch?query.mapId=0002&quot;, &quot;search&quot;, &quot;GÉOPORTAIL&quot;, {});" style="color: #FFF;"  class="btn">Découvrir</a>
-            </div>
-        </div>
-    </div>
-</div>
 </html>
 <html>
   <div class="gallery-area">
@@ -448,7 +426,7 @@
             <div class="cl-xl-7 col-lg-8 col-md-10">
                 <!-- Section Tittle -->
                 <div class="section-tittle text-center mb-70">
-                    <h2>Dernièrs documents d’urbanisme mis en ligne </h2>
+                    <h2>Derniers documents d’urbanisme mis en ligne </h2>
                 </div> 
             </div>
         </div>
@@ -461,32 +439,11 @@
   <search searchQN="gis/virtual/search/AllVirtual?searchName=docUrbanismeAcc" />
 </vbox>
 <html style="padding: 0 0 40px 0;text-align:center">
-  <a class="btn" style="color:#FFF" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Document d'urbanisme&quot;, {});">Tous documents d’urbanisme</a>
+  <a class="btn" style="color:#FFF" onClick="displaySearchByHisto(&quot;karaz/ux/hub/portailsearch/search/UrbanismeSearch&quot;, &quot;search&quot;, &quot;Document d'urbanisme&quot;, {});">Tous documents d’urbanisme</a>
 </html>
 <html xpath="instanceId">
-  <div id="f2">  
-    <div class="container centered" style="text-align: center;">
-        <div class="row justify-content-sm-center">
-          <div class="cl-xl-7 col-lg-8 col-md-10">
-              <!-- Section Tittle -->
-              <div class="section-tittle text-center mb-70">
-                  <h2 style="color:#0b1c39">Newsletter</h2>
-              </div> 
-          </div>
-      </div>
-        <div><h2>Soyez les premiers informés de notre actualité</h2></div>
-      <div class="row centered mtb" style="margin-top:30px">
-        
-        <div class="col-md-6 col-md-offset-3 mt effect-slide-bottom in"  data-effect="slide-bottom" style="margin:auto;transition: all 0.7s ease-in-out 0s;">
-          <form role="form" action="register.php" method="post" enctype="plain">
-            <input style="border: 1px solid #CCC !important;" type="email" name="email" class="subscribe-input" placeholder="Adresse E-mail" required=""></input>
-            <button style="padding: 23px 20px !important;" class="btn btn-lg btn-green subscribe-submit" type="submit">Envoyer</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="testimonial-area section-bg" data-background="extensions/assets/img/gallery/section_bg03.png">
+ 
+  <div class="testimonial-area section-bg guideBG" data-backgroundxx="extensions/assets/img/gallery/section_bg03.png">
     <div class="container">
         <div class="row justify-content-sm-center">
           <div class="cl-xl-7 col-lg-8 col-md-10">
@@ -499,23 +456,28 @@
       <div>
         <div class="simple-slider simple-slider-first-${instanceId}">
                         <div class="slider-wrapper">
-                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide1.png')">
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide1.jpg')">
                           </div>
                       
-                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide2.png')">
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide2.jpg')">
                           </div>
                       
-                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide3.png')">
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide3.jpg')">
                           </div>
-                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide4.png')">
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide4.jpg')">
                           </div>
-                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide5.png')">
+                          <div class="slider-slide" style="background-image: url('extensions/img/imageSlide5.jpg')">
                             
                           </div>
                         </div>
                         </div>
                       <script>
-                        var slider = new simpleSlider('.simple-slider-first-${instanceId}', {speed: 500},{delay:500});
+                        //var slider = new SimpleSlider('.simple-slider-first-${instanceId}', {speed: 500},{delay:500});
+                        var slider =  new SimpleSlider('.simple-slider-first-${instanceId}', {
+                          speed: 1600,
+                          autoplay: true,
+                          delay:1500
+                        });
                       </script>
       </div>
       <div style="height:30px"></div>
@@ -540,7 +502,7 @@
   </vbox>
 </vbox>
 <html style="padding: 40px 0 40px 0;text-align:center">
-  <a class="btn" style="color:#FFF" onClick="ApplicationManager.run(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Toutes les ressources</a>
+  <a class="btn" style="color:#FFF" onClick="displaySearchByHisto(&quot;karaz/ux/hub/portailsearch/search/ArticlesListe?query.typeArticle=0&quot;, &quot;search&quot;, &quot;Articles&quot;, {});">Toutes les ressources</a>
 </html>
 
 <html style="height:50px">
