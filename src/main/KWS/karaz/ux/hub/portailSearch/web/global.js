@@ -6639,7 +6639,7 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
 	                    "query_string": {
 	                        "fields": ["location"],
 	                        "query": "*" + req + "*",
-	                        "fuzziness": "0.6",
+	                        "fuzziness": "0.5",
 	                        "minimum_should_match": "AUTO"
 	                    }
 	                }],
