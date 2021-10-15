@@ -6647,12 +6647,7 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
                         "minimum_should_match": "80%"
                     }
                 }
-                ],
-                "should": [{
-                    "match_phrase_prefix": {
-                        "location": req
-                    }
-                }]
+                ]
             }
         },
         "_source": ["location", "type"]
