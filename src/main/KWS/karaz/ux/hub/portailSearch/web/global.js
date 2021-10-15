@@ -6627,9 +6627,6 @@ function removeAccent(text){
 }
 
 function searchByLocationName(inp, type, req, kmapid, context, root) { 
-	let minShouldMatch=80;
-	if(req.length<4)
-		minShouldMatch=60
 	var obj = {
 	        "size": 5,
 	         "query":
@@ -6639,8 +6636,8 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
 	                    "query_string": {
 	                        "fields": ["location"],
 	                        "query": "*" + req + "*",
-	                        "fuzziness": "AUTO",
-	                        "minimum_should_match": minShouldMatch+"%"
+	                        "fuzziness": "0.6",
+	                        "minimum_should_match": "80%"
 	                    }
 	                }],
 	                "should": [{
