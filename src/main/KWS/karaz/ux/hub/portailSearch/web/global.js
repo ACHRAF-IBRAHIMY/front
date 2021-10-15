@@ -6642,28 +6642,15 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
                 "must": [{
                     "query_string": {
                         "fields": ["location"],
-                        "query": "*" +req+"*",
+                        "query": "*" +req+"* OR"+"*"+reqWidthoutAccents+"*",
                         "fuzziness": "AUTO",
                         "minimum_should_match": "80%"
                     }
-                },
-                {
-                	 "query_string": {
-                         "fields": ["location"],
-                         "query": "*"+reqWidthoutAccents+"*",
-                         "fuzziness": "AUTO",
-                         "minimum_should_match": "80%"
-                     }
                 }
                 ],
                 "should": [{
                     "match_phrase_prefix": {
                         "location": req
-                    }
-                },
-                {
-                    "match_phrase_prefix": {
-                        "location": reqWidthoutAccents
                     }
                 }]
             }
