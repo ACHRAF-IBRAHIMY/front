@@ -6605,7 +6605,7 @@ function searchById(id, kmapid){
     });
 }
 
-function searchByLocationName(inp, type, req, kmapid, context, root) {
+function searchByLocationName(inp, type, req, kmapid, context, root) { 
 	console.log("ssss",inp)
 	console.log("type",type)
 	console.log("req",req)
