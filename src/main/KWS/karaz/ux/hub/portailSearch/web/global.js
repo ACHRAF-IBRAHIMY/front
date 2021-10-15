@@ -6604,8 +6604,30 @@ function searchById(id, kmapid){
         }
     });
 }
+function removeAccent(text){
+	let accentsMap = new Map([
+		  ["A", "Á|À|Ã|Â|Ä"],
+		  ["a", "á|à|ã|â|ä"],
+		  ["E", "É|È|Ê|Ë"],
+		  ["e", "é|è|ê|ë"],
+		  ["I", "Í|Ì|Î|Ï"],
+		  ["i", "í|ì|î|ï"],
+		  ["O", "Ó|Ò|Ô|Õ|Ö"],
+		  ["o", "ó|ò|ô|õ|ö"],
+		  ["U", "Ú|Ù|Û|Ü"],
+		  ["u", "ú|ù|û|ü"],
+		  ["C", "Ç"],
+		  ["c", "ç"],
+		  ["N", "Ñ"],
+		  ["n", "ñ"]
+		]);
+	const reducer = (acc, [key]) =>
+	  acc.replace(new RegExp(accentsMap.get(key), "g"), key);
+	  return [...accentsMap].reduce(reducer, text);
+}
 
 function searchByLocationName(inp, type, req, kmapid, context, root) { 
+	let reqWidthoutAccents=removeAccent(req);
 	console.log("ssss",inp)
 	console.log("type",type)
 	console.log("req",req)
@@ -6620,14 +6642,28 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
                 "must": [{
                     "query_string": {
                         "fields": ["location"],
-                        "query": "*" + req + "*",
+                        "query": "*" +reqWidthoutAccents+"*",
                         "fuzziness": "AUTO",
                         "minimum_should_match": "80%"
                     }
-                }],
+                },
+                {
+                	 "query_string": {
+                         "fields": ["location"],
+                         "query": "*"+reqWidthoutAccents+"*",
+                         "fuzziness": "AUTO",
+                         "minimum_should_match": "80%"
+                     }
+                }
+                ],
                 "should": [{
                     "match_phrase_prefix": {
                         "location": req
+                    }
+                },
+                {
+                    "match_phrase_prefix": {
+                        "location": reqWidthoutAccents
                     }
                 }]
             }
