@@ -6631,7 +6631,7 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
 	var obj={}
 	if(removedAccent==req)
 	   obj = {
-	        "size": 7,
+	        "size": 5,
 	         "query":
 	        {
 	            "bool": {
@@ -6640,7 +6640,7 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
 	                        "fields": ["location"],
 	                        "query": "*" + req + "*",
 	                        "fuzziness": "0.6",
-	                        "minimum_should_match": "80%"
+	                        "minimum_should_match": "AUTO"
 	                    }
 	                }],
 	                "should": [{
@@ -6654,16 +6654,16 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
 	    };
 	else{
 		obj = {
-		        "size": 7,
+		        "size": 6,
 		         "query":
 		        {
 		            "bool": {
 		                "must": [{
 		                    "query_string": {
 		                        "fields": ["location"],
-		                        "query": "*" + req + "*",
+		                        "query": "(*" + req + "*) OR (*" + removedAccent + "*)",
 		                        "fuzziness": "0.6",
-		                        "minimum_should_match": "80%"
+		                        "minimum_should_match": "50%"
 		                    }
 		                }],
 		                "should": [{
