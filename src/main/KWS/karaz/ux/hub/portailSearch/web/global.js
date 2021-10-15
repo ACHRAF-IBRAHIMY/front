@@ -6627,31 +6627,31 @@ function removeAccent(text){
 }
 
 function searchByLocationName(inp, type, req, kmapid, context, root) { 
-	let reqWidthoutAccents=removeAccent(req);
-	console.log("ssss",inp)
-	console.log("type",type)
-	console.log("req",req)
-	console.log("kmapid",kmapid)
-	console.log("context",context)
-	console.log("root",root)
-    var obj = {
-        "size": 5,
-         "query":
-        {
-            "bool": {
-                "must": [{
-                    "query_string": {
-                        "fields": ["location"],
-                        "query": "(location:*" +req+"* OR"+"location:*"+reqWidthoutAccents+"*)",
-                        "fuzziness": "AUTO",
-                        "minimum_should_match": "80%"
-                    }
-                }
-                ]
-            }
-        },
-        "_source": ["location", "type"]
-    };
+	let minShouldMatch=80;
+	if(req.length<4)
+		minShouldMatch=60
+	var obj = {
+	        "size": 5,
+	         "query":
+	        {
+	            "bool": {
+	                "must": [{
+	                    "query_string": {
+	                        "fields": ["location"],
+	                        "query": "*" + req + "*",
+	                        "fuzziness": "AUTO",
+	                        "minimum_should_match": minShouldMatch+"%"
+	                    }
+	                }],
+	                "should": [{
+	                    "match_phrase_prefix": {
+	                        "location": req
+	                    }
+	                }]
+	            }
+	        },
+	        "_source": ["location", "type"]
+	    };
 
     console.log("type is :"+type);
 
