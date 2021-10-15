@@ -6631,7 +6631,7 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
 	var obj={}
 	if(removedAccent==req)
 	   obj = {
-	        "size": 5,
+	        "size": 7,
 	         "query":
 	        {
 	            "bool": {
