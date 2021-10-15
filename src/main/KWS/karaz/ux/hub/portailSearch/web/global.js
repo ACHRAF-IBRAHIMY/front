@@ -6642,7 +6642,7 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
                 "must": [{
                     "query_string": {
                         "fields": ["location"],
-                        "query": "*" +reqWidthoutAccents+"*",
+                        "query": "*" +req+"*",
                         "fuzziness": "AUTO",
                         "minimum_should_match": "80%"
                     }
