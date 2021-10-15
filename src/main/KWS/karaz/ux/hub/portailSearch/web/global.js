@@ -6627,7 +6627,10 @@ function removeAccent(text){
 }
 
 function searchByLocationName(inp, type, req, kmapid, context, root) { 
-	var obj = {
+	let removedAccent=removeAccent(req)
+	var obj={}
+	if(removedAccent==req)
+	   obj = {
 	        "size": 5,
 	         "query":
 	        {
@@ -6649,6 +6652,31 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
 	        },
 	        "_source": ["location", "type"]
 	    };
+	else{
+		obj = {
+		        "size": 5,
+		         "query":
+		        {
+		            "bool": {
+		                "must": [{
+		                    "query_string": {
+		                        "fields": ["location"],
+		                        "query": "*" + req + "*",
+		                        "fuzziness": "0.6",
+		                        "minimum_should_match": "80%"
+		                    }
+		                }],
+		                "should": [{
+		                    "match_phrase_prefix": {
+		                        "location": req
+		                    }
+		                }]
+		            }
+		        },
+		        "_source": ["location", "type"]
+		    };
+		console.log("l'objet contient des accents")
+	}
 
     console.log("type is :"+type);
 
