@@ -6606,7 +6606,12 @@ function searchById(id, kmapid){
 }
 
 function searchByLocationName(inp, type, req, kmapid, context, root) {
-
+	console.log("ssss",inp)
+	console.log("type",type)
+	console.log("req",req)
+	console.log("kmapid",kmapid)
+	console.log("context",context)
+	console.log("root",root)
     var obj = {
         "size": 5,
          "query":
