@@ -6654,7 +6654,7 @@ function searchByLocationName(inp, type, req, kmapid, context, root) {
 	    };
 	else{
 		obj = {
-		        "size": 5,
+		        "size": 7,
 		         "query":
 		        {
 		            "bool": {
