@@ -9,85 +9,85 @@ var homePage = {
     "obj":{}
 };
 
-function reorderLayer(layer,index):void
-{
-        var layer:Layer = layer;
-        var index:int = index;
-        
-        var i:int;
-        var currentTOCIndex:int;
-        var currentItem:Object;
-        if (index <= (map.layerIds.length - _tocRoots.length)) // move this item to the bottom of toc
-        {   
-            // index of item to move
-            currentTOCIndex = getCurrentTOCIndex();
-            // item to move
-            currentItem = _tocRoots.getItemAt(currentTOCIndex);
-                    
-            for (i = currentTOCIndex; i < _tocRoots.length; i++)
-            {   
-                if(i == _tocRoots.length - 1)
-                {
-                    _tocRoots.setItemAt(currentItem, _tocRoots.length - 1);
-                }
-                else
-                {
-                    _tocRoots.setItemAt(_tocRoots.getItemAt(i+1), i);
-                }
-            }  
-        }
-        else if ((map.layerIds.length - _tocRoots.length) < index < map.layerIds.length)
-        {   
-            // index of item to move
-            currentTOCIndex = getCurrentTOCIndex();
-            // item to move
-            currentItem = _tocRoots.getItemAt(currentTOCIndex);
-                                    
-            var newTOCIndex:Number = map.layerIds.length - index - 1;
-            if (newTOCIndex < currentTOCIndex)
-            {
-                for (i = currentTOCIndex; newTOCIndex <= i; i--)
-                {
-                    if(i == newTOCIndex)
-                    {
-                        _tocRoots.setItemAt(currentItem, newTOCIndex);
-                    }
-                    else
-                    {
-                        _tocRoots.setItemAt(_tocRoots.getItemAt(i-1), i);
-                    }
-                }
-            }
-            else
-            {
-                for (i = currentTOCIndex; i <= newTOCIndex; i++)
-                {
-                    if(i == newTOCIndex)
-                    {
-                        _tocRoots.setItemAt(currentItem, newTOCIndex);
-                    }
-                    else
-                    {
-                        _tocRoots.setItemAt(_tocRoots.getItemAt(i+1), i);
-                    }
-                }
-            }
-        }
-        
-        function getCurrentTOCIndex():int
-        {   
-            var result:int;
-            for (i = 0; i < _tocRoots.length; i++)
-            {
-                if (_tocRoots.getItemAt(i) is TocMapLayerItem && TocMapLayerItem(_tocRoots.getItemAt(i)).layer === layer)
-                {   
-                    result = i;
-                    break;
-                }
-            } 
-            return result;
-        }
- }
+//function reorderLayer(layer,index):void
+//{
+//        var layer:Layer = layer;
+//        var index:int = index;
+//        
+//        var i:int;
+//        var currentTOCIndex:int;
+//        var currentItem:Object;
+//        if (index <= (map.layerIds.length - _tocRoots.length)) // move this item to the bottom of toc
+//        {   
+//            // index of item to move
+//            currentTOCIndex = getCurrentTOCIndex();
+//            // item to move
+//            currentItem = _tocRoots.getItemAt(currentTOCIndex);
+//                    
+//            for (i = currentTOCIndex; i < _tocRoots.length; i++)
+//            {   
+//                if(i == _tocRoots.length - 1)
+//                {
+//                    _tocRoots.setItemAt(currentItem, _tocRoots.length - 1);
+//                }
+//                else
+//                {
+//                    _tocRoots.setItemAt(_tocRoots.getItemAt(i+1), i);
+//                }
+//            }  
+//        }
+//        else if ((map.layerIds.length - _tocRoots.length) < index < map.layerIds.length)
+//        {   
+//            // index of item to move
+//            currentTOCIndex = getCurrentTOCIndex();
+//            // item to move
+//            currentItem = _tocRoots.getItemAt(currentTOCIndex);
+//                                    
+//            var newTOCIndex:Number = map.layerIds.length - index - 1;
+//            if (newTOCIndex < currentTOCIndex)
+//            {
+//                for (i = currentTOCIndex; newTOCIndex <= i; i--)
+//                {
+//                    if(i == newTOCIndex)
+//                    {
+//                        _tocRoots.setItemAt(currentItem, newTOCIndex);
+//                    }
+//                    else
+//                    {
+//                        _tocRoots.setItemAt(_tocRoots.getItemAt(i-1), i);
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                for (i = currentTOCIndex; i <= newTOCIndex; i++)
+//                {
+//                    if(i == newTOCIndex)
+//                    {
+//                        _tocRoots.setItemAt(currentItem, newTOCIndex);
+//                    }
+//                    else
+//                    {
+//                        _tocRoots.setItemAt(_tocRoots.getItemAt(i+1), i);
+//                    }
+//                }
+//            }
+//        }
+//        
+//        function getCurrentTOCIndex():int
+//        {   
+//            var result:int;
+//            for (i = 0; i < _tocRoots.length; i++)
+//            {
+//                if (_tocRoots.getItemAt(i) is TocMapLayerItem && TocMapLayerItem(_tocRoots.getItemAt(i)).layer === layer)
+//                {   
+//                    result = i;
+//                    break;
+//                }
+//            } 
+//            return result;
+//        }
+// }
 historyPages.push(homePage);
 
 /*if('serviceWorker' in navigator){
