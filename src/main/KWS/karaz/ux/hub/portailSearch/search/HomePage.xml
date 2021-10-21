@@ -372,7 +372,7 @@
             </div>
             <div class="row">
                 <div class=" col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-services text-center mb-30" onclick="displaySearchByHisto('gis/virtual/search/MapBoxSearch?query.mapId=7', 'search', 'GÉOPORTAIL', {})"  >
+                    <div class="single-services text-center mb-30" onclick="displaySearchByHisto('gis/virtual/search/MapBoxSearch?query.mapId=0090', 'search', 'GÉOPORTAIL', {})"  >
                         <div class="services-ion">
                             <span class="fas fa-globe-africa"></span>
                         </div>
