@@ -6499,6 +6499,7 @@ function stopVideo(text) {
 function autocompleteGeo(inp, type, kmapid, context, root) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
+    console.log("kmapid",kmapid)
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function (e) {
