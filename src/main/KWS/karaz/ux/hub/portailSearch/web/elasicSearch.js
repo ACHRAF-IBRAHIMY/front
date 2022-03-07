@@ -13,12 +13,12 @@ var AUTH = "";
 var ADMIN_AUTH = "" ;
 var URL_SEARCH = contextPath+"/kas/DataSynchronise";
 // var URL_SEARCH+"?operation=wselastic&shortUrl=" = "http://elasticformation.karaz.org:9200";
-var URL_COMMUNE = "https://r3urba.rokhas.ma/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
-var URL_WS_1 = "https://r3urba.rokhas.ma";
+var URL_COMMUNE = "https://urba.rokhas.ma/karazortal/access/rest/kdata/search/referentiel_localite_search_AllLocalite?query.decoupageDesc.description=ROKHAS&query.typeloc=commune/arrondissement&apiKey=AB90G-BH903-W4EE1-Z66Q9-7822K&offset=0&limit=1&sortInfo=id=ASC";
+var URL_WS_1 = "https://urba.rokhas.ma";
 var URL_WS_SEARCH_ALL_AUTORISATION = URL_WS_1+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction";
 var URL_WS_KDATA_OBJECT = URL_WS_1+"/karazortal/access/rest/kdata/object/karazapps.cug.cri.urbanisme.autorisation.model.AutorisationConstruction/";
-var URL_WS_FE = "https://r3urba.rokhas.ma";
-var URL_WS_FE2 = "https://r4eco.rokhas.ma";
+var URL_WS_FE = "https://urba.rokhas.ma";
+var URL_WS_FE2 = "https://eco.rokhas.ma";
 var autListId = [
 {
 "url":URL_WS_FE+"/karazortal/access/rest/kdata/search/cug_cri_urbanisme_autorisation_search_AllAutorisationConstruction",
@@ -52,6 +52,26 @@ var autListId = [
 "url":URL_WS_FE2 + "/karazortal/access/rest/kdata/search/autorisations_autorisationsd_search_AllAutorisationSD",
 "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
 "url_id":URL_WS_FE2 + "/karazortal/access/rest/kdata/object/karazapps.autorisations.autorisationsd.model.AutorisationSD"
+},
+{
+"url":URL_WS_FE + "/karazortal/access/rest/kdata/search/urbanisme_receptionequipements_search_AllReceptionequipements",
+"apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+"url_id":URL_WS_FE + "/karazortal/access/rest/kdata/object/karazapps.urbanisme.receptionequipements.model.Receptionequipements"
+},
+{
+    "url":URL_WS_FE + "/karazortal/access/rest/kdata/search/urbanisme_regularisation_search_AllRegularisation",
+    "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+    "url_id":URL_WS_FE + "/karazortal/access/rest/kdata/object/karazapps.urbanisme.regularisation.model.Regularisation"
+},
+{
+    "url":URL_WS_FE + "/karazortal/access/rest/kdata/search/urbanisme_demolition_search_AllDemolition",
+    "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+    "url_id":URL_WS_FE + "/karazortal/access/rest/kdata/object/karazapps.urbanisme.demolition.model.Demolition"
+},
+{
+    "url":URL_WS_FE + "/karazortal/access/rest/kdata/search/urbanisme_refection_search_AllRefectionHabitation",
+    "apiKey":"AB90G-BH903-W4EE1-Z66Q9-7822K",
+    "url_id":URL_WS_FE + "/karazortal/access/rest/kdata/object/karazapps.urbanisme.refection.model.RefectionHabitation"
 }
 
 ];
@@ -4471,7 +4491,7 @@ error: function(error){
 }
 }
 
-var prefixList = [["AMN","PCT","GRP","LOT","MDF","MRC","ELV"],["PH"],["ODP-AP"],["EC"],["ODP-AN"],["ODP"],["SD"]];
+var prefixList = [["AMN","PCT","GRP","LOT","MDF","MRC","ELV"],["PH"],["ODP-AP"],["EC"],["ODP-AN"],["ODP"],["SD"],["RCP","DR"],["RGL"],["DML"],["RFC"]];
 
 
 function getWsLink(ref){
