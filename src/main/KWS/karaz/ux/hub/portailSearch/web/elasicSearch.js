@@ -4465,7 +4465,11 @@ url: autListId[indexOf].url+"?query.reference="+ref.trim().toUpperCase()+"&apiKe
 datatype: "application/json",
 success: function (result) { 
     var newArray = transformFolder2Array(result.data);
+	console.log("newArray xx==",newArray);
     var index = newArray[1].indexOf(ref.trim().toUpperCase());
+	if(ref.includes("DR-") && index==-1){
+		index = newArray[2].indexOf(ref.trim().toUpperCase());
+	}
     if(index!=-1){
         $(".folder-feature-body .folder-steps .no-response").hide();
         getFolder(newArray[0][index],ref.trim().toUpperCase(),indexOf);
@@ -4605,6 +4609,7 @@ var newArray = [[],[]];
 for(var i=0;i<result.length;i++){
 newArray[0].push(result[i].id);
 newArray[1].push(result[i].stringIndex1);
+newArray[2].push(result[i].stringIndex2);
 }
 
 return newArray;
