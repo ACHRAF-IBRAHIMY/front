@@ -4604,7 +4604,7 @@ console.log(array[i]);
 }
 
 function transformFolder2Array(result){
-var newArray = [[],[]];
+var newArray = [[],[],[]];
 
 for(var i=0;i<result.length;i++){
 newArray[0].push(result[i].id);
