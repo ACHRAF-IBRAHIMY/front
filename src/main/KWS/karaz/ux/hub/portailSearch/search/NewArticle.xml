@@ -61,7 +61,7 @@
               //img loding ref
               context.formRender.targetPanel.find(".classSearch-99 .NFQ-load-img").hide();
 
-              context.formRender.targetPanel.find(".ref-form .fa-close-1").click(function(){
+              context.formRender.targetPanel.find(".ref-form .fa-close-1-ref").click(function(){
                 context.formRender.targetPanel.find(".close1-ref").click();
               });
 
@@ -153,19 +153,27 @@
             <vbox className="NQF-edit-modif ref-form">
               <fieldset label="DONNÉES ARTICLE" className="NQF-shadow">
                 <vbox className="DC-Customized-fields-NQF NQF-edit-float">
-                  <field label="Titre" widget="text" labelAlign="float" xpath="NQFtitle" />
+                  <field label="Titre" widget="text" labelAlign="float" xpath="NQFtitle" required="true" />
                   <vbox contentAlign="center" columns="30% 30% 30% 1% 0% 9%" className="NQF-edit-select-float">
-                    <field widget="select" label="Type" labelAlign="float" xpath="NQFtype">
+                    <field widget="select" label="Type" labelAlign="float" xpath="NQFtype" required="true">
                       <option value="Article Normal" label="Article Normal" />
                       <option value="Top" label="Top" />
                     </field> 
-                    <field widget="select" label="Catégorie" labelAlign="float" xpath="NQFcategorie">
+                    <field widget="select" label="Catégorie" labelAlign="float" xpath="NQFcategorie" required="true">
                       <option value="PRATIQUE" label="PRATIQUE" />
                       <option value="A LA UNE" label="A LA UNE" />
                       <option value="REVUE DE PRESSE" label="REVUE DE PRESSE" />
                     </field>
                     <field label="Image principale" widget="text" labelAlign="float" className="url-vue" xpath="urlRef" readOnly="true" />
-                    <field xpath="attachementArImg" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" />
+                    <field xpath="attachementArImg" krn="a04382bd-5d2c-455d-9e64-f316d7f9f645" label="attacher" widget="fileUpload" >
+					<postChange>
+                         
+                          root.urlRef = root.attachementArImg.fileName;
+                       
+                          context.formRender.notifyObservers("urlRef");
+                        
+                       </postChange>
+					</field>
                     <button className="k-btn-transparent hidden close1-ref" icon="fas fa-close" usage="visualisation=R">
                        <postChange>
                           var attachement = root.attachementArImg;
@@ -185,17 +193,17 @@
                       </html>
                     <vbox />
                   </vbox>
-                  <field widget="textArea" xpath="NQFdesc" label="Description" labelAlign="float" className="NFQ-desc-refjuridique" />
+                  <field widget="textArea" xpath="NQFdesc" label="Description" labelAlign="float" className="NFQ-desc-refjuridique" required="true" />
                   <vbox columns="33% 34% 33%">
                       <field widget="input" xpath="NQFauthor" label="Auteur" labelAlign="float" className="" />
-                      <field widget="input" xpath="NQFtags" label="Tags : tag1 // tag2" labelAlign="float" className="" />
+                      <field widget="input" xpath="NQFtags" label="Tags : tag1 // tag2" labelAlign="float" required="true" />
                       <field widget="select" label="Langue" labelAlign="float" xpath="NQFlang">
                       <option value="Fr" label="Fr" />
                       <option value="Ar" label="Ar" />
                       <option value="En" label="En" />
                     </field>
                   </vbox>
-                  <vbox columns="50% 50%" visible="('{NQFcategorie}'=='REVUE DE PRESSE'),expr,boolean" >
+                  <vbox columns="50% 50%" visible="('{NQFcategorie}'=='REVUE DE PRESSE'),expr,boolean">
                       <field widget="input" xpath="NQFsource" label="Source" labelAlign="float" className="" />
                       <field widget="input" xpath="NQFlink" label="Lien" labelAlign="float" className="" />
                   </vbox>
