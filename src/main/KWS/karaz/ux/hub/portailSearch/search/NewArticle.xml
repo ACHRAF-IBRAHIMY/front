@@ -188,8 +188,8 @@
                        </postChange>
                     </button>
                       <html className="att-icons">
-                        <i class="fas fa-upload fa-upload-1-ref" title="Attacher un fichier (moins de 15 mb)" style="color:#38A;font-size=13px" />
-                        <i class="fas fa-close fa-close-1-ref" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;" />
+                        <i class="fas fa-upload fa-upload-1-ref" title="Attacher un fichier (moins de 15 mb)" style="color:#38A;font-size=13px;cursor:pointer" />
+                        <i class="fas fa-close fa-close-1-ref" title="Annuler" style="color:#38A;font-size=13px;margin-left:5px;cursor:pointer" />
                       </html>
                     <vbox />
                   </vbox>
