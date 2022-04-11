@@ -222,7 +222,7 @@
                     <htmlTranslate renderer="htmlP" code="DANC03" />
                   </vbox>
                 </vbox>
-                <vbox className="p-list-but" columns="10% 90%">
+                <!--vbox className="p-list-but" columns="10% 90%">
                   <html className="gen-num-html">
                     <span class="gen-num">5</span>
                   </html>
@@ -241,10 +241,10 @@
                     <button className="but-orange" label="Commune" />
                     <htmlTranslate renderer="htmlP" code="DANC07" />
                   </vbox>
-                </vbox>
+                </vbox-->
                 <vbox className="p-list-but" columns="10% 90%">
                   <html className="gen-num-html">
-                    <span class="gen-num">7</span>
+                    <span class="gen-num">5</span>
                   </html>
                   <vbox>
                     <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL27" />
@@ -254,7 +254,7 @@
                 </vbox>
                 <vbox className="p-list-but" columns="10% 90%">
                   <html className="gen-num-html">
-                    <span class="gen-num">8</span>
+                    <span class="gen-num">6</span>
                   </html>
                   <vbox>
                     <htmlTranslate renderer="htmlSpan" htmlClassName="inline-html" code="AUDL29" />
