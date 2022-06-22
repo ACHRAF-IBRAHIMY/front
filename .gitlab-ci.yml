@@ -5,7 +5,7 @@ Build:
   
   stage: build
   tags : 
-    - runner6
+    - docker
 
   script: 
     - mvn kbuilder:all
