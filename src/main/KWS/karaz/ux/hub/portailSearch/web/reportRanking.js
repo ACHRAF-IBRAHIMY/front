@@ -37,7 +37,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking/_search",
     datatype: "application/json",
     contentType: "application/json",
     data: JSON.stringify(obj),
@@ -84,7 +84,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
         case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
         case 6 : createBarTop10(result,".ranking-bar10-U","scoreU");break;  
-        case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+       //  case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
     }
        
     
@@ -95,7 +95,139 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     })
     
     };
-    
+    function restGetAllMedCommune(filters,sortBy,rev,size,from,type){
+        
+        var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
+        
+        console.log(JSON.stringify(obj));
+        
+        $.ajax({
+        type: "post",
+        url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking_medcom/_search",
+        datatype: "application/json",
+        contentType: "application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+          console.log(result);
+        
+        
+        
+        
+        if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
+            var dec = true;
+            var str = "";
+            var trims = filters[1][0].split("-");
+            if(trims[0]=="1"){
+                str += "1er trimestre "+trims[1];
+            }else if(trims[0]=="2"){
+                str += "2éme trimestre "+trims[1];
+            }else if(trims[0]=="3"){
+                str += "3éme trimestre "+trims[1];
+            }else if(trims[0]=="4"){
+                str += "4éme trimestre "+trims[1];
+            }
+            try{
+                if(transMap[str.replace(/ /g,"__")]!=undefined){
+                var strTrans = transMap[str.replace(/ /g,"__")];
+                }else{
+                var strTrans = str
+                }
+        
+                }catch(e){}
+            dataReportRk.trim = strTrans;
+            dataReportRk.data = [];
+        }
+        
+        
+        switch (type){
+            case 0 : createCommuneTable(result,dec);break;
+            case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
+            case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
+            case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
+            case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
+            case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
+            case 6 : createBarTop10(result,".ranking-bar10-U","scoreU");break;  
+         //   case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+        }
+           
+        
+        },
+        error: function (error) {
+          console.log(error);
+        }
+        })
+        
+        };  
+ function restGetAllSmlCommune(filters,sortBy,rev,size,from,type){
+        
+        var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
+        
+        console.log(JSON.stringify(obj));
+        
+        $.ajax({
+        type: "post",
+        url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking_smlcom/_search",
+        datatype: "application/json",
+        contentType: "application/json",
+        data: JSON.stringify(obj),
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Authorization", AUTH);
+        },
+        success: function (result) {
+          console.log(result);
+        
+        
+        
+        
+        if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
+            var dec = true;
+            var str = "";
+            var trims = filters[1][0].split("-");
+            if(trims[0]=="1"){
+                str += "1er trimestre "+trims[1];
+            }else if(trims[0]=="2"){
+                str += "2éme trimestre "+trims[1];
+            }else if(trims[0]=="3"){
+                str += "3éme trimestre "+trims[1];
+            }else if(trims[0]=="4"){
+                str += "4éme trimestre "+trims[1];
+            }
+            try{
+                if(transMap[str.replace(/ /g,"__")]!=undefined){
+                var strTrans = transMap[str.replace(/ /g,"__")];
+                }else{
+                var strTrans = str
+                }
+        
+                }catch(e){}
+            dataReportRk.trim = strTrans;
+            dataReportRk.data = [];
+        }
+        
+        
+        switch (type){
+            case 0 : createCommuneTable(result,dec);break;
+            case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
+            case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
+            case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
+            case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
+            case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
+            case 6 : createBarTop10(result,".ranking-bar10-U","scoreU");break;  
+           // case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+        }
+           
+        
+        },
+        error: function (error) {
+          console.log(error);
+        }
+        })
+        
+        };
+
     
     function restGetAllarrondissement(filters,sortBy,rev,size,from,type){
     
@@ -105,7 +237,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
       type: "post",
-      url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index_arr/_search",
+      url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking_arr/_search",
       datatype: "application/json",
       contentType: "application/json",
       data: JSON.stringify(obj),
@@ -152,7 +284,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
             case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
             case 6 : createBarTop10(result,".ranking-bar10-U","scoreU");break;  
-            case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+           // case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
         }
            
     
@@ -172,7 +304,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
           type: "post",
-          url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index_cmm/_search",
+          url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking_comm/_search",
           datatype: "application/json",
           contentType: "application/json",
           data: JSON.stringify(obj),
@@ -219,7 +351,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
                 case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
                 case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
                 case 6 : createBarTop10(result,".ranking-bar10-U","scoreU");break;  
-                case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+              //  case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
             }
                
     
@@ -240,7 +372,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index_prefecture/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking_prefecture/_search",
     datatype: "application/json",
     contentType: "application/json",
     data: JSON.stringify(obj),
@@ -258,7 +390,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         case 4 : createBarTop3P(result,".ranking-bar3-es","ecosystem");break;   
         case 5 : createBarTop3P(result,".ranking-bar3-fs","fiscalite");break; 
         case 6 : createBarTop10P(result,".ranking-bar10-U","score");break;  
-        case 7 : createBarTop10P(result,".ranking-bar10-E","scoreE");break;  
+      //  case 7 : createBarTop10P(result,".ranking-bar10-E","scoreE");break;  
     }
        
     
@@ -278,7 +410,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index_region/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking_region/_search",
     datatype: "application/json",
     contentType: "application/json",
     data: JSON.stringify(obj),
@@ -296,7 +428,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         case 4 : createBarTop3G(result,".ranking-bar3-es","ecosystem");break;   
         case 5 : createBarTop3G(result,".ranking-bar3-fs","fiscalite");break; 
         case 6 : createBarTop10G(result,".ranking-bar10-U","score");break;  
-        case 7 : createBarTop10G(result,".ranking-bar10-E","scoreE");break;  
+       // case 7 : createBarTop10G(result,".ranking-bar10-E","scoreE");break;  
     }
        
     
@@ -316,7 +448,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index_ville/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking_ville/_search",
     datatype: "application/json",
     contentType: "application/json",
     data: JSON.stringify(obj),
@@ -334,7 +466,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
         case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
         case 6 : createBarTop10(result,".ranking-bar10-U","score");break;  
-        case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+       // case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
     }
        
     
@@ -447,8 +579,38 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     restGetAllVille(getFiltersArray(newTabs),"score",type,60,0,0)
     }
     }
-    
-    
+    else if(val=="communesml"){
+        if(classe=="rank-dl"){
+        restGetAllSmlCommue
+        restGetAllSmlCommune(getFiltersArray(newTabs),"delai",type,60,0,0)
+        }else if(classe=="rank-dg"){
+        restGetAllSmlCommune(getFiltersArray(newTabs),"digital",type,60,0,0)
+        }else if(classe=="rank-at"){
+        restGetAllSmlCommune(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+        }else if(classe=="rank-es"){
+        restGetAllSmlCommune(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+        }else if(classe=="rank-fs"){
+        restGetAllSmlCommune(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+        }else if(classe=="sp-td"){
+        restGetAllSmlCommune(getFiltersArray(newTabs),"score",type,60,0,0)
+        }
+        }
+    else if(val=="communemed"){
+        if(classe=="rank-dl"){
+        restGetAllMedCommue
+        restGetAllMedCommune(getFiltersArray(newTabs),"delai",type,60,0,0)
+        }else if(classe=="rank-dg"){
+        restGetAllMedCommune(getFiltersArray(newTabs),"digital",type,60,0,0)
+        }else if(classe=="rank-at"){
+        restGetAllMedCommune(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+        }else if(classe=="rank-es"){
+        restGetAllMedCommune(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+        }else if(classe=="rank-fs"){
+        restGetAllMedCommune(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+        }else if(classe=="sp-td"){
+        restGetAllMedCommune(getFiltersArray(newTabs),"score",type,60,0,0)
+        }
+        }
     }
     
     
@@ -970,7 +1132,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     return $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking/_search",
     datatype: "application/json",
     contentType: "application/json",
     data: JSON.stringify(obj),
@@ -1160,7 +1322,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
     type: "post", 
-    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/ranking_index_region/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/index_ranking_region/_search",
     datatype: "application/json",
     contentType: "application/json",
     data: JSON.stringify(obj),
@@ -1281,7 +1443,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     return $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/ranking_index_proc/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_ranking_proc/_search",
     datatype: "application/json",
     contentType: "application/json",
     data:JSON.stringify(obj),
@@ -1368,7 +1530,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/ranking_index_communes/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_ranking_communes/_search",
     datatype: "application/json",
     contentType: "application/json",
     data:JSON.stringify(obj),
@@ -1603,13 +1765,13 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     liste.forEach(function(obj){
     if(obj.typeIdd=="add"){
-    str+= '{ "index" : { "_index" : "ranking_index_proc" } }\n'
+    str+= '{ "index" : { "_index" : "index_ranking_proc" } }\n'
     str+= '{ "title":"'+obj.title+'","Nr":"'+obj.Nr+'" }\n';
     }else if(obj.typeIdd=="update"){
-    str+='{ "update" : {"_id" : "'+obj.id+'", "_index" : "ranking_index_proc"} }\n';
+    str+='{ "update" : {"_id" : "'+obj.id+'", "_index" : "index_ranking_proc"} }\n';
     str+='{ "doc" : { "title":"'+obj.title+'","Nr":"'+obj.Nr+'" }}\n'
     }else if(obj.typeIdd=="delete"){
-    str+='{ "delete" : { "_index" : "ranking_index_proc", "_id" : "'+obj.id+'" } }\n';
+    str+='{ "delete" : { "_index" : "index_ranking_proc", "_id" : "'+obj.id+'" } }\n';
     }
     });
     
@@ -1651,7 +1813,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     liste.forEach(function(obj){
     
     if(obj.typeIdd=="update"){
-    str+='{ "update" : {"_id" : "'+obj.id+'", "_index" : "ranking_index_communes"} }\n';
+    str+='{ "update" : {"_id" : "'+obj.id+'", "_index" : "index_ranking_communes"} }\n';
     str+='{ "doc" : { "commune":"'+obj.commune+'","procs":'+JSON.stringify(obj.proc)+',"bonus":"'+obj.bonus+'","population":"'+obj.population+'","active":"1","score":"'+obj.score+'" }}\n'
     }
     
