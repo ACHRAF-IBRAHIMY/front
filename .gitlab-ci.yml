@@ -20,7 +20,7 @@ Build:
 Job2:
    stage: deploy_dev
    script:
-     - scp  target/*.jar kstage@51.255.16.127:/home/kstage 
+     - scp -o stricthostkeychecking=no target/*.jar kstage@51.255.16.127:/home/kstage 
      - ssh -o stricthostkeychecking=no kstage@51.255.16.127 "unzip -o kstage-ux-hub-1.0.jar -d kstage-ux-hub-1.0/ && rm -rf /kstage/glassfish5/glassfish/domains/domain1/autodeploy/karazApp/kstage-ux-hub-1.0 && mv kstage-ux-hub-1.0 /kstage/glassfish5/glassfish/domains/domain1/autodeploy/karazApp/ "
      - ssh -o stricthostkeychecking=no kstage@51.255.16.127 "/kstage/restart_glassfish.sh"
    only:
