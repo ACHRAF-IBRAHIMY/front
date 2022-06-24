@@ -795,7 +795,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
     }
     }
-    
+     
     function updateTitles(){
     var trim = $(".ranking-fieldset #period option:selected").val();
     var region = $(".ranking-fieldset #region option:selected").val();
