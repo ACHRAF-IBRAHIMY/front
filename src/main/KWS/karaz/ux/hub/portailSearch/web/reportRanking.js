@@ -927,16 +927,20 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
             }catch(e){}
         if(results[i]._source.indecators.delaiPpV==-1){
-            var titleText = ppTrans+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
-        }else{
-            var titleText = gpTrans+(1/results[i]._source.indecators.delaiPpV).toFixed(2) +jppTrans+(1/results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
+            var titleText = ppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
+        }else if(results[i]._source.indecators.delaiGpV==-1) {
+            var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) ;
+        }
+        else {
+            var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) +jppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
+
         }
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
         tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.delai)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+titleText+`</span></i></td>`);
         tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.attractivite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+results[i]._source.indecators.attractiviteUV+dtTrans+` </span></i></td>`);
         tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
         tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
-        tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.fiscalite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext-rt">`+(1/(Number(results[i]._source.indecators.fiscaliteUV)*1000000)).toFixed(2)+` Dhs/m² </span></i></td>`);
+        tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.fiscalite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext-rt">`+((Number(results[i]._source.indecators.fiscaliteUV))).toFixed(2)+` Dhs/m² </span></i></td>`);
         tableHtml.append(tr);
     }
     
@@ -1530,7 +1534,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_ranking_communes/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/ranking_index_communes/_search",
     datatype: "application/json",
     contentType: "application/json",
     data:JSON.stringify(obj),
@@ -1765,13 +1769,13 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     liste.forEach(function(obj){
     if(obj.typeIdd=="add"){
-    str+= '{ "index" : { "_index" : "index_ranking_proc" } }\n'
+    str+= '{ "index" : { "_index" : "ranking_index_proc" } }\n'
     str+= '{ "title":"'+obj.title+'","Nr":"'+obj.Nr+'" }\n';
     }else if(obj.typeIdd=="update"){
-    str+='{ "update" : {"_id" : "'+obj.id+'", "_index" : "index_ranking_proc"} }\n';
+    str+='{ "update" : {"_id" : "'+obj.id+'", "_index" : "ranking_index_proc"} }\n';
     str+='{ "doc" : { "title":"'+obj.title+'","Nr":"'+obj.Nr+'" }}\n'
     }else if(obj.typeIdd=="delete"){
-    str+='{ "delete" : { "_index" : "index_ranking_proc", "_id" : "'+obj.id+'" } }\n';
+    str+='{ "delete" : { "_index" : "ranking_index_proc", "_id" : "'+obj.id+'" } }\n';
     }
     });
     

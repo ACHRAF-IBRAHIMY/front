@@ -247,7 +247,7 @@
               }
 
               if( !(prefecture=="default" || rankBy=="region" || rankBy=="ville" || rankBy=="prefecture") ){
-                filters.push("préfecture.keyword");
+                filters.push("prefecture.keyword");
                 filtersBy.push(prefecture);
               }
               
@@ -294,7 +294,7 @@
                 restGetAllPrefecture([filters,filtersBy],"digital","desc",3,0,3);
                 restGetAllPrefecture([filters,filtersBy],"ecosystem","desc",3,0,4);
                 restGetAllPrefecture([filters,filtersBy],"fiscalite","desc",3,0,5);
-             <!--   restGetAllPrefecture([filters,filtersBy],"score","desc",10,0,6);-->
+            restGetAllPrefecture([filters,filtersBy],"score","desc",10,0,6);
               }else if(rankBy=="region"){ 
                 restGetAllRegion([filters,filtersBy],"score","desc",100,0,0);
                 restGetAllRegion([filters,filtersBy],"score","desc",100,0,0);
@@ -303,7 +303,7 @@
                 restGetAllRegion([filters,filtersBy],"digital","desc",3,0,3);
                 restGetAllRegion([filters,filtersBy],"ecosystem","desc",3,0,4);
                 restGetAllRegion([filters,filtersBy],"fiscalite","desc",3,0,5);
-              <!--  restGetAllRegion([filters,filtersBy],"score","desc",10,0,6);-->
+              restGetAllRegion([filters,filtersBy],"score","desc",10,0,6);
               }else if(rankBy=="ville"){
                 restGetAllVille([filters,filtersBy],"score","desc",100,0,0);
                 restGetAllVille([filters,filtersBy],"score","desc",100,0,0);
@@ -312,8 +312,8 @@
                 restGetAllVille([filters,filtersBy],"indecators.digital","desc",3,0,3);
                 restGetAllVille([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
                 restGetAllVille([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
-             <!--      restGetAllVille([filters,filtersBy],"score","desc",10,0,6);-->
-              }
+                  restGetAllVille([filters,filtersBy],"score","desc",10,0,6)
+              
                }else if(rankBy=="communesml"){
                 restGetAllSmlCommune([filters,filtersBy],"score","desc",100,0,0);
                 restGetAllSmlCommune([filters,filtersBy],"score","desc",100,0,0);
@@ -323,7 +323,7 @@
                 restGetAllSmlCommune([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
                 restGetAllSmlCommune([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
                 restGetAllSmlCommune([filters,filtersBy],"score","desc",10,0,6);
-              }
+              
                  }else if(rankBy=="communemed"){
                 restGetAllMedCommune([filters,filtersBy],"score","desc",100,0,0);
                 restGetAllMedCommune([filters,filtersBy],"score","desc",100,0,0);
@@ -332,7 +332,7 @@
                 restGetAllMedCommune([filters,filtersBy],"indecators.digital","desc",3,0,3);
                 restGetAllMedCommune([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
                 restGetAllMedCommune([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
-               <!-- restGetAllMedCommune([filters,filtersBy],"score","desc",10,0,6);-->
+               restGetAllMedCommune([filters,filtersBy],"score","desc",10,0,6);
               }
                updateTitles();
 
@@ -366,6 +366,12 @@
                 }else if(rankBy=="ville"){
                   $(".ranking-fieldset #region option").prop("disabled",true)
                   $(".ranking-fieldset #prefecture option").prop("disabled",true)
+                }else if(rankBy=="communesml"){
+                  $(".ranking-fieldset #region option").prop("disabled",false);
+                  $(".ranking-fieldset #prefecture option").prop("disabled",false);
+                }else if(rankBy=="communemed"){
+                  $(".ranking-fieldset #region option").prop("disabled",false);
+                  $(".ranking-fieldset #prefecture option").prop("disabled",false);
                 }
             });
 
@@ -527,7 +533,7 @@
             </vbox> -->
 
             <vbox>
-              <htmlTranslate renderer="selectOptions" code1="rank01" code2="rank02" code3="rank03" code4="rank04" code5="rank05" code6="rank06" code7="rank07" code8="rank08"/>
+              <htmlTranslate renderer="selectOptions" code1="rank01" code2="rank02" code3="rank03" code4="rank04" code5="rank05" code6="rank06" code7="Classement par commune (moins que 50k population)" code8="Classement par commune ( plus de 50k population)"/>
             </vbox>
 
             <vbox>
