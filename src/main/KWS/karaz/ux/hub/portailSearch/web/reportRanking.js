@@ -888,10 +888,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         try{
             if(transMap[results[i]._source.commune.replace(/ /g,"__")]!=undefined){
             var communeTrans = transMap[results[i]._source.commune.replace(/ /g,"__")];
-            var prefectureTrans = transMap[results[i]._source.préfecture.replace(/ /g,"__")];
+            var prefectureTrans = transMap[results[i]._source.prefecture.replace(/ /g,"__")];
             }else{
             var communeTrans = results[i]._source.commune
-            var prefectureTrans = results[i]._source.préfecture
+            var prefectureTrans = results[i]._source.prefecture
             }
     
             }catch(e){}

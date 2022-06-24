@@ -203,9 +203,9 @@
           $(".ranking-fieldset #region").change(function(){
               var region = $(".ranking-fieldset #region option:selected").val();
               if(region=="default"){
-                  getAllByAggs("préfecture.keyword",100,null,"",2);
+                  getAllByAggs("prefecture.keyword",100,null,"",2);
               }else{
-                  getAllByAggs("préfecture.keyword",100,"région.keyword",region,2);
+                  getAllByAggs("prefecture.keyword",100,"région.keyword",region,2);
               }
           });
 
@@ -240,9 +240,16 @@
                 filters.push("région.keyword");
                 filtersBy.push(region);
               }
-
+             if( !(region=="default" || rankBy!="communesml") ){
+                filters.push("région.keyword");
+                filtersBy.push(region);
+              }
+                if( !(region=="default" || rankBy!="communemed") ){
+                filters.push("région.keyword");
+                filtersBy.push(region);
+              }
                if( !(region=="default" || rankBy!="prefecture") ){
-                filters.push("region.keyword");
+                filters.push("région.keyword");
                 filtersBy.push(region);
               }
 
