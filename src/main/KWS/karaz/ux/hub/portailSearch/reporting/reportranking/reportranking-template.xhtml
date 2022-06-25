@@ -159,7 +159,7 @@ img.iconS{
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Commune</th>
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Rang</th>
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Score</th>
-            <th style="font-size: 10px !important;text-align:center;" colspan="3">Délai</th>
+            <th style="font-size: 10px !important;text-align:center;" colspan="12">Délai</th>
             <th style="font-size: 10px !important;text-align:center;" colspan="2">Attractivité</th>
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Digital</th>
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Ecosystème</th>
@@ -169,6 +169,16 @@ img.iconS{
             <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Score</th>
             <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Gpj (jr)</th>
             <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Ppj (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Ph (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Dml (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Rcp (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Rfc (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Ec (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Sd (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Oan (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Afp (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Odprt (jr)</th>
+            <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;width: 150px !important;">Délai Odptu (jr)</th>
             <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Score</th>
             <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Nombre dossiers</th>
             <th style="font-size: 10px !important;text-align:center;color:#666;background: #EEE;">Score</th>
@@ -177,10 +187,19 @@ img.iconS{
         #foreach($ch in $xml.getElements("dataReportRk.data"))
             <tr>
                 #set($str = $xml.getValue($ch,"commune").substring(0, 1).toUpperCase() + $xml.getValue($ch,"commune").substring(1).toLowerCase())
-                #set($fiscalite=(1/($xml.getDouble($ch,"indecators.fiscaliteUV")*1000000)))
-                #set($gpv=(1/$xml.getDouble($ch,"indecators.delaiGpV")))
-                #set($ppv=(1/$xml.getDouble($ch,"indecators.delaiPpV")))
-               
+                #set($fiscalite=(($xml.getDouble($ch,"indecators.fiscaliteUV"))))
+                #set($gpv=($xml.getDouble($ch,"indecators.delaiGpV")))
+                #set($ppv=($xml.getDouble($ch,"indecators.delaiPpV")))
+                #set($ph=($xml.getDouble($ch,"indecators.delaiPhV")))
+                #set($dml=($xml.getDouble($ch,"indecators.delaiDemV")))
+                #set($rcp=($xml.getDouble($ch,"indecators.delaiRecV")))
+                #set($rfc=($xml.getDouble($ch,"indecators.delaiRefV")))
+                #set($ec=($xml.getDouble($ch,"indecators.delaiECV")))
+                #set($sd=($xml.getDouble($ch,"indecators.delaiSDV")))
+                #set($oan=($xml.getDouble($ch,"indecators.delaiOANV")))
+                #set($afp=($xml.getDouble($ch,"indecators.delaiAFPV")))
+                #set($odprt=($xml.getDouble($ch,"indecators.delaiODPRT")))
+                #set($odptu=($xml.getDouble($ch,"indecators.delaiODPTU")))
 
                 <td style="font-size: 10px !important;text-align:left;" >$str</td>
                 <td style="font-size: 10px !important;" >$xml.getValue($ch,"rank")</td>
@@ -188,6 +207,71 @@ img.iconS{
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.delai").intValue()</td>
                 #if($ppv.intValue()>-1)
                 <td style="font-size: 10px !important;width: 250px !important;" width="10%">$ppv.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end
+                  #if($gpv.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$gpv.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end
+                  #if($ph.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$ph.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end  
+                #if($dml.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$dml.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end  #if($rcp.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$rcp.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end  #if($rfc.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$rfc.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end  #if($ec.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$ec.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end  #if($sd.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$sd.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end  #if($oan.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$oan.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end
+                 #if($odprt.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$odprt.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end
+                  #if($odptu.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$odptu.intValue()</td>
 
                 #else
                 <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>

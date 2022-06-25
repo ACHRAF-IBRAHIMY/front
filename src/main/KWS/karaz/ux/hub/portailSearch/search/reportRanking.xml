@@ -294,52 +294,52 @@
                 restGetAllarrondissement([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
                <!-- restGetAllarrondissement([filters,filtersBy],"indecators.scoreE","desc",10,0,7);-->
               }else if(rankBy=="prefecture"){
-                restGetAllPrefecture([filters,filtersBy],"score","desc",100,0,0);
-                restGetAllPrefecture([filters,filtersBy],"score","desc",100,0,0);
-                restGetAllPrefecture([filters,filtersBy],"delai","desc",3,0,1);
-                restGetAllPrefecture([filters,filtersBy],"attractivite","desc",3,0,2);
-                restGetAllPrefecture([filters,filtersBy],"digital","desc",3,0,3);
-                restGetAllPrefecture([filters,filtersBy],"ecosystem","desc",3,0,4);
-                restGetAllPrefecture([filters,filtersBy],"fiscalite","desc",3,0,5);
-            restGetAllPrefecture([filters,filtersBy],"score","desc",10,0,6);
+                restGetAllPrefecture([filters,filtersBy],"indecators.score","desc",100,0,0);
+                restGetAllPrefecture([filters,filtersBy],"indecators.score","desc",100,0,0);
+                restGetAllPrefecture([filters,filtersBy],"indecators.delai","desc",3,0,1);
+                restGetAllPrefecture([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
+                restGetAllPrefecture([filters,filtersBy],"indecators.digital","desc",3,0,3);
+                restGetAllPrefecture([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
+                restGetAllPrefecture([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
+                restGetAllPrefecture([filters,filtersBy],"indecators.score","desc",10,0,6);
               }else if(rankBy=="region"){ 
-                restGetAllRegion([filters,filtersBy],"score","desc",100,0,0);
-                restGetAllRegion([filters,filtersBy],"score","desc",100,0,0);
-                restGetAllRegion([filters,filtersBy],"delai","desc",3,0,1);
-                restGetAllRegion([filters,filtersBy],"attractivite","desc",3,0,2);
-                restGetAllRegion([filters,filtersBy],"digital","desc",3,0,3);
-                restGetAllRegion([filters,filtersBy],"ecosystem","desc",3,0,4);
-                restGetAllRegion([filters,filtersBy],"fiscalite","desc",3,0,5);
-              restGetAllRegion([filters,filtersBy],"score","desc",10,0,6);
+                restGetAllRegion([filters,filtersBy],"indecators.score","desc",100,0,0);
+                restGetAllRegion([filters,filtersBy],"indecators.score","desc",100,0,0);
+                restGetAllRegion([filters,filtersBy],"indecators.delai","desc",3,0,1);
+                restGetAllRegion([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
+                restGetAllRegion([filters,filtersBy],"indecators.digital","desc",3,0,3);
+                restGetAllRegion([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
+                restGetAllRegion([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
+              restGetAllRegion([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
               }else if(rankBy=="ville"){
-                restGetAllVille([filters,filtersBy],"score","desc",100,0,0);
-                restGetAllVille([filters,filtersBy],"score","desc",100,0,0);
+                restGetAllVille([filters,filtersBy],"indecators.score","desc",100,0,0);
+                restGetAllVille([filters,filtersBy],"indecators.score","desc",100,0,0);
                 restGetAllVille([filters,filtersBy],"indecators.delai","desc",3,0,1);
                 restGetAllVille([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
                 restGetAllVille([filters,filtersBy],"indecators.digital","desc",3,0,3);
                 restGetAllVille([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
                 restGetAllVille([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
-                  restGetAllVille([filters,filtersBy],"score","desc",10,0,6)
+                  restGetAllVille([filters,filtersBy],"indecators.scoreU","desc",10,0,6)
               
                }else if(rankBy=="communesml"){
-                restGetAllSmlCommune([filters,filtersBy],"score","desc",100,0,0);
-                restGetAllSmlCommune([filters,filtersBy],"score","desc",100,0,0);
+                restGetAllSmlCommune([filters,filtersBy],"indecators.score","desc",100,0,0);
+                restGetAllSmlCommune([filters,filtersBy],"indecators.score","desc",100,0,0);
                 restGetAllSmlCommune([filters,filtersBy],"indecators.delai","desc",3,0,1);
                 restGetAllSmlCommune([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
                 restGetAllSmlCommune([filters,filtersBy],"indecators.digital","desc",3,0,3);
                 restGetAllSmlCommune([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
                 restGetAllSmlCommune([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
-                restGetAllSmlCommune([filters,filtersBy],"score","desc",10,0,6);
+                restGetAllSmlCommune([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
               
                  }else if(rankBy=="communemed"){
-                restGetAllMedCommune([filters,filtersBy],"score","desc",100,0,0);
-                restGetAllMedCommune([filters,filtersBy],"score","desc",100,0,0);
-                restGetAllMedCommune([filters,filtersBy],"indecators.delai","desc",3,0,1);
-                restGetAllMedCommune([filters,filtersBy],"indecators.attractivite","desc",3,0,2);
-                restGetAllMedCommune([filters,filtersBy],"indecators.digital","desc",3,0,3);
-                restGetAllMedCommune([filters,filtersBy],"indecators.ecosystem","desc",3,0,4);
-                restGetAllMedCommune([filters,filtersBy],"indecators.fiscalite","desc",3,0,5);
-               restGetAllMedCommune([filters,filtersBy],"score","desc",10,0,6);
+                restGetAllMedCommune([filters,filtersBy],"indecators.score","desc",100,0,0);
+                restGetAllMedCommune([filters,filtersBy],"indecators.score","desc",100,0,0);
+                restGetAllMedCommune([filters,filtersBy],"indecators.indecators.delai","desc",3,0,1);
+                restGetAllMedCommune([filters,filtersBy],"indecators.indecators.attractivite","desc",3,0,2);
+                restGetAllMedCommune([filters,filtersBy],"indecators.indecators.digital","desc",3,0,3);
+                restGetAllMedCommune([filters,filtersBy],"indecators.indecators.ecosystem","desc",3,0,4);
+                restGetAllMedCommune([filters,filtersBy],"indecators.indecators.fiscalite","desc",3,0,5);
+               restGetAllMedCommune([filters,filtersBy],"indecators.scoreU","desc",10,0,6);
               }
                updateTitles();
 

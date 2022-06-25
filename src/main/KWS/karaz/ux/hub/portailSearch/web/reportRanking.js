@@ -459,7 +459,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
       console.log(result);
     
     switch (type){
-        case 0 : createCommuneTable(result);break;
+        case 0 : createCommuneTableV(result);break;
         case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
         case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
         case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
@@ -931,6 +931,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         }else if(results[i]._source.indecators.delaiGpV==-1) {
             var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) ;
         }
+        else if(results[i]._source.indecators.delaiGpV==-1 && results[i]._source.indecators.delaiPpV==-1 ){
+            var titleText = "Pas de dossiers délivrés" ;
+
+        }
         else {
             var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) +jppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
 
@@ -979,12 +983,12 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }
     tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.prefecture+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.prefecture,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
-    tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.attractivite)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.digital)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.ecosystem)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.fiscalite)+`</td>`);
+    tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.attractivite)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.fiscalite)+`</td>`);
     tableHtml.append(tr);
     }
     
@@ -1025,27 +1029,27 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }
     try{
         if(transMap[results[i]._source.region.replace(/ /g,"__")]!=undefined){
-        var regionTrans = transMap[results[i]._source.region.replace(/ /g,"__")];
+        var regionTrans = transMap[results[i]._source.région.replace(/ /g,"__")];
         }else{
-        var regionTrans = results[i]._source.region
+        var regionTrans = results[i]._source.région
         }
 
         }catch(e){}
     tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+regionTrans+"\"><span>"+(i+1)+"- "+subLong(regionTrans,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
-    tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.score)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.delai)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.attractivite)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.digital)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.ecosystem)+`</td>`);
-    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.fiscalite)+`</td>`);
+    tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.attractivite)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
+    tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.fiscalite)+`</td>`);
     tableHtml.append(tr);
     }
     
     }
     
     
-    function createCommuneTableV(result){
+  /*  function createCommuneTableV(result){
     var results = result.hits.hits;
     var tableHtml = $("#ranking-table2");
     
@@ -1089,8 +1093,106 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }
     
     }
-    
-    
+    */
+    function createCommuneTableV(result){
+        var results = result.hits.hits;
+        var tableHtml = $("#ranking-table2");
+        
+        
+        //$("#ranking-table tr:not(.first-tr)").remove();
+        $("#ranking-table2 tr:not(.first-tr)").remove();
+        $("#ranking-table2 .err-msg-rk").remove();
+        if(results.length==0){
+            tableHtml.append("<span class=\"err-msg-rk\" style=\"display: block;margin-top: 50px;color: #333;font-size: 20px;\">"+transMap["ACPP00"]+"</span>");
+        }else{
+            $("#ranking-table2 tr:not(.first-tr)").remove();
+        }
+        
+        for(var i=0;i<results.length;i++){
+            var tr = $(document.createElement("tr"));
+            var rankCom = results[i]._source.rankComp;
+            var newRankComp = results[i]._source.newRankComp;
+            var rankStr = "";
+            
+            
+        
+            if(rankCom>0){
+                rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
+            }else if(rankCom<0){
+                rankStr = "<span><i style=\"color:red\" class=\"fas fa-arrow-down\"></i>"+" "+rankCom+"</span>";
+            }else{
+            	if(results[i]._source.trim == "2-2021"){
+    	        	if(newRankComp == 1 || newRankComp == 1){
+    	        		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+    	        	}
+            	}else{
+            		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
+            	}
+            }
+            try{
+                if(transMap[results[i]._source.ville.replace(/ /g,"__")]!=undefined){
+                var communeTrans = transMap[results[i]._source.ville.replace(/ /g,"__")];
+                var prefectureTrans = transMap[results[i]._source.prefecture.replace(/ /g,"__")];
+                }else{
+                var communeTrans = results[i]._source.ville
+                var prefectureTrans = results[i]._source.prefecture
+                }
+        
+                }catch(e){console.log("error in ville ");}
+            tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+`<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\"`+communeTrans+`\"><span>`+(i+1)+`- `+subLong(communeTrans,30)+`</span> `+rankStr+`</span><span style="display: block;color: orange;font-size: 11px;    margin-top: 1px;margin-left: 19px;">`+prefectureTrans+`</span></td>`);        
+            $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(communeTrans,30)+"</span>"+rankStr+"</span></td></tr>");
+            tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
+            try{
+                if(transMap["Petit projets : ".replace(/ /g,"__")]!=undefined){
+                    var ppTrans = transMap["Petit projets : ".replace(/ /g,"__")];
+                }else{
+                    var ppTrans = "Petit projets : "
+                }
+                if(transMap[" jours".replace(/ /g,"__")]!=undefined){
+                    var joursTrans = transMap[" jours".replace(/ /g,"__")];
+                }else{
+                    var joursTrans = " jours"
+                }
+                if(transMap["Grand projets : ".replace(/ /g,"__")]!=undefined){
+                    var gpTrans = transMap["Grand projets : ".replace(/ /g,"__")];
+                }else{
+                    var gpTrans = "Grand projets : "
+                }
+                if(transMap[" jours - Petit projets : ".replace(/ /g,"__")]!=undefined){
+                    var jppTrans = transMap[" jours - Petit projets : ".replace(/ /g,"__")];
+                }else{
+                    var jppTrans = " jours - Petit projets : "
+                }
+                if(transMap["Dossiers traités".replace(/ /g,"__")]!=undefined){
+                    var dtTrans = transMap["Dossiers traités".replace(/ /g,"__")];
+                }else{
+                    var dtTrans = "Dossiers traités"
+                }
+        
+                }catch(e){}
+            if(results[i]._source.indecators.delaiPpV==-1){
+                var titleText = ppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
+            }else if(results[i]._source.indecators.delaiGpV==-1) {
+                var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) ;
+            }
+            else if(results[i]._source.indecators.delaiGpV==-1 && results[i]._source.indecators.delaiPpV==-1 ){
+                var titleText = "Pas de dossiers délivrés" ;
+
+            }
+            else {
+                var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) +jppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
+
+            }
+            tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
+            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.delai)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+titleText+`</span></i></td>`);
+            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.attractivite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+results[i]._source.indecators.attractiviteUV+dtTrans+` </span></i></td>`);
+            tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
+            tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
+            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.fiscalite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext-rt">`+((Number(results[i]._source.indecators.fiscaliteUV))).toFixed(2)+` Dhs/m² </span></i></td>`);
+            tableHtml.append(tr);
+        }
+        
+        }
     function getReportDataRk(root,context){
     root.dataReportRk = {};
     context.formRender.notifyObservers("dataReportRk");
