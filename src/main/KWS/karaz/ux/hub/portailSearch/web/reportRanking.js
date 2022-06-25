@@ -928,14 +928,16 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             }catch(e){}
         if(results[i]._source.indecators.delaiPpV==-1){
             var titleText = ppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
-        }else if(results[i]._source.indecators.delaiGpV==-1) {
+        }
+        if(results[i]._source.indecators.delaiGpV==-1) {
             var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) ;
         }
-        else if(results[i]._source.indecators.delaiGpV==-1 && results[i]._source.indecators.delaiPpV==-1 ){
+         if(results[i]._source.indecators.delaiGpV==-1 && results[i]._source.indecators.delaiPpV==-1 ){
             var titleText = "Pas de dossiers délivrés" ;
 
         }
-        else {
+
+     if(results[i]._source.indecators.delaiGpV!=-1 && results[i]._source.indecators.delaiPpV!=-1 ){
             var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) +jppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
 
         }
@@ -1184,11 +1186,11 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
 
             }
             tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
-            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.delai)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+titleText+`</span></i></td>`);
-            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.attractivite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+results[i]._source.indecators.attractiviteUV+dtTrans+` </span></i></td>`);
+            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
+            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.attractivite)+`</td>`);
             tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
             tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
-            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.fiscalite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext-rt">`+((Number(results[i]._source.indecators.fiscaliteUV))).toFixed(2)+` Dhs/m² </span></i></td>`);
+            tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.fiscalite)+`</td>`);
             tableHtml.append(tr);
         }
         
