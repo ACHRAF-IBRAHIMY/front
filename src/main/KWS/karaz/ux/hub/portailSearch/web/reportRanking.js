@@ -744,10 +744,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     for(var i=0;i<results.length;i++){
         try{
-            if(transMap[results[i]._source.region.replace(/ /g,"__")]!=undefined){
-            var regionTrans = transMap[results[i]._source.region.replace(/ /g,"__")];
+            if(transMap[results[i]._source.région.replace(/ /g,"__")]!=undefined){
+            var regionTrans = transMap[results[i]._source.région.replace(/ /g,"__")];
             }else{
-            var regionTrans = results[i]._source.region
+            var regionTrans = results[i]._source.région
             }
     
             }catch(e){}
@@ -823,7 +823,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             var strTrans = str
         }
         if(transMap[region.replace(/ /g,"__")]!=undefined){
-            var regionTrans = transMap[region.replace(/ /g,"__")];
+            var regionTrans = transMap[région.replace(/ /g,"__")];
         }else{
             var regionTrans = region
         }
@@ -1034,7 +1034,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	}
     }
     try{
-        if(transMap[results[i]._source.region.replace(/ /g,"__")]!=undefined){
+        if(transMap[results[i]._source.région.replace(/ /g,"__")]!=undefined){
         var regionTrans = transMap[results[i]._source.région.replace(/ /g,"__")];
         }else{
         var regionTrans = results[i]._source.région
@@ -1467,7 +1467,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         }; 
 
         try{
-            if(transMap[dataset[i]._source.region.replace(/ /g,"__")]!=undefined){
+            if(transMap[dataset[i]._source.région.replace(/ /g,"__")]!=undefined){
             var regionTrans = transMap[dataset[i]._source.région.replace(/ /g,"__")];
             }else{
             var regionTrans = dataset[i]._source.région
