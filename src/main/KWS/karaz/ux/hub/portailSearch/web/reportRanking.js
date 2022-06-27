@@ -688,9 +688,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     var cm2 = results[0]._source.prefecture.replace("PROVINCE ","").replace("PRÉFECTURE ","").replace("PREFECTURE "," ").replace("ARRONDISSEMENT ","");
     var cm3 = results[2]._source.prefecture.replace("PROVINCE ","").replace("PRÉFECTURE ","").replace("PREFECTURE "," ").replace("ARRONDISSEMENT ","");
     
-    var hg1 = results[1]._source[select];
-    var hg2 = results[0]._source[select];
-    var hg3 = results[2]._source[select];
+    var hg1 = results[1]._source.indecators[select];
+    var hg2 = results[0]._source.indecators[select];
+    var hg3 = results[2]._source.indecators[select];
+    
     
     bar.find(".div-bar-1 .bar1 .bottom-div").html("<div class=\"cm cm1\">"+cm1+"</div><div style=\"height:"+((hg1*135)/hg2+25)+"px\"><span>"+Number(hg1).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+2+"</span></div>");
     bar.find(".div-bar-1 .bar2 .bottom-div").html("<div class=\"cm cm2\">"+cm2+"</div><div style=\"height:"+((hg2*135)/hg2+25)+"px\"><span>"+Number(hg2).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+1+"</span></div>");
@@ -707,7 +708,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     for(var i=0;i<results.length;i++){
     bar.find(".div-1-top10").append("<span>"+results[i]._source.prefecture+"</span>");
-    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
+    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source.indecators[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span><br/>");
     }
     }
     
@@ -720,13 +721,14 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     bar.find(".div-bar-1 .bar2 .bottom-div").html("");
     bar.find(".div-bar-1 .bar3 .bottom-div").html("");
     
-    var cm1 = results[1]._source.region.replace("REGION DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
-    var cm2 = results[0]._source.region.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
-    var cm3 = results[2]._source.region.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm1 = results[1]._source.région.replace("REGION DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm2 = results[0]._source.région.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm3 = results[2]._source.région.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
     
-    var hg1 = results[1]._source[select];
-    var hg2 = results[0]._source[select];
-    var hg3 = results[2]._source[select];
+    var hg1 = results[1]._source.indecators[select];
+    var hg2 = results[0]._source.indecators[select];
+    var hg3 = results[2]._source.indecators[select];
+    
     
     bar.find(".div-bar-1 .bar1 .bottom-div").html("<div class=\"cm cm1\">"+cm1+"</div><div style=\"height:"+((hg1*135)/hg2+25)+"px\"><span>"+Number(hg1).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+2+"</span></div>");
     bar.find(".div-bar-1 .bar2 .bottom-div").html("<div class=\"cm cm2\">"+cm2+"</div><div style=\"height:"+((hg2*135)/hg2+25)+"px\"><span>"+Number(hg2).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+1+"</span></div>");
@@ -750,7 +752,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
             }catch(e){}
     bar.find(".div-1-top10").append("<span>"+regionTrans+"</span>");
-    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
+    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source.indecators[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span><br/>");
     }
     }
     
@@ -762,13 +764,14 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     bar.find(".div-bar-1 .bar2 .bottom-div").html("");
     bar.find(".div-bar-1 .bar3 .bottom-div").html("");
     
-    var cm1 = results[1]._source.commune.replace("REGION DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
-    var cm2 = results[0]._source.commune.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
-    var cm3 = results[2]._source.commune.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm1 = results[1]._source.ville.replace("REGION DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm2 = results[0]._source.ville.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm3 = results[2]._source.ville.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
     
-    var hg1 = results[1]._source[select];
-    var hg2 = results[0]._source[select];
-    var hg3 = results[2]._source[select];
+    var hg1 = results[1]._source.indecators[select];
+    var hg2 = results[0]._source.indecators[select];
+    var hg3 = results[2]._source.indecators[select];
+    
     
     bar.find(".div-bar-1 .bar1 .bottom-div").html("<div class=\"cm cm1\">"+cm1+"</div><div style=\"height:"+((hg1*135)/hg2+25)+"px\"><span>"+Number(hg1).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+2+"</span></div>");
     bar.find(".div-bar-1 .bar2 .bottom-div").html("<div class=\"cm cm2\">"+cm2+"</div><div style=\"height:"+((hg2*135)/hg2+25)+"px\"><span>"+Number(hg2).toFixed(2)+"</span><span class=\"nbr-rnk\" >"+1+"</span></div>");
@@ -785,14 +788,14 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     for(var i=0;i<results.length;i++){
         try{
             if(transMap[results[i]._source.commune.replace(/ /g,"__")]!=undefined){
-            var communeTrans = transMap[results[i]._source.commune.replace(/ /g,"__")];
+            var communeTrans = transMap[results[i]._source.ville.replace(/ /g,"__")];
             }else{
-            var communeTrans = results[i]._source.commune
+            var communeTrans = results[i]._source.ville
             }
     
             }catch(e){}
     bar.find(".div-1-top10").append("<span>"+communeTrans+"</span>");
-    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source[select].toFixed(1)+"</span><br/>");
+    bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span><br/>");
     }
     }
      
@@ -927,10 +930,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
             }catch(e){}
         if(results[i]._source.indecators.delaiPpV==-1){
-            var titleText = ppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
+            var titleText = gpTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
         }
         if(results[i]._source.indecators.delaiGpV==-1) {
-            var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) ;
+            var titleText = ppTrans+(results[i]._source.indecators.delaiPpV).toFixed(2)+joursTrans ;
         }
          if(results[i]._source.indecators.delaiGpV==-1 && results[i]._source.indecators.delaiPpV==-1 ){
             var titleText = "Pas de dossiers délivrés" ;
@@ -938,11 +941,12 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         }
 
      if(results[i]._source.indecators.delaiGpV!=-1 && results[i]._source.indecators.delaiPpV!=-1 ){
-            var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2) +jppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
+            var titleText = gpTrans+(results[i]._source.indecators.delaiPpV).toFixed(2)+joursTrans +jppTrans+(results[i]._source.indecators.delaiGpV).toFixed(2)+joursTrans;
 
         }
+     console.log("check titleText "+titleText)
         tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
-        tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.delai)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+titleText+`</span></i></td>`);
+        tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
         tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.attractivite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+results[i]._source.indecators.attractiviteUV+dtTrans+` </span></i></td>`);
         tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
         tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);

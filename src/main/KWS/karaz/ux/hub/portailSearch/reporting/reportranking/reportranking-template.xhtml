@@ -11,7 +11,7 @@
 
 @page { 
 margin-top:17mm;margin-bottom:17mm;
-size:A4 rotate landscape; 
+size:A4  landscape; 
 @bottom-left{ content: "© $sdf.format($now).toString().split("/")[2] ROKHAS – Powered By Karaz"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
 @bottom-center { content: "Imprimé Le : $sdf.format($now)"; font-size:12px; font-family:Candara; color:#3C5F8D;} 
 @bottom-right { content: "Page " counter(page) " / " counter(pages)  ; font-size:12px; font-family:Candara; color:#3C5F8D;}
@@ -159,7 +159,7 @@ img.iconS{
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Commune</th>
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Rang</th>
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Score</th>
-            <th style="font-size: 10px !important;text-align:center;" colspan="12">Délai</th>
+            <th style="font-size: 10px !important;text-align:center;" colspan="13">Délai</th>
             <th style="font-size: 10px !important;text-align:center;" colspan="2">Attractivité</th>
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Digital</th>
             <th style="font-size: 10px !important;text-align:center;" rowspan="2">Ecosystème</th>
@@ -277,7 +277,6 @@ img.iconS{
                 <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
 
                 #end
-                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$gpv.intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.attractivite").intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.attractiviteUV").intValue()</td>
                 <td style="font-size: 10px !important;" >$xml.getDouble($ch,"indecators.digital").intValue()</td>

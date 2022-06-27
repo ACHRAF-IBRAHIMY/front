@@ -628,9 +628,9 @@
           </fieldSet>
         </vbox>
       </fieldSet>
-      <fieldSet className="hp-box ranking-fieldset hp-small" label="TOP 10 PAR DOMAINE">
+      <fieldSet className="hp-box ranking-fieldset hp-small" label="TOP 10">
         <htmlTranslate renderer="htmlDiv" divStyle="padding-left: 23px;" code="CSIC01" />
-        <vbox columns="50% 50%">
+        <vbox >
           <fieldSet label="Autorisations d'urbanisme" className="ranking-bar10-U">
             <html>
               <div class="top-10-small" style="display:grid;grid-template-columns: 48% 4% 48%;">
@@ -646,7 +646,7 @@
               </div>
             </html>
           </fieldSet>
-          <fieldSet label="Autorisations économiques" className="ranking-bar10-E">
+         <!--  <fieldSet label="Autorisations économiques" className="ranking-bar10-E">
           <html>
               <div style="display:grid;grid-template-columns: 48% 4% 48%;">
                 <div class="div-1-top10">
@@ -660,7 +660,7 @@
                 </div>
               </div>
             </html>
-          </fieldSet>
+          </fieldSet> -->
         </vbox>
       </fieldSet>
       <fieldSet className="hp-box ranking-fieldset hp-small" label="RADAR DES REGIONS">
