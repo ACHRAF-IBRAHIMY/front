@@ -19,7 +19,6 @@ size:A4  landscape;
 
 table {    -fs-table-paginate: paginate;}
 tr{ page-break-inside:avoid;}
-
 .table5 {
     width: 100%;
     margin: auto;
@@ -45,7 +44,7 @@ tr{ page-break-inside:avoid;}
 
 .table5 td, th {
   border: 1px solid #eee;
-  padding: 8px;
+  padding: 4px;
 }
 
 .table5 tr:nth-child(even) {
@@ -119,7 +118,7 @@ img.iconS{
 
 .table3 td, .table3 th {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 6px;
   text-align:center;
   font-size:14px;
 }
@@ -134,7 +133,6 @@ img.iconS{
   background-color: #38A;
   color: white;
 }
-
 </style>
 </head>
  
@@ -258,6 +256,13 @@ img.iconS{
 
                 #end  #if($oan.intValue()>-1)
                 <td style="font-size: 10px !important;width: 250px !important;" width="10%">$oan.intValue()</td>
+
+                #else
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
+
+                #end
+                  #end  #if($afp.intValue()>-1)
+                <td style="font-size: 10px !important;width: 250px !important;" width="10%">$afp.intValue()</td>
 
                 #else
                 <td style="font-size: 10px !important;width: 250px !important;" width="10%">-</td>
