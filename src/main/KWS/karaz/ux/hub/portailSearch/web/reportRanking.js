@@ -1458,19 +1458,19 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             borderColor : region_color[i],
             pointBackgroundColor : region_color[i],
             data: [
-                dataset[i]._source.delai.toFixed(2),
-                (dataset[i]._source.attractivite/5).toFixed(2),
-                dataset[i]._source.digital.toFixed(2),
-                dataset[i]._source.ecosystem.toFixed(2),
-                dataset[i]._source.fiscalite.toFixed(2)
+                dataset[i]._source.indecators.delai.toFixed(2),
+                (dataset[i]._source.indecators.attractivite/5).toFixed(2),
+                dataset[i]._source.indecators.digital.toFixed(2),
+                dataset[i]._source.indecators.ecosystem.toFixed(2),
+                dataset[i]._source.indecators.fiscalite.toFixed(2)
             ]
         }; 
 
         try{
             if(transMap[dataset[i]._source.region.replace(/ /g,"__")]!=undefined){
-            var regionTrans = transMap[dataset[i]._source.region.replace(/ /g,"__")];
+            var regionTrans = transMap[dataset[i]._source.région.replace(/ /g,"__")];
             }else{
-            var regionTrans = dataset[i]._source.region
+            var regionTrans = dataset[i]._source.région
             }
     
             }catch(e){}
