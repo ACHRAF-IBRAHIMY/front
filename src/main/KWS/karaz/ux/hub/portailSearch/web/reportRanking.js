@@ -1555,7 +1555,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     return $.ajax({
     type: "post",
-    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/index_ranking_proc/_search",
+    url: URL_SEARCH+"?operation=wselastic&shortUrl="+"/ranking_index_proc/_search",
     datatype: "application/json",
     contentType: "application/json",
     data:JSON.stringify(obj),
@@ -1925,7 +1925,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     liste.forEach(function(obj){
     
     if(obj.typeIdd=="update"){
-    str+='{ "update" : {"_id" : "'+obj.id+'", "_index" : "index_ranking_communes"} }\n';
+    str+='{ "update" : {"_id" : "'+obj.id+'", "_index" : "ranking_index_communes"} }\n';
     str+='{ "doc" : { "commune":"'+obj.commune+'","procs":'+JSON.stringify(obj.proc)+',"bonus":"'+obj.bonus+'","population":"'+obj.population+'","active":"1","score":"'+obj.score+'" }}\n'
     }
     
