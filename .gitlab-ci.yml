@@ -21,9 +21,9 @@ Job2:
    stage: deploy_dev
    script:
      - hostname && hostname -i
-     - scp -o stricthostkeychecking=no target/*.jar kstage@51.255.16.127:/home/kstage 
-     - ssh -o stricthostkeychecking=no kstage@51.255.16.127 "unzip -o karaz-ux-hub-1.0.jar -d karaz-ux-hub-1.0/ && rm -rf /karaz/glassfish5/glassfish/domains/domain1/autodeploy/karazApp/karaz-ux-hub-1.0 && mv karaz-ux-hub-1.0 /karaz/glassfish5/glassfish/domains/domain1/autodeploy/karazApp/ "
-     - ssh -o stricthostkeychecking=no kstage@51.255.16.127 "/karaz/restart_glassfish.sh"
+     - scp -o -P 22900 stricthostkeychecking=no target/*.jar kstage@51.255.16.127:/home/kstage 
+     - ssh -o -p 22900 stricthostkeychecking=no kstage@51.255.16.127 "unzip -o karaz-ux-hub-1.0.jar -d karaz-ux-hub-1.0/ && rm -rf /karaz/glassfish5/glassfish/domains/domain1/autodeploy/karazApp/karaz-ux-hub-1.0 && mv karaz-ux-hub-1.0 /karaz/glassfish5/glassfish/domains/domain1/autodeploy/karazApp/ "
+     - ssh -o -p 22900 stricthostkeychecking=no kstage@51.255.16.127 "/karaz/restart_glassfish.sh"
    only:
      - h_k_ranking
    tags : 
