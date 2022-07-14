@@ -611,75 +611,75 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }
     }else if(val=="prefecture"){
     if(classe=="rank-dl"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"delai",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
     }else if(classe=="rank-dg"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"digital",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
     }else if(classe=="rank-at"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
     }else if(classe=="rank-es"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
     }else if(classe=="rank-fs"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
     }else if(classe=="sp-td"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"score",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
     }
     }else if(val=="region"){
     if(classe=="rank-dl"){
-    restGetAllRegion(getFiltersArray(newTabs),"delai",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
     }else if(classe=="rank-dg"){
-    restGetAllRegion(getFiltersArray(newTabs),"digital",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
     }else if(classe=="rank-at"){
-    restGetAllRegion(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
     }else if(classe=="rank-es"){
-    restGetAllRegion(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
     }else if(classe=="rank-fs"){
-    restGetAllRegion(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
     }else if(classe=="sp-td"){
-    restGetAllRegion(getFiltersArray(newTabs),"score",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
     }
     }else if(val=="ville"){
     if(classe=="rank-dl"){
-    restGetAllVille(getFiltersArray(newTabs),"delai",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
     }else if(classe=="rank-dg"){
-    restGetAllVille(getFiltersArray(newTabs),"digital",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
     }else if(classe=="rank-at"){
-    restGetAllVille(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
     }else if(classe=="rank-es"){
-    restGetAllVille(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
     }else if(classe=="rank-fs"){
-    restGetAllVille(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
     }else if(classe=="sp-td"){
-    restGetAllVille(getFiltersArray(newTabs),"score",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
     }
     }
     else if(val=="communesml"){
         if(classe=="rank-dl"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"delai",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
         }else if(classe=="rank-dg"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"digital",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
         }else if(classe=="rank-at"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
         }else if(classe=="rank-es"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
         }else if(classe=="rank-fs"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
         }else if(classe=="sp-td"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"score",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
         }
         }
     else if(val=="communemed"){
         if(classe=="rank-dl"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"delai",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
         }else if(classe=="rank-dg"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"digital",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
         }else if(classe=="rank-at"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
         }else if(classe=="rank-es"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
         }else if(classe=="rank-fs"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
         }else if(classe=="sp-td"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"score",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
         }
         }
     }
