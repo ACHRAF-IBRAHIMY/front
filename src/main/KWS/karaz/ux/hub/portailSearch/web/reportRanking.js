@@ -381,9 +381,32 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     },
     success: function (result) {
       console.log(result);
-    
+      if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
+          var dec = true;
+          var str = "";
+          var trims = filters[1][0].split("-");
+          if(trims[0]=="1"){
+              str += "1er trimestre "+trims[1];
+          }else if(trims[0]=="2"){
+              str += "2éme trimestre "+trims[1];
+          }else if(trims[0]=="3"){
+              str += "3éme trimestre "+trims[1];
+          }else if(trims[0]=="4"){
+              str += "4éme trimestre "+trims[1];
+          }
+          try{
+              if(transMap[str.replace(/ /g,"__")]!=undefined){
+              var strTrans = transMap[str.replace(/ /g,"__")];
+              }else{
+              var strTrans = str
+              }
+      
+              }catch(e){}
+          dataReportRk.trim = strTrans;
+          dataReportRk.data = [];
+      }
     switch (type){
-        case 0 : createCommuneTableP(result);break;
+        case 0 : createCommuneTableP(result,dec);break;
         case 1 : createBarTop3P(result,".ranking-bar3-dl","delai");break;   
         case 2 : createBarTop3P(result,".ranking-bar3-at","attractivite");break;   
         case 3 : createBarTop3P(result,".ranking-bar3-dg","digital");break;   
@@ -483,15 +506,55 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     if(val=="commune" || val=="commune1" || val=="arrondissement" ){
     var newTabs = tabs;
     }else if(val=="prefecture"){
+    	
     var newTabs = [];
-    newTabs.push(tabs[0]);
-    newTabs.push(tabs[1]);
+   // newTabs.push(tabs[0]);
+    //newTabs.push(tabs[1]);
+    if(classe=="rank-dl"){
+    	restGetAllPrefecture(getFiltersArray(newTabs),"delai",type,60,0,0)
+        }else if(classe=="rank-dg"){
+        	restGetAllPrefecture(getFiltersArray(newTabs),"digital",type,60,0,0)
+        }else if(classe=="rank-at"){
+        	restGetAllPrefecture(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+        }else if(classe=="rank-es"){
+        	restGetAllPrefecture(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+        }else if(classe=="rank-fs"){
+        	restGetAllPrefecture(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+        }else if(classe=="sp-td"){
+        	restGetAllPrefecture(getFiltersArray(newTabs),"score",type,60,0,0)
+        }
     }else if(val=="region"){
-    var newTabs = [];
-    newTabs.push(tabs[0]);
+  //  var newTabs = [];
+   // newTabs.push(tabs[0]);
+    	 if(classe=="rank-dl"){
+    		 restGetAllRegion(getFiltersArray(newTabs),"delai",type,60,0,0)
+    	        }else if(classe=="rank-dg"){
+    	        	restGetAllRegion(getFiltersArray(newTabs),"digital",type,60,0,0)
+    	        }else if(classe=="rank-at"){
+    	        	restGetAllRegion(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+    	        }else if(classe=="rank-es"){
+    	        	restGetAllRegion(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+    	        }else if(classe=="rank-fs"){
+    	        	restGetAllRegion(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+    	        }else if(classe=="sp-td"){
+    	        	restGetAllRegion(getFiltersArray(newTabs),"score",type,60,0,0)
+    	        }
     }else if(val=="ville"){
-    var newTabs = [];
-    newTabs.push(tabs[0]);
+ //  var newTabs = [];
+   // newTabs.push(tabs[0]);
+    	 if(classe=="rank-dl"){
+    		 restGetAllRegion(getFiltersArray(newTabs),"delai",type,60,0,0)
+    	        }else if(classe=="rank-dg"){
+    	        	restGetAllVille(getFiltersArray(newTabs),"digital",type,60,0,0)
+    	        }else if(classe=="rank-at"){
+    	        	restGetAllVille(getFiltersArray(newTabs),"attractivite",type,60,0,0)
+    	        }else if(classe=="rank-es"){
+    	        	restGetAllVille(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
+    	        }else if(classe=="rank-fs"){
+    	        	restGetAllVille(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
+    	        }else if(classe=="sp-td"){
+    	        	restGetAllVille(getFiltersArray(newTabs),"score",type,60,0,0)
+    	        }
     }
     
     if(val=="commune"){
@@ -581,7 +644,6 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }
     else if(val=="communesml"){
         if(classe=="rank-dl"){
-        restGetAllSmlCommue
         restGetAllSmlCommune(getFiltersArray(newTabs),"delai",type,60,0,0)
         }else if(classe=="rank-dg"){
         restGetAllSmlCommune(getFiltersArray(newTabs),"digital",type,60,0,0)
@@ -597,7 +659,6 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         }
     else if(val=="communemed"){
         if(classe=="rank-dl"){
-        restGetAllMedCommue
         restGetAllMedCommune(getFiltersArray(newTabs),"delai",type,60,0,0)
         }else if(classe=="rank-dg"){
         restGetAllMedCommune(getFiltersArray(newTabs),"digital",type,60,0,0)
@@ -950,7 +1011,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.attractivite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext">`+results[i]._source.indecators.attractiviteUV+dtTrans+` </span></i></td>`);
         tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.digital)+`</td>`);
         tr.html(tr.html()+`<td class="rm" >`+Math.floor(results[i]._source.indecators.ecosystem)+`</td>`);
-        tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.fiscalite)+`<i class="fas fa-info-circle tooltip" title=""> <span class="tooltiptext-rt">`+((Number(results[i]._source.indecators.fiscaliteUV))).toFixed(2)+` Dhs/m² </span></i></td>`);
+        tr.html(tr.html()+`<td class="rm" title="">`+Math.floor(results[i]._source.indecators.fiscalite)+`</td>`);
         tableHtml.append(tr);
     }
     
@@ -973,7 +1034,9 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     var rankCom = results[i]._source.rankComp;
     var newRankComp = results[i]._source.newRankComp;
     var rankStr = "";
-    
+    if(dec == true){
+        dataReportRk.data.push(results[i]._source);
+    }
     if(rankCom>0){
         rankStr = "<span><i style=\"color:green\" class=\"fas fa-arrow-up \"></i>"+" +"+rankCom+"</span>";
     }else if(rankCom<0){
