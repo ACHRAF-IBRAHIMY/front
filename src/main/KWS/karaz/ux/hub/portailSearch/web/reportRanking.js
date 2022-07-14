@@ -359,7 +359,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
           error: function (error) {
               console.log(error);
           }
-      })
+      }) 
     
     };
     
