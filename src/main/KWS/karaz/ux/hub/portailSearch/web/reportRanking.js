@@ -404,7 +404,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
               }catch(e){}
           dataReportRk.trim = strTrans;
           dataReportRk.data = [];
-      }
+      } 
     switch (type){
         case 0 : createCommuneTableP(result,dec);break;
         case 1 : createBarTop3P(result,".ranking-bar3-dl","delai");break;   
