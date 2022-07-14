@@ -549,7 +549,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     function sortByRanking(tabs,classe,val,type){
     
-    if(val=="commune" || val=="commune1" || val=="arrondissement" ){
+    if(val=="commune" || val=="commune1" || val=="arrondissement" || val=="communemed" || val=="communesml" ){
     var newTabs = tabs;
     }else if(val=="prefecture"){
     	
@@ -562,8 +562,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     newTabs.push(tabs[0]);
     	
     }else if(val=="ville"){
-   var newTabs = [];
-    newTabs.push(tabs[0]);
+        var newTabs = tabs;
+
     	
     }
     
