@@ -554,53 +554,17 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }else if(val=="prefecture"){
     	
     var newTabs = [];
-   // newTabs.push(tabs[0]);
-    //newTabs.push(tabs[1]);
-    if(classe=="rank-dl"){
-    	restGetAllPrefecture(getFiltersArray(newTabs),"delai",type,60,0,0)
-        }else if(classe=="rank-dg"){
-        	restGetAllPrefecture(getFiltersArray(newTabs),"digital",type,60,0,0)
-        }else if(classe=="rank-at"){
-        	restGetAllPrefecture(getFiltersArray(newTabs),"attractivite",type,60,0,0)
-        }else if(classe=="rank-es"){
-        	restGetAllPrefecture(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
-        }else if(classe=="rank-fs"){
-        	restGetAllPrefecture(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
-        }else if(classe=="sp-td"){
-        	restGetAllPrefecture(getFiltersArray(newTabs),"score",type,60,0,0)
-        }
+    newTabs.push(tabs[0]);
+    newTabs.push(tabs[1]);
+   
     }else if(val=="region"){
-  //  var newTabs = [];
-   // newTabs.push(tabs[0]);
-    	 if(classe=="rank-dl"){
-    		 restGetAllRegion(getFiltersArray(newTabs),"delai",type,60,0,0)
-    	        }else if(classe=="rank-dg"){
-    	        	restGetAllRegion(getFiltersArray(newTabs),"digital",type,60,0,0)
-    	        }else if(classe=="rank-at"){
-    	        	restGetAllRegion(getFiltersArray(newTabs),"attractivite",type,60,0,0)
-    	        }else if(classe=="rank-es"){
-    	        	restGetAllRegion(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
-    	        }else if(classe=="rank-fs"){
-    	        	restGetAllRegion(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
-    	        }else if(classe=="sp-td"){
-    	        	restGetAllRegion(getFiltersArray(newTabs),"score",type,60,0,0)
-    	        }
+    var newTabs = [];
+    newTabs.push(tabs[0]);
+    	
     }else if(val=="ville"){
- //  var newTabs = [];
-   // newTabs.push(tabs[0]);
-    	 if(classe=="rank-dl"){
-    		 restGetAllRegion(getFiltersArray(newTabs),"delai",type,60,0,0)
-    	        }else if(classe=="rank-dg"){
-    	        	restGetAllVille(getFiltersArray(newTabs),"digital",type,60,0,0)
-    	        }else if(classe=="rank-at"){
-    	        	restGetAllVille(getFiltersArray(newTabs),"attractivite",type,60,0,0)
-    	        }else if(classe=="rank-es"){
-    	        	restGetAllVille(getFiltersArray(newTabs),"ecosystem",type,60,0,0)
-    	        }else if(classe=="rank-fs"){
-    	        	restGetAllVille(getFiltersArray(newTabs),"fiscalite",type,60,0,0)
-    	        }else if(classe=="sp-td"){
-    	        	restGetAllVille(getFiltersArray(newTabs),"score",type,60,0,0)
-    	        }
+   var newTabs = [];
+    newTabs.push(tabs[0]);
+    	
     }
     
     if(val=="commune"){
@@ -1377,7 +1341,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }
     
     function getFiltersArray(arr){
-    var  arrFilters = ["trim.keyword","région.keyword","préfecture.keyword","commune.keyword"];
+    var  arrFilters = ["trim.keyword","région.keyword","prefecture.keyword","commune.keyword"];
     var array=[[],[]];
     
     for(var i=0;i<arr.length;i++){
