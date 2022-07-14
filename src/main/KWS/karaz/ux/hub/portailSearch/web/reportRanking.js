@@ -442,7 +442,30 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     },
     success: function (result) {
       console.log(result);
-    
+      if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
+          var dec = true;
+          var str = "";
+          var trims = filters[1][0].split("-");
+          if(trims[0]=="1"){
+              str += "1er trimestre "+trims[1];
+          }else if(trims[0]=="2"){
+              str += "2éme trimestre "+trims[1];
+          }else if(trims[0]=="3"){
+              str += "3éme trimestre "+trims[1];
+          }else if(trims[0]=="4"){
+              str += "4éme trimestre "+trims[1];
+          }
+          try{
+              if(transMap[str.replace(/ /g,"__")]!=undefined){
+              var strTrans = transMap[str.replace(/ /g,"__")];
+              }else{
+              var strTrans = str
+              }
+      
+              }catch(e){}
+          dataReportRk.trim = strTrans;
+          dataReportRk.data = [];
+      } 
     switch (type){
         case 0 : createCommuneTableG(result);break;
         case 1 : createBarTop3G(result,".ranking-bar3-dl","delai");break;   
@@ -480,7 +503,30 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     },
     success: function (result) {
       console.log(result);
-    
+      if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
+          var dec = true;
+          var str = "";
+          var trims = filters[1][0].split("-");
+          if(trims[0]=="1"){
+              str += "1er trimestre "+trims[1];
+          }else if(trims[0]=="2"){
+              str += "2éme trimestre "+trims[1];
+          }else if(trims[0]=="3"){
+              str += "3éme trimestre "+trims[1];
+          }else if(trims[0]=="4"){
+              str += "4éme trimestre "+trims[1];
+          }
+          try{
+              if(transMap[str.replace(/ /g,"__")]!=undefined){
+              var strTrans = transMap[str.replace(/ /g,"__")];
+              }else{
+              var strTrans = str
+              }
+      
+              }catch(e){}
+          dataReportRk.trim = strTrans;
+          dataReportRk.data = [];
+      } 
     switch (type){
         case 0 : createCommuneTableV(result);break;
         case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
@@ -1017,7 +1063,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     }
     
-    function createCommuneTableP(result){
+    function createCommuneTableP(result,dec){
     var results = result.hits.hits;
     var tableHtml = $("#ranking-table2");
     
