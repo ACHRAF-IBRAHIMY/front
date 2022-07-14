@@ -8,7 +8,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     filter["term"][filters[0][i]]=filters[1][i];
     filtersObj.push(filter);
-    }
+     }
     
     var objSort = {};
     objSort[sortBy] = {"order":rev}
