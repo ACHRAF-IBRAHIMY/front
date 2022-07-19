@@ -562,8 +562,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     newTabs.push(tabs[0]);
     	
     }else if(val=="ville"){
-        var newTabs = tabs;
-
+   var newTabs = [];
+    newTabs.push(tabs[0]);
     	
     }
     
