@@ -107,6 +107,8 @@
               <td class="rank-fs">${code7 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
             </tr>
           </table>
+         <div id="pagination" class="pagination pagination-second" />
+          
           </div>
         </html>
       </renderer>

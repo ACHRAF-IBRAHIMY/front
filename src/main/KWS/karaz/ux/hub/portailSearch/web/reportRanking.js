@@ -32,7 +32,6 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     function restGetAllCommue(filters,sortBy,rev,size,from,type){
     
     var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
-    
     console.log(JSON.stringify(obj));
     
     $.ajax({
@@ -46,9 +45,6 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     },
     success: function (result) {
       console.log(result);
-    
-    
-    
     
     if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
         var dec = true;
@@ -246,7 +242,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
       },
       success: function (result) {
           console.log(result);
-        
+          var totalPage = Math.ceil(result.hits.total.value/size);
+
     
         
     
@@ -277,7 +274,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     
         switch (type){
-            case 0 : createCommuneTable(result,dec);break;
+            case 0 : createCommuneTable(result,dec);createPaginationBar({nbrPage:totalPage,begin:from,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type});break;
             case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
             case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
             case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
@@ -869,7 +866,109 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span><br/>");
     }
     }
-     
+    function createPaginationBar(param){
+
+    	var nbrPage = param.nbrPage;
+    	var begin = param.begin;
+    	var prev = param.prev;
+         var size = param.size;
+          var filters=params.filters;
+          var sortBy=params.sortBy;
+          var rev=params.rev;
+          var type=params.type;
+    	var p = document.getElementsById('pagination');
+    	console.log(p.html());
+    	p.html("");
+    	console.log(p.html());
+    	var a = document.createElement("a");
+    	var aiangle="<i class=\"fas fa-angle-double-left\"></i>";
+    
+    	a.innerHTML=aiangle;
+    	        a.addEventListener("click",function(){
+    	            console.log("!next");
+    	            previousPage({"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	            event.preventDefault();
+    	        });
+    	p.append(a);
+
+    	for(var i=begin;i<nbrPage;i++){
+    	    if(i==begin){
+    	        a = document.createElement("a");
+    	        a.innerHTML=begin+1;
+    	        if(prev==false){
+    	            a.setAttribute("class","active");                
+    	        }
+    	        a.addEventListener("click",function(){
+    	            event.preventDefault();
+    	            console.log("1");
+    	            getPage({"page":begin+1,"prev":false,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	        });
+
+    	        p.append(a);
+    	    }else{
+    	        a = document.createElement("a");
+    	        if(prev==true && i==nbrPage-2){
+    	        a.setAttribute("class","active");
+    	        }
+    	        var j=i+1;
+    	        a.innerHTML=(j);
+    	        a.addEventListener("click",function(event){
+    	            event.preventDefault();
+    	            console.log(this.innerHTML);
+    	            getPage({"page":Number(this.innerHTML),"prev":false,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	            
+    	        });
+    	        p.append(a);        
+    	    }
+    	}
+    	a = document.createElement("a");
+    	a = document.createElement("a");
+    	var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
+    	
+    	a.innerHTML=aiangle;
+    	a.addEventListener("click",function(){
+    	event.preventDefault();
+    	    console.log("next");
+    	    nextPage({"size":size});
+    	});        
+    	p.append(a);
+    	}
+
+
+    	function nextPage(param){
+    	if(currentPage<totalPage){
+    	currentPage++;
+    	getPage({"page":currentPage,"size":param.size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	}
+    	}
+
+    	function previousPage(param){
+    	if(1<currentPage){
+    	currentPage--;
+    	if(currentPage<((currentLPage-1)*10)){
+    	    getPage({"page":currentPage,"size":param.size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	}else{
+    	    getPage({"page":currentPage,"size":param.size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type}); 
+    	}
+    	}
+    	}
+
+    	function getPage(param){
+    		restGetAllCommue(params.filters,params.sortBy,params.rev,params.size,(params.page-1)*params.size,params.type)
+    	}
+
+    	function activePageBar(elm){
+    	elm.removeClass("active");
+    	var cpage = 0;
+    	if(currentLPage==1){
+    	cpage=currentPage;
+    	}else{
+    	cpage=currentPage-(10*(currentLPage-1))+1;
+    	console.log(cpage+" "+currentLPage+" "+currentPage);
+    	}
+    	elm.get(cpage).setAttribute("class","active");;
+    	}
+
     function updateTitles(){
     var trim = $(".ranking-fieldset #period option:selected").val();
     var region = $(".ranking-fieldset #region option:selected").val();
@@ -925,7 +1024,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     function createCommuneTable(result,dec){
     var results = result.hits.hits;
     var tableHtml = $("#ranking-table2");
-    
+  
     
     //$("#ranking-table tr:not(.first-tr)").remove();
     $("#ranking-table2 tr:not(.first-tr)").remove();
