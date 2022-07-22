@@ -876,7 +876,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
           var sortBy=param.sortBy;
           var rev=param.rev;
           var type=param.type;
-    	var p = document.getElementsById('pagination');
+    	var p = document.getElementById('pagination');
     	console.log(p.html());
     	p.html("");
     	console.log(p.html());
