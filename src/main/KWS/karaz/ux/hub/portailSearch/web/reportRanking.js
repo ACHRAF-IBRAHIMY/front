@@ -74,7 +74,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     
     switch (type){
-        case 0 : createCommuneTable(result,dec);createPaginationBar({nbrPage:totalPage,begin:from,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type});break;
+        case 0 : createCommuneTable(result,dec);createPaginationBar({nbrPage:totalPage,begin:0,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type});break;
         case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
         case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
         case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
