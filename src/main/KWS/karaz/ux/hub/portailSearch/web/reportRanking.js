@@ -230,7 +230,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         };
 
     
-    function restGetAllarrondissement(filters,sortBy,rev,size,from,type){
+    function restGetAllarrondissement(filters,sortBy,rev,size,from,type,currentPage){
     
     var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
     
@@ -247,8 +247,11 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
       },
       success: function (result) {
           console.log(result);
-          var totalPage = Math.ceil(result.hits.total.value/size);
 
+          var totalPage = Math.ceil(result.hits.total.value/size);
+          if(from==0|| from==1)currentPage=1;
+
+        
     
         
     
@@ -279,7 +282,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     
         switch (type){
-            case 0 : createCommuneTable(result,dec); break;
+            case 0 : createCommuneTable(result,dec);createPaginationBarR({nbrPage:totalPage,begin:0,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type,prev:false,currentPage:currentPage,nature:"arrondissement"}); break;
             case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
             case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
             case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
@@ -298,7 +301,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     };
     
-    function restGetAllCommune1(filters,sortBy,rev,size,from,type){
+    function restGetAllCommune1(filters,sortBy,rev,size,from,type,currentPage){
     
     var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
     
@@ -316,7 +319,11 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
           success: function (result) {
               console.log(result);
             
-    
+
+              var totalPage = Math.ceil(result.hits.total.value/size);
+              if(from==0|| from==1)currentPage=1;
+
+            
             
     
             if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
@@ -346,7 +353,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     
             switch (type){
-                case 0 : createCommuneTable(result,dec);break;
+                case 0 : createCommuneTable(result,dec);createPaginationBarR({nbrPage:totalPage,begin:0,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type,prev:false,currentPage:currentPage,nature:"communes"});break;
                 case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
                 case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
                 case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
@@ -383,6 +390,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     },
     success: function (result) {
       console.log(result);
+      var p = document.getElementById('pagination');
+    	p.innerHTML="";
       if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
           var dec = true;
           var str = "";
@@ -444,6 +453,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     },
     success: function (result) {
       console.log(result);
+      var p = document.getElementById('pagination');
+    	p.innerHTML="";
       if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
           var dec = true;
           var str = "";
@@ -505,6 +516,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     },
     success: function (result) {
       console.log(result);
+      var p = document.getElementById('pagination');
+    	p.innerHTML="";
       if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
           var dec = true;
           var str = "";
@@ -892,7 +905,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	a.innerHTML=aiangle;
     	        a.addEventListener("click",function(){
     	            console.log("!next");
-    	            previousPageR({"page":currentPage,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	            previousPageR({"page":currentPage,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"nature":nature});
     	            event.preventDefault();
     	        });
     	p.append(a);
@@ -936,7 +949,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	a.addEventListener("click",function(){
     	event.preventDefault();
     	    console.log("next");
-    	    nextPageR({"page":currentPage,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"nature":nature});
+    	    nextPageR({"page":currentPage,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"nature":nature,"nature":nature});
     	});        
     	p.append(a);
     	var elm = $("#pagination a");
