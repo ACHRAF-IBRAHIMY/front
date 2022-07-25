@@ -962,15 +962,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
 
     	function activePageBarR(elm,param){
         var currentPage=param.page;
+        console.log("this current page "+currentPage);
     	elm.removeClass("active");
-    	var cpage = 0;
-    	if(currentLPage==1){
-    	cpage=currentPage;
-    	}else{
-    	cpage=currentPage-(10*(currentLPage-1))+1;
     	console.log(cpage+" "+currentLPage+" "+currentPage);
-    	}
-    	elm.get(cpage).setAttribute("class","active");;
+    	elm.get(cpage).setAttribute("class","active");
     	}
 
     function updateTitles(){
