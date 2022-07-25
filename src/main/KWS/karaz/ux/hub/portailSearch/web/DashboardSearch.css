@@ -1040,8 +1040,8 @@ box-card:hover{
   text-decoration: none;
   transition: background-color .3s;
 }
-#pagination a.active {
-  background-color: #38B!important;
+#pagination a:active {
+  background-color: #38B;
   color: white !important;
 }
 #pagination a:hover:not(.active) {background-color: #ddd;}
