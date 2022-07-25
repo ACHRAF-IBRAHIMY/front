@@ -956,9 +956,12 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
 
     	function getPageR(param){
     		restGetAllCommue(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type)
+    		var elm = $("#pagination a");
+    		activePageBarR(elem,param);
     	}
 
-    	function activePageBar(elm){
+    	function activePageBarR(elm,param){
+        var currentPage=param.page;
     	elm.removeClass("active");
     	var cpage = 0;
     	if(currentLPage==1){
