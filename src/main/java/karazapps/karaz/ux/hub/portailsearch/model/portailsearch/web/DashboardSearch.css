@@ -1033,7 +1033,7 @@ box-card:hover{
     margin-bottom: 90px;
 }
 
-.pagination a,.pagination-new-style a {
+#pagination a,.pagination a,.pagination-new-style a {
   color: inherit !important;
   padding: 8px 10px;
   border-radius: 3px;
@@ -1049,7 +1049,10 @@ box-card:hover{
   background-color: #38B;
   color: white !important;
 }
-
+#pagination a.active {
+  background-color: #38B!important;
+  color: white !important;
+}
 .searchList .grid-container {
     width: 1000px;    
     display: grid;
@@ -1059,7 +1062,7 @@ box-card:hover{
     background-color: #ddd;
 }            
 .searchList .pagination a:hover:not(.active) {background-color: #ddd;}
-
+#pagination a:hover:not(.active) {background-color: #ddd;}
 .searchList .second-search-bar{
     height: 63px;
     position: relative;
