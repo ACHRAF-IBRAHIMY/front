@@ -961,7 +961,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             var currentPage=param.page;
     	if(currentPage!=6){
     	currentPage++;
-    	getPageR({"page":currentPage,"size":param.size,"filters":param.filters,"sortBy":param.sortBy,"rev":param.rev,"type":param.type,"prev":false,"nature":nature});
+    	getPageR({"page":currentPage,"size":param.size,"filters":param.filters,"sortBy":param.sortBy,"rev":param.rev,"type":param.type,"prev":false,"nature":param.nature});
     	}
     	}
 
@@ -969,7 +969,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             var currentPage=param.page;
     	if(1<currentPage){
     	currentPage--;
-    	    getPageR({"page":currentPage,"size":param.size,"filters":param.filters,"sortBy":param.sortBy,"rev":param.rev,"type":param.type,"prev":true,"nature":nature});
+    	    getPageR({"page":currentPage,"size":param.size,"filters":param.filters,"sortBy":param.sortBy,"rev":param.rev,"type":param.type,"prev":true,"nature":param.nature});
     	}
     	}
 
@@ -980,6 +980,10 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     		restGetAllMedCommune(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
            else if(param.nature=="communesml")
     		restGetAllSmlCommune(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
+    		   else if(param.nature=="communes")
+    		restGetAllCommune1(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
+    		   else if(param.nature=="arrondissement")
+    		restGetAllArrondissement(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
     		var elm = $("#pagination a");
     		activePageBarR(elm,param);
     	}
