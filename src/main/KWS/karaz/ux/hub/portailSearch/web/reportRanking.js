@@ -1066,7 +1066,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             var communeTrans = results[i]._source.commune
             var prefectureTrans = results[i]._source.prefecture
             }
-    
+     
             }catch(e){}
         tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+`<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\"`+communeTrans+`\"><span>`+subLong(communeTrans,30)+`</span> `+rankStr+`</span><span style="display: block;color: orange;font-size: 11px;    margin-top: 1px;margin-left: 19px;">`+prefectureTrans+`</span></td>`);        
         $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(communeTrans,30)+"</span>"+rankStr+"</span></td></tr>");
