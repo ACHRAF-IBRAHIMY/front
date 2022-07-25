@@ -871,7 +871,6 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
 
     	var nbrPage = param.nbrPage;
     	var begin = param.begin;
-    	var prev = param.prev;
          var size = param.size;
           var filters=param.filters;
           var sortBy=param.sortBy;
@@ -895,9 +894,9 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	    if(i==begin){
     	        a = document.createElement("a");
     	        a.innerHTML=begin+1;
-    	        if(prev==false){
-    	            a.setAttribute("class","active");                
-    	        }
+    	        console.log("prev is"+prev);
+    	         a.setAttribute("class","active");                
+    	        
     	        a.addEventListener("click",function(){
     	            event.preventDefault();
     	            console.log("1");
@@ -907,7 +906,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	        p.append(a);
     	    }else{
     	        a = document.createElement("a");
-    	        if(prev==true && i==nbrPage-2){
+    	        if(i==nbrPage-2){
     	        a.setAttribute("class","active");
     	        }
     	        var j=i+1;
