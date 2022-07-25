@@ -29,7 +29,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     }
     
     
-    function restGetAllCommue(filters,sortBy,rev,size,from,type){
+    function restGetAllCommue(filters,sortBy,rev,size,from,type,currentPage){
     
     var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
     console.log(JSON.stringify(obj));
@@ -46,6 +46,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     success: function (result) {
       console.log(result);
       var totalPage = Math.ceil(result.hits.total.value/size);
+      if(from==0|| from==1)currentPage=1;
 
     if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
         var dec = true;
@@ -74,7 +75,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     
     
     switch (type){
-        case 0 : createCommuneTable(result,dec);createPaginationBar({nbrPage:totalPage,begin:0,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type,prev:false});break;
+        case 0 : createCommuneTable(result,dec);createPaginationBarR({nbrPage:totalPage,begin:0,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type,prev:false,currentPage:currentPage,nature:"communeglob"});break;
         case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
         case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
         case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
@@ -92,7 +93,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     })
     
     };
-    function restGetAllMedCommune(filters,sortBy,rev,size,from,type){
+    function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
         
         var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
         
@@ -111,7 +112,9 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
           console.log(result);
         
         
-        
+          var totalPage = Math.ceil(result.hits.total.value/size);
+          if(from==0|| from==1)currentPage=1;
+
         
         if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
             var dec = true;
@@ -140,7 +143,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         
         
         switch (type){
-            case 0 : createCommuneTable(result,dec);break;
+            case 0 : createCommuneTable(result,dec);createPaginationBarR({nbrPage:totalPage,begin:0,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type,prev:false,currentPage:currentPage,nature:"communemed"});break;
             case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
             case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
             case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
@@ -867,7 +870,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     bar.find(".div-3-top10").append("<div style=\"width:"+((results[i]._source.indecators[select]*80)/results[0]._source[select])+"%\" ><span>"+(i+1)+"</span></div><span class=\"nbr-div\">"+results[i]._source.indecators[select].toFixed(1)+"</span><br/>");
     }
     }
-    function createPaginationBar(param){
+    function createPaginationBarR(param){
 
     	var nbrPage = param.nbrPage;
     	var begin = param.begin;
@@ -877,6 +880,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
           var sortBy=param.sortBy;
           var rev=param.rev;
           var type=param.type;
+          var currentPage=param.currentPage;
+          var nature=param.nature;
           var p = document.getElementById('pagination');
       	p.innerHTML="";
       	console.log(p);
@@ -886,19 +891,20 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	a.innerHTML=aiangle;
     	        a.addEventListener("click",function(){
     	            console.log("!next");
-    	            previousPageR({"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	            previousPageR({"page":currentPage,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
     	            event.preventDefault();
     	        });
     	p.append(a);
 
     	for(var i=begin;i<nbrPage;i++){
+            console.log("this is i"+i);
     	    if(i==begin){
     	        a = document.createElement("a");
     	        a.innerHTML=begin+1;
     	        console.log("prev is"+prev);
-    	        if(prev==false){
+    	      /*  if(prev==false){
     	            a.setAttribute("class","active");                
-    	        }
+    	        }*/
     	        a.addEventListener("click",function(){
     	            event.preventDefault();
     	            console.log("1");
@@ -908,15 +914,15 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	        p.append(a);
     	    }else{
     	        a = document.createElement("a");
-    	        if(prev==true && i==nbrPage-2){
+    	    /*    if(prev==true && i==nbrPage-2){
     	        a.setAttribute("class","active");
-    	        }
+    	        }*/
     	        var j=i+1;
     	        a.innerHTML=(j);
     	        a.addEventListener("click",function(event){
     	            event.preventDefault();
     	            console.log(this.innerHTML);
-    	            getPageR({"page":Number(this.innerHTML),"prev":false,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	            getPageR({"page":Number(this.innerHTML),"prev":false,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"nature":nature});
     	            
     	        });
     	        p.append(a);        
@@ -925,37 +931,40 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	a = document.createElement("a");
     	a = document.createElement("a");
     	var aiangle="<i class=\"fas fa-angle-double-right\"></i>";
-    	
     	a.innerHTML=aiangle;
     	a.addEventListener("click",function(){
     	event.preventDefault();
     	    console.log("next");
-    	    nextPageR({"size":size});
+    	    nextPageR({"page":currentPage,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"nature":nature});
     	});        
     	p.append(a);
+    	var elm = $("#pagination a");
+        elm.get(currentPage).setAttribute("class","active");
     	}
 
 
     	function nextPageR(param){
-    	if(currentPage<totalPage){
+            var currentPage=param.page;
+    	if(currentPage!=6){
     	currentPage++;
-    	getPageR({"page":currentPage,"size":param.size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"prev":false});
+    	getPageR({"page":currentPage,"size":param.size,"filters":param.filters,"sortBy":param.sortBy,"rev":param.rev,"type":param.type,"prev":false,"nature":nature});
     	}
     	}
 
     	function previousPageR(param){
+            var currentPage=param.page;
     	if(1<currentPage){
     	currentPage--;
-    	if(currentPage<((currentLPage-1)*10)){
-    	    getPageR({"page":currentPage,"size":param.size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"prev":true});
-    	}else{
-    	    getPageR({"page":currentPage,"size":param.size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"prev":true}); 
-    	}
+    	    getPageR({"page":currentPage,"size":param.size,"filters":param.filters,"sortBy":param.sortBy,"rev":param.rev,"type":param.type,"prev":true,"nature":nature});
     	}
     	}
 
     	function getPageR(param){
-    		restGetAllCommue(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type)
+    		if(param.nature=="communeglob")
+    		restGetAllCommue(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
+    		else if(param.nature=="communemed")
+    		restGetAllMedCommune(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
+
     		var elm = $("#pagination a");
     		activePageBarR(elm,param);
     	}
