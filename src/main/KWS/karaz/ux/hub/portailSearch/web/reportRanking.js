@@ -964,8 +964,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         var currentPage=param.page;
         console.log("this current page "+currentPage);
     	elm.removeClass("active");
-    	console.log(cpage+" "+currentLPage+" "+currentPage);
-    	elm.get(cpage).setAttribute("class","active");
+    	elm.get(currentPage).setAttribute("class","active");
     	}
 
     function updateTitles(){
