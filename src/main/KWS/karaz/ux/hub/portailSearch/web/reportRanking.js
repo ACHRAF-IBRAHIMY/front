@@ -161,7 +161,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         })
         
         };  
- function restGetAllSmlCommune(filters,sortBy,rev,size,from,type){
+ function restGetAllSmlCommune(filters,sortBy,rev,size,from,type,currentPage){
         
         var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
         
@@ -179,7 +179,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         success: function (result) {
           console.log(result);
         
-        
+          var totalPage = Math.ceil(result.hits.total.value/size);
+          if(from==0|| from==1)currentPage=1;
         
         
         if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="indecators.score" ){
@@ -209,7 +210,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
         
         
         switch (type){
-            case 0 : createCommuneTable(result,dec);break;
+            case 0 : createCommuneTable(result,dec);createPaginationBarR({nbrPage:totalPage,begin:0,size:size,filters:filters,sortBy:sortBy,rev:rev,type:type,prev:false,currentPage:currentPage,nature:"communesml"});break;
             case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
             case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
             case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
@@ -964,7 +965,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     		restGetAllCommue(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
     		else if(param.nature=="communemed")
     		restGetAllMedCommune(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
-
+           else if(param.nature=="communesml")
+    		restGetAllSmlCommune(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type,param.page)
     		var elm = $("#pagination a");
     		activePageBarR(elm,param);
     	}
