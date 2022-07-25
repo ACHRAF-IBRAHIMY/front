@@ -109,7 +109,7 @@
           </table>
           
           </div>
-                   <div id="pagination" class="pagination pagination-second" />
+                   <div id="pagination" class="pagination pagination-second"  style="width: fit-content;margin: 0 auto;padding: 10px;"/>
           
         </html>
       </renderer>
