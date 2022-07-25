@@ -957,7 +957,7 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     	function getPageR(param){
     		restGetAllCommue(param.filters,param.sortBy,param.rev,param.size,(param.page-1)*param.size,param.type)
     		var elm = $("#pagination a");
-    		activePageBarR(elem,param);
+    		activePageBarR(elm,param);
     	}
 
     	function activePageBarR(elm,param){
