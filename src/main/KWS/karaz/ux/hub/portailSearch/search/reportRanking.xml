@@ -86,7 +86,7 @@
         
           <table id="ranking-table">
             <tr class="first-tr">
-              <td style="width: 28%;position:relative;border:none"> <input  style="position:absolute" type="text" id="myInput" minlength="3" onkeyup="searchAll()" placeholder="Recherche"/><i class="fas fa-search mysearch"></i>  </td>
+              <td style="width: 28%;position:relative;border:none"> <input  style="position:absolute" type="text" id="myInput" minlength="3" onkeyup="searchAll()" placeholder="Recherche localite"/><i class="fas fa-search mysearch"></i>  </td>
 
               <td class="sp-td">${code1 | translate}  </td>
               <td class="sp-td">${code2 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
@@ -100,7 +100,7 @@
           <div style="height: 400px;overflow: overlay;">
           <table id="ranking-table2">
           <tr class="first-tr" style="display:none;">
-              <td style="width: 28%;position:relative;border:none"> <input  style="position:absolute" type="text" id="myInput" minlength="3" onkeyup="searchAll()" placeholder="Recherche"/><i class="fas fa-search"></i>  </td>
+              <td style="width: 28%;position:relative;border:none"> <input  style="position:absolute" type="text" id="myInput" minlength="3" onkeyup="searchAll()" placeholder="Recherche localite"/><i class="fas fa-search"></i>  </td>
               <td class="sp-td">${code1 | translate}  </td>
               <td class="sp-td">${code2 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
               <td class="rank-dl">${code3 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
