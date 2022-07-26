@@ -1059,7 +1059,7 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
     bar.find(".div-bar-1 .bar2 .bottom-div").html("");
     bar.find(".div-bar-1 .bar3 .bottom-div").html("");
     
-    var cm1 = results[1]._source.ville.replace("REGION DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm1 = results[1]._source.ville.replace("REGION DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","").replace("COMMUNE DE ","");
     var cm2 = results[0]._source.ville.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
     var cm3 = results[2]._source.ville.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
     
@@ -1082,7 +1082,7 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
     
     for(var i=0;i<results.length;i++){
         try{
-            if(transMap[results[i]._source.commune.replace(/ /g,"__")]!=undefined){
+            if(transMap[results[i]._source.ville.replace(/ /g,"__")]!=undefined){
             var communeTrans = transMap[results[i]._source.ville.replace(/ /g,"__")];
             }else{
             var communeTrans = results[i]._source.ville
