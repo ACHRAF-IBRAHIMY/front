@@ -93,208 +93,216 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
     })
     
     };
-   function  searchAll(){
-            var myinput = document.getElementById("myInput");
-            var text = myinput.value;
-         var trim = $(".ranking-fieldset #period option:selected").val();
-        var region = $(".ranking-fieldset #region option:selected").val();
-        var prefecture = $(".ranking-fieldset #prefecture option:selected").val();
-        var rankBy = $(".ranking-fieldset #rankBy option:selected").val();
-        
-        var filters = [];
-        var filtersBy = [];
+    function  searchAll(){
+        var myinput = document.getElementById("myInput");
+        var text = myinput.value;
+     var trim = $(".ranking-fieldset #period option:selected").val();
+    var region = $(".ranking-fieldset #region option:selected").val();
+    var prefecture = $(".ranking-fieldset #prefecture option:selected").val();
+    var rankBy = $(".ranking-fieldset #rankBy option:selected").val();
+    
+    var filters = [];
+    var filtersBy = [];
 
-        if(trim=="default"){
-          filters.push("trim.keyword");
-          filtersBy.push(tabInd[0]);
-        }else{
-          filters.push("trim.keyword");
-          filtersBy.push(trim);
-        }
+    if(trim=="default"){
+      filters.push("trim.keyword");
+      filtersBy.push(tabInd[0]);
+    }else{
+      filters.push("trim.keyword");
+      filtersBy.push(trim);
+    }
 
-        if( !(region=="default" || rankBy!="commune") ){
-          filters.push("région.keyword");
-          filtersBy.push(region);
-        }
+    if( !(region=="default" || rankBy!="commune") ){
+      filters.push("région.keyword");
+      filtersBy.push(region);
+    }
 
-        if( !(region=="default" || rankBy!="commune1") ){
-          filters.push("région.keyword");
-          filtersBy.push(region);
-        }
+    if( !(region=="default" || rankBy!="commune1") ){
+      filters.push("région.keyword");
+      filtersBy.push(region);
+    }
 
-         if( !(region=="default" || rankBy!="arrondissement") ){
-          filters.push("région.keyword");
-          filtersBy.push(region);
-        }
-       if( !(region=="default" || rankBy!="communesml") ){
-          filters.push("région.keyword");
-          filtersBy.push(region);
-        }
-          if( !(region=="default" || rankBy!="communemed") ){
-          filters.push("région.keyword");
-          filtersBy.push(region);
-        }
-         if( !(region=="default" || rankBy!="prefecture") ){
-          filters.push("région.keyword");
-          filtersBy.push(region);
-        }
+     if( !(region=="default" || rankBy!="arrondissement") ){
+      filters.push("région.keyword");
+      filtersBy.push(region);
+    }
+   if( !(region=="default" || rankBy!="communesml") ){
+      filters.push("région.keyword");
+      filtersBy.push(region);
+    }
+      if( !(region=="default" || rankBy!="communemed") ){
+      filters.push("région.keyword");
+      filtersBy.push(region);
+    }
+     if( !(region=="default" || rankBy!="prefecture") ){
+      filters.push("région.keyword");
+      filtersBy.push(region);
+    }
 
-        if( !(prefecture=="default" || rankBy=="region" || rankBy=="ville" || rankBy=="prefecture") ){
-          filters.push("prefecture.keyword");
-          filtersBy.push(prefecture);
-        }
-        
-        tabInd = [];
-        tabInd.push(trim);
-        tabInd.push(region);
-        tabInd.push(prefecture);
-        var filtersObj = [];
-        var myfilters=[filters,filtersBy];
-         var sortBy="commune";
-         var rev="desc";
-        var size=2000;
-         var from=0;
-         for(var i=0;i<myfilters[0].length;i++){
-         var filter = {
-         "term":{}     
-         };
-         
-         filter["term"][myfilters[0][i]]=myfilters[1][i];
-         filtersObj.push(filter);
-           }
-          console.log("this is filter "+filtersObj);
-          if(text.length<3) {
-             if(text.length==0){
-            if(rankBy=="commune"){
-                restGetAllCommue([filters,filtersBy],"indecators.score","desc",200,0,0);
-               
-              }else if(rankBy=="commune1"){
-                restGetAllCommune1([filters,filtersBy],"indecators.score","desc",200,0,0);
+    if( !(prefecture=="default" || rankBy=="region" || rankBy=="ville" || rankBy=="prefecture") ){
+      filters.push("prefecture.keyword");
+      filtersBy.push(prefecture);
+    }
+    
+    tabInd = [];
+    tabInd.push(trim);
+    tabInd.push(region);
+    tabInd.push(prefecture);
+    var filtersObj = [];
+    var myfilters=[filters,filtersBy];
+     var sortBy="commune";
+     var rev="desc";
+    var size=2000;
+     var from=0;
+     for(var i=0;i<myfilters[0].length;i++){
+     var filter = {
+     "term":{}     
+     };
      
-              }else if(rankBy=="arrondissement"){
-                restGetAllarrondissement([filters,filtersBy],"indecators.score","desc",200,0,0);
+     filter["term"][myfilters[0][i]]=myfilters[1][i];
+     filtersObj.push(filter);
+       }
+      console.log("this is filter "+filtersObj);
+      console.log("this is rankBy "+rankBy);
+      if(text.length<3) {
+         if(text.length==0){
+        if(rankBy=="commune"){
+            restGetAllCommue([filters,filtersBy],"indecators.score","desc",200,0,0);
+           
+          }else if(rankBy=="commune1"){
+            restGetAllCommune1([filters,filtersBy],"indecators.score","desc",200,0,0);
+ 
+          }else if(rankBy=="arrondissement"){
+            restGetAllarrondissement([filters,filtersBy],"indecators.score","desc",200,0,0);
+  
+          }else if(rankBy=="prefecture"){
+            restGetAllPrefecture([filters,filtersBy],"indecators.score","desc",200,0,0);
       
-              }else if(rankBy=="prefecture"){
-                restGetAllPrefecture([filters,filtersBy],"indecators.score","desc",200,0,0);
+          }else if(rankBy=="region"){ 
+            restGetAllRegion([filters,filtersBy],"indecators.score","desc",100,0,0);
+        
+          }else if(rankBy=="ville"){
+            restGetAllVille([filters,filtersBy],"indecators.score","desc",100,0,0);
+  
           
-              }else if(rankBy=="region"){ 
-                restGetAllRegion([filters,filtersBy],"indecators.score","desc",100,0,0);
-            
-              }else if(rankBy=="ville"){
-                restGetAllVille([filters,filtersBy],"indecators.score","desc",100,0,0);
-      
-              
-               }else if(rankBy=="communesml"){
-                restGetAllSmlCommune([filters,filtersBy],"indecators.score","desc",200,0,0);
+           }else if(rankBy=="communesml"){
+            restGetAllSmlCommune([filters,filtersBy],"indecators.score","desc",200,0,0);
 
-              
-                 }else if(rankBy=="communemed"){
-                restGetAllMedCommune([filters,filtersBy],"indecators.score","desc",200,0,0);
-         
-              }
-            }
-            else return null;
+          
+             }else if(rankBy=="communemed"){
+            restGetAllMedCommune([filters,filtersBy],"indecators.score","desc",200,0,0);
+     
           }
+        }
+        else return null;
+      }
 
-         var objSort = {};
-         objSort[sortBy] = {"order":rev}
-         
-         
-         
-         var obj = {
-         "size":size,"from":from,
-         "query": {
-         "bool": {
-         "filter": filtersObj,
-         "must":[{
-             "query_string":{
-                 "fields":["commune"],
-                 "query":"*"+text+"*",
-                 "fuzziness":"AUTO",
-                 "minimum_should_match":"100%"}}],
-         "should":[{"match_phrase_prefix":{"value":text}}]
+     var objSort = {};
+     objSort[sortBy] = {"order":rev}
+     
+     
+     var index=""; 
+     var field="commune";
+     if(rankBy=="commune")
+      index="index_ranking";
+     else if(rankBy=="commune1")
+      index="index_ranking_comm";
+     else if(rankBy=="arrondissement")
+    	 index="index_ranking_arr";
+     else if(rankBy=="communesml")
+    	 index="index_ranking_smlcom";
+     else if(rankBy=="communemed")
+    	 index="index_ranking_medcom";
+     else if(rankBy=="prefecture"){
+    	 index="index_ranking_prefecture";
+         field="prefecture";
+     }
+     else if(rankBy=="region"){
+    	 index="index_ranking_region";
+         field="région";
+     }
+     else if(rankBy=="ville"){
+    	 index="index_ranking_ville";
+         field="ville";
+     }
+     var obj = {
+     "size":size,"from":from,
+     "query": {
+     "bool": {
+     "filter": filtersObj,
+     "must":[{
+         "query_string":{
+             "fields":[field],
+             "query":"*"+text+"*",
+             "fuzziness":"AUTO",
+             "minimum_should_match":"100%"}}],
+     "should":[{"match_phrase_prefix":{"value":text}}]
+     }
+     },
+     };
+     
+     
+     console.log(JSON.stringify(obj));
+     
+     $.ajax({
+     type: "post",
+     url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/"+index+"/_search",
+     datatype: "application/json",
+     contentType: "application/json",
+     data: JSON.stringify(obj),
+     beforeSend: function (xhr) {
+       xhr.setRequestHeader("Authorization", AUTH);
+     },
+     success: function (result) {
+       console.log(result);
+     
+     if(myfilters[0].length==1  && rev=="desc" && sortBy==field ){
+         var dec = true;
+         var str = "";
+         var trims = myfilters[1][0].split("-");
+         if(trims[0]=="1"){
+             str += "1er trimestre "+trims[1];
+         }else if(trims[0]=="2"){
+             str += "2éme trimestre "+trims[1];
+         }else if(trims[0]=="3"){
+             str += "3éme trimestre "+trims[1];
+         }else if(trims[0]=="4"){
+             str += "4éme trimestre "+trims[1];
          }
-         },
-         };
-         var index="index_ranking";
-         if(rankBy=="commune")
-          index="index_ranking";
-         else if(rankBy=="commune1")
-          index="index_ranking_comm";
-         else if(rankBy=="arrondissement")
-        	 index="index_ranking_arr";
-         else if(rankBy=="communesml")
-        	 index="index_ranking_smlcom";
-         else if(rankBy=="communemed")
-        	 index="index_ranking_medcom";
-         else if(rankBy=="prefecture")
-        	 index=="index_ranking_prefecture";
-         else if(rankBy=="region")
-        	 index="index_ranking_region";
-         else if(rankBy=="ville")
-        	 index="index_ranking_ville";
-         
-         console.log(JSON.stringify(obj));
-         
-         $.ajax({
-         type: "post",
-         url: URL_SEARCH+"?operation=wselastic&shortUrl=" + "/"+index+"/_search",
-         datatype: "application/json",
-         contentType: "application/json",
-         data: JSON.stringify(obj),
-         beforeSend: function (xhr) {
-           xhr.setRequestHeader("Authorization", AUTH);
-         },
-         success: function (result) {
-           console.log(result);
-         
-         if(filters[0].length==1 && type==0 && rev=="desc" && sortBy=="commune" ){
-             var dec = true;
-             var str = "";
-             var trims = filters[1][0].split("-");
-             if(trims[0]=="1"){
-                 str += "1er trimestre "+trims[1];
-             }else if(trims[0]=="2"){
-                 str += "2éme trimestre "+trims[1];
-             }else if(trims[0]=="3"){
-                 str += "3éme trimestre "+trims[1];
-             }else if(trims[0]=="4"){
-                 str += "4éme trimestre "+trims[1];
+         try{
+             if(transMap[str.replace(/ /g,"__")]!=undefined){
+             var strTrans = transMap[str.replace(/ /g,"__")];
+             }else{
+             var strTrans = str
              }
-             try{
-                 if(transMap[str.replace(/ /g,"__")]!=undefined){
-                 var strTrans = transMap[str.replace(/ /g,"__")];
-                 }else{
-                 var strTrans = str
-                 }
-         
-                 }catch(e){}
-            
-         }
-         
-         
-         var index="index_ranking";
-         if(rankBy=="commune" || rankBy=="commune1" || rankBy=="arrondissement" || rankBy=="communesml" || rankBy=="communemed")
-        	 createCommuneTable(result,dec);
-         else if(rankBy=="prefecture")
-        	 createCommuneTableP(result,dec);
-         else if(rankBy=="region")
-        	 createCommuneTableG(result,dec);
-         else if(rankBy=="ville")
-        	 createCommuneTableV(result,dec);
+     
+             }catch(e){}
+        
+     }
+     
+     
+     if(rankBy=="commune" || rankBy=="commune1" || rankBy=="arrondissement" || rankBy=="communesml" || rankBy=="communemed")
+    	 createCommuneTable(result,dec);
+     else if(rankBy=="prefecture")
+    	 createCommuneTableP(result,dec);
+     else if(rankBy=="region")
+    	 createCommuneTableG(result,dec);
+     else if(rankBy=="ville")
+    	 createCommuneTableV(result,dec);
 
-            
-             
-            //  case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+        
          
-            
-         
-         },
-         error: function (error) {
-           console.log(error);
-         }
-         })
- };    function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
+        //  case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
+     
+        
+     
+     },
+     error: function (error) {
+       console.log(error);
+     }
+     })
+};
+function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
         
         var obj = getAllCommuneObject(filters,sortBy,rev,size,from);
         
@@ -745,12 +753,12 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
       } 
     switch (type){
         case 0 : createCommuneTableV(result);break;
-        case 1 : createBarTop3(result,".ranking-bar3-dl","delai");break;   
-        case 2 : createBarTop3(result,".ranking-bar3-at","attractivite");break;   
-        case 3 : createBarTop3(result,".ranking-bar3-dg","digital");break;   
-        case 4 : createBarTop3(result,".ranking-bar3-es","ecosystem");break;   
-        case 5 : createBarTop3(result,".ranking-bar3-fs","fiscalite");break; 
-        case 6 : createBarTop10(result,".ranking-bar10-U","score");break;  
+        case 1 : createBarTop3V(result,".ranking-bar3-dl","delai");break;   
+        case 2 : createBarTop3V(result,".ranking-bar3-at","attractivite");break;   
+        case 3 : createBarTop3V(result,".ranking-bar3-dg","digital");break;   
+        case 4 : createBarTop3V(result,".ranking-bar3-es","ecosystem");break;   
+        case 5 : createBarTop3V(result,".ranking-bar3-fs","fiscalite");break; 
+        case 6 : createBarTop10V(result,".ranking-bar10-U","score");break;  
        // case 7 : createBarTop10(result,".ranking-bar10-E","scoreE");break;  
     }
        

@@ -86,7 +86,7 @@
         
           <table id="ranking-table">
             <tr class="first-tr">
-              <td style="width: 28%"> <input type="text" id="myInput" minlength="3" onkeyup="searchAll()" placeholder="Recherche Commune"/><i class="fas fa-search"></i>  </td>
+              <td style="width: 28%;border:none"> <input type="text" id="myInput" minlength="3" onkeyup="searchAll()" placeholder="Recherche"/><i class="fas fa-search"></i>  </td>
 
               <td class="sp-td">${code1 | translate}  </td>
               <td class="sp-td">${code2 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
@@ -150,7 +150,7 @@
           });
 
           getAllByAggs("région.keyword",100,null,"",1);
-          getAllByAggs("préfecture.keyword",100,null,"",2);
+          getAllByAggs("prefecture.keyword",100,null,"",2);
             
           $("#ranking-table .fa-sort-down").click(function(){
             
