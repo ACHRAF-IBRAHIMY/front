@@ -1046,6 +1046,20 @@ box-card:hover{
 }
 #pagination a:hover:not(.active) {background-color: #ddd;}
 
+#myInput{
+    position: absolute;
+    left: -2%;
+    border: 1px solid;
+    top: 16%;
+    text-align: center;
+    width: -webkit-fill-available;
+}
+.mysearch{
+	    z-index: 1;
+    position: absolute;
+    left: 90%;
+    top: 32%;
+}
 .searchList .searchP{
     margin-top: 3px;
 }
