@@ -83,9 +83,11 @@
     
       <renderer name="rankingTable">
         <html>
+        
           <table id="ranking-table">
             <tr class="first-tr">
-              <td style="visibility:hidden;width: 28%" />
+              <td style="width: 28%"> <input type="text" id="myInput" minlength="3" onkeyup="searchAll()" placeholder="Recherche Commune"/><i class="fas fa-search"></i>  </td>
+
               <td class="sp-td">${code1 | translate}  </td>
               <td class="sp-td">${code2 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
               <td class="rank-dl">${code3 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
@@ -98,7 +100,7 @@
           <div style="height: 400px;overflow: overlay;">
           <table id="ranking-table2">
           <tr class="first-tr" style="display:none;">
-              <td class="dipslay-block" style="visibility:hidden;width: 165px !important;" />
+                        <td style="visibility:hidden;width: 28%" />
               <td class="sp-td">${code1 | translate}  </td>
               <td class="sp-td">${code2 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
               <td class="rank-dl">${code3 | translate} <i class="fas fa-sort-up" /><i class="fas fa-sort-down" /> </td>
@@ -110,7 +112,7 @@
           </table>
           
           </div>
-                   <div id="pagination" class="pagination pagination-second"  style="width: fit-content;margin: 0 auto;padding: 10px;"/>
+                   <div id="pagination" class="pagination pagination-second" style="width: fit-content;margin: 0 auto;padding: 10px;" />
           
         </html>
       </renderer>
@@ -149,7 +151,7 @@
 
           getAllByAggs("région.keyword",100,null,"",1);
           getAllByAggs("préfecture.keyword",100,null,"",2);
-
+            
           $("#ranking-table .fa-sort-down").click(function(){
             
             var classe = $(this).parent().attr("class");
@@ -212,7 +214,7 @@
                   getAllByAggs("prefecture.keyword",100,"région.keyword",region,2);
               }
           });
-
+        
           $(".ranking-fieldset #period,.ranking-fieldset #region,.ranking-fieldset #prefecture,.ranking-fieldset #rankBy").change(function(){
               var trim = $(".ranking-fieldset #period option:selected").val();
               var region = $(".ranking-fieldset #region option:selected").val();
@@ -266,7 +268,7 @@
               tabInd.push(trim);
               tabInd.push(region);
               tabInd.push(prefecture); 
-
+               
               if(rankBy=="commune"){
                 restGetAllCommue([filters,filtersBy],"indecators.score","desc",200,0,0);
                 restGetAllCommue([filters,filtersBy],"indecators.score","desc",200,0,0);
@@ -385,7 +387,9 @@
                   $(".ranking-fieldset #prefecture option").prop("disabled",false);
                 }
             });
+             
 
+                
 
       </script>
       <html id="hSeparator">
@@ -544,7 +548,7 @@
             </vbox> -->
 
             <vbox>
-              <htmlTranslate renderer="selectOptions" code1="rank01" code2="rank02" code3="rank03" code4="rank04" code5="rank05" code6="rank06" code7="Classement par commune (moins que 50k population)" code8="Classement par commune ( plus de 50k population)"/>
+              <htmlTranslate renderer="selectOptions" code1="rank01" code2="rank02" code3="rank03" code4="rank04" code5="rank05" code6="rank06" code7="Classement par commune (moins que 50k population)" code8="Classement par commune ( plus de 50k population)" />
             </vbox>
 
             <vbox>
@@ -634,7 +638,7 @@
       </fieldSet>
       <fieldSet className="hp-box ranking-fieldset hp-small" label="TOP 10">
         <htmlTranslate renderer="htmlDiv" divStyle="padding-left: 23px;" code="CSIC01" />
-        <vbox >
+        <vbox>
           <fieldSet label="Autorisations d'urbanisme" className="ranking-bar10-U">
             <html>
               <div class="top-10-small" style="display:grid;grid-template-columns: 48% 4% 48%;">
