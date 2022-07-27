@@ -793,117 +793,117 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
     
     if(val=="commune"){
     if(classe=="rank-dl"){
-    restGetAllCommue(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+    restGetAllCommue(getFiltersArray(newTabs),"indecators.delai",type,200,0,0)
     }else if(classe=="rank-dg"){
-    restGetAllCommue(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+    restGetAllCommue(getFiltersArray(newTabs),"indecators.digital",type,200,0,0)
     }else if(classe=="rank-at"){
-    restGetAllCommue(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+    restGetAllCommue(getFiltersArray(newTabs),"indecators.attractivite",type,200,0,0)
     }else if(classe=="rank-es"){
-    restGetAllCommue(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+    restGetAllCommue(getFiltersArray(newTabs),"indecators.ecosystem",type,200,0,0)
     }else if(classe=="rank-fs"){
-    restGetAllCommue(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+    restGetAllCommue(getFiltersArray(newTabs),"indecators.fiscalite",type,200,0,0)
     }else if(classe=="sp-td"){
-    restGetAllCommue(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+    restGetAllCommue(getFiltersArray(newTabs),"indecators.score",type,200,0,0)
     }
     }else if(val=="commune1"){
     if(classe=="rank-dl"){
-        restGetAllCommune1(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+        restGetAllCommune1(getFiltersArray(newTabs),"indecators.delai",type,200,0,0)
       }else if(classe=="rank-dg"){
-        restGetAllCommune1(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+        restGetAllCommune1(getFiltersArray(newTabs),"indecators.digital",type,200,0,0)
       }else if(classe=="rank-at"){
-        restGetAllCommune1(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+        restGetAllCommune1(getFiltersArray(newTabs),"indecators.attractivite",type,200,0,0)
       }else if(classe=="rank-es"){
-        restGetAllCommune1(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+        restGetAllCommune1(getFiltersArray(newTabs),"indecators.ecosystem",type,200,0,0)
       }else if(classe=="rank-fs"){
-        restGetAllCommune1(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+        restGetAllCommune1(getFiltersArray(newTabs),"indecators.fiscalite",type,200,0,0)
       }else if(classe=="sp-td"){
-        restGetAllCommune1(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+        restGetAllCommune1(getFiltersArray(newTabs),"indecators.score",type,200,0,0)
       }
     }else if(val=="arrondissement"){
     if(classe=="rank-dl"){
-    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.delai",type,200,0,0)
     }else if(classe=="rank-dg"){
-    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.digital",type,200,0,0)
     }else if(classe=="rank-at"){
-    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.attractivite",type,200,0,0)
     }else if(classe=="rank-es"){
-    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.ecosystem",type,200,0,0)
     }else if(classe=="rank-fs"){
-    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.fiscalite",type,200,0,0)
     }else if(classe=="sp-td"){
-    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+    restGetAllarrondissement(getFiltersArray(newTabs),"indecators.score",type,200,0,0)
     }
     }else if(val=="prefecture"){
     if(classe=="rank-dl"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.delai",type,200,0,0)
     }else if(classe=="rank-dg"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.digital",type,200,0,0)
     }else if(classe=="rank-at"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.attractivite",type,200,0,0)
     }else if(classe=="rank-es"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.ecosystem",type,200,0,0)
     }else if(classe=="rank-fs"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.fiscalite",type,200,0,0)
     }else if(classe=="sp-td"){
-    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+    restGetAllPrefecture(getFiltersArray(newTabs),"indecators.score",type,200,0,0)
     }
     }else if(val=="region"){
     if(classe=="rank-dl"){
-    restGetAllRegion(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.delai",type,200,0,0)
     }else if(classe=="rank-dg"){
-    restGetAllRegion(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.digital",type,200,0,0)
     }else if(classe=="rank-at"){
-    restGetAllRegion(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.attractivite",type,200,0,0)
     }else if(classe=="rank-es"){
-    restGetAllRegion(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.ecosystem",type,200,0,0)
     }else if(classe=="rank-fs"){
-    restGetAllRegion(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.fiscalite",type,200,0,0)
     }else if(classe=="sp-td"){
-    restGetAllRegion(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+    restGetAllRegion(getFiltersArray(newTabs),"indecators.score",type,200,0,0)
     }
     }else if(val=="ville"){
     if(classe=="rank-dl"){
-    restGetAllVille(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.delai",type,200,0,0)
     }else if(classe=="rank-dg"){
-    restGetAllVille(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.digital",type,200,0,0)
     }else if(classe=="rank-at"){
-    restGetAllVille(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.attractivite",type,200,0,0)
     }else if(classe=="rank-es"){
-    restGetAllVille(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.ecosystem",type,200,0,0)
     }else if(classe=="rank-fs"){
-    restGetAllVille(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.fiscalite",type,200,0,0)
     }else if(classe=="sp-td"){
-    restGetAllVille(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+    restGetAllVille(getFiltersArray(newTabs),"indecators.score",type,200,0,0)
     }
     }
     else if(val=="communesml"){
         if(classe=="rank-dl"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.delai",type,200,0,0)
         }else if(classe=="rank-dg"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.digital",type,200,0,0)
         }else if(classe=="rank-at"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.attractivite",type,200,0,0)
         }else if(classe=="rank-es"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.ecosystem",type,200,0,0)
         }else if(classe=="rank-fs"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.fiscalite",type,200,0,0)
         }else if(classe=="sp-td"){
-        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+        restGetAllSmlCommune(getFiltersArray(newTabs),"indecators.score",type,200,0,0)
         }
         }
     else if(val=="communemed"){
         if(classe=="rank-dl"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.delai",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.delai",type,200,0,0)
         }else if(classe=="rank-dg"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.digital",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.digital",type,200,0,0)
         }else if(classe=="rank-at"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.attractivite",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.attractivite",type,200,0,0)
         }else if(classe=="rank-es"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.ecosystem",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.ecosystem",type,200,0,0)
         }else if(classe=="rank-fs"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.fiscalite",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.fiscalite",type,200,0,0)
         }else if(classe=="sp-td"){
-        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.score",type,60,0,0)
+        restGetAllMedCommune(getFiltersArray(newTabs),"indecators.score",type,200,0,0)
         }
         }
     }
@@ -1060,8 +1060,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
     bar.find(".div-bar-1 .bar3 .bottom-div").html("");
     
     var cm1 = results[1]._source.ville.replace("REGION DE ","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","").replace("COMMUNE DE ","");
-    var cm2 = results[0]._source.ville.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
-    var cm3 = results[2]._source.ville.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","");
+    var cm2 = results[0]._source.ville.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","").replace("COMMUNE DE ","");
+    var cm3 = results[2]._source.ville.replace("REGION DE","").replace("COMMUNE D'","").replace("COMMUNE "," ").replace("ARRONDISSEMENT ","").replace("COMMUNE DE ","");
     
     var hg1 = results[1]._source.indecators[select];
     var hg2 = results[0]._source.indecators[select];
