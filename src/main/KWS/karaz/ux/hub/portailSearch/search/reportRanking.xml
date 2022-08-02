@@ -68,13 +68,13 @@
       <renderer name="selectOptions">
         <html>
           <select name="trierPar" id="rankBy">
+           <option value="region">${code5 | translate}</option>
             <option value="commune">${code1 | translate}</option>
             <option value="commune1">${code2 | translate}</option>
             <option value="arrondissement">${code3 | translate}</option>
             <option value="communesml">${code7 | translate}</option>
              <option value="communemed">${code8 | translate}</option>
             <option value="prefecture">${code4 | translate}</option>
-            <option value="region">${code5 | translate}</option>
             <option value="ville">${code6 | translate}</option>
             
           </select>
@@ -138,14 +138,22 @@
               var elms = result.aggregations.genres.buckets;
               elms = triPeriods(elms);
               tabInd=[elms[0].key];
-              restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",200,0,0);
+               restGetAllRegion([["trim.keyword"],tabInd],"indecators.score","desc",200,0,0);
+              restGetAllRegion([["trim.keyword"],tabInd],"indecators.delai","desc",3,0,1);
+              restGetAllRegion([["trim.keyword"],tabInd],"indecators.attractivite","desc",3,0,2);
+              restGetAllRegion([["trim.keyword"],tabInd],"indecators.digital","desc",3,0,3);
+              restGetAllRegion([["trim.keyword"],tabInd],"indecators.ecosystem","desc",3,0,4);
+              restGetAllRegion([["trim.keyword"],tabInd],"indecators.fiscalite","desc",3,0,5);
+              restGetAllRegion([["trim.keyword"],tabInd],"indecators.scoreU","desc",10,0,6);
+              <!-- restGetAllCommue([["trim.keyword"],tabInd],"indecators.score","desc",200,0,0);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.delai","desc",3,0,1);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.attractivite","desc",3,0,2);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.digital","desc",3,0,3);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.ecosystem","desc",3,0,4);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.fiscalite","desc",3,0,5);
               restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreU","desc",10,0,6);
-           <!--   restGetAllCommue([["trim.keyword"],tabInd],"indecators.scoreE","desc",10,0,7);-->
+           
+           -->
             drawRadarRegion(tabInd[0]);
           });
 
