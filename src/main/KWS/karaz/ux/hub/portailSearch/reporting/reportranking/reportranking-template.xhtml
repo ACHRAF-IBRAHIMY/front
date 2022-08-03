@@ -67,8 +67,19 @@ table {    -fs-table-paginate: paginate;}
 
     <table class="tg">
       #foreach($ch in $xml.getElements("dataReportRk.data"))
+     #foreach($ch in $xml.getElements("dataReportRk.data"))
+      #if($xml.getValue("dataReportRk.type")=="commune")
       #set($str = $xml.getValue($ch,"commune").substring(0, 1).toUpperCase() + $xml.getValue($ch,"commune").substring(1).toLowerCase())
-                
+      #end
+      #if($xml.getValue("dataReportRk.type")=="ville")
+      #set($str = $xml.getValue($ch,"ville").substring(0, 1).toUpperCase() + $xml.getValue($ch,"ville").substring(1).toLowerCase())
+      #end   
+      #if($xml.getValue("dataReportRk.type")=="prefecture")
+      #set($str = $xml.getValue($ch,"prefecture").substring(0, 1).toUpperCase() + $xml.getValue($ch,"prefecture").substring(1).toLowerCase())
+      #end 
+      #if($xml.getValue("dataReportRk.type")=="region")
+      #set($str = $xml.getValue($ch,"région").substring(0, 1).toUpperCase() + $xml.getValue($ch,"région").substring(1).toLowerCase())
+      #end  
                 #set($gpv=($xml.getDouble($ch,"indecators.delaiGpV")))
                 #set($ppv=($xml.getDouble($ch,"indecators.delaiPpV")))
                 #set($ph=($xml.getDouble($ch,"indecators.delaiPhV")))

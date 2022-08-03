@@ -347,6 +347,7 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
         
                 }catch(e){}
             dataReportRk.trim = strTrans;
+            dataReportRk.type = "commune";
             dataReportRk.data = [];
         }
         
@@ -415,6 +416,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
                 }catch(e){}
             dataReportRk.trim = strTrans;
             dataReportRk.data = [];
+            dataReportRk.type = "commune";
+
         }
         
         
@@ -487,6 +490,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
                 }catch(e){}
             dataReportRk.trim = strTrans;
             dataReportRk.data = [];
+            dataReportRk.type = "commune";
+
         }
     
     
@@ -558,6 +563,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
                     }catch(e){}
                 dataReportRk.trim = strTrans;
                 dataReportRk.data = [];
+                dataReportRk.type = "commune";
+
             }
     
     
@@ -624,6 +631,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
               }catch(e){}
           dataReportRk.trim = strTrans;
           dataReportRk.data = [];
+          dataReportRk.type = "prefecture";
+
       } 
     switch (type){
         case 0 : createCommuneTableP(result,dec);break;
@@ -687,6 +696,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
               }catch(e){}
           dataReportRk.trim = strTrans;
           dataReportRk.data = [];
+          dataReportRk.type = "region";
+
       } 
     switch (type){
         case 0 : createCommuneTableG(result);break;
@@ -750,6 +761,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
               }catch(e){}
           dataReportRk.trim = strTrans;
           dataReportRk.data = [];
+          dataReportRk.type = "ville";
+
       } 
     switch (type){
         case 0 : createCommuneTableV(result);break;
@@ -1132,7 +1145,7 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
     	        a.addEventListener("click",function(){
     	            event.preventDefault();
     	            console.log("1");
-    	            getPageR({"page":begin+1,"prev":false,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type});
+    	            getPageR({"page":begin+1,"prev":false,"size":size,"filters":filters,"sortBy":sortBy,"rev":rev,"type":type,"nature":nature});
     	        });
 
     	        p.append(a);
@@ -1254,7 +1267,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
     
     var dataReportRk = {
         date : [],
-        trim : ""
+        trim : "",
+        type : "",
     };
     
     function createCommuneTable(result,dec){
@@ -1278,6 +1292,7 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
         var rankStr = "";
         
         if(dec == true){
+        	
             dataReportRk.data.push(results[i]._source);
         }
     
