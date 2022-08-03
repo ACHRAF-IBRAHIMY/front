@@ -67,7 +67,6 @@ table {    -fs-table-paginate: paginate;}
 
     <table class="tg">
       #foreach($ch in $xml.getElements("dataReportRk.data"))
-     #foreach($ch in $xml.getElements("dataReportRk.data"))
       #if($xml.getValue("dataReportRk.type")=="commune")
       #set($str = $xml.getValue($ch,"commune").substring(0, 1).toUpperCase() + $xml.getValue($ch,"commune").substring(1).toLowerCase())
       #end
