@@ -1412,7 +1412,7 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
     		rankStr = "<span><i style=\"color:blue\" class=\"fas fa-arrow-right\"></i>"+" +"+rankCom+"</span>";
     	}
     }
-    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.prefecture+"\"><span>"+(i+1)+"- "+subLong(results[i]._source.prefecture,30)+"</span> "+rankStr+`</span></td>`);
+    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+results[i]._source.prefecture+"\"><span>"+subLong(results[i]._source.prefecture,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
     tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
     tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
@@ -1466,7 +1466,7 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
         }
 
         }catch(e){}
-    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+regionTrans+"\"><span>"+(i+1)+"- "+subLong(regionTrans,30)+"</span> "+rankStr+`</span></td>`);
+    tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+"<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\""+regionTrans+"\"><span>"+subLong(regionTrans,30)+"</span> "+rankStr+`</span></td>`);
     tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
     tr.html(tr.html()+`<td class="sp-td">`+Math.floor(results[i]._source.indecators.score)+`</td>`);
     tr.html(tr.html()+`<td>`+Math.floor(results[i]._source.indecators.delai)+`</td>`);
@@ -1571,8 +1571,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
                 }
         
                 }catch(e){console.log("error in ville ");}
-            tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+`<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\"`+communeTrans+`\"><span>`+(i+1)+`- `+subLong(communeTrans,30)+`</span> `+rankStr+`</span><span style="display: block;color: orange;font-size: 11px;    margin-top: 1px;margin-left: 19px;">`+prefectureTrans+`</span></td>`);        
-            $('.hidden-table-rank').append("<tr><td><span>"+(i+1)+"- "+subLong(communeTrans,30)+"</span>"+rankStr+"</span></td></tr>");
+            tr.html(`<td class=\"commune-td\" style="font-size: 15px;text-align: left;padding-left: 30px;width: 28%;">`+`<span style=\"display: grid;grid-template-columns: 80% 20%;\" title=\"`+communeTrans+`\"><span>`+subLong(communeTrans,30)+`</span> `+rankStr+`</span><span style="display: block;color: orange;font-size: 11px;    margin-top: 1px;margin-left: 19px;">`+prefectureTrans+`</span></td>`);        
+            $('.hidden-table-rank').append("<tr><td><span>"+subLong(communeTrans,30)+"</span>"+rankStr+"</span></td></tr>");
             tr.html(tr.html()+`<td class="sp-td">`+(results[i]._source.rank)+`</td>`);
             try{
                 if(transMap["Petit projets : ".replace(/ /g,"__")]!=undefined){
