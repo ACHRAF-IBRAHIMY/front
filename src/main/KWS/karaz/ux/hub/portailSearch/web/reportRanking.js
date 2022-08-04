@@ -71,6 +71,8 @@ function getAllCommuneObject(filters,sortBy,rev,size,from){
             }catch(e){}
         dataReportRk.trim = strTrans;
         dataReportRk.data = [];
+    	dataReportRk.type="commune";
+
     }
     
     
@@ -1292,7 +1294,7 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
         var rankStr = "";
         
         if(dec == true){
-        	
+        	dataReportRk.type="commune";
             dataReportRk.data.push(results[i]._source);
         }
     
@@ -1542,7 +1544,8 @@ function restGetAllMedCommune(filters,sortBy,rev,size,from,type,currentPage){
             var rankCom = results[i]._source.rankComp;
             var newRankComp = results[i]._source.newRankComp;
             var rankStr = "";
-            
+            dataReportRk.data.push(results[i]._source);
+
             
         
             if(rankCom>0){
