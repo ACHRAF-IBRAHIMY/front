@@ -133,7 +133,7 @@
           
           var tabInd = ["1-2019"];
 
-          
+           
           getAllByAggs("trim.keyword",100,null,"",0).done(function(result){
               var elms = result.aggregations.genres.buckets;
               elms = triPeriods(elms);
